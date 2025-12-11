@@ -1,0 +1,79 @@
+@import '../variables';
+
+.mat-mdc-radio-button.mat-accent {
+    // --mdc-radio-disabled-selected-icon-color: #000;
+    // --mdc-radio-disabled-unselected-icon-color: #000;
+    // --mdc-radio-unselected-focus-icon-color: #212121;
+    // --mdc-radio-unselected-hover-icon-color: #212121;
+    // --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    // --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-selected-focus-icon-color: $colour-blue;
+    --mdc-radio-selected-hover-icon-color: $colour-blue;
+    --mdc-radio-selected-icon-color: $colour-blue;
+    --mdc-radio-selected-pressed-icon-color: $colour-blue;
+    // --mat-mdc-radio-ripple-color: #000;
+    --mat-mdc-radio-checked-ripple-color: $colour-blue;
+
+    .mdc-form-field {
+        .mdc-radio {
+            .mdc-radio__native-control:enabled + .mdc-radio__background {
+                .mdc-radio__outer-circle {
+                    background-color: white;
+                }
+                .mdc-radio__inner-circle {
+                }
+            }
+        }
+    }
+}
+
+.wfrm-base-container .mobile-filter-expansion-panel,
+
+.wfrm-base-container .table-search-header .search-and-filters,
+.mat-mdc-dialog-container wfrm-base-dialog {
+    .field.filter-radio-group {
+        width: auto;
+        flex-basis: auto !important;
+
+        .mat-mdc-radio-group {
+            display: flex;
+            gap: 15px;
+
+            .mat-mdc-radio-button {
+                height: 40px;
+                display: flex;
+
+                .mdc-radio {
+                    margin-left: -10px;
+                }
+
+                label {
+                    margin-left: -10px;
+                }
+            }
+        }
+    }
+}
+
+.wfrm-base-container .bottom-header-bar .sort-by-info {
+    width: auto;
+    flex-basis: auto !important;
+
+    .mat-mdc-radio-group.sort-dir {
+        display: flex;
+
+        .mat-mdc-radio-button {
+            height: 40px;
+            display: flex;
+
+            .mdc-radio {
+                margin-left: -10px;
+            }
+
+            label {
+                margin-left: -10px;
+                white-space: nowrap;
+            }
+        }
+    }
+}

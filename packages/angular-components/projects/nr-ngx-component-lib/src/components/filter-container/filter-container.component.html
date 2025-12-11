@@ -1,0 +1,17 @@
+<mat-form-field
+    floatLabel="always"
+    appearance="outline"
+    subscriptSizing="dynamic"
+>
+    <mat-label>{{ label }}</mat-label>
+
+    <input matInput>
+
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+
+    @if ( hint ) {
+        <mat-hint>{{ hint }}</mat-hint>
+    }
+</mat-form-field>

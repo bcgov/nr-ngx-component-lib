@@ -1,0 +1,34 @@
+:root {
+    --nrcl-font-family: BCSans,Noto Sans,Verdana,Arial,sans-serif;
+    --nrcl-font-size: 15px;
+    --nrcl-font-size-h1: 35px;
+    --nrcl-font-size-h2: 22px;
+    --nrcl-font-size-h3: 18px;
+    --nrcl-font-size-small: 12px;
+    --nrcl-border-radius: 5px;
+
+    --nrcl-filter-width-default: 150px;
+    --nrcl-filter-height-default: 40px;
+
+    --nrcl-icon-size: 24px;
+
+    // desktop
+    --nrcl-device-desktop-gutter-space: 16px;
+    --nrcl-device-desktop-form-layout-columns: 4;
+
+    //mobile
+    --nrcl-device-mobile-gutter-space: 8px;
+    --nrcl-device-mobile-form-layout-columns: 2;
+}
+
+html {
+    .nrcl-device-desktop {
+        --nrcl-gutter-space: var( --nrcl-device-desktop-gutter-space );
+        --nrcl-form-layout-columns: var( --nrcl-device-desktop-form-layout-columns );
+    }
+
+    .nrcl-device-mobile {
+        --nrcl-gutter-space: var( --nrcl-device-mobile-gutter-space );
+        --nrcl-form-layout-columns: var( --nrcl-device-mobile-form-layout-columns );
+    }
+}

@@ -1,0 +1,89 @@
+@use "sass:meta";
+
+::ng-deep :root {
+}
+
+:host {
+    ::ng-deep {
+    }
+
+    ::ng-deep {
+        .mat-mdc-form-field {
+            width: 100%;
+            font-family: var( --nrcl-font-family );
+
+            .mat-mdc-text-field-wrapper {
+                padding-left: 0;
+                padding-right: 0;
+                background-color: unset;
+
+                .mat-mdc-form-field-flex {
+                    .mat-mdc-form-field-infix {
+                        font-size: var( --nrcl-font-size );
+                        padding-bottom: 2px;
+                        line-height: 20px;
+                        min-height: 50px;
+                        width: unset;
+
+                        .mat-mdc-form-field-required-marker {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .mat-mdc-form-field-subscript-wrapper {
+            .mat-mdc-form-field-error-wrapper, .mat-mdc-form-field-hint-wrapper {
+                padding: 0;
+            }
+        }
+    }
+
+    &.required ::ng-deep {
+        .mat-mdc-form-field {
+            .mat-mdc-text-field-wrapper {
+                .mat-mdc-form-field-flex {
+                    .mat-mdc-form-field-infix {
+                        .mdc-floating-label {
+                            :after {
+                                color: red;
+                                content: " *";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.readonly ::ng-deep {
+        .mat-mdc-form-field {
+            cursor: not-allowed;
+
+            [readonly="true"] {
+                color: rgba(0, 0, 0, 0.55);
+                cursor: not-allowed;
+            }
+
+            .mdc-line-ripple::before {
+                border-style: dashed;
+                border-width: 1px;
+                border-color: rgba(0, 0, 0, 0.13);
+            }
+
+            mat-error {
+                display: none;
+            }
+
+            input, textarea {
+                cursor: not-allowed;
+            }
+
+            .select-read-only-cursor {
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+        }
+    }
+}

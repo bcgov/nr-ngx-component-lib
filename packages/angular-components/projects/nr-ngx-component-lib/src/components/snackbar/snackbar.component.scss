@@ -1,0 +1,95 @@
+@use "sass:meta";
+
+::ng-deep :root {
+    --nrcl-snackbar-success-background-color: #2E7940;
+    --nrcl-snackbar-error-background-color: #D8292F;
+    --nrcl-snackbar-info-background-color: #37474f;
+    --nrcl-snackbar-update-background-color: #37474f;
+    --nrcl-snackbar-update-button-color: #f9ca81;
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+    }
+
+    &.snackbar-type-success {
+        --snackbar-background-color: var(--nrcl-snackbar-success-background-color );
+    }
+
+    &.snackbar-type-error {
+        --snackbar-background-color: var(--nrcl-snackbar-error-background-color );
+    }
+
+    &.snackbar-type-info {
+        --snackbar-background-color: var( --nrcl-snackbar-info-background-color );
+    }
+
+    &.snackbar-type-update {
+        --snackbar-background-color: var( --nrcl-snackbar-update-background-color );
+        --snackbar-button-color: var( --nrcl-snackbar-update-button-color );
+    }
+
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    color: white;
+    font-family: var( --nrcl-font-family );
+    font-size: var( --nrcl-font-size );
+    word-break: break-word;
+    background-color: var( --snackbar-background-color );
+
+    .icon {
+        display: flex;
+        background-color: #f2f2f2;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+
+        mat-icon {
+            padding: var( --nrcl-gutter-space );
+            color: var( --snackbar-background-color );
+        }
+    }
+
+    .message {
+        padding: var( --nrcl-gutter-space );
+        flex: 1;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .button {
+        padding-right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            padding: calc( var( --nrcl-gutter-space ) / 2 );
+            border: 1px white solid;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-family: var( --nrcl-font-family );
+            background-color: var( --snackbar-button-color, --snackbar-background-color );
+        }
+    }
+}
+
+::ng-deep {
+    .mat-mdc-snack-bar-container {
+        color: white;
+        font-family: var( --nrcl-font-family );
+        font-size: var( --nrcl-font-size );
+        word-break: break-word;
+
+        .mat-mdc-snackbar-surface {
+            padding-right: 0;
+
+            .mat-mdc-snack-bar-label {
+                padding: 0;
+            }
+        }
+    }
+}

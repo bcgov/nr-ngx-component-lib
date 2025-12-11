@@ -1,0 +1,59 @@
+@use "sass:meta";
+
+::ng-deep :root {
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+    }
+
+    display: flex;
+    gap: var( --nrcl-gutter-space );
+    position: relative;
+    padding-top: var( --nrcl-gutter-space );
+    font-family: var( --nrcl-font-family );
+
+    .left-side {
+        display: flex;
+        flex-direction: column;
+
+        ::ng-deep h1 {
+            font-size: var( --nrcl-font-size-h1 );
+            font-weight: 200;
+            padding: 0;
+            margin: 0;
+        }    
+
+        ::ng-deep h2 {
+            font-size: var( --nrcl-font-size-h2 );
+            font-weight: 200;
+            padding: 0;
+            margin: 0;
+        }    
+    }
+
+    .right-side {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;        
+    }
+
+    .loading {
+        position: absolute;
+        top: var( --nrcl-gutter-space );
+        right: 0;
+        display: none;
+    }
+
+    &.isLoading {
+        .loading {
+            display: block;
+        }
+
+        .right-side {
+            visibility: hidden;
+        }
+    }
+}

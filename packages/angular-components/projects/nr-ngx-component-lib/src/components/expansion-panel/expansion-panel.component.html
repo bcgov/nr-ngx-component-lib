@@ -1,0 +1,23 @@
+<mat-expansion-panel #panel 
+    togglePosition="before"
+    [expanded]="expanded" 
+    [disabled]="disabled" 
+    (opened)="expandedChange.emit( true )"   
+    (closed)="expandedChange.emit( false )"   
+>
+    <mat-expansion-panel-header>
+        <mat-panel-description>
+            <ng-content select="nrcl-expansion-panel-header"></ng-content>
+
+            @if ( isLoading ) {
+                <mat-spinner class="loading" [diameter]="30"></mat-spinner>
+            }
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="body">
+        <ng-content></ng-content>
+    </div>
+
+    <ng-content select="nrcl-expansion-panel-footer"></ng-content>
+</mat-expansion-panel>

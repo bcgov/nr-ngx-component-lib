@@ -1,0 +1,20 @@
+<nrcl-filter-select class="sort-order" 
+    label="Sort By"
+    [value]="wrapFilterValue( sortColumn )"
+    [options]="sortColumnOptions"
+    (valueChange)="onSortColumnChange( unwrapFilterValue( $event ) )"
+    selectMax="1"        
+></nrcl-filter-select>
+
+<nrcl-filter-container class="sort-direction" 
+    label="Sort Order"
+>
+    <mat-radio-group
+        [(ngModel)]="sortDirection" 
+        (ngModelChange)="onSortDirectionChange()"
+        [disabled]="!sortColumn"
+    >
+        <mat-radio-button aria-label="Sort A to Z" value="asc">A &rarr; Z</mat-radio-button>
+        <mat-radio-button aria-label="Sort Z to A" value="desc">Z &rarr; A</mat-radio-button>
+    </mat-radio-group>
+</nrcl-filter-container>

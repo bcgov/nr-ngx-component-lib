@@ -1,0 +1,8 @@
+<div [matTooltip]="tooltipContent" class="content">
+    @if ( content ) {
+        {{ content }}
+    }
+    @else {
+        <ng-content></ng-content>
+    }
+</div>

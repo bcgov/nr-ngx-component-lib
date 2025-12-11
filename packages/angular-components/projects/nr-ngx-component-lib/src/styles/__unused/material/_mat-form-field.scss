@@ -1,0 +1,214 @@
+@import '../variables';
+
+// .cdk-overlay-container .mat-mdc-dialog-content {
+//     .form-flex {
+//         .field {
+//             // not used in app
+//             /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+//             .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+//             .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
+//             .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap {
+//                 border-width: 1px;
+//             }
+//             /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+//             .mat-mdc-form-field-infix {
+//                 border-top: none;
+//                 padding-bottom: 0.5em;
+//                 line-height: 20px;
+//             }
+//         }
+//     }
+// }
+
+// .cdk-overlay-container,
+// wfrm-root {
+    // .form-flex-wrapper .form-flex .field, 
+    // .wf-field {
+        .mat-mdc-form-field:not(.mat-form-field-appearance-outline) {
+            .mat-mdc-text-field-wrapper {
+                // padding-left: 0;
+                padding-right: 0;
+                background-color: unset;
+
+                .mat-mdc-form-field-flex {
+                    .mat-mdc-form-field-infix {
+                        font-size: 15px;
+                        padding-bottom: 2px;
+                        line-height: 20px;
+                        min-height: 50px;
+
+                        .mdc-floating-label {
+                            .required:after {
+                                color: red;
+                                content: " *";
+                            }
+                        }
+
+                        .mat-mdc-input-element {
+
+                        }
+
+                        .mat-mdc-form-field-required-marker {
+                            display: none;
+                        }
+
+                        // .date-picker-input {
+                        //     display: flex;
+                        //     min-width: 0;
+                        //     position: relative;
+        
+                        //     input {
+                        //         width: 100%;
+                        //     }
+        
+                        //     button {
+                        //         position: absolute;
+                        //         right: -27px;
+                        //         top: -10px;
+                        //     }
+        
+                        //     .mat-mdc-button {
+                        //         line-height: 0px;
+                        //         margin-top: 4px;
+                        //         margin-left: -45px;
+                        //     }
+        
+                        //     .mat-icon {
+                        //         width: 24px;
+                        //         height: 24px;
+                        //         font-size: 24px;
+                        //         line-height: 24px;
+                        //     }
+                        // }                
+                    }
+                }
+
+                .mdc-line-ripple {
+
+                }
+            }
+
+            &.readonly {
+                cursor: not-allowed;
+
+                [readonly="true"] {
+                    color: $colour-disabled-text;
+                    cursor: not-allowed;
+                }
+
+                .mdc-line-ripple::before {
+                    border-style: dashed;
+                    border-width: 1px;
+                    border-color: rgba(0, 0, 0, 0.13);
+                }
+
+                mat-error {
+                    display: none;
+                }
+
+                input, textarea {
+                    cursor: not-allowed;
+                }
+            }
+
+        }
+
+        .mat-mdc-form-field-subscript-wrapper {
+            .mat-mdc-form-field-error-wrapper, .mat-mdc-form-field-hint-wrapper {
+                padding: 0;
+            }
+        }
+
+        // &.no-underline {
+        //     .mdc-line-ripple {
+        //         display: none;
+        //     }
+        // }
+
+        // &.no-subscript {
+        //     .mat-mdc-form-field-subscript-wrapper {
+        //         display: none;
+        //     }
+        // }
+
+        // &.selector,
+        // &.action {
+        //     .mat-mdc-form-field:not(.mat-form-field-appearance-outline) {
+        //         /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+        //         .mat-mdc-form-field-infix {
+        //             display: flex;
+        //             justify-content: center;
+
+        //             input {
+        //                 width: 0;
+        //             }
+
+        //             // /* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version.*/
+        //             // .mat-radio-container {
+        //             //     margin-left: 3px;
+        //             // }
+        //         }
+        //         /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+        //         .mat-form-field-label {
+        //             text-align: center;
+        //         }
+        //         /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+        //         .mat-form-field-underline {
+        //             display: none;
+        //         }
+        //     }
+        // }
+
+        // &.action {
+        //     /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+        //     .mat-mdc-form-field-infix button {
+        //         margin-top: -2px;
+        //     }
+        // }
+
+        
+
+        .mat-mdc-form-field {
+        // .mat-mdc-form-field:not(.mat-form-field-appearance-outline) {
+            width: 100%;
+            font-family: $font-family-main;
+
+            &.selection-list {
+                /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+                .mat-mdc-form-field-infix {
+                    padding: 0;
+                }
+                /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+                .mat-form-field-underline {
+                    display: none;
+                }
+            }
+            /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+            &.mat-form-field-invalid .mat-form-field-label {
+                color: $colour-errors;
+            }
+            /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+            .mat-mdc-form-field-flex,
+            .mat-mdc-form-field-infix {
+                // width: 100%;
+            }
+            /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+            /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+            .mat-mdc-form-field-infix {
+                line-height: 20px;
+                /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+                .mat-mdc-floating-label {
+                    // color: $colour-almost-black;
+                }
+            }
+        }
+
+        .field-label-value.visible-nowrap-subscript-wrapper {
+            /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+            .mat-form-field-subscript-wrapper {
+                overflow: visible;
+                white-space: nowrap;
+            }
+        }
+    // }
+// }

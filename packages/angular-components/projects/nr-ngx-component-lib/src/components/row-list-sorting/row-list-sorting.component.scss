@@ -1,0 +1,25 @@
+:host {
+    gap: 8px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .sort-order {
+        --nrcl-filter-select-width: auto;
+        grid-column: 1;
+    }
+
+    .sort-direction {
+        --nrcl-filter-container-width: auto;
+        grid-column: 2;
+
+        ::ng-deep {
+            .content {
+                .mat-mdc-radio-group {
+                    justify-content: space-evenly;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

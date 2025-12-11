@@ -1,0 +1,30 @@
+.material-icons {
+    font-family: 'Material Symbols Outlined';
+    font-feature-settings: 'liga';
+}
+
+.mat-icon {
+    width: var( --nrcl-icon-size );
+    height: var( --nrcl-icon-size );
+    font-size: var( --nrcl-icon-size );
+    line-height: var( --nrcl-icon-size );
+}
+
+button {
+    &.mat-mdc-fab,
+    &.mat-mdc-raised-button,
+    &.mat-mdc-button,
+    &.mat-mdc-raised-button,
+    &.mat-mdc-icon-button,
+    &.mat-mdc-outlined-button,
+    &.mat-mdc-unelevated-button,
+    &.mat-mdc-fab,
+    &.mat-mdc-mini-fab .mat-mdc-menu-item {
+        > .mat-icon {
+            width: var( --nrcl-icon-size );
+            height: var( --nrcl-icon-size );
+            font-size: var( --nrcl-icon-size );
+            line-height: var( --nrcl-icon-size );
+        }
+    }
+}

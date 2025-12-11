@@ -1,0 +1,29 @@
+<button 
+    matRipple
+    (click)="onClick( $event )"
+    [disabled]="disabled"
+    [matTooltip]="tooltip"
+>
+    @if ( icon || iconRight || iconCompact || label ) {
+        @if ( icon && ( !isCompact || !iconCompact ) ) { 
+            <mat-icon class="left">{{ icon }}</mat-icon> 
+        }
+
+        @if ( !isCompact && iconRight && label ) { 
+            <mat-icon class="right">{{ iconRight }}</mat-icon> 
+        }
+
+        @if ( isCompact && iconCompact ) { 
+            <mat-icon class="compact">{{ iconCompact }}</mat-icon> 
+        }
+
+        @if ( label ) {
+            <span class="label">{{ label }}</span>        
+        }
+    }
+    @else {
+        <div class="content">
+            <ng-content></ng-content>
+        </div>
+    }
+</button>

@@ -1,0 +1,23 @@
+{
+    "extends": "../tsconfig.app.json",
+    "compilerOptions": {
+        "types": [
+            "node"
+        ],
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "typeRoots": ["../node_modules/@types"]
+    },
+    "exclude": [
+        "../src/test.ts",
+        "../src/**/*.spec.ts",
+        "../examples/**"
+    ],
+    "include": [
+        "../projects/nr-ngx-component-lib/src/**/*.stories.*",
+        "./preview.ts"
+    ],
+    "files": [
+        "./typings.d.ts"
+    ]
+}
