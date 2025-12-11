@@ -1,0 +1,11 @@
+:host {
+    display: block;
+
+    &[horizontal] {
+        width: var( --nrcl-gutter-space );
+    }
+
+    &[vertical] {
+        height: var( --nrcl-gutter-space );
+    }
+}

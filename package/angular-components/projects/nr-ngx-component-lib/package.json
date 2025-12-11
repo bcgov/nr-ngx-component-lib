@@ -1,0 +1,12 @@
+{
+    "name": "@bcgov/nr-ngx-component-lib",
+    "version": "0.0.1",
+    "dependencies": {
+        "tslib": "^2.5.1"
+    },
+    "exports": {
+        ".": {
+            "sass": "./styles/global.scss"
+        }
+    }
+}

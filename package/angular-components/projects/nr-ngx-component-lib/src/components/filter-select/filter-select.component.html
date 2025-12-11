@@ -1,0 +1,91 @@
+<mat-form-field #trigger
+    [floatLabel]="floatLabel"
+    appearance="outline"
+    subscriptSizing="dynamic"
+>
+    @if ( label ) {
+        <mat-label>{{ label }}</mat-label>
+    }
+
+    <input class="filter-input" #searchInput
+        matInput 
+        [placeholder]="placeholder" 
+        [value]="inputValue"
+        (input)="onInput( $event )"
+        (keydown.escape)="close()"
+        (focus)="onInputFocus()"
+        [matTooltip]="inputValue"
+    >
+
+    @if ( isOpen ) {
+        <mat-icon matSuffix>arrow_drop_up</mat-icon>
+    }
+    @else if ( selection?.value?.length > 0 && clear ) {
+        <button class="cancel"
+            mat-icon-button
+            matSuffix
+            (click)="onCancelClick($event); $event.stopPropagation()"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    }
+    @else {
+        <mat-icon matSuffix>arrow_drop_down</mat-icon>
+    }                
+
+    @if ( hint ) {
+        <mat-hint>{{ hint }}</mat-hint>
+    }
+</mat-form-field>        
+
+<ng-template #overlayTemplate>
+    <div class="filter-select-options" [class.multiple]="!single" [class.single]="single">
+        @if ( !isFiltered && !single && summary ) {
+            @if ( selection?.value?.length > 0 && selection?.value?.length < options?.length ) {
+                <div class="selection-overview">
+                    <div class="summary">{{ selection?.value?.length }} selected of {{ options?.length }}</div>
+
+                    <mat-selection-list
+                        (selectionChange)="onUpperSelectionChange( $event )"
+                    >
+                        @for ( code of selection?.value; track code ) {
+                            <mat-list-option 
+                                [value]="code" 
+                                togglePosition="before"
+                                selected
+                                [matTooltip]="tooltips ? descriptionForCode( code ) : null"
+                                matTooltipPosition="after"
+                            >
+                                {{ descriptionForCode( code ) }}
+                            </mat-list-option>
+                        }
+                    </mat-selection-list>
+                </div>
+            }
+
+            @if ( selection?.value?.length == options?.length ) {
+                <div class="selection-overview">
+                    <div class="summary">All options selected</div>
+                </div>
+            }
+        }
+
+        <mat-selection-list
+            [formControl]="selection"
+            (selectionChange)="onSelectionChange( $event )"
+            [multiple]="!single"
+            hideSingleSelectionIndicator
+        >
+            @for ( option of options; track option ) {
+                <mat-list-option [class.hide]="!matchesFilter( option )"
+                    [value]="option.code" 
+                    togglePosition="before"                    
+                    [matTooltip]="tooltips ? option.description : null"
+                    matTooltipPosition="after"                    
+                >
+                    {{ option.description }}
+                </mat-list-option>
+            }
+        </mat-selection-list>
+    </div>
+</ng-template>

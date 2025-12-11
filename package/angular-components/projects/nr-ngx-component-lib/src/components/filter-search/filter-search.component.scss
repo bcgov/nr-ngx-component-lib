@@ -1,0 +1,48 @@
+@use "sass:meta";
+
+::ng-deep :root {
+    --nrcl-filter-search-width: calc( var( --nrcl-filter-width-default ) * 2 + 8px );
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+    }
+
+    --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
+    --mat-form-field-container-vertical-padding: 10px;
+    --mat-form-field-container-text-size: 15px;
+    --mdc-outlined-text-field-focus-label-text-color: black;
+    --mdc-outlined-text-field-hover-label-text-color: black;
+
+    width: var( --nrcl-filter-search-width, calc( var( --nrcl-filter-width-default ) * 2 + 8px ) );
+    display: block;
+
+    &.has-value {
+        --mdc-outlined-text-field-label-text-color: black;
+    }
+
+    ::ng-deep {
+        .mat-mdc-form-field {
+            width: 100%;
+
+            .mat-mdc-text-field-wrapper {
+                background-color: white;
+                height: var( --nrcl-filter-height-default );
+
+                .mat-mdc-form-field-infix {
+                    width: var( --nrcl-filter-search-width, calc( var( --nrcl-filter-width-default ) * 2 + 8px ) );
+                }
+            }
+        }
+    }
+
+    .cancel {            
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

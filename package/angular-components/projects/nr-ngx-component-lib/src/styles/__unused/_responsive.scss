@@ -1,0 +1,263 @@
+@import 'variables';
+
+
+#core-interface-container {
+  display: flex;
+}
+//@media screen and (max-width: map_get($grid-breakpoints, sm)) {
+//  input,
+//  select,
+//  button.mat-raised-button{
+//    font-size: $font-size-small;
+//  }
+//}
+
+
+//-------------------------------base-wrapper-----------------------
+@media screen and (max-width: calc(map_get($grid-breakpoints, md) - 1px)) {
+  .user-summary {
+    top: 5px !important;
+  }
+  .user-summary-org {
+    top: 12px !important;
+  }
+
+}
+
+@media screen and (max-width: map_get($grid-breakpoints, md)) {
+
+  #core-interface-container .mat-sidenav-container .mat-sidenav-content {
+    margin-left: 0;
+  }
+  //.app-branding{
+  //  margin-bottom: 0 !important;
+  //  border-bottom: none !important;
+  //}
+
+  .mat-mdc-dialog-container .collection-notice-dialog {
+
+    .collection-notice-text {
+      overflow-x: hidden;
+    }
+  }
+
+  .toolbar-panel {
+    margin: 8px 0 !important;
+
+    button {
+      padding: 0 !important;
+    }
+
+    .nav-menu-button {
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      padding: 2em !important;
+      margin: -2em;
+    }
+  }
+  mat-toolbar.mat-primary.wf1-public-application-header .action-items {
+    left: unset;
+  }
+}
+
+@media screen and (max-width: map_get($grid-breakpoints, xs)) {
+  span.back-route-label {
+    font-size: small !important;
+  }
+
+  div.summary {
+    font-size: x-small !important;
+  }
+
+  .header-warning{
+    font-size: small !important;
+  }
+}
+
+//-------------------------------dialog-----------------------
+@media screen and (max-width: calc(#{map_get($grid-breakpoints, md)} - 1px)) {
+  .wf1-loading-screen {
+    font-size: 50%;
+  }
+}
+
+//-------------------------------header-----------------------
+@media screen and (max-width: map_get($grid-breakpoints, md)) {
+  mat-toolbar.mat-primary.wf1-public-application-header,
+  mat-toolbar.mat-primary.wf1-application-header {
+    padding-left: var(--wf1-gutter-space);
+    padding-right: var(--wf1-gutter-space);
+
+    img[alt="Wildfire ONE"] {
+      width: 136px;
+      padding-bottom: 3px;
+    }
+
+    #header-title {
+      font-size: $font-size;
+      margin-left: 6px;
+      margin-bottom: 3px;
+    }
+
+    .header-caption-label, .header-caption-text {
+      margin-bottom: 3px;
+    }
+
+    .header-caption-label {
+      margin-right: 8px;
+    }
+
+
+    .app-logo-and-title-div {
+      display: flex;
+      margin: auto;
+    }
+
+  }
+
+  #map {
+    min-height: $wf1-app-map-mobile-height;
+  }
+
+  .svg-inline--fa {
+    height: 0.8em;
+  }
+}
+//---------------table screens----------
+@media screen and (max-width: map_get($grid-breakpoints, xs)) {
+  .sort-dir{
+    // /*TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version.*/
+    // .mat-radio-label-content{
+    //   padding-left: 2px;
+    // }
+  }
+}
+
+@media screen and (max-width: map_get($grid-breakpoints, md)) {
+  #core-interface-container{
+    .bottom-summary{
+      flex-direction: column;
+
+      .ngx-pagination{
+        margin-top: var(--wf1-gutter-space);
+        margin-bottom: var(--wf1-gutter-space);
+      }
+
+      .show-entries-info{
+        padding-bottom: var(--wf1-gutter-space);
+      }
+    }
+  }
+
+}
+//-----------forms-------------
+@media screen and (max-width: map_get($grid-breakpoints, md)) {
+  .cdk-overlay-container .mobile,
+  wfrm-root {
+    .form-flex-wrapper .form-flex {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+
+    .columns{
+      .col{
+        flex-basis: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: map_get($grid-breakpoints, sm)) {
+  mat-form-field {
+    &.ng-valid {
+      /*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+    //   .mat-form-field-wrapper {
+    //     padding-bottom: 1.25em;
+    //   }
+    }
+
+    &.ng-invalid,
+    &.mat-form-field-invalid {
+      /*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+    //   .mat-form-field-wrapper {
+    //     padding-bottom: 7px;
+    //   }
+    }
+
+    &.ng-untouched {
+      /*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+    //   .mat-form-field-wrapper {
+    //     padding-bottom: 1.25em;
+    //   }
+    }
+
+    // .mat-mdc-form-field {
+    //   &-underline {
+    //     position: static;
+    //   }
+
+    //   &-subscript-wrapper {
+    //     position: static;
+    //   }
+    // }
+  }
+
+  .mat-action-row{
+    align-items: flex-start;
+  }
+
+  .action-row-warning{
+    flex-direction: column;
+    .mat-icon{
+      margin-right: 0;
+    }
+    span{
+        white-space: nowrap;
+      text-align: center;
+    }
+  }
+
+  wfrm-root .form-flex-wrapper .form-flex {
+
+    .icon-button {
+      flex: 1;
+    }
+
+
+    .field {
+      &.action,
+      &.selector {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+    }
+
+    &.form-flex-thirds {
+      flex-flow: row wrap;
+
+      .field {
+        flex-basis: 100%;
+        &.flex-1 {
+          flex-basis: 40%;
+        }
+        &.flex-2 {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: map_get($grid-breakpoints, xs)) {
+  .mat-action-row {
+    font-size: $font-size-small;
+
+    button{
+      font-size: $font-size-small;
+      padding: 0 5px;
+      min-width: 50px;  }
+  }
+}

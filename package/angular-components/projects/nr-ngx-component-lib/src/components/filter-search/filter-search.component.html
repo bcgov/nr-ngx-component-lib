@@ -1,0 +1,28 @@
+<mat-form-field
+    floatLabel="auto"
+    appearance="outline"
+    subscriptSizing="dynamic"
+>
+    <mat-label>{{ label }}</mat-label>
+
+    <input class="search-input" #input
+        matInput
+        [value]="value || ''"
+        (input)="onInput( $event )"
+        [placeholder]="placeholder"
+    >
+
+    @if ( hint ) {
+        <mat-hint>{{ hint }}</mat-hint>
+    }
+
+    @if ( value ) {
+        <button class="cancel"
+            mat-icon-button
+            matSuffix
+            (click)="onCancelClick($event); $event.stopPropagation()"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    }                
+</mat-form-field>

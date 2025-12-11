@@ -1,0 +1,32 @@
+@import '../variables';
+
+.material-icons {
+    font-family: 'Material Symbols Outlined';
+    font-feature-settings: 'liga';
+}
+
+.mat-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+button {
+    &.mat-mdc-fab,
+    &.mat-mdc-raised-button,
+    &.mat-mdc-button,
+    &.mat-mdc-raised-button,
+    &.mat-mdc-icon-button,
+    &.mat-mdc-outlined-button,
+    &.mat-mdc-unelevated-button,
+    &.mat-mdc-fab,
+    &.mat-mdc-mini-fab .mat-mdc-menu-item {
+        > .mat-icon {
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+}

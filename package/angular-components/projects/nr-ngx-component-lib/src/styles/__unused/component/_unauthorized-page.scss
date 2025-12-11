@@ -1,0 +1,15 @@
+@import "../variables";
+
+.unauthorized-page {
+  height: $wf1-app-main-panel-container-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family-main;
+
+  h2{
+    color: $colour-errors;
+  }
+
+}

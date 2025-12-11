@@ -1,0 +1,31 @@
+<mat-form-field
+    floatLabel="auto"
+    appearance="outline"
+    subscriptSizing="dynamic"
+>
+    <mat-label>{{ label }}</mat-label>
+
+    <input matInput class="search-input"            
+        [ngModel]="value" 
+        (ngModelChange)="onDateChange( $event )"
+        [placeholder]="placeholder"
+        [owlDateTime]="selectedDateDT" 
+        maxlength="10" 
+        appWFDateMask
+    >
+
+    @if ( hint ) {
+        <mat-hint>{{ hint }}</mat-hint>
+    }
+
+    <button class="select-date"
+        [owlDateTimeTrigger]="selectedDateDT" 
+        aria-label="Open Select Date Picker"
+        mat-icon-button
+        matSuffix
+    >
+        <mat-icon>event</mat-icon>
+    </button>
+</mat-form-field>
+
+<owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time>

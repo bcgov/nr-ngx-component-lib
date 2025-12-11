@@ -1,0 +1,68 @@
+@use "sass:meta";
+
+::ng-deep :root {
+    --nrcl-filter-container-width: var( --nrcl-filter-width-default );
+    --nrcl-filter-container-height: var( --nrcl-filter-height-default );
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-checkbox');
+        @include meta.load-css('../../styles/include/mat-radio-button');
+    }
+
+    --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
+    --mat-form-field-container-vertical-padding: 10px;
+    --mat-form-field-container-text-size: 15px;
+    --mdc-outlined-text-field-focus-label-text-color: black;
+    --mdc-outlined-text-field-hover-label-text-color: black;
+
+    width: var( --nrcl-filter-container-width, var( --nrcl-filter-width-default ) );
+    display: block;
+
+    ::ng-deep {
+        .mat-mdc-form-field {
+            width: 100%;
+        
+            .mat-mdc-text-field-wrapper {
+                background-color: white;
+                height: var( --nrcl-filter-container-height, var( --nrcl-filter-height-default ) );
+
+                .mat-mdc-form-field-infix {
+                    width: var( --nrcl-filter-container-width, var( --nrcl-filter-width-default ) );
+                    padding: 0;                        
+
+                    & > input {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        gap: var( --nrcl-gutter-space );
+        align-items: center;
+        height: var( --nrcl-filter-container-height, var( --nrcl-filter-height-default ) );
+
+        ::ng-deep {
+            .mdc-checkbox {
+                padding: 0;
+                
+                .mdc-checkbox__background {
+                    top: 0;
+                }
+            }
+
+            .mat-mdc-radio-group {
+                display: flex;
+                gap: var( --nrcl-gutter-space );
+
+                .mdc-radio {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

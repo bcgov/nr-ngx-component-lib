@@ -1,0 +1,79 @@
+@use "sass:meta";
+
+::ng-deep :root {
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+    }
+
+    mat-expansion-panel {
+        & > .mat-expansion-panel-header {
+            padding-left: var(--nrcl-gutter-space);
+            padding-right: var(--nrcl-gutter-space);
+            height: unset;
+            min-height: 50px;
+            border-bottom: 1px solid #c6c8cb;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            font-family: var( --nrcl-font-family );
+            align-items: flex-start;
+
+            & > ::ng-deep .mat-expansion-indicator {
+                align-self: center;
+                padding-bottom: 4px;
+            }
+            &.mat-expanded > ::ng-deep .mat-expansion-indicator {
+                padding-bottom: 0;
+            }
+
+            .mat-expansion-panel-header-description {
+                position: relative;
+                margin-right: 0;
+
+                .loading {
+                    position: absolute;
+                    top: 10px;
+                    right: 0;
+                }
+            }
+        }
+
+        & > ::ng-deep .mat-expansion-panel-content {
+            font-family: var( --nrcl-font-family );
+            font-size: var( --nrcl-font-size );
+        
+            .mat-expansion-panel-body {
+                padding: 0;
+
+                .body {
+                    padding-left: var(--nrcl-gutter-space);
+                    padding-right: var(--nrcl-gutter-space);
+                }
+            }
+        }
+    }
+
+    &.is-loading {
+        .mat-expansion-panel {
+            & > .mat-expansion-panel-header {
+                ::ng-deep nrcl-expansion-panel-header {
+                    .right-side {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }   
+
+    &.disabled {
+        .mat-expansion-panel {
+            & > .mat-expansion-panel-header {
+                & > ::ng-deep .mat-content {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}

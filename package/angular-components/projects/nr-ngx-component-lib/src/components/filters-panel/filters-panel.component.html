@@ -1,0 +1,35 @@
+@if ( showFilters ) {
+    <ng-content></ng-content>
+}
+
+<div class="actions">
+    <nrcl-mobile-view>
+        @if ( showFilters ) {
+            <button mat-stroked-button class="hide"
+                (click)="onHideClick()"
+            >
+                <mat-icon>expand_less</mat-icon>
+                Hide Filters
+            </button>
+        }
+        @else {
+            <button mat-stroked-button class="show"
+                (click)="onShowClick()"
+            >
+                <mat-icon>expand_more</mat-icon>
+                Show Filters
+            </button>
+        }
+    </nrcl-mobile-view>
+
+    <div class="spacer"></div>        
+
+    @if ( showClear && showFilters ) {
+        <button mat-stroked-button class="clear"
+            (click)="onClearClick()"
+        >
+            <mat-icon>filter_list_off</mat-icon>
+            Clear
+        </button>
+    }
+</div>

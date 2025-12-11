@@ -1,0 +1,155 @@
+.multi-select-open {
+    pointer-events: none !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+wf-application,
+.cdk-overlay-container {
+    .ms-parent {   
+        .ms-choice {
+            height: 37.5px;
+            line-height: 37.5px;
+            border: 1px solid $colour-light-grey;
+            padding: 0 5px;
+            border-radius: $wf1-border-radius;
+            font-family: $font-family-main;
+            font-size: $font-size;
+            color: inherit;        
+
+            .placeholder{
+                color: #6a6a6a;
+            }
+        
+            .icon-caret{
+                margin-top: -5px;
+                border-width: 9px 6px 0 6px;
+        
+                &.open{
+                border-width: 0 6px 9px 6px;
+                }
+            }          
+        }
+    }
+
+    &.desktop, &.device-desktop {
+        .ms-parent.width-default {
+            width: 150px !important;
+        }
+    }
+
+    &.mobile, &.device-mobile {
+        .ms-parent {
+            .ms-choice {
+                border: 1px solid gray;
+            }
+        }    
+    }
+}
+
+wf-application,
+.cdk-overlay-container {
+    &.multi-select-container {
+        z-index: 2000;
+    }
+
+    &.open {
+    }
+
+    &.closed {
+        .cdk-overlay-backdrop {
+            display: none;
+        }
+    }
+
+    &.width-default {
+        .ms-drop {
+            width: unset !important;
+        }
+    }
+
+    .ms-drop {
+        font-family: $font-family-main;
+        font-size: $font-size;          
+        pointer-events: all;
+
+        .ms-search {
+            width: calc(100% - 6px);
+            border-radius: $wf1-border-radius;
+            
+            input {
+                width: inherit;
+                font-family: $font-family-main;
+                font-size: $font-size;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 4px #3E7FFF;
+                }              
+            }
+        }
+    
+        ul {
+            overflow-x: hidden;
+
+            li {
+                label {
+                    display: flex;
+                    align-items: flex-end;
+                    line-height: normal;
+
+                    input {
+                        height: unset;
+                    }
+                }
+
+                .disabled {
+                    opacity: 0.45;
+                }
+
+                &:hover {
+                    background-color: #f8f9fa;
+                }
+            }
+
+            li.hide-radio label {
+                text-overflow: ellipsis;
+                overflow-x: hidden;
+            }                
+        }
+
+        &.bottom {
+            width: unset;
+            max-width: 400px;
+        }
+
+        &.top {
+            height: fit-content;
+        }
+    }
+
+    &.mobile, &.device-mobile {
+        .ms-drop {
+            ul {
+                li {
+                    label {
+                        input {
+                            padding: 0;
+                            height: unset;
+                        }
+
+                        span {
+                            word-break: break-word;
+                            white-space: break-spaces;
+                        }                        
+                    }
+                }
+            }
+    
+            &.bottom {
+                max-width: 100%;
+            }
+        }    
+    }
+}

@@ -1,0 +1,21 @@
+@use "sass:meta";
+
+::ng-deep :root {
+}
+
+:host {
+    ::ng-deep {
+    }
+
+    display: grid;
+    gap: var( --nrcl-gutter-space );
+    grid-template-columns: repeat( var( --nrcl-form-layout-columns ), 1fr );
+
+    & > ::ng-deep [ layoutwidth="2" ] {
+        grid-column: span 2;
+    }
+
+    & > ::ng-deep [ layoutwidth="full" ] {
+        grid-column: span var( --nrcl-form-layout-columns );
+    }
+}

@@ -1,0 +1,19 @@
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-focus-icon-color: #003366;
+    --mdc-radio-selected-hover-icon-color: #003366;
+    --mdc-radio-selected-icon-color: #003366;
+    --mdc-radio-selected-pressed-icon-color: #003366;
+    --mat-mdc-radio-checked-ripple-color: #003366;
+
+    .mdc-form-field {
+        .mdc-radio {
+            .mdc-radio__native-control:enabled + .mdc-radio__background {
+                .mdc-radio__outer-circle {
+                    background-color: white;
+                }
+                .mdc-radio__inner-circle {
+                }
+            }
+        }
+    }
+}

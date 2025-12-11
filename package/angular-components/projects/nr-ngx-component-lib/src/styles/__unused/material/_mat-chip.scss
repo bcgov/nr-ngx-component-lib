@@ -1,0 +1,16 @@
+@import '../variables';
+
+.mat-mdc-chip.mat-mdc-standard-chip {
+    border-radius: $wf1-border-radius;
+    border: 1px solid $colour-light-grey;
+
+    --mdc-chip-focus-state-layer-opacity: 0;
+    --mdc-chip-label-text-weight: 800;
+    --mdc-chip-elevated-container-color: #{$colour-lighter-grey};
+}
+
+.mat-mdc-chip {
+    .mat-icon {
+        line-height: unset;
+    }
+}

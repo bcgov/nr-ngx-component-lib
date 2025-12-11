@@ -1,0 +1,52 @@
+@import '../variables';
+
+.mat-mdc-snack-bar-container {
+    color: $colour-white;
+    font-family: $font-family-main;
+    font-size: $font-size;
+    word-break: break-word;
+
+    .mat-mdc-snackbar-surface {
+        padding-right: 0;
+
+        .mat-mdc-snack-bar-label {
+            padding: 0;
+        }
+    }
+
+    &.snackbar-success {
+        --mdc-snackbar-container-color: #{ $colour-success };
+
+        .mat-mdc-snackbar-surface {
+            padding-right: 8px;
+        }    
+    }
+
+    &.snackbar-error {
+        --mdc-snackbar-container-color: #{ $colour-errors };
+
+        .mat-mdc-snackbar-surface {
+            padding-right: 8px;
+        }    
+    }
+
+    &.snackbar-info {
+        --mdc-snackbar-container-color: #{ $colour-blue-grey };
+
+        .mat-mdc-snackbar-surface {
+            padding-right: 8px;
+        }    
+    }
+
+    &.snackbar-update {
+        --mdc-snackbar-container-color: #{ $colour-blue-grey };
+
+        .mat-mdc-snackbar-surface {
+            padding-right: 8px;
+        }    
+
+        button {
+            color: $colour-light-yellow;
+        }
+    }
+}

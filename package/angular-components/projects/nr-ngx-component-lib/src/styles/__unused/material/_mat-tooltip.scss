@@ -1,0 +1,15 @@
+@import '../variables';
+
+.mat-mdc-tooltip-panel {
+    .mat-mdc-tooltip {
+        font-size: $font-size;
+        max-width: unset;
+    }
+
+    .mdc-tooltip--multiline .mat-mdc-tooltip-surface,
+    .mdc-tooltip.multiline .mat-mdc-tooltip-surface {
+        white-space: pre-line;
+        max-width: unset;
+        text-align: left;
+    }
+}

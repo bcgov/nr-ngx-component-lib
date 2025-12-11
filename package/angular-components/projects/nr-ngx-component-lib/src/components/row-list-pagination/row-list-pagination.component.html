@@ -1,0 +1,36 @@
+@if ( hasRows ) {
+    <nrcl-filter-container class="summary"
+        label="Showing Rows"
+    >
+        <span>{{ firstRow }} to {{ lastRow }} <small>(of {{ rowCount }})</small></span>
+    </nrcl-filter-container>
+}
+@else {
+    <div class="no-rows">No records to display.</div>
+}
+
+@if ( hasRows ) {
+    <div class="pagination">
+        <pagination-controls 
+            [id]="paginationId" 
+            [maxSize]="paginationMaxSize"
+            [responsive]="false"
+            [directionLinks]="true"
+            previousLabel=""
+            nextLabel=""
+            [autoHide]="false"
+            (pageChange)="onPageNumberChange( $event )"
+        ></pagination-controls>
+    </div>
+}
+
+@if ( hasRows && showPageSize ) {
+    <nrcl-filter-select class="page-size"
+        label="Page Size"
+        [value]="[ pageSize ]"
+        [options]="pageSizeOptions"
+        (valueChange)="onPageSizeChange( $event[ 0 ] )"
+        selectMax="1"
+        [clear]="false"
+    ></nrcl-filter-select>
+}

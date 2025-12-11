@@ -1,0 +1,115 @@
+@import '../variables';
+
+.field {
+    .mat-mdc-selection-list {
+        display: flex;
+        flex-flow: wrap;
+        padding-top: 24px;
+
+        .mat-mdc-list-option {
+            display: inline;
+            height: 25px;
+            padding-left: 25px;
+            margin-right: var(--wf1-gutter-space);
+            width: unset;
+
+            .mdc-list-item__content {
+                padding: 0;
+                flex-direction: row;
+                justify-content: flex-start;
+                display: flex;
+                align-items: center;
+
+                .mdc-list-item__primary-text {
+                    flex: 0 1 auto;
+                    white-space: nowrap;
+
+                    font-family: $font-family-main;
+                    font-size: $font-size;
+                }
+            }
+
+            .mdc-list-item__end {
+                .mdc-checkbox {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    .mdc-checkbox__background {
+                        top: 3px;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// mat-selection-list{
+//     min-height: 40px;
+//     .mat-list-option {
+//       flex-basis: 20px;
+//       padding-right: 5px;
+//       margin-right: var(--wf1-gutter-space);
+
+//       &:last-of-type {
+//         margin-left: 0;
+//       }
+//     }
+
+//     ::ng-deep .mat-list-text{
+//       padding-right: 0;
+//     }
+//     ::ng-deep .mat-list-item-content:not(:first-of-type){
+//       margin-left: var(--wf1-gutter-space);
+//     }
+//   }
+
+// :host-context( .wfrm-base-container.mobile ),
+// :host-context( .mobile-expansion-panel ) {
+//     ::ng-deep {
+// // ::ng-deep .wfrm-base-container.mobile,
+// // ::ng-deep .mobile-expansion-panel {
+//         .mat-mdc-list-base .mat-list-option.mat-list-option .mat-list-item-content-reverse .mat-list-text {
+//             flex-direction: unset !important;
+//         }
+
+//     /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+//     /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+//         mat-list,
+//         mat-selection-list {
+//             padding-top: 0;
+//             display: grid;
+
+
+//             //mat-list-item.list-item:nth-child(odd) { //commented due to WFRM-225
+//             //  background-color: $opacity-light-grey;
+//             //}
+
+//             mat-list-option.mat-mdc-list-item,
+//             mat-list-item.mat-mdc-list-item {
+//                 height: auto;
+//                 padding: 4px 0;
+//                 border-bottom: 2px solid #C4C4C4;
+//                 width: 100%;
+//                 max-width: calc(var(--vw, 1vw) * 100);
+//                 margin: auto;
+//                 background-color: $colour-white;
+//                 min-height: 64px;
+//                 display: inline-grid;
+
+//                 /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+//                 .mat-list-item__content {
+//                     max-width: calc(var(--vw, 1vw) * 100);
+
+//                 }
+
+//                 &:hover {
+//                     background-color: opacify($opacity-light-grey, .1);
+//                     cursor: pointer;
+//                 }
+
+//             }
+//         }
+//     }
+// }

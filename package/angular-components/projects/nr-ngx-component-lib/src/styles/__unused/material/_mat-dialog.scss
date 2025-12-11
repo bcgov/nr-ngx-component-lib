@@ -1,0 +1,60 @@
+@import '../variables';
+
+mat-dialog-container.mat-mdc-dialog-container {
+    font-family: $font-family-main;
+    font-size: $font-size;
+    --mdc-dialog-supporting-text-color: rgba(0, 0, 0, 0.87);
+    
+    .mat-mdc-dialog-content {
+        font-family: $font-family-main;
+        font-size: $font-size;
+    }
+}
+
+.cdk-overlay-container.desktop {
+    .cdk-overlay-pane {
+        .mat-mdc-dialog-container {
+            .mat-mdc-dialog-surface {
+                overflow: hidden;
+            }
+
+            .mat-mdc-dialog-content.no-scroll {
+                overflow-y: hidden;
+            }
+        }
+    }
+}
+
+.cdk-overlay-container.mobile {   
+    .cdk-overlay-pane {
+        width: unset !important; 
+        max-width: unset !important; 
+
+        .mat-mdc-dialog-container {
+            .mat-mdc-dialog-surface {
+                overflow: hidden;
+            }
+            
+            .title-bar {
+                .spinner-header {
+                    top: 10px;
+                    right: 14px;
+                }
+            }
+
+            .mat-mdc-dialog-content {
+                overflow-y: auto !important;
+                max-height: calc(var(--vh, 1vh) * 100 - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 135px);
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--wf1-gutter-space));
+            }            
+
+            .mat-mdc-dialog-actions {
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--wf1-gutter-space));
+            }            
+
+            .max-content-width {
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--wf1-gutter-space));
+            }            
+        }
+    }
+}

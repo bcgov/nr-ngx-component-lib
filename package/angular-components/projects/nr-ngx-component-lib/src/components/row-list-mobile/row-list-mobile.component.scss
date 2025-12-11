@@ -1,0 +1,99 @@
+@use "sass:meta";
+
+::ng-deep :root {}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+    }
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--nrcl-gutter-space);
+
+    ::ng-deep mat-card.mat-mdc-card {
+        margin: 0;
+        box-shadow: none;
+        border: 2px solid #bebebe;
+        padding: 0;
+        font-family: var(--nrcl-font-family);
+
+        .mat-mdc-card-title {
+            padding: var(--nrcl-gutter-space);
+            border-bottom: #f2f2f2 1px solid;
+            background-color: #f2f2f2;
+            gap: var(--nrcl-gutter-space);
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin: 0;
+
+            section[title] {
+                flex-direction: column;
+                align-items: flex-start;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: flex;
+                flex: 1;
+
+                h2, h3 {
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin: 0;
+                    padding: 0;
+                    line-height: normal;
+                }
+
+                h2 {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+
+                h3 {
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+
+            section[actions] {
+                display: flex;
+                gap: var(--nrcl-gutter-space);
+
+                button[icon] {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 0;
+                    justify-content: center;
+                    line-height: 20px;
+                }
+            }
+        }
+
+        .mat-mdc-card-content {
+            display: grid;
+            grid-template-columns: minmax( 0, 1fr) minmax( 0, 1fr );
+            padding: var(--nrcl-gutter-space);
+            margin: 0;
+            gap: var(--nrcl-gutter-space);
+
+            section {
+                display: flex;
+                flex-direction: column;
+
+                .mat-label {
+                }
+
+                cell-content {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<div class="icon">
+    @switch ( config.type ) {
+        @case ( 'success' ) {
+            <mat-icon>check_circle</mat-icon>
+        }
+        @case ( 'error' ) {
+            <mat-icon>cancel</mat-icon>
+        }
+        @case ( 'info' ) {
+            <mat-icon>info</mat-icon>
+        }
+        @case ( 'update' ) {
+            <mat-icon>error</mat-icon>
+        }
+    }
+</div>
+
+<div class="message">
+    <span>{{ config.message }}</span>
+</div>
+
+<div class="button">
+    <button (click)="snackBarRef.dismissWithAction()">Close</button>
+</div>

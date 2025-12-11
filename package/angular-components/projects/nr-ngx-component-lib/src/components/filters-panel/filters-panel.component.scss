@@ -1,0 +1,67 @@
+@use "sass:meta";
+
+::ng-deep :root {
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+        @include meta.load-css('../../styles/include/mat-button');
+    }
+
+    display: flex;
+    flex-flow: row wrap;
+    gap: 8px;
+    position: relative;
+    border: 1px solid #c6c8cb;
+    padding: 8px;
+    background-color: #f2f2f2;
+
+    .actions {
+        flex-grow: 1;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+        width: unset;
+        display: flex;
+
+        button {
+            height: 40px;
+        }
+
+        .spacer {
+            flex-grow: 1;
+        }
+    }
+}
+
+:host-context( .nrcl-device-mobile ) {
+    :host {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .actions {
+            grid-column: 1 / span 2;
+        }            
+
+        ::ng-deep {
+            nrcl-filter-search {
+                --nrcl-filter-search-width: auto;
+                grid-row: 1;
+                grid-column: 1 / span 2;
+            }
+
+            nrcl-filter-select {
+                --nrcl-filter-select-width: auto;
+            }
+
+            nrcl-filter-date {
+                --nrcl-filter-date-width: auto;
+            }
+
+            nrcl-filter-container {
+                --nrcl-filter-container-width: auto;
+            }
+        }
+    }
+}
