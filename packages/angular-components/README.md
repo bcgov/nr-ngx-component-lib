@@ -2,7 +2,7 @@
 NR Component Library for Angular.
 
 # Development 
-In order to do development on this library, first start a local build of Storybook.
+In order to do development on this library, first start a local build of [Storybook](https://storybook.js.org/docs/8).
 First open a terminal, and change to this folder in your local checkout.
 
 ```shell
@@ -10,7 +10,7 @@ First open a terminal, and change to this folder in your local checkout.
 > npm start
 ```
 
-Open [Storybook](http://localhost:6006/?path=/story).
+Open local build of [nr-ngx-component-lib storybook](http://localhost:6006/?path=/story) at `http://localhost:6006/?path=/story`.
 Now you can test any component while you make changes to it.
 
 # Deployment
