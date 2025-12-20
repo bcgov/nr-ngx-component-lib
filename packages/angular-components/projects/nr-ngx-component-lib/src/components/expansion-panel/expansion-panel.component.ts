@@ -87,7 +87,7 @@ export class ExpansionPanelHeaderComponent {}
                 iconCompact="cancel"
                 compact="mobile"
                 [disabled]="!cancelEnabled"
-                click="cancelClick.emit( $event )"
+                (click)="cancelClick.emit( $event )"
             ></nrcl-button>
         }
 
@@ -97,7 +97,7 @@ export class ExpansionPanelHeaderComponent {}
                 iconCompact="save"
                 compact="mobile"
                 [disabled]="!saveEnabled"
-                click="saveClick.emit( $event )"
+                (click)="saveClick.emit( $event )"
             ></nrcl-button>
         }
 
