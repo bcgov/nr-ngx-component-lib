@@ -13,6 +13,8 @@
                 cursor: pointer;
 
                 .mat-mdc-cell {
+                    font-family: var(--nrcl-font-family);
+                    font-size: var(--nrcl-font-size);
                     padding: 5px;
                     color: black;
                     overflow: hidden;
@@ -35,6 +37,8 @@
             }
 
             .mat-mdc-header-cell {
+                font-family: var(--nrcl-font-family);
+                font-size: var(--nrcl-font-size);
                 padding: 5px;
                 color: black;
                 
