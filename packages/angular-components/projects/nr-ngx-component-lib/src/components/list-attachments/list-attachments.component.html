@@ -9,12 +9,10 @@
             }"
         >
             <ng-container matColumnDef="make">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Make
-                </mat-header-cell>
-                <mat-cell *matCellDef="let item">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Make</th>
+                <td mat-cell *matCellDef="let item">
                     <nrcl-cell-content tooltip>{{ item.make }}</nrcl-cell-content>
-                </mat-cell>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="attachmentTypeCode">

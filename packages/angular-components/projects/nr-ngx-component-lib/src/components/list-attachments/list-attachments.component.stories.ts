@@ -136,7 +136,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
     },    
     render: ( args ) => {
         args.rowListProvider = {
-            fetchRowListPage: () => { return of(attachmentCollection()) },
+            fetchAttachments: () => { return of(attachmentCollection()) },
             displayRowListPage: ( res: AttachmentCollection ) => {
                 return {
                     totalRowCount: res.totalRowCount,
@@ -201,7 +201,7 @@ function attachmentCollection(): AttachmentCollection {
                 "sourceObjectUniqueId": "33F2E970411E23A3E063690A0A0A9B26",
                 "sourceObjectNameCode": "EQUIP_ATTACH",
                 "fileName": "ben-avatar-2.png",
-                "attachmentDescription": "dfgdfgdfgdfg",
+                "attachmentDescription": "dfgdfgdfgdfg dfgdfgdfgdfg dfgdfgdfgdfg dfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfg",
                 "attachmentTypeCode": "OTHER",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:08:15",
@@ -212,7 +212,7 @@ function attachmentCollection(): AttachmentCollection {
                 "sourceObjectUniqueId": "33F2E970411E23A3E063690A0A0A9B26",
                 "sourceObjectNameCode": "EQUIP_ATTACH",
                 "fileName": "prep-sheet-detail.png",
-                "attachmentDescription": "asadasdaefefsefsefsegdsfsfedweqweqeqweqweqweqweqweqweqwe",
+                "attachmentDescription": "asadasda efefsefse fseg dsfsfed weqweqeqweqw eqweqweqwe qweqwe",
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:47:49",
@@ -234,7 +234,7 @@ function attachmentCollection(): AttachmentCollection {
                 "sourceObjectUniqueId": "33F2E970411E23A3E063690A0A0A9B26",
                 "sourceObjectNameCode": "EQUIP_ATTACH",
                 "fileName": "WIN_20231221_10_28_31_Pro copy.jpeg",
-                "attachmentDescription": "sdfsdfsdfsdfsdfsdfsfesfsefef",
+                "attachmentDescription": "sdfsdfsdfsdfsdfsdfsfesfsefefsdfsdfsdfsdfsdfsdfsfesfsefefsdfsdfsdfsdfsdfsdfsfesfsefefsdfsdfsdfsdfsdfsdfsfesfsefefsdfsdfsdfsdfsdfsdfsfesfsefef",
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:17:08",
