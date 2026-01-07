@@ -22,14 +22,18 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } fro
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
-import { DesktopViewComponent, MobileViewComponent } from './components/device-view/device-view.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
 import { ExpansionPanelComponent, ExpansionPanelFooterComponent, ExpansionPanelHeaderComponent } from './components/expansion-panel/expansion-panel.component';
 import { FilterContainerComponent } from './components/filter-container/filter-container.component';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
 import { FilterSearchComponent } from './components/filter-search/filter-search.component';
 import { FilterSelectComponent } from './components/filter-select/filter-select.component';
 import { FiltersPanelComponent } from './components/filters-panel/filters-panel.component';
+import { FormFieldComponent } from './components/form-field/form-field.component';
+import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { GapComponent } from './components/gap/gap.component';
+import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
+import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { RowListDesktopComponent } from './components/row-list-desktop/row-list-desktop.component';
@@ -41,10 +45,6 @@ import { ConfigurationService } from './services/configuration.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { FormLayoutComponent } from './components/form-layout/form-layout.component';
-import { FormFieldComponent } from './components/form-field/form-field.component';
-import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
-import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 
 @NgModule({
     imports: [
@@ -75,7 +75,6 @@ import { ListEventHistoryComponent } from './components/list-event-history/list-
     declarations: [
         ButtonComponent,
         CellContentComponent,
-        DesktopViewComponent,
         ExpansionPanelComponent,
         ExpansionPanelHeaderComponent,
         ExpansionPanelFooterComponent,
@@ -89,7 +88,6 @@ import { ListEventHistoryComponent } from './components/list-event-history/list-
         GapComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
-        MobileViewComponent,
         PageContainerComponent,
         PageHeaderComponent,
         RowListDesktopComponent,
@@ -97,11 +95,13 @@ import { ListEventHistoryComponent } from './components/list-event-history/list-
         RowListPaginationComponent,
         RowListSortingComponent,
         SnackbarComponent,
+        DesktopViewDirective,
+        MobileViewDirective,
+        DeviceViewComponent
     ],
     exports: [
         ButtonComponent,
         CellContentComponent,
-        DesktopViewComponent,
         ExpansionPanelComponent,
         ExpansionPanelHeaderComponent,
         ExpansionPanelFooterComponent,
@@ -115,7 +115,6 @@ import { ListEventHistoryComponent } from './components/list-event-history/list-
         GapComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
-        MobileViewComponent,
         PageContainerComponent,
         PageHeaderComponent,
         RowListDesktopComponent,
@@ -123,6 +122,9 @@ import { ListEventHistoryComponent } from './components/list-event-history/list-
         RowListPaginationComponent,
         RowListSortingComponent,
         SnackbarComponent,
+        DesktopViewDirective,
+        MobileViewDirective,
+        DeviceViewComponent
     ],
     providers: [
         SnackbarUtilService,

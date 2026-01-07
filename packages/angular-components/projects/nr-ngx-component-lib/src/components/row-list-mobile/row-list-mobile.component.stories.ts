@@ -11,7 +11,6 @@ import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } f
 import { useArgs } from '@storybook/preview-api';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CellContentComponent } from '../cell-content/cell-content.component';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { GapComponent } from '../gap/gap.component';
@@ -51,8 +50,6 @@ const meta: Meta<RowListMobileComponent> = {
                 FilterSelectComponent,
                 FilterContainerComponent,
                 GapComponent,
-                DesktopViewComponent,
-                MobileViewComponent,
                 DisplayModeWrapperComponent,
                 RowListSortingComponent,
                 RowListPaginationComponent
@@ -65,9 +62,7 @@ const meta: Meta<RowListMobileComponent> = {
             ( story ) => {
                 return `
                     <display-mode-wrapper displayMode="mobile">
-                        <nrcl-mobile-view>
-                            ${ story }
-                        </nrcl-mobile-view>
+                        ${ story }
                     </display-mode-wrapper>
                 `
             },
@@ -222,37 +217,44 @@ export class MyMobileListComponent {
 
 ### With Device View for Responsive Layouts
 \`\`\`typescript
-<nrcl-desktop-view>
-  <nrcl-row-list-desktop>
-    <mat-table [dataSource]="items">
-      <!-- Desktop table columns -->
-    </mat-table>
-  </nrcl-row-list-desktop>
-</nrcl-desktop-view>
+<nrcl-device-view>
+    <ng-template desktop-view>
+        <nrcl-row-list-desktop>
+            <mat-table [dataSource]="items">
+            <!-- Desktop table columns -->
+            </mat-table>
+        </nrcl-row-list-desktop>
+        
+        <nrcl-row-list-pagination 
+            [pageSize]="pageSize" 
+            [pageNumber]="pageNumber">
+        </nrcl-row-list-pagination>
+    </ng-template>
 
-<nrcl-mobile-view>
-  <nrcl-row-list-sorting
-    [sortColumn]="sortColumn"
-    [sortColumnOptions]="sortOptions"
-    [sortDirection]="sortDirection"
-    (sortChange)="onSortChange($event)">
-  </nrcl-row-list-sorting>
-  
-  <nrcl-gap vertical/>
-  
-  <nrcl-row-list-mobile>
-    @for (item of items; track item.id) {
-      <mat-card>
-        <!-- Card content -->
-      </mat-card>
-    }
-  </nrcl-row-list-mobile>
-  
-  <nrcl-row-list-pagination
-    [pageSize]="pageSize"
-    [pageNumber]="pageNumber">
-  </nrcl-row-list-pagination>
-</nrcl-mobile-view>
+    <ng-template mobile-view>
+        <nrcl-row-list-sorting
+            [sortColumn]="sortColumn"
+            [sortColumnOptions]="sortOptions"
+            [sortDirection]="sortDirection"
+            (sortChange)="onSortChange($event)">
+        </nrcl-row-list-sorting>
+        
+        <nrcl-gap vertical/>
+        
+        <nrcl-row-list-mobile>
+            @for (item of items; track item.id) {
+            <mat-card>
+                <!-- Card content -->
+            </mat-card>
+            }
+        </nrcl-row-list-mobile>
+        
+        <nrcl-row-list-pagination
+            [pageSize]="pageSize"
+            [pageNumber]="pageNumber">
+        </nrcl-row-list-pagination>
+    </ng-template>
+</nrcl-device-view>
 \`\`\`
 
 ## Integration Points

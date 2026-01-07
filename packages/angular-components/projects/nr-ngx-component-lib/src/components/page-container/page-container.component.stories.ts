@@ -21,7 +21,6 @@ import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rere
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ConfigurationService } from '../../services/configuration.service';
 import { CellContentComponent } from '../cell-content/cell-content.component';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { GapComponent } from '../gap/gap.component';
@@ -37,6 +36,7 @@ import { FiltersPanelComponent } from '../filters-panel/filters-panel.component'
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { ButtonComponent } from '../button/button.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 
 const meta: Meta<PageContainerComponent> = {
     title: 'Page Container',
@@ -67,7 +67,6 @@ const meta: Meta<PageContainerComponent> = {
             // declare components that are used in the template
             declarations: [
                 CellContentComponent,
-                DesktopViewComponent,
                 DisplayModeWrapperComponent,
                 FilterContainerComponent,
                 FilterSelectComponent,
@@ -75,7 +74,6 @@ const meta: Meta<PageContainerComponent> = {
                 FilterSearchComponent,
                 FilterDateComponent,
                 GapComponent,
-                MobileViewComponent,
                 PageContainerComponent,
                 PageHeaderComponent,
                 RerenderDirective,
@@ -83,7 +81,10 @@ const meta: Meta<PageContainerComponent> = {
                 RowListMobileComponent,
                 RowListPaginationComponent,
                 RowListSortingComponent,
-                ButtonComponent
+                ButtonComponent,
+                DeviceViewComponent,
+                DesktopViewDirective,
+                MobileViewDirective
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -145,18 +146,6 @@ import { PageContainerComponent } from '@wf-design-system/page-container';
 export class MyPageComponent {}
 \`\`\`
 
-### Responsive Layout with Device Views
-\`\`\`typescript
-<nrcl-page-container>
-  <nrcl-desktop-view>
-    <section>Desktop-specific layout</section>
-  </nrcl-desktop-view>
-  
-  <nrcl-mobile-view>
-    <section>Mobile-optimized layout</section>
-  </nrcl-mobile-view>
-</nrcl-page-container>
-\`\`\`
 
 ### Complete Page Layout
 \`\`\`typescript
@@ -217,38 +206,6 @@ This is the foundational layout pattern for organizing page content.
                 <nrcl-page-container>
                     <section style="border: 1px solid red; padding: 10px;">section 1</section>
                     <section style="border: 1px solid red; padding: 10px;">section 2</section>
-                </nrcl-page-container>
-            `
-        }
-    }
-}
-
-export const DeviceView: StoryObj<PageContainerComponent & DisplayModeWrapperComponent> = {
-    ...displayModeWrapperStory,
-    parameters: {
-        docs: {
-            description: {
-                story: `
-Shows how the page container works with device-view components for responsive layouts.
-Desktop sections (red borders) display only in desktop mode, while mobile sections (green borders) appear only in mobile mode.
-Toggle the display mode to see the conditional rendering in action.                
-                `
-            }
-        }
-    },    
-    render: ( { ...args } ) => {
-        return {
-            props: args,
-            template: `
-                <nrcl-page-container>
-                    <nrcl-desktop-view>
-                        <section style="border: 1px solid red; padding: 10px;">section 1 desktop</section>
-                        <section style="border: 1px solid red; padding: 10px;">section 2 desktop</section>
-                    </nrcl-desktop-view>
-                    <nrcl-mobile-view>
-                        <section style="border: 1px solid green; padding: 10px;">section 1 mobile</section>
-                        <section style="border: 1px solid green; padding: 10px;">section 2 mobile</section>
-                    </nrcl-mobile-view>
                 </nrcl-page-container>
             `
         }
@@ -356,15 +313,17 @@ Toggle display mode to see how the layout adapts between desktop and mobile expe
                         ></nrcl-filter-date>
                     </nrcl-filters-panel>
 
-                    <nrcl-desktop-view>
-                        ${ rowListDesktop.template }
-                    </nrcl-desktop-view>
+                    <nrcl-device-view>
+                        <ng-template desktop-view>
+                            ${ rowListDesktop.template }
+                        </ng-template>
 
-                    <nrcl-mobile-view>
-                        <nrcl-gap vertical/>
+                        <ng-template mobile-view>
+                            <nrcl-gap vertical/>
 
-                        ${ rowListMobile.template }
-                    </nrcl-mobile-view>
+                            ${ rowListMobile.template }
+                        </ng-template>
+                    </nrcl-device-view>
                 </nrcl-page-container>
             `
         }

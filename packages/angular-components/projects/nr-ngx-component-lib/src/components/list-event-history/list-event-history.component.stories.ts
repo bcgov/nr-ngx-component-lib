@@ -22,7 +22,6 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';
 import { CellContentComponent } from '../cell-content/cell-content.component';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
@@ -35,6 +34,7 @@ import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.compo
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ListEventHistoryComponent } from './list-event-history.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 
 const meta: Meta<ListEventHistoryComponent> = {
     title: 'List Event History',
@@ -65,7 +65,6 @@ const meta: Meta<ListEventHistoryComponent> = {
             // declare components that are used in the template
             declarations: [
                 CellContentComponent,
-                DesktopViewComponent,
                 DisplayModeWrapperComponent,
                 FilterContainerComponent,
                 FilterSelectComponent,
@@ -73,14 +72,16 @@ const meta: Meta<ListEventHistoryComponent> = {
                 FilterSearchComponent,
                 FilterDateComponent,
                 GapComponent,
-                MobileViewComponent,
                 PageHeaderComponent,
                 RerenderDirective,
                 RowListDesktopComponent,
                 RowListMobileComponent,
                 RowListPaginationComponent,
                 RowListSortingComponent,
-                ButtonComponent,                
+                ButtonComponent,          
+                DeviceViewComponent,
+                DesktopViewDirective,
+                MobileViewDirective      
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

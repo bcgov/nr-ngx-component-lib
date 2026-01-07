@@ -3,24 +3,26 @@
 }
 
 <div class="actions">
-    <nrcl-mobile-view>
-        @if ( showFilters ) {
-            <button mat-stroked-button class="hide"
-                (click)="onHideClick()"
-            >
-                <mat-icon>expand_less</mat-icon>
-                Hide Filters
-            </button>
-        }
-        @else {
-            <button mat-stroked-button class="show"
-                (click)="onShowClick()"
-            >
-                <mat-icon>expand_more</mat-icon>
-                Show Filters
-            </button>
-        }
-    </nrcl-mobile-view>
+    <nrcl-device-view>
+        <ng-template mobile-view>
+            @if ( showFilters ) {
+                <button mat-stroked-button class="hide"
+                    (click)="onHideClick()"
+                >
+                    <mat-icon>expand_less</mat-icon>
+                    Hide Filters
+                </button>
+            }
+            @else {
+                <button mat-stroked-button class="show"
+                    (click)="onShowClick()"
+                >
+                    <mat-icon>expand_more</mat-icon>
+                    Show Filters
+                </button>
+            }
+        </ng-template>
+    </nrcl-device-view>
 
     <div class="spacer"></div>        
 

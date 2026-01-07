@@ -11,7 +11,6 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
@@ -50,8 +49,6 @@ const meta: Meta<CollectionParametersDesktopComponentExtended> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
-                MobileViewComponent,
-                DesktopViewComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

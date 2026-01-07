@@ -1,24 +1,45 @@
-import { Component } from "@angular/core";
+import { ChangeDetectorRef, Component, ContentChild, Directive, HostListener, inject, TemplateRef } from "@angular/core";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
-@Component( {
-    selector: "nrcl-desktop-view",
-    template: '@if ( visible ) { <ng-content></ng-content> }',
-    host: {
-        '[class.nrcl-device-desktop]': 'true'
-    }
-} )
-export class DesktopViewComponent extends ConfigurationSubscriberBase {    
-    get visible() { return this.configuration.displayMode == 'desktop' }
+@Directive({
+    selector: "[desktop-view]"
+})
+export class DesktopViewDirective {
+    constructor(
+        public templateRef: TemplateRef<unknown>
+    ) {}
 }
 
-@Component( {
-    selector: "nrcl-mobile-view",
-    template: '@if ( visible ) { <ng-content></ng-content> }',
-    host: {
-        '[class.nrcl-device-mobile]': 'true'
-    }
-} )
-export class MobileViewComponent extends ConfigurationSubscriberBase {    
-    get visible() { return this.configuration.displayMode == 'mobile' }
+
+@Directive({
+    selector: "[mobile-view]"
+})
+export class MobileViewDirective {
+    constructor(
+        public templateRef: TemplateRef<unknown>
+    ) {}
 }
+
+
+@Component({
+    selector: "nrcl-device-view",
+    template: `
+        @if ( mobileVisible && mobileContent ) {
+            <ng-container [ngTemplateOutlet]="mobileContent.templateRef"></ng-container>
+        }
+
+        @if ( desktopVisible && desktopContent ) {
+            <ng-container [ngTemplateOutlet]="desktopContent.templateRef"></ng-container>
+        }
+    `,
+})
+export class DeviceViewComponent extends ConfigurationSubscriberBase {
+    @ContentChild( DesktopViewDirective ) desktopContent!: DesktopViewDirective;
+    @ContentChild( MobileViewDirective ) mobileContent!: MobileViewDirective;
+
+    changeDetectorRef = inject( ChangeDetectorRef )
+
+    get desktopVisible() { return this.configuration.displayMode == 'desktop' }
+    get mobileVisible() { return this.configuration.displayMode == 'mobile' }
+}
+

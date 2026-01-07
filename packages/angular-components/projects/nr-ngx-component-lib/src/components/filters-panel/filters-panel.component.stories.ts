@@ -13,7 +13,6 @@ import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { DATE_FORMATS } from '../../utils/date.util';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
@@ -48,8 +47,6 @@ const meta: Meta<FiltersPanelComponent> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
-                MobileViewComponent,
-                DesktopViewComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

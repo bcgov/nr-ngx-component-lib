@@ -11,7 +11,6 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
@@ -50,8 +49,6 @@ const meta: Meta<RowListSortingComponent> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
-                MobileViewComponent,
-                DesktopViewComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -132,7 +129,6 @@ export class MyMobileListComponent {
 
 ### With Mobile Card List
 \`\`\`typescript
-<nrcl-mobile-view>
   <nrcl-row-list-sorting
     [sortColumn]="sortColumn"
     [sortColumnOptions]="sortOptions"
@@ -149,7 +145,6 @@ export class MyMobileListComponent {
       </mat-card>
     }
   </nrcl-row-list-mobile>
-</nrcl-mobile-view>
 \`\`\`
 
 ### Sort Column Options Format
@@ -168,7 +163,6 @@ const sortOptions: SortColumnOption[] = [
 
 ### Complete Mobile List with Sorting and Pagination
 \`\`\`typescript
-<nrcl-mobile-view>
   <nrcl-row-list-sorting
     [sortColumn]="sortColumn"
     [sortColumnOptions]="sortOptions"
@@ -206,7 +200,6 @@ const sortOptions: SortColumnOption[] = [
     (pageNumberChange)="pageNumber = $event"
     (pageSizeChange)="onPageSizeChange($event)">
   </nrcl-row-list-pagination>
-</nrcl-mobile-view>
 \`\`\`
 
 ## Inputs
@@ -245,43 +238,11 @@ This allows easy integration with existing sort logic that may also handle deskt
 - Provide clear, user-friendly descriptions in sortColumnOptions
 - Keep the number of sort options reasonable (3-6 options ideal)
 - Ensure sort field codes match your data model property names
-- Use with \`nrcl-mobile-view\` to separate mobile and desktop experiences
 - Consider providing a sensible default sort (e.g., by name or date)
-
-## Desktop vs Mobile Pattern
-
-For responsive lists, use table header sorting on desktop and this component on mobile:
-
-\`\`\`typescript
-<nrcl-desktop-view>
-  <mat-table matSort (matSortChange)="onSortChange($event)">
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
-        Name
-      </mat-header-cell>
-      <!-- cells -->
-    </ng-container>
-  </mat-table>
-</nrcl-desktop-view>
-
-<nrcl-mobile-view>
-  <nrcl-row-list-sorting
-    [sortColumn]="sortColumn"
-    [sortColumnOptions]="sortOptions"
-    [sortDirection]="sortDirection"
-    (sortChange)="onSortChange($event)">
-  </nrcl-row-list-sorting>
-  
-  <nrcl-row-list-mobile>
-    <!-- cards -->
-  </nrcl-row-list-mobile>
-</nrcl-mobile-view>
-\`\`\`
 
 ## Integration Points
 
 - **nrcl-row-list-mobile**: Mobile card list container
-- **nrcl-mobile-view**: Display mode wrapper for mobile-only display
 - **nrcl-gap**: Spacing component for vertical gaps
 - **Angular Material MatSort**: Compatible event format for shared sort logic
 

@@ -13,12 +13,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RowListArgs, rowListItems, rowListStory, seedRandom } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { CellContentComponent } from '../cell-content/cell-content.component';
-import { DesktopViewComponent, MobileViewComponent } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { GapComponent } from '../gap/gap.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListDesktopComponent } from './row-list-desktop.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 
 const meta: Meta<RowListDesktopComponent> = {
     title: 'Row List (Desktop)',
@@ -46,10 +46,11 @@ const meta: Meta<RowListDesktopComponent> = {
                 FilterSelectComponent,
                 FilterContainerComponent,
                 GapComponent,
-                DesktopViewComponent,
-                MobileViewComponent,
                 DisplayModeWrapperComponent,
-                RowListPaginationComponent
+                RowListPaginationComponent,
+                DeviceViewComponent,
+                DesktopViewDirective,
+                MobileViewDirective
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -59,9 +60,7 @@ const meta: Meta<RowListDesktopComponent> = {
             ( story ) => {
                 return `
                     <display-mode-wrapper displayMode="desktop">
-                        <nrcl-desktop-view>
-                            ${ story }
-                        </nrcl-desktop-view>
+                        ${ story }
                     </display-mode-wrapper>
                 `
             },
@@ -186,24 +185,26 @@ export class MyListComponent {
 
 ### With Device View for Responsive Layouts
 \`\`\`typescript
-<nrcl-desktop-view>
-  <nrcl-row-list-desktop>
-    <mat-table [dataSource]="items">
-      <!-- Desktop table columns -->
-    </mat-table>
-  </nrcl-row-list-desktop>
-  
-  <nrcl-row-list-pagination 
-    [pageSize]="pageSize" 
-    [pageNumber]="pageNumber">
-  </nrcl-row-list-pagination>
-</nrcl-desktop-view>
+<nrcl-device-view>
+    <ng-template desktop-view>
+        <nrcl-row-list-desktop>
+            <mat-table [dataSource]="items">
+            <!-- Desktop table columns -->
+            </mat-table>
+        </nrcl-row-list-desktop>
+        
+        <nrcl-row-list-pagination 
+            [pageSize]="pageSize" 
+            [pageNumber]="pageNumber">
+        </nrcl-row-list-pagination>
+    </ng-template>
 
-<nrcl-mobile-view>
-  <nrcl-row-list-mobile>
-    <!-- Mobile card layout -->
-  </nrcl-row-list-mobile>
-</nrcl-mobile-view>
+    <ng-template mobile-view>
+        <nrcl-row-list-mobile>
+            <!-- Mobile card layout -->
+        </nrcl-row-list-mobile>
+    </ng-template>
+</nrcl-device-view>
 \`\`\`
 
 ## Integration Points
@@ -228,7 +229,6 @@ export class MyListComponent {
 - Set explicit column widths using CSS for consistent layouts
 - Enable sticky headers with \`sticky: true\` on header row definition
 - Combine with \`nrcl-row-list-pagination\` for paginated lists
-- Use with \`nrcl-desktop-view\` to create responsive desktop/mobile layouts
 
 ## Interactive Demo
 
