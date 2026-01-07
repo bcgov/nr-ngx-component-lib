@@ -43,7 +43,7 @@
                     margin: 0;
                     padding: 0;
                     line-height: normal;
-                    word-break: break-all;
+                    overflow-wrap: break-word;
                 }
 
                 h2 {
@@ -92,7 +92,7 @@
                 .value {
                     font-weight: bold;
                     width: 100%;
-                    word-break: break-all;
+                    overflow-wrap: break-word;
                 }
 
                 &[full-width] {
