@@ -141,12 +141,12 @@ import { RowListPaginationComponent } from '@wf-design-system/row-list-paginatio
           <mat-card-content>
             <section>
               <mat-label>Status</mat-label>
-              <nrcl-cell-content>{{ item.status }}</nrcl-cell-content>
+              <div class="value">{{ item.status }}</div>
             </section>
             
             <section>
               <mat-label>Date</mat-label>
-              <nrcl-cell-content>{{ item.date }}</nrcl-cell-content>
+              <div class="value">{{ item.date }}</div>
             </section>
           </mat-card-content>
         </mat-card>
@@ -212,7 +212,7 @@ export class MyMobileListComponent {
       <mat-card-content>
         <section>
           <mat-label>Field Label</mat-label>
-          <nrcl-cell-content>{{ item.value }}</nrcl-cell-content>
+          <div class="value">{{ item.value }}</div>
         </section>
       </mat-card-content>
     </mat-card>
@@ -260,7 +260,6 @@ export class MyMobileListComponent {
 - **mat-card**: Angular Material card component for individual items
 - **nrcl-row-list-sorting**: Mobile-friendly sorting controls
 - **ngx-pagination**: Pagination pipe for data slicing
-- **nrcl-cell-content**: Cell content component for text handling
 - **nrcl-row-list-pagination**: Pagination controls component
 
 ## Card Layout Sections
@@ -284,7 +283,6 @@ Each field should be wrapped in a \`<section>\` with \`<mat-label>\` and content
 ## Best Practices
 
 - Always pair with \`nrcl-row-list-sorting\` at the top for mobile sort controls
-- Use \`nrcl-cell-content\` for card content to handle text overflow
 - Combine with \`nrcl-row-list-pagination\` for paginated lists
 - Use \`nrcl-gap vertical\` between sorting, list, and pagination components
 - Use with \`nrcl-mobile-view\` to create responsive desktop/mobile layouts
@@ -357,8 +355,8 @@ export const Primary: StoryObj<RowListMobileComponent & RowListArgs> = {
                         <mat-card>
                             <mat-card-title>
                                 <section title>
-                                    <h2><nrcl-cell-content>{{ item.make }}</nrcl-cell-content></h2>
-                                    <h3><nrcl-cell-content>{{ item.model }}</nrcl-cell-content></h3>
+                                    <h2>{{ item.make }}</h2>
+                                    <h3>{{ item.model }}</h3>
                                 </section>
 
                                 <section actions>
@@ -377,17 +375,17 @@ export const Primary: StoryObj<RowListMobileComponent & RowListArgs> = {
                             <mat-card-content>
                                 <section>
                                     <mat-label>Category</mat-label>
-                                    <nrcl-cell-content>{{ item.category }}</nrcl-cell-content>
+                                    <div class="value">{{ item.category }}</div>
                                 </section>
 
                                 <section>
                                     <mat-label>Classification</mat-label>
-                                    <nrcl-cell-content>{{ item.classification }}</nrcl-cell-content>
+                                    <div class="value">{{ item.classification }}</div>
                                 </section>
 
                                 <section>
                                     <mat-label>Crew #</mat-label>
-                                    <nrcl-cell-content>{{ item.crewNumber }}</nrcl-cell-content>
+                                    <div class="value">{{ item.crewNumber }}</div>
                                 </section>                                            
                             </mat-card-content>
                         </mat-card>

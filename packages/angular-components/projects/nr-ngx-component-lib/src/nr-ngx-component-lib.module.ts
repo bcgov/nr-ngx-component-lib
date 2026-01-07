@@ -43,6 +43,8 @@ import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
+import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
+import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 
 @NgModule({
     imports: [
@@ -85,6 +87,8 @@ import { FormFieldComponent } from './components/form-field/form-field.component
         FormFieldComponent,
         FormLayoutComponent,
         GapComponent,
+        ListAttachmentsComponent,
+        ListEventHistoryComponent,
         MobileViewComponent,
         PageContainerComponent,
         PageHeaderComponent,
@@ -109,6 +113,8 @@ import { FormFieldComponent } from './components/form-field/form-field.component
         FormFieldComponent,
         FormLayoutComponent,
         GapComponent,
+        ListAttachmentsComponent,
+        ListEventHistoryComponent,
         MobileViewComponent,
         PageContainerComponent,
         PageHeaderComponent,

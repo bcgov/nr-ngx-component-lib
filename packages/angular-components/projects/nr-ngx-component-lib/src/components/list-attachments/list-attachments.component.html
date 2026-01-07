@@ -1,0 +1,178 @@
+<nrcl-desktop-view>
+    <nrcl-row-list-desktop>
+        <table mat-table
+            [dataSource]="rows | paginate: { 
+                id: 'desktop-attachments', 
+                itemsPerPage: showPagination ? pageSize : totalRowCount, 
+                currentPage: showPagination ? pageNumber : 1, 
+                totalItems: totalRowCount 
+            }"
+        >
+            <ng-container matColumnDef="make">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Make</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.make }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="attachmentTypeCode">
+                <th mat-header-cell *matHeaderCellDef>Attachment Type</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.attachmentTypeDescription }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fileName">
+                <th mat-header-cell *matHeaderCellDef>File Name</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.fileName }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="sourceObjectNameCode">
+                <th mat-header-cell *matHeaderCellDef>File Type</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.fileExtension }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="uploadedBy">
+                <th mat-header-cell *matHeaderCellDef>Uploaded By</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.uploadedBy }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="uploadedTimestamp">
+                <th mat-header-cell *matHeaderCellDef>Uploaded At</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.uploadedTimestamp }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>Description</th>
+                <td mat-cell *matCellDef="let item">
+                    <nrcl-cell-content tooltip>{{ item.attachmentDescription }}</nrcl-cell-content>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="download">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let item">
+                    <div class="button-container">
+                        <nrcl-button compact
+                            label="Download"
+                            icon="download"
+                            (click)="onDownloadClick( item )"                        
+                        ></nrcl-button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let item">
+                    <div class="button-container">
+                        <nrcl-button compact
+                            label="Delete"
+                            icon="delete"
+                            (click)="onDeleteClick( item )"
+                        ></nrcl-button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let item; columns: columns;"></tr>
+        </table>
+    </nrcl-row-list-desktop>
+
+    @if ( showPagination ) {
+        <nrcl-gap vertical/>
+
+        <nrcl-row-list-pagination
+            paginationId="desktop-attachments"
+            [pageSize]="pageSize"
+            [pageNumber]="pageNumber"
+            [rowCount]="totalRowCount"
+            (pageNumberChange)="onPageNumberChange( $event )"
+            (pageSizeChange)="onPageSizeChange( $event )"
+        ></nrcl-row-list-pagination>
+    }
+</nrcl-desktop-view>
+
+<nrcl-mobile-view>
+    <nrcl-row-list-mobile>
+        @for ( item of rows | paginate: { 
+            id: 'mobile-attachments', 
+            itemsPerPage: showPagination ? pageSize : totalRowCount, 
+            currentPage: showPagination ? pageNumber : 1, 
+            totalItems: totalRowCount 
+        }; track item.attachmentId ) {
+            <mat-card>
+                <mat-card-title>
+                    <section title>
+                        <h2>{{ item.fileName }}</h2>
+                    </section>
+
+                    <section actions>
+                        <nrcl-button compact
+                            label="Download"
+                            icon="download"
+                            (click)="onDownloadClick( item )"                        
+                        ></nrcl-button>
+
+                        @if ( canDelete ) {
+                            <nrcl-button compact
+                                label="Delete"
+                                icon="delete"
+                                (click)="onDeleteClick( item )"
+                            ></nrcl-button>
+                        }
+                    </section>
+                </mat-card-title>
+
+                <mat-card-content>
+                    <section>
+                        <mat-label>Attachment Type</mat-label>
+                        <div class="value">{{ item.attachmentTypeDescription }}</div>
+                    </section>
+
+                    <section>
+                        <mat-label>File Type</mat-label>
+                        <div class="value">{{ item.fileExtension }}</div>
+                    </section>
+
+                    <section>
+                        <mat-label>Uploaded By</mat-label>
+                        <div class="value">{{ item.uploadedBy }}</div>
+                    </section>                                            
+
+                    <section>
+                        <mat-label>Uploaded At</mat-label>
+                        <div class="value">{{ item.uploadedTimestamp }}</div>
+                    </section>                                            
+
+                    <section full-width>
+                        <mat-label>Description</mat-label>
+                        <div class="value">{{ item.attachmentDescription }}</div>
+                    </section>                                            
+                </mat-card-content>
+            </mat-card>
+        }
+    </nrcl-row-list-mobile>
+
+    @if ( showPagination ) {
+        <nrcl-gap vertical/>
+
+        <nrcl-row-list-pagination
+            paginationId="mobile-attachments"
+            [pageSize]="pageSize"
+            [pageNumber]="pageNumber"
+            [rowCount]="totalRowCount"
+            (pageNumberChange)="onPageNumberChange( $event )"
+            (pageSizeChange)="onPageSizeChange( $event )"
+        ></nrcl-row-list-pagination>
+    }
+</nrcl-mobile-view>

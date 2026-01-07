@@ -1,0 +1,47 @@
+:host {
+    .mat-mdc-table {
+        .mat-column-attachmentTypeCode {
+            min-width: 100px;
+        }
+
+        .mat-column-orgUnit {
+            min-width: 100px;
+            max-width: 200px;
+        }
+
+        .mat-column-fileName {
+            min-width: 100px;
+            max-width: 200px;
+        }
+
+        .mat-column-sourceObjectNameCode {
+            min-width: 60px;
+            max-width: 60px;
+        }
+
+        .mat-column-uploadedBy {
+            min-width: 140px;
+            max-width: 140px;
+        }
+
+        .mat-column-uploadedTimestamp {
+            min-width: 140px;
+            max-width: 140px;
+        }
+
+        .mat-column-description {
+            width: 100%;
+            min-width: 200px;
+            max-width: 100px;
+            white-space: normal;
+        }
+
+        .mat-column-download, .mat-column-delete {            
+            .button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
