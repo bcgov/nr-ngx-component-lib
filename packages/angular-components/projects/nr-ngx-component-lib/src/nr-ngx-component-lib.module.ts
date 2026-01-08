@@ -7,7 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -45,6 +45,8 @@ import { ConfigurationService } from './services/configuration.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
+import { DomSanitizer } from '@angular/platform-browser';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
     imports: [
@@ -97,7 +99,8 @@ import { DATE_FORMATS } from './utils/date.util';
         SnackbarComponent,
         DesktopViewDirective,
         MobileViewDirective,
-        DeviceViewComponent
+        DeviceViewComponent,
+        IconComponent
     ],
     exports: [
         ButtonComponent,
@@ -124,7 +127,8 @@ import { DATE_FORMATS } from './utils/date.util';
         SnackbarComponent,
         DesktopViewDirective,
         MobileViewDirective,
-        DeviceViewComponent
+        DeviceViewComponent,
+        IconComponent
     ],
     providers: [
         SnackbarUtilService,
@@ -133,5 +137,15 @@ import { DATE_FORMATS } from './utils/date.util';
         { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
     ]
 })
-export class NrNgxComponentLibModule
- {}
+export class NrNgxComponentLibModule {
+    constructor(
+        private matIconRegistry: MatIconRegistry,
+        private domSanitizer: DomSanitizer
+    ) {
+        this.matIconRegistry.addSvgIcon(
+            "filter-cancel",
+            this.domSanitizer.bypassSecurityTrustResourceUrl("assets/app-icons/filter-cancel.svg")
+        );
+
+    }
+}

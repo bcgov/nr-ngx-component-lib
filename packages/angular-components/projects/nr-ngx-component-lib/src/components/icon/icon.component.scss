@@ -1,0 +1,14 @@
+:host {
+    display: inline-block;
+    
+    .name {
+        display: none;
+    }
+
+    .svg {
+        width: var( --nrcl-icon-size );
+        height: var( --nrcl-icon-size );
+        font-size: var( --nrcl-icon-size );
+        line-height: var( --nrcl-icon-size );
+    }
+}
