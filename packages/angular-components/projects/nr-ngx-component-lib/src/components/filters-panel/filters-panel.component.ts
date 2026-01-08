@@ -15,9 +15,12 @@ import {
 export class FiltersPanelComponent {
     @Input() showClear = true
     @Input() showFilters = true
+    @Input() hasAdvancedFilters = false
+    @Input() showAdvancedFilters = false
 
     @Output() clearFilters = new EventEmitter()
     @Output() showFiltersChange = new EventEmitter<boolean>()
+    @Output() showAdvancedFiltersChange = new EventEmitter<boolean>()
 
     onClearClick() {
         this.clearFilters.emit()
@@ -31,5 +34,15 @@ export class FiltersPanelComponent {
     onShowClick() {
         this.showFilters = true
         this.showFiltersChange.emit( true )
+    }
+
+    onHideAdvancedClick() {
+        this.showAdvancedFilters = false
+        this.showAdvancedFiltersChange.emit( false )
+    }
+
+    onShowAdvancedClick() {
+        this.showAdvancedFilters = true
+        this.showAdvancedFiltersChange.emit( true )
     }
 }

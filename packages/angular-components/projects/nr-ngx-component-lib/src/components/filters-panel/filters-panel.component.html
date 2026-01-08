@@ -2,7 +2,32 @@
     <ng-content></ng-content>
 }
 
+@if ( showFilters && hasAdvancedFilters && showAdvancedFilters ) {
+    <ng-content select="[advanced]"></ng-content>
+}
+
 <div class="actions">
+    @if ( showFilters && hasAdvancedFilters ) {
+        @if ( showAdvancedFilters ) {
+            <!-- <ng-content select="[advanced]"></ng-content> -->
+
+            <button mat-stroked-button class="hide"
+                (click)="onHideAdvancedClick()"
+            >
+                <mat-icon>remove</mat-icon>
+                Less Filters
+            </button>
+        }
+        @else {
+            <button mat-stroked-button class="show"
+                (click)="onShowAdvancedClick()"
+            >
+                <mat-icon>add</mat-icon>
+                More Filters
+            </button>
+        }
+    }
+
     <nrcl-device-view>
         <ng-template mobile-view>
             @if ( showFilters ) {
