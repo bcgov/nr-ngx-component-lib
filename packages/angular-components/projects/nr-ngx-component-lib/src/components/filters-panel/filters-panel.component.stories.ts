@@ -19,6 +19,8 @@ import { FilterSelectComponent } from '../filter-select/filter-select.component'
 import { FiltersPanelComponent } from './filters-panel.component';
 import { useArgs } from 'storybook/internal/preview-api';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<FiltersPanelComponent> = {
     title: 'Filters Panel',
@@ -50,7 +52,9 @@ const meta: Meta<FiltersPanelComponent> = {
                 FilterSelectComponent,
                 DesktopViewDirective,
                 MobileViewDirective,
-                DeviceViewComponent
+                DeviceViewComponent,
+                IconComponent,
+                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

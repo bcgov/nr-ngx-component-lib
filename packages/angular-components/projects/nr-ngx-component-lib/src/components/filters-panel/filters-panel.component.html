@@ -9,42 +9,36 @@
 <div class="actions">
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
-            <!-- <ng-content select="[advanced]"></ng-content> -->
-
-            <button mat-stroked-button class="hide"
+            <nrcl-button outline 
+                label="Less Filters"
+                icon="remove"
                 (click)="onHideAdvancedClick()"
-            >
-                <mat-icon>remove</mat-icon>
-                Less Filters
-            </button>
+            ></nrcl-button>
         }
         @else {
-            <button mat-stroked-button class="show"
+            <nrcl-button outline 
+                label="More Filters"
+                icon="add"
                 (click)="onShowAdvancedClick()"
-            >
-                <mat-icon>add</mat-icon>
-                More Filters
-            </button>
+            ></nrcl-button>
         }
     }
 
     <nrcl-device-view>
         <ng-template mobile-view>
             @if ( showFilters ) {
-                <button mat-stroked-button class="hide"
+                <nrcl-button outline 
+                    label="Hide Filters"
+                    icon="expand_less"
                     (click)="onHideClick()"
-                >
-                    <mat-icon>expand_less</mat-icon>
-                    Hide Filters
-                </button>
+                ></nrcl-button>
             }
             @else {
-                <button mat-stroked-button class="show"
+                <nrcl-button outline 
+                    label="Show Filters"
+                    icon="expand_more"
                     (click)="onShowClick()"
-                >
-                    <mat-icon>expand_more</mat-icon>
-                    Show Filters
-                </button>
+                ></nrcl-button>
             }
         </ng-template>
     </nrcl-device-view>
@@ -52,11 +46,11 @@
     <div class="spacer"></div>        
 
     @if ( showClear && showFilters ) {
-        <button mat-stroked-button class="clear"
+        <nrcl-button outline class="icon-left"
             (click)="onClearClick()"
         >
-            <mat-icon>filter_list_off</mat-icon>
-            Clear
-        </button>
+            <nrcl-icon class="left">clear-filters</nrcl-icon>             
+            <div class="label">Clear</div>
+        </nrcl-button>
     }
 </div>
