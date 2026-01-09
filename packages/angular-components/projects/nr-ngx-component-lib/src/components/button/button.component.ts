@@ -7,6 +7,7 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
     styleUrl: './button.component.scss',
     host: {
         '[class.primary]': 'primary',
+        '[class.outline]': 'outline && !primary',
         '[class.disabled]': 'disabled',
         '[class.compact]': 'isCompact',
         '[class.icon-left]': '!isCompact && icon',
@@ -22,6 +23,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase {
     @Input() tooltip
     @Input() compact
     @Input( { transform: booleanAttribute } ) primary = false
+    @Input( { transform: booleanAttribute } ) outline = false
     @Input( { transform: booleanAttribute } ) disabled = false
 
     @Output() click = new EventEmitter<PointerEvent>()

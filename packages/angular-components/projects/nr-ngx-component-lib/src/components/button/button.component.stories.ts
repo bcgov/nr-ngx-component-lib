@@ -270,6 +270,20 @@ Compact buttons that include both icon and text:
                                 label="Add Resources"                        
                             ></nrcl-button> 
                         </article>
+
+                        <article>
+                            <h6>outline</h6>
+                            <nrcl-button outline
+                                label="Add Resources"                        
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>outline disabled</h6>
+                            <nrcl-button outline disabled
+                                label="Add Resources"                        
+                            ></nrcl-button> 
+                        </article>
                     </div>
 
                     <div class="inner-grid">
@@ -300,6 +314,23 @@ Compact buttons that include both icon and text:
                         <article>
                             <h6>icon iconRight primary disabled</h6>
                             <nrcl-button primary disabled
+                                label="Add Resources"                        
+                                icon="add"
+                                iconRight="get_app"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>icon outline</h6>
+                            <nrcl-button outline
+                                label="Add Resources"                        
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>icon iconRight outline disabled</h6>
+                            <nrcl-button outline disabled
                                 label="Add Resources"                        
                                 icon="add"
                                 iconRight="get_app"
