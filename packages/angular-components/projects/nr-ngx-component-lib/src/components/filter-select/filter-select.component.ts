@@ -41,7 +41,8 @@ import { CodeDescription } from "../../utils/code-table.util";
     host: {
         '[class.has-value]': "hasValue",
         '[class.is-open]': "isOpen",
-        '[class.is-closed]': "!isOpen"
+        '[class.is-closed]': "!isOpen",
+        '[class.use-filter]': "filter",
     }
 } )
 export class FilterSelectComponent implements OnChanges {
@@ -54,6 +55,7 @@ export class FilterSelectComponent implements OnChanges {
     @Input( { transform: booleanAttribute } ) tooltips = true
     @Input( { transform: booleanAttribute } ) summary = true
     @Input( { transform: booleanAttribute } ) clear = true
+    @Input( { transform: booleanAttribute } ) filter = true
 
     @Output() valueChange = new EventEmitter<string[]>();
 
@@ -130,7 +132,12 @@ export class FilterSelectComponent implements OnChanges {
 
         this.isOpen = true
         this.floatLabel = 'always'
-        this.inputValue = ''
+        if ( this.filter ) {
+            this.inputValue = ''
+        }
+        else {
+
+        }
 
         // Create overlay
         const positionStrategy = this.overlay
@@ -288,6 +295,10 @@ export class FilterSelectComponent implements OnChanges {
 
     onInputFocus() {
         this.open()
+    }
+
+    onCloseClick() {
+        this.close()
     }
 
     descriptionForCode( code: string ): string {

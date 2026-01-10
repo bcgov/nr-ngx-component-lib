@@ -7,6 +7,7 @@ import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@story
 import { FilterDateComponent } from './filter-date.component';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<FilterDateComponent> = {
     title: 'Filter Date',
@@ -27,6 +28,7 @@ const meta: Meta<FilterDateComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

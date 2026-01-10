@@ -76,7 +76,7 @@ export class ExpansionPanelHeaderComponent {}
     template: `
         @if ( showWarning ) {
             <div class="warning">
-                <mat-icon>warning</mat-icon>
+                <nrcl-icon>warning</nrcl-icon>
                 <span>{{ warningMessage }}</span>
             </div>
         }
@@ -123,7 +123,7 @@ export class ExpansionPanelHeaderComponent {}
             align-items: center;
         }
 
-        .warning .mat-icon {
+        .warning nrcl-icon {
             color: #FCBA19;        
         }
     `],

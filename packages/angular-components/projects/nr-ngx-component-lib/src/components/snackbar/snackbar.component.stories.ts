@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRippleModule } from '@angular/material/core';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { IconComponent } from '../icon/icon.component';
 
 @Component( {
     selector: 'storybook-dummy-component',
@@ -113,7 +114,8 @@ Use the controls below to test different snackbar types and messages. Click the 
                 SnackbarComponent,
                 ButtonComponent,
                 RerenderDirective,
-                DisplayModeWrapperComponent
+                DisplayModeWrapperComponent,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

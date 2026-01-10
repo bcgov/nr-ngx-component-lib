@@ -2,6 +2,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { IconComponent } from './icon.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const meta: Meta<IconComponent> = {
     title: 'Icon',
@@ -12,6 +13,7 @@ const meta: Meta<IconComponent> = {
             // import necessary ngModules or standalone components
             imports: [
                 MatTooltipModule,
+                MatIconModule
             ],
             // declare components that are used in the template
             declarations: [
@@ -21,17 +23,17 @@ const meta: Meta<IconComponent> = {
             providers: [
             ],
         } ),
-        componentWrapperDecorator( 
-            ( story ) => {
-                return `
-                    <ng-container *rerender="width + tooltip">
-                        <div class="component-container-inline">
-                            ${ story }
-                        </div>
-                    </ng-container>
-                `
-            }
-        ),        
+        // componentWrapperDecorator( 
+        //     ( story ) => {
+        //         return `
+        //             <ng-container *rerender="width + tooltip">
+        //                 <div class="component-container-inline">
+        //                     ${ story }
+        //                 </div>
+        //             </ng-container>
+        //         `
+        //     }
+        // ),        
     ],
     tags: ['autodocs'],
     parameters: {
@@ -66,7 +68,36 @@ export const Primary: StoryObj<IconComponent> = {
         return {
             props: args,
             template: `
-                <nrcl-icon>clear-filters</nrcl-icon> 
+                <h3>NRCL Icons</h3>
+                
+                <div class="item">
+                    <label>clear-filter</label>
+                    <nrcl-icon>clear-filters</nrcl-icon> 
+                </div>
+
+                <h3>Material Icons</h3>
+
+                <section>
+                    <div class="item">
+                        <label>remove</label>
+                        <nrcl-icon>remove</nrcl-icon> 
+                    </div>
+
+                    <div class="item">
+                        <label>add</label>
+                        <nrcl-icon>add</nrcl-icon> 
+                    </div>
+
+                    <div class="item">
+                        <label>expand_less</label>
+                        <nrcl-icon>expand_less</nrcl-icon> 
+                    </div>
+
+                    <div class="item">
+                        <label>expand_more</label>
+                        <nrcl-icon>expand_more</nrcl-icon> 
+                    </div>
+            </section>
             `
         }
     }

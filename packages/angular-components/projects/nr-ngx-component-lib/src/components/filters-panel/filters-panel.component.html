@@ -46,11 +46,10 @@
     <div class="spacer"></div>        
 
     @if ( showClear && showFilters ) {
-        <nrcl-button outline class="icon-left"
+        <nrcl-button outline 
+            label="Clear"
+            icon="clear-filters"
             (click)="onClearClick()"
-        >
-            <nrcl-icon class="left">clear-filters</nrcl-icon>             
-            <div class="label">Clear</div>
-        </nrcl-button>
+        ></nrcl-button>
     }
 </div>

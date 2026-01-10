@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterSearchComponent } from './filter-search.component';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<FilterSearchComponent> = {
     title: 'Filter Search',
@@ -26,6 +27,7 @@ const meta: Meta<FilterSearchComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

@@ -1,13 +1,7 @@
-@use "sass:meta";
-
 ::ng-deep :root {
 }
 
 :host {
-    ::ng-deep {
-        @include meta.load-css('../../styles/include/mat-icon');
-    }
-
     display: block;
     font-family: var( --nrcl-font-family );
     position: relative;

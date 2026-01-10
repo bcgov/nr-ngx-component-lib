@@ -16,6 +16,7 @@ import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { RowListPaginationComponent } from './row-list-pagination.component';
+import { IconComponent } from '../icon/icon.component';
 
 type CollectionParametersDesktopComponentExtended = RowListPaginationComponent & { width?: number }
 
@@ -49,6 +50,7 @@ const meta: Meta<CollectionParametersDesktopComponentExtended> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

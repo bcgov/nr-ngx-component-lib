@@ -1,16 +1,10 @@
-@use "sass:meta";
-
 ::ng-deep :root {
     --nrcl-filter-date-width: var( --nrcl-filter-width-default );
 }
 
 :host {
-    ::ng-deep {
-        @include meta.load-css('../../styles/include/mat-icon');
-    }
-
     --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
-    --mat-form-field-container-vertical-padding: 10px;
+    --mat-form-field-container-vertical-padding: 8px;
     --mat-form-field-container-text-size: 15px;
     --mdc-outlined-text-field-focus-label-text-color: black;
     --mdc-outlined-text-field-hover-label-text-color: black;
@@ -35,8 +29,8 @@
 
     .select-date {            
         padding: 0;
-        width: 36px;
-        height: 36px;
+        width: calc( var( --nrcl-filter-height-default ) - 2px );
+        height: calc( var( --nrcl-filter-height-default ) - 2px );
         display: flex;
         justify-content: center;
         align-items: center;

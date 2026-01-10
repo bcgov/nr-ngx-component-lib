@@ -17,6 +17,7 @@ import { FilterSearchComponent } from '../filter-search/filter-search.component'
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { RowListSortingComponent } from './row-list-sorting.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<RowListSortingComponent> = {
     title: 'Row List Sorting',
@@ -49,6 +50,7 @@ const meta: Meta<RowListSortingComponent> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

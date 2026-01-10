@@ -37,6 +37,7 @@ import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { ButtonComponent } from '../button/button.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<PageContainerComponent> = {
     title: 'Page Container',
@@ -84,7 +85,8 @@ const meta: Meta<PageContainerComponent> = {
                 ButtonComponent,
                 DeviceViewComponent,
                 DesktopViewDirective,
-                MobileViewDirective
+                MobileViewDirective,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

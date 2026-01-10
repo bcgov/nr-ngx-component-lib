@@ -9,6 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterSelectComponent } from './filter-select.component';
 import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<FilterSelectComponent & { width: number }> = {
     title: 'Filter Select',
@@ -30,6 +31,7 @@ const meta: Meta<FilterSelectComponent & { width: number }> = {
             ],
             // declare components that are used in the template
             declarations: [
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -94,7 +96,9 @@ A powerful multi-select component with filtering capabilities.
         hint: '',
         tooltips: true,
         summary: true,
-        clear: false,
+        clear: true,
+        filter: true,
+        placeholder: 'Filter...'
     },
 }
 

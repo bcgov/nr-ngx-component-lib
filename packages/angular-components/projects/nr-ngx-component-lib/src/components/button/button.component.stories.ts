@@ -6,6 +6,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrappe
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<ButtonComponent> = {
     title: 'Button',
@@ -22,7 +23,8 @@ const meta: Meta<ButtonComponent> = {
             // declare components that are used in the template
             declarations: [
                 RerenderDirective,
-                DisplayModeWrapperComponent
+                DisplayModeWrapperComponent,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

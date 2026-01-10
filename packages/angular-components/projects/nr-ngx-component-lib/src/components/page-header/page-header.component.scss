@@ -1,13 +1,7 @@
-@use "sass:meta";
-
 ::ng-deep :root {
 }
 
 :host {
-    ::ng-deep {
-        @include meta.load-css('../../styles/include/mat-icon');
-    }
-
     display: flex;
     gap: var( --nrcl-gutter-space );
     position: relative;

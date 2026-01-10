@@ -5,19 +5,21 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     selector: 'nrcl-icon',
     templateUrl: './icon.component.html',
     styleUrl: './icon.component.scss',
+    host: {
+        '[class.show-icon]': '!svg',
+        '[class.show-svg]':  '!!svg',
+    }
 } )
 export class IconComponent implements AfterContentInit {   
-    elementRef = inject( ElementRef )
-    changeDetectorRef = inject( ChangeDetectorRef )
-
     name: keyof( typeof ICON )
     svg: SafeHtml
 
+    elementRef = inject( ElementRef )
     domSanitizer = inject( DomSanitizer )    
 
     ngAfterContentInit(): void {
         this.name = this.elementRef?.nativeElement?.textContent
-        this.svg = this.domSanitizer.bypassSecurityTrustHtml( ICON[ this.name ] )
+        if ( ICON[ this.name ] ) this.svg = this.domSanitizer.bypassSecurityTrustHtml( ICON[ this.name ] )
     }
 }
 
