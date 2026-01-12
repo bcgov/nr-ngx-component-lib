@@ -301,7 +301,6 @@ Each field should be wrapped in a \`<section>\` with \`<mat-label>\` and content
 - Always pair with \`nrcl-row-list-sorting\` at the top for mobile sort controls
 - Combine with \`nrcl-row-list-pagination\` for paginated lists
 - Use \`nrcl-gap vertical\` between sorting, list, and pagination components
-- Use with \`nrcl-mobile-view\` to create responsive desktop/mobile layouts
 - Keep action buttons in the card title for easy thumb access
 - Limit the number of fields shown to avoid overly tall cards
 

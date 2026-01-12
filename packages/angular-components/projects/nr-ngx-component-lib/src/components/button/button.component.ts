@@ -35,6 +35,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase {
     onClick( ev: PointerEvent ) {
         if ( this.disabled ) return
 
+        ev.stopPropagation()
         this.click.emit( ev )
     }
 
