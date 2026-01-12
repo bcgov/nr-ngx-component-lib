@@ -94,7 +94,7 @@ const meta: Meta<ListAttachmentsComponent> = {
         componentWrapperDecorator(
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + displayMode + canDelete">
+                    <ng-container *rerender="width + displayMode + canDelete + canDownload">
                         <display-mode-wrapper
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
@@ -127,6 +127,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
     args: {
         ...displayModeWrapperStory.args,
         canDelete: true,
+        canDownload: true,
     },
     parameters: {
         docs: {
@@ -166,6 +167,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
                 <nrcl-list-attachments
                     [rowListProvider]="rowListProvider"
                     [canDelete]="canDelete"
+                    [canDownload]="canDownload"
                     [showPagination]="showPagination"
                 ></nrcl-list-attachments>
             `

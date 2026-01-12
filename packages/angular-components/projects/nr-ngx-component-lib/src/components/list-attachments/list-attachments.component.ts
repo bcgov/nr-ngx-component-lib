@@ -38,9 +38,10 @@ export interface AttachmentRowListProvider<R,L=any> {
 export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> {
     @Input() rowListProvider: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
+    @Input() canDownload = true
 
     DATE_FORMATS = DATE_FORMATS
-    columns = [ 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description', 'download' ]
+    columns = [ 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description' ]
 
     initializeRowList(): void {
         super.initializeRowList()
@@ -57,6 +58,9 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     }
 
     ngAfterViewInit() {
+        if ( this.canDownload )
+            this.columns.push( 'download' )
+
         if ( this.canDelete )
             this.columns.push( 'delete' )
         
