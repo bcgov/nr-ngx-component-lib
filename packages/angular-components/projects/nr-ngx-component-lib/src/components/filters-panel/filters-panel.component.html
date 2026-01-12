@@ -7,26 +7,14 @@
 }
 
 <div class="actions">
-    <nrcl-device-view>
-        <ng-template mobile-view>
-            @if ( showFilters ) {
-                <nrcl-button outline 
-                    label="Hide Filters"
-                    icon="expand_less"
-                    (click)="onHideClick()"
-                    compact="mobile"
-                ></nrcl-button>
-            }
-            @else {
-                <nrcl-button outline 
-                    label="Show Filters"
-                    icon="expand_more"
-                    (click)="onShowClick()"
-                    compact="mobile"
-                ></nrcl-button>
-            }
-        </ng-template>
-    </nrcl-device-view>
+    @if ( showClear && showFilters ) {
+        <nrcl-button outline 
+            label="Clear"
+            icon="clear-filters"
+            (click)="onClearClick()"
+            compact="mobile"
+        ></nrcl-button>
+    }
 
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
@@ -47,14 +35,24 @@
         }
     }
 
-    <!-- <div class="spacer"></div>         -->
-
-    @if ( showClear && showFilters ) {
-        <nrcl-button outline 
-            label="Clear"
-            icon="clear-filters"
-            (click)="onClearClick()"
-            compact="mobile"
-        ></nrcl-button>
-    }
+    <nrcl-device-view>
+        <ng-template mobile-view>
+            @if ( showFilters ) {
+                <nrcl-button outline 
+                    label="Hide Filters"
+                    icon="expand_less"
+                    (click)="onHideClick()"
+                    compact="mobile"
+                ></nrcl-button>
+            }
+            @else {
+                <nrcl-button outline 
+                    label="Show Filters"
+                    icon="expand_more"
+                    (click)="onShowClick()"
+                    compact="mobile"
+                ></nrcl-button>
+            }
+        </ng-template>
+    </nrcl-device-view>
 </div>

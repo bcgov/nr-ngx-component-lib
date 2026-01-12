@@ -32,6 +32,11 @@ export class MobileViewDirective {
             <ng-container [ngTemplateOutlet]="desktopContent.templateRef"></ng-container>
         }
     `,
+    styles: [`
+        :host:empty {
+            display: none;
+        }
+    `]
 })
 export class DeviceViewComponent extends ConfigurationSubscriberBase {
     @ContentChild( DesktopViewDirective ) desktopContent!: DesktopViewDirective;

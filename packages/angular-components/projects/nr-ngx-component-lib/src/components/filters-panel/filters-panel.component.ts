@@ -11,6 +11,9 @@ import {
     templateUrl: "./filters-panel.component.html",
     styleUrl: "./filters-panel.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class.hide-filters]': '!showFilters'
+    }
 } )
 export class FiltersPanelComponent {
     @Input() showClear = true

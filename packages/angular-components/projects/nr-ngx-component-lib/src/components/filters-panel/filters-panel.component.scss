@@ -12,7 +12,7 @@
 
     .actions {
         flex-grow: 1;
-        flex-direction: row;
+        flex-direction: row-reverse;
         justify-content: space-between;
         align-items: flex-end;
         width: unset;
@@ -28,6 +28,12 @@
 
         .spacer {
             flex-grow: 1;
+        }
+    }
+
+    &.hide-filters {
+        .actions {
+            flex-direction: row;
         }
     }
 }
