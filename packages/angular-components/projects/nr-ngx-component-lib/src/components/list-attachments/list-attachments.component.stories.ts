@@ -127,7 +127,6 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
     args: {
         ...displayModeWrapperStory.args,
         canDelete: true,
-        showPagination: false
     },
     parameters: {
         docs: {
@@ -140,6 +139,59 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
     render: ( args ) => {
         args.rowListProvider = {
             fetchAttachments: () => { return of(attachmentCollection()) },
+            displayRowListPage: ( res: AttachmentCollection ) => {
+                return {
+                    totalRowCount: res.totalRowCount,
+                    rows: res.collection.map( v => {
+                        return {
+                            attachmentTypeDescription: v.attachmentTypeCode,
+                            fileName: v.fileName,
+                            fileExtension: getFileExtension( v.fileName ),
+                            uploadedBy: v.uploadedBy,
+                            uploadedTimestamp: moment( v.uploadedTimestamp ).format( DATE_FORMATS.fullPickerInput ),
+                            attachmentDescription: v.attachmentDescription,
+                            attachmentId: v.attachmentGuid,
+                            fileId: v.fileIdentifier,
+                            sourceObjectUniqueId: v.sourceObjectUniqueId
+                        }
+                    } )
+                }
+            },
+            downloadItem: () => {},
+            deleteItem: () => {},
+        }
+        return {
+            props: args,
+            template: `
+                <nrcl-list-attachments
+                    [rowListProvider]="rowListProvider"
+                    [canDelete]="canDelete"
+                    [showPagination]="showPagination"
+                ></nrcl-list-attachments>
+            `
+        }
+    }
+}
+
+export const NoRows: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComponent> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        canDelete: true,
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: `
+                `
+            }
+        }
+    },
+    render: ( args ) => {
+        args.rowListProvider = {
+            fetchAttachments: () => { return of([]) },
             displayRowListPage: ( res: AttachmentCollection ) => {
                 return {
                     totalRowCount: res.totalRowCount,

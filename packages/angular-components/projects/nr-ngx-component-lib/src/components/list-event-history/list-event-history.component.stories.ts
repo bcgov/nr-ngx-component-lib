@@ -35,6 +35,7 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ListEventHistoryComponent } from './list-event-history.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<ListEventHistoryComponent> = {
     title: 'List Event History',
@@ -81,7 +82,8 @@ const meta: Meta<ListEventHistoryComponent> = {
                 ButtonComponent,          
                 DeviceViewComponent,
                 DesktopViewDirective,
-                MobileViewDirective      
+                MobileViewDirective,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
