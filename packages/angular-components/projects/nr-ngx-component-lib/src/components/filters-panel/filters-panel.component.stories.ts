@@ -18,6 +18,9 @@ import { FilterSearchComponent } from '../filter-search/filter-search.component'
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { FiltersPanelComponent } from './filters-panel.component';
 import { useArgs } from 'storybook/internal/preview-api';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<FiltersPanelComponent> = {
     title: 'Filters Panel',
@@ -47,6 +50,11 @@ const meta: Meta<FiltersPanelComponent> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
+                DesktopViewDirective,
+                MobileViewDirective,
+                DeviceViewComponent,
+                IconComponent,
+                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -279,6 +287,54 @@ export const ClearFilters: StoryObj<DisplayModeWrapperComponent & { filter: Filt
                         [value]="filter.fruit3"
                         (valueChange)="onValueChange( 'fruit3', $event )"
                     ></nrcl-filter-select>
+                </nrcl-filters-panel> 
+            `
+        }
+    }
+}
+
+export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent> = {
+    ...displayModeWrapperStory,
+    args: {
+        ...displayModeWrapperStory.args,
+        showClear: true,
+        showFilters: true,
+        hasAdvancedFilters: true,
+    },
+    render: ( args ) => {
+        let templateArgs = argsToTemplate(args, { include: [ 'showClear', 'showFilters', 'hasAdvancedFilters' ] } )
+
+        return {
+            props: {
+                ...args,
+                options: fruitOptions()
+            },
+            template: `
+                <nrcl-filters-panel ${ templateArgs }>
+                    <nrcl-filter-search></nrcl-filter-search>
+
+                    <nrcl-filter-select
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-select
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-select advanced
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date advanced
+                        label="Start"
+                    ></nrcl-filter-date>
                 </nrcl-filters-panel> 
             `
         }

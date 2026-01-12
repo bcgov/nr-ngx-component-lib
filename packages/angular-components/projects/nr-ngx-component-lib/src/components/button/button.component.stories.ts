@@ -6,6 +6,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrappe
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<ButtonComponent> = {
     title: 'Button',
@@ -22,7 +23,8 @@ const meta: Meta<ButtonComponent> = {
             // declare components that are used in the template
             declarations: [
                 RerenderDirective,
-                DisplayModeWrapperComponent
+                DisplayModeWrapperComponent,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -270,6 +272,20 @@ Compact buttons that include both icon and text:
                                 label="Add Resources"                        
                             ></nrcl-button> 
                         </article>
+
+                        <article>
+                            <h6>outline</h6>
+                            <nrcl-button outline
+                                label="Add Resources"                        
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>outline disabled</h6>
+                            <nrcl-button outline disabled
+                                label="Add Resources"                        
+                            ></nrcl-button> 
+                        </article>
                     </div>
 
                     <div class="inner-grid">
@@ -300,6 +316,23 @@ Compact buttons that include both icon and text:
                         <article>
                             <h6>icon iconRight primary disabled</h6>
                             <nrcl-button primary disabled
+                                label="Add Resources"                        
+                                icon="add"
+                                iconRight="get_app"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>icon outline</h6>
+                            <nrcl-button outline
+                                label="Add Resources"                        
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>icon iconRight outline disabled</h6>
+                            <nrcl-button outline disabled
                                 label="Add Resources"                        
                                 icon="add"
                                 iconRight="get_app"

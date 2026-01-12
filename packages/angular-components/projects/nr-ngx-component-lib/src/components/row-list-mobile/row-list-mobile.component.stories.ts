@@ -21,6 +21,8 @@ import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.co
 import { MatRadioModule } from '@angular/material/radio';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListArgs, rowListItems, rowListStory, seedRandom } from 'projects/nr-ngx-component-lib/story-util';
+import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<RowListMobileComponent> = {
     title: 'Row List (Mobile)',
@@ -52,7 +54,9 @@ const meta: Meta<RowListMobileComponent> = {
                 GapComponent,
                 DisplayModeWrapperComponent,
                 RowListSortingComponent,
-                RowListPaginationComponent
+                RowListPaginationComponent,
+                IconComponent,
+                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -126,10 +130,15 @@ import { RowListPaginationComponent } from '@wf-design-system/row-list-paginatio
             </section>
             
             <section actions>
-              <button icon (click)="onEdit(item)">
-                <mat-icon>edit</mat-icon>
-                <span>Edit</span>
-              </button>
+                <nrcl-button compact
+                    label="Edit"
+                    icon="edit"
+                ></nrcl-button>
+
+                <nrcl-button compact
+                    label="Delete"
+                    icon="delete"
+                ></nrcl-button>
             </section>
           </mat-card-title>
           
@@ -196,10 +205,15 @@ export class MyMobileListComponent {
         </section>
         
         <section actions>
-          <button icon>
-            <mat-icon>action_icon</mat-icon>
-            <span>Action</span>
-          </button>
+            <nrcl-button compact
+                label="Edit"
+                icon="edit"
+            ></nrcl-button>
+
+            <nrcl-button compact
+                label="Delete"
+                icon="delete"
+            ></nrcl-button>
         </section>
       </mat-card-title>
       
@@ -362,15 +376,15 @@ export const Primary: StoryObj<RowListMobileComponent & RowListArgs> = {
                                 </section>
 
                                 <section actions>
-                                    <button icon>
-                                        <mat-icon>edit</mat-icon>
-                                        <span>Edit</span>
-                                    </button>
+                                    <nrcl-button compact
+                                        label="Edit"
+                                        icon="edit"
+                                    ></nrcl-button>
 
-                                    <button icon>
-                                        <mat-icon>delete</mat-icon>
-                                        <span>Delete</span>
-                                    </button>
+                                    <nrcl-button compact
+                                        label="Delete"
+                                        icon="delete"
+                                    ></nrcl-button>
                                 </section>
                             </mat-card-title>
 

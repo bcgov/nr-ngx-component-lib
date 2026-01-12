@@ -8,6 +8,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/n
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ButtonComponent } from '../button/button.component';
 import { ExpansionPanelComponent, ExpansionPanelFooterComponent, ExpansionPanelHeaderComponent } from './expansion-panel.component';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<ExpansionPanelComponent> = {
     title: 'Expansion Panel',
@@ -29,7 +30,8 @@ const meta: Meta<ExpansionPanelComponent> = {
                 DisplayModeWrapperComponent,
                 ButtonComponent,
                 ExpansionPanelHeaderComponent,
-                ExpansionPanelFooterComponent
+                ExpansionPanelFooterComponent,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

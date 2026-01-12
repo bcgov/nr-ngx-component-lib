@@ -19,6 +19,7 @@ import { GapComponent } from '../gap/gap.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListDesktopComponent } from './row-list-desktop.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<RowListDesktopComponent> = {
     title: 'Row List (Desktop)',
@@ -50,7 +51,8 @@ const meta: Meta<RowListDesktopComponent> = {
                 RowListPaginationComponent,
                 DeviceViewComponent,
                 DesktopViewDirective,
-                MobileViewDirective
+                MobileViewDirective,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

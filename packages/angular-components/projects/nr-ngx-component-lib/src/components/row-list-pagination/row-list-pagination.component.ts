@@ -37,6 +37,7 @@ export class RowListPaginationComponent implements AfterViewInit {
     @Input() pageNumber
     @Input() rowCount
     @Input() showPageSize = true 
+    @Input() noRowsMessage = 'No records to display.'
 
     @Output() pageSizeChange = new EventEmitter<number>();
     @Output() pageNumberChange = new EventEmitter<number>();
@@ -105,6 +106,6 @@ export class RowListPaginationComponent implements AfterViewInit {
     }
 
     get hasRows() {
-        return this.rowCount && this.pageSize
+        return this.rowCount
     }
 }

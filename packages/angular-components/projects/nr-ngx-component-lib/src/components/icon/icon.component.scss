@@ -1,0 +1,35 @@
+@use "sass:meta";
+
+::ng-deep :root {
+}
+
+:host {
+    ::ng-deep {
+        @include meta.load-css('../../styles/include/mat-icon');
+    }
+
+    display: block;
+    
+    &.show-svg {
+        .mat-icon {
+            display: none;
+        }
+
+        .svg {
+            width: var( --nrcl-icon-size );
+            height: var( --nrcl-icon-size );
+            font-size: var( --nrcl-icon-size );
+            line-height: var( --nrcl-icon-size );
+        }
+    }
+
+    &.show-icon {
+        .mat-icon {
+            display: block;
+        }
+
+        .svg {
+            display: none;
+        }
+    }
+}

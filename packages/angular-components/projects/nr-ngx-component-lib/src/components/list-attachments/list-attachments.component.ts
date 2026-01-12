@@ -38,7 +38,6 @@ export interface AttachmentRowListProvider<R,L=any> {
 export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> {
     @Input() rowListProvider: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
-    @Input() showPagination = false
 
     DATE_FORMATS = DATE_FORMATS
     columns = [ 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description', 'download' ]

@@ -35,6 +35,7 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ListAttachmentsComponent } from './list-attachments.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<ListAttachmentsComponent> = {
     title: 'List Attachments',
@@ -78,10 +79,11 @@ const meta: Meta<ListAttachmentsComponent> = {
                 RowListMobileComponent,
                 RowListPaginationComponent,
                 RowListSortingComponent,
-                ButtonComponent,  
+                ButtonComponent,
                 DeviceViewComponent,
                 DesktopViewDirective,
-                MobileViewDirective              
+                MobileViewDirective,
+                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -89,21 +91,21 @@ const meta: Meta<ListAttachmentsComponent> = {
                 { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
             ],
         } ),
-        componentWrapperDecorator( 
+        componentWrapperDecorator(
             ( story ) => {
                 return `
                     <ng-container *rerender="width + displayMode + canDelete">
-                        <display-mode-wrapper 
+                        <display-mode-wrapper
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
-                            [width]="width"                        
+                            [width]="width"
                         >
                             ${ story }
                         </display-mode-wrapper>
                     </ng-container>
                     `
             }
-        ),        
+        ),
     ],
     tags: [ 'autodocs' ],
     parameters: {
@@ -125,7 +127,6 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
     args: {
         ...displayModeWrapperStory.args,
         canDelete: true,
-        showPagination: false
     },
     parameters: {
         docs: {
@@ -134,7 +135,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
                 `
             }
         }
-    },    
+    },
     render: ( args ) => {
         args.rowListProvider = {
             fetchAttachments: () => { return of(attachmentCollection()) },
@@ -151,7 +152,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
                             attachmentDescription: v.attachmentDescription,
                             attachmentId: v.attachmentGuid,
                             fileId: v.fileIdentifier,
-                            sourceObjectUniqueId: v.sourceObjectUniqueId                        
+                            sourceObjectUniqueId: v.sourceObjectUniqueId
                         }
                     } )
                 }
@@ -172,22 +173,75 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
     }
 }
 
-type AttachmentCollection = { 
-    pageNumber: number 
-    pageRowCount: number 
-    totalRowCount: number 
-    totalPageCount: number 
-    collection: { 
-        attachmentGuid: string 
-        sourceObjectUniqueId: string 
-        sourceObjectNameCode: string 
-        fileName: string 
-        attachmentDescription: string 
-        attachmentTypeCode: string 
-        uploadedBy: string 
-        uploadedTimestamp: string 
-        fileIdentifier: string 
-    }[] 
+export const NoRows: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComponent> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        canDelete: true,
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: `
+                `
+            }
+        }
+    },
+    render: ( args ) => {
+        args.rowListProvider = {
+            fetchAttachments: () => { return of([]) },
+            displayRowListPage: ( res: AttachmentCollection ) => {
+                return {
+                    totalRowCount: res.totalRowCount,
+                    rows: res.collection.map( v => {
+                        return {
+                            attachmentTypeDescription: v.attachmentTypeCode,
+                            fileName: v.fileName,
+                            fileExtension: getFileExtension( v.fileName ),
+                            uploadedBy: v.uploadedBy,
+                            uploadedTimestamp: moment( v.uploadedTimestamp ).format( DATE_FORMATS.fullPickerInput ),
+                            attachmentDescription: v.attachmentDescription,
+                            attachmentId: v.attachmentGuid,
+                            fileId: v.fileIdentifier,
+                            sourceObjectUniqueId: v.sourceObjectUniqueId
+                        }
+                    } )
+                }
+            },
+            downloadItem: () => {},
+            deleteItem: () => {},
+        }
+        return {
+            props: args,
+            template: `
+                <nrcl-list-attachments
+                    [rowListProvider]="rowListProvider"
+                    [canDelete]="canDelete"
+                    [showPagination]="showPagination"
+                ></nrcl-list-attachments>
+            `
+        }
+    }
+}
+
+type AttachmentCollection = {
+    pageNumber: number
+    pageRowCount: number
+    totalRowCount: number
+    totalPageCount: number
+    collection: {
+        attachmentGuid: string
+        sourceObjectUniqueId: string
+        sourceObjectNameCode: string
+        fileName: string
+        attachmentDescription: string
+        attachmentTypeCode: string
+        uploadedBy: string
+        uploadedTimestamp: string
+        fileIdentifier: string
+    }[]
 }
 
 function attachmentCollection(): AttachmentCollection {

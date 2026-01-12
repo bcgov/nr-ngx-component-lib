@@ -15,10 +15,17 @@
         (keydown.escape)="close()"
         (focus)="onInputFocus()"
         [matTooltip]="inputValue"
+        [readonly]="!filter"
     >
 
     @if ( isOpen ) {
-        <mat-icon matSuffix>arrow_drop_up</mat-icon>
+        <button class="cancel"
+            mat-icon-button
+            matSuffix
+            (click)="onCloseClick($event); $event.stopPropagation()"
+        >
+            <nrcl-icon>arrow_drop_up</nrcl-icon>
+        </button>
     }
     @else if ( selection?.value?.length > 0 && clear ) {
         <button class="cancel"
@@ -26,11 +33,16 @@
             matSuffix
             (click)="onCancelClick($event); $event.stopPropagation()"
         >
-            <mat-icon>close</mat-icon>
+            <nrcl-icon>close</nrcl-icon>
         </button>
     }
     @else {
-        <mat-icon matSuffix>arrow_drop_down</mat-icon>
+        <button class="cancel"
+            mat-icon-button
+            matSuffix
+        >
+            <nrcl-icon>arrow_drop_down</nrcl-icon>
+        </button>
     }                
 
     @if ( hint ) {
