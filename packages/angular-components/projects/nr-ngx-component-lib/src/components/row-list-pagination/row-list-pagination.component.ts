@@ -10,6 +10,7 @@ import {
     Input,
     Output
 } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 export type RowListPaginationWidth = 'sufficient'|'tight'|'restrictive'
 
@@ -24,7 +25,7 @@ export type RowListPaginationWidth = 'sufficient'|'tight'|'restrictive'
         '[class.width-restrictive]': "componentWidth == 'restrictive'",
     }
 })
-export class RowListPaginationComponent implements AfterViewInit {
+export class RowListPaginationComponent extends NrclBase implements AfterViewInit {
     @Input() paginationId = '1'
     @Input() pageSizeOptions = [ 
         { code: 5,   description: '5 Rows' },

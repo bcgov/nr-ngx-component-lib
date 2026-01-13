@@ -8,9 +8,10 @@ import {
     OnInit
 } from "@angular/core";
 import { Configuration, ConfigurationService } from "../services/configuration.service";
+import { NrclBase } from "./nrcl.base";
 
 @Directive()
-export class ConfigurationSubscriberBase implements OnInit, OnDestroy {    
+export class ConfigurationSubscriberBase extends NrclBase implements OnInit, OnDestroy {    
     configurationSubscription
     configuration: Configuration
 
@@ -18,6 +19,7 @@ export class ConfigurationSubscriberBase implements OnInit, OnDestroy {
     changeDetectorRef = inject( ChangeDetectorRef )
 
     ngOnInit(): void {
+        super.ngOnInit()
         this.configurationSubscription = this.configurationService.configurationObservable.subscribe( ( c ) => {
             this.configuration = c
             this.onConfigurationChange()

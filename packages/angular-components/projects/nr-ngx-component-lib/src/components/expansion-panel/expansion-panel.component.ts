@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
 import { MatExpansionPanel } from "@angular/material/expansion";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
     selector: "nrcl-expansion-panel",
@@ -12,7 +13,7 @@ import { MatExpansionPanel } from "@angular/material/expansion";
         '[class.disabled]':     'disabled',
     }
 })
-export class ExpansionPanelComponent {
+export class ExpansionPanelComponent extends NrclBase {
     @Input() isLoading: boolean = false;
     @Input() disabled = false;
     @Input() expanded = false
@@ -69,7 +70,7 @@ export class ExpansionPanelComponent {
         }
     `],
 })
-export class ExpansionPanelHeaderComponent {}
+export class ExpansionPanelHeaderComponent extends NrclBase {}
 
 @Component({
     selector: "nrcl-expansion-panel-footer",
@@ -128,7 +129,7 @@ export class ExpansionPanelHeaderComponent {}
         }
     `],
 })
-export class ExpansionPanelFooterComponent {
+export class ExpansionPanelFooterComponent extends NrclBase {
     @Input() saveEnabled 
     @Input() cancelEnabled 
     @Input() warningMessage = 'Unsaved Changes'

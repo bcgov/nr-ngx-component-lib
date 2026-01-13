@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, EventEmitter, inject, Input, NgZone, Output } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, EventEmitter, inject, Input, NgZone, Output } from '@angular/core';
 import { ConfigurationSubscriberBase } from '../../directives/configuration-subscriber.base';
 
 @Component( {
@@ -12,7 +12,7 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
         '[class.compact]': 'isCompact',
         '[class.icon-left]': '!isCompact && icon',
         '[class.icon-right]': '!isCompact && iconRight && label',
-        '[class.label]': 'label'
+        '[class.label]': 'label',
     }
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase {    

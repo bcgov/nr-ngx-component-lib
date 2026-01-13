@@ -22,6 +22,7 @@ import { MatSelectionListChange } from "@angular/material/list";
 import { fromEvent } from "rxjs";
 import { filter } from "rxjs/operators";
 import { CodeDescription } from "../../utils/code-table.util";
+import { NrclBase } from "../../directives/nrcl.base";
 
 
 /**
@@ -45,7 +46,7 @@ import { CodeDescription } from "../../utils/code-table.util";
         '[class.use-filter]': "filter",
     }
 } )
-export class FilterSelectComponent implements OnChanges {
+export class FilterSelectComponent extends NrclBase implements OnChanges {
     @Input() label
     @Input() placeholder = 'Filter...'
     @Input() hint

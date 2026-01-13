@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import moment from "moment";
 import { DATE_FORMATS } from "../../utils/date.util";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component( {
     selector: "nrcl-filter-date",
@@ -14,7 +15,7 @@ import { DATE_FORMATS } from "../../utils/date.util";
     styleUrl: "./filter-date.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
 } )
-export class FilterDateComponent {
+export class FilterDateComponent extends NrclBase {
     @Input() label = '[label]]'
     @Input() placeholder = 'Select...'
     @Input() hint

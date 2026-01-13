@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component
 } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
     selector: "nrcl-row-list-mobile",
@@ -9,5 +10,5 @@ import {
     styleUrl: "./row-list-mobile.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RowListMobileComponent {
+export class RowListMobileComponent extends NrclBase {
 }

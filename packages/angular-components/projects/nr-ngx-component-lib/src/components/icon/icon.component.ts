@@ -1,5 +1,6 @@
 import { AfterContentInit, ChangeDetectorRef, Component, ElementRef, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
     selector: 'nrcl-icon',
@@ -10,7 +11,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         '[class.show-svg]':  '!!svg',
     }
 } )
-export class IconComponent implements AfterContentInit {   
+export class IconComponent extends NrclBase implements AfterContentInit {   
     name: keyof( typeof ICON )
     svg: SafeHtml
 

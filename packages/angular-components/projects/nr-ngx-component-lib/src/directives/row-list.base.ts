@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { PageStateService } from "../services/page-state.service";
 import { ObservableAborter, Aborted } from "../utils/row-list.util";
 import { CodeDescription } from "../public-api";
+import { NrclBase } from "./nrcl.base";
 
 export type RowListState<F> = {
     filter: F
@@ -19,7 +20,7 @@ export type LoadRowListResult<R> = {
 }
 
 @Directive()
-export class RowListBase<F,R,L=any> implements RowListState<F>, AfterViewInit {
+export class RowListBase<F,R,L=any> extends NrclBase implements RowListState<F>, AfterViewInit {
     @Output() isLoadingChange = new EventEmitter<boolean>()
     
     private _isLoading = false
@@ -49,6 +50,7 @@ export class RowListBase<F,R,L=any> implements RowListState<F>, AfterViewInit {
     private _loadRowListRequest: ObservableAborter<L>
 
     constructor() {
+        super()
         this.initializeRowList()
     }
 

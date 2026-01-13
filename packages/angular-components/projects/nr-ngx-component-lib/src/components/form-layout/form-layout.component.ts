@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component
 } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
     selector: "nrcl-form-layout",
@@ -9,5 +10,5 @@ import {
     styleUrl: "./form-layout.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormLayoutComponent {
+export class FormLayoutComponent extends NrclBase {
 }

@@ -8,8 +8,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterSelectComponent } from './filter-select.component';
-import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
+import { fruitOptions, fruitSubOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { IconComponent } from '../icon/icon.component';
+import { useArgs } from 'storybook/internal/preview-api';
 
 const meta: Meta<FilterSelectComponent & { width: number }> = {
     title: 'Filter Select',
@@ -189,6 +190,58 @@ export const NoClear: StoryObj<FilterSelectComponent & { width: number }> = {
                     [options]="options"
                     [style.--nrcl-filter-select-width.px]="width"
                 ></nrcl-filter-select>
+            `
+        }
+    }
+}
+
+export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> = {
+    args: {
+        options: fruitOptions(),
+        suboptions: fruitSubOptions(),
+        value: [],
+        subvalue: [],
+    },
+    render: ( args ) => {
+        const [, setArgs] = useArgs();
+        return {
+            props: {
+                ...args,
+                onValueChange: ( ev ) => { 
+                    let sub = fruitSubOptions().filter( ( v ) => {
+                            return !ev[ 0 ] || v.parent == ev[ 0 ]
+                        } )
+                    // console.log( ev, sub ) 
+                    setArgs( {
+                        suboptions: sub,
+                        value: ev,
+                        subvalue: []
+                    } )
+                },
+                onSubValueChange: ( ev ) => { 
+                    // console.log( ev ) 
+                    setArgs( {
+                        subvalue: ev
+                    } )
+                },
+            },
+            template: `
+                <div>value:{{value|json}}</div>
+                <div>subvalue:{{subvalue|json}}</div>
+                <div style="display: flex; gap: 8px;">
+                    <nrcl-filter-select 
+                        [value]="value"
+                        (valueChange)="onValueChange( $event )"
+                        [options]="options"
+                        [selectMax]="1"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-select 
+                        [value]="subvalue"
+                        (valueChange)="onSubValueChange( $event )"
+                        [options]="suboptions"
+                    ></nrcl-filter-select>
+                </div>
             `
         }
     }

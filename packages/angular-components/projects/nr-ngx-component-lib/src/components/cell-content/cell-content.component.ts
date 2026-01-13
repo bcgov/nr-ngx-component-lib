@@ -1,11 +1,12 @@
 import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
+import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
     selector: 'nrcl-cell-content',
     templateUrl: './cell-content.component.html',
     styleUrl: './cell-content.component.scss',
 } )
-export class CellContentComponent implements AfterContentInit {
+export class CellContentComponent extends NrclBase implements AfterContentInit {
     @Input() tooltip
     @Input() content
     

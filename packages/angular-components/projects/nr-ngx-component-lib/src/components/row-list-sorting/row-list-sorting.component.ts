@@ -7,13 +7,14 @@ import {
 import { CodeDescription } from "../../utils/code-table.util";
 import { Sort, SortDirection } from "@angular/material/sort";
 import { unwrapFilterValue, wrapFilterValue } from "../../utils/filter.util";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
     selector: "nrcl-row-list-sorting",
     templateUrl: "./row-list-sorting.component.html",
     styleUrl: "./row-list-sorting.component.scss",
 })
-export class RowListSortingComponent {
+export class RowListSortingComponent extends NrclBase {
     @Input() sortColumn: string
     @Input() sortColumnOptions: CodeDescription[] = []
     @Input() sortDirection: SortDirection = 'asc'

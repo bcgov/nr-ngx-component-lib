@@ -9,6 +9,7 @@ import {
     Output,
     ViewChild
 } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component( {
     selector: "nrcl-filter-search",
@@ -19,7 +20,7 @@ import {
         '[class.has-value]': "hasValue"
     }
 } )
-export class FilterSearchComponent {
+export class FilterSearchComponent extends NrclBase {
     @Input() label = 'Search'
     @Input() placeholder = 'Search...'
     @Input() hint

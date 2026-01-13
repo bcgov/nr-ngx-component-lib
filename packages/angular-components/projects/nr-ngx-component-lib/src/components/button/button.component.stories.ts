@@ -24,7 +24,7 @@ const meta: Meta<ButtonComponent> = {
             declarations: [
                 RerenderDirective,
                 DisplayModeWrapperComponent,
-                IconComponent
+                IconComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

@@ -100,7 +100,7 @@ import { IconComponent } from './components/icon/icon.component';
         DesktopViewDirective,
         MobileViewDirective,
         DeviceViewComponent,
-        IconComponent
+        IconComponent,
     ],
     exports: [
         ButtonComponent,
@@ -128,7 +128,7 @@ import { IconComponent } from './components/icon/icon.component';
         DesktopViewDirective,
         MobileViewDirective,
         DeviceViewComponent,
-        IconComponent
+        IconComponent,
     ],
     providers: [
         SnackbarUtilService,
@@ -138,14 +138,4 @@ import { IconComponent } from './components/icon/icon.component';
     ]
 })
 export class NrNgxComponentLibModule {
-    constructor(
-        private matIconRegistry: MatIconRegistry,
-        private domSanitizer: DomSanitizer
-    ) {
-        this.matIconRegistry.addSvgIcon(
-            "filter-cancel",
-            this.domSanitizer.bypassSecurityTrustResourceUrl("assets/app-icons/filter-cancel.svg")
-        );
-
-    }
 }

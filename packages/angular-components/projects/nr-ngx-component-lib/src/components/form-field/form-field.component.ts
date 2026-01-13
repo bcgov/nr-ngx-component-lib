@@ -9,6 +9,7 @@ import {
     Renderer2,
     SimpleChanges
 } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
     selector: "nrcl-form-field",
@@ -20,7 +21,7 @@ import {
         '[class.readonly]': "readonly",
     }
 })
-export class FormFieldComponent implements OnChanges {
+export class FormFieldComponent extends NrclBase implements OnChanges {
     @Input( { transform: booleanAttribute } ) required
     @Input( { transform: booleanAttribute } ) readonly
 

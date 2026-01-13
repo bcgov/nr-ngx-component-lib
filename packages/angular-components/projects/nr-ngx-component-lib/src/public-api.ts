@@ -26,6 +26,7 @@ export * from './components/snackbar/snackbar.component'
 
 export * from './directives/configuration-subscriber.base'
 export * from './directives/row-list.base'
+export * from './directives/nrcl.base'
 
 export * from './services/snackbar-util.service'
 export * from './services/configuration.service'

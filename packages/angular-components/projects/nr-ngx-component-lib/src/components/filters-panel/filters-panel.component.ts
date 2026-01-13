@@ -5,6 +5,7 @@ import {
     Input,
     Output
 } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component( {
     selector: "nrcl-filters-panel",
@@ -15,7 +16,7 @@ import {
         '[class.hide-filters]': '!showFilters'
     }
 } )
-export class FiltersPanelComponent {
+export class FiltersPanelComponent extends NrclBase {
     @Input() showClear = true
     @Input() showFilters = true
     @Input() hasAdvancedFilters = false
