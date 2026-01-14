@@ -11,6 +11,8 @@ import {
     Input,
     numberAttribute,
     OnChanges,
+    OnDestroy,
+    OnInit,
     Output,
     SimpleChanges,
     TemplateRef,
@@ -46,7 +48,7 @@ import { NrclBase } from "../../directives/nrcl.base";
         '[class.use-filter]': "filter",
     }
 } )
-export class FilterSelectComponent extends NrclBase implements OnChanges {
+export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges, OnDestroy {
     @Input() label
     @Input() placeholder = 'Filter...'
     @Input() hint
@@ -57,6 +59,7 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
     @Input( { transform: booleanAttribute } ) summary = true
     @Input( { transform: booleanAttribute } ) clear = true
     @Input( { transform: booleanAttribute } ) filter = true
+    @Input( { transform: numberAttribute } ) filterCharsMin = 0
 
     @Output() valueChange = new EventEmitter<string[]>();
 
@@ -78,6 +81,29 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
     @ViewChild( 'trigger', { read: ElementRef } ) trigger!: ElementRef
     @ViewChild( 'filterInput' ) filterInput!: ElementRef
     @ViewChild( 'overlayTemplate' ) overlayTemplate!: TemplateRef<any>
+
+    ngOnInit(): void {
+        super.ngOnInit()
+
+        this.clickSubscription = fromEvent<MouseEvent>( document, 'click' )
+            .pipe( filter( ( event: MouseEvent ) => {
+                const clickTarget = event.target as HTMLElement
+                const triggerEl = this.trigger.nativeElement
+                const overlayEl = this.overlayRef?.overlayElement
+
+                // console.log(triggerEl,overlayEl)
+                // Only close if click is outside both trigger and overlay
+                return !triggerEl?.contains(clickTarget)
+                    && !overlayEl?.contains(clickTarget)
+            } ) )
+            .subscribe( () => {
+                // console.log('outside click')
+                this.close()
+                this.setInputToSelection()
+                this.floatLabel = 'auto'
+                this.changeDetectorRef.detectChanges()
+            } )
+    }
 
     ngOnChanges( changes: SimpleChanges ): void {
         if ( this.isOpen ) return
@@ -119,6 +145,10 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
         }
     }
 
+    ngOnDestroy(): void {
+        this.clickSubscription?.unsubscribe()
+    }
+
     get single() {
         return this.selectMax == 1
     }
@@ -129,16 +159,12 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
     }
 
     open() {
+        // console.log('open',this.isOpen,this.filterCharsMin && !this.isFiltered)
         if ( this.isOpen ) return
 
-        this.isOpen = true
-        this.floatLabel = 'always'
-        if ( this.filter ) {
-            this.inputValue = ''
-        }
-        else {
+        if ( this.filterCharsMin && !this.isFiltered ) return
 
-        }
+        this.isOpen = true
 
         // Create overlay
         const positionStrategy = this.overlay
@@ -177,47 +203,22 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
         const portal = new TemplatePortal( this.overlayTemplate, this.viewContainerRef )
         this.overlayRef.attach( portal )
 
-        // Listen to document clicks after a small delay to avoid closing immediately
-        setTimeout( () => {
-            this.clickSubscription = fromEvent<MouseEvent>( document, 'click' )
-                .pipe( filter( ( event: MouseEvent ) => {
-                    const clickTarget = event.target as HTMLElement
-                    const triggerEl = this.trigger.nativeElement
-                    const overlayEl = this.overlayRef?.overlayElement
-
-                    // Only close if click is outside both trigger and overlay
-                    return !triggerEl.contains(clickTarget)
-                        && !overlayEl?.contains(clickTarget)
-                } ) )
-                .subscribe( () => {
-                    this.close()
-                } )
-        } )
-
         // Focus input after overlay is attached
         setTimeout( () => {
             this.filterInput?.nativeElement.focus();
 
-            // prevent list from scrolling when selection changes
-            this.overlayRef.overlayElement.children[0].scroll( 0, 1 )
-        } )
-
-        this.setFilter()
+            // prevent list from scrolling when selection changes            
+            this.overlayRef?.overlayElement.children[0].scroll( 0, 1 )
+        },100 )
 
         this.openingValue = JSON.stringify( this.selection.value )
     }
 
     close() {
+        // console.log('close',this.isOpen)
         if ( !this.isOpen ) return
 
         this.isOpen = false
-        this.setInputToSelection()
-        this.floatLabel = 'auto'
-
-        if ( this.clickSubscription ) {
-            this.clickSubscription.unsubscribe()
-            this.clickSubscription = null
-        }
 
         if ( this.overlayRef ) {
             this.overlayRef.dispose()
@@ -233,6 +234,7 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
 
     setInputToSelection() {
         this.inputValue = this.selection?.value?.map( c => this.descriptionForCode( c ) ).join( ', ' ) || null
+            this.isFiltered = false
     }
 
     onInput( ev?) {
@@ -242,13 +244,19 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
     setFilter( text?: string ) {
         let t = text?.trim().toLowerCase()
 
-        if ( t ) {
+        if ( t?.length >= this.filterCharsMin ) {
+            // console.log('filtering')
             this.isFiltered = true
             this.match = ( option ) => option.description.toLowerCase().includes( t )
+
+            if ( this.filterCharsMin ) this.open()
         }
         else {
+            // console.log('not filtering')
             this.isFiltered = false
             this.match = ( o ) => true
+
+            if ( this.filterCharsMin ) this.close()
         }
 
         this.changeDetectorRef.detectChanges()
@@ -261,6 +269,8 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
     onSelectionChange( ev ) {
         if ( this.single ) {
             this.close()
+            this.setInputToSelection()
+            this.floatLabel = 'auto'
         }
         else {
             this.filterInput?.nativeElement.focus()
@@ -295,7 +305,20 @@ export class FilterSelectComponent extends NrclBase implements OnChanges {
     }
 
     onInputFocus() {
+        // console.log('onInputFocus')
+        this.floatLabel = 'always'
+
+        if ( this.filter ) {
+            this.inputValue = ''
+            this.setFilter()
+        }
+
         this.open()
+    }
+
+    onInputBlur() {
+        // if ( this.filterCharsMin )
+        //     console.log('onInputBlur')
     }
 
     onCloseClick() {

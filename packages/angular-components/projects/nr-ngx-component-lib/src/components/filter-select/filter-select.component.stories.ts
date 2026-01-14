@@ -84,6 +84,13 @@ A powerful multi-select component with filtering capabilities.
                 max: 20
             }
         },
+        filterCharsMin: {
+            control: {
+                type: 'range',
+                min: 0,
+                max: 10
+            }
+        },
         valueChange: { action: 'valueChange' },
         options: {
 
@@ -99,7 +106,8 @@ A powerful multi-select component with filtering capabilities.
         summary: true,
         clear: true,
         filter: true,
-        placeholder: 'Filter...'
+        placeholder: 'Filter...',
+        filterCharsMin: 0
     },
 }
 
