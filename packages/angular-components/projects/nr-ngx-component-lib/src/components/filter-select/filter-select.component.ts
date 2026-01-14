@@ -61,6 +61,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: booleanAttribute } ) filter = true
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
     @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description
+    @Input() overlayClass
 
     @Output() valueChange = new EventEmitter<string[]>();
 

@@ -277,6 +277,7 @@ export const FormatOption: StoryObj<FilterSelectComponent & { width: number }> =
                     [optionFormatter]="optionFormatter"
                     [options]="options"
                     [style.--nrcl-filter-select-width.px]="width"
+                    overlayClass="foo"
                 ></nrcl-filter-select>
             `
         }
