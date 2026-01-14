@@ -60,6 +60,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: booleanAttribute } ) clear = true
     @Input( { transform: booleanAttribute } ) filter = true
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
+    @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description
 
     @Output() valueChange = new EventEmitter<string[]>();
 
@@ -233,8 +234,8 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     setInputToSelection() {
-        this.inputValue = this.selection?.value?.map( c => this.descriptionForCode( c ) ).join( ', ' ) || null
-            this.isFiltered = false
+        this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || null
+        this.isFiltered = false
     }
 
     onInput( ev?) {
@@ -316,16 +317,19 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         this.open()
     }
 
-    onInputBlur() {
-        // if ( this.filterCharsMin )
-        //     console.log('onInputBlur')
-    }
-
     onCloseClick() {
         this.close()
     }
 
     descriptionForCode( code: string ): string {
         return this.options.find( o => o.code == code )?.description
+    }
+
+    optionForCode( code: string ): CodeDescription {
+        return this.options.find( o => o.code == code )
+    }
+
+    formatOption( option: CodeDescription ): string {
+        return this.optionFormatter( option, false )
     }
 }

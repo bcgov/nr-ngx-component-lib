@@ -254,3 +254,31 @@ export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> 
         }
     }
 }
+
+export const FormatOption: StoryObj<FilterSelectComponent & { width: number }> = {
+    args: {
+    },
+    render: ( args ) => {
+        return {
+            props: {
+                ...args,
+                options: fruitOptions(),
+                optionFormatter: ( o, p ) => {
+                    if ( p ) {
+                        return `${ o.description } - ${ o['extra'] }`
+                    }
+                    else {
+                        return `<div>${ o.description } - ${ o['extra'] }</div>`
+                    }
+                }
+            },
+            template: `
+                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                    [optionFormatter]="optionFormatter"
+                    [options]="options"
+                    [style.--nrcl-filter-select-width.px]="width"
+                ></nrcl-filter-select>
+            `
+        }
+    }
+}

@@ -137,18 +137,18 @@ export function rowListItems( count ) {
 
 export function fruitOptions() {
     return [
-        { code: 'apple', description: 'Apple Apple' },
-        { code: 'banana', description: 'Banana Banana' },
-        { code: 'orange', description: 'Orange Orange' },
-        { code: 'grape', description: 'Grape Grape' },
-        { code: 'mango', description: 'Mango Mango' },
-        { code: 'pineapple', description: 'Pineapple Pineapple' },
-        { code: 'strawberry', description: 'Strawberry Strawberry' },
-        { code: 'watermelon', description: 'Watermelon Watermelon' },
-        { code: 'blueberry', description: 'Blueberry Blueberry' },
-        { code: 'kiwi', description: 'Kiwi Kiwi' },
-        { code: 'peach', description: 'Peach Peach' },
-        { code: 'pear', description: 'Pear Pear' }        
+        { code: 'apple', description: 'Apple Apple', extra: 'Ap-fu' },
+        { code: 'banana', description: 'Banana Banana', extra: 'Ba-fu' },
+        { code: 'orange', description: 'Orange Orange', extra: 'Or-fu' },
+        { code: 'grape', description: 'Grape Grape', extra: 'Gr-fu' },
+        { code: 'mango', description: 'Mango Mango', extra: 'Ma-fu' },
+        { code: 'pineapple', description: 'Pineapple Pineapple', extra: 'Pi-fu' },
+        { code: 'strawberry', description: 'Strawberry Strawberry', extra: 'St-fu' },
+        { code: 'watermelon', description: 'Watermelon Watermelon', extra: 'Wa-fu' },
+        { code: 'blueberry', description: 'Blueberry Blueberry', extra: 'Bl-fu' },
+        { code: 'kiwi', description: 'Kiwi Kiwi', extra: 'Ki-fu' },
+        { code: 'peach', description: 'Peach Peach', extra: 'Pe-fu' },
+        { code: 'pear', description: 'Pear Pear', extra: 'Pe-fu' }        
     ]
 }
 

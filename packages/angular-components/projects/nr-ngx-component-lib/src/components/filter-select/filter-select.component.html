@@ -14,7 +14,6 @@
         (input)="onInput( $event )"
         (keydown.escape)="close()"
         (focus)="onInputFocus()"
-        (blur)="onInputBlur()"
         [matTooltip]="inputValue"
         [readonly]="!filter"
     >
@@ -69,7 +68,7 @@
                                 [matTooltip]="tooltips ? descriptionForCode( code ) : null"
                                 matTooltipPosition="after"
                             >
-                                {{ descriptionForCode( code ) }}
+                                <span [innerHTML]="formatOption( optionForCode( code ) )"></span>
                             </mat-list-option>
                         }
                     </mat-selection-list>
@@ -94,9 +93,9 @@
                     [value]="option.code" 
                     togglePosition="before"                    
                     [matTooltip]="tooltips ? option.description : null"
-                    matTooltipPosition="after"                    
+                    matTooltipPosition="after"            
                 >
-                    {{ option.description }}
+                    <span [innerHTML]="formatOption( option )"></span>
                 </mat-list-option>
             }
         </mat-selection-list>
