@@ -14,10 +14,10 @@
     border: 2px solid var( --nrcl-indicator-border-color );
     background-color: var( --nrcl-indicator-background-color );
     border-radius: 5px;
-    align-self: flex-start;
     text-align: center;
     min-width: 80px;
-
+    line-height: unset;
+    
     .none {
         display: none;
         &:after {
