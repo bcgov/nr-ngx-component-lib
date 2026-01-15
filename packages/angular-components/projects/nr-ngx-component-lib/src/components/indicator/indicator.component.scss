@@ -1,0 +1,35 @@
+::ng-deep :root {
+    --nrcl-indicator-text-color: black;
+    --nrcl-indicator-border-color: black;
+    --nrcl-indicator-background-color: #f2f2f2;
+}
+
+:host {
+    display: inline-block;
+    font-family: var( --nrcl-font-family );
+    font-size: var( --nrcl-font-size-small );
+    font-weight: bold;
+    padding: 2px;
+    color: var( --nrcl-indicator-text-color );
+    border: 2px solid var( --nrcl-indicator-border-color );
+    background-color: var( --nrcl-indicator-background-color );
+    border-radius: 5px;
+    align-self: flex-start;
+    text-align: center;
+    min-width: 80px;
+
+    .none {
+        display: none;
+        &:after {
+            content: '(None)';
+        }
+    }
+
+    &.status-none {
+        --nrcl-indicator-text-color: gray;
+        --nrcl-indicator-border-color: gray;
+        .none {
+            display: block;
+        }
+    }
+}

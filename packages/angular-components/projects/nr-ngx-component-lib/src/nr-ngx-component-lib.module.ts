@@ -47,6 +47,7 @@ import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IconComponent } from './components/icon/icon.component';
+import { IndicatorComponent } from './components/indicator/indicator.component';
 
 @NgModule({
     imports: [
@@ -101,6 +102,7 @@ import { IconComponent } from './components/icon/icon.component';
         MobileViewDirective,
         DeviceViewComponent,
         IconComponent,
+        IndicatorComponent,
     ],
     exports: [
         ButtonComponent,
@@ -129,6 +131,7 @@ import { IconComponent } from './components/icon/icon.component';
         MobileViewDirective,
         DeviceViewComponent,
         IconComponent,
+        IndicatorComponent,
     ],
     providers: [
         SnackbarUtilService,
