@@ -61,8 +61,16 @@ export const Primary: StoryObj<IndicatorComponent & { indicator: string }> = {
                     --nrcl-indicator-border-color: blue;
                 }
             `],
-            template: `
-                <nrcl-indicator>{{ indicator }}</nrcl-indicator>
+            template: `                
+                <div style="padding: 10px 0;">
+                    Before <nrcl-indicator>{{ indicator }}</nrcl-indicator> After
+                </div>
+
+                <div style="display: flex; gap: 10px; align-items: center">                     
+                    <div>Before</div>
+                    <nrcl-indicator>{{ indicator }}</nrcl-indicator> 
+                    <div>After</div>
+                </div>
             `
         }
     }
