@@ -16,6 +16,7 @@
                 padding-left: 0;
                 padding-right: 0;
                 background-color: unset;
+                overflow: visible;
 
                 .mat-mdc-form-field-flex {
                     .mat-mdc-form-field-infix {
@@ -27,6 +28,11 @@
 
                         .mat-mdc-form-field-required-marker {
                             display: none;
+                        }
+
+                        .mdc-floating-label {
+                            overflow-wrap: break-word;
+                            white-space: unset;
                         }
                     }
                 }

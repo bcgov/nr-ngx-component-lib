@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
 import { FormFieldComponent } from './form-field.component';
@@ -42,6 +42,8 @@ const meta: Meta<FormFieldComponent> = {
                     <ng-container *rerender="displayMode">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
+                            [width]="width"
+                            [useWidth]="useWidth"
                         >
                             ${ story }
                         </display-mode-wrapper>
@@ -217,6 +219,60 @@ export const Primary: StoryObj<FormFieldComponent & { displayMode: DisplayMode }
                     <nrcl-form-field [required]="required" [readonly]="readonly">
                         <mat-form-field floatLabel="always">
                             <mat-label>Select</mat-label>
+
+                            <select matNativeControl>
+                                <option value="N">No</option>
+                                <option value="Y">Yes</option>
+                            </select>
+                        </mat-form-field>
+                    </nrcl-form-field>
+                </div>
+            `
+        }
+    }
+}
+
+export const LongLabel: StoryObj<FormFieldComponent & DisplayModeWrapperComponent & { label: string }> = {
+    args: {
+        ...displayModeWrapperStory.args,
+        label: 'This is a very long label that is very long, and it just keeps on going, and it just gets longer'
+    },
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 20px;
+                    
+                }
+            `],
+            template: `
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <nrcl-form-field [required]="required" [readonly]="readonly">
+                        <mat-form-field floatLabel="always">
+                            <mat-label>{{ label }}</mat-label>
+
+                            <textarea 
+                                matNativeControl 
+                                cdkTextareaAutosize                 
+                            ></textarea>
+                        </mat-form-field>
+                    </nrcl-form-field>
+
+                    <nrcl-form-field [required]="required" [readonly]="readonly">
+                        <mat-form-field floatLabel="always">
+                            <mat-label>{{ label }}</mat-label>
+
+                            <input matInput type="text">
+                        </mat-form-field>
+                    </nrcl-form-field>
+
+                    <nrcl-form-field [required]="required" [readonly]="readonly">
+                        <mat-form-field floatLabel="always">
+                            <mat-label>{{ label }}</mat-label>
 
                             <select matNativeControl>
                                 <option value="N">No</option>
