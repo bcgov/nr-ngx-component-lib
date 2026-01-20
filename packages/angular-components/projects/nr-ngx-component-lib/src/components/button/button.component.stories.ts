@@ -368,6 +368,20 @@ Compact buttons that include both icon and text:
                                 icon="add"
                             ></nrcl-button> 
                         </article>
+
+                        <article>
+                            <h6>(no label) compact outline</h6>
+                            <nrcl-button outline compact
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>(no label) compact outline disabled</h6>
+                            <nrcl-button outline disabled compact
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
                     </div>
 
                     <div class="inner-grid">
@@ -398,6 +412,22 @@ Compact buttons that include both icon and text:
                         <article>
                             <h6>compact primary disabled</h6>
                             <nrcl-button primary disabled compact
+                                label="Add"                        
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>compact outline</h6>
+                            <nrcl-button outline compact
+                                label="Add"                        
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>compact outline disabled</h6>
+                            <nrcl-button outline disabled compact
                                 label="Add"                        
                                 icon="add"
                             ></nrcl-button> 

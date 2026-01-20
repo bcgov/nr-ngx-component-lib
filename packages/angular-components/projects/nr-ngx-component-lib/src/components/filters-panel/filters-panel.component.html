@@ -16,7 +16,7 @@
         ></nrcl-button>
     }
 
-    @if ( showFilters && hasAdvancedFilters ) {
+    <!-- @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
             <nrcl-button outline 
                 label="Less Filters"
@@ -33,7 +33,7 @@
                 compact="mobile"
             ></nrcl-button>
         }
-    }
+    } -->
 
     <nrcl-device-view>
         <ng-template mobile-view>
@@ -55,4 +55,23 @@
             }
         </ng-template>
     </nrcl-device-view>
+</div>
+
+<div class="below">
+    @if ( showFilters && hasAdvancedFilters ) {
+        @if ( showAdvancedFilters ) {
+            <nrcl-button outline compact
+                label="Less Filters"
+                icon="remove"
+                (click)="onHideAdvancedClick()"
+            ></nrcl-button>
+        }
+        @else {
+            <nrcl-button outline compact
+                label="More Filters"
+                icon="add"
+                (click)="onShowAdvancedClick()"
+            ></nrcl-button>
+        }
+    }
 </div>

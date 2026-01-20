@@ -1,0 +1,18 @@
+::ng-deep :root {
+}
+
+:host {
+    font-family: var( --nrcl-font-family );
+    font-size: var( --nrcl-font-size );
+
+    ::ng-deep .mat-mdc-chip.mat-mdc-standard-chip {
+        border-radius: 5px;
+        border: 1px solid #c6c8cb;
+
+        --mdc-chip-focus-state-layer-opacity: 0;
+        --mdc-chip-label-text-weight: 800;
+        --mdc-chip-elevated-container-color: #f2f2f2;
+    }
+
+}
+
