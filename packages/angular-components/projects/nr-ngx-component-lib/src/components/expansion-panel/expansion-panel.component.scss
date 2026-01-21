@@ -8,7 +8,7 @@
             padding-right: var(--nrcl-gutter-space);
             height: unset;
             min-height: 50px;
-            border-bottom: 1px solid #c6c8cb;
+            border-bottom: 1px solid var( --nrcl-divider-color );
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
             font-family: var( --nrcl-font-family );

@@ -7,7 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -23,7 +23,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
-import { ExpansionPanelComponent, ExpansionPanelFooterComponent, ExpansionPanelHeaderComponent } from './components/expansion-panel/expansion-panel.component';
+import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
+import { ExpansionPanelFooterComponent } from './components/expansion-panel/footer/expansion-panel-footer.component';
+import { ExpansionPanelHeaderComponent } from './components/expansion-panel/header/expansion-panel-header.component';
+import { ExpansionPanelSectionComponent } from './components/expansion-panel/section/expansion-panel-section.component';
 import { FilterContainerComponent } from './components/filter-container/filter-container.component';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
 import { FilterSearchComponent } from './components/filter-search/filter-search.component';
@@ -32,6 +35,8 @@ import { FiltersPanelComponent } from './components/filters-panel/filters-panel.
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { GapComponent } from './components/gap/gap.component';
+import { IconComponent } from './components/icon/icon.component';
+import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { PageContainerComponent } from './components/page-container/page-container.component';
@@ -41,13 +46,11 @@ import { RowListMobileComponent } from './components/row-list-mobile/row-list-mo
 import { RowListPaginationComponent } from './components/row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from './components/row-list-sorting/row-list-sorting.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { TagListComponent } from './components/tag-list/tag-list.component';
 import { ConfigurationService } from './services/configuration.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { DomSanitizer } from '@angular/platform-browser';
-import { IconComponent } from './components/icon/icon.component';
-import { IndicatorComponent } from './components/indicator/indicator.component';
 
 @NgModule({
     imports: [
@@ -81,6 +84,7 @@ import { IndicatorComponent } from './components/indicator/indicator.component';
         ExpansionPanelComponent,
         ExpansionPanelHeaderComponent,
         ExpansionPanelFooterComponent,
+        ExpansionPanelSectionComponent,
         FilterContainerComponent,
         FilterDateComponent,
         FilterSearchComponent,
@@ -98,6 +102,7 @@ import { IndicatorComponent } from './components/indicator/indicator.component';
         RowListPaginationComponent,
         RowListSortingComponent,
         SnackbarComponent,
+        TagListComponent,
         DesktopViewDirective,
         MobileViewDirective,
         DeviceViewComponent,
@@ -110,6 +115,7 @@ import { IndicatorComponent } from './components/indicator/indicator.component';
         ExpansionPanelComponent,
         ExpansionPanelHeaderComponent,
         ExpansionPanelFooterComponent,
+        ExpansionPanelSectionComponent,
         FilterContainerComponent,
         FilterDateComponent,
         FilterSearchComponent,
@@ -127,6 +133,7 @@ import { IndicatorComponent } from './components/indicator/indicator.component';
         RowListPaginationComponent,
         RowListSortingComponent,
         SnackbarComponent,
+        TagListComponent,
         DesktopViewDirective,
         MobileViewDirective,
         DeviceViewComponent,

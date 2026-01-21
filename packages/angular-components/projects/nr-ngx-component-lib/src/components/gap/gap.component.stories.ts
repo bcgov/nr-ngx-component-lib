@@ -114,14 +114,53 @@ export const Vertical: StoryObj<GapComponent & { displayMode: DisplayMode }> = {
     },
     args: {
         displayMode: 'desktop',
+        divider: false
     },
     render: ( args ) => {
         return {
             props: args,
             template: `
                 <div>Before gap</div>
-                <nrcl-gap vertical/>
+                <nrcl-gap vertical [divider]="divider"/>
                 <div>After gap</div>
+            `
+        }
+    }
+}
+
+export const Horizontal: StoryObj<GapComponent & { displayMode: DisplayMode }> = {
+    argTypes: {
+        displayMode: {
+            control: 'inline-radio',
+            options: ['desktop', 'mobile'],
+            description: 'Display mode for the component'
+        },
+    },
+    args: {
+        displayMode: 'desktop',
+        divider: false
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            styles: [`
+                div.container {
+                    display: flex;
+                    align-items: stretch;
+                }
+                span {
+                    display: inline-flex;
+                    height: 50px;
+                    border: 1px solid gray;
+                    align-items: center;
+                }
+            `],
+            template: `
+                <div class="container">
+                    <span>Before gap</span>
+                    <nrcl-gap horizontal [divider]="divider"/>
+                    <span>After gap</span>
+                </div>
             `
         }
     }

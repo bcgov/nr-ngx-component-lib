@@ -1,0 +1,33 @@
+:host {
+    display: flex;
+    color: #212121;
+    width: 100%;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;        
+    align-self: flex-start;
+}
+
+.left-side ::ng-deep h2 {
+    font-size: var( --nrcl-font-size-h2);
+    font-weight: 200;
+    padding: 0;
+    margin: 0;
+}    
+
+.left-side ::ng-deep h3 {
+    font-size: var( --nrcl-font-size-h3 );
+    font-weight: 200;
+    padding: 0;
+    margin: 0;
+}    
+
+.right-side {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+}

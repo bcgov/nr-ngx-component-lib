@@ -1,0 +1,28 @@
+@if ( showWarning ) {
+    <div class="warning">
+        <nrcl-icon>warning</nrcl-icon>
+        <span>{{ warningMessage }}</span>
+    </div>
+}
+
+@if ( cancelEnabled != null ) {
+    <nrcl-button
+        label="Cancel"
+        iconCompact="cancel"
+        compact="mobile"
+        [disabled]="!cancelEnabled"
+        (click)="cancelClick.emit( $event )"
+    ></nrcl-button>
+}
+
+@if ( saveEnabled != null ) {
+    <nrcl-button primary
+        label="Save"
+        iconCompact="save"
+        compact="mobile"
+        [disabled]="!saveEnabled"
+        (click)="saveClick.emit( $event )"
+    ></nrcl-button>
+}
+
+<ng-content></ng-content>

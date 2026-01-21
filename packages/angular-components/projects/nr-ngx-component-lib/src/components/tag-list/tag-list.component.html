@@ -1,0 +1,20 @@
+@if ( items?.length > 0 ) {
+    <mat-chip-set>
+        @for ( item of items; track item.id ) {
+            <mat-chip
+                (removed)="onRemoveItem( item.id )"
+            >
+                {{ item.description }}
+
+                @if ( removable ) {
+                    <nrcl-button matChipRemove compact
+                        icon="cancel"
+                    ></nrcl-button>
+                }
+            </mat-chip>
+        }
+    </mat-chip-set>
+} 
+@else {
+    <span>{{ noItemsMessage }}</span>
+}
