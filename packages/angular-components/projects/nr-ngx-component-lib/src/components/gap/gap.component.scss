@@ -1,11 +1,31 @@
 :host {
-    display: block;
+    justify-content: center;
+    align-items: center;
 
-    &[horizontal] {
+    &.horizontal {
+        display: inline-flex;       
         width: var( --nrcl-gutter-space );
+        align-items: stretch;
+
+        &.divider {
+            .divider {
+                width: 1px;
+                height: 100%;
+                border-right: 1px solid var( --nrcl-divider-color );
+            }
+        }
     }
 
-    &[vertical] {
+    &.vertical {
+        display: flex;
         height: var( --nrcl-gutter-space );
+
+        &.divider {
+            .divider {
+                height: 1px;
+                width: 100%;
+                border-bottom: 1px solid var( --nrcl-divider-color );
+            }
+        }
     }
 }
