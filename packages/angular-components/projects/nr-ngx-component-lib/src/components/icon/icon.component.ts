@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectorRef, Component, ElementRef, inject } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NrclBase } from '../../directives/nrcl.base';
 
@@ -9,9 +9,15 @@ import { NrclBase } from '../../directives/nrcl.base';
     host: {
         '[class.show-icon]': '!svg',
         '[class.show-svg]':  '!!svg',
+        '[class.small]':  'small',
+        '[class.normal]':  '( !small && !large ) || ( small && large )',
+        '[class.large]':  'large',
     }
 } )
 export class IconComponent extends NrclBase implements AfterContentInit {   
+    @Input( { transform: booleanAttribute } ) small = false
+    @Input( { transform: booleanAttribute } ) large = false
+
     name: keyof( typeof ICON )
     svg: SafeHtml
 

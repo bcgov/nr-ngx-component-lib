@@ -1,25 +1,82 @@
 @use "sass:meta";
 
 ::ng-deep :root {
+    --nrcl-icon-small-size: 18px;
+    --nrcl-icon-normal-size: var( --nrcl-icon-size );
+    --nrcl-icon-large-size: 30px;
 }
 
 :host {
-    ::ng-deep {
-        @include meta.load-css('../../styles/include/mat-icon');
-    }
-
     display: block;
     
+    .material-icons {
+        font-family: 'Material Symbols Outlined';
+        font-feature-settings: 'liga';
+    }
+
+    &.small {
+        &.show-icon {
+            .mat-icon {
+                width: var( --nrcl-icon-small-size );
+                height: var( --nrcl-icon-small-size );
+                font-size: var( --nrcl-icon-small-size );
+                line-height: var( --nrcl-icon-small-size );
+            }
+        }
+
+        &.show-svg {
+            .svg {
+                width: var( --nrcl-icon-small-size );
+                height: var( --nrcl-icon-small-size );
+                font-size: var( --nrcl-icon-small-size );
+                line-height: var( --nrcl-icon-small-size );
+            }
+        }        
+    }
+
+    &.normal {
+        &.show-icon {
+            .mat-icon {
+                width: var( --nrcl-icon-normal-size );
+                height: var( --nrcl-icon-normal-size );
+                font-size: var( --nrcl-icon-normal-size );
+                line-height: var( --nrcl-icon-normal-size );
+            }
+        }
+
+        &.show-svg {
+            .svg {
+                width: var( --nrcl-icon-normal-size );
+                height: var( --nrcl-icon-normal-size );
+                font-size: var( --nrcl-icon-normal-size );
+                line-height: var( --nrcl-icon-normal-size );
+            }
+        }        
+    }
+
+    &.large {
+        &.show-icon {
+            .mat-icon {
+                width: var( --nrcl-icon-large-size );
+                height: var( --nrcl-icon-large-size );
+                font-size: var( --nrcl-icon-large-size );
+                line-height: var( --nrcl-icon-large-size );
+            }
+        }
+
+        &.show-svg {
+            .svg {
+                width: var( --nrcl-icon-large-size );
+                height: var( --nrcl-icon-large-size );
+                font-size: var( --nrcl-icon-large-size );
+                line-height: var( --nrcl-icon-large-size );
+            }
+        }        
+    }
+
     &.show-svg {
         .mat-icon {
             display: none;
-        }
-
-        .svg {
-            width: var( --nrcl-icon-size );
-            height: var( --nrcl-icon-size );
-            font-size: var( --nrcl-icon-size );
-            line-height: var( --nrcl-icon-size );
         }
     }
 

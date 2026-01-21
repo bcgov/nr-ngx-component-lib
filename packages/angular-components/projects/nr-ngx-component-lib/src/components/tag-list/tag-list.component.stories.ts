@@ -2,17 +2,17 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { IconComponent } from 'dist/nr-ngx-component-lib';
 import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
-import { TagItem, TagListComponent } from './tag-list.component';
-import { MatIconModule } from '@angular/material/icon';
 import { ButtonComponent } from '../button/button.component';
+import { IconComponent } from '../icon/icon.component';
+import { TagListComponent } from './tag-list.component';
 
 const meta: Meta<TagListComponent> = {
     title: 'Tag List',
@@ -94,11 +94,13 @@ export const Primary: StoryObj<TagListComponent & { displayMode: DisplayMode, it
             props: {
                 ...args,
                 items: makeTagItems( args.itemCount ),
+                itemRemoved: ( ev ) => { console.log( ev ) }
             },
             template: `
                 <nrcl-tag-list
                     [items]="items"
                     [removable]="removable"
+                    (itemRemoved)="itemRemoved( $event )"
                 ></nrcl-tag-list>
             `
         }
