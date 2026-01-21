@@ -51,6 +51,7 @@ import { ConfigurationService } from './services/configuration.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
     imports: [
@@ -60,6 +61,7 @@ import { DATE_FORMATS } from './utils/date.util';
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatChipsModule,
         MatExpansionModule,
         MatRadioModule,
         MatFormFieldModule,
