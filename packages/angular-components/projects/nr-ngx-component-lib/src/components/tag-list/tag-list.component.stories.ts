@@ -82,6 +82,7 @@ export const Primary: StoryObj<TagListComponent & { displayMode: DisplayMode, it
     args: {
         displayMode: 'desktop',
         itemCount: 10,
+        removable: true,
     },
     render: ( args ) => {
         return {
@@ -97,6 +98,7 @@ export const Primary: StoryObj<TagListComponent & { displayMode: DisplayMode, it
             template: `
                 <nrcl-tag-list
                     [items]="items"
+                    [removable]="removable"
                 ></nrcl-tag-list>
             `
         }
