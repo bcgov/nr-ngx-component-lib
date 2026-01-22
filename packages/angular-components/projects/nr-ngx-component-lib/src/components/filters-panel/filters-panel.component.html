@@ -1,41 +1,40 @@
-@if ( showFilters ) {
-    <ng-content></ng-content>
-}
+<div class="filters">
+    @if ( showFilters ) {
+        <ng-content></ng-content>
+    }
 
-@if ( showFilters && hasAdvancedFilters && showAdvancedFilters ) {
-    <ng-content select="[advanced]"></ng-content>
-}
+    @if ( showFilters && hasAdvancedFilters && showAdvancedFilters ) {
+        <ng-content select="[advanced]"></ng-content>
+    }
+</div>
 
 <div class="actions">
     @if ( showClear && showFilters ) {
-        <nrcl-button outline 
+        <nrcl-button outline compact
             label="Clear"
             icon="clear-filters"
             (click)="onClearClick()"
-            compact="mobile"
         ></nrcl-button>
     }
 
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
-            <nrcl-button outline 
+            <nrcl-button outline compact
                 label="Less Filters"
                 icon="remove"
                 (click)="onHideAdvancedClick()"
-                compact="mobile"
             ></nrcl-button>
         }
         @else {
-            <nrcl-button outline 
+            <nrcl-button outline compact
                 label="More Filters"
                 icon="add"
                 (click)="onShowAdvancedClick()"
-                compact="mobile"
             ></nrcl-button>
         }
     }
 
-    <nrcl-device-view>
+    <!-- <nrcl-device-view>
         <ng-template mobile-view>
             @if ( showFilters ) {
                 <nrcl-button outline 
@@ -54,5 +53,24 @@
                 ></nrcl-button>
             }
         </ng-template>
-    </nrcl-device-view>
+    </nrcl-device-view> -->
 </div>
+
+<!-- <div class="below">
+    @if ( showFilters && hasAdvancedFilters ) {
+        @if ( showAdvancedFilters ) {
+            <nrcl-button outline compact
+                label="Less Filters"
+                icon="remove"
+                (click)="onHideAdvancedClick()"
+            ></nrcl-button>
+        }
+        @else {
+            <nrcl-button outline compact
+                label="More Filters"
+                icon="add"
+                (click)="onShowAdvancedClick()"
+            ></nrcl-button>
+        }
+    }
+</div> -->

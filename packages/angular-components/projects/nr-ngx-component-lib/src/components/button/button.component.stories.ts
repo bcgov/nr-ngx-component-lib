@@ -1,12 +1,11 @@
+import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { ButtonComponent } from './button.component';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatRippleModule } from '@angular/material/core';
+import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
     title: 'Button',
@@ -368,6 +367,20 @@ Compact buttons that include both icon and text:
                                 icon="add"
                             ></nrcl-button> 
                         </article>
+
+                        <article>
+                            <h6>(no label) compact outline</h6>
+                            <nrcl-button outline compact
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>(no label) compact outline disabled</h6>
+                            <nrcl-button outline disabled compact
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
                     </div>
 
                     <div class="inner-grid">
@@ -398,6 +411,22 @@ Compact buttons that include both icon and text:
                         <article>
                             <h6>compact primary disabled</h6>
                             <nrcl-button primary disabled compact
+                                label="Add"                        
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>compact outline</h6>
+                            <nrcl-button outline compact
+                                label="Add"                        
+                                icon="add"
+                            ></nrcl-button> 
+                        </article>
+
+                        <article>
+                            <h6>compact outline disabled</h6>
+                            <nrcl-button outline disabled compact
                                 label="Add"                        
                                 icon="add"
                             ></nrcl-button> 

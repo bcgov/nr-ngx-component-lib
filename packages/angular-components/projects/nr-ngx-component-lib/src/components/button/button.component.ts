@@ -42,6 +42,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase {
     onConfigurationChange(): void {
         // apparently this is needed to ensure that the host binding updates properly
         this.zone.run( () => {
+            // console.log(JSON.stringify(this.compact))
             if ( this.compact == null || this.compact === false ) {
                 this.isCompact = false
             }
@@ -51,6 +52,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase {
             else {
                 this.isCompact = this.compact == this.configuration.displayMode
             }
+            // console.log(this.isCompact)
 
             this.changeDetectorRef.markForCheck()
         } )

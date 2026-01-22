@@ -68,7 +68,7 @@ const meta: Meta<FiltersPanelComponent> = {
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
-                            [width]="width"                        
+                            [width]="width"               
                         >
                             ${ story }
                         </display-mode-wrapper>
@@ -184,6 +184,11 @@ export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperC
                 ...args,
                 options: fruitOptions()
             },
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 10px;
+                }
+            `],
             template: `
                 <nrcl-filters-panel ${ templateArgs }>
                     <nrcl-filter-search></nrcl-filter-search>
@@ -254,6 +259,11 @@ export const ClearFilters: StoryObj<DisplayModeWrapperComponent & { filter: Filt
                     setArgs( { filter: { ...args.filter, [field]: ev } } )
                 },
             },
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 10px;
+                }
+            `],
             template: `
                 <nrcl-filters-panel (clearFilters)="onClearFilters( $event )">
                     <nrcl-filter-search
@@ -309,6 +319,11 @@ export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
                 ...args,
                 options: fruitOptions()
             },
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 10px;
+                }
+            `],
             template: `
                 <nrcl-filters-panel ${ templateArgs }>
                     <nrcl-filter-search></nrcl-filter-search>
