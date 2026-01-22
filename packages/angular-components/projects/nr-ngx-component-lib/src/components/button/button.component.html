@@ -4,26 +4,26 @@
     [disabled]="disabled"
     [matTooltip]="tooltip"
 >
-    @if ( icon || iconRight || iconCompact || label ) {
-        @if ( icon && ( !isCompact || !iconCompact ) ) { 
-            <nrcl-icon class="left">{{ icon }}</nrcl-icon> 
-        }
-
-        @if ( !isCompact && iconRight && label ) { 
-            <nrcl-icon class="right">{{ iconRight }}</nrcl-icon> 
-        }
-
-        @if ( isCompact && iconCompact ) { 
-            <nrcl-icon small class="compact">{{ iconCompact }}</nrcl-icon> 
-        }
-
-        @if ( label ) {
-            <span class="label">{{ label }}</span>        
-        }
-    }
-    @else {
+    @if ( useContent ) {
         <div class="content">
             <ng-content></ng-content>
         </div>
+    }
+    @else {
+        @if ( hasIconLeft ) { 
+            <nrcl-icon [small]="small" class="left">{{ icon }}</nrcl-icon> 
+        }
+
+        @if ( hasIconRight ) { 
+            <nrcl-icon [small]="small" class="right">{{ iconRight }}</nrcl-icon> 
+        }
+
+        @if ( hasIconCompact ) { 
+            <nrcl-icon class="compact">{{ iconCompact || icon }}</nrcl-icon> 
+        }
+
+        @if ( hasLabel ) {
+            <span class="label">{{ label }}</span>        
+        }
     }
 </button>
