@@ -21,6 +21,7 @@ import { useArgs } from 'storybook/internal/preview-api';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from '../button/button.component';
+import { FilterContainerComponent } from '../filter-container/filter-container.component';
 
 const meta: Meta<FiltersPanelComponent> = {
     title: 'Filters Panel',
@@ -50,6 +51,7 @@ const meta: Meta<FiltersPanelComponent> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
+                FilterContainerComponent,
                 DesktopViewDirective,
                 MobileViewDirective,
                 DeviceViewComponent,
@@ -64,7 +66,7 @@ const meta: Meta<FiltersPanelComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + displayMode">
+                    <ng-container *rerender="width + displayMode ">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
@@ -215,6 +217,36 @@ export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperC
                     <nrcl-filter-date
                         label="Start"
                     ></nrcl-filter-date>
+
+                    <nrcl-filter-container wide="4"
+                        label="Resource Category"
+                    >
+                        <mat-radio-group 
+                            aria-label="Resource Category" 
+                        >
+                            <mat-radio-button aria-label="Home Org Unit" value="home">Home Org Unit</mat-radio-button>
+                            <mat-radio-button aria-label="Currently Assigned/Active Org" value="assignedActive">Currently Assigned/Active Org</mat-radio-button>
+                        </mat-radio-group>
+                    </nrcl-filter-container>      
+                    
+                    <nrcl-filter-container
+                        label="Resource Fire Centre"
+                    >
+                        <mat-checkbox 
+                            [(ngModel)]="selectedFireCentreHome"
+                            (change)="onChangeFilters()"
+                        >
+                            Home
+                        </mat-checkbox>
+
+                        <mat-checkbox 
+                            [(ngModel)]="selectedFireCentreOther"
+                            (change)="onChangeFilters()"
+                        >
+                            Outside
+                        </mat-checkbox>
+                    </nrcl-filter-container>
+                    
                 </nrcl-filters-panel> 
             `
         }
@@ -303,17 +335,23 @@ export const ClearFilters: StoryObj<DisplayModeWrapperComponent & { filter: Filt
     }
 }
 
-export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent> = {
-    ...displayModeWrapperStory,
+export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent & { actionStyle: string }> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        actionStyle: {
+            control: { type: 'inline-radio' },
+            options: [ '1', '2', '3' ],
+        }
+    },
     args: {
         ...displayModeWrapperStory.args,
         showClear: true,
         showFilters: true,
         hasAdvancedFilters: true,
+        actionStyle: '1',
     },
     render: ( args ) => {
         let templateArgs = argsToTemplate(args, { include: [ 'showClear', 'showFilters', 'hasAdvancedFilters' ] } )
-
         return {
             props: {
                 ...args,
@@ -325,7 +363,7 @@ export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
                 }
             `],
             template: `
-                <nrcl-filters-panel ${ templateArgs }>
+                <nrcl-filters-panel ${ templateArgs } class="actions-${ args.actionStyle }">
                     <nrcl-filter-search></nrcl-filter-search>
 
                     <nrcl-filter-select
@@ -348,6 +386,37 @@ export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
                     ></nrcl-filter-select>
 
                     <nrcl-filter-date advanced
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-select advanced
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date advanced
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-select advanced wide="4"
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date advanced
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-date advanced wide="3"
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-select advanced wide="3"
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date advanced 
                         label="Start"
                     ></nrcl-filter-date>
                 </nrcl-filters-panel> 
