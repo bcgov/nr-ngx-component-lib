@@ -1,115 +1,10 @@
-<!-- <div class="filters1 filters2 filters3">
-    @if ( showFilters ) {
-        <ng-content></ng-content>
-    }
 
-    @if ( showFilters && hasAdvancedFilters && showAdvancedFilters ) {
-        <ng-content select="[advanced]"></ng-content>
-    }
-</div> -->
 
-<div class="filters">
+<div class="actions">
     <div class="search">
         <ng-content select="nrcl-filter-search"></ng-content>
-
-        <div class="actions4">
-            @if ( showFilters && hasAdvancedFilters ) {
-                @if ( showAdvancedFilters ) {
-                    <nrcl-button secondary
-                        label="Less"
-                        icon="remove"
-                        (click)="onHideAdvancedClick()"
-                    ></nrcl-button>
-                }
-                @else {
-                    <nrcl-button secondary
-                        label="More"
-                        icon="add"
-                        (click)="onShowAdvancedClick()"
-                    ></nrcl-button>
-                }
-            }
-
-                @if ( showClear && showFilters ) {
-                <nrcl-button primary
-                    label="Clear"
-                    icon="clear-filters"
-                    (click)="onClearClick()"
-                ></nrcl-button>
-            }
-        </div>
+        <div class="spacer"></div>
     </div>
-
-    <div class="other">
-        <ng-content></ng-content>
-
-        @if ( hasAdvancedFilters && showAdvancedFilters ) {
-            <ng-content select="[advanced]"></ng-content>
-        }
-    </div>
-</div>
-
-<div class="actions1">
-    @if ( showClear && showFilters ) {
-        <nrcl-button small primary
-            label="Clear"
-            icon="clear-filters"
-            (click)="onClearClick()"
-        ></nrcl-button>
-    }
-
-    @if ( showFilters && hasAdvancedFilters ) {
-        @if ( showAdvancedFilters ) {
-            <nrcl-button small secondary
-                label="Less"
-                icon="remove"
-                (click)="onHideAdvancedClick()"
-            ></nrcl-button>
-        }
-        @else {
-            <nrcl-button small secondary
-                label="More"
-                icon="add"
-                (click)="onShowAdvancedClick()"
-            ></nrcl-button>
-        }
-    }
-</div>
-
-<div class="actions2">
-
-    <div class="container">
-
-    @if ( showFilters && hasAdvancedFilters ) {
-        @if ( showAdvancedFilters ) {
-            <nrcl-button compact secondary
-                label="Less"
-                icon="remove"
-                (click)="onHideAdvancedClick()"
-            ></nrcl-button>
-        }
-        @else {
-            <nrcl-button compact secondary
-                label="More"
-                icon="add"
-                (click)="onShowAdvancedClick()"
-            ></nrcl-button>
-        }
-    }
-
-        @if ( showClear && showFilters ) {
-        <nrcl-button compact primary
-            label="Clear"
-            icon="clear-filters"
-            (click)="onClearClick()"
-        ></nrcl-button>
-    }
-</div>
-</div>
-
-<div class="actions3">
-
-    <div class="container">
 
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
@@ -136,45 +31,12 @@
         ></nrcl-button>
     }
 </div>
-</div>
 
+<div class="filters">
 
-    <!-- <nrcl-device-view>
-        <ng-template mobile-view>
-            @if ( showFilters ) {
-                <nrcl-button outline 
-                    label="Hide Filters"
-                    icon="expand_less"
-                    (click)="onHideClick()"
-                    compact="mobile"
-                ></nrcl-button>
-            }
-            @else {
-                <nrcl-button outline 
-                    label="Show Filters"
-                    icon="expand_more"
-                    (click)="onShowClick()"
-                    compact="mobile"
-                ></nrcl-button>
-            }
-        </ng-template>
-    </nrcl-device-view> -->
+    <ng-content></ng-content>
 
-<!-- <div class="below">
-    @if ( showFilters && hasAdvancedFilters ) {
-        @if ( showAdvancedFilters ) {
-            <nrcl-button outline compact
-                label="Less Filters"
-                icon="remove"
-                (click)="onHideAdvancedClick()"
-            ></nrcl-button>
-        }
-        @else {
-            <nrcl-button outline compact
-                label="More Filters"
-                icon="add"
-                (click)="onShowAdvancedClick()"
-            ></nrcl-button>
-        }
+    @if ( hasAdvancedFilters && showAdvancedFilters ) {
+        <ng-content select="[advanced]"></ng-content>
     }
-</div> -->
+</div>

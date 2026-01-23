@@ -1,25 +1,46 @@
 ::ng-deep :root {
 }
 
-:host {
-        
-    display: flex;
-    flex-flow: row;    
-    gap: 8px;
+:host {        
+    display: block;
+    // display: flex;
+    // flex-flow: row;    
+    // gap: 8px;
     // position: relative;
     border: 1px solid #c6c8cb;
     border-radius: 10px;
-    padding: 8px;
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 0px;
     background-color: #f2f2f2;    
         // box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
         //     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
         //     0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
+    // display: grid;
+    /* Define two columns: one for content (1fr), one for the corner (100px wide) */
+    // grid-template-columns: 1fr;
+    /* Define two rows: top row for corner height (60px), bottom row for rest (auto) */
+    // grid-template-rows: 1fr;
+    position: relative;
+    /* Name the layout areas */
+    // grid-template-areas:
+        // "content-area corner-area"
+        // "content-area content-area"; /* Content area spans full width on second row */
+    width: 100%;
+    box-sizing: border-box;
+
     .filters {
-        flex-grow: 1;
-        display: flex;
-        flex-flow: row wrap;
-        gap: 8px;
+        display: contents;
+        // grid-area: content-area;
+
+        // padding: 60px 200px 0 0;
+
+        // flex-grow: 1;
+        // display: flex;
+        // flex-flow: row wrap;
+        // gap: 8px;
         // position: relative;
         // border: 1px solid #c6c8cb;
         // border-radius: 10px;
@@ -28,305 +49,404 @@
         .search, .other {
             display: contents;
         }
-    }
 
-    &.style-1 {
-        .filters {
-        }
-        .actions1 {
-            display: flex;
-        }
-    }
+        ::ng-deep {
+            .nrcl-filter-select, .nrcl-filter-date, .nrcl-filter-container {
+                display: inline-block;
+                margin-right: 8px;
+                margin-bottom: 8px;
+            }
 
-    &.style-2 {
-        .filters {
-        }
-        .actions2 {
-            display: block;
         }
     }
 
-    &.style-3 {
-        .filters {
-        }
-        .actions3 {
-            display: block;
-        }
-    }
+    &.has-search .actions {
+        width: 100%;
+                margin-bottom: 8px;
 
-    &.style-4 {
-        .filters {
-            flex-flow: column;
+        .search { 
+            display: contents;
+            // display: flex; 
+            --nrcl-filter-search-width: var( --nrcl-filter-width-6 );
 
-            .search { 
-                display: flex; 
-                --nrcl-filter-search-width: var( --nrcl-filter-width-6 );
+            ::ng-deep .nrcl-filter-search {
+                // flex-grow: 1;
+                // width: 100%;
+                max-width: var( --nrcl-filter-search-width );
 
-                ::ng-deep .nrcl-filter-search {
-                    // flex-grow: 1;
-                    width: 100%;
-                    max-width: var( --nrcl-filter-search-width );
-
-                    .mat-mdc-form-field-infix {
-                        width: unset;
-                        // max-width: var( --nrcl-filter-search-width );
-                    }
-                }
-                .actions4 {
-                    display: flex;
+                .mat-mdc-form-field-infix {
+                    width: unset;
+                    // max-width: var( --nrcl-filter-search-width );
                 }
             }
 
-            .other { 
-                display: flex;
-                flex-flow: row wrap;
-                gap: 8px;
+            .spacer {
+                flex-grow: 1;
+                min-width: 100px;
             }
         }
     }
 
-    .actions1 {
-        // display: flex;
-        display: none;
-        // flex-grow: 1;
-        // flex-direction: row-reverse;
-        flex-direction: column;
-        margin-top: -6px;
-        margin-bottom: -6px;
-        gap: 4px;
-        // justify-content: space-between;
-        align-items: flex-end;
-        width: unset;
+    .actions {
+        // grid-area: corner-area;
+        float: right;
+        // position: absolute;
+        // top: 0;
+        // right: 0;
+        // width: 200px;
+        // height: 50px;
 
-        --nrcl-button-width: 60px;
-        // button {
-            // height: 40px;
-        // }
 
-        // nrcl-button {
-            // --nrcl-button-height: 40px;
-        // }
-
-        .spacer {
-            flex-grow: 1;
-        }
-    }
-
-    .actions2 {
-        display: none;
-        .container {
-        flex-shrink: 1;
-        flex-grow: 0;
-        // min-width: 100px;
-        // overflow: hidden;
-        // flex-grow: 1;
-        // flex-direction: row-reverse;
         display: flex;
-        flex-wrap: wrap-reverse;
-        justify-content: flex-end;
+        // justify-content: flex-end;
         
-        // flex-direction: column;
-        // margin-top: -4px;
-        margin-bottom: -4px;
-        margin-right: -8px;
-        // gap: 4px;
-        // justify-content: space-between;
-        // align-items: flex-end;
-        // width: unset;
-        // display: flex;
-
-        // --nrcl-button-width: 100px;
-        // button {
-            // height: 40px;
-        // }
-
-        // nrcl-button {
-            // --nrcl-button-height: 40px;
-        // }
-
-        .spacer {
-            flex-grow: 1;
-        }
-
-        // container-type: size; /* 'size' allows both height and width queries */
-        // container-name: layout-container; /* Optional name for targeting */
-
-        .nrcl-button {
-            width: 50px;
-            display: flex;
-            justify-content: center;
-            min-height: 0;
-
-        }
-    }
-    }
-
-    .actions3 {
-        display: none;
-        .container {
-        // flex-shrink: 1;
-        // flex-grow: 0;
-        // min-width: 100px;
-        // overflow: hidden;
-        // flex-grow: 1;
-        // flex-direction: row-reverse;
-        display: flex;
-        flex-wrap: wrap-reverse;
-        justify-content: flex-end;
-        
-        // flex-direction: column;
-        // margin-top: -4px;
-        // margin-bottom: -4px;
-        // margin-right: -8px;
         gap: 8px;
-        // justify-content: space-between;
-        // align-items: flex-end;
-        // width: unset;
-        // display: flex;
-
-        // --nrcl-button-width: 100px;
-        // button {
-            // height: 40px;
-        // }
-
-        // nrcl-button {
-            // --nrcl-button-height: 40px;
-        // }
-
-        .spacer {
-            flex-grow: 1;
-        }
-
-        // container-type: size; /* 'size' allows both height and width queries */
-        // container-name: layout-container; /* Optional name for targeting */
 
         .nrcl-button {
-            // width: 95px;
             --nrcl-button-width: 95px;
             --nrcl-button-height: 40px;
-            // display: flex;
-            // justify-content: center;
-            min-height: 0;
+        }
 
+        .search { 
+            display: none;
         }
     }
-    }
 
-    .actions4 {
-        display: none;
-        flex-grow: 1;
-        // flex-grow: 0;
-        // min-width: 100px;
-        // overflow: hidden;
-        // flex-grow: 1;
-        // flex-direction: row-reverse;
-        // flex-wrap: wrap-reverse;
-        justify-content: flex-end;
+//     &.style-1 {
+//         .filters {
+//         }
+//         .actions1 {
+//             display: flex;
+//         }
+//     }
+
+//     &.style-2 {
+//         .filters {
+//         }
+//         .actions2 {
+//             display: block;
+//         }
+//     }
+
+//     &.style-3 {
+//         .filters {
+//         }
+//         .actions3 {
+//             display: block;
+//         }
+//     }
+
+//     &.style-4 {
+//         .filters {
+//             flex-flow: column;
+
+//             .search { 
+//                 display: flex; 
+//                 --nrcl-filter-search-width: var( --nrcl-filter-width-6 );
+
+//                 ::ng-deep .nrcl-filter-search {
+//                     // flex-grow: 1;
+//                     width: 100%;
+//                     max-width: var( --nrcl-filter-search-width );
+
+//                     .mat-mdc-form-field-infix {
+//                         width: unset;
+//                         // max-width: var( --nrcl-filter-search-width );
+//                     }
+//                 }
+//                 .actions4 {
+//                     display: flex;
+//                 }
+//             }
+
+//             .other { 
+//                 display: flex;
+//                 flex-flow: row wrap;
+//                 gap: 8px;
+//             }
+//         }
+//     }
+
+//     .actions1 {
+//         // display: flex;
+//         display: none;
+//         // flex-grow: 1;
+//         // flex-direction: row-reverse;
+//         flex-direction: column;
+//         margin-top: -6px;
+//         margin-bottom: -6px;
+//         gap: 4px;
+//         // justify-content: space-between;
+//         align-items: flex-end;
+//         width: unset;
+
+//         --nrcl-button-width: 60px;
+//         // button {
+//             // height: 40px;
+//         // }
+
+//         // nrcl-button {
+//             // --nrcl-button-height: 40px;
+//         // }
+
+//         .spacer {
+//             flex-grow: 1;
+//         }
+//     }
+
+//     .actions2 {
+//         display: none;
+//         .container {
+//         flex-shrink: 1;
+//         flex-grow: 0;
+//         // min-width: 100px;
+//         // overflow: hidden;
+//         // flex-grow: 1;
+//         // flex-direction: row-reverse;
+//         display: flex;
+//         flex-wrap: wrap-reverse;
+//         justify-content: flex-end;
         
-        // flex-direction: column;
-        // margin-top: -4px;
-        // margin-bottom: -4px;
-        // margin-right: -8px;
-        gap: 8px;
-        padding-left: 8px;
-        // justify-content: space-between;
-        // align-items: flex-end;
-        // width: unset;
-        // display: flex;
+//         // flex-direction: column;
+//         // margin-top: -4px;
+//         margin-bottom: -4px;
+//         margin-right: -8px;
+//         // gap: 4px;
+//         // justify-content: space-between;
+//         // align-items: flex-end;
+//         // width: unset;
+//         // display: flex;
 
-        // --nrcl-button-width: 100px;
-        // button {
-            // height: 40px;
-        // }
+//         // --nrcl-button-width: 100px;
+//         // button {
+//             // height: 40px;
+//         // }
 
-        // nrcl-button {
-            // --nrcl-button-height: 40px;
-        // }
+//         // nrcl-button {
+//             // --nrcl-button-height: 40px;
+//         // }
 
-        // .spacer {
-            // flex-grow: 1;
-        // }
+//         .spacer {
+//             flex-grow: 1;
+//         }
 
-        // container-type: size; /* 'size' allows both height and width queries */
-        // container-name: layout-container; /* Optional name for targeting */
+//         // container-type: size; /* 'size' allows both height and width queries */
+//         // container-name: layout-container; /* Optional name for targeting */
 
-        .nrcl-button {
-            // width: 95px;
-            --nrcl-button-width: 95px;
-            --nrcl-button-height: 40px;
-            // display: flex;
-            // justify-content: center;
-            min-height: 0;
+//         .nrcl-button {
+//             width: 50px;
+//             display: flex;
+//             justify-content: center;
+//             min-height: 0;
 
-        }
-    }
+//         }
+//     }
+//     }
 
-    &.hide-filters {
-        .actions {
-            flex-direction: row;
-        }
-    }
+//     .actions3 {
+//         display: none;
+//         .container {
+//         // flex-shrink: 1;
+//         // flex-grow: 0;
+//         // min-width: 100px;
+//         // overflow: hidden;
+//         // flex-grow: 1;
+//         // flex-direction: row-reverse;
+//         display: flex;
+//         flex-wrap: wrap-reverse;
+//         justify-content: flex-end;
+        
+//         // flex-direction: column;
+//         // margin-top: -4px;
+//         // margin-bottom: -4px;
+//         // margin-right: -8px;
+//         gap: 8px;
+//         // justify-content: space-between;
+//         // align-items: flex-end;
+//         // width: unset;
+//         // display: flex;
+
+//         // --nrcl-button-width: 100px;
+//         // button {
+//             // height: 40px;
+//         // }
+
+//         // nrcl-button {
+//             // --nrcl-button-height: 40px;
+//         // }
+
+//         .spacer {
+//             flex-grow: 1;
+//         }
+
+//         // container-type: size; /* 'size' allows both height and width queries */
+//         // container-name: layout-container; /* Optional name for targeting */
+
+//         .nrcl-button {
+//             // width: 95px;
+//             --nrcl-button-width: 95px;
+//             --nrcl-button-height: 40px;
+//             // display: flex;
+//             // justify-content: center;
+//             min-height: 0;
+
+//         }
+//     }
+//     }
+
+//     .actions4 {
+//         display: none;
+//         flex-grow: 1;
+//         // flex-grow: 0;
+//         // min-width: 100px;
+//         // overflow: hidden;
+//         // flex-grow: 1;
+//         // flex-direction: row-reverse;
+//         // flex-wrap: wrap-reverse;
+//         justify-content: flex-end;
+        
+//         // flex-direction: column;
+//         // margin-top: -4px;
+//         // margin-bottom: -4px;
+//         // margin-right: -8px;
+//         gap: 8px;
+//         padding-left: calc( var( --nrcl-filter-width-1 ) );
+//         // justify-content: space-between;
+//         // align-items: flex-end;
+//         // width: unset;
+//         // display: flex;
+
+//         // --nrcl-button-width: 100px;
+//         // button {
+//             // height: 40px;
+//         // }
+
+//         // nrcl-button {
+//             // --nrcl-button-height: 40px;
+//         // }
+
+//         // .spacer {
+//             // flex-grow: 1;
+//         // }
+
+//         // container-type: size; /* 'size' allows both height and width queries */
+//         // container-name: layout-container; /* Optional name for targeting */
+
+//         .nrcl-button {
+//             // width: 95px;
+//             --nrcl-button-width: 95px;
+//             --nrcl-button-height: 40px;
+//             // display: flex;
+//             // justify-content: center;
+//             min-height: 0;
+
+//         }
+//     }
+
+//     &.hide-filters {
+//         .actions {
+//             flex-direction: row;
+//         }
+//     }
+// }
+
+// :host-context( .nrcl-device-desktop ) {
+//    :host {
+//         .actions {
+//             grid-column: 1 / span 2;
+//         }            
+//     }
+// }
+
+// :host-context( .nrcl-device-mobile ) {
+//     :host {
+//         flex-direction: column;
+//         flex-flow: column;
+
+//         .actions {
+//             grid-column: 1 / span 2;
+//         }            
+
+//         .actions2 {
+//             .container {
+//             justify-content: space-between;
+//             }
+//         }            
+
+//         .actions3 {
+//             .container {
+//             justify-content: space-between;
+//             }
+//         }            
+
+//         .actions4 {
+//             position: absolute;
+
+//             bottom: 0;
+//             right: 0;
+
+//             .filters {
+//                 flex-flow: column;
+
+//                 .search { 
+//                     display: flex; 
+//                     --nrcl-filter-search-width: var( --nrcl-filter-width-6 );
+
+//                     ::ng-deep .nrcl-filter-search {
+//                         // flex-grow: 1;
+//                         width: 100%;
+//                         max-width: var( --nrcl-filter-search-width );
+
+//                         .mat-mdc-form-field-infix {
+//                             width: unset;
+//                             // max-width: var( --nrcl-filter-search-width );
+//                         }
+//                     }
+//                     .actions4 {
+//                         display: flex;
+//                     }
+//                 }
+
+//                 .other { 
+//                     display: flex;
+//                     flex-flow: row wrap;
+//                     gap: 8px;
+//                 }
+//             }
+
+//             // justify-content: space-between;
+//         }            
+
+//         .filters ::ng-deep {
+//             display: grid;
+//             grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr );
+
+//             .nrcl-filter-search {
+//                 --nrcl-filter-search-width: auto !important;
+//                 grid-row: 1;
+//                 grid-column: 1 / span 2;
+//             }
+
+//             .nrcl-filter-select {
+//                 --nrcl-filter-select-width: auto !important;
+//             }
+
+//             .nrcl-filter-date {
+//                 --nrcl-filter-date-width: auto !important;
+//             }
+
+//             .nrcl-filter-container {
+//                 --nrcl-filter-container-width: auto !important;
+//             }
+//         }
+    // }
 }
 
-:host-context( .nrcl-device-desktop ) {
-   :host {
-        .actions {
-            grid-column: 1 / span 2;
-        }            
-    }
-}
-
-:host-context( .nrcl-device-mobile ) {
-    :host {
-        flex-direction: column;
-        flex-flow: column;
-
-        .actions {
-            grid-column: 1 / span 2;
-        }            
-
-        .actions2 {
-            .container {
-            justify-content: space-between;
-            }
-        }            
-
-        .actions3 {
-            .container {
-            justify-content: space-between;
-            }
-        }            
-
-        .filters ::ng-deep {
-            display: grid;
-            grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr );
-
-            .nrcl-filter-search {
-                --nrcl-filter-search-width: auto !important;
-                grid-row: 1;
-                grid-column: 1 / span 2;
-            }
-
-            .nrcl-filter-select {
-                --nrcl-filter-select-width: auto !important;
-            }
-
-            .nrcl-filter-date {
-                --nrcl-filter-date-width: auto !important;
-            }
-
-            .nrcl-filter-container {
-                --nrcl-filter-container-width: auto !important;
-            }
-        }
-    }
-}
-
-@container layout-container (max-height: 44px) {
-  .actions2 {
-    width: 200px;
-    flex-direction: row; /* Horizontal layout */
-    align-items: center; /* Centers items vertically in the row */
-    justify-content: center; /* Centers items horizontally in the row */
-  }
-}
+// @container layout-container (max-height: 44px) {
+//   .actions2 {
+//     width: 200px;
+//     flex-direction: row; /* Horizontal layout */
+//     align-items: center; /* Centers items vertically in the row */
+//     justify-content: center; /* Centers items horizontally in the row */
+//   }
+// }
