@@ -17,12 +17,9 @@
     }
 
     @if ( value ) {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
+        <nrcl-button tertiary matSuffix
+            icon="close"
             (click)="onCancelClick($event); $event.stopPropagation()"
-        >
-            <nrcl-icon>close</nrcl-icon>
-        </button>
+        ></nrcl-button>
     }                
 </mat-form-field>

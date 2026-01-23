@@ -19,30 +19,22 @@
     >
 
     @if ( isOpen ) {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
+        <nrcl-button tertiary matSuffix
+            icon="arrow_drop_up"
             (click)="onCloseClick($event); $event.stopPropagation()"
-        >
-            <nrcl-icon>arrow_drop_up</nrcl-icon>
-        </button>
+        ></nrcl-button>
     }
     @else if ( selection?.value?.length > 0 && clear ) {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
+        <nrcl-button tertiary matSuffix
+            icon="close"
             (click)="onCancelClick($event); $event.stopPropagation()"
-        >
-            <nrcl-icon>close</nrcl-icon>
-        </button>
+        ></nrcl-button>
     }
     @else {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
-        >
-            <nrcl-icon>arrow_drop_down</nrcl-icon>
-        </button>
+        <nrcl-button tertiary matSuffix
+            icon="arrow_drop_down"
+            (click)="onInputFocus(); $event.stopPropagation()"
+        ></nrcl-button>
     }                
 
     @if ( hint ) {

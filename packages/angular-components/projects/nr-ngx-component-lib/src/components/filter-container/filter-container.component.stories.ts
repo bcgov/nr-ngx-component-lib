@@ -88,21 +88,37 @@ export const Primary: StoryObj<FilterContainerComponent & { width: number, heigh
                 max: 300
             }
         },
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
+        }
     },
     args: {
         width: 308,
         height: 0,
         label: 'Container',
-        hint: ''
+        hint: '',
+        wide: null
     },
     render: ( args ) => {
         return {
             props: args,
+            styles: [`
+                :host {
+                    display: flex;
+                    gap: 20px;
+                }
+            `],
             template: `
                 <nrcl-filter-container ${ argsToTemplate(args,{exclude:['width','height']}) } 
                     [style.--nrcl-filter-container-width]="width + 'px'"
                     [style.--nrcl-filter-container-height]="height ? height + 'px' : 'unset'"
                 >
+                    <div style="border: 1px dashed blue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">Hello</div>
+                </nrcl-filter-container> 
+
+                <nrcl-filter-container ${ argsToTemplate(args,{exclude:['width','height']}) }>
                     <div style="border: 1px dashed blue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">Hello</div>
                 </nrcl-filter-container> 
             `

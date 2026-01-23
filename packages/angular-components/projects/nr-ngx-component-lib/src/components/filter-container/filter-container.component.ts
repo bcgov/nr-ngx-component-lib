@@ -10,8 +10,13 @@ import { NrclBase } from "../../directives/nrcl.base";
     templateUrl: "./filter-container.component.html",
     styleUrl: "./filter-container.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[style.--nrcl-filter-container-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
+    }
 } )
 export class FilterContainerComponent extends NrclBase {
     @Input() label = '[label]'
     @Input() hint
+    @Input() wide 
+
 }

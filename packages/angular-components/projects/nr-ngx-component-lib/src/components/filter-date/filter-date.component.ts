@@ -14,12 +14,16 @@ import { NrclBase } from "../../directives/nrcl.base";
     templateUrl: "./filter-date.component.html",
     styleUrl: "./filter-date.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[style.--nrcl-filter-date-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
+    }
 } )
 export class FilterDateComponent extends NrclBase {
     @Input() label = '[label]]'
     @Input() placeholder = 'Select...'
     @Input() hint
     @Input() value = moment().format( DATE_FORMATS.datePickerInput )
+    @Input() wide 
 
     @Output() valueChange = new EventEmitter<string>();
 

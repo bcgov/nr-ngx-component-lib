@@ -7,11 +7,17 @@
     --nrcl-font-size-small: 12px;
     --nrcl-border-radius: 5px;
 
-    --nrcl-filter-width-default: 150px;
-    --nrcl-filter-height-default: 40px;
-
     --nrcl-divider-color: #c6c8cb;
-    
+
+    --nrcl-filter-gap: 8px;
+    --nrcl-filter-width-1: 100px; 
+    --nrcl-filter-width-2: calc( 2 * var( --nrcl-filter-width-1 ) + 1 * var( --nrcl-filter-gap ) ); 
+    --nrcl-filter-width-3: calc( 3 * var( --nrcl-filter-width-1 ) + 2 * var( --nrcl-filter-gap ) ); 
+    --nrcl-filter-width-4: calc( 4 * var( --nrcl-filter-width-1 ) + 3 * var( --nrcl-filter-gap ) ); 
+    --nrcl-filter-width-5: calc( 5 * var( --nrcl-filter-width-1 ) + 4 * var( --nrcl-filter-gap ) ); 
+    --nrcl-filter-width-6: calc( 6 * var( --nrcl-filter-width-1 ) + 5 * var( --nrcl-filter-gap ) ); 
+    --nrcl-filter-height: 40px;
+
     // desktop
     --nrcl-device-desktop-gutter-space: 16px;
     --nrcl-device-desktop-form-layout-columns: 4;
