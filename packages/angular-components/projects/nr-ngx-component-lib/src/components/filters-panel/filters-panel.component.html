@@ -1,4 +1,4 @@
-<div class="filters">
+<!-- <div class="filters1 filters2 filters3">
     @if ( showFilters ) {
         <ng-content></ng-content>
     }
@@ -6,11 +6,52 @@
     @if ( showFilters && hasAdvancedFilters && showAdvancedFilters ) {
         <ng-content select="[advanced]"></ng-content>
     }
+</div> -->
+
+<div class="filters">
+    <div class="search">
+        <ng-content select="nrcl-filter-search"></ng-content>
+
+        <div class="actions4">
+            @if ( showFilters && hasAdvancedFilters ) {
+                @if ( showAdvancedFilters ) {
+                    <nrcl-button secondary
+                        label="Less"
+                        icon="remove"
+                        (click)="onHideAdvancedClick()"
+                    ></nrcl-button>
+                }
+                @else {
+                    <nrcl-button secondary
+                        label="More"
+                        icon="add"
+                        (click)="onShowAdvancedClick()"
+                    ></nrcl-button>
+                }
+            }
+
+                @if ( showClear && showFilters ) {
+                <nrcl-button primary
+                    label="Clear"
+                    icon="clear-filters"
+                    (click)="onClearClick()"
+                ></nrcl-button>
+            }
+        </div>
+    </div>
+
+    <div class="other">
+        <ng-content></ng-content>
+
+        @if ( hasAdvancedFilters && showAdvancedFilters ) {
+            <ng-content select="[advanced]"></ng-content>
+        }
+    </div>
 </div>
 
 <div class="actions1">
     @if ( showClear && showFilters ) {
-        <nrcl-button small
+        <nrcl-button small primary
             label="Clear"
             icon="clear-filters"
             (click)="onClearClick()"
@@ -19,14 +60,14 @@
 
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
-            <nrcl-button small
+            <nrcl-button small secondary
                 label="Less"
                 icon="remove"
                 (click)="onHideAdvancedClick()"
             ></nrcl-button>
         }
         @else {
-            <nrcl-button small
+            <nrcl-button small secondary
                 label="More"
                 icon="add"
                 (click)="onShowAdvancedClick()"
@@ -41,14 +82,14 @@
 
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
-            <nrcl-button compact
+            <nrcl-button compact secondary
                 label="Less"
                 icon="remove"
                 (click)="onHideAdvancedClick()"
             ></nrcl-button>
         }
         @else {
-            <nrcl-button compact
+            <nrcl-button compact secondary
                 label="More"
                 icon="add"
                 (click)="onShowAdvancedClick()"
@@ -57,7 +98,7 @@
     }
 
         @if ( showClear && showFilters ) {
-        <nrcl-button compact
+        <nrcl-button compact primary
             label="Clear"
             icon="clear-filters"
             (click)="onClearClick()"
@@ -72,14 +113,14 @@
 
     @if ( showFilters && hasAdvancedFilters ) {
         @if ( showAdvancedFilters ) {
-            <nrcl-button tertiary
+            <nrcl-button secondary
                 label="Less"
                 icon="remove"
                 (click)="onHideAdvancedClick()"
             ></nrcl-button>
         }
         @else {
-            <nrcl-button tertiary
+            <nrcl-button secondary
                 label="More"
                 icon="add"
                 (click)="onShowAdvancedClick()"
@@ -88,7 +129,7 @@
     }
 
         @if ( showClear && showFilters ) {
-        <nrcl-button tertiary
+        <nrcl-button primary
             label="Clear"
             icon="clear-filters"
             (click)="onClearClick()"

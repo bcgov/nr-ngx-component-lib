@@ -126,24 +126,41 @@ The panel automatically:
 
 export default meta;
 
-export const Empty: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent> = {
-    ...displayModeWrapperStory,
+export const Empty: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent & { actionStyle: string }> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        actionStyle: {
+            control: { type: 'inline-radio' },
+            options: [ '1', '2', '3', '4' ],
+        }
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        actionStyle: '4',
+    },
     render: ( args ) => {
         return {
             props: args,
             template: `
-                <nrcl-filters-panel></nrcl-filters-panel> 
+                <nrcl-filters-panel class="style-${ args.actionStyle }"></nrcl-filters-panel> 
             `
         }
     }
 }
 
-export const Populated: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent> = {
-    ...displayModeWrapperStory,
+export const Populated: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent & { actionStyle: string }> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        actionStyle: {
+            control: { type: 'inline-radio' },
+            options: [ '1', '2', '3', '4' ],
+        }
+    },
     args: {
         ...displayModeWrapperStory.args,
         showClear: true,
         showFilters: true,
+        actionStyle: '4',
     },
     render: ( args ) => {
         let templateArgs = argsToTemplate(args, { include: [ 'showClear', 'showFilters' ] } )
@@ -154,7 +171,7 @@ export const Populated: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompo
                 options: fruitOptions()
             },
             template: `
-                <nrcl-filters-panel ${ templateArgs }>
+                <nrcl-filters-panel ${ templateArgs } class="style-${ args.actionStyle }">
                     <nrcl-filter-search></nrcl-filter-search>
 
                     <nrcl-filter-select
@@ -171,12 +188,19 @@ export const Populated: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompo
     }
 }
 
-export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent> = {
-    ...displayModeWrapperStory,
+export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent & { actionStyle: string }> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        actionStyle: {
+            control: { type: 'inline-radio' },
+            options: [ '1', '2', '3', '4' ],
+        }
+    },
     args: {
         ...displayModeWrapperStory.args,
         showClear: true,
         showFilters: true,
+        actionStyle: '4',
     },
     render: ( args ) => {
         let templateArgs = argsToTemplate(args, { include: [ 'showClear', 'showFilters' ] } )
@@ -192,9 +216,96 @@ export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperC
                 }
             `],
             template: `
-                <nrcl-filters-panel ${ templateArgs }>
+                <nrcl-filters-panel ${ templateArgs } class="style-${ args.actionStyle }">
                     <nrcl-filter-search></nrcl-filter-search>
 
+                    <nrcl-filter-select
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-select
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-select
+                        label="Fruit"
+                        [options]="options"
+                    ></nrcl-filter-select>
+
+                    <nrcl-filter-date
+                        label="Start"
+                    ></nrcl-filter-date>
+
+                    <nrcl-filter-container wide="4"
+                        label="Resource Category"
+                    >
+                        <mat-radio-group 
+                            aria-label="Resource Category" 
+                        >
+                            <mat-radio-button aria-label="Home Org Unit" value="home">Home Org Unit</mat-radio-button>
+                            <mat-radio-button aria-label="Currently Assigned/Active Org" value="assignedActive">Currently Assigned/Active Org</mat-radio-button>
+                        </mat-radio-group>
+                    </nrcl-filter-container>      
+                    
+                    <nrcl-filter-container
+                        label="Resource Fire Centre"
+                    >
+                        <mat-checkbox 
+                            [(ngModel)]="selectedFireCentreHome"
+                            (change)="onChangeFilters()"
+                        >
+                            Home
+                        </mat-checkbox>
+
+                        <mat-checkbox 
+                            [(ngModel)]="selectedFireCentreOther"
+                            (change)="onChangeFilters()"
+                        >
+                            Outside
+                        </mat-checkbox>
+                    </nrcl-filter-container>
+                    
+                </nrcl-filters-panel> 
+            `
+        }
+    }
+}
+
+export const NoSearch: StoryObj<FiltersPanelComponent & DisplayModeWrapperComponent & { actionStyle: string }> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        actionStyle: {
+            control: { type: 'inline-radio' },
+            options: [ '1', '2', '3', '4' ],
+        }
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        showClear: true,
+        showFilters: true,
+        actionStyle: '4',
+    },
+    render: ( args ) => {
+        let templateArgs = argsToTemplate(args, { include: [ 'showClear', 'showFilters' ] } )
+
+        return {
+            props: {
+                ...args,
+                options: fruitOptions()
+            },
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 10px;
+                }
+            `],
+            template: `
+                <nrcl-filters-panel ${ templateArgs } class="style-${ args.actionStyle }">
                     <nrcl-filter-select
                         label="Fruit"
                         [options]="options"
@@ -271,11 +382,18 @@ function emptyFilter() {
     }
 }
 
-export const ClearFilters: StoryObj<DisplayModeWrapperComponent & { filter: Filter }>  = {
-    ...displayModeWrapperStory,
+export const ClearFilters: StoryObj<DisplayModeWrapperComponent & { filter: Filter } & { actionStyle: string }>  = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        actionStyle: {
+            control: { type: 'inline-radio' },
+            options: [ '1', '2', '3', '4' ],
+        }
+    },
     args: {
         ...displayModeWrapperStory.args,
-        filter: emptyFilter()
+        filter: emptyFilter(),
+        actionStyle: '4',
     },
     render: ( args ) => {
         const [, setArgs] = useArgs();
@@ -297,7 +415,7 @@ export const ClearFilters: StoryObj<DisplayModeWrapperComponent & { filter: Filt
                 }
             `],
             template: `
-                <nrcl-filters-panel (clearFilters)="onClearFilters( $event )">
+                <nrcl-filters-panel (clearFilters)="onClearFilters( $event )" class="style-${ args.actionStyle }">
                     <nrcl-filter-search
                         [value]="filter.search"
                         (valueChange)="onValueChange( 'search', $event )"
@@ -340,7 +458,7 @@ export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
         ...displayModeWrapperStory.argTypes,
         actionStyle: {
             control: { type: 'inline-radio' },
-            options: [ '1', '2', '3' ],
+            options: [ '1', '2', '3', '4' ],
         }
     },
     args: {
@@ -348,7 +466,7 @@ export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
         showClear: true,
         showFilters: true,
         hasAdvancedFilters: true,
-        actionStyle: '1',
+        actionStyle: '4',
     },
     render: ( args ) => {
         let templateArgs = argsToTemplate(args, { include: [ 'showClear', 'showFilters', 'hasAdvancedFilters' ] } )
@@ -363,7 +481,7 @@ export const Advanced: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
                 }
             `],
             template: `
-                <nrcl-filters-panel ${ templateArgs } class="actions-${ args.actionStyle }">
+                <nrcl-filters-panel ${ templateArgs } class="style-${ args.actionStyle }">
                     <nrcl-filter-search></nrcl-filter-search>
 
                     <nrcl-filter-select

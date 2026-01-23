@@ -25,21 +25,63 @@
         // border-radius: 10px;
         // padding: 8px;
         // background-color: #f2f2f2;    
+        .search, .other {
+            display: contents;
+        }
     }
 
-    &.actions-1 {
+    &.style-1 {
+        .filters {
+        }
         .actions1 {
             display: flex;
         }
     }
-    &.actions-2 {
+
+    &.style-2 {
+        .filters {
+        }
         .actions2 {
             display: block;
         }
     }
-    &.actions-3 {
+
+    &.style-3 {
+        .filters {
+        }
         .actions3 {
             display: block;
+        }
+    }
+
+    &.style-4 {
+        .filters {
+            flex-flow: column;
+
+            .search { 
+                display: flex; 
+                --nrcl-filter-search-width: var( --nrcl-filter-width-6 );
+
+                ::ng-deep .nrcl-filter-search {
+                    // flex-grow: 1;
+                    width: 100%;
+                    max-width: var( --nrcl-filter-search-width );
+
+                    .mat-mdc-form-field-infix {
+                        width: unset;
+                        // max-width: var( --nrcl-filter-search-width );
+                    }
+                }
+                .actions4 {
+                    display: flex;
+                }
+            }
+
+            .other { 
+                display: flex;
+                flex-flow: row wrap;
+                gap: 8px;
+            }
         }
     }
 
@@ -49,9 +91,9 @@
         // flex-grow: 1;
         // flex-direction: row-reverse;
         flex-direction: column;
-        margin-top: -4px;
-        margin-bottom: -4px;
-        // gap: 4px;
+        margin-top: -6px;
+        margin-bottom: -6px;
+        gap: 4px;
         // justify-content: space-between;
         align-items: flex-end;
         width: unset;
@@ -136,7 +178,7 @@
         // margin-top: -4px;
         // margin-bottom: -4px;
         // margin-right: -8px;
-        // gap: 4px;
+        gap: 8px;
         // justify-content: space-between;
         // align-items: flex-end;
         // width: unset;
@@ -159,7 +201,8 @@
         // container-name: layout-container; /* Optional name for targeting */
 
         .nrcl-button {
-            width: 95px;
+            // width: 95px;
+            --nrcl-button-width: 95px;
             --nrcl-button-height: 40px;
             // display: flex;
             // justify-content: center;
@@ -167,6 +210,55 @@
 
         }
     }
+    }
+
+    .actions4 {
+        display: none;
+        flex-grow: 1;
+        // flex-grow: 0;
+        // min-width: 100px;
+        // overflow: hidden;
+        // flex-grow: 1;
+        // flex-direction: row-reverse;
+        // flex-wrap: wrap-reverse;
+        justify-content: flex-end;
+        
+        // flex-direction: column;
+        // margin-top: -4px;
+        // margin-bottom: -4px;
+        // margin-right: -8px;
+        gap: 8px;
+        padding-left: 8px;
+        // justify-content: space-between;
+        // align-items: flex-end;
+        // width: unset;
+        // display: flex;
+
+        // --nrcl-button-width: 100px;
+        // button {
+            // height: 40px;
+        // }
+
+        // nrcl-button {
+            // --nrcl-button-height: 40px;
+        // }
+
+        // .spacer {
+            // flex-grow: 1;
+        // }
+
+        // container-type: size; /* 'size' allows both height and width queries */
+        // container-name: layout-container; /* Optional name for targeting */
+
+        .nrcl-button {
+            // width: 95px;
+            --nrcl-button-width: 95px;
+            --nrcl-button-height: 40px;
+            // display: flex;
+            // justify-content: center;
+            min-height: 0;
+
+        }
     }
 
     &.hide-filters {
