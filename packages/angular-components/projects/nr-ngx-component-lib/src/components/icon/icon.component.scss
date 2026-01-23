@@ -78,6 +78,10 @@
         .mat-icon {
             display: none;
         }
+
+        ::ng-deep .svg {
+            fill: currentcolor;
+        }
     }
 
     &.show-icon {

@@ -204,22 +204,22 @@ Compact buttons that include both icon and text:
     argTypes: {
         label: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'Ok', 'Add Resources' ],
+            options: [ 'none', 'Ok', 'Add Resources', 'Clear' ],
             mapping: { 'none': undefined }
         },
         icon: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app' ],
+            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
             mapping: { 'none': undefined }
         },
         iconRight: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app' ],
+            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
             mapping: { 'none': undefined }
         },
         iconCompact: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app' ],
+            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
             mapping: { 'none': undefined }
         },
         tooltip: { type: 'string' },
