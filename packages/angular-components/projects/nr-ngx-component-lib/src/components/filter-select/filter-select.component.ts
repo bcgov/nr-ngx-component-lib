@@ -169,6 +169,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         if ( this.filterCharsMin && !this.isFiltered ) return
 
         this.isOpen = true
+        this.changeDetectorRef.markForCheck()
 
         // Create overlay
         const positionStrategy = this.overlay
@@ -322,6 +323,9 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     onCloseClick() {
         this.close()
+        this.setInputToSelection()
+        this.floatLabel = 'auto'
+        this.changeDetectorRef.detectChanges()
     }
 
     descriptionForCode( code: string ): string {
