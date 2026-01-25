@@ -1,42 +1,75 @@
 
-
-<div class="actions">
+<div class="search-actions">
     <div class="search">
         <ng-content select="nrcl-filter-search"></ng-content>
         <div class="spacer"></div>
     </div>
 
-    @if ( showFilters && hasAdvancedFilters ) {
-        @if ( showAdvancedFilters ) {
-            <nrcl-button secondary
-                label="Less"
-                icon="remove"
-                (click)="onHideAdvancedClick()"
-            ></nrcl-button>
-        }
-        @else {
-            <nrcl-button secondary
-                label="More"
-                icon="add"
-                (click)="onShowAdvancedClick()"
-            ></nrcl-button>
-        }
-    }
+    <nrcl-device-view>
+        <ng-template desktop-view>
+            @if ( showFilters && hasAdvancedFilters ) {
+                @if ( showAdvancedFilters ) {
+                    <nrcl-button secondary
+                        label="Less"
+                        icon="remove"
+                        (click)="onHideAdvancedClick()"
+                    ></nrcl-button>
+                }
+                @else {
+                    <nrcl-button secondary
+                        label="More"
+                        icon="add"
+                        (click)="onShowAdvancedClick()"
+                    ></nrcl-button>
+                }
+            }
 
-        @if ( showClear && showFilters ) {
-        <nrcl-button primary
-            label="Clear"
-            icon="clear-filters"
-            (click)="onClearClick()"
-        ></nrcl-button>
-    }
+                @if ( showClear && showFilters ) {
+                <nrcl-button primary
+                    label="Clear"
+                    icon="clear-filters"
+                    (click)="onClearClick()"
+                ></nrcl-button>
+            }
+        </ng-template>
+    </nrcl-device-view>
 </div>
 
 <div class="filters">
-
     <ng-content></ng-content>
 
     @if ( hasAdvancedFilters && showAdvancedFilters ) {
         <ng-content select="[advanced]"></ng-content>
     }
+</div>
+
+<div class="mobile-actions">
+    <nrcl-device-view>
+        <ng-template mobile-view>
+            @if ( hasAdvancedFilters ) {
+                @if ( showAdvancedFilters ) {
+                    <nrcl-button secondary
+                        label="Less"
+                        icon="remove"
+                        (click)="onHideAdvancedClick()"
+                    ></nrcl-button>
+                }
+                @else {
+                    <nrcl-button secondary
+                        label="More"
+                        icon="add"
+                        (click)="onShowAdvancedClick()"
+                    ></nrcl-button>
+                }
+            }
+
+            @if ( showClear ) {
+                <nrcl-button primary
+                    label="Clear"
+                    icon="clear-filters"
+                    (click)="onClearClick()"
+                ></nrcl-button>
+            }
+        </ng-template>
+    </nrcl-device-view>
 </div>
