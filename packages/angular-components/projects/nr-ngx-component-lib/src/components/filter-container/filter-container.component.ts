@@ -15,7 +15,7 @@ import { NrclBase } from "../../directives/nrcl.base";
     }
 } )
 export class FilterContainerComponent extends NrclBase {
-    @Input() label = '[label]'
+    @Input() label 
     @Input() hint
     @Input() wide 
 
