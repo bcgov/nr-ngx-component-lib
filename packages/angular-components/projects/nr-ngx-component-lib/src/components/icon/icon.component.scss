@@ -2,7 +2,7 @@
 
 ::ng-deep :root {
     --nrcl-icon-small-size: 18px;
-    --nrcl-icon-normal-size: var( --nrcl-icon-size );
+    --nrcl-icon-normal-size: 24px;
     --nrcl-icon-large-size: 30px;
 }
 
@@ -77,6 +77,10 @@
     &.show-svg {
         .mat-icon {
             display: none;
+        }
+
+        ::ng-deep .svg {
+            fill: currentcolor;
         }
     }
 

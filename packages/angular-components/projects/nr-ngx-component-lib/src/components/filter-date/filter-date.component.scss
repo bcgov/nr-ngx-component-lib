@@ -1,15 +1,16 @@
 ::ng-deep :root {
-    --nrcl-filter-date-width: var( --nrcl-filter-width-default );
+    --nrcl-filter-date-width: var( --nrcl-filter-width-2 );
+    --nrcl-filter-date-height: var( --nrcl-filter-height );
 }
 
 :host {
-    --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
+    --mat-form-field-container-height: calc( var( --nrcl-filter-date-height ) - 4px );
     --mat-form-field-container-vertical-padding: 8px;
     --mat-form-field-container-text-size: 15px;
     --mdc-outlined-text-field-focus-label-text-color: black;
     --mdc-outlined-text-field-hover-label-text-color: black;
 
-    width: var( --nrcl-filter-date-width, var( --nrcl-filter-width-default ) );
+    width: var( --nrcl-filter-date-width );
     display: block;
 
     ::ng-deep {
@@ -18,21 +19,12 @@
         
             .mat-mdc-text-field-wrapper {
                 background-color: white;
-                height: var( --nrcl-filter-height-default );
+                height: var( --nrcl-filter-date-height );
 
                 .mat-mdc-form-field-infix {
-                    width: var( --nrcl-filter-date-width, var( --nrcl-filter-width-default ) );
+                    width: var( --nrcl-filter-date-width );
                 }
             }
         }
-    }
-
-    .select-date {            
-        padding: 0;
-        width: calc( var( --nrcl-filter-height-default ) - 2px );
-        height: calc( var( --nrcl-filter-height-default ) - 2px );
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 }

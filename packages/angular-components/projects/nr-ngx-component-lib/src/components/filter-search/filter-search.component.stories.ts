@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterSearchComponent } from './filter-search.component';
 import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<FilterSearchComponent> = {
     title: 'Filter Search',
@@ -27,7 +28,8 @@ const meta: Meta<FilterSearchComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent
+                IconComponent,
+                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -98,17 +100,32 @@ export const Primary: StoryObj<FilterSearchComponent & { width: number }> = {
         value: { type: 'string' },
         hint: { type: 'string' },
         placeholder: { type: 'string' },
-        valueChange: { action: 'valueChange' }
+        valueChange: { action: 'valueChange' },
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
+        }
     },
     args: {
         width: 308,
+        wide: null,
     },
     render: ( args ) => {
         return {
+            styles: [`
+                :host {
+                    display: flex;
+                    gap: 20px;
+                }
+            `],
             props: args,
             template: `
-                <nrcl-filter-search ${ argsToTemplate(args) } 
+                <nrcl-filter-search ${ argsToTemplate(args, {exclude:['width']} ) } 
                     [style.--nrcl-filter-search-width.px]="width"
+                ></nrcl-filter-search> 
+
+                <nrcl-filter-search ${ argsToTemplate(args, {exclude:['width']} ) } 
                 ></nrcl-filter-search> 
             `
         }

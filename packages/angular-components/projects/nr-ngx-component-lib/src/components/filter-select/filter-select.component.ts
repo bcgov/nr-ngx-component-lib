@@ -46,6 +46,7 @@ import { NrclBase } from "../../directives/nrcl.base";
         '[class.is-open]': "isOpen",
         '[class.is-closed]': "!isOpen",
         '[class.use-filter]': "filter",
+        '[style.--nrcl-filter-select-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
     }
 } )
 export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges, OnDestroy {
@@ -62,6 +63,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
     @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description
     @Input() overlayClass
+    @Input() wide 
 
     @Output() valueChange = new EventEmitter<string[]>();
 
@@ -167,6 +169,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         if ( this.filterCharsMin && !this.isFiltered ) return
 
         this.isOpen = true
+        this.changeDetectorRef.markForCheck()
 
         // Create overlay
         const positionStrategy = this.overlay
@@ -320,6 +323,9 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     onCloseClick() {
         this.close()
+        this.setInputToSelection()
+        this.floatLabel = 'auto'
+        this.changeDetectorRef.detectChanges()
     }
 
     descriptionForCode( code: string ): string {

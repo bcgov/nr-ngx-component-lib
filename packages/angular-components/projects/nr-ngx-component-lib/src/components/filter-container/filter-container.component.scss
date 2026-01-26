@@ -1,8 +1,8 @@
 @use "sass:meta";
 
 ::ng-deep :root {
-    --nrcl-filter-container-width: var( --nrcl-filter-width-default );
-    --nrcl-filter-container-height: var( --nrcl-filter-height-default );
+    --nrcl-filter-container-width: var( --nrcl-filter-width-2 );
+    --nrcl-filter-container-height: var( --nrcl-filter-height );
 }
 
 :host {
@@ -11,13 +11,13 @@
         @include meta.load-css('../../styles/include/mat-radio-button');
     }
 
-    --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
+    --mat-form-field-container-height: calc( var( --nrcl-filter-container-height ) - 4px );
     --mat-form-field-container-vertical-padding: 10px;
     --mat-form-field-container-text-size: 15px;
     --mdc-outlined-text-field-focus-label-text-color: black;
     --mdc-outlined-text-field-hover-label-text-color: black;
 
-    width: var( --nrcl-filter-container-width, var( --nrcl-filter-width-default ) );
+    width: var( --nrcl-filter-container-width );
     display: block;
 
     ::ng-deep {
@@ -26,10 +26,10 @@
         
             .mat-mdc-text-field-wrapper {
                 background-color: white;
-                height: var( --nrcl-filter-container-height, var( --nrcl-filter-height-default ) );
+                height: var( --nrcl-filter-container-height );
 
                 .mat-mdc-form-field-infix {
-                    width: var( --nrcl-filter-container-width, var( --nrcl-filter-width-default ) );
+                    width: var( --nrcl-filter-container-width );
                     padding: 0;                        
 
                     & > input {
@@ -44,7 +44,7 @@
         display: flex;
         gap: var( --nrcl-gutter-space );
         align-items: center;
-        height: var( --nrcl-filter-container-height, var( --nrcl-filter-height-default ) );
+        height: var( --nrcl-filter-container-height );
 
         ::ng-deep {
             .mdc-checkbox {

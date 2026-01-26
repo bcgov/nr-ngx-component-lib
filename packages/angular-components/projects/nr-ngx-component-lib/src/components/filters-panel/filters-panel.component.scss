@@ -1,69 +1,133 @@
 ::ng-deep :root {
 }
 
-:host {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 8px;
-    position: relative;
+:host {        
+    display: block;
     border: 1px solid #c6c8cb;
+    border-radius: 10px;
     padding: 8px;
-    background-color: #f2f2f2;
+    background-color: #f2f2f2;    
+    position: relative;
+    box-sizing: border-box;
 
-    .actions {
-        flex-grow: 1;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        align-items: flex-end;
-        width: unset;
-        display: flex;
-
-        button {
-            height: 40px;
-        }
-
-        nrcl-button {
-            --nrcl-button-height: 40px;
-        }
-
-        .spacer {
-            flex-grow: 1;
-        }
+    .filters {
+        display: contents;
     }
+}
 
-    &.hide-filters {
-        .actions {
-            flex-direction: row;
+:host-context( .nrcl-device-desktop ) {
+    :host {        
+        padding-bottom: 0px;
+
+        .search-actions {
+            float: right;
+            display: flex;        
+            gap: 8px;
+
+            .nrcl-button {
+                --nrcl-button-width: 95px;
+                --nrcl-button-height: 40px;
+            }
+
+            .search { 
+                display: none;
+            }
+
+            .nrcl-device-view {
+                display: contents;
+            }
+        }
+
+        &.has-search .search-actions {
+            float: none;
+            width: 100%;
+            margin-bottom: 8px;
+
+            .search { 
+                display: contents;
+                --nrcl-filter-search-width: var( --nrcl-filter-width-4 );
+
+                ::ng-deep .nrcl-filter-search {
+                    max-width: var( --nrcl-filter-search-width );
+
+                    .mat-mdc-form-field-infix {
+                        width: unset;
+                    }
+                }
+
+                .spacer {
+                    flex-grow: 1;
+                    min-width: 100px;
+                }
+            }
+        }
+
+        .filters {
+            ::ng-deep {
+                .nrcl-filter-select, .nrcl-filter-date, .nrcl-filter-container {
+                    display: inline-block;
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                }
+            }
         }
     }
 }
 
 :host-context( .nrcl-device-mobile ) {
     :host {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-direction: column;        
+        gap: 8px;
 
-        .actions {
-            grid-column: 1 / span 2;
-        }            
+        .search-actions {
+            display:none;
 
-        ::ng-deep {
-            nrcl-filter-search {
-                --nrcl-filter-search-width: auto;
-                grid-row: 1;
-                grid-column: 1 / span 2;
+            .spacer {
+                display: none;
+            }
+        }
+
+        &.has-search .search-actions {
+            display:block;
+            margin-bottom: 0px;
+
+            .search {
+                ::ng-deep .nrcl-filter-search {
+                    width: 100%;
+
+                    .mat-mdc-form-field-infix {
+                        width: unset;
+                    }
+                }
+            }
+        }
+
+        .filters ::ng-deep {
+            display: grid;
+            grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr );
+            gap: 8px;
+
+            .nrcl-filter-select {
+                --nrcl-filter-select-width: auto !important;
             }
 
-            nrcl-filter-select {
-                --nrcl-filter-select-width: auto;
+            .nrcl-filter-date {
+                --nrcl-filter-date-width: auto !important;
             }
 
-            nrcl-filter-date {
-                --nrcl-filter-date-width: auto;
+            .nrcl-filter-container {
+                --nrcl-filter-container-width: auto !important;
             }
+        }
 
-            nrcl-filter-container {
-                --nrcl-filter-container-width: auto;
+        .mobile-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+
+            .nrcl-device-view {
+                display: contents;
             }
         }
     }

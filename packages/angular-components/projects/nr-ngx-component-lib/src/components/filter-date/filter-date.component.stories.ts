@@ -88,20 +88,35 @@ export const Primary: StoryObj<FilterDateComponent & { width: number }> = {
                 max: 500
             }
         },
-        valueChange: { action: 'valueChange' }
+        valueChange: { action: 'valueChange' },
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
+        }
     },
     args: {
         width: 158,
         label: 'Start Date',
         value: '',
-        hint: ''
+        hint: '',
+        wide: null
     },
     render: ( args ) => {
         return {
             props: args,
+            styles: [`
+                :host {
+                    display: flex;
+                    gap: 20px;
+                }
+            `],
             template: `
                 <nrcl-filter-date ${ argsToTemplate(args,{exclude:['width']}) } 
                     [style.--nrcl-filter-date-width.px]="width"
+                ></nrcl-filter-date>
+
+                <nrcl-filter-date ${ argsToTemplate(args,{exclude:['width']}) } 
                 ></nrcl-filter-date>
             `
         }

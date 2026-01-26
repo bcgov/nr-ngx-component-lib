@@ -18,14 +18,10 @@
         <mat-hint>{{ hint }}</mat-hint>
     }
 
-    <button class="select-date"
+    <nrcl-button tertiary matSuffix
+        icon="event"
         [owlDateTimeTrigger]="selectedDateDT" 
-        aria-label="Open Select Date Picker"
-        mat-icon-button
-        matSuffix
-    >
-        <nrcl-icon>event</nrcl-icon>
-    </button>
+    ></nrcl-button>
 </mat-form-field>
 
 <owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time>

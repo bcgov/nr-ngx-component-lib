@@ -1,15 +1,16 @@
 ::ng-deep :root {
-    --nrcl-filter-select-width: var( --nrcl-filter-width-default );
+    --nrcl-filter-select-width: var( --nrcl-filter-width-2 );
+    --nrcl-filter-select-height: var( --nrcl-filter-height );
 }
 
 :host {
-    --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
+    --mat-form-field-container-height: calc( var( --nrcl-filter-select-height ) - 4px );
     --mat-form-field-container-vertical-padding: 8px;
     --mat-form-field-container-text-size: 15px;
     --mdc-outlined-text-field-focus-label-text-color: black;
     --mdc-outlined-text-field-hover-label-text-color: black;
 
-    width: var( --nrcl-filter-select-width, var( --nrcl-filter-width-default ) );
+    width: var( --nrcl-filter-select-width );
     display: block;
 
     &.has-value {
@@ -22,11 +23,11 @@
 
             .mat-mdc-text-field-wrapper {
                 background-color: white;
-                height: var( --nrcl-filter-height-default );
+                height: var( --nrcl-filter-select-height );
                 cursor: pointer;
 
                 .mat-mdc-form-field-infix {
-                    width: var( --nrcl-filter-select-width, var( --nrcl-filter-width-default ) );
+                    width: var( --nrcl-filter-select-width );
 
                     .filter-input {
                         cursor: pointer;
@@ -52,8 +53,8 @@
 
     .cancel {
         padding: 0;
-        width: calc( var( --nrcl-filter-height-default ) - 2px );
-        height: calc( var( --nrcl-filter-height-default ) - 2px );
+        width: calc( var( --nrcl-filter-select-height ) - 2px );
+        height: calc( var( --nrcl-filter-select-height ) - 2px );
         display: flex;
         justify-content: center;
         align-items: center;

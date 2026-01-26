@@ -1,11 +1,14 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
+    contentChild,
     EventEmitter,
     Input,
     Output
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
+import { FilterSearchComponent } from "../filter-search/filter-search.component";
 
 @Component( {
     selector: "nrcl-filters-panel",
@@ -13,7 +16,8 @@ import { NrclBase } from "../../directives/nrcl.base";
     styleUrl: "./filters-panel.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.hide-filters]': '!showFilters'
+        '[class.hide-filters]': '!showFilters',
+        '[class.has-search]': '!!search'
     }
 } )
 export class FiltersPanelComponent extends NrclBase {
@@ -26,6 +30,8 @@ export class FiltersPanelComponent extends NrclBase {
     @Output() showFiltersChange = new EventEmitter<boolean>()
     @Output() showAdvancedFiltersChange = new EventEmitter<boolean>()
 
+    @ContentChild( FilterSearchComponent ) search: FilterSearchComponent
+    
     onClearClick() {
         this.clearFilters.emit()
     }

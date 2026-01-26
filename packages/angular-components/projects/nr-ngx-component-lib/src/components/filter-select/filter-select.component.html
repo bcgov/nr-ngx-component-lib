@@ -19,43 +19,40 @@
     >
 
     @if ( isOpen ) {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
+        <nrcl-button tertiary matSuffix
+            icon="arrow_drop_up"
             (click)="onCloseClick($event); $event.stopPropagation()"
-        >
-            <nrcl-icon>arrow_drop_up</nrcl-icon>
-        </button>
+        ></nrcl-button>
     }
     @else if ( selection?.value?.length > 0 && clear ) {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
+        <nrcl-button tertiary matSuffix
+            icon="close"
             (click)="onCancelClick($event); $event.stopPropagation()"
-        >
-            <nrcl-icon>close</nrcl-icon>
-        </button>
+        ></nrcl-button>
     }
     @else {
-        <button class="cancel"
-            mat-icon-button
-            matSuffix
-        >
-            <nrcl-icon>arrow_drop_down</nrcl-icon>
-        </button>
+        <nrcl-button tertiary matSuffix
+            icon="arrow_drop_down"
+            (click)="onInputFocus(); $event.stopPropagation()"
+        ></nrcl-button>
     }                
-
-    @if ( hint ) {
-        <mat-hint>{{ hint }}</mat-hint>
-    }
 </mat-form-field>        
-
 <ng-template #overlayTemplate>
     <div class="filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass">
         @if ( !isFiltered && !single && summary ) {
+            @if ( !selection?.value?.length && hint ) {
+                <div class="selection-overview">
+                    <div class="summary">
+                        <span>({{ hint }})</span>
+                    </div>
+                </div>
+            }
+
             @if ( selection?.value?.length > 0 && selection?.value?.length < options?.length ) {
                 <div class="selection-overview">
-                    <div class="summary">{{ selection?.value?.length }} selected of {{ options?.length }}</div>
+                    <div class="summary">
+                        <span>{{ selection?.value?.length }} selected of {{ options?.length }}</span>
+                    </div>
 
                     <mat-selection-list
                         (selectionChange)="onUpperSelectionChange( $event )"
@@ -72,6 +69,12 @@
                             </mat-list-option>
                         }
                     </mat-selection-list>
+
+                    @if ( hint ) {
+                        <div class="summary">
+                            <span>({{ hint }})</span>
+                        </div>
+                    }
                 </div>
             }
 

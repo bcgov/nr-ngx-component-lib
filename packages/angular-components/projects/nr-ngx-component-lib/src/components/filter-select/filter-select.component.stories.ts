@@ -11,8 +11,9 @@ import { FilterSelectComponent } from './filter-select.component';
 import { fruitOptions, fruitSubOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { IconComponent } from '../icon/icon.component';
 import { useArgs } from 'storybook/internal/preview-api';
+import { ButtonComponent } from '../button/button.component';
 
-const meta: Meta<FilterSelectComponent & { width: number }> = {
+const meta: Meta<FilterSelectComponent> = {
     title: 'Filter Select',
     component: FilterSelectComponent,
     decorators: [
@@ -32,7 +33,8 @@ const meta: Meta<FilterSelectComponent & { width: number }> = {
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent
+                IconComponent,
+                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -70,13 +72,6 @@ A powerful multi-select component with filtering capabilities.
         }
     },
     argTypes: {
-        width: {
-            control: {
-                type: 'range',
-                min: 50,
-                max: 500
-            }
-        },
         selectMax: {
             control: {
                 type: 'range',
@@ -92,12 +87,14 @@ A powerful multi-select component with filtering capabilities.
             }
         },
         valueChange: { action: 'valueChange' },
-        options: {
-
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
         }
     },
     args: {
-        width: 150,
+        wide: null,
         label: 'Fruit',
         value: [ ],
         selectMax: 0,
@@ -107,7 +104,7 @@ A powerful multi-select component with filtering capabilities.
         clear: true,
         filter: true,
         placeholder: 'Filter...',
-        filterCharsMin: 0
+        filterCharsMin: 0,
     },
 }
 
@@ -121,8 +118,26 @@ export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
             }
         }
     },
+    argTypes: {
+        width: {
+            control: {
+                type: 'range',
+                min: 50,
+                max: 500
+            }
+        },
+    },
+    args: {
+        width: 150
+    },
     render: ( args ) => {
         return {
+            styles: [`
+                :host {
+                    display: flex;
+                    gap: 20px;
+                }
+            `],
             props: {
                 ...args,
                 options: fruitOptions()
@@ -131,6 +146,10 @@ export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
                 <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
                     [options]="options"
                     [style.--nrcl-filter-select-width.px]="width"
+                ></nrcl-filter-select>
+
+                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                    [options]="options"
                 ></nrcl-filter-select>
             `
         }
@@ -161,7 +180,7 @@ export const Multiple: StoryObj<FilterSelectComponent & { width: number }> = {
     }
 }
 
-export const Single: StoryObj<FilterSelectComponent & { width: number }> = {
+export const Single: StoryObj<FilterSelectComponent> = {
     args: {
         selectMax: 1,
     },
@@ -172,16 +191,15 @@ export const Single: StoryObj<FilterSelectComponent & { width: number }> = {
                 options: fruitOptions()
             },
             template: `
-                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                <nrcl-filter-select ${ argsToTemplate(args) }
                     [options]="options"
-                    [style.--nrcl-filter-select-width.px]="width"
                 ></nrcl-filter-select>
             `
         }
     }
 }
 
-export const NoClear: StoryObj<FilterSelectComponent & { width: number }> = {
+export const NoClear: StoryObj<FilterSelectComponent> = {
     args: {
         selectMax: 1,
         clear: false,
@@ -194,9 +212,8 @@ export const NoClear: StoryObj<FilterSelectComponent & { width: number }> = {
                 options: fruitOptions()
             },
             template: `
-                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                <nrcl-filter-select ${ argsToTemplate(args) }
                     [options]="options"
-                    [style.--nrcl-filter-select-width.px]="width"
                 ></nrcl-filter-select>
             `
         }
@@ -255,7 +272,7 @@ export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> 
     }
 }
 
-export const FormatOption: StoryObj<FilterSelectComponent & { width: number }> = {
+export const FormatOption: StoryObj<FilterSelectComponent> = {
     args: {
     },
     render: ( args ) => {
@@ -273,10 +290,9 @@ export const FormatOption: StoryObj<FilterSelectComponent & { width: number }> =
                 }
             },
             template: `
-                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                <nrcl-filter-select ${ argsToTemplate(args) }
                     [optionFormatter]="optionFormatter"
                     [options]="options"
-                    [style.--nrcl-filter-select-width.px]="width"
                     overlayClass="foo"
                 ></nrcl-filter-select>
             `

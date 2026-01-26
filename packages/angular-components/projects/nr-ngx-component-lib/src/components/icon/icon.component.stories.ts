@@ -51,7 +51,7 @@ const meta: Meta<IconComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<IconComponent> = {
+export const Primary: StoryObj<IconComponent & { color: string }> = {
     parameters: {
         docs: {
             description: {
@@ -61,10 +61,13 @@ export const Primary: StoryObj<IconComponent> = {
         }
     },    
     argTypes: {
+        color: { control: { type: 'color' } },
     },
     args: {
+        color: 'black'
     },
     render: ( args ) => {
+        console.log(args.color)
         return {
             props: args,
             styles: [`
@@ -87,6 +90,10 @@ export const Primary: StoryObj<IconComponent> = {
                             label {
                                 position: absolute;
                                 top: -20px;
+                            }
+
+                            .nrcl-icon {
+                                color: ${ args.color }
                             }
                         }
                     }

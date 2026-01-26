@@ -1,15 +1,16 @@
 ::ng-deep :root {
-    --nrcl-filter-search-width: calc( var( --nrcl-filter-width-default ) * 2 + 8px );
+    --nrcl-filter-search-width: var( --nrcl-filter-width-2 );
+    --nrcl-filter-search-height: var( --nrcl-filter-height );
 }
 
 :host {
-    --mat-form-field-container-height: calc( var( --nrcl-filter-height-default ) - 4px );
+    --mat-form-field-container-height: calc( var( --nrcl-filter-search-height ) - 4px );
     --mat-form-field-container-vertical-padding: 8px;
     --mat-form-field-container-text-size: 15px;
     --mdc-outlined-text-field-focus-label-text-color: black;
     --mdc-outlined-text-field-hover-label-text-color: black;
 
-    width: var( --nrcl-filter-search-width, calc( var( --nrcl-filter-width-default ) * 2 + 8px ) );
+    width: var( --nrcl-filter-search-width );
     display: block;
 
     &.has-value {
@@ -22,21 +23,12 @@
 
             .mat-mdc-text-field-wrapper {
                 background-color: white;
-                height: var( --nrcl-filter-height-default );
+                height: var( --nrcl-filter-search-height );
 
                 .mat-mdc-form-field-infix {
-                    width: var( --nrcl-filter-search-width, calc( var( --nrcl-filter-width-default ) * 2 + 8px ) );
+                    width: var( --nrcl-filter-search-width );
                 }
             }
         }
-    }
-
-    .cancel {            
-        padding: 0;
-        width: calc( var( --nrcl-filter-height-default ) - 2px );
-        height: calc( var( --nrcl-filter-height-default ) - 2px );
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 }

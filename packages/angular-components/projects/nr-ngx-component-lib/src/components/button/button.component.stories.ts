@@ -1,12 +1,11 @@
+import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { ButtonComponent } from './button.component';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatRippleModule } from '@angular/material/core';
+import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
     title: 'Button',
@@ -33,7 +32,7 @@ const meta: Meta<ButtonComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="displayMode">
+                    <ng-container *rerender="displayMode + primary + secondary + tertiary + small + disabled + icon + compact">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                         >
@@ -202,36 +201,58 @@ Compact buttons that include both icon and text:
             }
         }
     },    
+    argTypes: {
+        label: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'Ok', 'Add Resources', 'Clear' ],
+            mapping: { 'none': undefined }
+        },
+        icon: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
+            mapping: { 'none': undefined }
+        },
+        iconRight: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
+            mapping: { 'none': undefined }
+        },
+        iconCompact: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
+            mapping: { 'none': undefined }
+        },
+        tooltip: { type: 'string' },
+        disabled: { type: 'boolean' },
+    },
+    args: {
+        label: 'Add Resources',
+        tooltip: null,
+        icon: null,
+        iconRight: null,
+        disabled: false,        
+    },
     render: ( args ) => {
+        var buttonArgs = argsToTemplate( args )
         return {
             props: args,
             styles: [`
-                .outer-grid {
-                    display:grid; 
-                    grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr );
-                }
-                .inner-grid {
+                ::ng-deep .component-container-block {
                     padding: 20px;
+                }
+
+                .grid {
+                    max-width: 900px;
                     display:grid; 
-                    gap: 20px; 
-                    grid-template-columns: 250px 250px;
+                    grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr ) minmax( 0, 1fr ) minmax( 0, 1fr );
+                    gap: 40px;
                 }
-                .ignore {
-                    position: relative;
-                    :before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        opacity: 0.05;
-                        background-color: black;
-                    }
-                }
+
                 article {
                     display: flex;
                     flex-direction: column;
+                    border: 1px dashed gray;
+                    padding: 10px;
 
                     h6 {
                         font-size: 14px;
@@ -239,170 +260,75 @@ Compact buttons that include both icon and text:
                         padding: 0;
                         margin: 0;
                         font-weight: normal;
+                        padding-bottom: 10px;
                     }
                 }
             `],
             template: `
-                <div class="outer-grid">
-                    <div class="inner-grid">
-                        <article>
-                            <h6>(default)</h6>
-                            <nrcl-button
-                                label="Add Resources"                        
-                            ></nrcl-button> 
-                        </article>
+                <div class="grid">
+                    <article>
+                        <h6>(default)</h6>
+                        <nrcl-button ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>disabled</h6>
-                            <nrcl-button disabled
-                                label="Add Resources"                        
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>primary</h6>
+                        <nrcl-button primary ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>primary</h6>
-                            <nrcl-button primary
-                                label="Add Resources"                        
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>secondary</h6>
+                        <nrcl-button secondary ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>primary disabled</h6>
-                            <nrcl-button primary disabled
-                                label="Add Resources"                        
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>tertiary</h6>
+                        <nrcl-button tertiary ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>outline</h6>
-                            <nrcl-button outline
-                                label="Add Resources"                        
-                            ></nrcl-button> 
-                        </article>
+                    <!-- -------------------------------- -->
 
-                        <article>
-                            <h6>outline disabled</h6>
-                            <nrcl-button outline disabled
-                                label="Add Resources"                        
-                            ></nrcl-button> 
-                        </article>
-                    </div>
+                    <article>
+                        <h6>small</h6>
+                        <nrcl-button small ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                    <div class="inner-grid">
-                        <article>
-                            <h6>icon</h6>
-                            <nrcl-button
-                                label="Add Resources"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>primary small</h6>
+                        <nrcl-button primary small ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>iconRight disabled</h6>
-                            <nrcl-button disabled
-                                label="Add Resources"                        
-                                iconRight="add"
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>secondary small</h6>
+                        <nrcl-button secondary small ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>icon primary</h6>
-                            <nrcl-button primary
-                                label="Add Resources"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>tertiary small</h6>
+                        <nrcl-button tertiary small ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>icon iconRight primary disabled</h6>
-                            <nrcl-button primary disabled
-                                label="Add Resources"                        
-                                icon="add"
-                                iconRight="get_app"
-                            ></nrcl-button> 
-                        </article>
+                    <!-- -------------------------------- -->
 
-                        <article>
-                            <h6>icon outline</h6>
-                            <nrcl-button outline
-                                label="Add Resources"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>compact</h6>
+                        <nrcl-button compact ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>icon iconRight outline disabled</h6>
-                            <nrcl-button outline disabled
-                                label="Add Resources"                        
-                                icon="add"
-                                iconRight="get_app"
-                            ></nrcl-button> 
-                        </article>
-                    </div>
+                    <article>
+                        <h6>primary compact</h6>
+                        <nrcl-button primary compact ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                    <div class="inner-grid">
-                        <article>
-                            <h6>(no label) compact</h6>
-                            <nrcl-button compact
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
+                    <article>
+                        <h6>secondary compact</h6>
+                        <nrcl-button secondary compact ${ buttonArgs }></nrcl-button> 
+                    </article>
 
-                        <article>
-                            <h6>(no label) compact disabled</h6>
-                            <nrcl-button disabled compact
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-
-                        <article>
-                            <h6>(no label) compact primary</h6>
-                            <nrcl-button primary compact
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-
-                        <article>
-                            <h6>(no label) compact primary disabled</h6>
-                            <nrcl-button primary disabled compact
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-                    </div>
-
-                    <div class="inner-grid">
-                        <article>
-                            <h6>compact</h6>
-                            <nrcl-button compact
-                                label="Add"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-
-                        <article>
-                            <h6>compact disabled</h6>
-                            <nrcl-button disabled compact
-                                label="Add"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-
-                        <article>
-                            <h6>compact primary</h6>
-                            <nrcl-button primary compact
-                                label="Add"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-
-                        <article>
-                            <h6>compact primary disabled</h6>
-                            <nrcl-button primary disabled compact
-                                label="Add"                        
-                                icon="add"
-                            ></nrcl-button> 
-                        </article>
-                    </div>
+                    <article>
+                        <h6>tertiary compact</h6>
+                        <nrcl-button tertiary compact ${ buttonArgs }></nrcl-button> 
+                    </article>
                 </div>
             `
         }
@@ -528,7 +454,11 @@ Compact mode reduces padding and size, making buttons suitable for dense UIs.
     },    
     argTypes: {
         ...displayModeWrapperStory.argTypes,
-        label: { type: 'string' },
+        label: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'Ok', 'Add Resources' ],
+            mapping: { 'none': undefined }
+        },
         icon: {
             control: { type: 'inline-radio' },
             options: [ 'none', 'add', 'get_app' ],
@@ -553,8 +483,6 @@ Compact mode reduces padding and size, making buttons suitable for dense UIs.
                 'yes': '',
             }
         },
-        primary: { type: 'boolean' },
-        disabled: { type: 'boolean' },
         click: { action: 'click' }
     },
     args: {
@@ -562,6 +490,9 @@ Compact mode reduces padding and size, making buttons suitable for dense UIs.
         label: 'Add Resources',
         tooltip: null,
         primary: false,
+        secondary: false,
+        tertiary: false,
+        small: false,
         disabled: false,
     },
     render: ( args ) => {
@@ -574,6 +505,86 @@ Compact mode reduces padding and size, making buttons suitable for dense UIs.
             `],
             template: `
                 <nrcl-button ${ argsToTemplate(args,{exclude:displayModeWrapperStoryArgs}) }></nrcl-button> 
+            `
+        }
+    }
+}
+
+export const ProjectedContent: StoryObj<ButtonComponent & DisplayModeWrapperComponent> = {
+    parameters: {
+        docs: {
+            description: {
+                story: `
+                `
+            }
+        }
+    },    
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        label: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'Ok', 'Add Resources' ],
+            mapping: { 'none': undefined }
+        },
+        icon: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app' ],
+            mapping: { 'none': undefined }
+        },
+        compact: {
+            control: { type: 'inline-radio' },
+            options: [ 'no', 'yes', 'desktop', 'mobile' ],
+            mapping: {
+                'no': undefined,
+                'yes': '',
+            }
+        },
+        click: { action: 'click' }
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        label: 'Add Resources',
+        tooltip: null,
+        primary: false,
+        secondary: false,
+        tertiary: false,
+        small: false,
+        disabled: false,
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 20px;
+                }
+            `],
+            template: `
+                <div style="display: flex; gap: 20px">
+                    <nrcl-button
+                        [primary]="primary"
+                        [secondary]="secondary"
+                        [tertiary]="tertiary"
+                        [disabled]="disabled"
+                        [small]="small"
+                        [compact]="compact"
+                    >
+                        @if ( icon ) { <nrcl-icon>{{ icon }}</nrcl-icon> }
+                        @if ( label ) { {{ label }} }
+                    </nrcl-button> 
+
+                    <nrcl-button
+                        [primary]="primary"
+                        [secondary]="secondary"
+                        [tertiary]="tertiary"
+                        [disabled]="disabled"
+                        [small]="small"
+                        [compact]="compact"
+                    >
+                        @if ( label ) { {{ label }} }
+                        @if ( icon ) { <nrcl-icon>{{ icon }}</nrcl-icon> }
+                    </nrcl-button> 
+                </div>
             `
         }
     }

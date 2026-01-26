@@ -1,48 +1,68 @@
 ::ng-deep :root {
-    --nrcl-button-height: 36px;
-    --nrcl-compact-button-height: 44px;
+    --nrcl-button-normal-height: 36px;
+    --nrcl-button-normal-padding-horizontal: 16px;
+    --nrcl-button-normal-font-size: var( --nrcl-font-size );
+    --nrcl-button-normal-icon-size: var( --nrcl-icon-normal-size );
 
-    --nrcl-button-foreground-color: black;
-    --nrcl-button-background-color: white;
-    --nrcl-button-border-color: #003366;
-    --nrcl-button-hover-background-color: #f5f5f5;
+    --nrcl-button-small-height: 24px;
+    --nrcl-button-small-padding-horizontal: 8px;
+    --nrcl-button-small-font-size: var( --nrcl-font-size-small );
+    --nrcl-button-small-icon-size: var( --nrcl-icon-small-size );
+
+    --nrcl-button-compact-height: 44px;
+    --nrcl-button-compact-padding-horizontal: 8px;
+    --nrcl-button-compact-font-size: var( --nrcl-font-size-small );
+    --nrcl-button-compact-icon-size: var( --nrcl-icon-normal-size );
 
     --nrcl-button-primary-foreground-color: white;
     --nrcl-button-primary-background-color: #003366;
     --nrcl-button-primary-border-color: #003366;
     --nrcl-button-primary-hover-background-color: #144a89cc;
+    --nrcl-button-primary-disabled-foreground-color: #7E7E7E;
+    --nrcl-button-primary-disabled-background-color: #CCCCCC;
+    --nrcl-button-primary-disabled-border-color: #CCCCCC;
+    --nrcl-button-primary-disabled-hover-background-color: #CCCCCC;
 
-    --nrcl-button-outline-foreground-color: black;
-    --nrcl-button-outline-background-color: transparent;
-    --nrcl-button-outline-border-color: rgba(0, 0, 0, 0.12);
-    --nrcl-button-outline-hover-background-color: rgba(0, 0, 0, 0.04);
+    --nrcl-button-secondary-foreground-color: black;
+    --nrcl-button-secondary-background-color: white;
+    --nrcl-button-secondary-border-color: #003366;
+    --nrcl-button-secondary-hover-background-color: #f5f5f5;
+    --nrcl-button-secondary-disabled-foreground-color: #7E7E7E;
+    --nrcl-button-secondary-disabled-background-color: #CCCCCC;
+    --nrcl-button-secondary-disabled-border-color: #CCCCCC;
+    --nrcl-button-secondary-disabled-hover-background-color: #CCCCCC;
 
-    --nrcl-button-disabled-foreground-color: #7E7E7E;
-    --nrcl-button-disabled-background-color: #CCCCCC;
-    --nrcl-button-disabled-border-color: #CCCCCC;
-    --nrcl-button-disabled-hover-background-color: #CCCCCC;
+    --nrcl-button-tertiary-foreground-color: black;
+    --nrcl-button-tertiary-background-color: transparent;
+    --nrcl-button-tertiary-border-color: transparent;
+    --nrcl-button-tertiary-hover-background-color: rgba(0, 0, 0, 0.04);
+    --nrcl-button-tertiary-disabled-foreground-color: #7E7E7E;
+    --nrcl-button-tertiary-disabled-background-color: transparent;
+    --nrcl-button-tertiary-disabled-border-color: transparent;
+    --nrcl-button-tertiary-disabled-hover-background-color: transparent;
 }
 
 :host {
+    --nrcl-button-height: 50px;
+    --nrcl-button-font-size: 40px;
+    --nrcl-button-padding-left: 50px;
+    --nrcl-button-padding-right: 50px;
+    --nrcl-button-foreground-color: #red;
+    --nrcl-button-background-color: #green;
+    --nrcl-button-border-color: #yellow;
+    --nrcl-button-hover-background-color: #blue;
+
     button {
-        height: var( --nrcl-button-height );
-        cursor: pointer;
-
-        .label, .content {
-            font-family: var( --nrcl-font-family );
-            font-size: var( --nrcl-font-size );
-            white-space: nowrap;
-            font-weight: 500;
-        }
-
-        margin: 0;
-        padding: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-
         display: flex;
         align-items: center;
         position: relative;
+        height: var( --nrcl-button-height );
+        min-width: var( --nrcl-button-height );
+        width: var( --nrcl-button-width );
+        cursor: pointer;
+
+        margin: 0;
+        padding: 0;
 
         background-color: var( --nrcl-button-background-color );
         color: var( --nrcl-button-foreground-color );
@@ -56,26 +76,58 @@
         border-style: solid;
         border-radius: 4px;
 
-        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-            0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-            0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        .label, .content {
+            font-family: var( --nrcl-font-family );
+            font-size: var( --nrcl-button-font-size );
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .content {
+            padding-left: var( --nrcl-button-padding-left );
+            padding-right: var( --nrcl-button-padding-right );
+
+            display: flex;
+            align-items: center;
+        }
     }
 
-    button .content {
-        padding-left: 16px;
-        padding-right: 16px;
+    &.normal {
+        --nrcl-button-height: var( --nrcl-button-normal-height );
+        --nrcl-button-padding-left: var( --nrcl-button-normal-padding-horizontal );
+        --nrcl-button-padding-right: var( --nrcl-button-normal-padding-horizontal );
+        --nrcl-button-font-size: var( --nrcl-button-normal-font-size );
+        --nrcl-button-icon-size: var( --nrcl-button-normal-icon-size );
+    }
 
-        display: flex;
-        align-items: center;
+    &.small {
+        --nrcl-button-height: var( --nrcl-button-small-height );
+        --nrcl-button-padding-left: var( --nrcl-button-small-padding-horizontal );
+        --nrcl-button-padding-right: var( --nrcl-button-small-padding-horizontal );
+        --nrcl-button-font-size: var( --nrcl-button-small-font-size );
+        --nrcl-button-icon-size: var( --nrcl-button-small-icon-size );
+    }
+
+    &.compact {
+        --nrcl-button-height: var( --nrcl-button-compact-height );
+        --nrcl-button-padding-left: var( --nrcl-button-compact-padding-horizontal );
+        --nrcl-button-padding-right: var( --nrcl-button-compact-padding-horizontal );
+        --nrcl-button-font-size: var( --nrcl-button-compact-font-size );
+        --nrcl-button-icon-size: var( --nrcl-button-normal-icon-size );
+
+        button {
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 
     &.label button {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: var( --nrcl-button-padding-left );
+        padding-right: var( --nrcl-button-padding-right );
     }
 
     &.icon-left button {
-        padding-left: var( --nrcl-button-height );
+        --nrcl-button-padding-left: var( --nrcl-button-height );
 
         .content {
             padding-left: 0;
@@ -84,13 +136,13 @@
         ::ng-deep {
             .mat-icon.left, nrcl-icon.left {
                 position: absolute;
-                left: calc( ( var( --nrcl-button-height ) - var( --nrcl-icon-size ) ) / 2 );
+                left: calc( ( var( --nrcl-button-height ) - var( --nrcl-button-icon-size ) ) / 2 - 1px );
             }
         }
     }
 
     &.icon-right button {
-        padding-right: var( --nrcl-button-height );
+        --nrcl-button-padding-right: var( --nrcl-button-height );
 
         .content {
             padding-right: 0;
@@ -99,61 +151,62 @@
         ::ng-deep {
             .mat-icon.right, nrcl-icon.right {
                 position: absolute;
-                right: calc( ( var( --nrcl-button-height ) - var( --nrcl-icon-size ) ) / 2 );
+                right: calc( ( var( --nrcl-button-height ) - var( --nrcl-button-icon-size ) ) / 2 - 1px );
             }
         }
     }
 
-    &.primary button {
-        background-color: var( --nrcl-button-primary-background-color );
-        color: var( --nrcl-button-primary-foreground-color );
-        border-color: var( --nrcl-button-primary-border-color );
+    &.primary {
+        --nrcl-button-foreground-color: var( --nrcl-button-primary-foreground-color );
+        --nrcl-button-background-color: var( --nrcl-button-primary-background-color );
+        --nrcl-button-border-color: var( --nrcl-button-primary-border-color );
+        --nrcl-button-hover-background-color: var( --nrcl-button-primary-hover-background-color );
 
-        &:hover {
-            background-color: var( --nrcl-button-primary-hover-background-color );
+        button {
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+                0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        }
+
+        &.disabled {
+            --nrcl-button-foreground-color: var( --nrcl-button-primary-disabled-foreground-color );
+            --nrcl-button-background-color: var( --nrcl-button-primary-disabled-background-color );
+            --nrcl-button-border-color: var( --nrcl-button-primary-disabled-border-color );
+            --nrcl-button-hover-background-color: var( --nrcl-button-primary-disabled-hover-background-color );
         }
     }
 
-    &.outline button {
-        background-color: var( --nrcl-button-outline-background-color );
-        color: var( --nrcl-button-outline-foreground-color );
-        border-color: var( --nrcl-button-outline-border-color );
-        box-shadow: none;
+    &.secondary {
+        --nrcl-button-foreground-color: var( --nrcl-button-secondary-foreground-color );
+        --nrcl-button-background-color: var( --nrcl-button-secondary-background-color );
+        --nrcl-button-border-color: var( --nrcl-button-secondary-border-color );
+        --nrcl-button-hover-background-color: var( --nrcl-button-secondary-hover-background-color );
 
-        &:hover {
-            background-color: var( --nrcl-button-outline-hover-background-color );
+        button {        
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+                0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        }
+
+        &.disabled {
+            --nrcl-button-foreground-color: var( --nrcl-button-secondary-disabled-foreground-color );
+            --nrcl-button-background-color: var( --nrcl-button-secondary-disabled-background-color );
+            --nrcl-button-border-color: var( --nrcl-button-secondary-disabled-border-color );
+            --nrcl-button-hover-background-color: var( --nrcl-button-secondary-disabled-hover-background-color );
         }
     }
 
-    &.compact button {
-        height: var( --nrcl-compact-button-height );
-        
-        border: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0 8px;
-        box-shadow: none;
-        background-color: transparent;
-        color: var( --nrcl-button-foreground-color );
-        &:hover {
-            background-color: var( --nrcl-button-hover-background-color );
-        }
+    &.tertiary {
+        --nrcl-button-foreground-color: var( --nrcl-button-tertiary-foreground-color );
+        --nrcl-button-background-color: var( --nrcl-button-tertiary-background-color );
+        --nrcl-button-border-color: var( --nrcl-button-tertiary-border-color );
+        --nrcl-button-hover-background-color: var( --nrcl-button-tertiary-hover-background-color );
 
-        .label {
-            line-height: 20px;
-            font-size: var( --nrcl-font-size-small );
-        }
-    }
-    
-    &.disabled button {
-        background-color: var( --nrcl-button-disabled-background-color );
-        color: var( --nrcl-button-disabled-foreground-color );
-        border-color: var( --nrcl-button-disabled-border-color );
-
-        &:hover {
-            background-color: var( --nrcl-button-disabled-hover-background-color );
+        &.disabled {
+            --nrcl-button-foreground-color: var( --nrcl-button-tertiary-disabled-foreground-color );
+            --nrcl-button-background-color: var( --nrcl-button-tertiary-disabled-background-color );
+            --nrcl-button-border-color: var( --nrcl-button-tertiary-disabled-border-color );
+            --nrcl-button-hover-background-color: var( --nrcl-button-tertiary-disabled-hover-background-color );
         }
     }
 }

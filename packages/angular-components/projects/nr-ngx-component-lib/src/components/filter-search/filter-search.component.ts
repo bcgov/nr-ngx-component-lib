@@ -17,7 +17,8 @@ import { NrclBase } from "../../directives/nrcl.base";
     styleUrl: "./filter-search.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.has-value]': "hasValue"
+        '[class.has-value]': "hasValue",
+        '[style.--nrcl-filter-search-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
     }
 } )
 export class FilterSearchComponent extends NrclBase {
@@ -25,6 +26,7 @@ export class FilterSearchComponent extends NrclBase {
     @Input() placeholder = 'Search...'
     @Input() hint
     @Input() value: string
+    @Input() wide 
 
     @Output() valueChange = new EventEmitter<string>();
 
