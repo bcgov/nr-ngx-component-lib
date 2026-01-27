@@ -299,3 +299,26 @@ export const FormatOption: StoryObj<FilterSelectComponent> = {
         }
     }
 }
+
+export const FormatValue: StoryObj<FilterSelectComponent> = {
+    args: {
+    },
+    render: ( args ) => {
+        return {
+            props: {
+                ...args,
+                options: fruitOptions(),
+                valueFormatter: ( o ) => {
+                    return `1 to 100 (of 1234)`
+                }
+            },
+            template: `
+                <nrcl-filter-select ${ argsToTemplate(args) }
+                    [valueFormatter]="valueFormatter"
+                    [options]="options"
+                    overlayClass="foo"
+                ></nrcl-filter-select>
+            `
+        }
+    }
+}

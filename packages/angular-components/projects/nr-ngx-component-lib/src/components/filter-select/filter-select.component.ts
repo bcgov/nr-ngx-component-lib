@@ -62,6 +62,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: booleanAttribute } ) filter = true
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
     @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description
+    @Input() valueFormatter: ( options: CodeDescription ) => string
     @Input() overlayClass
     @Input() wide 
 
@@ -238,7 +239,13 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     setInputToSelection() {
-        this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || null
+        if ( this.valueFormatter ) {
+            this.inputValue = this.valueFormatter( this.selection?.value )
+        }
+        else {
+            this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || null
+        }
+        
         this.isFiltered = false
     }
 
