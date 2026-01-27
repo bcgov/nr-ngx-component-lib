@@ -2,18 +2,24 @@
 }
 
 :host {
-    display: block;
+    display: flex;
+    align-items: center;
     font-family: var( --nrcl-font-family );
     position: relative;
     min-height: 40px;
 
+
     .summary {
-        --nrcl-filter-container-width: min-content; 
+        --nrcl-filter-container-width: 180px;
         position: absolute;
         top: 0;
         left: 0;
         bottom: 0;
         white-space: nowrap;
+    }
+
+    .no-rows {
+        font-size: var( --nrcl-font-size );
     }
 
     .pagination {
@@ -55,8 +61,6 @@
                 }
 
                 &.current {
-                    //background-color: $colour-blue;
-
                     color: #003366;
                     font-weight: bold;
                     background: white;
@@ -120,7 +124,7 @@
     }
 
     .page-size {
-        --nrcl-filter-select-width: 140px;
+        --nrcl-filter-select-width: 180px;
         position: absolute;
         top: 0;
         right: 0;
@@ -135,7 +139,7 @@
     &.width-restrictive {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: var( --nrcl-gutter-space );
+        gap: 8px;
 
         .summary {
             --nrcl-filter-container-width: auto;

@@ -4,6 +4,10 @@
     overflow-y: hidden;
     border-bottom: 1px solid #c6c8cb;
 
+    &:empty {
+        border-bottom: none;
+    }
+
     ::ng-deep {
         .mat-mdc-table {
             width: 100%;
@@ -17,10 +21,7 @@
                     font-size: var(--nrcl-font-size);
                     padding: 5px;
                     color: black;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    vertical-align: middle;
-                    white-space: nowrap;
+                    overflow-wrap: break-word;
                 }
 
                 &:hover {
