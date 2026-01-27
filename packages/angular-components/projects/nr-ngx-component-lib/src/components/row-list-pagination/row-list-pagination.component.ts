@@ -77,7 +77,7 @@ export class RowListPaginationComponent extends NrclBase implements AfterViewIni
                     this.paginationMaxSize = 5
                     break
 
-                case w > 500: 
+                case w > 550: 
                     this.componentWidth = 'tight'; 
                     this.paginationMaxSize = 3
                     break
