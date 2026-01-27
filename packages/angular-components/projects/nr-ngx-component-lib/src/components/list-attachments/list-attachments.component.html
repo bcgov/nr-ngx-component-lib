@@ -96,6 +96,8 @@
     </ng-template>
 
     <ng-template mobile-view>
+        <nrcl-gap vertical/>
+        
         <nrcl-row-list-mobile>
             @for ( item of rows | paginate: { 
                 id: 'mobile-attachments', 

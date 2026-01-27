@@ -2,10 +2,12 @@
 }
 
 :host {
-    display: block;
+    display: flex;
+    align-items: center;
     font-family: var( --nrcl-font-family );
     position: relative;
     min-height: 40px;
+
 
     .summary {
         --nrcl-filter-container-width: 180px;
@@ -14,6 +16,10 @@
         left: 0;
         bottom: 0;
         white-space: nowrap;
+    }
+
+    .no-rows {
+        font-size: var( --nrcl-font-size-h3 );
     }
 
     .pagination {
