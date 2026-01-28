@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
 import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
+import { CodeDescription } from "../../public-api";
 
 export type EventHistoryTableRow = {
     eventTimestamp: string
@@ -9,6 +10,7 @@ export type EventHistoryTableRow = {
     eventHistoryTypeDescription: string
     sourceObjectNameDescription: string
     comment: string
+    eventHistoryGuid: string
 }
 
 export type FetchEventHistoryParameters = { 
@@ -35,9 +37,17 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
     @Input() canDelete = true
     @Input() showPagination = false
     @Input() isSupplier: boolean = false
+    @Input() noRowsMessage = "No comments have been added."
 
     DATE_FORMATS = DATE_FORMATS
     columns = [ 'dateTime', 'changedBy', 'type', 'section', 'comment' ]
+    sortColumns = [
+        { code: 'dateTime', description: 'Date and Time' },
+        { code: 'changedBy', description: 'Changed By' },
+        { code: 'type', description: 'Type' },
+        { code: 'section', description: 'Section' },
+        // { code: 'comment', description: '' },        
+    ]
 
     fetchRowListPage(): Observable<any> {
         if ( !this.rowListProvider?.fetchEventHistory ) throw Error( 'no provider' )
@@ -66,6 +76,4 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
             sortDirection: 'desc',
         }
     }
-
-
 }

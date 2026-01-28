@@ -137,7 +137,7 @@ export const Primary: StoryObj<ListEventHistoryComponent & DisplayModeWrapperCom
     },    
     render: ( args ) => {
         args.rowListProvider = {
-            fetchEventHistory: () => { return of(eventHistoryCollection()) },
+            fetchEventHistory: ( x ) => { return of(eventHistoryCollection()) },
             displayRowListPage: ( res: EventHistoryCollection ) => {
                 return {
                     totalRowCount: res.totalRowCount,
@@ -147,9 +147,46 @@ export const Primary: StoryObj<ListEventHistoryComponent & DisplayModeWrapperCom
                             createdByUserId: v.createdByUserId,
                             eventHistoryTypeDescription: v.eventHistoryTypeCode,
                             sourceObjectNameDescription: v.sourceObjectNameCode,
-                            comment: v.comment
+                            comment: v.comment,
+                            eventHistoryGuid: v.eventHistoryGuid
                         }
                     } )
+                }
+            },
+        }
+        return {
+            props: args,
+            template: `
+                <nrcl-list-event-history
+                    [rowListProvider]="rowListProvider"
+                ></nrcl-list-event-history>
+            `
+        }
+    }
+}
+
+export const NoRows: StoryObj<ListEventHistoryComponent & DisplayModeWrapperComponent> = {
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: `
+                `
+            }
+        }
+    },    
+    render: ( args ) => {
+        args.rowListProvider = {
+            fetchEventHistory: () => { return of(eventHistoryCollection()) },
+            displayRowListPage: ( res: EventHistoryCollection ) => {
+                return {
+                    totalRowCount: 0,
+                    rows: []
                 }
             },
         }

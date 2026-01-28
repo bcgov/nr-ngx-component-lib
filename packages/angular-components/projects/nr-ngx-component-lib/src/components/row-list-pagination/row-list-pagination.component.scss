@@ -20,6 +20,7 @@
 
     .no-rows {
         font-size: var( --nrcl-font-size );
+        grid-column: span 2;
     }
 
     .pagination {
