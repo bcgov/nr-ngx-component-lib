@@ -33,6 +33,10 @@
                         cursor: pointer;
                     }
                 }
+
+                .mat-mdc-form-field-icon-suffix {
+                    margin: 0;
+                }
             }
         }
     }
@@ -51,15 +55,15 @@
         }
     }
 
-    .cancel {
-        padding: 0;
-        width: calc( var( --nrcl-filter-select-height ) - 2px );
-        height: calc( var( --nrcl-filter-select-height ) - 2px );
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: default;
-    }
+    // .cancel {
+    //     padding: 0;
+    //     width: calc( var( --nrcl-filter-select-height ) - 2px );
+    //     height: calc( var( --nrcl-filter-select-height ) - 2px );
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     cursor: default;
+    // }
 }
 
 ::ng-deep {
