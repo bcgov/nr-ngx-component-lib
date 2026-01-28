@@ -36,9 +36,10 @@
             (click)="onInputFocus(); $event.stopPropagation()"
         ></nrcl-button>
     }                
-</mat-form-field>        
+</mat-form-field>    
+    
 <ng-template #overlayTemplate>
-    <div class="filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass">
+    <div class="nrcl filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass">
         @if ( !isFiltered && !single && summary ) {
             @if ( !selection?.value?.length && hint ) {
                 <div class="selection-overview">
