@@ -39,7 +39,8 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     @Input() rowListProvider: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
     @Input() canDownload = true
-
+    @Input() noRowsMessage = "No attachments have been added."
+    
     DATE_FORMATS = DATE_FORMATS
     columns = [ 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description' ]
 

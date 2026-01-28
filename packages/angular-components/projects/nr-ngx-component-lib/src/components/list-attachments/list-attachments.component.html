@@ -90,14 +90,14 @@
                 [rowCount]="totalRowCount"
                 (pageNumberChange)="onPageNumberChange( $event )"
                 (pageSizeChange)="onPageSizeChange( $event )"
-                noRowsMessage="No attachments have been added."
+                [noRowsMessage]="noRowsMessage"
             ></nrcl-row-list-pagination>
         }
     </ng-template>
 
     <ng-template mobile-view>
         <nrcl-gap vertical/>
-        
+
         <nrcl-row-list-mobile>
             @for ( item of rows | paginate: { 
                 id: 'mobile-attachments', 
@@ -166,6 +166,7 @@
                 [rowCount]="totalRowCount"
                 (pageNumberChange)="onPageNumberChange( $event )"
                 (pageSizeChange)="onPageSizeChange( $event )"
+                [noRowsMessage]="noRowsMessage"
             ></nrcl-row-list-pagination>
         }
     </ng-template>
