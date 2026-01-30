@@ -105,6 +105,7 @@ A powerful multi-select component with filtering capabilities.
         filter: true,
         placeholder: 'Filter...',
         filterCharsMin: 0,
+        filterCharsMinMessage: 'Too many results'
     },
 }
 
@@ -294,6 +295,27 @@ export const FormatOption: StoryObj<FilterSelectComponent> = {
                     [optionFormatter]="optionFormatter"
                     [options]="options"
                     overlayClass="foo"
+                ></nrcl-filter-select>
+            `
+        }
+    }
+}
+
+export const FilterCharsMin: StoryObj<FilterSelectComponent> = {
+    args: {
+        filterCharsMin: 1,
+        placeholder: 'Type to start filtering',
+        selectMax: 1
+    },
+    render: ( args ) => {
+        return {
+            props: {
+                ...args,
+                options: fruitOptions(),
+            },
+            template: `
+                <nrcl-filter-select ${ argsToTemplate(args) }
+                    [options]="options"
                 ></nrcl-filter-select>
             `
         }
