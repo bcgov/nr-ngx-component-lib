@@ -1,0 +1,157 @@
+@use '@angular/material' as mat;
+// @import 'src/styles/variables';
+
+:host {
+    display: contents;
+
+    .title-bar {
+        display: flex;
+        align-items: center;
+        background-color: #003366;
+        color: white;
+        padding: var(--nrcl-gutter-space);
+    
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            font-family: var( --nrcl-font-family );
+            font-size: var( --mdc-dialog-subhead-size, 1rem );
+            display: flex;
+            align-items: center;    
+        }
+    
+        .icon-button {
+            padding: 0;
+            width: unset;
+            height: unset;
+            padding-left: var(--nrcl-gutter-space);
+        }
+
+        .spinner-header {
+            @include mat.progress-spinner-overrides((
+                active-indicator-color: white
+            ));
+        }
+    }
+
+    ::ng-deep {
+        .mat-mdc-dialog-title {
+            padding: 0;
+    
+            &::before {
+                display: none;
+            }
+        }
+    
+        .mat-mdc-dialog-content {
+            margin: 0;
+            padding: 0;
+
+            .content-wrapper {
+                padding-top: var(--nrcl-gutter-space);
+                padding-left: var(--nrcl-gutter-space);
+                padding-right: var(--nrcl-gutter-space);
+                padding-bottom: 0;    
+
+                .table-search-header {                    
+                    padding: 0;
+                    margin: 0;
+                    margin-top: var(--nrcl-gutter-space);
+
+                    .search-input {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        flex: unset;
+                        width: unset;
+
+                        .input-clear-button {
+                            position: absolute;
+                            right: -5px;
+                            bottom: -5px;
+                        }
+                    }
+                }
+
+                .table-wrapper {
+                    width: unset;
+                    margin: 0;
+                    margin-top: var(--nrcl-gutter-space);
+                }
+            }
+        }
+
+        .mat-mdc-dialog-actions {
+            margin: 0;
+            padding: 0;
+
+            .footer {
+                width: 100%;
+            }
+
+            .action-button-wrapper {
+                background-color: #F2F2F2;
+                border-top: solid 1px #c6c8cb;
+                padding: var(--nrcl-gutter-space);
+
+                display: flex;
+                align-items: center;               
+                justify-content: flex-end;
+                gap: 8px;
+                width: 100%;
+
+                .mdc-button {
+                    margin: 0;
+                }
+
+                .warning {
+                    display: flex;
+                    align-items: center;
+                
+                    .mat-icon {
+                        color: #FCBA19;
+                        margin-right: 8px;
+                    }
+                }                
+            }
+        }
+    }
+}
+
+:host-context( .cdk-overlay-container.mobile ) {
+    ::ng-deep {
+        .mat-mdc-dialog-content {
+            .content-wrapper {
+                .wf1-resources-header-bar {
+                    .mobile-filter-expansion-panel {
+                        overflow: hidden;
+
+                        .search-action-bar {
+                            position: relative;
+
+                            button.input-clear-button {
+                                position: absolute;
+                                top: 0;
+                                right: 0px;
+                                bottom: 0;
+                                display: flex;
+                                align-items: center;
+                                margin: 0;
+                                padding: 0;
+                                width: unset;
+                                height: unset;                                
+                            }
+                        }
+                    }
+                }
+
+                .bottom-summary {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}

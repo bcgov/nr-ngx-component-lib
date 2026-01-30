@@ -1,0 +1,56 @@
+<div mat-dialog-title >
+    <div class="title-bar">
+        <h1>{{ title }}</h1>
+
+        <div style="flex: 1 0"></div>
+
+        @if ( isLoading ) {
+            <div class="spinner-header">
+                <mat-spinner [diameter]="25"></mat-spinner>
+            </div>
+        }
+
+        @if ( showClose ) {
+            <nrcl-button tertiary
+                icon="close"
+                (click)="cancelClick.emit()"
+            ></nrcl-button>                                
+        }
+    </div>
+
+    <ng-content select="section[title]"></ng-content>
+</div>
+
+<div mat-dialog-content>
+    <div class="content-wrapper">
+        <ng-content></ng-content>
+    </div>
+</div>
+
+<ng-content select="section[footer]"></ng-content>
+
+@if ( !showClose ) {
+    <div mat-dialog-actions align="end">
+        <!-- <ng-content select=".footer"></ng-content> -->
+
+        <div class="action-button-wrapper">        
+            @if ( saveEnabled && showWarning ) {
+                <div class="warning">
+                    <nrcl-icon attr.alt="Unsaved Changes">warning</nrcl-icon>
+                    <span>Unsaved Changes</span>
+                </div>
+            }            
+            
+            <nrcl-button 
+                [label]="cancelLabel"
+                (click)="cancelClick.emit()"
+            ></nrcl-button>
+            
+            <nrcl-button primary
+                [label]="saveLabel"
+                (click)="saveClick.emit()" 
+                [disabled]="!saveEnabled"
+            ></nrcl-button>
+        </div>
+    </div>
+}
