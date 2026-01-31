@@ -32,6 +32,8 @@ export class ButtonComponent extends ConfigurationSubscriberBase {
     @Input( { transform: booleanAttribute } ) disabled = false
     @Input( { transform: booleanAttribute } ) small = false
 
+    // the click event is already defined for the host element
+    // this declaration makes storybook happy
     @Output() click = new EventEmitter<PointerEvent>()
 
     isCompact
@@ -45,13 +47,6 @@ export class ButtonComponent extends ConfigurationSubscriberBase {
     useContent
 
     zone = inject( NgZone )
-
-    onClick( ev: PointerEvent ) {
-        if ( this.disabled ) return
-
-        ev.stopPropagation()
-        this.click.emit( ev )
-    }
 
     onConfigurationChange(): void {
         // apparently this is needed to ensure that the host binding updates properly
