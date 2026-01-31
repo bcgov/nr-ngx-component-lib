@@ -21,12 +21,12 @@
 
 <nrcl-button tertiary matSuffix [class.hide]="!isOpen"
     icon="arrow_drop_up"
-    (click)="onCloseClick($event)"
+    (click)="onCloseClick()"
 ></nrcl-button>
 
 <nrcl-button tertiary matSuffix [class.hide]="!isClosedSelection"
     icon="close"
-    (click)="onCancelClick($event)"
+    (click)="onCancelClick()"
 ></nrcl-button>
 
 <nrcl-button tertiary matSuffix [class.hide]="!isClosedNoSelection"
