@@ -94,15 +94,16 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
                 const triggerEl = this.trigger.nativeElement
                 const overlayEl = this.overlayRef?.overlayElement
 
-                // console.log('triggerEl',triggerEl,triggerEl?.contains(clickTarget))
-                // console.log('overlayEl',overlayEl,overlayEl?.contains(clickTarget))
+                // console.log(this.label,'target',clickTarget)
+                // console.log(this.label,'triggerEl',triggerEl?.contains(clickTarget),triggerEl)
+                // console.log(this.label,'overlayEl',overlayEl?.contains(clickTarget),overlayEl)
 
                 // Only close if click is outside both trigger and overlay
                 if ( triggerEl?.contains(clickTarget) ) return 
                 if ( !overlayEl ) return 
                 if ( overlayEl?.contains(clickTarget) ) return 
 
-                // console.log('outside click')
+                // console.log(this.label,'outside click')
                 this.close()
                 this.setInputToSelection()
                 this.floatLabel = 'auto'
@@ -165,7 +166,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     open() {
-        // console.log('open',this.isOpen)
+        // console.warn('open',this.isOpen)
         if ( this.isOpen ) return
 
         this.isOpen = true
@@ -321,6 +322,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCloseClick() {
+        // console.log('onCloseClick')
         this.close()
         this.setInputToSelection()
         this.floatLabel = 'auto'
@@ -337,5 +339,13 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     formatOption( option: CodeDescription ): string {
         return this.optionFormatter( option, false )
+    }
+
+    get isClosedNoSelection() {
+        return !this.isOpen && !( this.selection?.value?.length > 0 && this.clear )
+    }
+
+    get isClosedSelection() {
+        return !this.isOpen && this.selection?.value?.length > 0 && this.clear
     }
 }

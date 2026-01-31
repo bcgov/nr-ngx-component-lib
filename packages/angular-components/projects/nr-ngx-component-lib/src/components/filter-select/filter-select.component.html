@@ -17,26 +17,22 @@
         [matTooltip]="inputValue"
         [readonly]="!filter"
     >
-
-    @if ( isOpen ) {
-        <nrcl-button tertiary matSuffix
-            icon="arrow_drop_up"
-            (click)="onCloseClick($event); $event.stopPropagation()"
-        ></nrcl-button>
-    }
-    @else if ( selection?.value?.length > 0 && clear ) {
-        <nrcl-button tertiary matSuffix
-            icon="close"
-            (click)="onCancelClick($event); $event.stopPropagation()"
-        ></nrcl-button>
-    }
-    @else {
-        <nrcl-button tertiary matSuffix
-            icon="arrow_drop_down"
-            (click)="onInputFocus(); $event.stopPropagation()"
-        ></nrcl-button>
-    }                
 </mat-form-field>        
+
+<nrcl-button tertiary matSuffix [class.hide]="!isOpen"
+    icon="arrow_drop_up"
+    (click)="onCloseClick($event)"
+></nrcl-button>
+
+<nrcl-button tertiary matSuffix [class.hide]="!isClosedSelection"
+    icon="close"
+    (click)="onCancelClick($event)"
+></nrcl-button>
+
+<nrcl-button tertiary matSuffix [class.hide]="!isClosedNoSelection"
+    icon="arrow_drop_down"
+    (click)="onInputFocus()"
+></nrcl-button>
 
 <ng-template #overlayTemplate>
     <div class="nrcl filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass">

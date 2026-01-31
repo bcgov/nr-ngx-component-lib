@@ -12,6 +12,18 @@
 
     width: var( --nrcl-filter-select-width );
     display: block;
+    position: relative;
+
+    .nrcl-button {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        bottom: 2px;
+    }
+
+    .hide {
+        display: none;
+    }
 
     &.has-value {
         --mdc-outlined-text-field-label-text-color: black;
