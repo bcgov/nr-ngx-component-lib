@@ -22,10 +22,8 @@ import {
 import { FormControl } from "@angular/forms";
 import { MatSelectionListChange } from "@angular/material/list";
 import { fromEvent } from "rxjs";
-import { filter } from "rxjs/operators";
-import { CodeDescription } from "../../utils/code-table.util";
 import { NrclBase } from "../../directives/nrcl.base";
-
+import { CodeDescription } from "../../utils/code-table.util";
 
 /**
  * A filter select component that allows users to select multiple options from a list.
@@ -64,6 +62,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description
     @Input() overlayClass
     @Input() wide 
+    @Input() filterCharsMinMessage = 'Too many options'
 
     @Output() valueChange = new EventEmitter<string[]>();
 
@@ -90,18 +89,21 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         super.ngOnInit()
 
         this.clickSubscription = fromEvent<MouseEvent>( document, 'click' )
-            .pipe( filter( ( event: MouseEvent ) => {
+            .subscribe( ( event: MouseEvent ) => {
                 const clickTarget = event.target as HTMLElement
                 const triggerEl = this.trigger.nativeElement
                 const overlayEl = this.overlayRef?.overlayElement
 
-                // console.log(triggerEl,overlayEl)
+                // console.log(this.label,'target',clickTarget)
+                // console.log(this.label,'triggerEl',triggerEl?.contains(clickTarget),triggerEl)
+                // console.log(this.label,'overlayEl',overlayEl?.contains(clickTarget),overlayEl)
+
                 // Only close if click is outside both trigger and overlay
-                return !triggerEl?.contains(clickTarget)
-                    && !overlayEl?.contains(clickTarget)
-            } ) )
-            .subscribe( () => {
-                // console.log('outside click')
+                if ( triggerEl?.contains(clickTarget) ) return 
+                if ( !overlayEl ) return 
+                if ( overlayEl?.contains(clickTarget) ) return 
+
+                // console.log(this.label,'outside click')
                 this.close()
                 this.setInputToSelection()
                 this.floatLabel = 'auto'
@@ -150,6 +152,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     ngOnDestroy(): void {
+        // console.log('destroy',this.inst)
         this.clickSubscription?.unsubscribe()
     }
 
@@ -163,10 +166,8 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     open() {
-        // console.log('open',this.isOpen,this.filterCharsMin && !this.isFiltered)
+        // console.warn('open',this.isOpen)
         if ( this.isOpen ) return
-
-        if ( this.filterCharsMin && !this.isFiltered ) return
 
         this.isOpen = true
         this.changeDetectorRef.markForCheck()
@@ -220,7 +221,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     close() {
-        // console.log('close',this.isOpen)
+        // console.warn('close',this.isOpen)
         if ( !this.isOpen ) return
 
         this.isOpen = false
@@ -238,6 +239,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     setInputToSelection() {
+        // console.warn('setInputToSelection')
         this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || null
         this.isFiltered = false
     }
@@ -253,15 +255,11 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             // console.log('filtering')
             this.isFiltered = true
             this.match = ( option ) => option.description.toLowerCase().includes( t )
-
-            if ( this.filterCharsMin ) this.open()
         }
         else {
             // console.log('not filtering')
             this.isFiltered = false
             this.match = ( o ) => true
-
-            if ( this.filterCharsMin ) this.close()
         }
 
         this.changeDetectorRef.detectChanges()
@@ -272,6 +270,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onSelectionChange( ev ) {
+        // console.log('onSelectionChange',this.single)
         if ( this.single ) {
             this.close()
             this.setInputToSelection()
@@ -303,6 +302,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCancelClick() {
+        // console.log('onCancelClick')
         this.selection.setValue( null )
         this.selection.enable()
         this.setInputToSelection()
@@ -322,6 +322,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCloseClick() {
+        // console.log('onCloseClick')
         this.close()
         this.setInputToSelection()
         this.floatLabel = 'auto'
@@ -338,5 +339,13 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     formatOption( option: CodeDescription ): string {
         return this.optionFormatter( option, false )
+    }
+
+    get isClosedNoSelection() {
+        return !this.isOpen && !( this.selection?.value?.length > 0 && this.clear )
+    }
+
+    get isClosedSelection() {
+        return !this.isOpen && this.selection?.value?.length > 0 && this.clear
     }
 }

@@ -12,6 +12,18 @@
 
     width: var( --nrcl-filter-select-width );
     display: block;
+    position: relative;
+
+    .nrcl-button {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        bottom: 2px;
+    }
+
+    .hide {
+        display: none;
+    }
 
     &.has-value {
         --mdc-outlined-text-field-label-text-color: black;
@@ -54,16 +66,6 @@
             }
         }
     }
-
-    // .cancel {
-    //     padding: 0;
-    //     width: calc( var( --nrcl-filter-select-height ) - 2px );
-    //     height: calc( var( --nrcl-filter-select-height ) - 2px );
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     cursor: default;
-    // }
 }
 
 ::ng-deep {
@@ -94,7 +96,9 @@
 
             .summary {
                 padding-top: 4px;
-                padding-left: 4px;
+                padding-left: 16px;
+                padding-right: 8px;
+                padding-bottom: 4px;
                 font-size: 14px;
                 color: rgba(0, 0, 0, 0.737);
                 font-family: var( --nrcl-font-family );
@@ -108,7 +112,7 @@
             .mat-mdc-list-option {
                 height: 30px;
                 font-size: var( --nrcl-font-size );
-                padding-left: 4px;
+                padding-left: 16px;
                 padding-right: 8px;
 
                 &.hide {
@@ -117,7 +121,19 @@
 
                 .mdc-list-item__start {
                     margin: 0;
-                    padding: 0 8px;
+                    padding-top: 0;
+                    padding-left: 0;
+                    padding-right: 8px;
+                    padding-bottom: 0;
+
+                    .mdc-checkbox {
+                        padding: 0;
+
+                        .mdc-checkbox__background {
+                            top: 0;
+                            left: 0;
+                        }
+                    }
                 }
 
                 .mdc-list-item__primary-text {
@@ -129,14 +145,6 @@
                     .mdc-list-item__primary-text {
                         color: white;
                     }
-                }
-            }
-        }
-
-        &.single {
-            .mat-mdc-selection-list {
-                .mat-mdc-list-option {
-                    padding-left: 12px;
                 }
             }
         }

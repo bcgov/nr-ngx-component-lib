@@ -568,6 +568,7 @@ export const ProjectedContent: StoryObj<ButtonComponent & DisplayModeWrapperComp
                         [disabled]="disabled"
                         [small]="small"
                         [compact]="compact"
+                        (click)="click( $event )"
                     >
                         @if ( icon ) { <nrcl-icon>{{ icon }}</nrcl-icon> }
                         @if ( label ) { {{ label }} }
@@ -580,6 +581,7 @@ export const ProjectedContent: StoryObj<ButtonComponent & DisplayModeWrapperComp
                         [disabled]="disabled"
                         [small]="small"
                         [compact]="compact"
+                        (click)="click( $event )"
                     >
                         @if ( label ) { {{ label }} }
                         @if ( icon ) { <nrcl-icon>{{ icon }}</nrcl-icon> }

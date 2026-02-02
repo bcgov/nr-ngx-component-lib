@@ -7,7 +7,7 @@
         <mat-label>{{ label }}</mat-label>
     }
 
-    <input class="filter-input" #searchInput
+    <input class="filter-input" #filterInput
         matInput 
         [placeholder]="placeholder" 
         [value]="inputValue"
@@ -17,43 +17,49 @@
         [matTooltip]="inputValue"
         [readonly]="!filter"
     >
+</mat-form-field>        
 
-    @if ( isOpen ) {
-        <nrcl-button tertiary matSuffix
-            icon="arrow_drop_up"
-            (click)="onCloseClick($event); $event.stopPropagation()"
-        ></nrcl-button>
-    }
-    @else if ( selection?.value?.length > 0 && clear ) {
-        <nrcl-button tertiary matSuffix
-            icon="close"
-            (click)="onCancelClick($event); $event.stopPropagation()"
-        ></nrcl-button>
-    }
-    @else {
-        <nrcl-button tertiary matSuffix
-            icon="arrow_drop_down"
-            (click)="onInputFocus(); $event.stopPropagation()"
-        ></nrcl-button>
-    }                
-</mat-form-field>    
-    
+<nrcl-button tertiary matSuffix [class.hide]="!isOpen"
+    icon="arrow_drop_up"
+    (click)="onCloseClick()"
+></nrcl-button>
+
+<nrcl-button tertiary matSuffix [class.hide]="!isClosedSelection"
+    icon="close"
+    (click)="onCancelClick()"
+></nrcl-button>
+
+<nrcl-button tertiary matSuffix [class.hide]="!isClosedNoSelection"
+    icon="arrow_drop_down"
+    (click)="onInputFocus()"
+></nrcl-button>
+
 <ng-template #overlayTemplate>
     <div class="nrcl filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass">
-        @if ( !isFiltered && !single && summary ) {
-            @if ( !selection?.value?.length && hint ) {
+        @if ( !isFiltered && ( !single || filterCharsMin ) && summary ) {
+            @if ( !selection?.value?.length && ( hint || filterCharsMin ) ) {
                 <div class="selection-overview">
-                    <div class="summary">
-                        <span>({{ hint }})</span>
-                    </div>
+                    @if ( hint ) {
+                        <div class="summary">
+                            <span>{{ hint }}</span>
+                        </div>
+                    }                    
+
+                    @if ( filterCharsMin && filterCharsMinMessage ) {
+                        <div class="summary">
+                            <span>{{ filterCharsMinMessage }}</span>
+                        </div>
+                    }
                 </div>
             }
 
             @if ( selection?.value?.length > 0 && selection?.value?.length < options?.length ) {
                 <div class="selection-overview">
-                    <div class="summary">
-                        <span>{{ selection?.value?.length }} selected of {{ options?.length }}</span>
-                    </div>
+                    @if ( !single ) {
+                        <div class="summary">
+                            <span>Selected {{ selection?.value?.length }} of {{ options?.length }} options</span>
+                        </div>
+                    }
 
                     <mat-selection-list
                         (selectionChange)="onUpperSelectionChange( $event )"
@@ -73,7 +79,13 @@
 
                     @if ( hint ) {
                         <div class="summary">
-                            <span>({{ hint }})</span>
+                            <span>{{ hint }}</span>
+                        </div>
+                    }                    
+
+                    @if ( filterCharsMin && filterCharsMinMessage ) {
+                        <div class="summary">
+                            <span>{{ filterCharsMinMessage }}</span>
                         </div>
                     }
                 </div>
@@ -86,22 +98,24 @@
             }
         }
 
-        <mat-selection-list
-            [formControl]="selection"
-            (selectionChange)="onSelectionChange( $event )"
-            [multiple]="!single"
-            hideSingleSelectionIndicator
-        >
-            @for ( option of options; track option ) {
-                <mat-list-option [class.hide]="!matchesFilter( option )"
-                    [value]="option.code" 
-                    togglePosition="before"                    
-                    [matTooltip]="tooltips ? option.description : null"
-                    matTooltipPosition="after"            
-                >
-                    <span [innerHTML]="formatOption( option )"></span>
-                </mat-list-option>
-            }
-        </mat-selection-list>
+        @if ( !filterCharsMin || isFiltered ) {
+            <mat-selection-list
+                [formControl]="selection"
+                (selectionChange)="onSelectionChange( $event )"
+                [multiple]="!single"
+                hideSingleSelectionIndicator
+            >
+                @for ( option of options; track option ) {
+                    <mat-list-option [class.hide]="!matchesFilter( option )"
+                        [value]="option.code" 
+                        togglePosition="before"                    
+                        [matTooltip]="tooltips ? option.description : null"
+                        matTooltipPosition="after"            
+                    >
+                        <span [innerHTML]="formatOption( option )"></span>
+                    </mat-list-option>
+                }
+            </mat-selection-list>
+        }
     </div>
 </ng-template>
