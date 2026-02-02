@@ -119,7 +119,7 @@
     }
 }
 
-:host-context( .cdk-overlay-container.mobile ) {
+:host-context( .nrcl-device-mobile ) {
     ::ng-deep {
         .mat-mdc-dialog-content {
             .content-wrapper {

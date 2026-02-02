@@ -1,0 +1,71 @@
+import { AfterViewInit, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OWL_DATE_TIME_FORMATS } from '@busacca/ng-pick-datetime';
+import { Store } from '@ngrx/store';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { ApplicationStateService } from 'src/app/services/application-state.service';
+import { DialogService } from 'src/app/services/dialog.service';
+import { DATE_FORMATS } from 'src/app/utils';
+import { EditDialogComponent } from '../base/edit-dialog/edit-dialog.component';
+import { CreatePrepSheetDialogComponent } from './create-prep-sheet-dialog.component';
+
+@Component( {
+    selector: 'storybook-dummy-component',
+    template: '', // No template needed for this approach
+} )
+class DummyComponent implements AfterViewInit {
+    constructor( 
+        public dialogService: DialogService
+    ) { }
+
+    ngAfterViewInit(): void {
+        this.dialogService.showCreatePrepSheetDialog()
+    }
+}
+
+const meta: Meta<DummyComponent> = {
+    component: DummyComponent,
+    decorators: [
+        // Apply metadata to all stories
+        moduleMetadata( {
+            // import necessary ngModules or standalone components
+            imports: [
+                MatIconModule,
+                BrowserAnimationsModule,
+                FormsModule,
+                MatButtonModule,
+                MatFormFieldModule,
+                MatSelectModule,
+                MatListModule,
+                MatDialogModule,
+                MatInputModule
+            ],
+            // declare components that are used in the template
+            declarations: [
+                CreatePrepSheetDialogComponent,
+                EditDialogComponent
+            ],
+            // List of providers that should be available to the root component and all its children.
+            providers: [
+                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
+                {provide: Store, useValue: {}},
+                {provide: ApplicationStateService, useValue: {}},               
+            ],
+        } ),
+    ],
+}
+
+export default meta;
+type Story = StoryObj<DummyComponent>;
+
+export const Primary: Story = {
+}

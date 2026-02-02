@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Directive, inject, Injectable, Injector, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { EditDialogComponent } from "../components/edit-dialog/edit-dialog.component";
 
 export type BaseEditDialogResult<R> = R | 'cancel'
 
