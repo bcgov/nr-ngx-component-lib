@@ -101,11 +101,11 @@ export class RowListBase<F,R,L=any> extends NrclBase implements RowListState<F>,
     }
 
     fetchRowListPage(): Observable<L> {
-        throw 'unimplemented'
+        throw 'RowListBase.fetchRowListPage unimplemented'
     }
     
     displayRowListPage( res: L ): LoadRowListResult<R> {
-        throw 'unimplemented'
+        throw 'RowListBase.displayRowListPage unimplemented'
     }
 
     loadRowListPageFailed( error ) {
@@ -163,7 +163,7 @@ export class RowListBase<F,R,L=any> extends NrclBase implements RowListState<F>,
     }
 
     get initialPageState(): RowListState<F> {
-        throw 'unimplemented'
+        throw 'RowListBase.initialPageState unimplemented'
     }
 
     loadPageState() {

@@ -28,14 +28,17 @@ export * from './components/row-list-pagination/row-list-pagination.component'
 export * from './components/row-list-sorting/row-list-sorting.component'
 export * from './components/snackbar/snackbar.component'
 export * from './components/tag-list/tag-list.component'
+export * from './components/edit-dialog/edit-dialog.component'
 
 export * from './directives/configuration-subscriber.base'
 export * from './directives/row-list.base'
 export * from './directives/nrcl.base'
+export * from './directives/edit-dialog.base'
 
 export * from './services/snackbar-util.service'
 export * from './services/configuration.service'
 export * from './services/page-state.service'
+export * from './services/dialog.service'
 
 export * from './utils/code-table.util'
 export * from './utils/date.util'

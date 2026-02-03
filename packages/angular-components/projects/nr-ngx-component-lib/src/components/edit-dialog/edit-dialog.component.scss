@@ -1,0 +1,143 @@
+@use '@angular/material' as mat;
+
+:host {
+    display: contents;
+
+    .title-bar {
+        display: flex;
+        align-items: center;
+        background-color: #003366;
+        color: white;
+        padding: var(--nrcl-gutter-space);
+    
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            font-family: var( --nrcl-font-family );
+            font-size: var( --mdc-dialog-subhead-size, 1rem );
+            display: flex;
+            align-items: center;    
+        }
+    
+        .spinner-header {
+            @include mat.progress-spinner-overrides((
+                active-indicator-color: white
+            ));
+        }
+    }
+
+    ::ng-deep {
+        .mat-mdc-dialog-title {
+            padding: 0;
+    
+            &::before {
+                display: none;
+            }
+        }
+    
+        .mat-mdc-dialog-content {
+            margin: 0;
+            padding: 0;
+
+            .content-wrapper {
+                padding-top: var(--nrcl-gutter-space);
+                padding-left: var(--nrcl-gutter-space);
+                padding-right: var(--nrcl-gutter-space);
+                padding-bottom: 0;    
+            }
+        }
+
+        .mat-mdc-dialog-actions {
+            margin: 0;
+            padding: 0;
+
+            .footer {
+                width: 100%;
+            }
+
+            .action-button-wrapper {
+                background-color: #F2F2F2;
+                border-top: solid 1px #c6c8cb;
+                padding: var(--nrcl-gutter-space);
+
+                display: flex;
+                align-items: center;               
+                justify-content: flex-end;
+                gap: 8px;
+                width: 100%;
+
+                .warning {
+                    display: flex;
+                    align-items: center;
+                
+                    .mat-icon {
+                        color: #FCBA19;
+                        margin-right: 8px;
+                    }
+                }                
+            }
+        }
+    }
+}
+
+::ng-deep .cdk-overlay-pane.nrcl-dialog {
+    mat-dialog-container.mat-mdc-dialog-container {
+        font-family: var( --nrcl-font-family );
+        font-size: var( --nrcl-font-size );
+        --mdc-dialog-supporting-text-color: rgba(0, 0, 0, 0.87);
+        
+        .mat-mdc-dialog-content {
+            font-family: var( --nrcl-font-family );
+            font-size: var( --nrcl-font-size );
+        }
+    }
+}
+
+::ng-deep .nrcl-device-desktop {
+    .cdk-overlay-pane.nrcl-dialog {
+        .mat-mdc-dialog-container {
+            .mat-mdc-dialog-surface {
+                overflow: hidden;
+            }
+
+            .mat-mdc-dialog-content.no-scroll {
+                overflow-y: hidden;
+            }
+        }
+    }
+}
+
+::ng-deep .nrcl-device-mobile {
+    .cdk-overlay-pane.nrcl-dialog {
+        width: unset !important; 
+        max-width: unset !important; 
+
+        .mat-mdc-dialog-container {
+            .mat-mdc-dialog-surface {
+                overflow: hidden;
+            }
+            
+            .title-bar {
+                .spinner-header {
+                    top: 10px;
+                    right: 14px;
+                }
+            }
+
+            .mat-mdc-dialog-content {
+                overflow-y: auto !important;
+                max-height: calc(var(--vh, 1vh) * 100 - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 135px);
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--nrcl-gutter-space));
+            }            
+
+            .mat-mdc-dialog-actions {
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--nrcl-gutter-space));
+            }            
+
+            .max-content-width {
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--nrcl-gutter-space));
+            }            
+        }
+    }
+}
