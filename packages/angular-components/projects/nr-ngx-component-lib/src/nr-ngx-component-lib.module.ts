@@ -53,6 +53,8 @@ import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { MatChipsModule } from '@angular/material/chips';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogService } from './services/dialog.service';
 
 @NgModule({
     imports: [
@@ -80,6 +82,7 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
         OwlDateTimeModule,
         OwlMomentDateTimeModule,
         NgxPaginationModule,
+        MatDialogModule
     ],
     declarations: [
         ButtonComponent,
@@ -149,6 +152,7 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
         SnackbarUtilService,
         ConfigurationService,
         PageStateService,
+        DialogService,
         { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
     ]
 })

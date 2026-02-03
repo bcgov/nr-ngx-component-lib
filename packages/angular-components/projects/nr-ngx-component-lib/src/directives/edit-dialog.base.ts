@@ -1,11 +1,14 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, inject, Injectable, Injector, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Directive, inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { EditDialogComponent } from "../components/edit-dialog/edit-dialog.component";
 
-export type BaseEditDialogResult<R> = R | 'cancel'
+export type EditDialogBaseResult<R> = R | 'cancel'
 
 @Directive()
-export class EditDialogBase<CONFIG, RESULT = any> implements OnInit, AfterViewInit {
+export class EditDialogBase<CONFIG, RESULT = any> {
+    dialogRef = inject( MatDialogRef<EditDialogComponent,EditDialogBaseResult<RESULT>> )
+    changeDetectorRef = inject( ChangeDetectorRef )
+
     title: string
     
     saveLabel = 'Save'
@@ -14,18 +17,7 @@ export class EditDialogBase<CONFIG, RESULT = any> implements OnInit, AfterViewIn
     get saveEnabled() { return this._saveEnabled }
     set saveEnabled( v: boolean ) { this._saveEnabled = v }
 
-    // get isLocalSaving() { return this.saveEnabled }
-    // set isLocalSaving( v: boolean ) { this.saveEnabled = v }
-
     cancelLabel = 'Cancel'
-
-    // private _loadState: LoadState
-    // get loadState() { return this._loadState }
-    // set loadState( v: LoadState ) { 
-    //     this._loadState = v
-    //     if ( !v ) return
-    //     this.isLoading = this.loadState.isLoading
-    // }
 
     private _isLoading = false
     get isLoading() { return this._isLoading }
@@ -35,27 +27,10 @@ export class EditDialogBase<CONFIG, RESULT = any> implements OnInit, AfterViewIn
         this.changeDetectorRef.detectChanges()
     }
 
-    // errorState: ErrorState[]
     result: RESULT
-    // mobile: boolean
 
     data: CONFIG = inject( MAT_DIALOG_DATA )
     
-    dialogRef = inject( MatDialogRef<EditDialogComponent,BaseEditDialogResult<RESULT>> )
-    // applicationStateService = inject( ApplicationStateService )
-    changeDetectorRef = inject( ChangeDetectorRef )
-    
-    // constructor() {
-    //     this.mobile = this.applicationStateService.getIsMobileResolution();
-    // }
-    
-    ngOnInit(): void {
-    }
-
-    ngAfterViewInit() {
-        // addRemoveCdkOverlayClass(this.mobile)
-    }
-
     onSaveClick() {
         this.ok()
     }

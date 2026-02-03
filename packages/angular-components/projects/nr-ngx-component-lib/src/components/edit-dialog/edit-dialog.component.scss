@@ -1,5 +1,4 @@
 @use '@angular/material' as mat;
-// @import 'src/styles/variables';
 
 :host {
     display: contents;
@@ -21,13 +20,6 @@
             align-items: center;    
         }
     
-        .icon-button {
-            padding: 0;
-            width: unset;
-            height: unset;
-            padding-left: var(--nrcl-gutter-space);
-        }
-
         .spinner-header {
             @include mat.progress-spinner-overrides((
                 active-indicator-color: white
@@ -53,32 +45,6 @@
                 padding-left: var(--nrcl-gutter-space);
                 padding-right: var(--nrcl-gutter-space);
                 padding-bottom: 0;    
-
-                .table-search-header {                    
-                    padding: 0;
-                    margin: 0;
-                    margin-top: var(--nrcl-gutter-space);
-
-                    .search-input {
-                        position: relative;
-                        display: flex;
-                        flex-direction: column;
-                        flex: unset;
-                        width: unset;
-
-                        .input-clear-button {
-                            position: absolute;
-                            right: -5px;
-                            bottom: -5px;
-                        }
-                    }
-                }
-
-                .table-wrapper {
-                    width: unset;
-                    margin: 0;
-                    margin-top: var(--nrcl-gutter-space);
-                }
             }
         }
 
@@ -101,10 +67,6 @@
                 gap: 8px;
                 width: 100%;
 
-                .mdc-button {
-                    margin: 0;
-                }
-
                 .warning {
                     display: flex;
                     align-items: center;
@@ -119,39 +81,63 @@
     }
 }
 
-:host-context( .nrcl-device-mobile ) {
-    ::ng-deep {
+::ng-deep .cdk-overlay-pane.nrcl-dialog {
+    mat-dialog-container.mat-mdc-dialog-container {
+        font-family: var( --nrcl-font-family );
+        font-size: var( --nrcl-font-size );
+        --mdc-dialog-supporting-text-color: rgba(0, 0, 0, 0.87);
+        
         .mat-mdc-dialog-content {
-            .content-wrapper {
-                .wf1-resources-header-bar {
-                    .mobile-filter-expansion-panel {
-                        overflow: hidden;
+            font-family: var( --nrcl-font-family );
+            font-size: var( --nrcl-font-size );
+        }
+    }
+}
 
-                        .search-action-bar {
-                            position: relative;
+::ng-deep .nrcl-device-desktop {
+    .cdk-overlay-pane.nrcl-dialog {
+        .mat-mdc-dialog-container {
+            .mat-mdc-dialog-surface {
+                overflow: hidden;
+            }
 
-                            button.input-clear-button {
-                                position: absolute;
-                                top: 0;
-                                right: 0px;
-                                bottom: 0;
-                                display: flex;
-                                align-items: center;
-                                margin: 0;
-                                padding: 0;
-                                width: unset;
-                                height: unset;                                
-                            }
-                        }
-                    }
-                }
+            .mat-mdc-dialog-content.no-scroll {
+                overflow-y: hidden;
+            }
+        }
+    }
+}
 
-                .bottom-summary {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
+::ng-deep .nrcl-device-mobile {
+    .cdk-overlay-pane.nrcl-dialog {
+        width: unset !important; 
+        max-width: unset !important; 
+
+        .mat-mdc-dialog-container {
+            .mat-mdc-dialog-surface {
+                overflow: hidden;
+            }
+            
+            .title-bar {
+                .spinner-header {
+                    top: 10px;
+                    right: 14px;
                 }
             }
+
+            .mat-mdc-dialog-content {
+                overflow-y: auto !important;
+                max-height: calc(var(--vh, 1vh) * 100 - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 135px);
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--nrcl-gutter-space));
+            }            
+
+            .mat-mdc-dialog-actions {
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--nrcl-gutter-space));
+            }            
+
+            .max-content-width {
+                width: calc(var(--vw, 1vw) * 100 - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--nrcl-gutter-space));
+            }            
         }
     }
 }
