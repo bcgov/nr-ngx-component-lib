@@ -1,7 +1,7 @@
-import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
 import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { DisplayModeWrapperComponent, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { GapComponent } from './gap.component';
 
 const meta: Meta<GapComponent> = {
@@ -26,7 +26,7 @@ const meta: Meta<GapComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="displayMode">
+                    <ng-container *rerender="displayMode +'|'+ vertical +'|'+ horizontal +'|'+ divider">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                         >
@@ -99,7 +99,24 @@ Toggle the display mode to see how the gap spacing adjusts between desktop and m
                 `
             }
         }
-    }  
+    },
+    argTypes: {
+        vertical: {
+            control: { type: 'inline-radio' },
+            options: [ 'missing', '""', '1', '2', '3' ],
+            mapping: { 'missing': undefined, '""': '' }
+        },
+        horizontal: {
+            control: { type: 'inline-radio' },
+            options: [ 'missing', '""', '1', '2', '3' ],
+            mapping: { 'missing': undefined, '""': '' }
+        },
+        divider: {
+            control: { type: 'inline-radio' },
+            options: [ 'missing', 'before', 'middle', 'after', 'none' ],
+            mapping: { 'missing': undefined }
+        }
+    }
 }
 
 export default meta;
@@ -114,14 +131,15 @@ export const Vertical: StoryObj<GapComponent & { displayMode: DisplayMode }> = {
     },
     args: {
         displayMode: 'desktop',
-        divider: false
+        vertical: '',        
     },
     render: ( args ) => {
+        let tmpl = argsToTemplate(args,{exclude:['displayMode']})
         return {
             props: args,
             template: `
                 <div>Before gap</div>
-                <nrcl-gap vertical [divider]="divider"/>
+                <nrcl-gap ${ tmpl }/>
                 <div>After gap</div>
             `
         }
@@ -138,9 +156,10 @@ export const Horizontal: StoryObj<GapComponent & { displayMode: DisplayMode }> =
     },
     args: {
         displayMode: 'desktop',
-        divider: false
+        horizontal: ''
     },
     render: ( args ) => {
+        let tmpl = argsToTemplate(args,{exclude:['displayMode']})
         return {
             props: args,
             styles: [`
@@ -158,7 +177,7 @@ export const Horizontal: StoryObj<GapComponent & { displayMode: DisplayMode }> =
             template: `
                 <div class="container">
                     <span>Before gap</span>
-                    <nrcl-gap horizontal [divider]="divider"/>
+                    <nrcl-gap ${ tmpl }/>
                     <span>After gap</span>
                 </div>
             `

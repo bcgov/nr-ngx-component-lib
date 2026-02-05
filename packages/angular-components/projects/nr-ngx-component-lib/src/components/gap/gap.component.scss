@@ -1,13 +1,24 @@
 :host {
-    justify-content: center;
-    align-items: center;
-
-    &.horizontal {
+    &.direction-horizontal {
         display: inline-flex;       
         width: var( --nrcl-gutter-space );
         align-items: stretch;
 
-        &.divider {
+        &.divider-position-before {
+            justify-content: flex-start;
+        }
+
+        &.divider-position-middle {
+            justify-content: center;            
+        }
+
+        &.divider-position-after {
+            justify-content: flex-end;            
+        }
+
+        &.divider-position-before, &.divider-position-middle, &.divider-position-after {
+            width: calc( var( --nrcl-gap-multiple ) * var( --nrcl-gutter-space ) );
+        
             .divider {
                 width: 1px;
                 height: 100%;
@@ -16,11 +27,25 @@
         }
     }
 
-    &.vertical {
+    &.direction-vertical {
         display: flex;
         height: var( --nrcl-gutter-space );
 
-        &.divider {
+        &.divider-position-before {
+            align-items: flex-start;
+        }
+
+        &.divider-position-middle {
+            align-items: center;            
+        }
+
+        &.divider-position-after {
+            align-items: flex-end;            
+        }
+
+        &.divider-position-before, &.divider-position-middle, &.divider-position-after {
+            height: calc( var( --nrcl-gap-multiple ) * var( --nrcl-gutter-space ) );
+
             .divider {
                 height: 1px;
                 width: 100%;

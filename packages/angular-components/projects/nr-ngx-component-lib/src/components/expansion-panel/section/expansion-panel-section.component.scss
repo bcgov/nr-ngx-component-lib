@@ -7,9 +7,12 @@
         padding-bottom: var( --nrcl-gutter-space );
     }
 
-    & > nrcl-gap.divider {
-        margin-left: calc( -1 * var( --nrcl-gutter-space ) );
-        margin-right: calc( -1 * var( --nrcl-gutter-space ) );
+    & > ::ng-deep .nrcl-gap {
+        width: calc( 100% + 2 * var( --nrcl-gutter-space ) );
+        .divider {
+            margin-left: calc( -1 * var( --nrcl-gutter-space ) );
+            margin-right: calc( -1 * var( --nrcl-gutter-space ) );
+        }
     }
 }
 
