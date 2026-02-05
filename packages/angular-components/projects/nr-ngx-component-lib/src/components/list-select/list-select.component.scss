@@ -1,0 +1,32 @@
+:host {
+    font-family: var( --nrcl-font-family );
+    font-size: var( --nrcl-font-size );
+
+    .summary {
+        display: flex;
+        justify-content: flex-end;
+
+        h3 {
+            font-size: var( --nrcl-font-size-h3 );
+            font-weight: normal;
+            padding: 0;
+            margin: 0;
+            padding-bottom: var( --nrcl-gutter-space );
+        }
+    }
+
+    .mat-mdc-table {
+        .mat-column-description {
+            flex-grow: 1;
+        }
+
+        .mat-column-addRemove {
+            flex-basis: 70px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+}

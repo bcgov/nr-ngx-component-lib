@@ -1,0 +1,53 @@
+@if ( !single ) {
+    <div class="summary">
+        <h3>{{ value?.length || '0' }} Selected</h3>
+    </div>
+}
+
+<nrcl-filters-panel (clearFilters)="onClearFilters()">
+    <nrcl-filter-search
+        [(value)]="searchText"
+        (valueChange)="onSearchTextChange( $event )">
+    </nrcl-filter-search>
+</nrcl-filters-panel>
+
+<nrcl-row-list-desktop>
+    @if ( rows?.length > 0 ) {
+        <mat-table [dataSource]="rows">
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef>{{ descriptionLabel }}</mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    {{ item.description }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="addRemove">
+                <mat-header-cell *matHeaderCellDef>Add Remove</mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <nrcl-indicator-select [selected]="isSelected( item )"></nrcl-indicator-select>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="[ 'description', 'addRemove' ]; sticky: true"></mat-header-row>
+
+            <mat-row
+                *matRowDef="let item; columns: [ 'description', 'addRemove' ]"
+                [class.selected]="isSelected( item )"
+                (click)="onRowClick( item )"
+                (keypress)="onRowClick( item )"
+            ></mat-row>
+        </mat-table>
+    }
+</nrcl-row-list-desktop>
+
+@if ( totalRowCount == 0 ) {
+    <nrcl-row-list-pagination
+        paginationId="list-select"
+        [pageSize]="pageSize"
+        [pageNumber]="pageNumber"
+        [rowCount]="totalRowCount"
+        (pageNumberChange)="onPageNumberChange( $event )"
+        (pageSizeChange)="onPageSizeChange( $event )"
+        [noRowsMessage]="noRowsMessage"
+    ></nrcl-row-list-pagination>
+}

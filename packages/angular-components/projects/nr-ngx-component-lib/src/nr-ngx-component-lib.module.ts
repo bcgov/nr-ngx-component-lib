@@ -4,7 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from '@angular/material/icon';
@@ -23,6 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './components/expansion-panel/footer/expansion-panel-footer.component';
 import { ExpansionPanelHeaderComponent } from './components/expansion-panel/header/expansion-panel-header.component';
@@ -36,9 +39,11 @@ import { FormFieldComponent } from './components/form-field/form-field.component
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { GapComponent } from './components/gap/gap.component';
 import { IconComponent } from './components/icon/icon.component';
+import { IndicatorSelectComponent } from './components/indicator-select/indicator-select.component';
 import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
+import { ListSelectComponent } from './components/list-select/list-select.component';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { RowListDesktopComponent } from './components/row-list-desktop/row-list-desktop.component';
@@ -48,13 +53,10 @@ import { RowListSortingComponent } from './components/row-list-sorting/row-list-
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
 import { ConfigurationService } from './services/configuration.service';
+import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { MatChipsModule } from '@angular/material/chips';
-import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DialogService } from './services/dialog.service';
 
 @NgModule({
     imports: [
@@ -115,6 +117,8 @@ import { DialogService } from './services/dialog.service';
         IconComponent,
         IndicatorComponent,
         EditDialogComponent,
+        IndicatorSelectComponent,
+        ListSelectComponent,
     ],
     exports: [
         ButtonComponent,
@@ -147,6 +151,8 @@ import { DialogService } from './services/dialog.service';
         IconComponent,
         IndicatorComponent,
         EditDialogComponent,
+        IndicatorSelectComponent,
+        ListSelectComponent,
     ],
     providers: [
         SnackbarUtilService,

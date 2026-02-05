@@ -28,12 +28,16 @@
                     background-color: #d7d7d7;
                 }
 
-                &:nth-child(odd):not(:hover) {
+                &:nth-child(odd):not(:hover):not(.selected) {
                     background-color: #f2f2f2;
                 }
             
-                &:nth-child(even):not(:hover) {
+                &:nth-child(even):not(:hover):not(.selected) {
                     background-color: #ffffff;
+                }
+
+                &.selected {
+                    background-color: #b6d7a8;
                 }
             }
 
