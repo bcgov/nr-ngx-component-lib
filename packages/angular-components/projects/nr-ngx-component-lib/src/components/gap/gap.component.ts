@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 const POSITIONS = [ 'before', 'middle', 'after', 'none' ] as const
@@ -9,7 +9,7 @@ type Position = (typeof POSITIONS)[number]
     templateUrl: './gap.component.html',
     styleUrl: './gap.component.scss',
 } )
-export class GapComponent extends NrclBase implements OnChanges {
+export class GapComponent extends NrclBase implements OnChanges, OnInit {
     @Input() horizontal
     @Input() vertical
     @Input() divider
@@ -20,7 +20,16 @@ export class GapComponent extends NrclBase implements OnChanges {
     @HostBinding( 'style.--nrcl-gap-multiple' )
     multiple = 1
 
+    ngOnInit(): void {
+        super.ngOnInit()
+        this.updateState()
+    }
+
     ngOnChanges(changes: SimpleChanges): void {
+        this.updateState()
+    }
+
+    updateState() {
         let defaultMultiple = 1
         let direction: 'vertical' | 'horizontal' = 'vertical'
         let dividerPosition: Position = 'none'
