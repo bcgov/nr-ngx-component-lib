@@ -5,15 +5,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ButtonComponent } from '../button/button.component';
-import { ExpansionPanelComponent } from './expansion-panel.component';
-import { IconComponent } from '../icon/icon.component';
-import { ExpansionPanelHeaderComponent } from './header/expansion-panel-header.component';
-import { ExpansionPanelFooterComponent } from './footer/expansion-panel-footer.component';
-import { ExpansionPanelSectionComponent } from './section/expansion-panel-section.component';
-import { MatDividerModule } from '@angular/material/divider';
 import { GapComponent } from '../gap/gap.component';
+import { IconComponent } from '../icon/icon.component';
+import { ExpansionPanelComponent } from './expansion-panel.component';
+import { ExpansionPanelFooterComponent } from './footer/expansion-panel-footer.component';
+import { ExpansionPanelHeaderComponent } from './header/expansion-panel-header.component';
+import { ExpansionPanelSectionComponent } from './section/expansion-panel-section.component';
 
 const meta: Meta<ExpansionPanelComponent> = {
     title: 'Expansion Panel',

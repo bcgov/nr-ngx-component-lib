@@ -5,19 +5,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { RowListSortingComponent } from './row-list-sorting.component';
-import { MatRadioModule } from '@angular/material/radio';
 import { IconComponent } from '../icon/icon.component';
+import { RowListSortingComponent } from './row-list-sorting.component';
 
 const meta: Meta<RowListSortingComponent> = {
     title: 'Row List Sorting',

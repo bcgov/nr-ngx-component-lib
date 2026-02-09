@@ -1,8 +1,7 @@
-import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './device-view.component';
 
 @Component( {

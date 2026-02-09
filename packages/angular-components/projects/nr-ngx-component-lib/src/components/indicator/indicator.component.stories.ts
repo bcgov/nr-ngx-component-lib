@@ -1,6 +1,4 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ConfigurationService } from '../../services/configuration.service';
 import { IndicatorComponent } from './indicator.component';
 

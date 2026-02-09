@@ -1,7 +1,6 @@
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { CellContentComponent } from './cell-content.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 
 const meta: Meta<CellContentComponent & { width: number }> = {
     title: 'Cell Content',

@@ -1,7 +1,6 @@
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { IconComponent } from './icon.component';
 
 const meta: Meta<IconComponent> = {

@@ -11,17 +11,16 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } fro
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
+import { useArgs } from 'storybook/internal/preview-api';
 import { DATE_FORMATS } from '../../utils/date.util';
+import { ButtonComponent } from '../button/button.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { FiltersPanelComponent } from './filters-panel.component';
-import { useArgs } from 'storybook/internal/preview-api';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { IconComponent } from '../icon/icon.component';
-import { ButtonComponent } from '../button/button.component';
-import { FilterContainerComponent } from '../filter-container/filter-container.component';
+import { FiltersPanelComponent } from './filters-panel.component';
 
 const meta: Meta<FiltersPanelComponent> = {
     title: 'Filters Panel',

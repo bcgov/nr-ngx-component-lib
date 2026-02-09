@@ -13,31 +13,28 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import moment from 'moment';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { of } from 'rxjs';
 import { ConfigurationService } from '../../services/configuration.service';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';
 import { CellContentComponent } from '../cell-content/cell-content.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { FiltersPanelComponent } from '../filters-panel/filters-panel.component';
 import { GapComponent } from '../gap/gap.component';
+import { IconComponent } from '../icon/icon.component';
+import { IndicatorSelectComponent } from '../indicator-select/indicator-select.component';
 import { PageHeaderComponent } from '../page-header/page-header.component';
 import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.component';
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
-import { IconComponent } from '../icon/icon.component';
 import { ListSelectComponent } from './list-select.component';
-import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
-import { IndicatorSelectComponent } from '../indicator-select/indicator-select.component';
 
 const meta: Meta<ListSelectComponent> = {
     title: 'List Select',
@@ -68,7 +65,6 @@ const meta: Meta<ListSelectComponent> = {
             // declare components that are used in the template
             declarations: [
                 CellContentComponent,
-                DisplayModeWrapperComponent,
                 FilterContainerComponent,
                 FilterSelectComponent,
                 FiltersPanelComponent,
@@ -76,7 +72,6 @@ const meta: Meta<ListSelectComponent> = {
                 FilterDateComponent,
                 GapComponent,
                 PageHeaderComponent,
-                RerenderDirective,
                 RowListDesktopComponent,
                 RowListMobileComponent,
                 RowListPaginationComponent,

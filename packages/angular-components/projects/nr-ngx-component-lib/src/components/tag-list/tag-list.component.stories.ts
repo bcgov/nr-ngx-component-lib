@@ -7,8 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';

@@ -1,7 +1,5 @@
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { DisplayModeWrapperComponent, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { GapComponent } from './gap.component';
 
 const meta: Meta<GapComponent> = {

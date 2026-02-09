@@ -4,11 +4,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ButtonComponent } from '../button/button.component';
-import { PageHeaderComponent } from './page-header.component';
 import { PageContainerComponent } from '../page-container/page-container.component';
+import { PageHeaderComponent } from './page-header.component';
 
 const meta: Meta<PageHeaderComponent> = {
     title: 'Page Header',

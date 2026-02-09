@@ -17,13 +17,18 @@ import { useArgs } from '@storybook/preview-api';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { fruitOptions, RowListArgs, rowListStory } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { RerenderDirective } from 'projects/nr-ngx-component-lib/story-util/rerender.directive';
-import { DATE_FORMATS } from '../../utils/date.util';
 import { ConfigurationService } from '../../services/configuration.service';
+import { DATE_FORMATS } from '../../utils/date.util';
+import { ButtonComponent } from '../button/button.component';
 import { CellContentComponent } from '../cell-content/cell-content.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
+import { FilterDateComponent } from '../filter-date/filter-date.component';
+import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
+import { FiltersPanelComponent } from '../filters-panel/filters-panel.component';
 import { GapComponent } from '../gap/gap.component';
+import { IconComponent } from '../icon/icon.component';
 import { PageHeaderComponent } from '../page-header/page-header.component';
 import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.component';
 import { Primary as RowListDesktopPrimary } from '../row-list-desktop/row-list-desktop.component.stories';
@@ -32,12 +37,6 @@ import { Primary as RowListMobilePrimary } from '../row-list-mobile/row-list-mob
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { PageContainerComponent } from './page-container.component';
-import { FiltersPanelComponent } from '../filters-panel/filters-panel.component';
-import { FilterDateComponent } from '../filter-date/filter-date.component';
-import { FilterSearchComponent } from '../filter-search/filter-search.component';
-import { ButtonComponent } from '../button/button.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
-import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<PageContainerComponent> = {
     title: 'Page Container',
@@ -68,7 +67,6 @@ const meta: Meta<PageContainerComponent> = {
             // declare components that are used in the template
             declarations: [
                 CellContentComponent,
-                DisplayModeWrapperComponent,
                 FilterContainerComponent,
                 FilterSelectComponent,
                 FiltersPanelComponent,
@@ -77,7 +75,6 @@ const meta: Meta<PageContainerComponent> = {
                 GapComponent,
                 PageContainerComponent,
                 PageHeaderComponent,
-                RerenderDirective,
                 RowListDesktopComponent,
                 RowListMobileComponent,
                 RowListPaginationComponent,
