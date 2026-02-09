@@ -96,7 +96,7 @@
     </ng-template>
 
     <ng-template mobile-view>
-        <nrcl-gap vertical/>
+        <nrcl-gap/>
 
         <nrcl-row-list-mobile>
             @for ( item of rows | paginate: { 
@@ -106,29 +106,12 @@
                 totalItems: totalRowCount 
             }; track item.attachmentId ) {
                 <mat-card>
-                    <mat-card-title>
-                        <section title>
-                            <h2>{{ item.fileName }}</h2>
-                        </section>
-
-                        <section actions>
-                            <nrcl-button compact
-                                label="Download"
-                                icon="download"
-                                (click)="onDownloadClick( item )"                        
-                            ></nrcl-button>
-
-                            @if ( canDelete ) {
-                                <nrcl-button compact
-                                    label="Delete"
-                                    icon="delete"
-                                    (click)="onDeleteClick( item )"
-                                ></nrcl-button>
-                            }
-                        </section>
-                    </mat-card-title>
-
                     <mat-card-content>
+                        <section full-width>
+                            <mat-label>File name</mat-label>
+                            <div class="value">{{ item.fileName }}</div>
+                        </section>
+
                         <section>
                             <mat-label>Attachment Type</mat-label>
                             <div class="value">{{ item.attachmentTypeDescription }}</div>
@@ -154,6 +137,24 @@
                             <div class="value">{{ item.attachmentDescription }}</div>
                         </section>                                            
                     </mat-card-content>
+
+                    <mat-card-footer>
+                        @if ( canDownload ) {
+                            <nrcl-button compact
+                                label="Download"
+                                icon="download"
+                                (click)="onDownloadClick( item )"                        
+                            ></nrcl-button>
+                        }
+
+                        @if ( canDelete ) {
+                            <nrcl-button compact
+                                label="Delete"
+                                icon="delete"
+                                (click)="onDeleteClick( item )"
+                            ></nrcl-button>
+                        }
+                    </mat-card-footer>                    
                 </mat-card>
             }
         </nrcl-row-list-mobile>
