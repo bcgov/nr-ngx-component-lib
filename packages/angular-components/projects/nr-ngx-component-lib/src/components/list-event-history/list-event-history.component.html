@@ -3,13 +3,13 @@
         @if ( rows?.length > 0 ) {
             <nrcl-row-list-desktop>
                 <table mat-table
-                    [dataSource]="rows | paginate: { 
-                        id: 'desktop-event-history', 
-                        itemsPerPage: pageSize, 
-                        currentPage: pageNumber, 
-                        totalItems: totalRowCount 
+                    [dataSource]="rows | paginate: {
+                        id: 'desktop-event-history',
+                        itemsPerPage: pageSize,
+                        currentPage: pageNumber,
+                        totalItems: totalRowCount
                     }"
-                    matSort 
+                    matSort
                     [matSortActive]="sortActive"
                     [matSortDirection]="sortDirection"
                     (matSortChange)="onSortChange( $event )">
@@ -54,7 +54,7 @@
                 </table>
             </nrcl-row-list-desktop>
 
-            <nrcl-gap vertical/>
+            <nrcl-gap/>
         }
 
         <nrcl-row-list-pagination
@@ -69,7 +69,7 @@
     </ng-template>
 
     <ng-template mobile-view>
-        <nrcl-gap vertical/>
+        <nrcl-gap/>
 
         <nrcl-row-list-sorting
             [sortColumn]="sortActive"
@@ -78,20 +78,20 @@
             (sortChange)="onSortChange($event)">
         </nrcl-row-list-sorting>
 
-        <nrcl-gap vertical/>
+        <nrcl-gap/>
 
         @if ( rows?.length > 0 ) {
             <nrcl-row-list-mobile>
-                @for ( item of rows | paginate: { 
-                    id: 'mobile-event-history', 
-                    itemsPerPage: pageSize, 
-                    currentPage: pageNumber, 
-                    totalItems: totalRowCount 
+                @for ( item of rows | paginate: {
+                    id: 'mobile-event-history',
+                    itemsPerPage: pageSize,
+                    currentPage: pageNumber,
+                    totalItems: totalRowCount
                 }; track item.eventHistoryGuid ) {
                     <mat-card>
                         <mat-card-title>
                             <section title>
-                                <h2>{{ item.comment }}</h2>
+                                <h2>{{ item.eventTimestamp }}</h2>
                             </section>
                         </mat-card-title>
 
@@ -102,11 +102,6 @@
                             </section>
 
                             <section>
-                                <mat-label>Time</mat-label>
-                                <div class="value">{{ item.eventTimestamp }}</div>
-                            </section>
-
-                            <section>
                                 <mat-label>Type</mat-label>
                                 <div class="value">{{ item.eventHistoryTypeDescription }}</div>
                             </section>
@@ -114,18 +109,18 @@
                             <section>
                                 <mat-label>Section</mat-label>
                                 <div class="value">{{ item.sourceObjectNameDescription }}</div>
-                            </section>                                            
+                            </section>
 
-                            <!-- <section full-width>
+                            <section full-width>
                                 <mat-label>Comment</mat-label>
                                 <div class="value">{{ item.comment }}</div>
-                            </section>                                             -->
+                            </section>
                         </mat-card-content>
                     </mat-card>
                 }
             </nrcl-row-list-mobile>
 
-            <nrcl-gap vertical/>
+            <nrcl-gap/>
         }
 
         <nrcl-row-list-pagination
