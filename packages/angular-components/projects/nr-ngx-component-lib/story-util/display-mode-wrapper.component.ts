@@ -1,39 +1,12 @@
+
 import { Component, OnInit, OnChanges, Input, inject, ChangeDetectorRef } from "@angular/core"
 import { ConfigurationService, DisplayMode } from "../src/services/configuration.service"
 import { StoryObj } from "@storybook/angular"
 
 @Component( {
     selector: 'display-mode-wrapper',
-    styles: `
-        ::ng-deep html { 
-            height: 100%; 
-            --wf1-gutter-space: 16px;
-
-            body { 
-                height: 100%;
-            }
-
-            #storybook-root { 
-                height: 100%;
-
-                storybook-root { 
-                    height: 100%; 
-                    display: block; 
-                }
-            }
-        }
-            
-        :host {
-            display: block;
-    
-            height: 100%;
-        }
-    `,
-    template: `
-        <div class="component-container-block">
-            <ng-content></ng-content>
-        </div>
-    `,
+    styleUrl: './display-mode-wrapper.component.scss',
+    templateUrl: './display-mode-wrapper.component.html',
     host: {
         '[style.width]': 'getWidth()',
         '[class.nrcl-device-desktop]': "displayMode == 'desktop'",

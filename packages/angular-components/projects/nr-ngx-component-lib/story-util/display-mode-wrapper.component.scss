@@ -1,0 +1,22 @@
+::ng-deep html { 
+    height: 100%; 
+    --wf1-gutter-space: 16px;
+
+    body { 
+        height: 100%;
+    }
+
+    #storybook-root { 
+        height: 100%;
+
+        storybook-root { 
+            height: 100%; 
+            display: block; 
+        }
+    }
+}
+   
+:host {
+    display: block;
+    height: 100%;
+}

@@ -25,8 +25,6 @@ const meta: Meta<PageHeaderComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 ButtonComponent,
                 PageContainerComponent
             ],

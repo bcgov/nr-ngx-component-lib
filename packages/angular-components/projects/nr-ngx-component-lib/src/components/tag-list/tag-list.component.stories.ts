@@ -34,8 +34,6 @@ const meta: Meta<TagListComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 IconComponent,
                 ButtonComponent
             ],

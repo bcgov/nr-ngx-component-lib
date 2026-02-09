@@ -31,8 +31,6 @@ const meta: Meta<ExpansionPanelComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 ButtonComponent,
                 ExpansionPanelHeaderComponent,
                 ExpansionPanelFooterComponent,

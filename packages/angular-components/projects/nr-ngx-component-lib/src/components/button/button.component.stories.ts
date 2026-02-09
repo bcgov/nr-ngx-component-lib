@@ -21,8 +21,6 @@ const meta: Meta<ButtonComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 IconComponent,
             ],
             // List of providers that should be available to the root component and all its children.
@@ -32,8 +30,8 @@ const meta: Meta<ButtonComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="displayMode + primary + secondary + tertiary + small + disabled + icon + compact">
-                        <display-mode-wrapper 
+                    <ng-container *rerender="{displayMode, primary, secondary, tertiary, small, disabled, icon, compact}">
+                        <display-mode-wrapper style="--registration-display: inline-block;"
                             [displayMode]="displayMode"
                         >
                             ${ story }

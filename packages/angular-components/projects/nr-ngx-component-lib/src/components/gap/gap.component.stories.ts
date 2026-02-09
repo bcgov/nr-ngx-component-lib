@@ -15,8 +15,6 @@ const meta: Meta<GapComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -26,7 +24,7 @@ const meta: Meta<GapComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="displayMode +'|'+ vertical +'|'+ horizontal +'|'+ divider">
+                    <ng-container *rerender="{displayMode, vertical, horizontal, divider}">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                         >

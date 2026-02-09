@@ -1,4 +1,10 @@
-::ng-deep :root {}
+::ng-deep :root {
+    --nrcl-row-list-mobile-border-color: #bebebe;
+    --nrcl-row-list-mobile-header-background-color: #f2f2f2;
+    --nrcl-row-list-mobile-header-border-color: #d5d5d5;
+    --nrcl-row-list-mobile-footer-background-color: #f2f2f2;
+    --nrcl-row-list-mobile-footer-border-color: #d5d5d5;
+}
 
 :host {
     width: 100%;
@@ -9,15 +15,15 @@
     ::ng-deep mat-card.mat-mdc-card {
         margin: 0;
         box-shadow: none;
-        border: 2px solid #bebebe;
+        border: 2px solid var( --nrcl-row-list-mobile-border-color );
         padding: 0;
         font-family: var(--nrcl-font-family);
         font-size: var(--nrcl-font-size);
 
         .mat-mdc-card-title {
             padding: var(--nrcl-gutter-space);
-            border-bottom: #f2f2f2 1px solid;
-            background-color: #f2f2f2;
+            border-bottom: 1px solid var( --nrcl-row-list-mobile-header-border-color );
+            background-color: var( --nrcl-row-list-mobile-header-background-color );
             gap: var(--nrcl-gutter-space);
             display: flex;
             justify-content: space-between;
@@ -54,18 +60,6 @@
             section[actions] {
                 display: flex;
                 gap: var(--nrcl-gutter-space);
-
-                button[icon] {
-                    border: none;
-                    background: none;
-                    cursor: pointer;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 0;
-                    justify-content: center;
-                    line-height: 20px;
-                }
             }
         }
 
@@ -94,5 +88,16 @@
                 }
             }
         }
+
+        .mat-mdc-card-footer {
+            padding: var(--nrcl-gutter-space);
+            border-top: 1px solid var( --nrcl-row-list-mobile-footer-border-color );
+            background-color: var( --nrcl-row-list-mobile-footer-background-color );
+            gap: var(--nrcl-gutter-space);
+            display: flex;
+            justify-content: flex-end;
+            margin: 0;
+        }
+
     }
 }

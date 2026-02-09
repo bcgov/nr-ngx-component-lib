@@ -15,7 +15,6 @@ const meta: Meta<CellContentComponent & { width: number }> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -24,10 +23,10 @@ const meta: Meta<CellContentComponent & { width: number }> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + tooltip">
-                        <div class="component-container-inline">
+                    <ng-container *rerender="{width, tooltip}">
+                        <registration-wrapper style="--registration-display: inline-block;">
                             ${ story }
-                        </div>
+                        </registration-wrapper>
                     </ng-container>
                 `
             }
@@ -142,7 +141,7 @@ This approach is useful when binding to component data or when the content is dy
     }
 }
 
-export const ContentInserted: StoryObj<CellContentComponent & { width: number, inserted: string }> = {
+export const ContentProjection: StoryObj<CellContentComponent & { width: number, inserted: string }> = {
     parameters: {
         docs: {
             description: {

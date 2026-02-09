@@ -29,8 +29,6 @@ const meta: Meta<FormLayoutComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 FormFieldComponent
             ],
             // List of providers that should be available to the root component and all its children.

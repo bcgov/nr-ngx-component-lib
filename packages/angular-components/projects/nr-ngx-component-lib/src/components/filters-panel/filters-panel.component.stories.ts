@@ -46,8 +46,6 @@ const meta: Meta<FiltersPanelComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
@@ -66,7 +64,7 @@ const meta: Meta<FiltersPanelComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + displayMode ">
+                    <ng-container *rerender="{width, displayMode}">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"

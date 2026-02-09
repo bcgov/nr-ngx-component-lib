@@ -113,8 +113,6 @@ Use the controls below to test different snackbar types and messages. Click the 
             declarations: [
                 SnackbarComponent,
                 ButtonComponent,
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 IconComponent
             ],
             // List of providers that should be available to the root component and all its children.

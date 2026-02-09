@@ -1,0 +1,51 @@
+::ng-deep :root {
+    --registration-display: block;
+    --registration-size: 20px;
+    --registration-border-size: 2px;
+}
+    
+:host {
+    display: var( --registration-display );
+    background-color: white;
+    position: relative;
+
+    .top-left {
+        position: absolute;
+        top: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        left: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        width: var( --registration-size );
+        height: var( --registration-size );
+        border-bottom: var( --registration-border-size ) dashed green;
+        border-right: var( --registration-border-size ) dashed green;
+    }
+
+    .top-right {
+        position: absolute;
+        top: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        right: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        width: var( --registration-size );
+        height: var( --registration-size );
+        border-bottom: var( --registration-border-size ) dashed green;
+        border-left: var( --registration-border-size ) dashed green;
+    }
+
+    .bottom-left {
+        position: absolute;
+        bottom: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        left: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        width: var( --registration-size );
+        height: var( --registration-size );
+        border-top: var( --registration-border-size ) dashed green;
+        border-right: var( --registration-border-size ) dashed green;
+    }
+
+    .bottom-right {
+        position: absolute;
+        bottom: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        right: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
+        width: var( --registration-size );
+        height: var( --registration-size );
+        border-top: var( --registration-border-size ) dashed green;
+        border-left: var( --registration-border-size ) dashed green;
+    }
+}

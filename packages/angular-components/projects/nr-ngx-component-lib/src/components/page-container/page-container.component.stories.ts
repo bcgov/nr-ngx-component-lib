@@ -97,7 +97,7 @@ const meta: Meta<PageContainerComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + displayMode">
+                    <ng-container *rerender="{width, displayMode}">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"

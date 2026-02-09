@@ -97,7 +97,7 @@ const meta: Meta<ListSelectComponent> = {
         componentWrapperDecorator(
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + displayMode + canDelete + canDownload">
+                    <ng-container *rerender="{width, displayMode}">
                         <display-mode-wrapper
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"

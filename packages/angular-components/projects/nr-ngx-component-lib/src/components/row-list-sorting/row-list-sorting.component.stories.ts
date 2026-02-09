@@ -45,8 +45,6 @@ const meta: Meta<RowListSortingComponent> = {
             declarations: [
                 FilterSelectComponent,
                 FilterContainerComponent,
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
@@ -59,7 +57,7 @@ const meta: Meta<RowListSortingComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="width + displayMode">
+                    <ng-container *rerender="{width, displayMode}">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"

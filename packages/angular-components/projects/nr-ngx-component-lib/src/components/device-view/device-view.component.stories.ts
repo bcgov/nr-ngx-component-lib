@@ -35,8 +35,6 @@ const meta: Meta<DeviceViewComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective,
-                DisplayModeWrapperComponent,
                 SentinalComponent,
                 DesktopViewDirective,
                 MobileViewDirective

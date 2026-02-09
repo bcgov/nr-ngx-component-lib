@@ -17,23 +17,11 @@ const meta: Meta<IconComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                RerenderDirective
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
             ],
         } ),
-        // componentWrapperDecorator( 
-        //     ( story ) => {
-        //         return `
-        //             <ng-container *rerender="width + tooltip">
-        //                 <div class="component-container-inline">
-        //                     ${ story }
-        //                 </div>
-        //             </ng-container>
-        //         `
-        //     }
-        // ),        
     ],
     tags: ['autodocs'],
     parameters: {
