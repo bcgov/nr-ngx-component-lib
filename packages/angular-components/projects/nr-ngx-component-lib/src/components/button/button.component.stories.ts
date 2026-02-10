@@ -45,81 +45,58 @@ const meta: Meta<ButtonComponent> = {
         docs: {
             description: {
                 component: `
-A versatile, accessible button component built on Angular Material with support for icons, multiple sizes, and adaptive display modes.
+The Button component provides a flexible, Material Design-inspired button with multiple style variants and configurations.
 
 ## Features
-- **Icon support**: Display Material icons on left, right, or standalone
-- **Compact mode**: Smaller button size optimized for toolbars and dense layouts
-- **Primary/secondary styling**: Visual hierarchy for button importance
-- **Display mode awareness**: Automatically adapts to desktop/mobile configurations
-- **Disabled state**: Built-in disabled styling with proper accessibility
-- **Tooltips**: Optional tooltip support for additional context
-- **Ripple effects**: Material ripple feedback on interaction
+
+- **Style Variants**: Default, Primary, Secondary, Tertiary
+- **Size Options**: Default, Small, and Compact sizes
+- **Icon Support**: Icons on left, right, or compact icon-only mode
 
 ## Usage
 
 \`\`\`html
-<!-- Basic button -->
-<nrcl-button label="Click Me"></nrcl-button>
+<!-- Basic button with default style -->
+<nrcl-button 
+    label="Click Me"
+></nrcl-button>
 
 <!-- Primary button with icon -->
-<nrcl-button 
-  label="Add Resources" 
-  icon="add"
-  [primary]="true"
+<nrcl-button primary 
+    label="Add" icon="add"
 ></nrcl-button>
 
-<!-- Compact button -->
-<nrcl-button 
-  label="Save" 
-  [compact]="true"
-  icon="save"
+<!-- Small secondary button -->
+<nrcl-button secondary small 
+    label="Cancel"
 ></nrcl-button>
 
-<!-- Icon-only button with tooltip -->
-<nrcl-button 
-  icon="add"
-  tooltip="Add new item"
-  [compact]="true"
+<!-- Compact icon-only button -->
+<nrcl-button compact 
+    iconCompact="clear-filters" 
+    tooltip="Clear"
 ></nrcl-button>
 
-<!-- Button with icons on both sides -->
-<nrcl-button 
-  label="Download Report"
-  icon="description"
-  iconRight="get_app"
-  [primary]="true"
+<!-- Normal button on desktop, and compact with icon on mobile -->
+<nrcl-button compact="mobile" 
+    label="Clear"
+    iconCompact="clear-filters" 
+    tooltip="Clear"
 ></nrcl-button>
 \`\`\`
 
-## Icon Properties
-- **icon**: Displays icon on the left side, or standalone if no label is provided
-- **iconRight**: Positions icon on the right side of the label
-- **iconCompact**: Icon displayed specifically when button is in compact mode
+## Style Variants
 
-## Button Variants
+- **Default**: Button style depends on size option
+- **Primary**: Emphasized button for primary actions
+- **Secondary**: De-emphasized button for secondary actions
+- **Tertiary**: Minimal button for tertiary actions
 
-### Size Variants
-- **Default**: Standard button size for most use cases
-- **Compact**: Reduced size for toolbars, data tables, and space-constrained interfaces
+## Size Modifiers
 
-### Style Variants
-- **Default (Secondary)**: Subtle styling for secondary or less important actions
-- **Primary**: Emphasized styling for primary actions like form submissions
-
-### State Variants
-- **Enabled**: Interactive, responds to clicks
-- **Disabled**: Non-interactive, visually de-emphasized
-
-## Display Mode Behavior
-The button automatically responds to the application's display mode (desktop/mobile) configuration through the config service, allowing different compact behaviors per mode.
-
-## Accessibility
-- Proper ARIA labels and roles
-- Keyboard navigation support
-- Focus indicators
-- Disabled state properly communicated to screen readers
-- Tooltips provide additional context                                
+- **Default**: Standard size for most use cases
+- **Small**: Reduced size for compact layouts
+- **Compact**: Icon-only mode for toolbars and tight spaces
                 `
             },
             source: {
@@ -136,64 +113,24 @@ export const Primary: StoryObj<ButtonComponent> = {
         docs: {
             description: {
                 story: `
-# Button Variations Gallery
+This story showcases all button style and size variations.
 
-A comprehensive showcase displaying all button variations and state combinations. This gallery is organized into four columns, each demonstrating different aspects of the button component.
+## What This Shows
 
-## Column 1: Basic Variants
-Demonstrates the fundamental button styles and states:
-- **Default**: Standard button styling for secondary actions
-- **Disabled**: Default button in disabled state
-- **Primary**: Emphasized styling for primary/important actions
-- **Primary Disabled**: Primary button in disabled state
+The grid displays 12 button variations combining:
+- **Style variants**: Default, Primary, Secondary, Tertiary
+- **Size modifiers**: Default, Small, Compact
 
-## Column 2: Icon Positions
-Shows different icon placement options:
-- **Icon (Left)**: Default icon position on the left side
-- **Icon Right + Disabled**: Icon positioned on right, button disabled
-- **Icon + Primary**: Icon with primary button styling
-- **Dual Icons + Primary + Disabled**: Icons on both sides, all states combined
+## Interactive Controls
 
-**Note:** When using icons on both sides, consider if it enhances or clutters the UI. Dual icons work best when they represent a clear relationship (e.g., input icon + action icon).
+Adjust the controls to see how different properties affect all button variants simultaneously:
 
-## Column 3: Compact Icon-Only Buttons
-Icon-only buttons without labels, ideal for toolbars and action menus:
-- **Compact**: Small, icon-only button
-- **Compact Disabled**: Icon-only in disabled state
-- **Compact Primary**: Icon-only with primary emphasis
-- **Compact Primary Disabled**: All states combined
-
-**Best for:** Toolbars, data table row actions, floating action buttons, or any space-constrained UI where the icon meaning is universally understood.
-
-**Important:** Always provide tooltips for icon-only buttons to ensure accessibility and clarity.
-
-## Column 4: Compact with Labels
-Compact buttons that include both icon and text:
-- **Compact + Label**: Smaller button with text and icon
-- **Compact + Label + Disabled**: Compact with label, disabled state
-- **Compact + Label + Primary**: Compact with label, primary styling
-- **Compact + Label + Primary + Disabled**: All states combined
-
-**Best for:** Dense interfaces where you need text labels but want to conserve space, such as filter panels or sidebar actions.
-
-## Usage Guidelines
-
-**When to use Default vs Primary:**
-- Use **Primary** sparingly—typically only one primary button per view
-- **Default** buttons are for secondary actions or when multiple actions have equal importance
-- In forms, the submit action should typically be Primary
-
-**When to use Compact:**
-- Data tables and grids
-- Toolbars and action bars
-- Sidebars and panels
-- Any UI where vertical or horizontal space is limited
-
-**When to use Icon-only:**
-- Actions with universally recognized icons (add, delete, edit, etc.)
-- When space is extremely limited
-- In repeating patterns where labels would be redundant (e.g., every row in a table)
-- **Always** include a tooltip for accessibility
+- **label**: Change the button text
+- **icon**: Add an icon on the left side
+- **iconRight**: Add an icon on the right side
+- **iconCompact**: Set the icon for compact mode
+- **tooltip**: Add tooltip text
+- **disabled**: Toggle the disabled state
                 `
             }
         }
@@ -234,15 +171,18 @@ Compact buttons that include both icon and text:
         return {
             props: args,
             styles: [`
-                ::ng-deep .component-container-block {
-                    padding: 20px;
+                ::ng-deep registration-wrapper {
+                    --registration-display: block;
+                    
+                    .registration {
+                        display: none;
+                    }
                 }
 
                 .grid {
-                    max-width: 900px;
                     display:grid; 
                     grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr ) minmax( 0, 1fr ) minmax( 0, 1fr );
-                    gap: 40px;
+                    gap: 20px;
                 }
 
                 article {
@@ -337,114 +277,31 @@ export const AllOptions: StoryObj<ButtonComponent & DisplayModeWrapperComponent>
         docs: {
             description: {
                 story: `
-# Interactive Button Playground
+This story provides a single interactive button with full control over all properties and responsive testing capabilities.
 
-Use the controls below to experiment with different button configurations and see how properties interact in real-time.
+## Interactive Playground
 
-## Control Guide
+Use the controls panel to experiment with all button configurations:
 
-### Content Controls
+- **Style variants**: Toggle primary, secondary, or tertiary
+- **Size modifiers**: Adjust small and compact settings
+- **Icons**: Configure left icon, right icon, or compact icon
+- **States**: Test disabled and tooltip states
+- **Responsive**: Use displayMode to test compact options
 
-**label**: The text displayed on the button. 
-- Leave empty for icon-only buttons
-- Keep concise (2-3 words maximum)
-- Use action verbs (Add, Save, Delete, Export, etc.)
+## Display Mode Options
 
-**tooltip**: Hover text providing additional context.
-- **Required** for icon-only buttons (accessibility)
-- Optional but helpful for buttons with labels
-- Should explain what will happen when clicked
+The display mode wrapper allows you to test how the button appears across different screen sizes:
+- **Desktop**: Full desktop view
+- **Mobile**: Mobile breakpoint
 
-### Icon Controls
+## Compact Mode Behavior
 
-**icon**: Material icon displayed on the left side (or standalone without label).
-- Choose icons that clearly represent the action
-- Common choices: \`add\`, \`edit\`, \`delete\`, \`save\`, \`search\`
-
-**iconRight**: Icon positioned on the right side.
-- Useful for directional actions (next, forward, download)
-- Common choices: \`arrow_forward\`, \`get_app\`, \`open_in_new\`
-
-**iconCompact**: Icon shown specifically in compact mode.
-- Allows different icons for different sizes
-- Useful when the full-size icon doesn't work well when compact
-
-### Layout Controls
-
-**compact**: Controls button size.
-- \`no\`: Full-size button (default)
-- \`yes\`: Always use compact size
-- \`desktop\`: Compact only on desktop display mode
-- \`mobile\`: Compact only on mobile display mode
-
-Compact mode reduces padding and size, making buttons suitable for dense UIs.
-
-### Appearance Controls
-
-**primary**: Toggle between default and primary styling.
-- \`false\` (default): Secondary button styling
-- \`true\`: Primary/emphasized button styling
-
-**Best practice**: Use only one primary button per view for the most important action.
-
-### State Controls
-
-**disabled**: Disables the button.
-- Prevents all interactions
-- Applies disabled styling (reduced opacity, no hover effects)
-- Use during async operations to prevent double-clicks
-
-**displayMode**: Simulates desktop vs mobile display mode.
-- Toggle to see how compact settings adapt
-- Tests responsive behavior
-
-## Common Patterns
-
-### Form Submit Button
-\`\`\`html
-<nrcl-button 
-  label="Submit"
-  [primary]="true"
-  [disabled]="!form.valid"
-></nrcl-button>
-\`\`\`
-
-### Toolbar Action Button
-\`\`\`html
-<nrcl-button 
-  icon="add"
-  tooltip="Add new item"
-  [compact]="true"
-></nrcl-button>
-\`\`\`
-
-### Secondary Action with Icon
-\`\`\`html
-<nrcl-button 
-  label="Export"
-  iconRight="get_app"
-></nrcl-button>
-\`\`\`
-
-### Data Table Row Action
-\`\`\`html
-<nrcl-button 
-  icon="edit"
-  tooltip="Edit this record"
-  compact="desktop"
-></nrcl-button>
-\`\`\`
-
-## Design Best Practices
-
-1. **Button Hierarchy**: Use primary sparingly—only for the most important action on a page
-2. **Icon Clarity**: Choose universally recognized icons; when in doubt, include a label
-3. **Tooltips**: Always provide tooltips for icon-only buttons
-4. **Loading States**: Disable buttons during async operations
-5. **Compact Usage**: Use compact mode in toolbars, tables, and space-constrained layouts
-6. **Label Length**: Keep labels short and action-oriented
-7. **Consistent Placement**: Place primary actions in consistent locations (e.g., bottom-right of forms)
-8. **Testing**: Test in both display modes to ensur                
+The \`compact\` property has special responsive options:
+- **"no"**: Never compact
+- **"yes"**: Always compact (icon-only)
+- **"desktop"**: Compact on only desktop
+- **"mobile"**: Compact on only mobile
                 `
             }
         }
@@ -512,6 +369,59 @@ export const ProjectedContent: StoryObj<ButtonComponent & DisplayModeWrapperComp
         docs: {
             description: {
                 story: `
+This story demonstrates using Angular's content projection to compose button content with flexible icon and text positioning.
+
+## Content Projection vs. Input Properties
+
+While the component supports \`icon\`, \`iconRight\`, and \`label\` input properties, content projection offers greater flexibility:
+
+### Using Input Properties
+
+\`\`\`html
+<nrcl-button label="Add" icon="add"></nrcl-button>
+\`\`\`
+
+### Using Content Projection
+
+\`\`\`html
+<nrcl-button>
+    <nrcl-icon>add</nrcl-icon>
+    Add
+</nrcl-button>
+\`\`\`
+
+## Side-by-Side Comparison
+
+This story displays two buttons:
+1. **Icon-Left Button**: Icon projected before the label
+2. **Icon-Right Button**: Label projected before the icon
+
+Use the controls to see how the same configuration affects both icon positions.
+
+## Advanced Use Cases
+
+Content projection enables:
+- **Custom element ordering**: Place icons and text in any sequence
+- **Complex content**: Include multiple icons, badges, or custom elements
+- **Conditional rendering**: Use Angular's \`@if\` to dynamically show/hide content
+- **Custom components**: Project entire custom components inside buttons
+
+## Example: Multiple Icons
+\`\`\`html
+<nrcl-button primary>
+    <nrcl-icon>cloud_upload</nrcl-icon>
+    Upload File
+    <nrcl-icon>arrow_forward</nrcl-icon>
+</nrcl-button>
+\`\`\`
+
+## When to Use Projection
+
+Choose content projection when:
+- You need non-standard icon positioning
+- You want to include custom HTML or components
+- You're building complex, conditional button content
+- You prefer template-driven composition over property binding
                 `
             }
         }
