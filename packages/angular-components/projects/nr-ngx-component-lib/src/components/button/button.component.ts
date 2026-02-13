@@ -52,7 +52,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
     hasLabel
     useContent
     href
-    target = '_blank'
+    target 
 
     zone = inject( NgZone )
 
@@ -104,10 +104,11 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
             this.isAnchor = true
             if ( this.anchor.href ) {
                 this.href = this.anchor.href
-                this.target = this.anchor.target || this.target
+                this.target = ( 'target' in this.anchor ) ? this.anchor.target : '_blank'
             }
             else {
                 this.href = this.anchor
+                this.target = '_blank'
             }
         }
 
