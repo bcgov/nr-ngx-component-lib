@@ -11,11 +11,11 @@
         }
         @else {
             @if ( hasIconLeft ) {
-                <nrcl-icon [small]="isIconSmall" class="left">{{ icon }}</nrcl-icon>
+                <nrcl-icon class="left" [small]="isIconSmall">{{ icon }}</nrcl-icon>
             }
 
             @if ( hasIconRight ) {
-                <nrcl-icon [small]="isIconSmall" class="right">{{ iconRight }}</nrcl-icon>
+                <nrcl-icon class="right" [small]="isIconSmall">{{ iconRight }}</nrcl-icon>
             }
 
             @if ( hasIconCompact ) {
@@ -31,11 +31,11 @@
 @else {
     <a [attr.href]="href" [attr.target]="href && target">
         @if ( hasIconLeft ) {
-            <nrcl-icon [small]="isIconSmall" class="left">{{ icon }}</nrcl-icon>
+            <nrcl-icon class="left" [small]="isIconSmall">{{ icon }}</nrcl-icon>
         }
 
         @if ( hasIconRight ) {
-            <nrcl-icon [small]="isIconSmall" class="right">{{ iconRight }}</nrcl-icon>
+            <nrcl-icon class="right" [small]="isIconSmall">{{ iconRight }}</nrcl-icon>
         }
 
         @if ( hasIconCompact ) {

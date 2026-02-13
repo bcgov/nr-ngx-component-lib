@@ -92,6 +92,8 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
             this.isIconSmall = true
         }
 
+        this.href = null
+        this.target = null
         if ( this.anchor == null || this.anchor === false || this.primary || this.secondary || this.tertiary ) {
             this.isAnchor = false
         }
