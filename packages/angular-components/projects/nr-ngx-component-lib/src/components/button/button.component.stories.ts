@@ -29,7 +29,7 @@ const meta: Meta<ButtonComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="{displayMode, primary, secondary, tertiary, small, disabled, icon, compact}">
+                    <ng-container *rerender="{displayMode, primary, secondary, tertiary, anchor, small, disabled, icon, iconRight, compact}">
                         <display-mode-wrapper style="--registration-display: inline-block;"
                             [displayMode]="displayMode"
                         >
@@ -143,17 +143,17 @@ Adjust the controls to see how different properties affect all button variants s
         },
         icon: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
+            options: [ 'none', 'add', 'get_app', 'clear-filters', 'launch' ],
             mapping: { 'none': undefined }
         },
         iconRight: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
+            options: [ 'none', 'add', 'get_app', 'clear-filters', 'launch' ],
             mapping: { 'none': undefined }
         },
         iconCompact: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app', 'clear-filters' ],
+            options: [ 'none', 'add', 'get_app', 'clear-filters', 'launch' ],
             mapping: { 'none': undefined }
         },
         tooltip: { type: 'string' },
@@ -181,7 +181,7 @@ Adjust the controls to see how different properties affect all button variants s
 
                 .grid {
                     display:grid; 
-                    grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr ) minmax( 0, 1fr ) minmax( 0, 1fr );
+                    grid-template-columns: repeat( 5, 1fr );
                     gap: 20px;
                 }
 
@@ -223,6 +223,11 @@ Adjust the controls to see how different properties affect all button variants s
                         <nrcl-button tertiary ${ buttonArgs }></nrcl-button> 
                     </article>
 
+                    <article>
+                        <h6>anchor</h6>
+                        <nrcl-button anchor ${ buttonArgs }></nrcl-button> 
+                    </article>
+
                     <!-- -------------------------------- -->
 
                     <article>
@@ -245,6 +250,11 @@ Adjust the controls to see how different properties affect all button variants s
                         <nrcl-button tertiary small ${ buttonArgs }></nrcl-button> 
                     </article>
 
+                    <article>
+                        <h6>anchor small</h6>
+                        <nrcl-button anchor small ${ buttonArgs }></nrcl-button> 
+                    </article>
+
                     <!-- -------------------------------- -->
 
                     <article>
@@ -265,6 +275,11 @@ Adjust the controls to see how different properties affect all button variants s
                     <article>
                         <h6>tertiary compact</h6>
                         <nrcl-button tertiary compact ${ buttonArgs }></nrcl-button> 
+                    </article>
+
+                    <article>
+                        <h6>anchor compact</h6>
+                        <nrcl-button anchor compact ${ buttonArgs }></nrcl-button> 
                     </article>
                 </div>
             `
@@ -315,17 +330,17 @@ The \`compact\` property has special responsive options:
         },
         icon: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app' ],
+            options: [ 'none', 'add', 'get_app', 'launch' ],
             mapping: { 'none': undefined }
         },
         iconRight: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app' ],
+            options: [ 'none', 'add', 'get_app', 'launch' ],
             mapping: { 'none': undefined }
         },
         iconCompact: {
             control: { type: 'inline-radio' },
-            options: [ 'none', 'add', 'get_app' ],
+            options: [ 'none', 'add', 'get_app', 'launch' ],
             mapping: { 'none': undefined }
         },
         tooltip: { type: 'string' },
@@ -337,6 +352,25 @@ The \`compact\` property has special responsive options:
                 'yes': '',
             }
         },
+        small: {
+            control: { type: 'inline-radio' },
+            options: [ 'null', 'no', 'yes',  ],
+            mapping: {
+                'null': undefined,
+                'yes': '',
+                'no': false,
+            }
+        },
+        anchor: {
+            control: { type: 'inline-radio' },
+            options: [ 'null', 'no', 'yes', 'foo', 'object' ],
+            mapping: {
+                'null': undefined,
+                'yes': true,
+                'no': false,
+                'object': {href:"foo",target:"_foo"}
+            }
+        },
         click: { action: 'click' }
     },
     args: {
@@ -346,7 +380,8 @@ The \`compact\` property has special responsive options:
         primary: false,
         secondary: false,
         tertiary: false,
-        small: false,
+        anchor: null,
+        small: null,
         disabled: false,
     },
     render: ( args ) => {

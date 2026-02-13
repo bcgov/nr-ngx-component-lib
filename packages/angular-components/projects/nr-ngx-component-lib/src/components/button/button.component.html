@@ -1,28 +1,49 @@
-<button 
-    matRipple
-    [disabled]="disabled"
-    [matTooltip]="tooltip"
->
-    @if ( useContent ) {
-        <div class="content">
-            <ng-content></ng-content>
-        </div>
-    }
-    @else {
-        @if ( hasIconLeft ) { 
-            <nrcl-icon [small]="small" class="left">{{ icon }}</nrcl-icon> 
+@if ( !isAnchor ) {
+    <button
+        matRipple
+        [disabled]="disabled"
+        [matTooltip]="tooltip"
+    >
+        @if ( useContent ) {
+            <div class="content">
+                <ng-content></ng-content>
+            </div>
+        }
+        @else {
+            @if ( hasIconLeft ) {
+                <nrcl-icon [small]="isIconSmall" class="left">{{ icon }}</nrcl-icon>
+            }
+
+            @if ( hasIconRight ) {
+                <nrcl-icon [small]="isIconSmall" class="right">{{ iconRight }}</nrcl-icon>
+            }
+
+            @if ( hasIconCompact ) {
+                <nrcl-icon class="compact" [small]="isIconSmall">{{ iconCompact || icon }}</nrcl-icon>
+            }
+
+            @if ( hasLabel ) {
+                <span class="label">{{ label }}</span>
+            }
+        }
+    </button>
+}
+@else {
+    <a [attr.href]="href" [attr.target]="href && target">
+        @if ( hasIconLeft ) {
+            <nrcl-icon [small]="isIconSmall" class="left">{{ icon }}</nrcl-icon>
         }
 
-        @if ( hasIconRight ) { 
-            <nrcl-icon [small]="small" class="right">{{ iconRight }}</nrcl-icon> 
+        @if ( hasIconRight ) {
+            <nrcl-icon [small]="isIconSmall" class="right">{{ iconRight }}</nrcl-icon>
         }
 
-        @if ( hasIconCompact ) { 
-            <nrcl-icon class="compact">{{ iconCompact || icon }}</nrcl-icon> 
+        @if ( hasIconCompact ) {
+            <nrcl-icon class="compact" [small]="isIconSmall">{{ iconCompact || icon }}</nrcl-icon>
         }
 
         @if ( hasLabel ) {
-            <span class="label">{{ label }}</span>        
+            <span class="label">{{ label }}</span>
         }
-    }
-</button>
+    </a>
+}

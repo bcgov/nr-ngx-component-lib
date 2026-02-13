@@ -1,11 +1,13 @@
 ::ng-deep :root {
     --nrcl-button-normal-height: 36px;
     --nrcl-button-normal-padding-horizontal: 16px;
+    --nrcl-button-normal-icon-padding-horizontal: 36px;
     --nrcl-button-normal-font-size: var( --nrcl-font-size );
     --nrcl-button-normal-icon-size: var( --nrcl-icon-normal-size );
 
     --nrcl-button-small-height: 24px;
     --nrcl-button-small-padding-horizontal: 8px;
+    --nrcl-button-small-icon-padding-horizontal: 24px;
     --nrcl-button-small-font-size: var( --nrcl-font-size-small );
     --nrcl-button-small-icon-size: var( --nrcl-icon-small-size );
 
@@ -40,10 +42,20 @@
     --nrcl-button-tertiary-disabled-background-color: transparent;
     --nrcl-button-tertiary-disabled-border-color: transparent;
     --nrcl-button-tertiary-disabled-hover-background-color: transparent;
+
+    --nrcl-button-anchor-foreground-color: #027DB4;
+    --nrcl-button-anchor-background-color: transparent;
+    --nrcl-button-anchor-border-color: transparent;
+    --nrcl-button-anchor-hover-background-color: rgba(0, 0, 0, 0.04);
+    --nrcl-button-anchor-disabled-foreground-color: #7E7E7E;
+    --nrcl-button-anchor-disabled-background-color: transparent;
+    --nrcl-button-anchor-disabled-border-color: transparent;
+    --nrcl-button-anchor-disabled-hover-background-color: transparent;
 }
 
 :host {
     --nrcl-button-height: 50px;
+    --nrcl-icon-padding: 50px;
     --nrcl-button-font-size: 40px;
     --nrcl-button-padding-left: 50px;
     --nrcl-button-padding-right: 50px;
@@ -52,14 +64,15 @@
     --nrcl-button-border-color: #yellow;
     --nrcl-button-hover-background-color: #blue;
 
-    button {
-        display: flex;
+    button, a {
+        display: inline-flex;
         align-items: center;
         position: relative;
         height: var( --nrcl-button-height );
         min-width: var( --nrcl-button-height );
         width: var( --nrcl-button-width );
         cursor: pointer;
+        user-select: none;
 
         margin: 0;
         padding: 0;
@@ -98,14 +111,19 @@
         --nrcl-button-padding-right: var( --nrcl-button-normal-padding-horizontal );
         --nrcl-button-font-size: var( --nrcl-button-normal-font-size );
         --nrcl-button-icon-size: var( --nrcl-button-normal-icon-size );
+        --nrcl-icon-padding: var( --nrcl-button-normal-icon-padding-horizontal );
     }
 
     &.small {
         --nrcl-button-height: var( --nrcl-button-small-height );
+        --nrcl-button-font-size: var( --nrcl-button-small-font-size );
+    }
+
+    &.icon-small {
         --nrcl-button-padding-left: var( --nrcl-button-small-padding-horizontal );
         --nrcl-button-padding-right: var( --nrcl-button-small-padding-horizontal );
-        --nrcl-button-font-size: var( --nrcl-button-small-font-size );
         --nrcl-button-icon-size: var( --nrcl-button-small-icon-size );
+        --nrcl-icon-padding: var( --nrcl-button-small-icon-padding-horizontal );
     }
 
     &.compact {
@@ -121,37 +139,43 @@
         }
     }
 
-    &.label button {
-        padding-left: var( --nrcl-button-padding-left );
-        padding-right: var( --nrcl-button-padding-right );
+    &.label {
+        button, a {
+            padding-left: var( --nrcl-button-padding-left );
+            padding-right: var( --nrcl-button-padding-right );
+        }
     }
 
-    &.icon-left button {
-        --nrcl-button-padding-left: var( --nrcl-button-height );
+    &.icon-left {
+        button, a {
+            --nrcl-button-padding-left: var( --nrcl-icon-padding );
 
-        .content {
-            padding-left: 0;
-        }
+            .content {
+                padding-left: 0;
+            }
 
-        ::ng-deep {
-            .mat-icon.left, nrcl-icon.left {
-                position: absolute;
-                left: calc( ( var( --nrcl-button-height ) - var( --nrcl-button-icon-size ) ) / 2 - 1px );
+            ::ng-deep {
+                .mat-icon.left, nrcl-icon.left {
+                    position: absolute;
+                    left: calc( ( var( --nrcl-icon-padding ) - var( --nrcl-button-icon-size ) ) / 2 - 1px );
+                }
             }
         }
     }
 
-    &.icon-right button {
-        --nrcl-button-padding-right: var( --nrcl-button-height );
+    &.icon-right {
+        button, a {
+            --nrcl-button-padding-right: var( --nrcl-icon-padding );
 
-        .content {
-            padding-right: 0;
-        }
+            .content {
+                padding-right: 0;
+            }
 
-        ::ng-deep {
-            .mat-icon.right, nrcl-icon.right {
-                position: absolute;
-                right: calc( ( var( --nrcl-button-height ) - var( --nrcl-button-icon-size ) ) / 2 - 1px );
+            ::ng-deep {
+                .mat-icon.right, nrcl-icon.right {
+                    position: absolute;
+                    right: calc( ( var( --nrcl-icon-padding ) - var( --nrcl-button-icon-size ) ) / 2 - 1px );
+                }
             }
         }
     }
@@ -207,6 +231,30 @@
             --nrcl-button-background-color: var( --nrcl-button-tertiary-disabled-background-color );
             --nrcl-button-border-color: var( --nrcl-button-tertiary-disabled-border-color );
             --nrcl-button-hover-background-color: var( --nrcl-button-tertiary-disabled-hover-background-color );
+        }
+    }
+
+    &.anchor {
+        --nrcl-button-foreground-color: var( --nrcl-button-anchor-foreground-color );
+        --nrcl-button-background-color: var( --nrcl-button-anchor-background-color );
+        --nrcl-button-border-color: var( --nrcl-button-anchor-border-color );
+        --nrcl-button-hover-background-color: var( --nrcl-button-anchor-hover-background-color );
+
+        a {
+            &:hover {
+                color: #F59A23;
+            }
+            
+            .label, .content {
+                text-decoration: underline;
+            }
+        }
+
+        &.disabled {
+            --nrcl-button-foreground-color: var( --nrcl-button-anchor-disabled-foreground-color );
+            --nrcl-button-background-color: var( --nrcl-button-anchor-disabled-background-color );
+            --nrcl-button-border-color: var( --nrcl-button-anchor-disabled-border-color );
+            --nrcl-button-hover-background-color: var( --nrcl-button-anchor-disabled-hover-background-color );
         }
     }
 }

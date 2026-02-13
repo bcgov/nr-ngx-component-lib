@@ -20,6 +20,7 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { RowListDesktopComponent } from './row-list-desktop.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<RowListDesktopComponent> = {
     title: 'Row List (Desktop)',
@@ -52,7 +53,8 @@ const meta: Meta<RowListDesktopComponent> = {
                 DeviceViewComponent,
                 DesktopViewDirective,
                 MobileViewDirective,
-                IconComponent
+                IconComponent,
+                ButtonComponent,                
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

@@ -17,6 +17,7 @@ import { FilterSearchComponent } from '../filter-search/filter-search.component'
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { IconComponent } from '../icon/icon.component';
 import { RowListSortingComponent } from './row-list-sorting.component';
+import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<RowListSortingComponent> = {
     title: 'Row List Sorting',
@@ -47,7 +48,8 @@ const meta: Meta<RowListSortingComponent> = {
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
-                IconComponent
+                IconComponent,
+                ButtonComponent,                
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
