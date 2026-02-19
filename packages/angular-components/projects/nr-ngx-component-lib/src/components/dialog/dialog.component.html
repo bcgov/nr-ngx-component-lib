@@ -11,7 +11,7 @@
         }
 
         @if ( showClose ) {
-            <nrcl-button tertiary
+            <nrcl-button tertiary class="close"
                 icon="close"
                 (click)="cancelClick.emit()"
             ></nrcl-button>                                
@@ -29,9 +29,9 @@
 
 <ng-content select="section[footer]"></ng-content>
 
-@if ( !showClose ) {
+@if ( showActions ) {
     <div mat-dialog-actions align="end">
-        <!-- <ng-content select=".footer"></ng-content> -->
+        <ng-content select="section[actions]"></ng-content>
 
         <div class="action-button-wrapper">        
             @if ( saveEnabled && showWarning ) {
@@ -41,16 +41,21 @@
                 </div>
             }            
             
-            <nrcl-button 
-                [label]="cancelLabel"
-                (click)="cancelClick.emit()"
-            ></nrcl-button>
+            @if ( cancelEnabled != null ) {
+                <nrcl-button 
+                    [label]="cancelLabel"
+                    (click)="cancelClick.emit()"
+                    [disabled]="!cancelEnabled"
+                ></nrcl-button>
+            }
 
-            <nrcl-button primary
-                [label]="saveLabel"
-                (click)="saveClick.emit()" 
-                [disabled]="!saveEnabled"
-            ></nrcl-button>
+            @if ( saveEnabled != null ) {
+                <nrcl-button primary
+                    [label]="saveLabel"
+                    (click)="saveClick.emit()" 
+                    [disabled]="!saveEnabled"
+                ></nrcl-button>
+            }
         </div>
     </div>
 }

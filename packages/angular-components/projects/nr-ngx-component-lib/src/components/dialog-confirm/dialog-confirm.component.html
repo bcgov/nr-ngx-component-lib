@@ -1,0 +1,18 @@
+<nrcl-dialog
+    [title]="title"
+    [isLoading]="false"
+    [showClose]="true"
+    [saveLabel]="saveLabel"
+    [saveEnabled]="true"
+    [cancelLabel]="cancelLabel"
+    [cancelEnabled]="true"
+    [showWarning]="false"
+    [showActions]="true"
+    (saveClick)="onSaveClick()"
+    (cancelClick)="onCancelClick()"
+>
+    <ng-container 
+        [ngTemplateOutlet]="config.template" 
+        [ngTemplateOutletContext]="{ $implicit: config.context }">
+    </ng-container>
+</nrcl-dialog>

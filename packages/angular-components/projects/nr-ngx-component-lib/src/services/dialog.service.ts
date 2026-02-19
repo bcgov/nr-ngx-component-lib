@@ -1,8 +1,9 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { EditDialogBaseResult, EditDialogBase } from '../directives/edit-dialog.base';
+import { DialogBase, DialogBaseResult } from '../directives/dialog.base';
 import { ConfigurationService } from './configuration.service';
+import { DialogConfirmComponent, DialogConfirmConfig } from '../components/dialog-confirm/dialog-confirm.component';
 
 const DEFAULT_CONFIG = {
     panelClass: 'nrcl-dialog',
@@ -19,14 +20,17 @@ export class DialogService {
     configurationService = inject( ConfigurationService )
     matDialog = inject( MatDialog )
 
-    openEditDialog<D extends EditDialogBase<C,R>, C, R>( dialog: ComponentType<D>, data: C, additionalConfig?: MatDialogConfig) {
+    openDialog<D extends DialogBase<C, R>, C, R>( dialog: ComponentType<D>, data: C, additionalConfig?: MatDialogConfig) {
         let config: MatDialogConfig = {
             ...DEFAULT_CONFIG,
-            panelClass: [ DEFAULT_CONFIG.panelClass, 'nrcl-edit-dialog' ],
             data,
             ...additionalConfig
         }
 
-        return this.matDialog.open<D,C,EditDialogBaseResult<R>>( dialog, config )
+        return this.matDialog.open<D,C,DialogBaseResult<R>>( dialog, config )
+    }
+
+    openConfirmDialog( config: DialogConfirmConfig, additionalConfig?: MatDialogConfig ) {
+        return this.openDialog<DialogConfirmComponent,DialogConfirmConfig,DialogBaseResult<void>>( DialogConfirmComponent, config, additionalConfig )
     }
 }
