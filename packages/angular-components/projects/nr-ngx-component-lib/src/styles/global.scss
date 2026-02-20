@@ -20,21 +20,17 @@
 
     // desktop
     --nrcl-device-desktop-gutter-space: 16px;
-    --nrcl-device-desktop-form-layout-columns: 4;
 
     //mobile
     --nrcl-device-mobile-gutter-space: 8px;
-    --nrcl-device-mobile-form-layout-columns: 2;
 }
 
 html {
     .nrcl-device-desktop {
         --nrcl-gutter-space: var( --nrcl-device-desktop-gutter-space );
-        --nrcl-form-layout-columns: var( --nrcl-device-desktop-form-layout-columns );
     }
 
     .nrcl-device-mobile {
         --nrcl-gutter-space: var( --nrcl-device-mobile-gutter-space );
-        --nrcl-form-layout-columns: var( --nrcl-device-mobile-form-layout-columns );
     }
 }

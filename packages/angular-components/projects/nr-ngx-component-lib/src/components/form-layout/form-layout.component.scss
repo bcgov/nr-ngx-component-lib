@@ -1,14 +1,15 @@
 @use "sass:meta";
 
 ::ng-deep :root {
+    --nrcl-form-layout-columns: 3;
+    --nrcl-device-desktop-form-layout-columns: 4;
+    --nrcl-device-mobile-form-layout-columns: 2;
 }
 
 :host {
-    ::ng-deep {
-    }
-
     display: grid;
-    gap: var( --nrcl-gutter-space );
+    column-gap: var( --nrcl-gutter-space );
+    row-gap: 0;
     grid-template-columns: repeat( var( --nrcl-form-layout-columns ), 1fr );
 
     & > ::ng-deep [ layoutwidth="2" ] {
@@ -17,5 +18,17 @@
 
     & > ::ng-deep [ layoutwidth="full" ] {
         grid-column: span var( --nrcl-form-layout-columns );
+    }
+}
+
+:host-context( .nrcl-device-desktop ) {
+    :host {
+        --nrcl-form-layout-columns: var( --nrcl-device-desktop-form-layout-columns );
+    }
+}
+
+:host-context( .nrcl-device-mobile ) {
+    :host {
+        --nrcl-form-layout-columns: var( --nrcl-device-mobile-form-layout-columns );
     }
 }
