@@ -533,3 +533,90 @@ Choose content projection when:
         }
     }
 }
+
+export const Inline: StoryObj<ButtonComponent & DisplayModeWrapperComponent> = {
+    parameters: {
+        docs: {
+            description: {
+                story: `
+                `
+            }
+        }
+    },    
+    argTypes: {
+        ...displayModeWrapperStory.argTypes,
+        label: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'Ok', 'Add Resources' ],
+            mapping: { 'none': undefined }
+        },
+        icon: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app', 'launch' ],
+            mapping: { 'none': undefined }
+        },
+        iconRight: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app', 'launch' ],
+            mapping: { 'none': undefined }
+        },
+        iconCompact: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', 'add', 'get_app', 'launch' ],
+            mapping: { 'none': undefined }
+        },
+        tooltip: { type: 'string' },
+        compact: {
+            control: { type: 'inline-radio' },
+            options: [ 'no', 'yes', 'desktop', 'mobile' ],
+            mapping: {
+                'no': undefined,
+                'yes': '',
+            }
+        },
+        small: {
+            control: { type: 'inline-radio' },
+            options: [ 'null', 'no', 'yes',  ],
+            mapping: {
+                'null': undefined,
+                'yes': '',
+                'no': false,
+            }
+        },
+        anchor: {
+            control: { type: 'inline-radio' },
+            options: [ 'null', 'no', 'yes', 'foo', 'object' ],
+            mapping: {
+                'null': undefined,
+                'yes': true,
+                'no': false,
+                'object': {href:"foo",target:"_foo"}
+            }
+        },
+        click: { action: 'click' }
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        label: 'Add Resources',
+        tooltip: null,
+        primary: false,
+        secondary: false,
+        tertiary: false,
+        anchor: null,
+        small: null,
+        disabled: false,
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 20px;
+                }
+            `],
+            template: `
+                The text before <nrcl-button ${ argsToTemplate(args,{exclude:displayModeWrapperStoryArgs}) }></nrcl-button> and the text after.
+            `
+        }
+    }
+}

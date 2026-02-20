@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Directive, inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { DialogComponent } from "../components/dialog/dialog.component";
+import { NrclBase } from "./nrcl.base";
 
 export type DialogBaseResult<R> = R | 'cancel'
 
 @Directive()
-export class DialogBase<CONFIG, RESULT = any> {
+export class DialogBase<CONFIG, RESULT = any> extends NrclBase {
     dialogRef = inject( MatDialogRef<DialogComponent,DialogBaseResult<RESULT>> )
     changeDetectorRef = inject( ChangeDetectorRef )
 

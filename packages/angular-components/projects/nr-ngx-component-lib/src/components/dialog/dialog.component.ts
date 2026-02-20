@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
+import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
     selector: 'nrcl-dialog',
@@ -6,7 +7,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
     styleUrl: './dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent {
+export class DialogComponent extends NrclBase {
     @Input() title: string;
     @Input() isLoading = false
     @Input() showClose = false
