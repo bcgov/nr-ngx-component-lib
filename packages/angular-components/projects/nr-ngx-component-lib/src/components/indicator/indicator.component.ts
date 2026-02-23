@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, inject, Input } from '@angular/core';
+import { AfterContentChecked, booleanAttribute, Component, ElementRef, inject, Input } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
@@ -6,7 +6,9 @@ import { NrclBase } from '../../directives/nrcl.base';
     styleUrl: './indicator.component.scss',
     template: '<ng-content></ng-content><div class="none"></div>',
     host: {
-        '[class]': "'status-' + status"
+        '[class]': "'status-' + status",
+        '[class.normal]': "!large",
+        '[class.large]': "large"
     }
 } )
 export class IndicatorComponent extends NrclBase implements AfterContentChecked {
@@ -23,6 +25,8 @@ export class IndicatorComponent extends NrclBase implements AfterContentChecked 
         return this._content
     }
 
+    @Input( { transform: booleanAttribute } ) large = false
+    
     elementRef = inject( ElementRef )
 
     ngAfterContentChecked(): void {        

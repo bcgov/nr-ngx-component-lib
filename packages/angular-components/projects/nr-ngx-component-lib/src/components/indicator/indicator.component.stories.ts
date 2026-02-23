@@ -40,6 +40,9 @@ export const Primary: StoryObj<IndicatorComponent & { indicator: string }> = {
             options: ['','Active','Future','Complete','Not defined', 'A really long value', 'Ok'],            
         }
     },
+    args: {
+        large: false
+    },
     render: ( args ) => {
         return {
             props: args,
@@ -59,12 +62,12 @@ export const Primary: StoryObj<IndicatorComponent & { indicator: string }> = {
             `],
             template: `                
                 <div style="padding: 10px 0;">
-                    Before <nrcl-indicator>{{ indicator }}</nrcl-indicator> After
+                    Before <nrcl-indicator [large]="large">{{ indicator }}</nrcl-indicator> After
                 </div>
 
                 <div style="display: flex; gap: 10px; align-items: center">                     
                     <div>Before</div>
-                    <nrcl-indicator>{{ indicator }}</nrcl-indicator> 
+                    <nrcl-indicator [large]="large">{{ indicator }}</nrcl-indicator> 
                     <div>After</div>
                 </div>
             `
