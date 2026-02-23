@@ -25,6 +25,11 @@
                 active-indicator-color: white
             ));
         }
+
+        .close {
+            display: flex;
+            --nrcl-button-tertiary-foreground-color: white;
+        }
     }
 
     ::ng-deep {

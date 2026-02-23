@@ -1,9 +1,13 @@
 ::ng-deep :root {
     --nrcl-indicator-min-width: 80px;
-    --nrcl-indicator-font-size: var( --nrcl-font-size-small );
+    --nrcl-indicator-font-size: 20px;
     --nrcl-indicator-text-color: black;
     --nrcl-indicator-border-color: black;
     --nrcl-indicator-background-color: #f2f2f2;
+
+    --nrcl-indicator-normal-font-size: var( --nrcl-font-size-small );
+
+    --nrcl-indicator-large-font-size: var( --nrcl-font-size );
 }
 
 :host {
@@ -35,5 +39,13 @@
         .none {
             display: block;
         }
+    }
+
+    &.normal {
+        --nrcl-indicator-font-size: var( --nrcl-indicator-normal-font-size );
+    }
+
+    &.large {
+        --nrcl-indicator-font-size: var( --nrcl-indicator-large-font-size );
     }
 }

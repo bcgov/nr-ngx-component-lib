@@ -33,6 +33,10 @@ export class MobileViewDirective {
         }
     `,
     styles: [`
+        :host {
+            display: contents;
+        }
+
         :host:empty {
             display: none;
         }
@@ -43,8 +47,5 @@ export class DeviceViewComponent extends ConfigurationSubscriberBase {
     @ContentChild( MobileViewDirective ) mobileContent!: MobileViewDirective;
 
     changeDetectorRef = inject( ChangeDetectorRef )
-
-    get desktopVisible() { return this.configuration.displayMode == 'desktop' }
-    get mobileVisible() { return this.configuration.displayMode == 'mobile' }
 }
 

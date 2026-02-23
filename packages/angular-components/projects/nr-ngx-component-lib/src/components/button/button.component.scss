@@ -240,6 +240,11 @@
         --nrcl-button-background-color: var( --nrcl-button-anchor-background-color );
         --nrcl-button-border-color: var( --nrcl-button-anchor-border-color );
         --nrcl-button-hover-background-color: var( --nrcl-button-anchor-hover-background-color );
+        --nrcl-button-padding-left: 0;
+        --nrcl-button-padding-right: 0;
+        --nrcl-button-normal-height: 20px;
+        --nrcl-button-normal-padding-horizontal: 0;
+        --nrcl-button-normal-icon-padding-horizontal: 0;
 
         a {
             &:hover {

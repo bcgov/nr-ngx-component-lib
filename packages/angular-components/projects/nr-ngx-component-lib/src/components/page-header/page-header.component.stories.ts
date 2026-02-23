@@ -8,6 +8,8 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { ButtonComponent } from '../button/button.component';
 import { PageContainerComponent } from '../page-container/page-container.component';
 import { PageHeaderComponent } from './page-header.component';
+import { IndicatorComponent } from '../indicator/indicator.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 
 const meta: Meta<PageHeaderComponent> = {
     title: 'Page Header',
@@ -25,7 +27,11 @@ const meta: Meta<PageHeaderComponent> = {
             // declare components that are used in the template
             declarations: [
                 ButtonComponent,
-                PageContainerComponent
+                PageContainerComponent,
+                IndicatorComponent,
+                DesktopViewDirective,
+                MobileViewDirective,
+                DeviceViewComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -143,7 +149,13 @@ Modify header text to test dynamic content.
 
 export default meta;
 
-export const Primary: StoryObj<PageHeaderComponent & DisplayModeWrapperComponent & { isLoading: boolean, header1: string, header2: string }> = {
+export const Primary: StoryObj<PageHeaderComponent & DisplayModeWrapperComponent & { 
+    isLoading: boolean, 
+    header1: string, 
+    header2: string 
+    leftSide: string 
+    rightSide: string 
+}> = {
     argTypes: displayModeWrapperStory.argTypes,
     parameters: {
         docs: {
@@ -161,7 +173,9 @@ Adjust header text to see how dynamic content is displayed.
         ...displayModeWrapperStory.args,
         header1: 'Prep Sheets',
         header2: 'Header 2',
-        isLoading: false
+        isLoading: false,
+        leftSide: 'Left side content',
+        rightSide: 'Right side content',
     },
     render: ( args ) => {
         return {
@@ -169,12 +183,22 @@ Adjust header text to see how dynamic content is displayed.
             template: `
                 <nrcl-page-container>
                     <nrcl-page-header [isLoading]="isLoading">
-                        <h1>{{ header1 }}</h1>
+                        <h1>
+                            {{ header1 }} 
+                        </h1>
                         @if ( header2 ) { <h2>{{ header2 }}</h2> }
+                        
+                        <div left-side>{{ leftSide }}</div>
 
-                        <nrcl-button primary>
+                        <nrcl-button primary action>
                             Create Prep Sheet
                         </nrcl-button>
+
+                        <nrcl-button primary action
+                            (click)="addClick( $event )"
+                        >Do Something</nrcl-button>
+
+                        <div right-side>{{ rightSide }}</div>
                     </nrcl-page-header>
                 </nrcl-page-container>
             `

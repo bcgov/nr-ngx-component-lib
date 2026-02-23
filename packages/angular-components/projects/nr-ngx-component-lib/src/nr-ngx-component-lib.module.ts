@@ -25,7 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
-import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './components/expansion-panel/footer/expansion-panel-footer.component';
 import { ExpansionPanelHeaderComponent } from './components/expansion-panel/header/expansion-panel-header.component';
@@ -57,6 +57,7 @@ import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
     imports: [
@@ -116,7 +117,8 @@ import { DATE_FORMATS } from './utils/date.util';
         DeviceViewComponent,
         IconComponent,
         IndicatorComponent,
-        EditDialogComponent,
+        DialogComponent,
+        DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
     ],
@@ -150,7 +152,8 @@ import { DATE_FORMATS } from './utils/date.util';
         DeviceViewComponent,
         IconComponent,
         IndicatorComponent,
-        EditDialogComponent,
+        DialogComponent,
+        DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
     ],

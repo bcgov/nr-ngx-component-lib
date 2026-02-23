@@ -33,4 +33,7 @@ export class ConfigurationSubscriberBase extends NrclBase implements OnInit, OnD
     }
 
     onConfigurationChange() {}
+
+    get desktopVisible() { return this.configuration.displayMode == 'desktop' }
+    get mobileVisible() { return this.configuration.displayMode == 'mobile' }
 }

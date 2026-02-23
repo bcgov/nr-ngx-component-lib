@@ -1,10 +1,59 @@
-<div class="left-side">
-    <ng-content select="[left-side],h1,h2"></ng-content>
-</div>
+<ng-template #headers>
+    <ng-content select="h1"></ng-content>
+    <ng-content select="h2"></ng-content>
+</ng-template>
 
-<div class="right-side">
+<ng-template #leftSide>
+    <ng-content select="[left-side]"></ng-content>
+</ng-template>
+
+<ng-template #actions>
+    <ng-content select="[action]"></ng-content>
+</ng-template>
+
+<ng-template #rightSide>
     <ng-content select="[right-side]"></ng-content>
     <ng-content></ng-content>
-</div>
+</ng-template>
+
+@if ( desktopVisible ) {
+    <div class="left-side">
+        <div class="title">
+            <ng-container [ngTemplateOutlet]="headers"></ng-container>
+        </div>
+
+        <div class="below-title">
+            <ng-container [ngTemplateOutlet]="leftSide"></ng-container>
+        </div>
+    </div>
+
+    <div class="middle"></div>
+
+    <div class="right-side">
+        <div class="actions">
+            <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+        <div class="below-actions">
+            <ng-container [ngTemplateOutlet]="rightSide"></ng-container>
+        </div>
+    </div>
+}
+
+@if ( mobileVisible ) {
+    <div class="top">
+        <div class="title">
+            <ng-container [ngTemplateOutlet]="headers"></ng-container>
+        </div>
+
+        <div class="actions">
+            <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <ng-container [ngTemplateOutlet]="leftSide"></ng-container>
+        <ng-container [ngTemplateOutlet]="rightSide"></ng-container>
+    </div>
+}
 
 <mat-spinner class="loading" [diameter]="30"></mat-spinner>

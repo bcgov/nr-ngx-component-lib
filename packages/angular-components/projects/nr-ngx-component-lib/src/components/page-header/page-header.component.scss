@@ -2,13 +2,7 @@
 }
 
 :host {
-    display: flex;
-    gap: var( --nrcl-gutter-space );
-    position: relative;
-    padding-top: var( --nrcl-gutter-space );
-    font-family: var( --nrcl-font-family );
-
-    .left-side {
+    .title {
         display: flex;
         flex-direction: column;
 
@@ -27,13 +21,6 @@
         }    
     }
 
-    .right-side {
-        flex-grow: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;        
-    }
-
     .loading {
         position: absolute;
         top: var( --nrcl-gutter-space );
@@ -45,9 +32,76 @@
         .loading {
             display: block;
         }
+    }
+}
+
+:host-context( .nrcl-device-desktop ) {
+    :host {
+        display: flex;
+        position: relative;
+        padding-top: var( --nrcl-gutter-space );
+        font-family: var( --nrcl-font-family );
+
+        .left-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .middle {
+            flex-grow: 1;
+        }
 
         .right-side {
-            visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;        
+
+            .actions {
+                align-self: flex-end;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: var( --nrcl-gutter-space );
+            }
         }
+
+        &.isLoading {
+            .right-side .actions {
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+:host-context( .nrcl-device-mobile ) {
+    :host {
+        .top {
+            display: flex;
+
+            .title {
+                flex-grow: 1;
+            }
+
+            .actions {
+                align-self: flex-end;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-end;
+                gap: var( --nrcl-gutter-space );
+            }
+        }
+
+        .bottom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &.isLoading {
+            .top .actions {
+                visibility: hidden;
+            }
+        }        
     }
 }

@@ -4,6 +4,7 @@ import {
     Input
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
+import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
 @Component({
     selector: "nrcl-page-header",
@@ -14,6 +15,6 @@ import { NrclBase } from "../../directives/nrcl.base";
         '[class.isLoading]': 'isLoading',
     }
 })
-export class PageHeaderComponent extends NrclBase {
+export class PageHeaderComponent extends ConfigurationSubscriberBase {
     @Input() isLoading = false
 }
