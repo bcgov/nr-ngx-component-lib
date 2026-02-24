@@ -151,6 +151,7 @@ export default meta;
 
 export const Primary: StoryObj<PageHeaderComponent & DisplayModeWrapperComponent & { 
     isLoading: boolean, 
+    indicator: boolean, 
     header1: string, 
     header2: string 
     leftSide: string 
@@ -174,6 +175,7 @@ Adjust header text to see how dynamic content is displayed.
         header1: 'Prep Sheets',
         header2: 'Header 2',
         isLoading: false,
+        indicator: true,
         leftSide: 'Left side content',
         rightSide: 'Right side content',
     },
@@ -187,7 +189,11 @@ Adjust header text to see how dynamic content is displayed.
                             {{ header1 }} 
                         </h1>
                         @if ( header2 ) { <h2>{{ header2 }}</h2> }
-                        
+
+                        @if ( indicator ) {
+                            <nrcl-indicator large>Active</nrcl-indicator>
+                        }       
+
                         <div left-side>{{ leftSide }}</div>
 
                         <nrcl-button primary action>
@@ -197,6 +203,10 @@ Adjust header text to see how dynamic content is displayed.
                         <nrcl-button primary action
                             (click)="addClick( $event )"
                         >Do Something</nrcl-button>
+
+                        <nrcl-button primary action
+                            (click)="addClick( $event )"
+                        >Do Other thing</nrcl-button>
 
                         <div right-side>{{ rightSide }}</div>
                     </nrcl-page-header>

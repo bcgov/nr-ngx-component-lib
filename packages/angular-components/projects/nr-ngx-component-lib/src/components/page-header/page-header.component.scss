@@ -2,11 +2,16 @@
 }
 
 :host {
-    .title {
+    display: flex;
+    position: relative;
+    padding-top: var( --nrcl-gutter-space );
+    font-family: var( --nrcl-font-family );
+
+    .headers {
         display: flex;
         flex-direction: column;
 
-        ::ng-deep h1 {
+        ::ng-deep h1 {            
             font-size: var( --nrcl-font-size-h1 );
             font-weight: 200;
             padding: 0;
@@ -21,9 +26,20 @@
         }    
     }
 
+    .actions {
+        align-self: flex-end;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var( --nrcl-gutter-space );
+        position: relative;
+        min-height: var( --nrcl-button-normal-height );
+    }
+
     .loading {
         position: absolute;
-        top: var( --nrcl-gutter-space );
+        top: 0; //var( --nrcl-gutter-space );
         right: 0;
         display: none;
     }
@@ -32,16 +48,15 @@
         .loading {
             display: block;
         }
+
+        .actions > ::ng-deep  *:not( .loading )  {
+            visibility: hidden;
+        }
     }
 }
 
 :host-context( .nrcl-device-desktop ) {
-    :host {
-        display: flex;
-        position: relative;
-        padding-top: var( --nrcl-gutter-space );
-        font-family: var( --nrcl-font-family );
-
+    :host {        
         .left-side {
             display: flex;
             flex-direction: column;
@@ -49,6 +64,13 @@
 
         .middle {
             flex-grow: 1;
+
+            .indicator {
+                display: flex;
+                align-items: center;
+                height: var( --nrcl-button-normal-height );
+                margin-left: var( --nrcl-gutter-space );
+            }
         }
 
         .right-side {
@@ -56,52 +78,45 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;        
-
-            .actions {
-                align-self: flex-end;
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                gap: var( --nrcl-gutter-space );
-            }
-        }
-
-        &.isLoading {
-            .right-side .actions {
-                visibility: hidden;
-            }
         }
     }
 }
 
 :host-context( .nrcl-device-mobile ) {
     :host {
+        flex-direction: column;
+        gap: var( --nrcl-gutter-space );
+
         .top {
-            display: flex;
+            display: block;
 
-            .title {
-                flex-grow: 1;
+            .headers {
+                display: contents;
+
+                ::ng-deep {
+                    h1, h2 { 
+                        display: block;
+                    }
+                }
             }
 
-            .actions {
-                align-self: flex-end;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-end;
-                gap: var( --nrcl-gutter-space );
+            .indicator {
+                float: right;
             }
+
+            .indicator:empty {
+                display: none;
+            }
+        }
+
+        .actions {
+            align-self: stretch;
+            justify-content: flex-start;
         }
 
         .bottom {
             display: flex;
             flex-direction: column;
         }
-
-        &.isLoading {
-            .top .actions {
-                visibility: hidden;
-            }
-        }        
     }
 }

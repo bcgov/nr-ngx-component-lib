@@ -3,6 +3,10 @@
     <ng-content select="h2"></ng-content>
 </ng-template>
 
+<ng-template #indicator>
+    <ng-content select="nrcl-indicator,[indicator]"></ng-content>
+</ng-template>
+
 <ng-template #leftSide>
     <ng-content select="[left-side]"></ng-content>
 </ng-template>
@@ -18,7 +22,7 @@
 
 @if ( desktopVisible ) {
     <div class="left-side">
-        <div class="title">
+        <div class="headers">
             <ng-container [ngTemplateOutlet]="headers"></ng-container>
         </div>
 
@@ -27,10 +31,15 @@
         </div>
     </div>
 
-    <div class="middle"></div>
+    <div class="middle">
+        <div class="indicator">
+            <ng-container [ngTemplateOutlet]="indicator"></ng-container>
+        </div>
+    </div>
 
     <div class="right-side">
         <div class="actions">
+            <mat-spinner class="loading" [diameter]="30"></mat-spinner>
             <ng-container [ngTemplateOutlet]="actions"></ng-container>
         </div>
         <div class="below-actions">
@@ -41,13 +50,17 @@
 
 @if ( mobileVisible ) {
     <div class="top">
-        <div class="title">
+        <div class="indicator">
+            <ng-container [ngTemplateOutlet]="indicator"></ng-container>
+        </div>
+        <div class="headers">
             <ng-container [ngTemplateOutlet]="headers"></ng-container>
         </div>
+    </div>
 
-        <div class="actions">
-            <ng-container [ngTemplateOutlet]="actions"></ng-container>
-        </div>
+    <div class="actions">
+        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        <mat-spinner class="loading" [diameter]="30"></mat-spinner>
     </div>
 
     <div class="bottom">
@@ -56,4 +69,3 @@
     </div>
 }
 
-<mat-spinner class="loading" [diameter]="30"></mat-spinner>
