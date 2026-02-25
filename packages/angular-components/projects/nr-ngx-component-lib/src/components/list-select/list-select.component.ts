@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, numberAttribute, Output } from "@angular/core";
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, numberAttribute, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
 import { CodeDescription } from "../../utils/code-table.util";
@@ -9,7 +9,7 @@ import { CodeDescription } from "../../utils/code-table.util";
     styleUrl: "./list-select.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListSelectComponent extends RowListBase<{},CodeDescription> {
+export class ListSelectComponent extends RowListBase<{},CodeDescription> implements OnChanges {
     @Input() options: CodeDescription[]
     @Input() value: string[]
     @Input() descriptionLabel = 'Description'
@@ -20,6 +20,15 @@ export class ListSelectComponent extends RowListBase<{},CodeDescription> {
     
     searchText
     searchRegexp: RegExp
+    displayColumns = [ 'description', 'addRemove' ]
+
+    ngOnChanges( changes: SimpleChanges ): void {
+        console.log(changes)
+
+        if ( changes.options ) {
+            this.refreshRowList()
+        }
+    }
 
     get initialPageState(): RowListState<{}> {
         return {
@@ -32,15 +41,11 @@ export class ListSelectComponent extends RowListBase<{},CodeDescription> {
     }
 
     fetchRowListPage(): Observable<CodeDescription[]> {
-        if ( this.searchRegexp ) {
-            return of( this.options.filter( o => this.searchRegexp.test( o.description ) ) )
-        }
-        else {
-            return of( this.options )
-        }
+        return of( this.options.filter( o => this.filterOption( o ) ) )
     }
     
     displayRowListPage( res: CodeDescription[] ): LoadRowListResult<CodeDescription> {
+        console.log(res)
         return {
             totalRowCount: res.length,
             rows: res
@@ -93,5 +98,17 @@ export class ListSelectComponent extends RowListBase<{},CodeDescription> {
         }
 
         this.refreshRowList()
+    }
+
+    filterOption( option: CodeDescription ): boolean {
+        if ( this.searchRegexp?.test( option.description ) ) return true
+
+        return this._optionsFilter( option )
+    }
+
+    private _optionsFilter: ( option: CodeDescription ) => boolean = () => true
+
+    setOptionsFilter( filter: ( option: CodeDescription ) => boolean ) {
+        this._optionsFilter = filter
     }
 }

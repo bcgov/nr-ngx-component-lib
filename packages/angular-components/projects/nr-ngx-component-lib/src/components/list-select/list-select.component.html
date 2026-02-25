@@ -9,6 +9,8 @@
         [(value)]="searchText"
         (valueChange)="onSearchTextChange( $event )">
     </nrcl-filter-search>
+
+    <ng-content select="[filter]"></ng-content>
 </nrcl-filters-panel>
 
 <nrcl-row-list-desktop>
@@ -21,6 +23,8 @@
                 </mat-cell>
             </ng-container>
 
+            <ng-content select="[column]"></ng-content>
+
             <ng-container matColumnDef="addRemove">
                 <mat-header-cell *matHeaderCellDef>Add Remove</mat-header-cell>
                 <mat-cell *matCellDef="let item">
@@ -28,10 +32,10 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="[ 'description', 'addRemove' ]; sticky: true"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
 
             <mat-row
-                *matRowDef="let item; columns: [ 'description', 'addRemove' ]"
+                *matRowDef="let item; columns: displayColumns"
                 [class.selected]="isSelected( item )"
                 (click)="onRowClick( item )"
                 (keypress)="onRowClick( item )"
