@@ -15,18 +15,24 @@
         }
     }
 
-    .mat-mdc-table {
-        .mat-column-description {
-            flex-grow: 1;
+    .nrcl-row-list-desktop {
+        &.empty {
+            display: none;
         }
+        
+        .mat-mdc-table {
+            .mat-column-description {
+                flex-grow: 1;
+            }
 
-        .mat-column-addRemove {
-            flex-basis: 70px;
-            flex-grow: 0;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            text-align: center;
+            .mat-column-addRemove {
+                flex-basis: 70px;
+                flex-grow: 0;
+                flex-shrink: 0;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+            }
         }
     }
 }

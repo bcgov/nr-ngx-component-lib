@@ -13,35 +13,33 @@
     <ng-content select="[filter]"></ng-content>
 </nrcl-filters-panel>
 
-<nrcl-row-list-desktop>
-    @if ( rows?.length > 0 ) {
-        <mat-table [dataSource]="rows">
-            <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef>{{ descriptionLabel }}</mat-header-cell>
-                <mat-cell *matCellDef="let item">
-                    {{ item.description }}
-                </mat-cell>
-            </ng-container>
+<nrcl-row-list-desktop [class.empty]="rows?.length == 0">
+    <mat-table [dataSource]="rows" >
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>{{ descriptionLabel }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">
+                <nrcl-cell-content>{{ item.description }}</nrcl-cell-content>
+            </mat-cell>
+        </ng-container>
 
-            <ng-content select="[column]"></ng-content>
+        <ng-container matColumnDef="addRemove">
+            <mat-header-cell *matHeaderCellDef>Add Remove</mat-header-cell>
+            <mat-cell *matCellDef="let item">
+                <nrcl-indicator-select [selected]="isSelected( item )"></nrcl-indicator-select>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="addRemove">
-                <mat-header-cell *matHeaderCellDef>Add Remove</mat-header-cell>
-                <mat-cell *matCellDef="let item">
-                    <nrcl-indicator-select [selected]="isSelected( item )"></nrcl-indicator-select>
-                </mat-cell>
-            </ng-container>
+        <ng-content></ng-content>
 
-            <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
 
-            <mat-row
-                *matRowDef="let item; columns: displayColumns"
-                [class.selected]="isSelected( item )"
-                (click)="onRowClick( item )"
-                (keypress)="onRowClick( item )"
-            ></mat-row>
-        </mat-table>
-    }
+        <mat-row
+            *matRowDef="let item; columns: displayColumns"
+            [class.selected]="isSelected( item )"
+            (click)="onRowClick( item )"
+            (keypress)="onRowClick( item )"
+        ></mat-row>
+    </mat-table>
 </nrcl-row-list-desktop>
 
 @if ( totalRowCount == 0 ) {
