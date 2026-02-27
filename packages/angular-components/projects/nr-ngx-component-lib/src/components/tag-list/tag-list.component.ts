@@ -11,6 +11,7 @@ export type TagItem = {
     id: string
     description: string
     tooltip: string
+    icon: string
 }
 
 @Component({

@@ -3,7 +3,12 @@
         @for ( item of items; track item.id ) {
             <mat-chip
                 (removed)="onRemoveItem( item.id )"
+                [matTooltip]="item.tooltip"
             >
+                @if ( item.icon ) {
+                    <nrcl-icon small matChipAvatar>{{ item.icon }}</nrcl-icon>
+                }
+
                 {{ item.description }}
 
                 @if ( removable ) {
