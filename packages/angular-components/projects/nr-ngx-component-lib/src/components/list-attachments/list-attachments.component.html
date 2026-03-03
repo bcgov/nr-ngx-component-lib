@@ -1,98 +1,98 @@
 <nrcl-device-view>
     <ng-template desktop-view>
-        <nrcl-row-list-desktop>
-            @if ( rows?.length > 0 ) {
-                <table mat-table
+        @if ( rows?.length > 0 ) {
+            <nrcl-row-list-desktop [showRowHover]="false">
+                <mat-table
                     [dataSource]="rows | paginate: { 
                         id: 'desktop-attachments', 
                         itemsPerPage: pageSize, 
                         currentPage: pageNumber, 
                         totalItems: totalRowCount 
                     }"
+                    matSort
+                    [matSortActive]="sortActive"
+                    [matSortDirection]="sortDirection"
+                    (matSortChange)="onSortChange( $event )"
                 >
                     <ng-container matColumnDef="attachmentTypeCode">
-                        <th mat-header-cell *matHeaderCellDef>Attachment Type</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Attachment Type</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.attachmentTypeDescription }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="fileName">
-                        <th mat-header-cell *matHeaderCellDef>File Name</th>
-                        <td mat-cell *matCellDef="let item">
-                            <nrcl-cell-content tooltip>{{ item.fileName }}</nrcl-cell-content>
-                        </td>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>File Name</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
+                            {{ item.fileName }}
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="sourceObjectNameCode">
-                        <th mat-header-cell *matHeaderCellDef>File Type</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>File Type</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.fileExtension }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="uploadedBy">
-                        <th mat-header-cell *matHeaderCellDef>Uploaded By</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Uploaded By</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.uploadedBy }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="uploadedTimestamp">
-                        <th mat-header-cell *matHeaderCellDef>Uploaded Date</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Uploaded Date</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.uploadedTimestamp }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="description">
-                        <th mat-header-cell *matHeaderCellDef>Description</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             {{ item.attachmentDescription }}
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="download">
-                        <th mat-header-cell *matHeaderCellDef>Download</th>
-                        <td mat-cell *matCellDef="let item">
-                            <div class="button-container">
-                                <nrcl-button compact
-                                    icon="download"
-                                    (click)="onDownloadClick( item )"                        
-                                ></nrcl-button>
-                            </div>
-                        </td>
+                        <mat-header-cell *matHeaderCellDef>Down&shy;load</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
+                            <nrcl-button compact
+                                icon="download"
+                                (click)="onDownloadClick( item )"                        
+                            ></nrcl-button>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="delete">
-                        <th mat-header-cell *matHeaderCellDef>Delete</th>
-                        <td mat-cell *matCellDef="let item">
-                            <div class="button-container">
-                                <nrcl-button compact
-                                    icon="delete"
-                                    (click)="onDeleteClick( item )"
-                                ></nrcl-button>
-                            </div>
-                        </td>
+                        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
+                            <nrcl-button compact
+                                icon="delete"
+                                (click)="onDeleteClick( item )"
+                            ></nrcl-button>
+                        </mat-cell>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
-                    <tr mat-row *matRowDef="let item; columns: columns;"></tr>
-                </table>
-            }
-        </nrcl-row-list-desktop>
-        
-        @if ( totalRowCount == 0 ) {
-            <nrcl-row-list-pagination
-                paginationId="desktop-attachments"
-                [pageSize]="pageSize"
-                [pageNumber]="pageNumber"
-                [rowCount]="totalRowCount"
-                (pageNumberChange)="onPageNumberChange( $event )"
-                (pageSizeChange)="onPageSizeChange( $event )"
-                [noRowsMessage]="noRowsMessage"
-            ></nrcl-row-list-pagination>
+                    <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let item; columns: columns;"></mat-row>
+                </mat-table>
+            </nrcl-row-list-desktop>
+            
+            <nrcl-gap/>
         }
+
+        <nrcl-row-list-pagination
+            paginationId="desktop-attachments"
+            [pageSize]="pageSize"
+            [pageNumber]="pageNumber"
+            [rowCount]="totalRowCount"
+            (pageNumberChange)="onPageNumberChange( $event )"
+            (pageSizeChange)="onPageSizeChange( $event )"
+            [noRowsMessage]="noRowsMessage"
+        ></nrcl-row-list-pagination>
     </ng-template>
 
     <ng-template mobile-view>
@@ -159,7 +159,7 @@
             }
         </nrcl-row-list-mobile>
 
-        @if ( totalRowCount == 0 ) { 
+        <!-- @if ( totalRowCount == 0 ) {  -->
             <nrcl-row-list-pagination
                 paginationId="mobile-attachments"
                 [pageSize]="pageSize"
@@ -169,6 +169,6 @@
                 (pageSizeChange)="onPageSizeChange( $event )"
                 [noRowsMessage]="noRowsMessage"
             ></nrcl-row-list-pagination>
-        }
+        <!-- } -->
     </ng-template>
 </nrcl-device-view>
