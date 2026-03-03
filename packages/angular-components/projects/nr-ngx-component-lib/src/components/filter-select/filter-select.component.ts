@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     inject,
@@ -58,7 +59,9 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @ViewChild( 'trigger', { read: ElementRef } ) trigger!: ElementRef
     @ViewChild( 'filterInput' ) filterInput!: ElementRef
     @ViewChild( 'overlayTemplate' ) overlayTemplate!: TemplateRef<any>
-    @ViewChild( 'optionTemplateRef' ) optionTemplateRef!: TemplateRef<any>
+    @ViewChild( 'defaultOptionTemplateRef' ) defaultOptionTemplateRef!: TemplateRef<any>
+
+    @ContentChild( TemplateRef ) optionTemplateRef: TemplateRef<any>;
 
     @Input() label
     @Input() placeholder = 'Filter...'
@@ -157,8 +160,14 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     ngAfterViewInit(): void {
-        if ( !this.optionTemplate )
-            this.optionTemplate = this.optionTemplateRef
+        if ( !this.optionTemplate ) {
+            if ( this.optionTemplateRef ) {
+                this.optionTemplate = this.optionTemplateRef
+            }
+            else {
+                this.optionTemplate = this.defaultOptionTemplateRef
+            }
+        }
     }
 
     ngOnDestroy(): void {
