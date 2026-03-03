@@ -52,7 +52,7 @@ export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
             control: {
                 type: 'range',
                 min: 350,
-                max: 1000
+                max: 2000
             }
         }
     },
