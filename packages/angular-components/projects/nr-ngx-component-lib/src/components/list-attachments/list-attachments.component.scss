@@ -33,7 +33,7 @@
 
         .mat-column-description {
             flex-basis: 200px;
-            flex-grow: 1;
+            flex-grow: 2;
             flex-shrink: 0;
             word-break: break-word;
         }
@@ -42,6 +42,7 @@
             flex-basis: 60px;
             flex-grow: 0;
             flex-shrink: 0;
+            justify-content: center;
         }
     }
 }
