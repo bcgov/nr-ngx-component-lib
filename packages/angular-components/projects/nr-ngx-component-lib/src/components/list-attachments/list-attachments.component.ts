@@ -77,7 +77,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     }
 
     fetchRowListPage(): Observable<any> {
-        if ( !this.rowListProvider?.fetchAttachments ) throw Error( 'no provider for ListAttachmentsComponent.fetchRowListPage' )
+        if ( !this.rowListProvider?.fetchAttachments ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.fetchRowListPage' )
 
         return this.rowListProvider.fetchAttachments({
             pageNumber: this.pageNumber,
@@ -88,19 +88,19 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     }
     
     displayRowListPage( res: any ): LoadRowListResult<AttachmentsTableRow> {
-        if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider for ListAttachmentsComponent.displayRowListPage' )
+        if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.displayRowListPage' )
 
         return this.rowListProvider.displayRowListPage( res )
     }
 
     onDownloadClick( item: AttachmentsTableRow ) {
-        if ( !this.rowListProvider?.downloadItem ) throw Error( 'no provider for ListAttachmentsComponent.onDownloadClick' )
+        if ( !this.rowListProvider?.downloadItem ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.onDownloadClick' )
 
         return this.rowListProvider.downloadItem( item )
     }
 
     onDeleteClick( item: AttachmentsTableRow ) {
-        if ( !this.rowListProvider?.deleteItem ) throw Error( 'no provider for ListAttachmentsComponent.onDeleteClick.' )
+        if ( !this.rowListProvider?.deleteItem ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.onDeleteClick.' )
         
         return this.rowListProvider.deleteItem( item )
     }
