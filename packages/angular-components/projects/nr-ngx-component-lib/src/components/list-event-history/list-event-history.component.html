@@ -1,8 +1,8 @@
 <nrcl-device-view>
     <ng-template desktop-view>
         @if ( rows?.length > 0 ) {
-            <nrcl-row-list-desktop>
-                <table mat-table
+            <nrcl-row-list-desktop [showRowHover]="false">
+                <mat-table
                     [dataSource]="rows | paginate: {
                         id: 'desktop-event-history',
                         itemsPerPage: pageSize,
@@ -15,43 +15,43 @@
                     (matSortChange)="onSortChange( $event )">
                 >
                     <ng-container matColumnDef="dateTime">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date and Time</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Date and Time</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.eventTimestamp }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="changedBy">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>User ID</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.createdByUserId }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="type">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.eventHistoryTypeDescription }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="section">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Section</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Section</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             <nrcl-cell-content tooltip>{{ item.sourceObjectNameDescription }}</nrcl-cell-content>
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="comment">
-                        <th mat-header-cell *matHeaderCellDef>Comment</th>
-                        <td mat-cell *matCellDef="let item">
+                        <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
                             {{ item.comment }}
-                        </td>
+                        </mat-cell>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
-                    <tr mat-row *matRowDef="let item; columns: columns;"></tr>
-                </table>
+                    <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let item; columns: columns;"></mat-row>
+                </mat-table>
             </nrcl-row-list-desktop>
 
             <nrcl-gap/>
@@ -69,18 +69,18 @@
     </ng-template>
 
     <ng-template mobile-view>
-        <nrcl-gap/>
-
-        <nrcl-row-list-sorting
-            [sortColumn]="sortActive"
-            [sortColumnOptions]="sortColumns"
-            [sortDirection]="sortDirection"
-            (sortChange)="onSortChange($event)">
-        </nrcl-row-list-sorting>
-
-        <nrcl-gap/>
-
         @if ( rows?.length > 0 ) {
+            <nrcl-gap/>
+
+            <nrcl-row-list-sorting
+                [sortColumn]="sortActive"
+                [sortColumnOptions]="sortColumns"
+                [sortDirection]="sortDirection"
+                (sortChange)="onSortChange($event)">
+            </nrcl-row-list-sorting>
+
+            <nrcl-gap/>
+
             <nrcl-row-list-mobile>
                 @for ( item of rows | paginate: {
                     id: 'mobile-event-history',
