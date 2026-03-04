@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
 import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
-import { CodeDescription } from "../../public-api";
 
 export type EventHistoryTableRow = {
     eventTimestamp: string
@@ -46,11 +45,10 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
         { code: 'changedBy', description: 'Changed By' },
         { code: 'type', description: 'Type' },
         { code: 'section', description: 'Section' },
-        // { code: 'comment', description: '' },        
     ]
 
     fetchRowListPage(): Observable<any> {
-        if ( !this.rowListProvider?.fetchEventHistory ) throw Error( 'no provider' )
+        if ( !this.rowListProvider?.fetchEventHistory ) throw Error( 'no provider for ListEventHistoryComponent.rowListProvider.fetchRowListPage' )
 
         return this.rowListProvider.fetchEventHistory( {
             isSupplier: this.isSupplier,
@@ -62,7 +60,7 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
     }
 
     displayRowListPage( res: any ): LoadRowListResult<EventHistoryTableRow> {
-        if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider' )
+        if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider for ListEventHistoryComponent.rowListProvider.displayRowListPage' )
 
         return this.rowListProvider.displayRowListPage( res )
     }   

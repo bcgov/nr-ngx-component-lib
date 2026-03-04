@@ -14,7 +14,7 @@
 
             .mat-mdc-row {
                 background-color: #ffffff;
-                cursor: pointer;
+                cursor: default;
 
                 .mat-mdc-cell {
                     font-family: var(--nrcl-font-family);
@@ -24,15 +24,11 @@
                     overflow-wrap: break-word;
                 }
 
-                &:hover {
-                    background-color: #d7d7d7;
-                }
-
-                &:nth-child(odd):not(:hover):not(.selected) {
+                &:nth-child(odd):not(.selected) {
                     background-color: #f2f2f2;
                 }
             
-                &:nth-child(even):not(:hover):not(.selected) {
+                &:nth-child(even):not(.selected) {
                     background-color: #ffffff;
                 }
 
@@ -51,6 +47,26 @@
                     text-align: left;
                     align-items: flex-end;
                     font-size: 15px;
+                }
+            }
+        }
+    }
+
+    &.show-row-hover ::ng-deep {
+        .mat-mdc-table {
+            .mat-mdc-row {
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #d7d7d7;
+                }
+
+                &:nth-child(odd):not(:hover):not(.selected) {
+                    background-color: #f2f2f2;
+                }
+            
+                &:nth-child(even):not(:hover):not(.selected) {
+                    background-color: #ffffff;
                 }
             }
         }

@@ -18,6 +18,7 @@ export type RowListArgs = {
     rowCount: number,
     sortColumn: string,
     sortDirection: string
+    showRowHover: boolean
 }
 
 export const rowListStory: StoryObj<RowListArgs> = {

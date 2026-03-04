@@ -36,7 +36,7 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ListSelectComponent } from './list-select.component';
 
-const meta: Meta<ListSelectComponent> = {
+const meta: Meta<ListSelectComponent<any>> = {
     title: 'List Select',
     component: ListSelectComponent,
     decorators: [
@@ -118,7 +118,7 @@ const meta: Meta<ListSelectComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<ListSelectComponent & DisplayModeWrapperComponent> = {
+export const Primary: StoryObj<ListSelectComponent<any> & DisplayModeWrapperComponent> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
     },

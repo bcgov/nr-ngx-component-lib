@@ -1,10 +1,12 @@
 import { Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { TemplatePortal } from "@angular/cdk/portal";
 import {
+    AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     inject,
@@ -24,6 +26,7 @@ import { MatSelectionListChange } from "@angular/material/list";
 import { fromEvent } from "rxjs";
 import { NrclBase } from "../../directives/nrcl.base";
 import { CodeDescription } from "../../utils/code-table.util";
+import { DomSanitizer } from "@angular/platform-browser";
 
 /**
  * A filter select component that allows users to select multiple options from a list.
@@ -47,7 +50,19 @@ import { CodeDescription } from "../../utils/code-table.util";
         '[style.--nrcl-filter-select-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
     }
 } )
-export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges, OnDestroy {
+export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+    changeDetectorRef = inject( ChangeDetectorRef )
+    overlay = inject( Overlay )
+    viewContainerRef = inject( ViewContainerRef )
+    domSanitizer = inject( DomSanitizer )
+
+    @ViewChild( 'trigger', { read: ElementRef } ) trigger!: ElementRef
+    @ViewChild( 'filterInput' ) filterInput!: ElementRef
+    @ViewChild( 'overlayTemplate' ) overlayTemplate!: TemplateRef<any>
+    @ViewChild( 'defaultOptionTemplateRef' ) defaultOptionTemplateRef!: TemplateRef<any>
+
+    @ContentChild( TemplateRef ) optionTemplateRef: TemplateRef<any>;
+
     @Input() label
     @Input() placeholder = 'Filter...'
     @Input() hint
@@ -59,7 +74,8 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: booleanAttribute } ) clear = true
     @Input( { transform: booleanAttribute } ) filter = true
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
-    @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description
+    @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description    
+    @Input() optionTemplate: TemplateRef<any> 
     @Input() overlayClass
     @Input() wide 
     @Input() filterCharsMinMessage = 'Too many options'
@@ -76,14 +92,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     selection = new FormControl()
     match: ( option: CodeDescription ) => boolean = ( o ) => true
     clickSubscription
-
-    changeDetectorRef = inject( ChangeDetectorRef )
-    overlay = inject( Overlay )
-    viewContainerRef = inject( ViewContainerRef )
-
-    @ViewChild( 'trigger', { read: ElementRef } ) trigger!: ElementRef
-    @ViewChild( 'filterInput' ) filterInput!: ElementRef
-    @ViewChild( 'overlayTemplate' ) overlayTemplate!: TemplateRef<any>
 
     ngOnInit(): void {
         super.ngOnInit()
@@ -147,6 +155,17 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
                 this.setFilter()
                 this.setInputToSelection()
                 this.changeDetectorRef.detectChanges()
+            }
+        }
+    }
+
+    ngAfterViewInit(): void {
+        if ( !this.optionTemplate ) {
+            if ( this.optionTemplateRef ) {
+                this.optionTemplate = this.optionTemplateRef
+            }
+            else {
+                this.optionTemplate = this.defaultOptionTemplateRef
             }
         }
     }
@@ -335,10 +354,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     optionForCode( code: string ): CodeDescription {
         return this.options.find( o => o.code == code )
-    }
-
-    formatOption( option: CodeDescription ): string {
-        return this.optionFormatter( option, false )
     }
 
     get isClosedNoSelection() {

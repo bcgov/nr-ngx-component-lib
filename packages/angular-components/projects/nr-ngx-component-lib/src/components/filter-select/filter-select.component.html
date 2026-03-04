@@ -19,17 +19,17 @@
     >
 </mat-form-field>        
 
-<nrcl-button tertiary matSuffix [class.hide]="!isOpen"
+<nrcl-button tertiary [class.hide]="!isOpen"
     icon="arrow_drop_up"
     (click)="onCloseClick()"
 ></nrcl-button>
 
-<nrcl-button tertiary matSuffix [class.hide]="!isClosedSelection"
+<nrcl-button tertiary [class.hide]="!isClosedSelection"
     icon="close"
     (click)="onCancelClick()"
 ></nrcl-button>
 
-<nrcl-button tertiary matSuffix [class.hide]="!isClosedNoSelection"
+<nrcl-button tertiary [class.hide]="!isClosedNoSelection"
     icon="arrow_drop_down"
     (click)="onInputFocus()"
 ></nrcl-button>
@@ -72,7 +72,10 @@
                                 [matTooltip]="tooltips ? descriptionForCode( code ) : null"
                                 matTooltipPosition="after"
                             >
-                                <span [innerHTML]="formatOption( optionForCode( code ) )"></span>
+                                <ng-container 
+                                    [ngTemplateOutlet]="optionTemplate" 
+                                    [ngTemplateOutletContext]="{ $implicit: optionForCode( code ) }">
+                                </ng-container>
                             </mat-list-option>
                         }
                     </mat-selection-list>
@@ -112,10 +115,17 @@
                         [matTooltip]="tooltips ? option.description : null"
                         matTooltipPosition="after"            
                     >
-                        <span [innerHTML]="formatOption( option )"></span>
+                        <ng-container 
+                            [ngTemplateOutlet]="optionTemplate" 
+                            [ngTemplateOutletContext]="{ $implicit: option }">
+                        </ng-container>
                     </mat-list-option>
                 }
             </mat-selection-list>
         }
     </div>
+</ng-template>
+
+<ng-template #defaultOptionTemplateRef let-ctx>
+    <span>{{ ctx.description }}</span>
 </ng-template>

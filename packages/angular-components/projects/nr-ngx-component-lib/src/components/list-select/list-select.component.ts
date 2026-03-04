@@ -1,7 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, numberAttribute, Output } from "@angular/core";
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, numberAttribute, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
 import { CodeDescription } from "../../utils/code-table.util";
+import { MatColumnDef, MatTable } from "@angular/material/table";
 
 @Component({
     selector: "nrcl-list-select",
@@ -9,17 +10,45 @@ import { CodeDescription } from "../../utils/code-table.util";
     styleUrl: "./list-select.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListSelectComponent extends RowListBase<{},CodeDescription> {
+export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> implements OnChanges, AfterContentInit {
     @Input() options: CodeDescription[]
     @Input() value: string[]
     @Input() descriptionLabel = 'Description'
     @Input( { transform: booleanAttribute } ) single 
     @Input() noRowsMessage = "No items have been added."
+    @Input() displayColumnsProvider: ( cols: string[] ) => string[] = ( cols ) => cols
+    @Input() filterProvider: ( option: CodeDescription ) => boolean = () => true
    
     @Output() valueChange = new EventEmitter<string[]>();
+    @Output() filterClear = new EventEmitter<void>();
+    
+    @ViewChild( MatTable, {static: true} ) table!: MatTable<T>;
+    
+    @ContentChildren( MatColumnDef ) columnDefs!: QueryList<MatColumnDef>;
     
     searchText
     searchRegexp: RegExp
+    defaultDisplayColumns = [ 'description', 'addRemove' ]
+    displayColumns = []
+
+    ngOnChanges( changes: SimpleChanges ): void {
+        // console.log(changes)
+
+        if ( changes.options ) {
+            this.refreshRowList()
+        }
+    }
+
+    ngAfterContentInit(): void {
+        // console.log('ngAfterContentInit')
+        this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
+
+        setTimeout( () => {
+            this.displayColumns = this.displayColumnsProvider( [ ...this.defaultDisplayColumns ] )
+            // console.log( this.displayColumns )
+            // this.changeDetectorRef.detectChanges()            
+        } )
+    }
 
     get initialPageState(): RowListState<{}> {
         return {
@@ -32,12 +61,7 @@ export class ListSelectComponent extends RowListBase<{},CodeDescription> {
     }
 
     fetchRowListPage(): Observable<CodeDescription[]> {
-        if ( this.searchRegexp ) {
-            return of( this.options.filter( o => this.searchRegexp.test( o.description ) ) )
-        }
-        else {
-            return of( this.options )
-        }
+        return of( this.options.filter( o => this.filterOption( o ) ) )
     }
     
     displayRowListPage( res: CodeDescription[] ): LoadRowListResult<CodeDescription> {
@@ -77,6 +101,7 @@ export class ListSelectComponent extends RowListBase<{},CodeDescription> {
     onClearFilters() {
         this.searchText = null
         this.searchRegexp = null
+        this.filterClear.emit()
         this.refreshRowList()
     }
 
@@ -94,4 +119,16 @@ export class ListSelectComponent extends RowListBase<{},CodeDescription> {
 
         this.refreshRowList()
     }
+
+    filterOption( option: CodeDescription ): boolean {
+        if ( this.searchRegexp && !this.searchRegexp.test( option.description ) ) return false
+
+        return this.filterProvider( option )
+    }
+
+    // private _optionsFilter: ( option: CodeDescription ) => boolean = () => true
+
+    // setOptionsFilter( filter: ( option: CodeDescription ) => boolean ) {
+    //     this._optionsFilter = filter
+    // }
 }
