@@ -8,7 +8,7 @@
 
         .mat-column-fileName {
             flex-basis: 200px;
-            flex-grow: 1;
+            flex-grow: 2;
             flex-shrink: 0;
             word-break: break-word;
         }
@@ -27,18 +27,25 @@
 
         .mat-column-uploadedTimestamp {
             flex-basis: 150px;
-            flex-grow: 0;
+            flex-grow: 1;
             flex-shrink: 0;
         }
 
         .mat-column-description {
             flex-basis: 200px;
-            flex-grow: 2;
+            flex-grow: 3;
             flex-shrink: 0;
             word-break: break-word;
         }
 
-        .mat-column-download, .mat-column-delete {            
+        .mat-column-download {            
+            flex-basis: 90px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            justify-content: center;
+        }
+
+        .mat-column-delete {            
             flex-basis: 60px;
             flex-grow: 0;
             flex-shrink: 0;

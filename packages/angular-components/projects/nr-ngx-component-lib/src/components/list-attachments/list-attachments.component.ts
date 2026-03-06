@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { Observable } from "rxjs";
 import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
@@ -35,14 +35,14 @@ export interface AttachmentRowListProvider<R,L=any> {
     styleUrl: "./list-attachments.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> {
+export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> implements OnChanges {
     @Input() rowListProvider: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
     @Input() canDownload = true
     @Input() noRowsMessage = "No attachments have been added."
     
     DATE_FORMATS = DATE_FORMATS
-    columns = [ 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description' ]
+    columns = [] // 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description' ]
     sortColumns = [
         { code: 'attachmentTypeCode',   description: 'Attachment Type' }, 
         { code: 'fileName',             description: 'File Name' }, 
@@ -52,9 +52,25 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
         { code: 'description',          description: 'Description' }  
     ]
 
-    initializeRowList(): void {
-        super.initializeRowList()
+    ngOnChanges(changes: SimpleChanges): void {
+        if ( changes.canDownload || changes.canDelete ) {
+            this.columns = [ 
+                'attachmentTypeCode', 
+                'fileName', 
+                'sourceObjectNameCode', 
+                'uploadedBy', 
+                'uploadedTimestamp', 
+                'description',
+                ...( this.canDownload ? ['download'] : [] ),
+                ...( this.canDelete ? ['delete'] : [] )
+            ]
+
+        }
     }
+
+    // initializeRowList(): void {
+    //     super.initializeRowList()
+    // }
 
     get initialPageState(): RowListState<{}> {
         return {
@@ -66,15 +82,15 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
         }
     }
 
-    ngAfterViewInit() {
-        if ( this.canDownload )
-            this.columns.push( 'download' )
+    // ngAfterViewInit() {
+    //     if ( this.canDownload )
+    //         this.columns.push( 'download' )
 
-        if ( this.canDelete )
-            this.columns.push( 'delete' )
+    //     if ( this.canDelete )
+    //         this.columns.push( 'delete' )
         
-        super.ngAfterViewInit()
-    }
+    //     super.ngAfterViewInit()
+    // }
 
     fetchRowListPage(): Observable<any> {
         if ( !this.rowListProvider?.fetchAttachments ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.fetchRowListPage' )
