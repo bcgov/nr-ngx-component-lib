@@ -1,3 +1,10 @@
+::ng-deep :root {
+    --nrcl-row-list-background-color: white;
+    --nrcl-row-list-alternate-background-color: #f2f2f2;
+    --nrcl-row-list-hover-background-color: #d7d7d7;
+    --nrcl-row-list-selected-background-color: #b6d7a8;
+}
+
 :host {
     display: block;
     overflow-x: auto;
@@ -13,7 +20,7 @@
             width: 100%;
 
             .mat-mdc-row {
-                background-color: #ffffff;
+                background-color: var( --nrcl-row-list-background-color );
                 cursor: default;
 
                 .mat-mdc-cell {
@@ -25,15 +32,15 @@
                 }
 
                 &:nth-child(odd):not(.selected) {
-                    background-color: #f2f2f2;
+                    background-color: var( --nrcl-row-list-background-color );
                 }
             
                 &:nth-child(even):not(.selected) {
-                    background-color: #ffffff;
+                    background-color: var( --nrcl-row-list-alternate-background-color );
                 }
 
                 &.selected {
-                    background-color: #b6d7a8;
+                    background-color: var( --nrcl-row-list-selected-background-color );
                 }
             }
 
@@ -46,27 +53,31 @@
                 .mat-sort-header-content {
                     text-align: left;
                     align-items: flex-end;
-                    font-size: 15px;
+                    font-size: var(--nrcl-font-size);
+                }
+            }
+        }
+
+        table.mat-mdc-table {
+            .mat-mdc-row {
+                &:nth-child(odd):not(.selected) {
+                    background-color: var( --nrcl-row-list-alternate-background-color );
+                }
+            
+                &:nth-child(even):not(.selected) {
+                    background-color: var( --nrcl-row-list-background-color );
                 }
             }
         }
     }
 
     &.show-row-hover ::ng-deep {
-        .mat-mdc-table {
+        .mat-mdc-table, table.mat-mdc-table {
             .mat-mdc-row {
                 cursor: pointer;
 
                 &:hover {
-                    background-color: #d7d7d7;
-                }
-
-                &:nth-child(odd):not(:hover):not(.selected) {
-                    background-color: #f2f2f2;
-                }
-            
-                &:nth-child(even):not(:hover):not(.selected) {
-                    background-color: #ffffff;
+                    background-color: var( --nrcl-row-list-hover-background-color );
                 }
             }
         }

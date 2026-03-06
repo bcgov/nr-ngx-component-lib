@@ -21,24 +21,24 @@ export class SnackbarUtilService {
         )
     }
 
-    successfullySaved( message: string, duration = 5000 ) {
-        this.successful( `${ message } saved successfully.`, duration )
+    successfullySaved( item: string, duration = 5000 ) {
+        this.successful( `${ item } saved successfully.`, duration )
     }
 
-    successfullyDeleted( message: string, duration = 5000 ) {
-        this.successful( `${ message } deleted successfully.`, duration )
+    successfullyDeleted( item: string, duration = 5000 ) {
+        this.successful( `${ item } deleted successfully.`, duration )
     }
 
-    successfullyRemoved( message: string, duration = 5000 ) {
-        this.successful( `${ message } removed successfully.`, duration )
+    successfullyRemoved( item: string, duration = 5000 ) {
+        this.successful( `${ item } removed successfully.`, duration )
     }
 
-    successfullyCreated( message: string, duration = 5000 ) {
-        this.successful( `${ message } created successfully.`, duration )
+    successfullyCreated( item: string, duration = 5000 ) {
+        this.successful( `${ item } created successfully.`, duration )
     }
 
-    successfullyAdded( message: string, duration = 5000 ) {
-        this.successful( `${ message } added successfully.`, duration )
+    successfullyAdded( item: string, duration = 5000 ) {
+        this.successful( `${ item } added successfully.`, duration )
     }
 
     information( message: string, duration = null ) {
