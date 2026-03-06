@@ -42,7 +42,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     @Input() noRowsMessage = "No attachments have been added."
     
     DATE_FORMATS = DATE_FORMATS
-    columns = [] // 'attachmentTypeCode', 'fileName', 'sourceObjectNameCode', 'uploadedBy', 'uploadedTimestamp', 'description' ]
+    columns = [] 
     sortColumns = [
         { code: 'attachmentTypeCode',   description: 'Attachment Type' }, 
         { code: 'fileName',             description: 'File Name' }, 
@@ -64,13 +64,8 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
                 ...( this.canDownload ? ['download'] : [] ),
                 ...( this.canDelete ? ['delete'] : [] )
             ]
-
         }
     }
-
-    // initializeRowList(): void {
-    //     super.initializeRowList()
-    // }
 
     get initialPageState(): RowListState<{}> {
         return {
@@ -81,16 +76,6 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
             sortDirection: 'desc',
         }
     }
-
-    // ngAfterViewInit() {
-    //     if ( this.canDownload )
-    //         this.columns.push( 'download' )
-
-    //     if ( this.canDelete )
-    //         this.columns.push( 'delete' )
-        
-    //     super.ngAfterViewInit()
-    // }
 
     fetchRowListPage(): Observable<any> {
         if ( !this.rowListProvider?.fetchAttachments ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.fetchRowListPage' )
