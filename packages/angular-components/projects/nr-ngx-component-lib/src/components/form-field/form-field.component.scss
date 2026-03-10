@@ -37,6 +37,10 @@
             .mat-mdc-form-field-error-wrapper, .mat-mdc-form-field-hint-wrapper {
                 padding: 0;
             }
+
+            &.mat-mdc-form-field-subscript-dynamic-size {
+                min-height: 22px;
+            }
         }
     }
 
