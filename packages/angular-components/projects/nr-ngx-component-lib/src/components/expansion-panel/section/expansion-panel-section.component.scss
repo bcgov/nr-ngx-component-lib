@@ -1,18 +1,20 @@
 :host {
+    .nrcl-gap.section {
+        width: calc( 100% + 2 * var( --nrcl-gutter-space ) );
+        ::ng-deep .divider {
+            margin-left: calc( -1 * var( --nrcl-gutter-space ) );
+            margin-right: calc( -1 * var( --nrcl-gutter-space ) );
+        }
+    }
+
     ::ng-deep h3 {
         font-size: var( --nrcl-font-size-h3 );
         font-weight: normal;
         padding: 0;
         margin: 0;
-        padding-bottom: var( --nrcl-gutter-space );
+        display: flex;
+        justify-content: space-between;
     }
 
-    & > ::ng-deep .nrcl-gap {
-        width: calc( 100% + 2 * var( --nrcl-gutter-space ) );
-        .divider {
-            margin-left: calc( -1 * var( --nrcl-gutter-space ) );
-            margin-right: calc( -1 * var( --nrcl-gutter-space ) );
-        }
-    }
 }
 
