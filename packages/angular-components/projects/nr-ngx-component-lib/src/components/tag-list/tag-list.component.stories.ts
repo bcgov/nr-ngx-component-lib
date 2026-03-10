@@ -97,7 +97,45 @@ export const Primary: StoryObj<TagListComponent & { displayMode: DisplayMode, it
                     [items]="items"
                     [removable]="removable"
                     (itemRemoved)="itemRemoved( $event )"
-                ></nrcl-tag-list>
+                >
+                </nrcl-tag-list>
+            `
+        }
+    }
+}
+
+export const Empty: StoryObj<TagListComponent & { displayMode: DisplayMode, itemCount: number }> = {
+    argTypes: {
+        displayMode: {
+            control: 'inline-radio',
+            options: ['desktop', 'mobile'],
+            description: 'Display mode for the component'
+        },
+    },
+    args: {
+        displayMode: 'desktop',
+        itemCount: 10,
+        removable: true,
+    },
+    render: ( args ) => {
+        return {
+            styles: [`
+                ::ng-deep .component-container-block {
+                    padding: 20px;
+                }
+            `],
+            props: {
+                ...args,
+                items: [],
+                itemRemoved: ( ev ) => { console.log( ev ) }
+            },
+            template: `
+                <nrcl-tag-list
+                    [items]="items"
+                    [removable]="removable"
+                    (itemRemoved)="itemRemoved( $event )"
+                >
+                </nrcl-tag-list>
             `
         }
     }

@@ -1,5 +1,11 @@
+<ng-template #action>
+    <ng-content select="nrcl-button"></ng-content>
+</ng-template>
+
 @if ( items?.length > 0 ) {
     <mat-chip-set>
+        <ng-container [ngTemplateOutlet]="action"></ng-container>
+
         @for ( item of items; track item.id ) {
             <mat-chip
                 (removed)="onRemoveItem( item.id )"
@@ -19,5 +25,8 @@
     </mat-chip-set>
 } 
 @else {
-    <span>{{ noItemsMessage }}</span>
+    <div class="no-tags">
+        <span>{{ noItemsMessage }}</span>
+        <ng-container [ngTemplateOutlet]="action"></ng-container>
+    </div>
 }
