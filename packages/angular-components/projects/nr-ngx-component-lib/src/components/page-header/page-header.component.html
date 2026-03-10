@@ -52,6 +52,7 @@
     <div class="top">
         <div class="indicator">
             <ng-container [ngTemplateOutlet]="indicator"></ng-container>
+            <mat-spinner class="loading" [diameter]="30"></mat-spinner>
         </div>
         <div class="headers">
             <ng-container [ngTemplateOutlet]="headers"></ng-container>
@@ -60,7 +61,6 @@
 
     <div class="actions">
         <ng-container [ngTemplateOutlet]="actions"></ng-container>
-        <mat-spinner class="loading" [diameter]="30"></mat-spinner>
     </div>
 
     <div class="bottom">

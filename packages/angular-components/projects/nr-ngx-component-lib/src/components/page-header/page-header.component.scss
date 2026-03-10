@@ -34,12 +34,15 @@
         align-items: center;
         gap: var( --nrcl-gutter-space );
         position: relative;
-        min-height: var( --nrcl-button-normal-height );
+
+        &:empty {
+            display: none;
+        }
     }
 
     .loading {
         position: absolute;
-        top: 0; //var( --nrcl-gutter-space );
+        top: 0;
         right: 0;
         display: none;
     }
@@ -47,10 +50,6 @@
     &.isLoading {
         .loading {
             display: block;
-        }
-
-        .actions > ::ng-deep  *:not( .loading )  {
-            visibility: hidden;
         }
     }
 }
@@ -79,6 +78,13 @@
             justify-content: flex-start;
             align-items: flex-start;        
         }
+
+        &.isLoading {
+            .actions > ::ng-deep  *:not( .loading )  {
+                visibility: hidden;
+            }
+        }
+
     }
 }
 
@@ -117,6 +123,17 @@
         .bottom {
             display: flex;
             flex-direction: column;
+
+            &:empty {
+                display: none;
+            }
         }
+
+        &.isLoading {
+            .indicator > ::ng-deep  *:not( .loading )  {
+                visibility: hidden;
+            }
+        }
+
     }
 }

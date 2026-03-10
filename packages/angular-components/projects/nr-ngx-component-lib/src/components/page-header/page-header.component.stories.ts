@@ -155,7 +155,8 @@ export const Primary: StoryObj<PageHeaderComponent & DisplayModeWrapperComponent
     header1: string, 
     header2: string 
     leftSide: string 
-    rightSide: string 
+    rightSide: string,
+    actions: boolean
 }> = {
     argTypes: displayModeWrapperStory.argTypes,
     parameters: {
@@ -178,6 +179,7 @@ Adjust header text to see how dynamic content is displayed.
         indicator: true,
         leftSide: 'Left side content',
         rightSide: 'Right side content',
+        actions: true,
     },
     render: ( args ) => {
         return {
@@ -196,20 +198,30 @@ Adjust header text to see how dynamic content is displayed.
 
                         <div left-side>{{ leftSide }}</div>
 
-                        <nrcl-button primary action>
-                            Create Prep Sheet
-                        </nrcl-button>
+                        @if ( actions ) {
+                            <nrcl-button primary action>
+                                Create Prep Sheet
+                            </nrcl-button>                        
+                        }
 
-                        <nrcl-button primary action
-                            (click)="addClick( $event )"
-                        >Do Something</nrcl-button>
+                        @if ( actions ) {
+                            <nrcl-button primary action
+                                (click)="addClick( $event )"
+                            >Do Something</nrcl-button>
+                        }
 
-                        <nrcl-button primary action
-                            (click)="addClick( $event )"
-                        >Do Other thing</nrcl-button>
+                        @if ( actions ) {
+                            <nrcl-button primary action
+                                (click)="addClick( $event )"
+                            >Do Other thing</nrcl-button>
+                        }
 
                         <div right-side>{{ rightSide }}</div>
                     </nrcl-page-header>
+
+                    <nrcl-button 
+                    >Dummy</nrcl-button>
+
                 </nrcl-page-container>
             `
         }
