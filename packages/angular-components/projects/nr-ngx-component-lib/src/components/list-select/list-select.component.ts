@@ -111,7 +111,7 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         let t = this.searchText?.trim()
         if ( t ) {
             t = t.toLowerCase().replace( /\s+/g, '.*' )
-            this.searchRegexp = new RegExp( t, 'gi' ) 
+            this.searchRegexp = new RegExp( t, 'i' ) 
         }
         else {
             this.searchRegexp = null
