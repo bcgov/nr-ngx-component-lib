@@ -5,23 +5,42 @@
 >
     <mat-label>{{ label }}</mat-label>
 
-    <input matInput class="search-input"            
+    <input matInput #input
+        [matDatepicker]="picker"
         [ngModel]="value" 
         (ngModelChange)="onDateChange( $event )"
         [placeholder]="placeholder"
-        [owlDateTime]="selectedDateDT" 
         maxlength="10" 
-        appWFDateMask
+        (focus)="onInputFocus()"
     >
+    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+    <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+    <mat-datepicker #picker
+        (opened)="onDatepickerOpened( $event )"
+    ></mat-datepicker>
+
+    <!-- <input matInput class="search-input"             /> -->
+        <!-- [ngModel]="value"  -->
+        <!-- (ngModelChange)="onDateChange( $event )" -->
+        <!-- [placeholder]="placeholder" -->
+        <!-- maxlength="10"  -->
+        <!-- appWFDateMask -->
+    <!-- > -->
+        <!-- [owlDateTime]="selectedDateDT"  -->
 
     @if ( hint ) {
         <mat-hint>{{ hint }}</mat-hint>
     }
 
-    <nrcl-button tertiary matSuffix
+    <!-- <nrcl-button tertiary matSuffix
         icon="event"
-        [owlDateTimeTrigger]="selectedDateDT" 
-    ></nrcl-button>
+    ></nrcl-button> -->
+        <!-- [owlDateTimeTrigger]="selectedDateDT"  -->
 </mat-form-field>
 
-<owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time>
+<!-- <owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time> -->
+
+<nrcl-button tertiary
+    icon="event"
+    (click)="picker.open()"
+></nrcl-button>

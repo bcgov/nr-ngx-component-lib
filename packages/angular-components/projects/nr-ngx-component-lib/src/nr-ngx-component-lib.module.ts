@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -20,11 +21,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './components/expansion-panel/footer/expansion-panel-footer.component';
@@ -56,8 +57,6 @@ import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
-import { DATE_FORMATS } from './utils/date.util';
-import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
     imports: [
@@ -68,6 +67,7 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         MatCardModule,
         MatCheckboxModule,
         MatChipsModule,
+        MatDatepickerModule,
         MatExpansionModule,
         MatRadioModule,
         MatFormFieldModule,
@@ -82,8 +82,6 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         MatTooltipModule,
         ReactiveFormsModule,
         RouterModule,
-        OwlDateTimeModule,
-        OwlMomentDateTimeModule,
         NgxPaginationModule,
         MatDialogModule
     ],
@@ -162,7 +160,6 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         ConfigurationService,
         PageStateService,
         DialogService,
-        { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
     ]
 })
 export class NrNgxComponentLibModule {

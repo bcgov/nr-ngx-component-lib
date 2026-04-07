@@ -1,13 +1,17 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
-    Output
+    Output,
+    ViewChild
 } from "@angular/core";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import { DATE_FORMATS } from "../../utils/date.util";
 import { NrclBase } from "../../directives/nrcl.base";
+import { MatDatepicker } from "@angular/material/datepicker";
+import { MatInput } from "@angular/material/input";
 
 @Component( {
     selector: "nrcl-filter-date",
@@ -27,13 +31,30 @@ export class FilterDateComponent extends NrclBase {
 
     @Output() valueChange = new EventEmitter<string>();
 
+    @ViewChild( 'picker' ) picker: MatDatepicker<Moment>
+    @ViewChild( MatInput ) input: MatInput
+
     onDateChange( ev ) {
+        console.log(ev)
         if ( !ev ) {
             this.valueChange.emit( null )
             return
         }
 
-        let date = ev.format( DATE_FORMATS.datePickerInput )
+        let date = moment( ev ).format( DATE_FORMATS.datePickerInput )
         this.valueChange.emit( date )
+    }
+
+    onInputFocus() {
+        console.log('onInputFocus')
+        this.picker.open()
+    }
+
+    onDatepickerOpened() {
+        console.log('onDatepickerOpened')
+        setTimeout(() => {
+            this.input.focus()
+        },100)
+
     }
 }

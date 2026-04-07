@@ -1,13 +1,16 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { FilterDateComponent } from './filter-date.component';
-import { DATE_FORMATS } from '../../utils/date.util';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
+import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
+import { FilterDateComponent } from './filter-date.component';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const meta: Meta<FilterDateComponent> = {
     title: 'Filter Date',
@@ -19,20 +22,36 @@ const meta: Meta<FilterDateComponent> = {
             imports: [
                 FormsModule,
                 MatButtonModule,
+                MatDatepickerModule,
                 MatFormFieldModule,
                 MatIconModule,
                 MatInputModule,
-                ReactiveFormsModule,
-                OwlDateTimeModule,
-                OwlMomentDateTimeModule,
+                ReactiveFormsModule,                
+                MatTooltipModule
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent
+                IconComponent,
+                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
+                // provideNativeDateAdapter( {
+                //     parse: {
+                //         dateInput: 
+                //     }
+                // } )
+                provideMomentDateAdapter( {
+                    parse: { 
+                        dateInput: 'YYYY-MM-DD' 
+                    },
+                    display: {
+                        dateInput: 'YYYY-MM-DD', // Change how date appears in the input
+                        monthYearLabel: 'MMM YYYY',
+                        dateA11yLabel: 'LL',
+                        monthYearA11yLabel: 'MMMM YYYY',
+                    }
+                } )
             ],
         } ),
     ],
@@ -100,7 +119,8 @@ export const Primary: StoryObj<FilterDateComponent & { width: number }> = {
         label: 'Start Date',
         value: '',
         hint: '',
-        wide: null
+        wide: null,
+        placeholder: ''
     },
     render: ( args ) => {
         return {
