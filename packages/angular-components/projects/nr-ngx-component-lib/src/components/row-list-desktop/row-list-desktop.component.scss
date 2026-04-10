@@ -3,6 +3,7 @@
     --nrcl-row-list-alternate-background-color: #f2f2f2;
     --nrcl-row-list-hover-background-color: #d7d7d7;
     --nrcl-row-list-selected-background-color: #b6d7a8;
+    --nrcl-row-list-hover-selected-background-color: #a1c193;
 }
 
 :host {
@@ -78,6 +79,9 @@
 
                 &:hover {
                     background-color: var( --nrcl-row-list-hover-background-color );
+                }
+                &:hover.selected {
+                    background-color: var( --nrcl-row-list-hover-selected-background-color );
                 }
             }
         }

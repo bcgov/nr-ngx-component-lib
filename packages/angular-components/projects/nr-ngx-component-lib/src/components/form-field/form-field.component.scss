@@ -1,6 +1,7 @@
 @use "sass:meta";
 
 ::ng-deep :root {
+    --nrcl-form-field-subscript-min-height: 22px;
 }
 
 :host {
@@ -39,7 +40,7 @@
             }
 
             &.mat-mdc-form-field-subscript-dynamic-size {
-                min-height: 22px;
+                min-height: var( --nrcl-form-field-subscript-min-height );
             }
         }
     }
