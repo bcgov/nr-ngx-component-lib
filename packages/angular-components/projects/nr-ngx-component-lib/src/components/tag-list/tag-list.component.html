@@ -15,7 +15,15 @@
                     <nrcl-icon small matChipAvatar>{{ item.icon }}</nrcl-icon>
                 }
 
-                {{ item.description }}
+                @if ( tagTemplate ) {
+                    <ng-container 
+                        [ngTemplateOutlet]="tagTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: item }">
+                    </ng-container>
+                }
+                @else {
+                    {{ item.description }}
+                }
 
                 @if ( removable ) {
                     <nrcl-icon small matChipRemove>cancel</nrcl-icon>
