@@ -3,7 +3,8 @@ import {
     Component,
     EventEmitter,
     Input,
-    Output
+    Output,
+    TemplateRef
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
 
@@ -24,6 +25,7 @@ export class TagListComponent extends NrclBase {
     @Input() items: TagItem[]
     @Input() removable = true
     @Input() noItemsMessage = 'No items have been added.'
+    @Input() tagTemplate: TemplateRef<any>
 
     @Output() itemRemoved = new EventEmitter<TagItem>()
     
