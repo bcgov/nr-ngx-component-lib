@@ -47,26 +47,32 @@
     }
 
     .message {
-        padding: var( --nrcl-gutter-space );
+        padding-top: var( --nrcl-gutter-space );
+        padding-left: var( --nrcl-gutter-space );
+        padding-right: 0; //var( --nrcl-gutter-space );
+        padding-bottom: var( --nrcl-gutter-space );
         flex: 1;
         cursor: default;
         pointer-events: none;
     }
 
     .button {
+        padding-top: var( --nrcl-gutter-space );
         padding-right: 8px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        
+        --nrcl-button-tertiary-foreground-color: white;
 
-        button {
-            padding: calc( var( --nrcl-gutter-space ) / 2 );
-            border: 1px white solid;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            font-family: var( --nrcl-font-family );
-            background-color: var( --snackbar-button-color, --snackbar-background-color );
+        ::ng-deep button {
+            // padding: calc( var( --nrcl-gutter-space ) / 2 );
+            // border: 1px white solid;
+            // border-radius: 5px;
+            // color: white;
+            // cursor: pointer;
+            // font-family: var( --nrcl-font-family );
+            // background-color: var( --snackbar-button-color, --snackbar-background-color );
         }
     }
 }

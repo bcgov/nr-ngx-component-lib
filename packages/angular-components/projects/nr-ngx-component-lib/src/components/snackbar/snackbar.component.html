@@ -1,16 +1,16 @@
 <div class="icon">
     @switch ( config.type ) {
         @case ( 'success' ) {
-            <nrcl-icon>check_circle</nrcl-icon>
+            <nrcl-icon large>check_circle</nrcl-icon>
         }
         @case ( 'error' ) {
-            <nrcl-icon>cancel</nrcl-icon>
+            <nrcl-icon large>cancel</nrcl-icon>
         }
         @case ( 'info' ) {
-            <nrcl-icon>info</nrcl-icon>
+            <nrcl-icon large>info</nrcl-icon>
         }
         @case ( 'update' ) {
-            <nrcl-icon>error</nrcl-icon>
+            <nrcl-icon large>error</nrcl-icon>
         }
     }
 </div>
@@ -20,5 +20,13 @@
 </div>
 
 <div class="button">
-    <button (click)="snackBarRef.dismissWithAction()">Close</button>
+    <!-- <button (click)="snackBarRef.dismissWithAction()">Close</button> -->
+    <!-- <nrcl-button 
+        label="Close"
+        (click)="snackBarRef.dismissWithAction()"
+    ></nrcl-button> -->
+    <nrcl-button tertiary
+        icon="close"
+        (click)="snackBarRef.dismissWithAction()"
+    ></nrcl-button>
 </div>
