@@ -8,7 +8,7 @@ import { SnackbarComponent, SnackbarConfig } from "../components/snackbar/snackb
 export class SnackbarUtilService {
     snackbar = inject( MatSnackBar )
 
-    successful( message: string, duration = 5000 ) {
+    successful( message: string, duration: number = 5000 ) {
         this.snackbar.openFromComponent<SnackbarComponent,SnackbarConfig>(
             SnackbarComponent, 
             {
@@ -41,7 +41,7 @@ export class SnackbarUtilService {
         this.successful( `${ item } added successfully.`, duration )
     }
 
-    information( message: string, duration = null ) {
+    information( message: string, duration?: number ) {
         this.snackbar.openFromComponent<SnackbarComponent,SnackbarConfig>(
             SnackbarComponent, 
             {
@@ -54,7 +54,7 @@ export class SnackbarUtilService {
         )
     }
 
-    error( message: string, duration = null ) {
+    error( message: string, duration?: number ) {
         this.snackbar.openFromComponent<SnackbarComponent,SnackbarConfig>(
             SnackbarComponent, 
             {
@@ -67,7 +67,7 @@ export class SnackbarUtilService {
         )
     }
 
-    updated( message: string, duration = null ) {
+    updated( message: string, duration?: number ) {
         this.snackbar.openFromComponent<SnackbarComponent,SnackbarConfig>(
             SnackbarComponent, 
             {
