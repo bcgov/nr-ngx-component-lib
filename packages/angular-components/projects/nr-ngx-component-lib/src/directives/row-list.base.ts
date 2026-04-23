@@ -1,26 +1,24 @@
 import { AfterViewInit, ChangeDetectorRef, Directive, EventEmitter, inject, Output } from "@angular/core";
-import { SortDirection } from "@angular/material/sort";
+import { Sort, SortDirection } from "@angular/material/sort";
 import { Observable } from "rxjs";
 import { PageStateService } from "../services/page-state.service";
-import { ObservableAborter, Aborted } from "../utils/row-list.util";
-import { CodeDescription } from "../public-api";
+import { Aborted, ObservableAborter } from "../utils/row-list.util";
 import { NrclBase } from "./nrcl.base";
 
-export type RowListState<F> = {
-    filter: F
+export type RowListPageConfig = {    
     pageSize: number
     pageNumber: number
     sortActive: string 
     sortDirection: SortDirection
 }
 
-export type LoadRowListResult<R> = { 
-    rows: R[], 
-    totalRowCount: number 
-}
+export type RowListState<F> = { pageConfig: RowListPageConfig, filter: F }
 
 @Directive()
-export class RowListBase<F,R,L=any> extends NrclBase implements RowListState<F>, AfterViewInit {
+export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterViewInit {
+    pageStateService = inject( PageStateService )
+    changeDetectorRef = inject( ChangeDetectorRef )
+
     @Output() isLoadingChange = new EventEmitter<boolean>()
     
     private _isLoading = false
@@ -31,62 +29,38 @@ export class RowListBase<F,R,L=any> extends NrclBase implements RowListState<F>,
         this.isLoadingChange.emit( v )
     }  
 
-    rows: R[] = []
-    totalRowCount: number
+    private _rows: R[] = []
+    get rows(): R[] { return this._rows }
 
-    filter: F
-    pageSize: number
-    pageNumber: number
-    sortActive: string 
-    sortDirection: SortDirection
+    private _totalRowCount: number = 0
+    get totalRowCount(): number { return this._totalRowCount }
 
-    sortColumns: CodeDescription[]
-    summaryMobile: string
-    showPagingMobile: boolean
-    
-    pageStateService = inject( PageStateService )
-    changeDetectorRef = inject( ChangeDetectorRef )
+    private _pageConfig: RowListPageConfig = {
+        pageSize:       0,
+        pageNumber:     1,
+        sortActive:     '',
+        sortDirection:  'asc'
+    }
+    get pageSize(): number              { return this._pageConfig.pageSize }
+    get pageNumber(): number            { return this._pageConfig.pageNumber }
+    get sortActive(): string            { return this._pageConfig.sortActive }
+    get sortDirection(): SortDirection  { return this._pageConfig.sortDirection }
 
-    private _loadRowListRequest: ObservableAborter<L>
-
-    constructor() {
-        super()
-        this.initializeRowList()
+    private _filter?: F
+    get filter(): F {
+        return this._filter || {} as F
     }
 
-    initializeRowList() {
-        this.loadPageState()        
-    }
+    private _loadRowListRequest?: ObservableAborter<L> 
 
     ngAfterViewInit(): void {
+        this.loadPageState()        
         this.refreshRowList()
     }
 
     refreshRowList(): Promise<void> {
         this.isLoading = true
 
-        return Promise.resolve()
-            .then( () => {
-                return this.loadRowList()
-            } )
-            .then( ( { rows, totalRowCount } ) => {
-                this.rows = rows
-                this.totalRowCount = totalRowCount
-                this.isLoading = false
-            } )
-            .catch( ( e ) => {
-                if ( e instanceof Aborted ) return
-
-                this.loadRowListPageFailed( e )
-                this.isLoading = false
-            } )
-            .finally( () => {
-                this.updateSummaryMobile()
-                this.changeDetectorRef.detectChanges()
-            } )
-    }
-
-    loadRowList(): Promise<LoadRowListResult<R>> {
         if ( this._loadRowListRequest )
             this._loadRowListRequest.abort()
 
@@ -96,109 +70,96 @@ export class RowListBase<F,R,L=any> extends NrclBase implements RowListState<F>,
 
         return this._loadRowListRequest.promise
             .then( res => {
-                return this.displayRowListPage( res )
+                this._totalRowCount = this.parseTotalRowCount( res )
+                this._rows = this.parseRows( res )
+            } )
+            .catch( ( e ) => {
+                if ( e instanceof Aborted ) return
+
+                this.loadRowListPageFailed( e )
+            } )
+            .finally( () => {
+                this.isLoading = false
+                this.changeDetectorRef.detectChanges()
             } )
     }
 
-    fetchRowListPage(): Observable<L> {
-        throw 'RowListBase.fetchRowListPage unimplemented'
-    }
+    abstract fetchRowListPage(): Observable<L> 
+    abstract parseRows( res: L ): R[] 
     
-    displayRowListPage( res: L ): LoadRowListResult<R> {
-        throw 'RowListBase.displayRowListPage unimplemented'
+    parseTotalRowCount( res: L ): number {
+        if ( 'totalRowCount' in (res as any) ) return (res as any)[ 'totalRowCount' ]
+
+        throw 'res.totalRowCount, might need to override this method'
     }
 
-    loadRowListPageFailed( error ) {
+    loadRowListPageFailed( error: any ) {
         console.warn( error )
-        this.rows = []
-        this.totalRowCount = 0
+        this._rows = []
+        this._totalRowCount = 0
     }
 
-    onFilterChange( ev ) {
-        this.filter = ev
-        this.pageNumber = 1
+    clone( obj: any ) {
+        return JSON.parse( JSON.stringify( obj ) ) 
+    }
+
+    onFilterChange( ev: F ) {
+        this._filter = this.clone( ev )
+        this.onPageNumberChange( 1 )
+    }
+
+    onSortChange( ev: Sort ) {
+        this._pageConfig.sortActive = ev.active
+        this._pageConfig.sortDirection = ev.direction
+        this.onPageNumberChange( 1 )
+    }
+
+    onPageSizeChange( ev: number ) {
+        this._pageConfig.pageSize = ev 
+        this.onPageNumberChange( 1 )
+    }
+
+    onPageNumberChange( ev: number ) {
+        this._pageConfig.pageNumber = ev
 
         this.refreshRowList()
             .then( () => {
                 this.savePageState()
-                this.updateSummaryMobile()
             } )
     }
 
-    onSortChange( ev ) {
-        this.sortActive = ev.active
-        this.sortDirection = ev.direction
-        this.pageNumber = 1
-
-        this.refreshRowList()
-            .then( () => {
-                this.savePageState()
-                this.updateSummaryMobile()
-            } )
-    }
-
-    onPageNumberChange( ev ) {
-        this.pageNumber = ev
-
-        this.refreshRowList()
-            .then( () => {
-                this.savePageState()
-                this.updateSummaryMobile()
-            } )
-    }
-
-    onPageSizeChange( ev ) {
-        this.pageSize = ev 
-        this.pageNumber = 1
-
-        this.refreshRowList()
-            .then( () => {
-                this.savePageState()
-                this.updateSummaryMobile()
-            } )
-    }
-
-    updateSummaryMobile() {
-        [ this.summaryMobile, this.showPagingMobile ] = makeSummary( this.totalRowCount, this.pageNumber, this.pageSize )
-    }
-
-    get initialPageState(): RowListState<F> {
-        throw 'RowListBase.initialPageState unimplemented'
-    }
+    abstract get initialPageState(): RowListState<F>
 
     loadPageState() {
         let state = this.pageStateService.getPageState<RowListState<F>>( this.constructor, this.initialPageState )
 
-        this.filter = state.filter
-        this.pageSize = state.pageSize
-        this.pageNumber = state.pageNumber
-        this.sortActive = state.sortActive
-        this.sortDirection = state.sortDirection
+        this._filter = state.filter
+        this._pageConfig.pageSize = state.pageConfig.pageSize
+        this._pageConfig.pageNumber = state.pageConfig.pageNumber
+        this._pageConfig.sortActive = state.pageConfig.sortActive
+        this._pageConfig.sortDirection = state.pageConfig.sortDirection
     }
 
     savePageState() {
-        let state: RowListState<F> = JSON.parse( JSON.stringify( {
-            filter: this.filter,
-            pageSize: this.pageSize,
-            pageNumber: this.pageNumber,
-            sortActive: this.sortActive,
-            sortDirection: this.sortDirection,
+        let state: RowListState<F> = JSON.parse( JSON.stringify( {            
+            filter: this._filter,
+            pageConfig: {
+                pageSize: this._pageConfig.pageSize,
+                pageNumber: this._pageConfig.pageNumber,
+                sortActive: this._pageConfig.sortActive,
+                sortDirection: this._pageConfig.sortDirection,
+            }
         } ) )
         
         this.pageStateService.setPageState<RowListState<F>>( this.constructor, state )
     }
-}
 
-export function makeSummary( rowCount, pageNumber, pageSize ): [ string, boolean ] {
-    if ( rowCount && pageSize ) {
-        let pageCount = Math.ceil( rowCount / pageSize )
-
-        let first = ( Math.min( pageCount, pageNumber ) - 1 ) * pageSize + 1
-        let last = Math.min( first + pageSize - 1, rowCount )
-
-        return [ `Showing ${ first } to ${ last } of ${ rowCount }`, true ]
-    }
-    else {
-        return [ "No records to display.", false ]
+    paginateState( id: string ) {
+        return {
+            id,
+            itemsPerPage: this._pageConfig.pageSize,
+            currentPage: this._pageConfig.pageNumber,
+            totalItems: this._totalRowCount
+        }
     }
 }
