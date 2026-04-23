@@ -1,8 +1,8 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, numberAttribute, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
-import { CodeDescription } from "../../utils/code-table.util";
+import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
 import { MatColumnDef, MatTable } from "@angular/material/table";
+import { Observable, of } from "rxjs";
+import { RowListBase, RowListState } from "../../directives/row-list.base";
+import { CodeDescription } from "../../utils/code-table.util";
 
 @Component({
     selector: "nrcl-list-select",
@@ -32,31 +32,28 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
     displayColumns = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        // console.log(changes)
-
         if ( changes.options ) {
             this.refreshRowList()
         }
     }
 
     ngAfterContentInit(): void {
-        // console.log('ngAfterContentInit')
         this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
 
         setTimeout( () => {
             this.displayColumns = this.displayColumnsProvider( [ ...this.defaultDisplayColumns ] )
-            // console.log( this.displayColumns )
-            // this.changeDetectorRef.detectChanges()            
         } )
     }
 
     get initialPageState(): RowListState<{}> {
         return {
             filter: {},
-            pageSize: undefined,
-            pageNumber: 1,
-            sortActive: null,
-            sortDirection: 'desc',
+            pageConfig: {
+                pageSize: 0,
+                pageNumber: 1,
+                sortActive: '',
+                sortDirection: 'desc',
+            }
         }
     }
 
@@ -64,11 +61,12 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         return of( this.options.filter( o => this.filterOption( o ) ) )
     }
     
-    displayRowListPage( res: CodeDescription[] ): LoadRowListResult<CodeDescription> {
-        return {
-            totalRowCount: res.length,
-            rows: res
-        }
+    parseRows( res: any ): CodeDescription[] {
+        return res
+    }
+
+    parseTotalRowCount( res: any ): number {
+        return res.length
     }
 
     isSelected( item: CodeDescription ) {
@@ -125,10 +123,4 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
 
         return this.filterProvider( option )
     }
-
-    // private _optionsFilter: ( option: CodeDescription ) => boolean = () => true
-
-    // setOptionsFilter( filter: ( option: CodeDescription ) => boolean ) {
-    //     this._optionsFilter = filter
-    // }
 }

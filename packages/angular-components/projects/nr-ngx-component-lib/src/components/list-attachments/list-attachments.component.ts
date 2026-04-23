@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { Observable } from "rxjs";
-import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
+import { RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
 
 export type AttachmentsTableRow = {
@@ -24,9 +24,9 @@ export type FetchAttachmentsParameters = {
 
 export interface AttachmentRowListProvider<R,L=any> {
     fetchAttachments( x: FetchAttachmentsParameters ): Observable<L>    
-    displayRowListPage( res: L ): LoadRowListResult<R>
-    downloadItem( item: R )
-    deleteItem( item: R )
+    displayRowListPage( res: L ): AttachmentsTableRow[]
+    downloadItem( item: R ): any
+    deleteItem( item: R ): any
 }
 
 @Component({
@@ -36,13 +36,13 @@ export interface AttachmentRowListProvider<R,L=any> {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> implements OnChanges {
-    @Input() rowListProvider: AttachmentRowListProvider<AttachmentsTableRow>
+    @Input() rowListProvider?: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
     @Input() canDownload = true
     @Input() noRowsMessage = "No attachments have been added."
     
     DATE_FORMATS = DATE_FORMATS
-    columns = [] 
+    columns: string[] = [] 
     sortColumns = [
         { code: 'attachmentTypeCode',   description: 'Attachment Type' }, 
         { code: 'fileName',             description: 'File Name' }, 
@@ -70,10 +70,12 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     get initialPageState(): RowListState<{}> {
         return {
             filter: {},
-            pageSize: 10,
-            pageNumber: 1,
-            sortActive: 'uploadedTimestamp',
-            sortDirection: 'desc',
+            pageConfig: {
+                pageSize: 10,
+                pageNumber: 1,
+                sortActive: 'uploadedTimestamp',
+                sortDirection: 'desc',
+            }
         }
     }
 
@@ -87,13 +89,13 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
             sortDirection: this.sortDirection,
         })
     }
-    
-    displayRowListPage( res: any ): LoadRowListResult<AttachmentsTableRow> {
+
+    parseRows( res: any ): AttachmentsTableRow[] {
         if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.displayRowListPage' )
 
         return this.rowListProvider.displayRowListPage( res )
     }
-
+    
     onDownloadClick( item: AttachmentsTableRow ) {
         if ( !this.rowListProvider?.downloadItem ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.onDownloadClick' )
 
