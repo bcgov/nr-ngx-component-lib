@@ -81,6 +81,11 @@
                     font-weight: bold;
                     width: 100%;
                     overflow-wrap: break-word;
+
+                    &:empty::after {
+                        color: #999;
+                        content: "—";
+                    }                    
                 }
 
                 &[full-width] {

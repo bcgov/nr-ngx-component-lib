@@ -136,19 +136,16 @@ export const Primary: StoryObj<ListEventHistoryComponent & DisplayModeWrapperCom
         args.rowListProvider = {
             fetchEventHistory: ( x ) => { return of(eventHistoryCollection()) },
             displayRowListPage: ( res: EventHistoryCollection ) => {
-                return {
-                    totalRowCount: res.totalRowCount,
-                    rows: res.collection.map( v => {
-                        return {
-                            eventTimestamp: moment( v.eventTimestamp ).format( DATE_FORMATS.fullPickerInput ),
-                            createdByUserId: v.createdByUserId,
-                            eventHistoryTypeDescription: v.eventHistoryTypeCode,
-                            sourceObjectNameDescription: v.sourceObjectNameCode,
-                            comment: v.comment,
-                            eventHistoryGuid: v.eventHistoryGuid
-                        }
-                    } )
-                }
+                return res.collection.map( v => {
+                    return {
+                        eventTimestamp: moment( v.eventTimestamp ).format( DATE_FORMATS.fullPickerInput ),
+                        createdByUserId: v.createdByUserId,
+                        eventHistoryTypeDescription: v.eventHistoryTypeCode,
+                        sourceObjectNameDescription: v.sourceObjectNameCode,
+                        comment: v.comment,
+                        eventHistoryGuid: v.eventHistoryGuid
+                    }
+                } )
             },
         }
         return {
@@ -181,10 +178,7 @@ export const NoRows: StoryObj<ListEventHistoryComponent & DisplayModeWrapperComp
         args.rowListProvider = {
             fetchEventHistory: () => { return of(eventHistoryCollection()) },
             displayRowListPage: ( res: EventHistoryCollection ) => {
-                return {
-                    totalRowCount: 0,
-                    rows: []
-                }
+                return []
             },
         }
         return {

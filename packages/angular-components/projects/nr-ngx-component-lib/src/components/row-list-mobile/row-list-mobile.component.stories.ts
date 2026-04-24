@@ -402,6 +402,19 @@ export const Primary: StoryObj<RowListMobileComponent & RowListArgs> = {
                                     <mat-label>Crew #</mat-label>
                                     <div class="value">{{ item.crewNumber }}</div>
                                 </section>                                            
+
+                                <section>
+                                    <mat-label>Empty</mat-label>
+                                    <div class="value"></div>
+                                </section>                                            
+                                <section>
+                                    <mat-label>Empty</mat-label>
+                                    <div class="value"></div>
+                                </section>                                            
+                                <section>
+                                    <mat-label>Empty</mat-label>
+                                    <div class="value"></div>
+                                </section>                                            
                             </mat-card-content>
                         </mat-card>
                     }

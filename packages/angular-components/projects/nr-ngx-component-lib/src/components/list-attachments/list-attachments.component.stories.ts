@@ -138,22 +138,19 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
         args.rowListProvider = {
             fetchAttachments: () => { return of(attachmentCollection()) },
             displayRowListPage: ( res: AttachmentCollection ) => {
-                return {
-                    totalRowCount: res.totalRowCount,
-                    rows: res.collection.map( v => {
-                        return {
-                            attachmentTypeDescription: v.attachmentTypeCode,
-                            fileName: v.fileName,
-                            fileExtension: getFileExtension( v.fileName ),
-                            uploadedBy: v.uploadedBy,
-                            uploadedTimestamp: moment( v.uploadedTimestamp ).format( DATE_FORMATS.fullPickerInput ),
-                            attachmentDescription: v.attachmentDescription,
-                            attachmentId: v.attachmentGuid,
-                            fileId: v.fileIdentifier,
-                            sourceObjectUniqueId: v.sourceObjectUniqueId
-                        }
-                    } )
-                }
+                return res.collection.map( v => {
+                    return {
+                        attachmentTypeDescription: v.attachmentTypeCode,
+                        fileName: v.fileName,
+                        fileExtension: getFileExtension( v.fileName )!,
+                        uploadedBy: v.uploadedBy,
+                        uploadedTimestamp: moment( v.uploadedTimestamp ).format( DATE_FORMATS.fullPickerInput ),
+                        attachmentDescription: v.attachmentDescription,
+                        attachmentId: v.attachmentGuid,
+                        fileId: v.fileIdentifier,
+                        sourceObjectUniqueId: v.sourceObjectUniqueId
+                    }
+                } )
             },
             downloadItem: () => {},
             deleteItem: () => {},
@@ -191,10 +188,7 @@ export const NoRows: StoryObj<ListAttachmentsComponent & DisplayModeWrapperCompo
         args.rowListProvider = {
             fetchAttachments: () => { return of({}) },
             displayRowListPage: ( res: AttachmentCollection ) => {
-                return {
-                    totalRowCount: 0,
-                    rows: []
-                }
+                return []
             },
             downloadItem: () => {},
             deleteItem: () => {},

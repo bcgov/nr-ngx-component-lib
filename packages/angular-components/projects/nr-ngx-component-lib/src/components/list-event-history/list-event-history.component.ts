@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
-import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
+import { RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
 
 export type EventHistoryTableRow = {
@@ -22,7 +22,7 @@ export type FetchEventHistoryParameters = {
 
 export interface EventHistoryRowListProvider<R,L=any> {
     fetchEventHistory( x: FetchEventHistoryParameters ): Observable<L>    
-    displayRowListPage( res: L ): LoadRowListResult<R>
+    displayRowListPage( res: L ): EventHistoryTableRow[]
 }
 
 @Component({
@@ -32,7 +32,7 @@ export interface EventHistoryRowListProvider<R,L=any> {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableRow> {
-    @Input() rowListProvider: EventHistoryRowListProvider<EventHistoryTableRow>
+    @Input() rowListProvider?: EventHistoryRowListProvider<EventHistoryTableRow>
     @Input() canDelete = true
     @Input() showPagination = false
     @Input() isSupplier: boolean = false
@@ -59,19 +59,21 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
         } )
     }
 
-    displayRowListPage( res: any ): LoadRowListResult<EventHistoryTableRow> {
+    parseRows( res: any ): EventHistoryTableRow[] {
         if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider for ListEventHistoryComponent.rowListProvider.displayRowListPage' )
 
         return this.rowListProvider.displayRowListPage( res )
-    }   
+    }
 
     get initialPageState(): RowListState<{}> {
         return {
             filter: {},
-            pageSize: 20,
-            pageNumber: 1,
-            sortActive: 'dateTime',
-            sortDirection: 'desc',
+            pageConfig: {
+                pageSize: 20,
+                pageNumber: 1,
+                sortActive: 'dateTime',
+                sortDirection: 'desc',
+            }
         }
     }
 }

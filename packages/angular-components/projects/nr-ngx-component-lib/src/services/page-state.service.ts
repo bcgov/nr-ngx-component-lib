@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 type StateContainer = {
-    label: string
+    label?: string
     state: any
 }
 
@@ -14,14 +14,14 @@ export class PageStateService {
     constructor() {
     }
 
-    getPageState<S>( classConstructor: Function, defaultState: S, label?: string ): S {
+    getPageState<S>( classConstructor: Function, defaultState: () => S, label?: string ): S {
         if ( this.classRegistry.has( classConstructor ) ) {
             let sc = this.classRegistry.get( classConstructor )
-            return sc.state
+            return sc!.state
         }
 
-        this.setPageState( classConstructor, defaultState, label )
-        return defaultState
+        // this.setPageState( classConstructor, defaultState, label )
+        return defaultState()
     }
 
     setPageState<S>( classConstructor: Function, state: S, label?: string ) {
