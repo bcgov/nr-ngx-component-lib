@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
-import { RowListBase, RowListState } from "../../directives/row-list.base";
+import { LoadRowListResult, RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
 
 export type EventHistoryTableRow = {
@@ -22,7 +22,7 @@ export type FetchEventHistoryParameters = {
 
 export interface EventHistoryRowListProvider<R,L=any> {
     fetchEventHistory( x: FetchEventHistoryParameters ): Observable<L>    
-    displayRowListPage( res: L ): EventHistoryTableRow[]
+    displayRowListPage( res: L ): LoadRowListResult<R>
 }
 
 @Component({
@@ -32,7 +32,7 @@ export interface EventHistoryRowListProvider<R,L=any> {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableRow> {
-    @Input() rowListProvider?: EventHistoryRowListProvider<EventHistoryTableRow>
+    @Input() rowListProvider: EventHistoryRowListProvider<EventHistoryTableRow>
     @Input() canDelete = true
     @Input() showPagination = false
     @Input() isSupplier: boolean = false
@@ -59,21 +59,19 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
         } )
     }
 
-    parseRows( res: any ): EventHistoryTableRow[] {
+    displayRowListPage( res: any ): LoadRowListResult<EventHistoryTableRow> {
         if ( !this.rowListProvider?.displayRowListPage ) throw Error( 'no provider for ListEventHistoryComponent.rowListProvider.displayRowListPage' )
 
         return this.rowListProvider.displayRowListPage( res )
-    }
+    }   
 
     get initialPageState(): RowListState<{}> {
         return {
             filter: {},
-            pageConfig: {
-                pageSize: 20,
-                pageNumber: 1,
-                sortActive: 'dateTime',
-                sortDirection: 'desc',
-            }
+            pageSize: 20,
+            pageNumber: 1,
+            sortActive: 'dateTime',
+            sortDirection: 'desc',
         }
     }
 }
