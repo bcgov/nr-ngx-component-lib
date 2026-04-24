@@ -90,7 +90,7 @@ export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterVi
     parseTotalRowCount( res: L ): number {
         if ( 'totalRowCount' in (res as any) ) return (res as any)[ 'totalRowCount' ]
 
-        throw 'res.totalRowCount, might need to override this method'
+        throw 'Missing res.totalRowCount, might need to override RowListBase.parseTotalRowCount'
     }
 
     loadRowListPageFailed( error: any ) {
