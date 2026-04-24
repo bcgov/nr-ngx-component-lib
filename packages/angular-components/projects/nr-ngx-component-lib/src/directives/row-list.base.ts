@@ -131,7 +131,7 @@ export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterVi
     abstract get initialPageState(): RowListState<F>
 
     loadPageState() {
-        let state = this.pageStateService.getPageState<RowListState<F>>( this.constructor, this.initialPageState )
+        let state = this.pageStateService.getPageState<RowListState<F>>( this.constructor, () => this.initialPageState )
 
         this._filter = state.filter
         this._pageConfig.pageSize = state.pageConfig.pageSize
@@ -141,7 +141,7 @@ export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterVi
     }
 
     savePageState() {
-        let state: RowListState<F> = JSON.parse( JSON.stringify( {            
+        let state: RowListState<F> = this.clone( {            
             filter: this._filter,
             pageConfig: {
                 pageSize: this._pageConfig.pageSize,
@@ -149,7 +149,7 @@ export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterVi
                 sortActive: this._pageConfig.sortActive,
                 sortDirection: this._pageConfig.sortDirection,
             }
-        } ) )
+        } ) 
         
         this.pageStateService.setPageState<RowListState<F>>( this.constructor, state )
     }
