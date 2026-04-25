@@ -107,4 +107,8 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
         
         return this.rowListProvider.deleteItem( item )
     }
+
+    savePageState(): void {
+        // state not saved
+    }
 }

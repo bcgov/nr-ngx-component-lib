@@ -123,4 +123,8 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
 
         return this.filterProvider( option )
     }
+
+    savePageState(): void {
+        // state not saved
+    }
 }
