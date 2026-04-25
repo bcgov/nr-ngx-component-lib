@@ -1,0 +1,26 @@
+name: Build and Publish Storybook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - "main"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.build-publish.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: build-publish
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
+        with:
+          path: packages/angular-components/storybook-static
+          install_command: cd packages/angular-components && npm ci
+          build_command: cd packages/angular-components && npm run build-storybook
+          
