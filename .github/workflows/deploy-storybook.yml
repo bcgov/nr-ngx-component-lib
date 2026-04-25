@@ -14,13 +14,33 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.build-publish.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.4
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        working-directory: packages/angular-components
+        run: npm install --legacy-peer-deps
+      
+      - name: Build Storybook
+        working-directory: packages/angular-components
+        run: npm run build-storybook
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: packages/angular-components/storybook-static
-          install_command: cd packages/angular-components && npm install --legacy-peer-deps
-          build_command: cd packages/angular-components && npm run build-storybook
-          
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
