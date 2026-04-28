@@ -5,10 +5,7 @@ const config: StorybookConfig = {
         "../projects/**/*.mdx",
         "../projects/nr-ngx-component-lib/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     ],    
-    "addons": [
-        "@storybook/addon-essentials",
-        "@storybook/addon-interactions",
-    ],
+    "addons": ["@storybook/addon-docs"],
     "framework": {
         "name": "@storybook/angular",
         "options": {}

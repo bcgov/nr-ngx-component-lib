@@ -11,7 +11,7 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } fro
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { useArgs } from 'storybook/internal/preview-api';
+import { useArgs } from 'storybook/preview-api';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';

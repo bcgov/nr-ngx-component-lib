@@ -10,7 +10,7 @@ import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@story
 import { FilterSelectComponent } from './filter-select.component';
 import { fruitOptions, fruitSubOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { IconComponent } from '../icon/icon.component';
-import { useArgs } from 'storybook/internal/preview-api';
+import { useArgs } from 'storybook/preview-api';
 import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<FilterSelectComponent> = {
