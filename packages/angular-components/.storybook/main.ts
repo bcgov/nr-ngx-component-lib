@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/angular';
 
 const config: StorybookConfig = {
     "stories": [
-        "../projects/**/*.mdx",
+        "../projects/nr-ngx-component-lib/src/**/*.mdx",
         "../projects/nr-ngx-component-lib/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     ],    
     "addons": ["@storybook/addon-docs"],

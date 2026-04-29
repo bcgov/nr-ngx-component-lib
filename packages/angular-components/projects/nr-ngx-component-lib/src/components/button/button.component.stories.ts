@@ -40,101 +40,101 @@ const meta: Meta<ButtonComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-The Button component provides a flexible, Material Design-inspired button with multiple style variants and configurations.
+    // tags: ['autodocs'],
+//     parameters: {
+//         docs: {
+//             description: {
+//                 component: `
+// The Button component provides a flexible, Material Design-inspired button with multiple style variants and configurations.
 
-## Features
+// ## Features
 
-- **Style Variants**: Default, Primary, Secondary, Tertiary
-- **Size Options**: Default, Small, and Compact sizes
-- **Icon Support**: Icons on left, right, or compact icon-only mode
+// - **Style Variants**: Default, Primary, Secondary, Tertiary
+// - **Size Options**: Default, Small, and Compact sizes
+// - **Icon Support**: Icons on left, right, or compact icon-only mode
 
-## Usage
+// ## Usage
 
-\`\`\`html
-<!-- Basic button with default style -->
-<nrcl-button 
-    label="Click Me"
-></nrcl-button>
+// \`\`\`html
+// <!-- Basic button with default style -->
+// <nrcl-button 
+//     label="Click Me"
+// ></nrcl-button>
 
-<!-- Primary button with icon -->
-<nrcl-button primary 
-    label="Add" icon="add"
-></nrcl-button>
+// <!-- Primary button with icon -->
+// <nrcl-button primary 
+//     label="Add" icon="add"
+// ></nrcl-button>
 
-<!-- Small secondary button -->
-<nrcl-button secondary small 
-    label="Cancel"
-></nrcl-button>
+// <!-- Small secondary button -->
+// <nrcl-button secondary small 
+//     label="Cancel"
+// ></nrcl-button>
 
-<!-- Compact icon-only button -->
-<nrcl-button compact 
-    iconCompact="clear-filters" 
-    tooltip="Clear"
-></nrcl-button>
+// <!-- Compact icon-only button -->
+// <nrcl-button compact 
+//     iconCompact="clear-filters" 
+//     tooltip="Clear"
+// ></nrcl-button>
 
-<!-- Normal button on desktop, and compact with icon on mobile -->
-<nrcl-button compact="mobile" 
-    label="Clear"
-    iconCompact="clear-filters" 
-    tooltip="Clear"
-></nrcl-button>
-\`\`\`
+// <!-- Normal button on desktop, and compact with icon on mobile -->
+// <nrcl-button compact="mobile" 
+//     label="Clear"
+//     iconCompact="clear-filters" 
+//     tooltip="Clear"
+// ></nrcl-button>
+// \`\`\`
 
-## Style Variants
+// ## Style Variants
 
-- **Default**: Button style depends on size option
-- **Primary**: Emphasized button for primary actions
-- **Secondary**: De-emphasized button for secondary actions
-- **Tertiary**: Minimal button for tertiary actions
+// - **Default**: Button style depends on size option
+// - **Primary**: Emphasized button for primary actions
+// - **Secondary**: De-emphasized button for secondary actions
+// - **Tertiary**: Minimal button for tertiary actions
 
-## Size Modifiers
+// ## Size Modifiers
 
-- **Default**: Standard size for most use cases
-- **Small**: Reduced size for compact layouts
-- **Compact**: Icon-only mode for toolbars and tight spaces
-                `
-            },
-            source: {
-                excludeDecorators: true
-            }
-        }
-    },
+// - **Default**: Standard size for most use cases
+// - **Small**: Reduced size for compact layouts
+// - **Compact**: Icon-only mode for toolbars and tight spaces
+//                 `
+//             },
+//             source: {
+//                 excludeDecorators: true
+//             }
+//         }
+//     },
 }
 
 export default meta;
 
 export const Primary: StoryObj<ButtonComponent> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-This story showcases all button style and size variations.
+//     parameters: {
+//         docs: {
+//             description: {
+//                 story: `
+// This story showcases all button style and size variations.
 
-## What This Shows
+// ## What This Shows
 
-The grid displays 12 button variations combining:
-- **Style variants**: Default, Primary, Secondary, Tertiary
-- **Size modifiers**: Default, Small, Compact
+// The grid displays 12 button variations combining:
+// - **Style variants**: Default, Primary, Secondary, Tertiary
+// - **Size modifiers**: Default, Small, Compact
 
-## Interactive Controls
+// ## Interactive Controls
 
-Adjust the controls to see how different properties affect all button variants simultaneously:
+// Adjust the controls to see how different properties affect all button variants simultaneously:
 
-- **label**: Change the button text
-- **icon**: Add an icon on the left side
-- **iconRight**: Add an icon on the right side
-- **iconCompact**: Set the icon for compact mode
-- **tooltip**: Add tooltip text
-- **disabled**: Toggle the disabled state
-                `
-            }
-        }
-    },    
+// - **label**: Change the button text
+// - **icon**: Add an icon on the left side
+// - **iconRight**: Add an icon on the right side
+// - **iconCompact**: Set the icon for compact mode
+// - **tooltip**: Add tooltip text
+// - **disabled**: Toggle the disabled state
+//                 `
+//             }
+//         }
+//     },    
     argTypes: {
         label: {
             control: { type: 'inline-radio' },
@@ -288,39 +288,39 @@ Adjust the controls to see how different properties affect all button variants s
 }
 
 export const AllOptions: StoryObj<ButtonComponent & DisplayModeWrapperComponent> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-This story provides a single interactive button with full control over all properties and responsive testing capabilities.
+//     parameters: {
+//         docs: {
+//             description: {
+//                 story: `
+// This story provides a single interactive button with full control over all properties and responsive testing capabilities.
 
-## Interactive Playground
+// ## Interactive Playground
 
-Use the controls panel to experiment with all button configurations:
+// Use the controls panel to experiment with all button configurations:
 
-- **Style variants**: Toggle primary, secondary, or tertiary
-- **Size modifiers**: Adjust small and compact settings
-- **Icons**: Configure left icon, right icon, or compact icon
-- **States**: Test disabled and tooltip states
-- **Responsive**: Use displayMode to test compact options
+// - **Style variants**: Toggle primary, secondary, or tertiary
+// - **Size modifiers**: Adjust small and compact settings
+// - **Icons**: Configure left icon, right icon, or compact icon
+// - **States**: Test disabled and tooltip states
+// - **Responsive**: Use displayMode to test compact options
 
-## Display Mode Options
+// ## Display Mode Options
 
-The display mode wrapper allows you to test how the button appears across different screen sizes:
-- **Desktop**: Full desktop view
-- **Mobile**: Mobile breakpoint
+// The display mode wrapper allows you to test how the button appears across different screen sizes:
+// - **Desktop**: Full desktop view
+// - **Mobile**: Mobile breakpoint
 
-## Compact Mode Behavior
+// ## Compact Mode Behavior
 
-The \`compact\` property has special responsive options:
-- **"no"**: Never compact
-- **"yes"**: Always compact (icon-only)
-- **"desktop"**: Compact on only desktop
-- **"mobile"**: Compact on only mobile
-                `
-            }
-        }
-    },    
+// The \`compact\` property has special responsive options:
+// - **"no"**: Never compact
+// - **"yes"**: Always compact (icon-only)
+// - **"desktop"**: Compact on only desktop
+// - **"mobile"**: Compact on only mobile
+//                 `
+//             }
+//         }
+//     },    
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         label: {
@@ -400,67 +400,67 @@ The \`compact\` property has special responsive options:
 }
 
 export const ProjectedContent: StoryObj<ButtonComponent & DisplayModeWrapperComponent> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-This story demonstrates using Angular's content projection to compose button content with flexible icon and text positioning.
+//     parameters: {
+//         docs: {
+//             description: {
+//                 story: `
+// This story demonstrates using Angular's content projection to compose button content with flexible icon and text positioning.
 
-## Content Projection vs. Input Properties
+// ## Content Projection vs. Input Properties
 
-While the component supports \`icon\`, \`iconRight\`, and \`label\` input properties, content projection offers greater flexibility:
+// While the component supports \`icon\`, \`iconRight\`, and \`label\` input properties, content projection offers greater flexibility:
 
-### Using Input Properties
+// ### Using Input Properties
 
-\`\`\`html
-<nrcl-button label="Add" icon="add"></nrcl-button>
-\`\`\`
+// \`\`\`html
+// <nrcl-button label="Add" icon="add"></nrcl-button>
+// \`\`\`
 
-### Using Content Projection
+// ### Using Content Projection
 
-\`\`\`html
-<nrcl-button>
-    <nrcl-icon>add</nrcl-icon>
-    Add
-</nrcl-button>
-\`\`\`
+// \`\`\`html
+// <nrcl-button>
+//     <nrcl-icon>add</nrcl-icon>
+//     Add
+// </nrcl-button>
+// \`\`\`
 
-## Side-by-Side Comparison
+// ## Side-by-Side Comparison
 
-This story displays two buttons:
-1. **Icon-Left Button**: Icon projected before the label
-2. **Icon-Right Button**: Label projected before the icon
+// This story displays two buttons:
+// 1. **Icon-Left Button**: Icon projected before the label
+// 2. **Icon-Right Button**: Label projected before the icon
 
-Use the controls to see how the same configuration affects both icon positions.
+// Use the controls to see how the same configuration affects both icon positions.
 
-## Advanced Use Cases
+// ## Advanced Use Cases
 
-Content projection enables:
-- **Custom element ordering**: Place icons and text in any sequence
-- **Complex content**: Include multiple icons, badges, or custom elements
-- **Conditional rendering**: Use Angular's \`@if\` to dynamically show/hide content
-- **Custom components**: Project entire custom components inside buttons
+// Content projection enables:
+// - **Custom element ordering**: Place icons and text in any sequence
+// - **Complex content**: Include multiple icons, badges, or custom elements
+// - **Conditional rendering**: Use Angular's \`@if\` to dynamically show/hide content
+// - **Custom components**: Project entire custom components inside buttons
 
-## Example: Multiple Icons
-\`\`\`html
-<nrcl-button primary>
-    <nrcl-icon>cloud_upload</nrcl-icon>
-    Upload File
-    <nrcl-icon>arrow_forward</nrcl-icon>
-</nrcl-button>
-\`\`\`
+// ## Example: Multiple Icons
+// \`\`\`html
+// <nrcl-button primary>
+//     <nrcl-icon>cloud_upload</nrcl-icon>
+//     Upload File
+//     <nrcl-icon>arrow_forward</nrcl-icon>
+// </nrcl-button>
+// \`\`\`
 
-## When to Use Projection
+// ## When to Use Projection
 
-Choose content projection when:
-- You need non-standard icon positioning
-- You want to include custom HTML or components
-- You're building complex, conditional button content
-- You prefer template-driven composition over property binding
-                `
-            }
-        }
-    },    
+// Choose content projection when:
+// - You need non-standard icon positioning
+// - You want to include custom HTML or components
+// - You're building complex, conditional button content
+// - You prefer template-driven composition over property binding
+//                 `
+//             }
+//         }
+//     },    
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         label: {

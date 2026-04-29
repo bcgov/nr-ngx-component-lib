@@ -38,7 +38,8 @@ const preview: Preview = {
         //         return story
         //     }
         // )
-    ]
+    ],
+    tags: ['autodocs']
 };
 
 export default preview;
