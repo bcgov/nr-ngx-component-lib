@@ -58,6 +58,8 @@ import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
+import { TabComponent } from './components/tabs/tab/tab.component';
 
 @NgModule({
     imports: [
@@ -121,7 +123,8 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
-        TabGroupComponent
+        TabGroupComponent,
+        TabComponent
     ],
     exports: [
         ButtonComponent,
@@ -157,7 +160,8 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
-        TabGroupComponent
+        TabGroupComponent,
+        TabComponent
     ],
     providers: [
         SnackbarUtilService,

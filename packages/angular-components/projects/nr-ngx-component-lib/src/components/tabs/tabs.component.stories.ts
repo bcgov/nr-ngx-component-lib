@@ -1,19 +1,23 @@
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { TabGroupComponent } from './tab-group.component';
-
-const meta: Meta<TabGroupComponent & { width: number }> = {
-    title: 'Tab Group',
-    component: TabGroupComponent,
+import {MatTabsModule} from '@angular/material/tabs';
+import { TabComponent } from './tab/tab.component';
+import { TabGroupComponent } from './tab-group/tab-group.component';
+const meta: Meta<{ width: number }> = {
+    title: 'Tabs',
+    // component: TabGroupComponent,
     decorators: [
         // Apply metadata to all stories
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
                 MatTooltipModule,
+                MatTabsModule
             ],
             // declare components that are used in the template
             declarations: [
+                TabComponent,
+                TabGroupComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -40,31 +44,18 @@ const meta: Meta<TabGroupComponent & { width: number }> = {
                 max: 500
             }
         },
-        tooltip: {
-            control: { type: 'inline-radio' },
-            options: [ '(missing)', 'False', "(no value)", 'True', 'This is a tooltip' ],
-            mapping: {
-                '(missing)': undefined,
-                'False': false,
-                '(no value)': '',
-                'True': true,
-            }
-        }
     },
     args: {
         width: 158,
-        tooltip: null
     },
 }
 
 export default meta;
 
-export const Primary: StoryObj<TabGroupComponent & { width: number }> = {
+export const Primary: StoryObj<{ width: number }> = {
     argTypes: {
-        content: { type: 'string' },
     },
     args: {
-        content: 'Property Content'
     },
     render: ( args ) => {
         return {
@@ -73,11 +64,15 @@ export const Primary: StoryObj<TabGroupComponent & { width: number }> = {
                 <nrcl-tab-group
                     [style.width.px]="width"                    
                 >
-                    <nrcl-tab
-                    ></nrcl-tab>
+                    <nrcl-tab>
+                        <section label>label 1</section>
+                        tab 1
+                    </nrcl-tab>
 
-                    <nrcl-tab
-                    ></nrcl-tab>
+                    <nrcl-tab>
+                        <section label>label 2</section>
+                        tab 2
+                    </nrcl-tab>
                 </nrcl-tab-group> 
             `
         }

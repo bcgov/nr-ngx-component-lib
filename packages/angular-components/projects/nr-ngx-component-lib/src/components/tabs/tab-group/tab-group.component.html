@@ -1,6 +1,27 @@
-<mat-tab-group class="wf-file-tab"
+<!-- <mat-tab-group class="wf-file-tab"
     mat-stretch-tabs="false"
     animationDuration="0ms" 
     disableRipple="true"
 >
+    <ng-content></ng-content>
+</mat-tab-group> -->
+
+<!-- my-tab-group.component.html -->
+<mat-tab-group class="wf-file-tab">
+  <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
+    <!-- Render the projected template using ngTemplateOutlet -->
+    <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+
+    <ng-template mat-tab-label *ngIf="tab.label">
+        <ng-container *ngTemplateOutlet="tab.label"></ng-container>
+    </ng-template>
+
+    <!-- Lazy Loaded Body -->
+    <ng-template matTabContent>
+        <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+    </ng-template>    
+  </mat-tab>
 </mat-tab-group>
+
+<!-- Hidden slot to keep the MyTabComponents in the DOM for ContentChildren to find -->
+<div style="display: none;"><ng-content></ng-content></div>

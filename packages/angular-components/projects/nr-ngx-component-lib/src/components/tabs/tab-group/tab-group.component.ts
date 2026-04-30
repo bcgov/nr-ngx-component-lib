@@ -1,33 +1,21 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
-import { NrclBase } from '../../directives/nrcl.base';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, inject, Input, QueryList } from '@angular/core';
+import { NrclBase } from '../../../directives/nrcl.base';
+import { TabComponent } from '../tab/tab.component';
 
 @Component( {
     selector: 'nrcl-tab-group',
     templateUrl: './tab-group.component.html',
     styleUrl: './tab-group.component.scss',
 } )
-export class TabGroupComponent extends NrclBase implements AfterContentInit {
-    @Input() tooltip
-    @Input() content
+export class TabGroupComponent extends NrclBase {
+    // @Input() tooltip
+    // @Input() content
     
     elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    tooltipContent
+    // tooltipContent
 
-    ngAfterContentInit(): void {
-        setTimeout( () => {
-            if ( this.tooltip == null || this.tooltip === false ) {
-                // no tooltip                
-            }
-            else if ( this.tooltip == '' || this.tooltip === true ) {
-                this.tooltipContent = this.content || this.elementRef?.nativeElement?.textContent
-            }
-            else {
-                this.tooltipContent = this.tooltip
-            }
-            
-            this.changeDetectorRef.detectChanges()
-        } )
-    }
+    @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;
+
 }

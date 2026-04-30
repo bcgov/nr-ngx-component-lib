@@ -1,6 +1,16 @@
-<mat-tab-group class="wf-file-tab"
-    mat-stretch-tabs="false"
-    animationDuration="0ms" 
-    disableRipple="true"
->
-</mat-tab-group>
+<!-- <ng-template matTabLabel>    
+    Label 
+</ng-template>
+<ng-template matTabContent>
+    <ng-content></ng-content>
+</ng-template> -->
+
+<!-- Content for the label (handled in previous step) -->
+<ng-template #label>
+    <ng-content select="section[label]"></ng-content>
+</ng-template>
+
+<!-- Content for the body (Lazy Loaded) -->
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>
