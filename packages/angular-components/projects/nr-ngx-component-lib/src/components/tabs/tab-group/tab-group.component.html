@@ -7,14 +7,20 @@
 </mat-tab-group> -->
 
 <!-- my-tab-group.component.html -->
-<mat-tab-group class="wf-file-tab">
+<mat-tab-group 
+    mat-stretch-tabs="false"
+    animationDuration="0ms" 
+    disableRipple="true"
+>    
   <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
     <!-- Render the projected template using ngTemplateOutlet -->
-    <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+    <!-- <ng-container *ngTemplateOutlet="tab.content"></ng-container> -->
 
-    <ng-template mat-tab-label *ngIf="tab.label">
-        <ng-container *ngTemplateOutlet="tab.label"></ng-container>
-    </ng-template>
+    @if ( tab.labelTemplate ) {
+        <ng-template mat-tab-label>
+            <ng-container *ngTemplateOutlet="tab.labelTemplate.template"></ng-container>
+        </ng-template>
+    }
 
     <!-- Lazy Loaded Body -->
     <ng-template matTabContent>

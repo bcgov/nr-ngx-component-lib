@@ -11,7 +11,7 @@ import { TabComponent } from '../tab/tab.component';
         '[class.look-classic]': 'isClassic',
     }
 } )
-export class TabGroupComponent extends NrclBase implements OnChanges {
+export class TabGroupComponent extends NrclBase implements OnChanges,AfterContentInit {
     elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
@@ -29,6 +29,11 @@ export class TabGroupComponent extends NrclBase implements OnChanges {
 
     ngOnChanges( changes: SimpleChanges ): void {
         this.updateState()
+    }
+
+    ngAfterContentInit() {
+        this.tabs.forEach( t => console.log(t.content))
+        this.tabs.forEach( t => console.log(t.labelTemplate))
     }
 
     updateState() {
