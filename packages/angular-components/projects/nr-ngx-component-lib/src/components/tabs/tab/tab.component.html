@@ -1,16 +1,7 @@
-<!-- <ng-template matTabLabel>    
-    Label 
-</ng-template>
-<ng-template matTabContent>
-    <ng-content></ng-content>
-</ng-template> -->
-
-<!-- Content for the label (handled in previous step) -->
 <ng-template #label>
     <ng-content select="[nrclTabLabel]"></ng-content>
 </ng-template>
 
-<!-- Content for the body (Lazy Loaded) -->
 <ng-template #content>
     <ng-content></ng-content>
 </ng-template>

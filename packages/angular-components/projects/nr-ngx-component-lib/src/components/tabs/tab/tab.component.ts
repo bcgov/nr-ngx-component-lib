@@ -1,4 +1,4 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, inject, Input, TemplateRef, ViewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NrclBase } from '../../../directives/nrcl.base';
 
 @Directive( {
@@ -10,6 +10,7 @@ export class TabLabelDirective {
     ){}
 }
 
+// ================================================================================
 
 @Component( {
     selector: 'nrcl-tab',
@@ -17,15 +18,13 @@ export class TabLabelDirective {
     styleUrl: './tab.component.scss',
 } )
 export class TabComponent extends NrclBase {
-    // @Input() tooltip
-    @Input() label
-    
     elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    // tooltipContent
+    @Input() name?: string
+    @Input() label?: string
+    @Input( { transform: booleanAttribute } ) disabled = false
 
-    // @ViewChild('label') labelTemplate!: TemplateRef<any>;    
-    @ViewChild('content',{static:true}) content!: TemplateRef<any>;    
+    @ViewChild( 'content' ) content!: TemplateRef<any>
     @ContentChild( TabLabelDirective ) labelTemplate?: TabLabelDirective
 }

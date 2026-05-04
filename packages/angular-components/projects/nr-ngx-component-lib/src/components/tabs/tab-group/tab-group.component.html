@@ -1,32 +1,27 @@
-<!-- <mat-tab-group class="wf-file-tab"
-    mat-stretch-tabs="false"
-    animationDuration="0ms" 
-    disableRipple="true"
->
-    <ng-content></ng-content>
-</mat-tab-group> -->
-
-<!-- my-tab-group.component.html -->
 <mat-tab-group 
     mat-stretch-tabs="false"
-    animationDuration="0ms" 
-    disableRipple="true"
+    animationDuration="500ms" 
+    disableRipple="false"
+    [selectedIndex]="selectedTab"
+    (selectedIndexChange)="onSelectedIndexChange( $event )"
+    [class.mat-elevation-z2]="isClassic"
 >    
-  <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
-    <!-- Render the projected template using ngTemplateOutlet -->
-    <!-- <ng-container *ngTemplateOutlet="tab.content"></ng-container> -->
+    @for ( tab of tabs; track tab ) {
+        <mat-tab 
+            [label]="tab.label"
+            [disabled]="tab.disabled"
+        >
+            @if ( tab.labelTemplate ) {
+                <ng-template mat-tab-label>
+                    <ng-container *ngTemplateOutlet="tab.labelTemplate.template"></ng-container>
+                </ng-template>
+            }
 
-    @if ( tab.labelTemplate ) {
-        <ng-template mat-tab-label>
-            <ng-container *ngTemplateOutlet="tab.labelTemplate.template"></ng-container>
-        </ng-template>
+            <ng-template matTabContent>
+                <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+            </ng-template>    
+        </mat-tab>
     }
-
-    <!-- Lazy Loaded Body -->
-    <ng-template matTabContent>
-        <ng-container *ngTemplateOutlet="tab.content"></ng-container>
-    </ng-template>    
-  </mat-tab>
 </mat-tab-group>
 
 <!-- Hidden slot to keep the MyTabComponents in the DOM for ContentChildren to find -->

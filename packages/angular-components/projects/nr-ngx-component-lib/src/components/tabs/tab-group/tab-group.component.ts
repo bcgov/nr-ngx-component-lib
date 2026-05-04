@@ -1,4 +1,4 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, inject, Input, OnChanges, QueryList, SimpleChanges } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, inject, Input, OnChanges, Output, QueryList, SimpleChanges } from '@angular/core';
 import { NrclBase } from '../../../directives/nrcl.base';
 import { TabComponent } from '../tab/tab.component';
 
@@ -11,29 +11,24 @@ import { TabComponent } from '../tab/tab.component';
         '[class.look-classic]': 'isClassic',
     }
 } )
-export class TabGroupComponent extends NrclBase implements OnChanges,AfterContentInit {
+export class TabGroupComponent extends NrclBase implements OnChanges {
     elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    // @Input() tooltip
-    // @Input() content
     @Input( { transform: booleanAttribute } ) standard = false
     @Input( { transform: booleanAttribute } ) classic = false
-    
-    isStandard
-    isClassic
+    @Input() selectedTab = -1
 
-    // tooltipContent
+    @Output() selectedTabChange = new EventEmitter<{ index: number, name?: string }>()
 
     @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;
 
-    ngOnChanges( changes: SimpleChanges ): void {
-        this.updateState()
-    }
+    isStandard = false
+    isClassic = false
 
-    ngAfterContentInit() {
-        this.tabs.forEach( t => console.log(t.content))
-        this.tabs.forEach( t => console.log(t.labelTemplate))
+    ngOnChanges( changes: SimpleChanges ): void {
+        console.log(changes)
+        this.updateState()
     }
 
     updateState() {
@@ -41,4 +36,8 @@ export class TabGroupComponent extends NrclBase implements OnChanges,AfterConten
         this.isClassic = this.classic && !this.standard
     }
 
+    onSelectedIndexChange( index: number ) {
+        let t = this.tabs.get( index )
+        this.selectedTabChange.emit( { index, name: t?.name } )
+    }
 }
