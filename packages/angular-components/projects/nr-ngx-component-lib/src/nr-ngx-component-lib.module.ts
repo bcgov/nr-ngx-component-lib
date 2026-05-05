@@ -61,6 +61,7 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
 import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
 import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
 
 @NgModule({
     imports: [
@@ -129,6 +130,7 @@ import { MatTabsModule } from '@angular/material/tabs';
         TabComponent,
         TabLabelDirective,
         TabContentDirective,
+        LoadingStatusComponent,
     ],
     exports: [
         ButtonComponent,
@@ -168,6 +170,7 @@ import { MatTabsModule } from '@angular/material/tabs';
         TabComponent,
         TabLabelDirective,
         TabContentDirective,
+        LoadingStatusComponent,
     ],
     providers: [
         SnackbarUtilService,

@@ -48,13 +48,17 @@ export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterVi
 
     private _filter?: F
     get filter(): F {
-        return this._filter || {} as F
+        return this._filter as F
     }
 
     private _loadRowListRequest?: ObservableAborter<L> 
 
-    ngAfterViewInit(): void {
+    constructor() {
+        super()
         this.loadPageState()        
+    }
+
+    ngAfterViewInit(): void {
         this.refreshRowList()
     }
 

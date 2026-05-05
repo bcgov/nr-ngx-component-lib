@@ -1,6 +1,6 @@
 <ng-template #headers>
-    <ng-content select="h1"></ng-content>
-    <ng-content select="h2"></ng-content>
+    <ng-content select="h1:not([right-side]):not([action])"></ng-content>
+    <ng-content select="h2:not([right-side]):not([action])"></ng-content>
 </ng-template>
 
 <ng-template #indicator>
