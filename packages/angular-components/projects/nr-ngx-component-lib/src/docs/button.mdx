@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Button" />
+
+# Button Component
+
+The Button component provides a flexible, Material Design-inspired button with multiple style variants and configurations.
+
+## Usage
+
+```html
+<nr-button 
+  [primary]="true" 
+  [disabled]="false"
+  (buttonClick)="onClick()">
+  Click Me
+</nr-button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `primary` | `boolean` | `false` | Primary style variant |
+| `secondary` | `boolean` | `false` | Secondary style variant |
+| `tertiary` | `boolean` | `false` | Tertiary/text style variant |
+| `anchor` | `boolean` | `false` | Render as anchor element |
+| `small` | `boolean` | `false` | Small size variant |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `icon` | `string` | - | Material icon name |
+| `iconRight` | `boolean` | `false` | Show icon on right side |
+| `compact` | `boolean` | `false` | Compact padding |
+| `buttonClick` | `EventEmitter<void>` | - | Click event |
+
+## Variants
+
+### Primary Button
+Use for main actions in a flow.
+
+### Secondary Button
+Use for secondary actions.
+
+### Tertiary Button
+Use for less prominent actions or in toolbars.
+
+### Icon Button
+Use with an icon for compact actions.
+
+```html
+<nr-button [icon]="'delete'" [small]="true"></nr-button>
+```
+
+## See Also
+
+- [Button Stories](/story/components-button--docs) - Interactive examples

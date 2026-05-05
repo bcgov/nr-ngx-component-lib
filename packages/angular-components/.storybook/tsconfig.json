@@ -15,6 +15,7 @@
     ],
     "include": [
         "../projects/nr-ngx-component-lib/src/**/*.stories.*",
+        "../projects/nr-ngx-component-lib/src/docs/**/*.mdx",
         "./preview.ts"
     ],
     "files": [

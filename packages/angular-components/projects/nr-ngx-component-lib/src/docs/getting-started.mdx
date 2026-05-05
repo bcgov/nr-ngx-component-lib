@@ -1,0 +1,66 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+
+<Meta 
+  title="Introduction/Getting Started" 
+  parameters={{
+    layout: 'fullscreen',
+  }}
+/>
+
+# Getting Started
+
+Welcome to the NR Angular Component Library — a reusable Angular components built on Angular Material.
+
+<Story name="Welcome">
+  {{
+    template: `<div style="padding: 2rem; text-align: center;">
+      <h1>Welcome to NR Angular Component Library</h1>
+      <p>Browse the sidebar to explore components</p>
+    </div>`,
+  }}
+</Story>
+
+## Installation
+
+```bash
+npm install nr-ngx-component-lib
+```
+
+## Setup
+
+Import the module in your Angular application:
+
+```typescript
+import { NrNgxComponentLibModule } from 'nr-ngx-component-lib';
+
+@NgModule({
+  imports: [
+    NrNgxComponentLibModule
+  ]
+})
+export class AppModule {}
+```
+
+## Available Components
+
+| Component | Description |
+|-----------|-------------|
+| `ButtonComponent` | Material Design button with multiple variants |
+| `IconComponent` | Icon wrapper with size and color options |
+| `DialogConfirmComponent` | Confirmation dialog modal |
+| `FilterSearchComponent` | Search input with filtering |
+| `FilterSelectComponent` | Dropdown select filter |
+| `FilterDateComponent` | Date range filter |
+| `PageHeaderComponent` | Page header with title and actions |
+| `PageContainerComponent` | Main content container |
+| `SnackbarComponent` | Toast notification |
+| And more... |
+
+## Storybook
+
+This library uses Storybook for component development and documentation. Browse the sidebar to explore all available components.
+
+Each component story includes:
+- **Canvas**: Interactive playground
+- **Docs**: Auto-generated documentation
+- **Knobs/Controls**: Adjust props in real-time

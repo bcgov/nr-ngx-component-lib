@@ -58,6 +58,9 @@ import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
+import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
+import { MatTabsModule } from '@angular/material/tabs';
 import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
 
 @NgModule({
@@ -86,7 +89,8 @@ import { LoadingStatusComponent } from './components/loading-status/loading-stat
         OwlDateTimeModule,
         OwlMomentDateTimeModule,
         NgxPaginationModule,
-        MatDialogModule
+        MatDialogModule,
+        MatTabsModule
     ],
     declarations: [
         ButtonComponent,
@@ -122,6 +126,10 @@ import { LoadingStatusComponent } from './components/loading-status/loading-stat
         DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
+        TabGroupComponent,
+        TabComponent,
+        TabLabelDirective,
+        TabContentDirective,
         LoadingStatusComponent,
     ],
     exports: [
@@ -158,6 +166,10 @@ import { LoadingStatusComponent } from './components/loading-status/loading-stat
         DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
+        TabGroupComponent,
+        TabComponent,
+        TabLabelDirective,
+        TabContentDirective,
         LoadingStatusComponent,
     ],
     providers: [

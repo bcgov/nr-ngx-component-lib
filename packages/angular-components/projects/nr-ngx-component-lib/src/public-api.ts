@@ -32,6 +32,8 @@ export * from './components/snackbar/snackbar.component'
 export * from './components/tag-list/tag-list.component'
 export * from './components/dialog/dialog.component'
 export * from './components/dialog-confirm/dialog-confirm.component'
+export * from './components/tabs/tab-group/tab-group.component'
+export * from './components/tabs/tab/tab.component'
 export * from './components/loading-status/loading-status.component'
 
 export * from './directives/configuration-subscriber.base'

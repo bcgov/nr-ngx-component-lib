@@ -1,0 +1,30 @@
+<mat-tab-group 
+    mat-stretch-tabs="false"
+    animationDuration="500ms" 
+    disableRipple="false"
+    [selectedIndex]="selectedTab"
+    (selectedIndexChange)="onSelectedIndexChange( $event )"
+    [class.mat-elevation-z2]="isClassic"
+>    
+    @for ( tab of tabs; track tab ) {
+        <mat-tab 
+            [label]="tab.label"
+            [disabled]="tab.disabled"
+        >
+            @if ( tab.labelTemplate ) {
+                <ng-template mat-tab-label>
+                    <ng-container *ngTemplateOutlet="tab.labelTemplate.template"></ng-container>
+                </ng-template>
+            }
+
+            <ng-template matTabContent>
+                @if ( tab.contentTemplate ) {
+                    <ng-container *ngTemplateOutlet="tab.contentTemplate.template"></ng-container>
+                }
+                @else if ( tab.content ) {
+                    <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+                }
+            </ng-template>    
+        </mat-tab>
+    }
+</mat-tab-group>
