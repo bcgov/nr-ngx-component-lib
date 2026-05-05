@@ -58,6 +58,7 @@ import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
 
 @NgModule({
     imports: [
@@ -121,6 +122,7 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
+        LoadingStatusComponent,
     ],
     exports: [
         ButtonComponent,
@@ -156,6 +158,7 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
         DialogConfirmComponent,
         IndicatorSelectComponent,
         ListSelectComponent,
+        LoadingStatusComponent,
     ],
     providers: [
         SnackbarUtilService,
