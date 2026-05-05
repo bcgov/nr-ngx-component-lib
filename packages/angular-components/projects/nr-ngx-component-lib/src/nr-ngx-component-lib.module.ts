@@ -59,7 +59,8 @@ import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
-import { TabComponent } from './components/tabs/tab/tab.component';
+import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
     imports: [
@@ -87,7 +88,8 @@ import { TabComponent } from './components/tabs/tab/tab.component';
         OwlDateTimeModule,
         OwlMomentDateTimeModule,
         NgxPaginationModule,
-        MatDialogModule
+        MatDialogModule,
+        MatTabsModule
     ],
     declarations: [
         ButtonComponent,
@@ -124,7 +126,9 @@ import { TabComponent } from './components/tabs/tab/tab.component';
         IndicatorSelectComponent,
         ListSelectComponent,
         TabGroupComponent,
-        TabComponent
+        TabComponent,
+        TabLabelDirective,
+        TabContentDirective,
     ],
     exports: [
         ButtonComponent,
@@ -161,7 +165,9 @@ import { TabComponent } from './components/tabs/tab/tab.component';
         IndicatorSelectComponent,
         ListSelectComponent,
         TabGroupComponent,
-        TabComponent
+        TabComponent,
+        TabLabelDirective,
+        TabContentDirective,
     ],
     providers: [
         SnackbarUtilService,

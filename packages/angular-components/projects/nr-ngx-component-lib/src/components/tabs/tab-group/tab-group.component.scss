@@ -11,6 +11,9 @@
     --nrcl-tab-group-header-inactive-foreground-color: #000000de;
     --nrcl-tab-group-header-active-foreground-color: #003366;
     --nrcl-tab-group-header-disabled-foreground-color: #8f8f8f;
+
+    --nrcl-tag-group-header-padding: unset;
+    --nrcl-tag-group-content-padding: unset;
 }
 
 :host {
@@ -28,7 +31,7 @@
                         gap: 0;
             
                         & > .mat-mdc-tab {
-                            padding: 0 var( --nrcl-gutter-space );
+                            padding: 0 var( --nrcl-tag-group-header-padding, var( --nrcl-gutter-space ) );
                             font-size: var( --nrcl-tab-group-header-font-size );
                             font-family: var( --nrcl-font-family );
                             font-weight: normal;
@@ -84,7 +87,7 @@
 
                     .mat-mdc-tab-labels {
                         .mat-mdc-tab {
-                            padding: 0 var( --nrcl-gutter-space );
+                            padding: 0 var( --nrcl-tag-group-header-padding, var( --nrcl-gutter-space ) );
                             min-width: unset;
                             font-size: var( --nrcl-tab-group-header-font-size );
                             font-family: var( --nrcl-font-family );
@@ -131,6 +134,10 @@
                             background-color: var( --nrcl-tab-group-header-active-background-color );
                             position: relative;
                             border-bottom-color: transparent;
+
+                            .mdc-tab__ripple::before {
+                                opacity: 0;
+                            }
                         }
 
                         &::after {
@@ -153,7 +160,7 @@
                 & > .mat-mdc-tab-body-wrapper{
                     & >.mat-mdc-tab-body {
                         font-family: var(--nrcl-font-family);
-                        padding: var( --nrcl-gutter-space );
+                        padding: var( --nrcl-tag-group-content-padding, var( --nrcl-gutter-space ) );
                         border-bottom: 1px solid var(--nrcl-tab-group-border-color);
                         border-left: 1px solid var(--nrcl-tab-group-border-color);
                         border-right: 1px solid var(--nrcl-tab-group-border-color);

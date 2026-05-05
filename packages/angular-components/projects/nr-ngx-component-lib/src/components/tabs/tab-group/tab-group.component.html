@@ -18,11 +18,13 @@
             }
 
             <ng-template matTabContent>
-                <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+                @if ( tab.contentTemplate ) {
+                    <ng-container *ngTemplateOutlet="tab.contentTemplate.template"></ng-container>
+                }
+                @else if ( tab.content ) {
+                    <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+                }
             </ng-template>    
         </mat-tab>
     }
 </mat-tab-group>
-
-<!-- Hidden slot to keep the MyTabComponents in the DOM for ContentChildren to find -->
-<div style="display: none;"><ng-content></ng-content></div>

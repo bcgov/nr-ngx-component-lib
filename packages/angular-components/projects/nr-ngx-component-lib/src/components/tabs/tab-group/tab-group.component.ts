@@ -1,6 +1,13 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, inject, Input, OnChanges, Output, QueryList, SimpleChanges } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, inject, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from '@angular/core';
+import { MatTab, MatTabGroup, MatTabGroupBaseHeader } from '@angular/material/tabs';
 import { NrclBase } from '../../../directives/nrcl.base';
 import { TabComponent } from '../tab/tab.component';
+
+export type ActivateTabEvent = {
+    tab: number,
+    name?: string,
+    cancel: ( shouldCancel: Promise<boolean> ) => void
+}
 
 @Component( {
     selector: 'nrcl-tab-group',
@@ -11,7 +18,7 @@ import { TabComponent } from '../tab/tab.component';
         '[class.look-classic]': 'isClassic',
     }
 } )
-export class TabGroupComponent extends NrclBase implements OnChanges {
+export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewInit {
     elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
@@ -20,6 +27,9 @@ export class TabGroupComponent extends NrclBase implements OnChanges {
     @Input() selectedTab = -1
 
     @Output() selectedTabChange = new EventEmitter<{ index: number, name?: string }>()
+    @Output() activateTab = new EventEmitter<ActivateTabEvent>()
+
+    @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
 
     @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;
 
@@ -29,6 +39,34 @@ export class TabGroupComponent extends NrclBase implements OnChanges {
     ngOnChanges( changes: SimpleChanges ): void {
         console.log(changes)
         this.updateState()
+    }
+
+    ngAfterViewInit() {
+        let self = this
+
+        this.tabGroup._handleClick = ( function ( inner ) {
+            return function ( tab: MatTab, tabHeader: MatTabGroupBaseHeader, index: number ) {
+                console.log(index)
+                //    return inner.call( this, tab, tabHeader, index )
+                if ( index == self.tabGroup.selectedIndex ) return
+
+                let shouldCancel = Promise.resolve( false )
+                let activate: ActivateTabEvent = { 
+                    tab: index, 
+                    name: self.tabs.get( index )?.name,
+                    cancel: ( should: Promise<boolean> ) => { shouldCancel = should }
+                }
+
+                self.activateTab.emit( activate )
+
+                shouldCancel.then( cancel => {
+                    if ( cancel ) return
+                        
+                    inner.call( this, tab, tabHeader, index )
+                    // self.changeDetectorRef.detectChanges()
+                } )
+            }
+        } )( this.tabGroup._handleClick )
     }
 
     updateState() {

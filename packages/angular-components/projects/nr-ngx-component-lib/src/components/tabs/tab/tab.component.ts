@@ -12,6 +12,17 @@ export class TabLabelDirective {
 
 // ================================================================================
 
+@Directive( {
+    selector: '[nrclTabContent]'
+} )
+export class TabContentDirective {
+    constructor(
+        public template: TemplateRef<any>
+    ){}
+}
+
+// ================================================================================
+
 @Component( {
     selector: 'nrcl-tab',
     templateUrl: './tab.component.html',
@@ -25,6 +36,7 @@ export class TabComponent extends NrclBase {
     @Input() label?: string
     @Input( { transform: booleanAttribute } ) disabled = false
 
-    @ViewChild( 'content' ) content!: TemplateRef<any>
     @ContentChild( TabLabelDirective ) labelTemplate?: TabLabelDirective
+    @ContentChild( TabContentDirective ) contentTemplate?: TabLabelDirective
+    @ViewChild( 'content', { static: true } ) content!: TemplateRef<any>
 }
