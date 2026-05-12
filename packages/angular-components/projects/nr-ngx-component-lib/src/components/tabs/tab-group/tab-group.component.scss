@@ -28,10 +28,11 @@
                 & > .mat-mdc-tab-header {
                     border-bottom: 1px solid #c6c8cb;
                     & > .mat-mdc-tab-label-container > .mat-mdc-tab-list > .mat-mdc-tab-labels {
-                        gap: 0;
+                        gap: calc( 2 * var( --nrcl-gutter-space ) );
             
                         & > .mat-mdc-tab {
-                            padding: 0 var( --nrcl-tag-group-header-padding, var( --nrcl-gutter-space ) );
+                            // padding: 0 var( --nrcl-tag-group-header-padding, var( --nrcl-gutter-space ) );
+                            padding: 0;                            
                             font-size: var( --nrcl-tab-group-header-font-size );
                             font-family: var( --nrcl-font-family );
                             font-weight: normal;
