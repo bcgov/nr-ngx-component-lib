@@ -64,6 +64,7 @@ export abstract class RowListBase<F,R,L=any> extends NrclBase implements AfterVi
 
     refreshRowList(): Promise<void> {
         this.isLoading = true
+        this.changeDetectorRef.detectChanges()
 
         if ( this._loadRowListRequest )
             this._loadRowListRequest.abort()
