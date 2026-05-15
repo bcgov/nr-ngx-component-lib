@@ -4,7 +4,6 @@
     disableRipple="false"
     [selectedIndex]="selectedTab"
     (selectedIndexChange)="onSelectedIndexChange( $event )"
-    [class.mat-elevation-z2]="isClassic"
 >    
     @for ( tab of tabs; track tab ) {
         <mat-tab 
