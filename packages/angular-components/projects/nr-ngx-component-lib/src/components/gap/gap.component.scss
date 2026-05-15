@@ -3,6 +3,8 @@
         display: inline-flex;       
         width: var( --nrcl-gutter-space );
         align-items: stretch;
+        flex-grow: 0;
+        flex-shrink: 0;
 
         &.divider-position-before {
             justify-content: flex-start;
@@ -30,6 +32,8 @@
     &.direction-vertical {
         display: flex;
         height: var( --nrcl-gutter-space );
+        flex-grow: 0;
+        flex-shrink: 0;
 
         &.divider-position-before {
             align-items: flex-start;
