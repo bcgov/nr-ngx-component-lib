@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: var( --nrcl-font-family );
+    
+    .content {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+}

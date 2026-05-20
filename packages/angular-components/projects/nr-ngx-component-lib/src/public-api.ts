@@ -35,6 +35,7 @@ export * from './components/dialog-confirm/dialog-confirm.component'
 export * from './components/tabs/tab-group/tab-group.component'
 export * from './components/tabs/tab/tab.component'
 export * from './components/loading-status/loading-status.component'
+export * from './components/schedule/schedule.component'
 
 export * from './directives/configuration-subscriber.base'
 export * from './directives/row-list.base'
