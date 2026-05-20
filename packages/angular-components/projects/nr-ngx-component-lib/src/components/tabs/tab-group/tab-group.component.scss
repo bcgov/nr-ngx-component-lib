@@ -8,8 +8,8 @@
     --nrcl-tab-group-header-inactive-background-color: #f2f2f2;
     --nrcl-tab-group-header-disabled-background-color: #f7f7f7;
     
-    --nrcl-tab-group-header-inactive-foreground-color: #000000de;
-    --nrcl-tab-group-header-active-foreground-color: #003366;
+    --nrcl-tab-group-header-inactive-foreground-color: #212121;
+    --nrcl-tab-group-header-active-foreground-color: #000000;
     --nrcl-tab-group-header-disabled-foreground-color: #8f8f8f;
 
     --nrcl-tag-group-header-padding: unset;
@@ -52,8 +52,11 @@
                         .mdc-tab--active {
                             font-family: var(--nrcl-font-family);
                             background-color: var( --nrcl-tab-group-header-active-background-color );
-                            color: var( --nrcl-tab-group-header-active-foreground-color );
                             font-weight: bold;
+
+                            .mdc-tab__text-label {
+                                color: var( --nrcl-tab-group-header-active-foreground-color );
+                            }       
                         }
                     }
             
@@ -138,6 +141,10 @@
                             .mdc-tab__ripple::before {
                                 opacity: 0;
                             }
+
+                            .mdc-tab__text-label {
+                                color: var( --nrcl-tab-group-header-active-foreground-color );
+                            }                            
                         }
 
                         &::after {
