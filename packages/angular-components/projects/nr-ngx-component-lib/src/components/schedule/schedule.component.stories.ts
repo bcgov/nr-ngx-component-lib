@@ -1,6 +1,6 @@
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { ScheduleComponent } from './schedule.component';
+import { ScheduleComponent, ScheduleRowHeadingComponent } from './schedule.component';
 
 const meta: Meta<ScheduleComponent & { width: number }> = {
     title: 'Schedule',
@@ -14,6 +14,7 @@ const meta: Meta<ScheduleComponent & { width: number }> = {
             ],
             // declare components that are used in the template
             declarations: [
+                ScheduleRowHeadingComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -40,20 +41,9 @@ const meta: Meta<ScheduleComponent & { width: number }> = {
                 max: 500
             }
         },
-        tooltip: {
-            control: { type: 'inline-radio' },
-            options: [ '(missing)', 'False', "(no value)", 'True', 'This is a tooltip' ],
-            mapping: {
-                '(missing)': undefined,
-                'False': false,
-                '(no value)': '',
-                'True': true,
-            }
-        }
     },
     args: {
         width: 158,
-        tooltip: null
     },
 }
 
@@ -61,20 +51,51 @@ export default meta;
 
 export const Primary: StoryObj<ScheduleComponent & { width: number }> = {
     argTypes: {
-        content: { type: 'string' },
     },
     args: {
-        content: 'Property Content'
     },
     render: ( args ) => {
         return {
-            props: args,
+            props: { ...args, 
+                rows: [
+                    {
+                        heading: { foo: 1 },
+                        items: [
+                            'available-regular-day',
+                            'available-day-off',
+                        ]
+                    },
+                    {
+                        heading: { foo: 2 },
+                        items: [
+                            'available-regular-day',
+                            'available-day-off',
+                        ]
+                    }
+                ]
+            },
             template: `
-                <nrcl-schedule ${ argsToTemplate(args,{exclude:['width']}) } 
-                    [style.width.px]="width"                    
-                ></nrcl-schedule> 
+                <nrcl-schedule
+                    startDate=""
+                    endDate=""
+                    [rows]="rows"
+                >
+                    <ng-template nrclScheduleRowHeading let-item>
+                        {{ item | json }}
+                    </ng-template>
+
+                </nrcl-schedule> 
             `
         }
     }
 }
 
+
+
+                    // <ng-template nrclScheduleItem="available-regular-day">
+                    //     <div>available-regular-day</div>
+                    // </ng-template>
+
+                    // <ng-template nrclScheduleItem="available-day-off">
+                    //     <div>available-day-off</div>
+                    // </ng-template>

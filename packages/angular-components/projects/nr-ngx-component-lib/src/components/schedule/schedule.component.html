@@ -1,8 +1,12 @@
-<div [matTooltip]="tooltipContent" class="content">
-    @if ( content ) {
-        {{ content }}
-    }
-    @else {
-        <ng-content></ng-content>
-    }
-</div>
+
+@for ( row of rows; track row ) {
+    <div class="header">
+        <ng-container 
+            [ngTemplateOutlet]="header.template1" 
+            [ngTemplateOutletContext]="{ $implicit: row.header }"            
+        ></ng-container>
+    </div>    
+}
+
+<ng-content></ng-content>
+

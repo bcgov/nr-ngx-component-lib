@@ -1,5 +1,30 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, inject, Input, TemplateRef } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
+
+@Directive( {
+    selector: '[nrclScheduleRowHeading]'
+} )
+export class ScheduleRowHeadingComponent {
+    constructor(
+        public template: TemplateRef<any>
+    ){
+        console.log('ScheduleRowHeadingComponent')
+
+    }
+}
+
+// ================================================================================
+
+@Directive( {
+    selector: '[nrclScheduleItem]'
+} )
+export class ScheduleItemComponent {
+    constructor(
+        public template: TemplateRef<any>
+    ){}
+}
+
+// ================================================================================
 
 @Component( {
     selector: 'nrcl-schedule',
@@ -7,27 +32,19 @@ import { NrclBase } from '../../directives/nrcl.base';
     styleUrl: './schedule.component.scss',
 } )
 export class ScheduleComponent extends NrclBase implements AfterContentInit {
-    @Input() tooltip
-    @Input() content
-    
-    elementRef = inject( ElementRef )
+    // elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    tooltipContent
+    @Input() startDate
+    @Input() endDate
+    @Input() rows    
+
+    // @ContentChildren(ScheduleRowHeadingComponent) tabs!: QueryList<ScheduleRowHeadingComponent>;
+    @ContentChild(ScheduleRowHeadingComponent) header!: ScheduleRowHeadingComponent
+
+    // tooltipContent
 
     ngAfterContentInit(): void {
-        setTimeout( () => {
-            if ( this.tooltip == null || this.tooltip === false ) {
-                // no tooltip                
-            }
-            else if ( this.tooltip == '' || this.tooltip === true ) {
-                this.tooltipContent = this.content || this.elementRef?.nativeElement?.textContent
-            }
-            else {
-                this.tooltipContent = this.tooltip
-            }
-            
-            this.changeDetectorRef.detectChanges()
-        } )
+        console.log(this.header)
     }
 }
