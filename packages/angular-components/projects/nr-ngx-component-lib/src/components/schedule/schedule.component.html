@@ -1,12 +1,39 @@
+<ng-template #empty>
+    <div>Empty</div>
+</ng-template>
 
-@for ( row of rows; track row ) {
-    <div class="header">
-        <ng-container 
-            [ngTemplateOutlet]="header.template1" 
-            [ngTemplateOutletContext]="{ $implicit: row.header }"            
-        ></ng-container>
-    </div>    
+<div class="weeks">
+
+</div>
+
+<div class="days">
+    @for ( item of row.items; track item.id ) {
+        <div class="item">
+            <ng-container 
+                [ngTemplateOutlet]="item.template || empty" 
+                [ngTemplateOutletContext]="{ $implicit: item.data }"            
+            ></ng-container>
+        </div>
+    }
+</div>
+
+
+@for ( row of _rows; track row.id ) {
+    <div class="row">
+        <div class="heading">
+            <ng-container 
+                [ngTemplateOutlet]="headerTemplate.template" 
+                [ngTemplateOutletContext]="{ $implicit: row.heading }"            
+            ></ng-container>
+        </div>    
+
+        @for ( item of row.items; track item.id ) {
+            <div class="item">
+                <ng-container 
+                    [ngTemplateOutlet]="item.template || empty" 
+                    [ngTemplateOutletContext]="{ $implicit: item.data }"            
+                ></ng-container>
+            </div>
+        }
+    </div>
 }
-
-<ng-content></ng-content>
-

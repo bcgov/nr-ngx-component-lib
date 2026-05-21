@@ -1,13 +1,29 @@
+::ng-deep :root {
+    --nrcl-schedule-day-count: 5;
+    --nrcl-schedule-row-height: 100px;
+    --nrcl-schedule-heading-width: 300px;
+    --nrcl-schedule-item-width: 100px;
+    --nrcl-schedule-border-color: #c6c8cb
+}
+
 :host {
-    display: block;
-    width: 100%;
     font-family: var( --nrcl-font-family );
-    
-    .content {
-        width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        vertical-align: middle;
-        white-space: nowrap;
+
+    display: grid;
+    grid-template-columns: var( --nrcl-schedule-heading-width ) repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
+
+    border-top: 1px solid var( --nrcl-schedule-border-color );
+    border-left: 1px solid var( --nrcl-schedule-border-color );
+
+    .row {
+        display: contents;
+        & > * {
+            height: var( --nrcl-schedule-row-height );
+        }
+
+        .heading, .item {
+            border-right: 1px solid var( --nrcl-schedule-border-color );
+            border-bottom: 1px solid var( --nrcl-schedule-border-color );
+        }
     }
 }
