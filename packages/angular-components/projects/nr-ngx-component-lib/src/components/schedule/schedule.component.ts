@@ -5,11 +5,11 @@ import moment from 'moment';
 @Directive( {
     selector: '[nrclScheduleRowHeading]'
 } )
-export class ScheduleRowHeadingComponent {
+export class ScheduleRowHeadingDirective {
     constructor(
         public template: TemplateRef<any>
     ){
-        console.log('ScheduleRowHeadingComponent')
+        console.log('ScheduleRowHeadingDirective')
 
     }
 }
@@ -19,18 +19,20 @@ export class ScheduleRowHeadingComponent {
 @Directive( {
     selector: '[nrclScheduleItem]'
 } )
-export class ScheduleItemComponent {
+export class ScheduleItemDirective {
     @Input( 'nrclScheduleItem' ) name?: string
 
     constructor(
         public template: TemplateRef<any>
-    ){}
+    ){
+        console.log('ScheduleItemDirective')
+    }
 }
 
 // ================================================================================
 
 export type ScheduleRowItem = {
-    id: string,
+    id?: string,
     // date: string,
     name: string,
     data?: any
@@ -38,7 +40,7 @@ export type ScheduleRowItem = {
 }
 
 export type ScheduleRow = {
-    id: string,
+    id?: string,
     heading: any,
     items: ( string | ScheduleRowItem )[]
 }
@@ -75,8 +77,8 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() schedule?: Schedule
 
-    @ContentChildren(ScheduleItemComponent) itemTemplates!: QueryList<ScheduleItemComponent>;
-    @ContentChild(ScheduleRowHeadingComponent) headerTemplate!: ScheduleRowHeadingComponent
+    @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>;
+    @ContentChild(ScheduleRowHeadingDirective,{descendants:true}) headerTemplate!: ScheduleRowHeadingDirective
 
     protected _rows: Schedule = []
     protected _days: Day[] = []

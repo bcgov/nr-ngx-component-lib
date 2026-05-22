@@ -1,33 +1,3 @@
-:host {
-    .mat-mdc-table {
-        .mat-column-dateTime {
-            flex-basis: 150px;
-            flex-grow: 0;
-            flex-shrink: 0;
-        }
-
-        .mat-column-changedBy {
-            flex-basis: 120px;
-            flex-grow: 0;
-            flex-shrink: 0;
-        }
-
-        .mat-column-type {
-            flex-basis: 80px;
-            flex-grow: 0;
-            flex-shrink: 0;
-        }
-
-        .mat-column-section {
-            flex-basis: 230px;
-            flex-grow: 0;
-            flex-shrink: 0;
-        }
-
-        .mat-column-comment {
-            flex-basis: 400px;
-            flex-grow: 1;
-            flex-shrink: 0;
-        }
-    }
+.schedule-item-available-regular-day {
+    background-color: red;
 }

@@ -34,13 +34,13 @@
     <div class="row schedule">
         <div class="heading">
             <ng-container 
-                [ngTemplateOutlet]="headerTemplate.template" 
+                [ngTemplateOutlet]="headerTemplate?.template" 
                 [ngTemplateOutletContext]="{ $implicit: row.heading }"            
             ></ng-container>
         </div>    
 
         @for ( item of row.items; track item.id ) {
-            <div class="item">
+            <div class="schedule-item" [class]="'schedule-item-' + item.name">
                 <ng-container 
                     [ngTemplateOutlet]="item.template || empty" 
                     [ngTemplateOutletContext]="{ $implicit: item.data }"            

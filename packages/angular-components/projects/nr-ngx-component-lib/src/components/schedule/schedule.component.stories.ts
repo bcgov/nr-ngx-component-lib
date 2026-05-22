@@ -1,6 +1,6 @@
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { ScheduleComponent, ScheduleItemComponent, ScheduleRowHeadingComponent } from './schedule.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './schedule.component';
 import { DATE_FORMATS } from '../../utils/date.util';
 import moment from 'moment';
 
@@ -16,8 +16,8 @@ const meta: Meta<ScheduleComponent & { width: number }> = {
             ],
             // declare components that are used in the template
             declarations: [
-                ScheduleRowHeadingComponent,
-                ScheduleItemComponent
+                ScheduleRowHeadingDirective,
+                ScheduleItemDirective
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

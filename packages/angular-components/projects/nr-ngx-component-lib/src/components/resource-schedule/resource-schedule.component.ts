@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, numberAttribute } from "@ang
 import { Observable, of } from "rxjs";
 import { RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
-import { Schedule } from "../schedule/schedule.component";
+import { Schedule, ScheduleRow } from "../schedule/schedule.component";
 
 export type EventHistoryTableRow = {
     eventTimestamp: string
@@ -13,17 +13,16 @@ export type EventHistoryTableRow = {
     eventHistoryGuid: string
 }
 
-export type FetchEventHistoryParameters = { 
-    isSupplier: boolean 
+export type fetchScheduleParameters = { 
     pageNumber: number 
     pageRowCount: number 
     sortColumn: string 
     sortDirection: string
 }
 
-export interface ResourceScheduleProvider<R,L=any> {
-    fetchEventHistory( x: FetchEventHistoryParameters ): Observable<L>    
-    displayRowListPage( res: L ): EventHistoryTableRow[]
+export interface ResourceScheduleProvider {
+    fetchSchedule( x: fetchScheduleParameters ): Observable<any>    
+    displaySchedule( res: any ): Schedule
 }
 
 @Component({
@@ -32,32 +31,38 @@ export interface ResourceScheduleProvider<R,L=any> {
     styleUrl: "./resource-schedule.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ResourceScheduleComponent extends RowListBase<{},EventHistoryTableRow> {
-    @Input() resourceScheduleProvider?: ResourceScheduleProvider<EventHistoryTableRow>
+export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
+    @Input() provider?: ResourceScheduleProvider
     @Input() startDate?: string
     @Input() weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
 
-    DATE_FORMATS = DATE_FORMATS
+    // DATE_FORMATS = DATE_FORMATS
 
-    schedule: Schedule
+    // schedule?: Schedule
     
     fetchRowListPage(): Observable<any> {
-        if ( !this.resourceScheduleProvider?.fetchEventHistory ) throw Error( 'no provider for ResourceScheduleComponent.rowListProvider.fetchRowListPage' )
-        return of()
-        // return this.resourceScheduleProvider.fetchEventHistory( {
-        //     isSupplier: this.isSupplier,
-        //     pageNumber: this.pageNumber,
-        //     pageRowCount: this.pageSize,
-        //     sortColumn: this.sortActive,
-        //     sortDirection: this.sortDirection,
-        // } )
+        if ( !this.provider?.fetchSchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.fetchSchedule' )
+
+        return this.provider.fetchSchedule( {
+            pageNumber: this.pageNumber,
+            pageRowCount: this.pageSize,
+            sortColumn: this.sortActive,
+            sortDirection: this.sortDirection,
+        } )
     }
 
-    parseRows( res: any ): EventHistoryTableRow[] {
-        if ( !this.resourceScheduleProvider?.displayRowListPage ) throw Error( 'no provider for ResourceScheduleComponent.rowListProvider.displayRowListPage' )
+    parseRows( res: any ): Schedule {
+        if ( !this.provider?.displaySchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.displaySchedule' )
 
-        return this.resourceScheduleProvider.displayRowListPage( res )
+        let x = this.provider.displaySchedule( res )
+        console.log(x)
+        return x 
+    }
+
+    parseTotalRowCount( res ): number {
+        console.log(res)
+        return res.length
     }
 
     get initialPageState(): RowListState<{}> {
@@ -70,9 +75,5 @@ export class ResourceScheduleComponent extends RowListBase<{},EventHistoryTableR
                 sortDirection: 'desc',
             }
         }
-    }
-
-    savePageState(): void {
-        // state not saved
     }
 }

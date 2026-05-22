@@ -35,6 +35,7 @@ import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.compo
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ResourceScheduleComponent } from './resource-schedule.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',
@@ -80,7 +81,10 @@ const meta: Meta<ResourceScheduleComponent> = {
                 DeviceViewComponent,
                 DesktopViewDirective,
                 MobileViewDirective,
-                IconComponent
+                IconComponent,
+                ScheduleComponent,
+                ScheduleItemDirective,
+                ScheduleRowHeadingDirective
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -120,40 +124,72 @@ export default meta;
 export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
+        startDate: {
+            type: 'date'
+        },
+        dayCount: {
+            control: {
+                type: 'range',
+                min: 2,
+                max: 20
+            }
+        },
+        weekStart: {
+            control: {
+                type: 'range',
+                min: 0,
+                max: 6
+            }
+        },
     },
     args: {
         ...displayModeWrapperStory.args,
+        startDate: moment().format( DATE_FORMATS.datePickerInput ),
+        dayCount: 8,
+        weekStart: 0,
     },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
-    },    
     render: ( args ) => {
-        // args.rowListProvider = {
-        //     fetchEventHistory: ( x ) => { return of(eventHistoryCollection()) },
-        //     displayRowListPage: ( res: EventHistoryCollection ) => {
-        //         return res.collection.map( v => {
-        //             return {
-        //                 eventTimestamp: moment( v.eventTimestamp ).format( DATE_FORMATS.fullPickerInput ),
-        //                 createdByUserId: v.createdByUserId,
-        //                 eventHistoryTypeDescription: v.eventHistoryTypeCode,
-        //                 sourceObjectNameDescription: v.sourceObjectNameCode,
-        //                 comment: v.comment,
-        //                 eventHistoryGuid: v.eventHistoryGuid
-        //             }
-        //         } )
-        //     },
-        // }
+        args.provider = {
+            fetchSchedule: ( x ) => { return of([]) },
+            displaySchedule: ( res ) => {
+                return [
+                    {
+                        heading: { foo: 1 },
+                        items: [
+                            'available-regular-day',
+                            'available-regular-day',
+                            'available-regular-day',
+                            'available-regular-day',
+                            'available-day-off',
+                        ]
+                    },
+                    {
+                        heading: { foo: 2 },
+                        items: [
+                            'available-regular-day',
+                            { name: 'available-day-off', data: { foo: 3 } },
+                            'available-day-off',
+                            'available-day-off',
+                            'available-day-off',
+                            'available-day-off',
+                        ]
+                    }
+                ]
+            },
+        }
         return {
             props: args,
             template: `
-                <nrcl-resource-scheduley
-                    [resourceScheduleProvider]="resourceScheduleProvider"
-                ></nrcl-resource-scheduley>
+                <nrcl-resource-schedule
+                    [startDate]="startDate"
+                    [dayCount]="dayCount"
+                    [weekStart]="weekStart"
+                    [provider]="provider"
+                >
+                    <ng-template nrclScheduleRowHeading let-item>
+                        <div>foo {{ item.foo }}</div>
+                    </ng-template>
+                </nrcl-resource-schedule>
             `
         }
     }
@@ -184,9 +220,9 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
         return {
             props: args,
             template: `
-                <nrcl-resource-scheduley
+                <nrcl-resource-schedule
                     [resourceScheduleProvider]="resourceScheduleProvider"
-                ></nrcl-resource-scheduley>
+                ></nrcl-resource-schedule>
             `
         }
     }

@@ -62,7 +62,7 @@ import { TabGroupComponent } from './components/tabs/tab-group/tab-group.compone
 import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
-import { ScheduleComponent } from './components/schedule/schedule.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 import { ResourceScheduleComponent } from './components/resource-schedule/resource-schedule.component';
 
 @NgModule({
@@ -134,6 +134,8 @@ import { ResourceScheduleComponent } from './components/resource-schedule/resour
         TabContentDirective,
         LoadingStatusComponent,
         ScheduleComponent,
+        ScheduleItemDirective,
+        ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
     ],
     exports: [
@@ -176,6 +178,8 @@ import { ResourceScheduleComponent } from './components/resource-schedule/resour
         TabContentDirective,
         LoadingStatusComponent,
         ScheduleComponent,
+        ScheduleItemDirective,
+        ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
     ],
     providers: [

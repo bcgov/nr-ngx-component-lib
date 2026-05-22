@@ -46,7 +46,7 @@
             height: var( --nrcl-schedule-row-days-height );
         }
 
-        .heading, .item, .day, .week {
+        .heading, .schedule-item, .day, .week {
             border-right: 1px solid var( --nrcl-schedule-border-color );
             border-bottom: 1px solid var( --nrcl-schedule-border-color );
         }

@@ -2,6 +2,13 @@
     [startDate]="startDate"
     [weekStart]="weekStart"
     [dayCount]="dayCount"
-    [schedule]="schedule"
+    [schedule]="rows"
 >
+    <ng-content></ng-content>
+
+    <ng-template nrclScheduleItem="available-regular-day" let-data>
+        <div>Available</div>
+        <div>Full Day Off</div>
+    </ng-template>
+
 </nrcl-schedule>
