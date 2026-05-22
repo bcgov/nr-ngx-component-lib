@@ -1,25 +1,37 @@
-<ng-template #empty>
-    <div>Empty</div>
-</ng-template>
-
-<div class="weeks">
-
+<div class="upper-left">
+    <ng-content></ng-content>
 </div>
 
-<div class="days">
-    @for ( item of row.items; track item.id ) {
-        <div class="item">
-            <ng-container 
-                [ngTemplateOutlet]="item.template || empty" 
-                [ngTemplateOutletContext]="{ $implicit: item.data }"            
-            ></ng-container>
+<div class="row weeks">
+    @for ( week of _weeks; track $index ) {
+        @if ( week.span == 1 ) {
+            <div class="week">
+                {{ week.start }}
+            </div>
+        }
+        @else {
+            <div class="week" [style.grid-column]="'span ' + week.span">
+                {{ week.start }} - {{ week.end }}
+            </div>
+        }
+    }
+</div>
+
+<div class="row days">    
+    @for ( day of _days; track $index ) {
+        <div class="day"
+            [class.weekend]="day.isWeekend"
+            [class.today]="day.isToday"
+            [class.first]="day.isFirst"
+        >
+            <div class="day-name">{{ day.day }}</div>
+            <div class="date">{{ day.date }}</div>
         </div>
     }
 </div>
 
-
 @for ( row of _rows; track row.id ) {
-    <div class="row">
+    <div class="row schedule">
         <div class="heading">
             <ng-container 
                 [ngTemplateOutlet]="headerTemplate.template" 
@@ -37,3 +49,7 @@
         }
     </div>
 }
+
+<ng-template #empty>
+    <div class="empty">(empty)</div>
+</ng-template>

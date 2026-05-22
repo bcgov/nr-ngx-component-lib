@@ -1,9 +1,21 @@
 ::ng-deep :root {
-    --nrcl-schedule-day-count: 5;
-    --nrcl-schedule-row-height: 100px;
+    --nrcl-schedule-border-color: #c6c8cb;
+
+    --nrcl-schedule-row-weeks-height: 30px;
+    --nrcl-schedule-row-weeks-font-size: 15px;
+    --nrcl-schedule-row-weeks-font-weight: bold;
+    --nrcl-schedule-row-weeks-foreground-color: black;
+
+    --nrcl-schedule-row-days-height: 45px;
+    --nrcl-schedule-row-days-font-size: 15px;
+    --nrcl-schedule-row-days-font-weight: normal;
+    --nrcl-schedule-row-days-foreground-color: black;
+    --nrcl-schedule-row-days-weekend-background-color: #e0f8fc;
+    --nrcl-schedule-row-days-today-background-color: #fcf8d9;
+
+    --nrcl-schedule-row-schedule-height: 80px;
     --nrcl-schedule-heading-width: 300px;
-    --nrcl-schedule-item-width: 100px;
-    --nrcl-schedule-border-color: #c6c8cb
+    --nrcl-schedule-item-width: 80px;
 }
 
 :host {
@@ -12,18 +24,86 @@
     display: grid;
     grid-template-columns: var( --nrcl-schedule-heading-width ) repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
 
-    border-top: 1px solid var( --nrcl-schedule-border-color );
-    border-left: 1px solid var( --nrcl-schedule-border-color );
+    .upper-left {
+        grid-row: 1 / span 2;
+        grid-column: 1;
+        border-right: 1px solid var( --nrcl-schedule-border-color );
+        border-bottom: 1px solid var( --nrcl-schedule-border-color );
+    }
 
     .row {
         display: contents;
-        & > * {
-            height: var( --nrcl-schedule-row-height );
+
+        &.schedule > * {
+            height: var( --nrcl-schedule-row-schedule-height );
         }
 
-        .heading, .item {
+        &.weeks > * {
+            height: var( --nrcl-schedule-row-weeks-height );
+        }
+
+        &.days > * {
+            height: var( --nrcl-schedule-row-days-height );
+        }
+
+        .heading, .item, .day, .week {
             border-right: 1px solid var( --nrcl-schedule-border-color );
             border-bottom: 1px solid var( --nrcl-schedule-border-color );
         }
+
+        .heading {
+            border-left: 1px solid var( --nrcl-schedule-border-color );
+        }
+
+        .week {
+            border-top: 1px solid var( --nrcl-schedule-border-color );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var( --nrcl-schedule-row-weeks-font-size );
+            font-weight: var( --nrcl-schedule-row-weeks-font-weight );
+            color: var( --nrcl-schedule-row-weeks-foreground-color );
+        }
+
+        .day {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: var( --nrcl-schedule-row-days-font-size );
+            font-weight: var( --nrcl-schedule-row-days-font-weight );
+            color: var( --nrcl-schedule-row-days-foreground-color );
+
+            .day-name { font-size: 13px; }
+            .date {}
+
+            &.weekend {
+                background-color: var( --nrcl-schedule-row-days-weekend-background-color );
+            }
+            
+            &.today {
+                background-color: var( --nrcl-schedule-row-days-today-background-color );
+            }
+
+            &.first {
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;                
+                    border-left: 2px solid black;
+                }
+            }
+        }
     }
+}
+
+.empty {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
 }

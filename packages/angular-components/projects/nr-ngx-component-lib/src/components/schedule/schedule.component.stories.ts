@@ -1,6 +1,8 @@
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ScheduleComponent, ScheduleItemComponent, ScheduleRowHeadingComponent } from './schedule.component';
+import { DATE_FORMATS } from '../../utils/date.util';
+import moment from 'moment';
 
 const meta: Meta<ScheduleComponent & { width: number }> = {
     title: 'Schedule',
@@ -24,7 +26,7 @@ const meta: Meta<ScheduleComponent & { width: number }> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="{width, tooltip}">
+                    <ng-container *rerender="{width, startDate}">
                         <registration-wrapper style="--registration-display: inline-block;">
                             ${ story }
                         </registration-wrapper>
@@ -52,8 +54,28 @@ export default meta;
 
 export const Primary: StoryObj<ScheduleComponent & { width: number }> = {
     argTypes: {
+        startDate: {
+            type: 'date'
+        },
+        dayCount: {
+            control: {
+                type: 'range',
+                min: 2,
+                max: 20
+            }
+        },
+        weekStart: {
+            control: {
+                type: 'range',
+                min: 0,
+                max: 6
+            }
+        },
     },
     args: {
+        startDate: moment().format( DATE_FORMATS.datePickerInput ),
+        dayCount: 8,
+        weekStart: 0,
     },
     render: ( args ) => {
         return {
@@ -84,9 +106,10 @@ export const Primary: StoryObj<ScheduleComponent & { width: number }> = {
             },
             template: `
                 <nrcl-schedule
-                    startDate="may 21"
-                    dayCount="8"
+                    [startDate]="startDate"
+                    [dayCount]="dayCount"
                     [schedule]="schedule"
+                    [weekStart]="weekStart"
                 >
                     <ng-template nrclScheduleRowHeading let-item>
                         <div>foo {{ item.foo }}</div>

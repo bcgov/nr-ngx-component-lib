@@ -31,7 +31,7 @@ export class ScheduleItemComponent {
 
 export type ScheduleRowItem = {
     id: string,
-    date: string,
+    // date: string,
     name: string,
     data?: any
     template?: TemplateRef<any>
@@ -44,6 +44,20 @@ export type ScheduleRow = {
 }
 
 export type Schedule = ScheduleRow[]
+
+type Day = { 
+    day: string, 
+    date: number, 
+    isWeekend: boolean, 
+    isToday: boolean, 
+    isFirst: boolean 
+}
+
+type Week = { 
+    start: string, 
+    end: string, 
+    span: number 
+}
 
 @Component( {
     selector: 'nrcl-schedule',
@@ -58,6 +72,7 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
     changeDetectorRef = inject( ChangeDetectorRef )
 
     @Input() startDate?: string
+    @Input() weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() schedule?: Schedule
 
@@ -65,8 +80,8 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
     @ContentChild(ScheduleRowHeadingComponent) headerTemplate!: ScheduleRowHeadingComponent
 
     protected _rows: Schedule = []
-    protected _days: string[] = []
-    protected _weeks: string[] = []
+    protected _days: Day[] = []
+    protected _weeks: Week[] = []
 
     ngOnChanges( changes: SimpleChanges ): void {
         this.makeRows()
@@ -78,8 +93,41 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
 
     makeRows() {
         let start = moment( this.startDate )
-        let days = Array.from( { length: this.dayCount! } ).map( ( x, i ) => {
-            return start.clone().add( i, 'day' ).format( 'ddd DD' )
+        let today = moment()
+
+        this._weeks = Array.from( { length: this.dayCount! } ).reduce<Week[]>( ( a, x, i ) => {
+            let m = start.clone().add( i, 'day' )
+            let date = m.format( 'MMM D' )
+            let day = m.day()
+
+            if ( a.length == 0 ) return a.concat( {
+                start: date,
+                end: date,
+                span: 1
+            } )
+
+            let prev = a[ a.length - 1 ] 
+
+            if ( day == this.weekStart ) return a.concat( {
+                start: date,
+                end: date,
+                span: 1
+            } )
+            
+            prev.end = date
+            prev.span += 1
+            return a
+        }, [] )
+
+        this._days = Array.from( { length: this.dayCount! } ).map( ( x, i ) => {
+            let d = start.clone().add( i, 'day' )
+            return {
+                day: d.format( 'ddd' ),
+                date: d.date(),
+                isFirst: d.date() == 1,
+                isWeekend: d.day() == 0 || d.day() == 6,
+                isToday: d.isSame( today, 'day' ),
+            }
         } )
 
         this._rows = this.schedule?.map( ( row, i ) => {
@@ -106,7 +154,7 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
 
                     return {
                         id: id ?? String( i ),
-                        date: days[ i ],
+                        // date: this._days[ i ].name,
                         name: name,
                         data: data,
                         template: this.itemTemplates?.find( i => i.name == name )?.template!
