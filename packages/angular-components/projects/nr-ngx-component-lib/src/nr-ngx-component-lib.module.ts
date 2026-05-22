@@ -63,6 +63,7 @@ import { TabComponent, TabContentDirective, TabLabelDirective } from './componen
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { ResourceScheduleComponent } from './components/resource-schedule/resource-schedule.component';
 
 @NgModule({
     imports: [
@@ -133,6 +134,7 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
         TabContentDirective,
         LoadingStatusComponent,
         ScheduleComponent,
+        ResourceScheduleComponent,
     ],
     exports: [
         ButtonComponent,
@@ -174,6 +176,7 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
         TabContentDirective,
         LoadingStatusComponent,
         ScheduleComponent,
+        ResourceScheduleComponent,
     ],
     providers: [
         SnackbarUtilService,

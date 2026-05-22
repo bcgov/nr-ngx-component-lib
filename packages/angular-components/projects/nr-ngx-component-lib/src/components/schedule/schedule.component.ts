@@ -68,7 +68,6 @@ type Week = {
     }
 } )
 export class ScheduleComponent extends NrclBase implements AfterContentInit, OnChanges {
-    // elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
     @Input() startDate?: string
