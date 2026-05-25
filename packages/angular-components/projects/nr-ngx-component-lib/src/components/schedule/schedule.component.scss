@@ -35,6 +35,7 @@
         display: contents;
 
         &.schedule > * {
+            box-sizing: border-box;
             height: var( --nrcl-schedule-row-schedule-height );
         }
 

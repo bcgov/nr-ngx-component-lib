@@ -1,3 +1,7 @@
+<ng-template #heading>
+    <ng-content select="[heading]"></ng-content>
+</ng-template>
+
 <nrcl-schedule
     [startDate]="startDate"
     [weekStart]="weekStart"
@@ -6,9 +10,25 @@
 >
     <ng-content></ng-content>
 
-    <ng-template nrclScheduleItem="available-regular-day" let-data>
-        <div>Available</div>
-        <div>Full Day Off</div>
+    <ng-template nrclScheduleRowHeading let-item>
+        <ng-container 
+            [ngTemplateOutlet]="headerTemplate.template"
+            [ngTemplateOutletContext]="{ $implicit: item }"            
+        ></ng-container>
     </ng-template>
 
+    <ng-template nrclScheduleItem="available-full-regular-day" let-data>
+        <h1>Available</h1>
+        <h2>Full Regular Day</h2>
+    </ng-template>
+    
+    <ng-template nrclScheduleItem="available-day-off" let-data>
+        <h1>Available</h1>
+        <h2>Full Day Off</h2>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="available-day-off" let-data>
+        <h1>Available</h1>
+        <h2>Full Day Off</h2>
+    </ng-template>
 </nrcl-schedule>

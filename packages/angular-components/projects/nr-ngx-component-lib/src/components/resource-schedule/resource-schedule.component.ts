@@ -1,19 +1,44 @@
-import { ChangeDetectionStrategy, Component, Input, numberAttribute } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ContentChild, Directive, Input, numberAttribute, TemplateRef } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { RowListBase, RowListState } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
-import { Schedule, ScheduleRow } from "../schedule/schedule.component";
+import { Schedule, ScheduleRow, ScheduleRowItem } from "../schedule/schedule.component";
 
-export type EventHistoryTableRow = {
-    eventTimestamp: string
-    createdByUserId: string
-    eventHistoryTypeDescription: string
-    sourceObjectNameDescription: string
-    comment: string
-    eventHistoryGuid: string
+@Directive( {
+    selector: '[nrclResourceScheduleRowHeading]'
+} )
+export class ResourceScheduleRowHeadingDirective {
+    constructor(
+        public template: TemplateRef<any>
+    ){
+        console.log('ResourceScheduleRowHeadingDirective')
+
+    }
 }
 
-export type fetchScheduleParameters = { 
+// ================================================================================
+
+export type ResourceScheduleItemTypes = 
+    'available-regular-day' |
+    'available-day-off'
+
+export type ResourceScheduleRowItem = ScheduleRowItem & {
+    // id?: string,
+    // date: string,
+    name: ResourceScheduleItemTypes,
+    // data?: any
+    // template?: TemplateRef<any>
+}
+
+export type ResourceScheduleRow = ScheduleRow & {
+    // id?: string,
+    // heading: any,
+    items: ( ResourceScheduleItemTypes | ResourceScheduleRowItem )[]
+}
+
+export type ResourceSchedule = ResourceScheduleRow[]
+
+export type FetchResourceScheduleParameters = { 
     pageNumber: number 
     pageRowCount: number 
     sortColumn: string 
@@ -21,8 +46,8 @@ export type fetchScheduleParameters = {
 }
 
 export interface ResourceScheduleProvider {
-    fetchSchedule( x: fetchScheduleParameters ): Observable<any>    
-    displaySchedule( res: any ): Schedule
+    fetchResourceSchedule( x: FetchResourceScheduleParameters ): Observable<any>    
+    displayResourceSchedule( res: any ): ResourceSchedule
 }
 
 @Component({
@@ -37,14 +62,16 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
     @Input() weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
 
+    @ContentChild(ResourceScheduleRowHeadingDirective) headerTemplate!: ResourceScheduleRowHeadingDirective
+    
     // DATE_FORMATS = DATE_FORMATS
 
     // schedule?: Schedule
     
     fetchRowListPage(): Observable<any> {
-        if ( !this.provider?.fetchSchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.fetchSchedule' )
+        if ( !this.provider?.fetchResourceSchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.fetchSchedule' )
 
-        return this.provider.fetchSchedule( {
+        return this.provider.fetchResourceSchedule( {
             pageNumber: this.pageNumber,
             pageRowCount: this.pageSize,
             sortColumn: this.sortActive,
@@ -52,10 +79,10 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
         } )
     }
 
-    parseRows( res: any ): Schedule {
-        if ( !this.provider?.displaySchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.displaySchedule' )
+    parseRows( res: any ): ResourceSchedule {
+        if ( !this.provider?.displayResourceSchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.displaySchedule' )
 
-        let x = this.provider.displaySchedule( res )
+        let x = this.provider.displayResourceSchedule( res )
         console.log(x)
         return x 
     }

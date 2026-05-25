@@ -34,7 +34,7 @@ import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.co
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { ResourceScheduleComponent } from './resource-schedule.component';
+import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './resource-schedule.component';
 import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 
 const meta: Meta<ResourceScheduleComponent> = {
@@ -84,7 +84,8 @@ const meta: Meta<ResourceScheduleComponent> = {
                 IconComponent,
                 ScheduleComponent,
                 ScheduleItemDirective,
-                ScheduleRowHeadingDirective
+                ScheduleRowHeadingDirective,
+                ResourceScheduleRowHeadingDirective,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -150,8 +151,8 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     },
     render: ( args ) => {
         args.provider = {
-            fetchSchedule: ( x ) => { return of([]) },
-            displaySchedule: ( res ) => {
+            fetchResourceSchedule: ( x ) => { return of([]) },
+            displayResourceSchedule: ( res ) => {
                 return [
                     {
                         heading: { foo: 1 },
@@ -164,7 +165,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                         ]
                     },
                     {
-                        heading: { foo: 2 },
+                        heading: { foo: 222 },
                         items: [
                             'available-regular-day',
                             { name: 'available-day-off', data: { foo: 3 } },
@@ -186,8 +187,10 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [weekStart]="weekStart"
                     [provider]="provider"
                 >
-                    <ng-template nrclScheduleRowHeading let-item>
-                        <div>foo {{ item.foo }}</div>
+                    <div>upper-left</div>
+
+                    <ng-template nrclResourceScheduleRowHeading let-item>
+                        <div>foo  {{item|json}}</div>
                     </ng-template>
                 </nrcl-resource-schedule>
             `

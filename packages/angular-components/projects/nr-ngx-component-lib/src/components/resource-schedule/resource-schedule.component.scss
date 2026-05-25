@@ -1,3 +1,50 @@
-.schedule-item-available-regular-day {
-    background-color: red;
+::ng-deep :root {
+    --nrcl-resource-schedule-item-foregroud-color: black;
+    --nrcl-resource-schedule-item-text-shadow:  1px 1px 10px white, -1px 1px 10px white, 1px -1px 10px white, -1px -1px 10px white;
+
+    --nrcl-resource-schedule-item-regular-day-background-color: #0AA647;
+    --nrcl-resource-schedule-item-day-off-background-color: #d4d2d2
+}
+
+.nrcl-schedule {
+    ::ng-deep .schedule-item {
+        font-size: 13px;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        align-items: center;
+        overflow: hidden;
+
+        h1, h2 {
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        h1 {
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        h2 {
+            flex-grow: 1;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        &.schedule-item-available-regular-day {
+            color: var( --nrcl-resource-schedule-item-foregroud-color );
+            text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
+            background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
+        }
+
+        &.schedule-item-available-day-off {
+            color: var( --nrcl-resource-schedule-item-foregroud-color );
+            text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
+            background-color: var( --nrcl-resource-schedule-item-day-off-background-color );
+        }
+    }
 }

@@ -78,7 +78,7 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
     @Input() schedule?: Schedule
 
     @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>;
-    @ContentChild(ScheduleRowHeadingDirective,{descendants:true}) headerTemplate!: ScheduleRowHeadingDirective
+    @ContentChild(ScheduleRowHeadingDirective) headerTemplate!: ScheduleRowHeadingDirective
 
     protected _rows: Schedule = []
     protected _days: Day[] = []
