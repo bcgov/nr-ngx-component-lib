@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Directive, Input, numberAttribute, TemplateRef } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { RowListBase, RowListState } from "../../directives/row-list.base";
-import { DATE_FORMATS } from "../../utils/date.util";
-import { Schedule, ScheduleRow, ScheduleRowItem } from "../schedule/schedule.component";
+import { ScheduleRow, ScheduleRowItem } from "../schedule/schedule.component";
 
 @Directive( {
     selector: '[nrclResourceScheduleRowHeading]'
@@ -76,11 +75,7 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
     @Input( { transform: numberAttribute } ) dayCount?: number
 
     @ContentChild(ResourceScheduleRowHeadingDirective) headerTemplate!: ResourceScheduleRowHeadingDirective
-    
-    // DATE_FORMATS = DATE_FORMATS
-
-    // schedule?: Schedule
-    
+       
     fetchRowListPage(): Observable<any> {
         if ( !this.provider?.fetchResourceSchedule ) throw Error( 'ResourceScheduleComponent.provider.fetchResourceSchedule not set' )
 
@@ -100,10 +95,9 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
         return x 
     }
 
-    parseTotalRowCount( res ): number {
-        console.log(res)
-        return res.length
-    }
+    // parseTotalRowCount( res ): number {
+    //     return res.length
+    // }
 
     get initialPageState(): RowListState<{}> {
         return {

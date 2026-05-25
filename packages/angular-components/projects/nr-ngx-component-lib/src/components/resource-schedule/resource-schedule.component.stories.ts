@@ -151,12 +151,14 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     },
     render: ( args ) => {
         args.provider = {
-            fetchResourceSchedule: ( x ) => { return of([]) },
+            fetchResourceSchedule: ( x ) => { return of({
+                totalRowCount: 10
+            }) },
             displayResourceSchedule: ( res ) => {
                 return Array.from( { length: 10 } ).map( ( x, i ) => {
                     return {
                         heading: { row: i },
-                        items: scheduleItems( i, 20, 11 )
+                        items: scheduleItems( i * 7, 19, 23 )
                     }
                 } )
             },
