@@ -1,9 +1,17 @@
 ::ng-deep :root {
     --nrcl-resource-schedule-item-foregroud-color: black;
-    --nrcl-resource-schedule-item-text-shadow:  1px 1px 10px white, -1px 1px 10px white, 1px -1px 10px white, -1px -1px 10px white;
+    --nrcl-resource-schedule-item-text-shadow:
+         1px  0px 5px #ffffff80,
+        -1px  0px 5px #ffffff80,
+         0px  1px 5px #ffffff80,
+         0px -1px 5px #ffffff80;
 
     --nrcl-resource-schedule-item-regular-day-background-color: #0AA647;
-    --nrcl-resource-schedule-item-day-off-background-color: #d4d2d2
+    --nrcl-resource-schedule-item-off-day-background-color: #d4d2d2;
+    --nrcl-resource-schedule-item-duty-day-background-color: #2f9fe0;
+    --nrcl-resource-schedule-item-standby-day-background-color: #f6cf43;
+    --nrcl-resource-schedule-item-out-of-service-background-color: #f55353;
+    --nrcl-resource-schedule-item-rostered-background-color: #ba9ef7;
 }
 
 .nrcl-schedule {
@@ -16,8 +24,10 @@
         gap: 8px;
         align-items: center;
         overflow: hidden;
+        color: var( --nrcl-resource-schedule-item-foregroud-color );
+        text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
 
-        h1, h2 {
+        h1, h2, h3 {
             padding: 0;
             margin: 0;
             font-weight: normal;
@@ -26,25 +36,55 @@
         h1 {
             font-size: 14px;
             text-align: center;
-            font-weight: bold;
+            // font-weight: bold;
         }
 
         h2 {
             flex-grow: 1;
+            font-size: 13px;
+            // font-weight: bold;
+            text-align: center;
+        }
+
+        h3 {
             font-size: 12px;
             text-align: center;
         }
-        
+
+        &.schedule-item-out-of-service {
+            background-color: var( --nrcl-resource-schedule-item-out-of-service-background-color );
+        }
+
+        &.schedule-item-available-duty-day {
+            background-color: var( --nrcl-resource-schedule-item-duty-day-background-color );
+        }
+
+        &.schedule-item-available-standby-day {
+            background-color: var( --nrcl-resource-schedule-item-standby-day-background-color );
+        }
+
+        &.schedule-item-available-off-day {
+            background-color: var( --nrcl-resource-schedule-item-off-day-background-color );
+        }
+
         &.schedule-item-available-regular-day {
-            color: var( --nrcl-resource-schedule-item-foregroud-color );
-            text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
         }
 
-        &.schedule-item-available-day-off {
-            color: var( --nrcl-resource-schedule-item-foregroud-color );
-            text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
-            background-color: var( --nrcl-resource-schedule-item-day-off-background-color );
+        &.schedule-item-assigned-duty-day {
+            background-color: var( --nrcl-resource-schedule-item-duty-day-background-color );
+        }
+
+        &.schedule-item-assigned-standby-day {
+            background-color: var( --nrcl-resource-schedule-item-standby-day-background-color );
+        }
+
+        &.schedule-item-assigned-off-day {
+            background-color: var( --nrcl-resource-schedule-item-off-day-background-color );
+        }
+
+        &.schedule-item-assigned-regular-day {
+            background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
         }
     }
 }

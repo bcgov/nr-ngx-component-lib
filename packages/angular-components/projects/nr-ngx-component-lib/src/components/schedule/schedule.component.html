@@ -39,13 +39,20 @@
             ></ng-container>
         </div>    
 
-        @for ( item of row.items; track item.id ) {
-            <div class="schedule-item" [class]="'schedule-item-' + item.name">
-                <ng-container 
-                    [ngTemplateOutlet]="item.template || empty" 
-                    [ngTemplateOutletContext]="{ $implicit: item.data }"            
-                ></ng-container>
-            </div>
+        @if ( row.items | async; as rowItems ) {
+            @for ( item of rowItems; track item.id ) {
+                <div class="schedule-item" [class]="'schedule-item-' + item.name">
+                    <ng-container 
+                        [ngTemplateOutlet]="item.template || empty" 
+                        [ngTemplateOutletContext]="{ $implicit: item.data }"            
+                    ></ng-container>
+                </div>
+            }
+        }
+        @else {
+            @for ( day of _days; track day ) {
+                <div class="schedule-item schedule-item-loading"></div>
+            }
         }
     </div>
 }
@@ -53,3 +60,4 @@
 <ng-template #empty>
     <div class="empty">(empty)</div>
 </ng-template>
+

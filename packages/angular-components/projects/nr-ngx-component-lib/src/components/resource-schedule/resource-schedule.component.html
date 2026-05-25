@@ -1,7 +1,3 @@
-<ng-template #heading>
-    <ng-content select="[heading]"></ng-content>
-</ng-template>
-
 <nrcl-schedule
     [startDate]="startDate"
     [weekStart]="weekStart"
@@ -17,18 +13,58 @@
         ></ng-container>
     </ng-template>
 
-    <ng-template nrclScheduleItem="available-full-regular-day" let-data>
-        <h1>Available</h1>
-        <h2>Full Regular Day</h2>
-    </ng-template>
-    
-    <ng-template nrclScheduleItem="available-day-off" let-data>
-        <h1>Available</h1>
-        <h2>Full Day Off</h2>
+    <ng-template nrclScheduleItem="out-of-service" let-data>
+        <h1>Out of Svc</h1>
+        <h2>{{ data.availabilityType }}</h2>
+        <h3>{{ data.shiftType }}</h3>
     </ng-template>
 
-    <ng-template nrclScheduleItem="available-day-off" let-data>
+    <ng-template nrclScheduleItem="available-duty-day" let-data>
         <h1>Available</h1>
-        <h2>Full Day Off</h2>
+        <h2>{{ data.availabilityType }}</h2>
+        <h3>Duty Day</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="available-standby-day" let-data>
+        <h1>Available</h1>
+        <h2>{{ data.availabilityType }}</h2>
+        <h3>Standby</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="available-off-day" let-data>
+        <h1>Available</h1>
+        <h2>{{ data.availabilityType }}</h2>
+        <h3>Off</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="available-regular-day" let-data>
+        <h1>Available</h1>
+        <h2>{{ data.availabilityType }}</h2>
+        <h3>Regular</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="assigned-duty-day" let-data>
+        <!-- <h1></h1> -->
+        <h2>{{ data.assignmentName }}</h2>
+        <h3>Duty Day</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="assigned-standby-day" let-data>
+        <!-- <h1></h1> -->
+        <h2>{{ data.assignmentName }}</h2>
+        <h3>Standby</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="assigned-off-day" let-data>
+        <!-- <h1></h1> -->
+        <h2>{{ data.assignmentName }}</h2>
+        <h3>Off</h3>
+    </ng-template>
+
+    <ng-template nrclScheduleItem="assigned-regular-day" let-data>
+        <!-- <h1></h1> -->
+        <h2>{{ data.assignmentName }}</h2>
+        <h3>Regular</h3>
     </ng-template>
 </nrcl-schedule>
+

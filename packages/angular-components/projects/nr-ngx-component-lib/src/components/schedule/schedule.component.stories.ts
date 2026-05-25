@@ -83,24 +83,46 @@ export const Primary: StoryObj<ScheduleComponent & { width: number }> = {
                 schedule: [
                     {
                         heading: { foo: 1 },
-                        items: [
-                            'available-regular-day',
-                            'available-regular-day',
-                            'available-regular-day',
-                            'available-regular-day',
-                            'available-day-off',
-                        ]
+                        items: delayed([
+                            { name: 'available-regular-day' },
+                            { name: 'available-regular-day' },
+                            { name: 'available-regular-day' },
+                            { name: 'available-regular-day' },
+                            { name: 'available-day-off' },
+                        ])
                     },
                     {
                         heading: { foo: 2 },
-                        items: [
-                            'available-regular-day',
+                        items: delayed([
+                            { name: 'available-regular-day' },
                             { name: 'available-day-off', data: { foo: 3 } },
-                            'available-day-off',
-                            'available-day-off',
-                            'available-day-off',
-                            'available-day-off',
-                        ]
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                        ])
+                    },
+                    {
+                        heading: { foo: 2 },
+                        items: delayed([
+                            { name: 'available-regular-day' },
+                            { name: 'available-day-off', data: { foo: 3 } },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                        ])
+                    },
+                    {
+                        heading: { foo: 2 },
+                        items: delayed([
+                            { name: 'available-regular-day' },
+                            { name: 'available-day-off', data: { foo: 3 } },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                            { name: 'available-day-off' },
+                        ])
                     }
                 ]
             },
@@ -127,4 +149,12 @@ export const Primary: StoryObj<ScheduleComponent & { width: number }> = {
             `
         }
     }
+}
+
+function delayed( val ) {
+    return new Promise( ( res, rej ) => {
+        setTimeout(() => {
+            res( val )
+        }, Math.random() * 2000 )
+    } )
 }

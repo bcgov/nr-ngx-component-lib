@@ -42,7 +42,7 @@ export type ScheduleRowItem = {
 export type ScheduleRow = {
     id?: string,
     heading: any,
-    items: ( string | ScheduleRowItem )[]
+    items: Promise<ScheduleRowItem[]> 
 }
 
 export type Schedule = ScheduleRow[]
@@ -135,32 +135,34 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
             return {
                 id: row.id ?? String( i ),
                 heading: clone( row.heading ),
-                items: Array.from( { length: this.dayCount! } ).map( ( x, i ) => {
-                    let rowItem = row.items[ i ]
+                items: row.items
+                    .then( rowItems => {
+                        return Array.from( { length: this.dayCount! } ).map( ( x, i ) => {
+                            let rowItem = rowItems[ i ]
+                            let name: string
+                            let data
+                            let id
+                            if ( rowItem == null ) {
+                                name = 'empty'
+                            }
+                            // else if ( typeof rowItem == 'string' ) {
+                                // name = rowItem
+                            // }
+                            else {
+                                id = rowItem.id
+                                name = rowItem.name
+                                data = clone( rowItem.data || null )
+                            }
 
-                    let name: string
-                    let data
-                    let id
-                    if ( rowItem == null ) {
-                        name = 'empty'
-                    }
-                    else if ( typeof rowItem == 'string' ) {
-                        name = rowItem
-                    }
-                    else {
-                        id = rowItem.id
-                        name = rowItem.name
-                        data = clone( rowItem.data || null )
-                    }
-
-                    return {
-                        id: id ?? String( i ),
-                        // date: this._days[ i ].name,
-                        name: name,
-                        data: data,
-                        template: this.itemTemplates?.find( i => i.name == name )?.template!
-                    }
-                } )
+                            return {
+                                id: id ?? String( i ),
+                                // date: this._days[ i ].name,
+                                name: name,
+                                data: data,
+                                template: this.itemTemplates?.find( i => i.name == name )?.template!
+                            }
+                        } )
+                    } )
             }
         } ) || []
     }

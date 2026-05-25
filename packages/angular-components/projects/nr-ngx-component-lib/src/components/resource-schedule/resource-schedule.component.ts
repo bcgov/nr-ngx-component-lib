@@ -10,30 +10,39 @@ import { Schedule, ScheduleRow, ScheduleRowItem } from "../schedule/schedule.com
 export class ResourceScheduleRowHeadingDirective {
     constructor(
         public template: TemplateRef<any>
-    ){
-        console.log('ResourceScheduleRowHeadingDirective')
-
-    }
+    ){}
 }
 
 // ================================================================================
 
 export type ResourceScheduleItemTypes = 
+    'out-of-service' |
+    'available-duty-day' |
+    'available-standby-day' |
+    'available-off-day' |
     'available-regular-day' |
-    'available-day-off'
+    'assigned-duty-day' |
+    'assigned-standby-day' |
+    'assigned-off-day' |
+    'assigned-regular-day' 
 
 export type ResourceScheduleRowItem = ScheduleRowItem & {
     // id?: string,
     // date: string,
     name: ResourceScheduleItemTypes,
-    // data?: any
+    data?: {
+        availabilityType?: string,
+        shiftType?: string,
+        assignmentName?: string,
+    }
     // template?: TemplateRef<any>
 }
 
 export type ResourceScheduleRow = ScheduleRow & {
     // id?: string,
     // heading: any,
-    items: ( ResourceScheduleItemTypes | ResourceScheduleRowItem )[]
+    // items: ( ResourceScheduleItemTypes | ResourceScheduleRowItem )[]
+    items: ( Promise<ResourceScheduleRowItem[]> )
 }
 
 export type ResourceSchedule = ResourceScheduleRow[]
@@ -45,8 +54,12 @@ export type FetchResourceScheduleParameters = {
     sortDirection: string
 }
 
+export type FetchResourceScheduleRowParameters = { 
+    resourceId: string 
+}
+
 export interface ResourceScheduleProvider {
-    fetchResourceSchedule( x: FetchResourceScheduleParameters ): Observable<any>    
+    fetchResourceSchedule( x: FetchResourceScheduleParameters ): Observable<any>
     displayResourceSchedule( res: any ): ResourceSchedule
 }
 
@@ -69,7 +82,7 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
     // schedule?: Schedule
     
     fetchRowListPage(): Observable<any> {
-        if ( !this.provider?.fetchResourceSchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.fetchSchedule' )
+        if ( !this.provider?.fetchResourceSchedule ) throw Error( 'ResourceScheduleComponent.provider.fetchResourceSchedule not set' )
 
         return this.provider.fetchResourceSchedule( {
             pageNumber: this.pageNumber,
@@ -80,9 +93,9 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
     }
 
     parseRows( res: any ): ResourceSchedule {
-        if ( !this.provider?.displayResourceSchedule ) throw Error( 'no provider for ResourceScheduleComponent.provider.displaySchedule' )
+        if ( !this.provider?.displayResourceSchedule ) throw Error( 'ResourceScheduleComponent.provider.displayResourceSchedule not set' )
 
-        let x = this.provider.displayResourceSchedule( res )
+        let x = this.provider.displayResourceSchedule( res )        
         console.log(x)
         return x 
     }
