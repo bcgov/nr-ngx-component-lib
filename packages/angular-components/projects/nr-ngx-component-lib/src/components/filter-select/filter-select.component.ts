@@ -125,7 +125,9 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         if ( changes.options ) {
             let pv = JSON.stringify( changes.options.previousValue )
             let cv = JSON.stringify( changes.options.currentValue )
+            // console.log('options',pv,cv)
             if ( pv != cv ) {
+                this.value = []
                 this.selection.setValue( null )
                 this.setInputToSelection()
                 this.setFilter()
@@ -133,9 +135,10 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         }
 
         if ( changes.value ) {
-            let pv = JSON.stringify( changes.value.previousValue )
-            let cv = JSON.stringify( changes.value.currentValue )
-            if ( pv != cv ) {
+            // let pv = JSON.stringify( changes.value.previousValue )
+            // let cv = JSON.stringify( changes.value.currentValue )
+            // console.log('value',pv,cv)
+            // if ( pv != cv ) {
                 if ( this.value ) {
                     this.hasValue = this.value.length > 0
                     this.selection.setValue( this.value )
@@ -155,7 +158,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
                 this.setFilter()
                 this.setInputToSelection()
                 this.changeDetectorRef.detectChanges()
-            }
+            // }
         }
     }
 
