@@ -30,7 +30,7 @@ export type ResourceScheduleRowItem = ScheduleRowItem & {
     // date: string,
     name: ResourceScheduleItemTypes,
     data?: {
-        availabilityType?: string,
+        allocationType?: string,
         shiftType?: string,
         assignmentName?: string,
     }

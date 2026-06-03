@@ -41,7 +41,7 @@
 
         @if ( row.items | async; as rowItems ) {
             @for ( item of rowItems; track item.id ) {
-                <div class="schedule-item" [class]="'schedule-item-' + item.name">
+                <div class="schedule-item" [class]="'schedule-item-' + item.name" matRipple>
                     <ng-container 
                         [ngTemplateOutlet]="item.template || empty" 
                         [ngTemplateOutletContext]="{ $implicit: item.data }"            
