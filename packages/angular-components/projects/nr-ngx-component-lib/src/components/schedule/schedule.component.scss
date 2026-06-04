@@ -52,6 +52,10 @@
             border-bottom: 1px solid var( --nrcl-schedule-border-color );
         }
 
+        .wrapper:first-child {
+            border-left: 1px solid var( --nrcl-schedule-border-color );
+        }
+
         .week {
             border-top: 1px solid var( --nrcl-schedule-border-color );
             display: flex;
@@ -112,7 +116,7 @@
                 }
 
                 .heading {
-                    border-left: 1px solid var( --nrcl-schedule-border-color );
+                    // border-left: 1px solid var( --nrcl-schedule-border-color );
                 }
 
                 .item {
