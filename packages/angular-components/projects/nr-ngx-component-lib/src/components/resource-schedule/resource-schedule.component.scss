@@ -15,15 +15,15 @@
 }
 
 .nrcl-schedule {
-    ::ng-deep .schedule-item {
+    ::ng-deep .item {
         font-size: 13px;
         padding: 4px;
         // margin: 2px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: stretch;
         // gap: 8px;
-        align-items: center;
+        align-items: stretch;
         overflow: hidden;
         color: var( --nrcl-resource-schedule-item-foregroud-color );
         // text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
@@ -52,39 +52,39 @@
             text-align: center;
         }
 
-        &.schedule-item-out-of-service {
+        &.item-out-of-service {
             background-color: var( --nrcl-resource-schedule-item-out-of-service-background-color );
         }
 
-        &.schedule-item-available-duty-day {
+        &.item-available-duty-day {
             background-color: var( --nrcl-resource-schedule-item-duty-day-background-color );
         }
 
-        &.schedule-item-available-standby-day {
+        &.item-available-standby-day {
             background-color: var( --nrcl-resource-schedule-item-standby-day-background-color );
         }
 
-        &.schedule-item-available-off-day {
+        &.item-available-off-day {
             background-color: var( --nrcl-resource-schedule-item-off-day-background-color );
         }
 
-        &.schedule-item-available-regular-day {
+        &.item-available-regular-day {
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
         }
 
-        &.schedule-item-assigned-duty-day {
+        &.item-assigned-duty-day {
             background-color: var( --nrcl-resource-schedule-item-duty-day-background-color );
         }
 
-        &.schedule-item-assigned-standby-day {
+        &.item-assigned-standby-day {
             background-color: var( --nrcl-resource-schedule-item-standby-day-background-color );
         }
 
-        &.schedule-item-assigned-off-day {
+        &.item-assigned-off-day {
             background-color: var( --nrcl-resource-schedule-item-off-day-background-color );
         }
 
-        &.schedule-item-assigned-regular-day {
+        &.item-assigned-regular-day {
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
         }
     }

@@ -13,9 +13,9 @@
     --nrcl-schedule-row-days-weekend-background-color: #e0f8fc;
     --nrcl-schedule-row-days-today-background-color: #fcf8d9;
 
-    --nrcl-schedule-row-schedule-height: 80px;
+    --nrcl-schedule-row-schedule-height: 70px;
     --nrcl-schedule-heading-width: 300px;
-    --nrcl-schedule-item-width: 80px;
+    --nrcl-schedule-item-width: 100px;
 }
 
 :host {
@@ -34,10 +34,10 @@
     .row {
         display: contents;
 
-        &.schedule > * {
-            box-sizing: border-box;
-            height: var( --nrcl-schedule-row-schedule-height );
-        }
+        // &.schedule > * {
+        //     box-sizing: border-box;
+        //     height: var( --nrcl-schedule-row-schedule-height );
+        // }
 
         &.weeks > * {
             height: var( --nrcl-schedule-row-weeks-height );
@@ -47,13 +47,9 @@
             height: var( --nrcl-schedule-row-days-height );
         }
 
-        .heading, .schedule-item, .day, .week {
+        .wrapper, .day, .week {
             border-right: 1px solid var( --nrcl-schedule-border-color );
             border-bottom: 1px solid var( --nrcl-schedule-border-color );
-        }
-
-        .heading {
-            border-left: 1px solid var( --nrcl-schedule-border-color );
         }
 
         .week {
@@ -95,6 +91,31 @@
                     left: 0;
                     bottom: 0;                
                     border-left: 2px solid black;
+                }
+            }
+        }
+
+        &.schedule {
+            .wrapper {
+                padding: 2px;
+                box-sizing: border-box;
+                height: var( --nrcl-schedule-row-schedule-height );
+                display: flex;
+                flex-direction: column;
+                justify-content: stretch;
+                // gap: 8px;
+                align-items: stretch;
+                overflow: hidden;
+
+                .heading, .item {
+                    flex-grow: 1;
+                }
+
+                .heading {
+                    border-left: 1px solid var( --nrcl-schedule-border-color );
+                }
+
+                .item {
                 }
             }
         }
