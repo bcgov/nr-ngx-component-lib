@@ -6,6 +6,10 @@
 >
     <ng-content></ng-content>
 
+    <div menu>
+        <ng-content select="[menu]"></ng-content>
+    </div>
+
     <ng-template nrclScheduleRowHeading let-item>
         <ng-container 
             [ngTemplateOutlet]="headerTemplate.template"

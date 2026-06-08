@@ -75,7 +75,7 @@ export class ResourceScheduleComponent extends RowListBase<{},ScheduleRow> {
     @Input( { transform: numberAttribute } ) dayCount?: number
 
     @ContentChild(ResourceScheduleRowHeadingDirective) headerTemplate!: ResourceScheduleRowHeadingDirective
-       
+           
     fetchRowListPage(): Observable<any> {
         if ( !this.provider?.fetchResourceSchedule ) throw Error( 'ResourceScheduleComponent.provider.fetchResourceSchedule not set' )
 

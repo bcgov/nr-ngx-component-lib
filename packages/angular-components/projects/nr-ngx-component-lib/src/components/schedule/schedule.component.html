@@ -44,7 +44,10 @@
         @if ( row.items | async; as rowItems ) {
             @for ( item of rowItems; track item.id ) {
                 <div class="wrapper">
-                    <div class="item" [class]="'item-' + item.name" matRipple>
+                    <div class="item" [class]="'item-' + item.name" 
+                        matRipple
+                        [matMenuTriggerFor]="menu"
+                    >
                         <ng-container 
                             [ngTemplateOutlet]="item.template || empty" 
                             [ngTemplateOutletContext]="{ $implicit: item.data }"            
@@ -64,4 +67,8 @@
 <ng-template #empty>
     <div class="empty">(empty)</div>
 </ng-template>
+
+<mat-menu #menu="matMenu" class="availability-menu">
+    <ng-content select="[menu]"></ng-content>
+</mat-menu>
 

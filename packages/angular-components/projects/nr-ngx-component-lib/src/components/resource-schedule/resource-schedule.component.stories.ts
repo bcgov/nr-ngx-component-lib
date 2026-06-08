@@ -37,6 +37,7 @@ import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.co
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
 import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { MatRippleModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',
@@ -63,7 +64,8 @@ const meta: Meta<ResourceScheduleComponent> = {
                 MatTableModule,
                 MatSortModule,
                 MatCardModule,
-                MatRippleModule
+                MatRippleModule,
+                MatMenuModule
             ],
             // declare components that are used in the template
             declarations: [
@@ -175,6 +177,11 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [provider]="provider"
                 >
                     <div>upper-left</div>
+
+                    <div menu>
+                        <button mat-menu-item
+                        >Manage Availability</button>
+                    </div>
 
                     <ng-template nrclResourceScheduleRowHeading let-item>
                         <div>foo  {{item|json}}</div>
