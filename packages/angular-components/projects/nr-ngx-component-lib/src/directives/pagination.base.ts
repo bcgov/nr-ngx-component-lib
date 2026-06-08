@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, inject } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Directive, inject } from "@angular/core";
 import { Sort, SortDirection } from "@angular/material/sort";
 import { PageStateService } from "../services/page-state.service";
 import { NrclBase } from "./nrcl.base";
@@ -13,7 +13,7 @@ export type PaginationConfig = {
 export type PaginationState<F> = { pageConfig: PaginationConfig, filter: F }
 
 @Directive()
-export abstract class PagainationBase<F> extends NrclBase {
+export abstract class PaginationBase<F> extends NrclBase implements AfterViewInit {
     pageStateService = inject( PageStateService )
     changeDetectorRef = inject( ChangeDetectorRef )
 
@@ -51,14 +51,16 @@ export abstract class PagainationBase<F> extends NrclBase {
 
     // private _loadRowListRequest?: ObservableAborter<L> 
 
-    constructor() {
-        super()
+    // constructor() {
+        // super()
+        // this.loadPageState()        
+    // }
+
+    ngAfterViewInit(): void {
+        console.log('PaginationBase.ngAfterViewInit')
+        // super.ng
         this.loadPageState()        
     }
-
-    // ngAfterViewInit(): void {
-    //     this.refreshRowList()
-    // }
 
     // refreshRowList(): Promise<void> {
     //     this.isLoading = true
@@ -131,7 +133,11 @@ export abstract class PagainationBase<F> extends NrclBase {
         //     } )
     }
 
-    abstract get initialPageState(): PaginationState<F>
+    get initialPageState(): PaginationState<F> {
+        return this.getInitialPageState()
+    }
+
+    abstract getInitialPageState(): PaginationState<F>
 
     loadPageState() {
         let state = this.pageStateService.getPageState<PaginationState<F>>( this.constructor, () => this.initialPageState )

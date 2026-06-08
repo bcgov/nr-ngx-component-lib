@@ -30,7 +30,12 @@
     }
 </div>
 
-@for ( row of _rows; track row.id ) {
+@for ( row of rows | paginate: { 
+    id: 'desktop-story', 
+    itemsPerPage: pageSize, 
+    currentPage: pageNumber, 
+    totalItems: totalRowCount
+}; track row.id ) {
     <div class="row schedule">
         <div class="wrapper">
             <div class="heading">

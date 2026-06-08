@@ -1,6 +1,9 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, inject, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
+import { AfterContentInit, AfterViewInit, booleanAttribute, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, inject, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 import moment from 'moment';
+import { RowListBase } from '../../directives/row-list.base';
+import { Observable } from 'rxjs';
+import { PaginationState } from '../../public-api';
 
 @Directive( {
     selector: '[nrclScheduleRowHeading]'
@@ -9,7 +12,7 @@ export class ScheduleRowHeadingDirective {
     constructor(
         public template: TemplateRef<any>
     ){
-        console.log('ScheduleRowHeadingDirective')
+        // console.log('ScheduleRowHeadingDirective')
 
     }
 }
@@ -25,7 +28,7 @@ export class ScheduleItemDirective {
     constructor(
         public template: TemplateRef<any>
     ){
-        console.log('ScheduleItemDirective')
+        // console.log('ScheduleItemDirective')
     }
 }
 
@@ -69,30 +72,58 @@ type Week = {
         '[style.--nrcl-schedule-day-count]': 'this.dayCount'
     }
 } )
-export class ScheduleComponent extends NrclBase implements AfterContentInit, OnChanges {
+export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements AfterContentInit, OnChanges {
     changeDetectorRef = inject( ChangeDetectorRef )
 
     @Input() startDate?: string
     @Input() weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
-    @Input() schedule?: Schedule
+    // @Input() schedule?: Schedule
 
     @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>;
     @ContentChild(ScheduleRowHeadingDirective) headerTemplate!: ScheduleRowHeadingDirective
 
-    protected _rows: Schedule = []
+    // protected _rows: Schedule = []
     protected _days: Day[] = []
     protected _weeks: Week[] = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        this.makeRows()
+        // this.makeRows()
+        // this.refreshRowList()
+    }
+
+    ngAfterViewInit(): void {
+        console.log('ScheduleComponent.ngAfterViewInit')
+        // this.makeRows()
+        // this.refreshRowList()
+        super.ngAfterViewInit()
     }
 
     ngAfterContentInit(): void {
-        this.makeRows()
+        // console.log('ScheduleComponent.ngAfterContentInit')
+        // this.makeRows()
+        // this.refreshRowList()
     }
 
-    makeRows() {
+    fetchRowListPage(): Observable<any> {
+        throw new Error( 'Method not implemented.' );
+    }
+
+    parseRows( res: any ): ScheduleRow[] {
+        let rows = this.displayResourceSchedule( res )
+
+        return this.makeRows( rows )
+    }
+
+    displayResourceSchedule( res: any ): ScheduleRow[] {
+        throw new Error( 'Method not implemented.' );
+    }
+
+    getInitialPageState(): PaginationState<{}> {
+        throw new Error( 'Method not implemented.' );
+    }
+
+    makeRows( schedule: Schedule ) {
         let start = moment( this.startDate )
         let today = moment()
 
@@ -131,7 +162,7 @@ export class ScheduleComponent extends NrclBase implements AfterContentInit, OnC
             }
         } )
 
-        this._rows = this.schedule?.map( ( row, i ) => {
+        return schedule.map( ( row, i ) => {
             return {
                 id: row.id ?? String( i ),
                 heading: clone( row.heading ),

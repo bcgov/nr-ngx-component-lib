@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Directive, EventEmitter, inject, Outp
 import { Observable } from "rxjs";
 import { PageStateService } from "../services/page-state.service";
 import { Aborted, ObservableAborter } from "../utils/row-list.util";
-import { PagainationBase, PaginationState } from "./pagination.base";
+import { PaginationBase as PaginationBase, PaginationState } from "./pagination.base";
 
 // export type RowListPageConfig = {    
 //     pageSize: number
@@ -14,7 +14,7 @@ import { PagainationBase, PaginationState } from "./pagination.base";
 export type RowListState<F> = PaginationState<F>
 
 @Directive()
-export abstract class RowListBase<F,R,L=any> extends PagainationBase<F> implements AfterViewInit {
+export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implements AfterViewInit {
     pageStateService = inject( PageStateService )
     changeDetectorRef = inject( ChangeDetectorRef )
 
@@ -58,6 +58,8 @@ export abstract class RowListBase<F,R,L=any> extends PagainationBase<F> implemen
     // }
 
     ngAfterViewInit(): void {
+        console.log('RowListBase.ngAfterViewInit')
+        super.ngAfterViewInit()
         this.refreshRowList()
     }
 

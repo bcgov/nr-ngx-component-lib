@@ -67,7 +67,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
         }
     }
 
-    get initialPageState(): RowListState<{}> {
+    getInitialPageState(): RowListState<{}> {
         return {
             filter: {},
             pageConfig: {
