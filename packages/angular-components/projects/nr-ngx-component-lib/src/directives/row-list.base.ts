@@ -62,6 +62,35 @@ export abstract class RowListBase<F,R,L=any> extends PagainationBase<F> implemen
     }
 
     refreshRowList(): Promise<void> {
+        return this.loadRowList().then( result => this.parseRowList( result ) )
+
+        // this.isLoading = true
+        // this.changeDetectorRef.detectChanges()
+
+        // if ( this._loadRowListRequest )
+        //     this._loadRowListRequest.abort()
+
+        // this._loadRowListRequest = new ObservableAborter<L>( () => {        
+        //     return this.fetchRowListPage()
+        // } )
+
+        // return this._loadRowListRequest.promise
+        //     .then( res => {
+        //         this._totalRowCount = this.parseTotalRowCount( res )
+        //         this._rows = this.parseRows( res )
+        //     } )
+        //     .catch( ( e ) => {
+        //         if ( e instanceof Aborted ) return
+
+        //         this.loadRowListPageFailed( e )
+        //     } )
+        //     .finally( () => {
+        //         this.isLoading = false
+        //         this.changeDetectorRef.detectChanges()
+        //     } )
+    }
+
+    loadRowList(): Promise<L> {
         this.isLoading = true
         this.changeDetectorRef.detectChanges()
 
@@ -73,6 +102,12 @@ export abstract class RowListBase<F,R,L=any> extends PagainationBase<F> implemen
         } )
 
         return this._loadRowListRequest.promise
+    }
+
+    abstract fetchRowListPage(): Observable<L> 
+
+    parseRowList( result: L ): Promise<void> {
+        return Promise.resolve( result )
             .then( res => {
                 this._totalRowCount = this.parseTotalRowCount( res )
                 this._rows = this.parseRows( res )
@@ -88,7 +123,6 @@ export abstract class RowListBase<F,R,L=any> extends PagainationBase<F> implemen
             } )
     }
 
-    abstract fetchRowListPage(): Observable<L> 
     abstract parseRows( res: L ): R[] 
     
     parseTotalRowCount( res: L ): number {
