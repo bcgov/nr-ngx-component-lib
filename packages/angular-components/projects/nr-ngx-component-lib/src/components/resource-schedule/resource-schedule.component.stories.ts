@@ -65,7 +65,8 @@ const meta: Meta<ResourceScheduleComponent> = {
                 MatSortModule,
                 MatCardModule,
                 MatRippleModule,
-                MatMenuModule
+                MatMenuModule,
+                NgxPaginationModule,
             ],
             // declare components that are used in the template
             declarations: [

@@ -21,107 +21,108 @@
 :host {
     font-family: var( --nrcl-font-family );
 
-    display: grid;
-    grid-template-columns: var( --nrcl-schedule-heading-width ) repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
+    .schedule {
+        display: grid;
+        grid-template-columns: var( --nrcl-schedule-heading-width ) repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
 
-    .upper-left {
-        grid-row: 1 / span 2;
-        grid-column: 1;
-        border-right: 1px solid var( --nrcl-schedule-border-color );
-        border-bottom: 1px solid var( --nrcl-schedule-border-color );
-    }
-
-    .row {
-        display: contents;
-
-        // &.schedule > * {
-        //     box-sizing: border-box;
-        //     height: var( --nrcl-schedule-row-schedule-height );
-        // }
-
-        &.weeks > * {
-            height: var( --nrcl-schedule-row-weeks-height );
-        }
-
-        &.days > * {
-            height: var( --nrcl-schedule-row-days-height );
-        }
-
-        .wrapper, .day, .week {
+        .upper-left {
+            grid-row: 1 / span 2;
+            grid-column: 1;
             border-right: 1px solid var( --nrcl-schedule-border-color );
             border-bottom: 1px solid var( --nrcl-schedule-border-color );
         }
 
-        .wrapper:first-child {
-            border-left: 1px solid var( --nrcl-schedule-border-color );
-        }
+        .row {
+            display: contents;
 
-        .week {
-            border-top: 1px solid var( --nrcl-schedule-border-color );
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: var( --nrcl-schedule-row-weeks-font-size );
-            font-weight: var( --nrcl-schedule-row-weeks-font-weight );
-            color: var( --nrcl-schedule-row-weeks-foreground-color );
-        }
+            // &.schedule > * {
+            //     box-sizing: border-box;
+            //     height: var( --nrcl-schedule-row-schedule-height );
+            // }
 
-        .day {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            font-size: var( --nrcl-schedule-row-days-font-size );
-            font-weight: var( --nrcl-schedule-row-days-font-weight );
-            color: var( --nrcl-schedule-row-days-foreground-color );
-
-            .day-name { font-size: 13px; }
-            .date {}
-
-            &.weekend {
-                background-color: var( --nrcl-schedule-row-days-weekend-background-color );
-            }
-            
-            &.today {
-                background-color: var( --nrcl-schedule-row-days-today-background-color );
+            &.weeks > * {
+                height: var( --nrcl-schedule-row-weeks-height );
             }
 
-            &.first {
-                &::after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    bottom: 0;                
-                    border-left: 2px solid black;
-                }
+            &.days > * {
+                height: var( --nrcl-schedule-row-days-height );
             }
-        }
 
-        &.schedule {
-            .wrapper {
-                padding: 2px;
-                box-sizing: border-box;
-                height: var( --nrcl-schedule-row-schedule-height );
+            .wrapper, .day, .week {
+                border-right: 1px solid var( --nrcl-schedule-border-color );
+                border-bottom: 1px solid var( --nrcl-schedule-border-color );
+            }
+
+            .wrapper:first-child {
+                border-left: 1px solid var( --nrcl-schedule-border-color );
+            }
+
+            .week {
+                border-top: 1px solid var( --nrcl-schedule-border-color );
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: var( --nrcl-schedule-row-weeks-font-size );
+                font-weight: var( --nrcl-schedule-row-weeks-font-weight );
+                color: var( --nrcl-schedule-row-weeks-foreground-color );
+            }
+
+            .day {
                 display: flex;
                 flex-direction: column;
-                justify-content: stretch;
-                // gap: 8px;
-                align-items: stretch;
-                overflow: hidden;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                font-size: var( --nrcl-schedule-row-days-font-size );
+                font-weight: var( --nrcl-schedule-row-days-font-weight );
+                color: var( --nrcl-schedule-row-days-foreground-color );
 
-                .heading, .item {
-                    flex-grow: 1;
+                .day-name { font-size: 13px; }
+                .date {}
+
+                &.weekend {
+                    background-color: var( --nrcl-schedule-row-days-weekend-background-color );
+                }
+                
+                &.today {
+                    background-color: var( --nrcl-schedule-row-days-today-background-color );
                 }
 
-                .heading {
-                    // border-left: 1px solid var( --nrcl-schedule-border-color );
-                    cursor: default;
+                &.first {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;                
+                        border-left: 2px solid black;
+                    }
                 }
+            }
 
-                .item {
-                    cursor: pointer;
+            &.items {
+                .wrapper {
+                    padding: 2px;
+                    box-sizing: border-box;
+                    height: var( --nrcl-schedule-row-schedule-height );
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: stretch;
+                    // gap: 8px;
+                    align-items: stretch;
+                    overflow: hidden;
+
+                    .heading, .item {
+                        flex-grow: 1;
+                    }
+
+                    .heading {
+                        cursor: default;
+                    }
+
+                    .item {
+                        cursor: pointer;
+                    }
                 }
             }
         }

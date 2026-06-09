@@ -3,7 +3,8 @@ import { NrclBase } from '../../directives/nrcl.base';
 import moment from 'moment';
 import { RowListBase } from '../../directives/row-list.base';
 import { Observable } from 'rxjs';
-import { PaginationState } from '../../public-api';
+import { PaginationState } from '../../directives/pagination.base';
+// import { PaginationState } from '../../public-api';
 
 @Directive( {
     selector: '[nrclScheduleRowHeading]'
@@ -89,14 +90,16 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
 
     ngOnChanges( changes: SimpleChanges ): void {
         // this.makeRows()
-        // this.refreshRowList()
+        this.refreshRowList()
     }
 
     ngAfterViewInit(): void {
         console.log('ScheduleComponent.ngAfterViewInit')
         // this.makeRows()
         // this.refreshRowList()
-        super.ngAfterViewInit()
+        setTimeout(() => {
+            super.ngAfterViewInit()        
+        });
     }
 
     ngAfterContentInit(): void {
@@ -114,6 +117,10 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
 
         return this.makeRows( rows )
     }
+
+    // parseTotalRowCount( res: any ): number {
+    //     return res.
+    // }
 
     displayResourceSchedule( res: any ): ScheduleRow[] {
         throw new Error( 'Method not implemented.' );

@@ -128,6 +128,7 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
     abstract parseRows( res: L ): R[] 
     
     parseTotalRowCount( res: L ): number {
+        // console.log(res)
         if ( 'totalRowCount' in (res as any) ) return (res as any)[ 'totalRowCount' ]
 
         throw 'Missing res.totalRowCount, might need to override RowListBase.parseTotalRowCount'
