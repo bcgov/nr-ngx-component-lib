@@ -156,17 +156,28 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     },
     render: ( args ) => {
         args.provider = {
-            fetchResourceSchedule: ( x ) => { return of({
+            fetchSchedule: ( x ) => { return of({
                 totalRowCount: 10
             }) },
-            displayResourceSchedule: ( res ) => {
-                return Array.from( { length: 10 } ).map( ( x, i ) => {
+            parseSchedule: ( res ) => {
+                return Array.from( { length: 30 } ).map( ( x, i ) => {
                     return {
                         heading: { row: i },
                         items: scheduleItems( i * 7, 19, 23 )
                     }
                 } )
             },
+            getInitialPageState: () => {
+                return {
+                    filter: {},
+                    pageConfig: {
+                        pageSize: 20,
+                        pageNumber: 1,
+                        sortActive: 'dateTime',
+                        sortDirection: 'desc',
+                    }
+                }
+            }
         }
         return {
             props: args,
@@ -176,22 +187,37 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [dayCount]="dayCount"
                     [weekStart]="weekStart"
                     [provider]="provider"
+                    [menu]="menu"
                 >
                     <div>upper-left</div>
-
-                    <div menu>
-                        <button mat-menu-item
-                        >Manage Availability</button>
-                    </div>
 
                     <ng-template nrclResourceScheduleRowHeading let-item>
                         <div>foo  {{item|json}}</div>
                     </ng-template>
                 </nrcl-resource-schedule>
+
+                <mat-menu #menu="matMenu" class="availability-menu">
+                    <ng-template matMenuContent let-data>
+                        {{ data | json }}
+                    </ng-template>
+                    <button mat-menu-item>Manage Availability</button>
+                </mat-menu>
+
             `
         }
     }
 }
+
+
+
+                    // <div menu>
+                    //     <button mat-menu-item>Manage Availability</button>
+                    // </div>
+
+
+// <ng-template matMenuContent let-data>
+                        //     {{ data | json }}
+                        // </ng-template>
 
 export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent> = {
     argTypes: {
@@ -227,44 +253,44 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
 }
 
 let items = [
-    { name: 'out-of-service', data: { allocationType: 'Leave', shiftType: 'Duty' } },
-    { name: 'out-of-service', data: { allocationType: 'Leave', shiftType: 'Standby' } },
-    { name: 'out-of-service', data: { allocationType: 'Leave', shiftType: 'Off' } },
-    { name: 'out-of-service', data: { allocationType: 'Leave', shiftType: 'Regular' } },
-    { name: 'out-of-service', data: { allocationType: 'Reset', shiftType: 'Duty' } },
-    { name: 'out-of-service', data: { allocationType: 'Reset', shiftType: 'Standby' } },
-    { name: 'out-of-service', data: { allocationType: 'Reset', shiftType: 'Off' } },
-    { name: 'out-of-service', data: { allocationType: 'Reset', shiftType: 'Regular' } },
-    { name: 'out-of-service', data: { allocationType: 'Training', shiftType: 'Duty' } },
-    { name: 'out-of-service', data: { allocationType: 'Training', shiftType: 'Standby' } },
-    { name: 'out-of-service', data: { allocationType: 'Training', shiftType: 'Off' } },
-    { name: 'out-of-service', data: { allocationType: 'Training', shiftType: 'Regular' } },
-    { name: 'out-of-service', data: { allocationType: 'Other', shiftType: 'Duty' } },
-    { name: 'out-of-service', data: { allocationType: 'Other', shiftType: 'Standby' } },
-    { name: 'out-of-service', data: { allocationType: 'Other', shiftType: 'Off' } },
-    { name: 'out-of-service', data: { allocationType: 'Other', shiftType: 'Regular' } },
-    { name: 'available-duty-day', data: { allocationType: 'Full' } },
-    { name: 'available-duty-day', data: { allocationType: 'Local' } },
-    { name: 'available-duty-day', data: { allocationType: 'Other' } },
-    { name: 'available-standby-day', data: { allocationType: 'Full' } },
-    { name: 'available-standby-day', data: { allocationType: 'Local' } },
-    { name: 'available-standby-day', data: { allocationType: 'Other' } },
-    { name: 'available-off-day', data: { allocationType: 'Full' } },
-    { name: 'available-off-day', data: { allocationType: 'Local' } },
-    { name: 'available-off-day', data: { allocationType: 'Other' } },
-    { name: 'available-regular-day', data: { allocationType: 'Full' } },
-    { name: 'available-regular-day', data: { allocationType: 'Local' } },
-    { name: 'available-regular-day', data: { allocationType: 'Other' } },
-    { name: 'assigned-duty-day', data: { assignmentName: 'CA1234' } },
-    { name: 'assigned-standby-day', data: { assignmentName: 'PWCC' } },
-    { name: 'assigned-off-day', data: { assignmentName: 'CA1234' } },
-    { name: 'assigned-regular-day', data: {  assignmentName: 'Multiple Assignments' } },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Standby' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Off' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Regular' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Duty' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Standby' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Off' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Regular' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Duty' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Standby' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Off' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Regular' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Duty' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Standby' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Off' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Regular' },
+    { name: 'available-duty-day', allocationType: 'Full' },
+    { name: 'available-duty-day', allocationType: 'Local' },
+    { name: 'available-duty-day', allocationType: 'Other' },
+    { name: 'available-standby-day', allocationType: 'Full' },
+    { name: 'available-standby-day', allocationType: 'Local' },
+    { name: 'available-standby-day', allocationType: 'Other' },
+    { name: 'available-off-day', allocationType: 'Full' },
+    { name: 'available-off-day', allocationType: 'Local' },
+    { name: 'available-off-day', allocationType: 'Other' },
+    { name: 'available-regular-day', allocationType: 'Full' },
+    { name: 'available-regular-day', allocationType: 'Local' },
+    { name: 'available-regular-day', allocationType: 'Other' },
+    { name: 'assigned-duty-day', assignmentName: 'CA1234' },
+    { name: 'assigned-standby-day', assignmentName: 'PWCC' },
+    { name: 'assigned-off-day', assignmentName: 'CA1234' },
+    { name: 'assigned-regular-day',  assignmentName: 'Multiple Assignments' },
 ]
 
 function scheduleItems( start, length, skip ): Promise<ResourceScheduleRowItem[]> {
     let len = items.length 
     return delayed( Array.from( { length } ).map( ( x, i ) => {
-        return items[ ( start + skip * i ) % len ] as ResourceScheduleRowItem
+        return { id: String(i), ...items[ ( start + skip * i ) % len ] } as ResourceScheduleRowItem
     } ) )
 }
 

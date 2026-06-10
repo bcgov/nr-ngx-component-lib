@@ -14,6 +14,11 @@
     --nrcl-resource-schedule-item-rostered-background-color: #ba9ef7;
 }
 
+:host {
+    height: 100%;
+    display: block;
+}
+
 .nrcl-schedule {
     ::ng-deep .item {
         font-size: 13px;

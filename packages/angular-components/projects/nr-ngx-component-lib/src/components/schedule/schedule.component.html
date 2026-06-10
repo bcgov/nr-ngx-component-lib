@@ -25,21 +25,16 @@
                 [class.today]="day.isToday"
                 [class.first]="day.isFirst"
             >
-                <div class="day-name">{{ day.day }}</div>
-                <div class="date">{{ day.date }}</div>
+                <div class="day-name">{{ day.dayName }}</div>
+                <div class="date">{{ day.monthDay }}</div>
             </div>
         }
     </div>
 
-    @for ( row of rows | paginate: { 
-        id: 'nrcl-schedule', 
-        itemsPerPage: pageSize, 
-        currentPage: pageNumber, 
-        totalItems: totalRowCount
-    }; track row.id ) {
+    @for ( row of rows | paginate: paginateState( 'nrcl-schedule' ); track row.id; let rowIndex = $index ) {
         <div class="row items">
-            <div class="wrapper">
-                <div class="heading">
+            <div class="outer heading">
+                <div class="inner heading">
                     <ng-container 
                         [ngTemplateOutlet]="headerTemplate?.template" 
                         [ngTemplateOutletContext]="{ $implicit: row.heading }"            
@@ -48,15 +43,21 @@
             </div>    
 
             @if ( row.items | async; as rowItems ) {
-                @for ( item of rowItems; track item.id ) {
-                    <div class="wrapper">
-                        <div class="item" [class]="'item-' + item.name" 
+                @for ( item of rowItems; track item.id; let colIndex = $index ) {
+                    <div class="outer item"
+                        [class.menu-open]="itemMenu.menuOpen"
+                    >
+                        <div class="inner item" #itemMenu="matMenuTrigger"
+                            [class]="'item-' + item.name" 
                             matRipple
                             [matMenuTriggerFor]="menu"
+                            [matMenuTriggerData]="{ $implicit: item }"
                         >
+                            <!-- (menuOpened)="td.classList.add('selected-grid-item')" -->
+                            <!-- (menuClosed)="td.classList.remove('selected-grid-item')" -->
                             <ng-container 
-                                [ngTemplateOutlet]="item.template || empty" 
-                                [ngTemplateOutletContext]="{ $implicit: item.data }"            
+                                [ngTemplateOutlet]="_templates[ rowIndex ][ colIndex ] || empty" 
+                                [ngTemplateOutletContext]="{ $implicit: item }"            
                             ></ng-container>
                         </div>
                     </div>
@@ -86,7 +87,9 @@
     <div class="empty">(empty)</div>
 </ng-template>
 
-<mat-menu #menu="matMenu" class="availability-menu">
-    <ng-content select="[menu]"></ng-content>
-</mat-menu>
-
+<!-- <mat-menu #menu="matMenu" class="availability-menu">
+     <ng-template matMenuContent let-data>
+        {{ data | json }}
+        <ng-content select="[menu]"></ng-content>
+    </ng-template>
+</mat-menu> -->

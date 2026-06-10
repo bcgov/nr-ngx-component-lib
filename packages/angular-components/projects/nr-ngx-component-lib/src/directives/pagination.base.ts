@@ -48,6 +48,9 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     get filter(): F {
         return this._filter as F
     }
+    protected set filter( f: F ) {
+        this._filter = this.clone( f )
+    }
 
     // private _loadRowListRequest?: ObservableAborter<L> 
 
@@ -109,7 +112,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onFilterChange( ev: F ) {
-        this._filter = this.clone( ev )
+        this.filter = ev 
         this.onPageNumberChange( 1 )
     }
 
@@ -142,7 +145,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     loadPageState() {
         let state = this.pageStateService.getPageState<PaginationState<F>>( this.constructor, () => this.initialPageState )
 
-        this._filter = state.filter
+        this.filter = state.filter
         this._pageConfig.pageSize = state.pageConfig.pageSize
         this._pageConfig.pageNumber = state.pageConfig.pageNumber
         this._pageConfig.sortActive = state.pageConfig.sortActive
@@ -151,7 +154,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     savePageState() {
         let state: PaginationState<F> = this.clone( {            
-            filter: this._filter,
+            filter: this.filter,
             pageConfig: {
                 pageSize: this._pageConfig.pageSize,
                 pageNumber: this._pageConfig.pageNumber,
