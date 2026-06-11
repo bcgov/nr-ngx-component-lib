@@ -16,6 +16,14 @@
                         </mat-cell>
                     </ng-container>
 
+<!--                    Only show this column for prep sheet attachment section-->
+                    <ng-container matColumnDef="orgUnit" *ngIf="isPrepSheet">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Org Unit</mat-header-cell>
+                        <mat-cell *matCellDef="let item">
+                            <nrcl-cell-content tooltip>{{ item.orgUnit }}</nrcl-cell-content>
+                        </mat-cell>
+                    </ng-container>
+
                     <ng-container matColumnDef="fileName">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>File Name</mat-header-cell>
                         <mat-cell *matCellDef="let item">
@@ -110,6 +118,11 @@
                             <section full-width>
                                 <mat-label>File name</mat-label>
                                 <div class="value">{{ item.fileName }}</div>
+                            </section>
+
+                            <section *ngIf="isPrepSheet">
+                                <mat-label>Org Unit</mat-label>
+                                <div class="value">{{ item.orgUnit }}</div>
                             </section>
 
                             <section>

@@ -5,6 +5,7 @@ import { DATE_FORMATS } from "../../utils/date.util";
 
 export type AttachmentsTableRow = {
     attachmentTypeDescription: string
+    orgUnit: string
     fileName: string
     fileExtension: string
     uploadedBy: string
@@ -39,8 +40,9 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     @Input() rowListProvider?: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
     @Input() canDownload = true
+    @Input() isPrepSheet = false
     @Input() noRowsMessage = "No attachments have been added."
-    
+
     DATE_FORMATS = DATE_FORMATS
     columns: string[] = [] 
     sortColumns = [
@@ -55,7 +57,8 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     ngOnChanges(changes: SimpleChanges): void {
         if ( changes.canDownload || changes.canDelete ) {
             this.columns = [ 
-                'attachmentTypeCode', 
+                'attachmentTypeCode',
+                ...(this.isPrepSheet ? ['orgUnit'] : []),
                 'fileName', 
                 'sourceObjectNameCode', 
                 'uploadedBy', 
