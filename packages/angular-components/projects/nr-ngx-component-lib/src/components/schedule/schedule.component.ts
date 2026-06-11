@@ -264,6 +264,29 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
     }
 }
 
+// --------------------------------------------------------------------------------
+
+@Component( {
+    selector: 'nrcl-schedule-item-icons',
+    templateUrl: './schedule-item-icons.component.html',
+    styleUrl: './schedule-item-icons.component.scss',
+    host: {
+    }
+} )
+export class ScheduleItemIconsComponent implements AfterContentInit, OnChanges {
+    @Input() icons: string[] = []
+
+    ngAfterContentInit(): void {
+        throw new Error('Method not implemented.');
+    }
+    ngOnChanges(changes: SimpleChanges): void {
+        throw new Error('Method not implemented.');
+    }
+}
+
+// --------------------------------------------------------------------------------
+
 function clone<T>( obj: T ): T {
     return JSON.parse( JSON.stringify( obj ) )
 }
+
