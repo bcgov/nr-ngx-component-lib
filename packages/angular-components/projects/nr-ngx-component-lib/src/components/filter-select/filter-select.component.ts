@@ -23,10 +23,10 @@ import {
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatSelectionListChange } from "@angular/material/list";
-import { fromEvent } from "rxjs";
+import { DomSanitizer } from "@angular/platform-browser";
+import { fromEvent, Observable, Subscription } from "rxjs";
 import { NrclBase } from "../../directives/nrcl.base";
 import { CodeDescription } from "../../utils/code-table.util";
-import { DomSanitizer } from "@angular/platform-browser";
 
 /**
  * A filter select component that allows users to select multiple options from a list.
@@ -63,11 +63,11 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     @ContentChild( TemplateRef ) optionTemplateRef: TemplateRef<any>;
 
-    @Input() label
+    @Input() label?: string
     @Input() placeholder = 'Filter...'
-    @Input() hint
-    @Input() options: CodeDescription[]
-    @Input() value: string[]
+    @Input() hint?: string
+    @Input() options: CodeDescription[] = []
+    @Input() value: string[] = []
     @Input( { transform: numberAttribute } ) selectMax = 0
     @Input( { transform: booleanAttribute } ) tooltips = true
     @Input( { transform: booleanAttribute } ) summary = true
@@ -75,23 +75,22 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: booleanAttribute } ) filter = true
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
     @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description    
-    @Input() optionTemplate: TemplateRef<any> 
-    @Input() overlayClass
-    @Input() wide 
+    @Input() optionTemplate?: TemplateRef<any> 
+    @Input() overlayClass?: string
+    @Input() wide?: string 
     @Input() filterCharsMinMessage = 'Too many options'
 
     @Output() valueChange = new EventEmitter<string[]>();
 
     floatLabel = 'auto'
-    inputValue
-    openingValue
+    inputValue?: string
     isFiltered = false
     isOpen = false
     hasValue = false
-    overlayRef: OverlayRef
+    overlayRef?: OverlayRef
     selection = new FormControl()
     match: ( option: CodeDescription ) => boolean = ( o ) => true
-    clickSubscription
+    clickSubscription?: Subscription
 
     ngOnInit(): void {
         super.ngOnInit()
@@ -115,7 +114,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
                 this.close()
                 this.setInputToSelection()
                 this.floatLabel = 'auto'
-                this.changeDetectorRef.detectChanges()
+                this.changeDetectorRef.markForCheck()
             } )
     }
 
@@ -125,40 +124,28 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         if ( changes.options ) {
             let pv = JSON.stringify( changes.options.previousValue )
             let cv = JSON.stringify( changes.options.currentValue )
-            // console.log('options',pv,cv)
+
             if ( pv != cv ) {
-                this.value = []
-                this.selection.setValue( null )
+                let vals = this.selection.value 
+                if ( vals ) {
+                    this.setValue( vals )
+                }
                 this.setInputToSelection()
                 this.setFilter()
             }
         }
 
         if ( changes.value ) {
-            // let pv = JSON.stringify( changes.value.previousValue )
-            // let cv = JSON.stringify( changes.value.currentValue )
-            // console.log('value',pv,cv)
-            // if ( pv != cv ) {
-                if ( this.value ) {
-                    this.hasValue = this.value.length > 0
-                    this.selection.setValue( this.value )
-                    if ( this.selectMax > 1 && this.value.length >= this.selectMax ) {
-                        this.selection.disable()
-                    }
-                    else {
-                        this.selection.enable()
-                    }
-                }
-                else {
-                    this.hasValue = false
-                    this.selection.setValue( null )
-                    this.selection.enable()
-                }
+            if ( this.value ) {
+                this.setValue( this.value )
+            }
+            else {
+                this.setValue( [] )
+            }
 
-                this.setFilter()
-                this.setInputToSelection()
-                this.changeDetectorRef.detectChanges()
-            // }
+            this.setFilter()
+            this.setInputToSelection()
+            this.changeDetectorRef.detectChanges()
         }
     }
 
@@ -174,7 +161,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     ngOnDestroy(): void {
-        // console.log('destroy',this.inst)
         this.clickSubscription?.unsubscribe()
     }
 
@@ -182,13 +168,33 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         return this.selectMax == 1
     }
 
+    setValue( value: string[] ) {
+        // console.warn(this.label,value)
+        let old = JSON.stringify( this.selection.value )
+        this.selection.setValue( value.filter( v => this.options.some( o => o.code == v ) ) )
+        let mod = JSON.stringify( this.selection.value )
+        // console.log(this.label,old,mod,this.options.map(o=>o.code))
+
+        if ( old == mod ) return
+
+        this.emitValueChange()
+    }
+
     emitValueChange() {
-        this.hasValue = ( this.selection.value || [] ).length > 0
+        let count = this.selection.value.length
+
+        this.hasValue = count > 0
+        if ( this.selectMax > 1 && count >= this.selectMax ) {
+            this.selection.disable()
+        }
+        else {
+            this.selection.enable()
+        }
+
         this.valueChange.emit( this.selection.value || [] )
     }
 
     open() {
-        // console.warn('open',this.isOpen)
         if ( this.isOpen ) return
 
         this.isOpen = true
@@ -238,31 +244,21 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             // prevent list from scrolling when selection changes            
             this.overlayRef?.overlayElement.children[0].scroll( 0, 1 )
         },100 )
-
-        this.openingValue = JSON.stringify( this.selection.value )
     }
 
     close() {
-        // console.warn('close',this.isOpen)
         if ( !this.isOpen ) return
-
         this.isOpen = false
 
         if ( this.overlayRef ) {
             this.overlayRef.dispose()
             this.overlayRef = null
         }
-
-        this.changeDetectorRef.detectChanges()
-
-        let closingValue = JSON.stringify( this.selection.value )
-        if ( this.openingValue != closingValue )
-            this.emitValueChange()
+        // this.changeDetectorRef.detectChanges()
     }
 
     setInputToSelection() {
-        // console.warn('setInputToSelection')
-        this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || null
+        this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || ''
         this.isFiltered = false
     }
 
@@ -274,17 +270,14 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         let t = text?.trim().toLowerCase()
 
         if ( t?.length >= this.filterCharsMin ) {
-            // console.log('filtering')
             this.isFiltered = true
             this.match = ( option ) => option.description.toLowerCase().includes( t )
         }
         else {
-            // console.log('not filtering')
             this.isFiltered = false
             this.match = ( o ) => true
         }
-
-        this.changeDetectorRef.detectChanges()
+        // this.changeDetectorRef.detectChanges()
     }
 
     matchesFilter( option: CodeDescription ) {
@@ -292,7 +285,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onSelectionChange( ev ) {
-        // console.log('onSelectionChange',this.single)
         if ( this.single ) {
             this.close()
             this.setInputToSelection()
@@ -302,16 +294,8 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             this.filterInput?.nativeElement.focus()
         }
 
-        if ( this.selectMax > 1 ) {
-            if ( this.selection.value.length >= this.selectMax ) {
-                this.selection.disable()
-            }
-            else {
-                this.selection.enable()
-            }
-        }
-
-        this.changeDetectorRef.detectChanges()
+        this.emitValueChange()
+        // this.changeDetectorRef.detectChanges()
     }
 
     onUpperSelectionChange( ev: MatSelectionListChange ) {
@@ -324,15 +308,13 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCancelClick() {
-        // console.log('onCancelClick')
-        this.selection.setValue( null )
-        this.selection.enable()
+        this.setValue( [] )
         this.setInputToSelection()
-        this.emitValueChange()
     }
 
     onInputFocus() {
-        // console.log('onInputFocus')
+        if ( this.isOpen ) return
+
         this.floatLabel = 'always'
 
         if ( this.filter ) {
@@ -344,7 +326,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCloseClick() {
-        // console.log('onCloseClick')
         this.close()
         this.setInputToSelection()
         this.floatLabel = 'auto'
