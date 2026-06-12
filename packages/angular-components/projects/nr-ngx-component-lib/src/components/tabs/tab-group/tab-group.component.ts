@@ -46,7 +46,6 @@ export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewI
 
         this.tabGroup._handleClick = ( function ( inner ) {
             return function ( tab: MatTab, tabHeader: MatTabGroupBaseHeader, index: number ) {
-                console.log(index)
                 //    return inner.call( this, tab, tabHeader, index )
                 if ( index == self.tabGroup.selectedIndex ) return
 

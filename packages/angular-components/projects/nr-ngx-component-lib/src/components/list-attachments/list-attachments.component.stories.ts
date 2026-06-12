@@ -148,7 +148,8 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
                         attachmentDescription: v.attachmentDescription,
                         attachmentId: v.attachmentGuid,
                         fileId: v.fileIdentifier,
-                        sourceObjectUniqueId: v.sourceObjectUniqueId
+                        sourceObjectUniqueId: v.sourceObjectUniqueId,
+                        orgUnit: ''
                     }
                 } )
             },

@@ -154,7 +154,7 @@ export function fruitOptions() {
 }
 
 export function fruitSubOptions() {
-    console.log('fruitSubOptions')
+    // console.log('fruitSubOptions')
     return fruitOptions().reduce( ( acc, v ) => {
         return acc.concat( [
             { code: v.code + '1', description: v.description + '1', parent: v.code },

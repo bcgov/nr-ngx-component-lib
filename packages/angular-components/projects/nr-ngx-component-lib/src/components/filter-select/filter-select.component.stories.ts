@@ -144,10 +144,6 @@ export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
                 options: fruitOptions()
             },
             template: `
-                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
-                    [options]="options"
-                    [style.--nrcl-filter-select-width.px]="width"
-                ></nrcl-filter-select>
 
                 <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
                     [options]="options"
@@ -156,6 +152,11 @@ export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
         }
     }
 }
+
+                // <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                //     [options]="options"
+                //     [style.--nrcl-filter-select-width.px]="width"
+                // ></nrcl-filter-select>
 
 export const Multiple: StoryObj<FilterSelectComponent & { width: number }> = {
     render: ( args ) => {
@@ -221,7 +222,7 @@ export const NoClear: StoryObj<FilterSelectComponent> = {
     }
 }
 
-export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> = {
+export const Linked: StoryObj<FilterSelectComponent & { options: any, suboptions: any, subvalue: any }> = {
     args: {
         options: fruitOptions(),
         suboptions: fruitSubOptions(),
@@ -230,19 +231,28 @@ export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> 
     },
     render: ( args ) => {
         const [, setArgs] = useArgs();
-        return {
+        let opts = fruitOptions(), 
+            subopts =  fruitSubOptions()
+        return {            
             props: {
                 ...args,
+                // options: opts,
+                // suboptions: subopts,
+                // value: [],
+                // subvalue: [],
                 onValueChange: ( ev ) => { 
+                    // console.log(this)
                     let sub = fruitSubOptions().filter( ( v ) => {
                             return !ev[ 0 ] || v.parent == ev[ 0 ]
                         } )
+                    
                     // console.log( ev, sub ) 
                     setArgs( {
                         suboptions: sub,
                         value: ev,
-                        subvalue: []
+                        // subvalue: []
                     } )
+                    
                 },
                 onSubValueChange: ( ev ) => { 
                     // console.log( ev ) 
@@ -252,10 +262,9 @@ export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> 
                 },
             },
             template: `
-                <div>value:{{value|json}}</div>
-                <div>subvalue:{{subvalue|json}}</div>
                 <div style="display: flex; gap: 8px;">
                     <nrcl-filter-select 
+                        label="parent"
                         [value]="value"
                         (valueChange)="onValueChange( $event )"
                         [options]="options"
@@ -263,10 +272,17 @@ export const Linked: StoryObj<FilterSelectComponent & { suboptions, subvalue }> 
                     ></nrcl-filter-select>
 
                     <nrcl-filter-select 
+                        label="child"
                         [value]="subvalue"
                         (valueChange)="onSubValueChange( $event )"
                         [options]="suboptions"
                     ></nrcl-filter-select>
+                </div>
+
+                <div style="font-family:sans-serif;font-size:12px;">
+                    <div>value:{{value|json}}</div>
+                    <div>subvalue:{{subvalue|json}}</div>
+                    <div>suboptions:{{suboptions|json}}</div>
                 </div>
             `
         }
