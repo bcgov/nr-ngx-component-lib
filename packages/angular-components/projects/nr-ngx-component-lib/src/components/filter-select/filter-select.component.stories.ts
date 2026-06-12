@@ -144,10 +144,6 @@ export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
                 options: fruitOptions()
             },
             template: `
-                <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
-                    [options]="options"
-                    [style.--nrcl-filter-select-width.px]="width"
-                ></nrcl-filter-select>
 
                 <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
                     [options]="options"
@@ -156,6 +152,11 @@ export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
         }
     }
 }
+
+                // <nrcl-filter-select ${ argsToTemplate(args,{exclude:['width']}) }
+                //     [options]="options"
+                //     [style.--nrcl-filter-select-width.px]="width"
+                // ></nrcl-filter-select>
 
 export const Multiple: StoryObj<FilterSelectComponent & { width: number }> = {
     render: ( args ) => {

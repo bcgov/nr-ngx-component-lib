@@ -84,7 +84,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     floatLabel = 'auto'
     inputValue?: string
-    openingValue?: string
     isFiltered = false
     isOpen = false
     hasValue = false
@@ -125,16 +124,11 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         if ( changes.options ) {
             let pv = JSON.stringify( changes.options.previousValue )
             let cv = JSON.stringify( changes.options.currentValue )
-            // console.log(this.label,'options',cv,'change?',pv != cv)
+
             if ( pv != cv ) {
-                // this.value = []
                 let vals = this.selection.value 
                 if ( vals ) {
-                    // console.log(vals,this.options)
                     this.setValue( vals )
-                    // this.selection.setValue( vals.filter( v => this.options.some( o => o.code == v ) ) )
-                    // this.emitValueChange()
-                    // console.log(this.selection.value )
                 }
                 this.setInputToSelection()
                 this.setFilter()
@@ -142,36 +136,16 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         }
 
         if ( changes.value ) {
-            let pv = JSON.stringify( changes.value.previousValue )
-            let cv = JSON.stringify( changes.value.currentValue )
-            // console.log(this.label,'value',cv)
-            // if ( pv != cv ) {
-                if ( this.value ) {
-                    // this.hasValue = this.value.length > 0
-                    this.setValue( this.value )
+            if ( this.value ) {
+                this.setValue( this.value )
+            }
+            else {
+                this.setValue( [] )
+            }
 
-                    // this.selection.setValue( this.value.filter( v => this.options.some( o => o.code == v ) ) )
-                    // this.emitValueChange()
-                    // this.selection.setValue( this.value )                    
-                    // if ( this.selectMax > 1 && this.value.length >= this.selectMax ) {
-                    //     this.selection.disable()
-                    // }
-                    // else {
-                    //     this.selection.enable()
-                    // }
-                }
-                else {
-                    this.setValue( [] )
-                    // this.hasValue = false
-                    // this.selection.setValue( [] ) //null )
-                    // this.emitValueChange()
-                    // this.selection.enable()
-                }
-
-                this.setFilter()
-                this.setInputToSelection()
-                this.changeDetectorRef.detectChanges()
-            // }
+            this.setFilter()
+            this.setInputToSelection()
+            this.changeDetectorRef.detectChanges()
         }
     }
 
@@ -187,7 +161,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     ngOnDestroy(): void {
-        // console.log('destroy',this.inst)
         this.clickSubscription?.unsubscribe()
     }
 
@@ -204,7 +177,12 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
         if ( old == mod ) return
 
+        this.emitValueChange()
+    }
+
+    emitValueChange() {
         let count = this.selection.value.length
+
         this.hasValue = count > 0
         if ( this.selectMax > 1 && count >= this.selectMax ) {
             this.selection.disable()
@@ -213,18 +191,10 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             this.selection.enable()
         }
 
-        // console.log(this.label,'emitValueChange',mod)
-        this.valueChange.emit( this.selection.value )
-    }
-
-    emitValueChange() {
-        this.hasValue = ( this.selection.value || [] ).length > 0
-        // console.log('emitValueChange',JSON.stringify(this.selection.value || []))
         this.valueChange.emit( this.selection.value || [] )
     }
 
     open() {
-        // console.warn('open',this.isOpen)
         if ( this.isOpen ) return
 
         this.isOpen = true
@@ -274,31 +244,20 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             // prevent list from scrolling when selection changes            
             this.overlayRef?.overlayElement.children[0].scroll( 0, 1 )
         },100 )
-
-        this.openingValue = JSON.stringify( this.selection.value )
     }
 
     close() {
-        // console.warn('close',this.isOpen)
         if ( !this.isOpen ) return
-
         this.isOpen = false
 
         if ( this.overlayRef ) {
             this.overlayRef.dispose()
             this.overlayRef = null
         }
-
-        this.changeDetectorRef.detectChanges()
-
-        let closingValue = JSON.stringify( this.selection.value )
-        // console.log(this.openingValue,closingValue)
-        if ( this.openingValue != closingValue )
-            this.emitValueChange()
+        // this.changeDetectorRef.detectChanges()
     }
 
     setInputToSelection() {
-        // console.warn('setInputToSelection')
         this.inputValue = this.selection?.value?.map( c => this.optionFormatter( this.optionForCode( c ), true ) ).join( ', ' ) || ''
         this.isFiltered = false
     }
@@ -311,17 +270,14 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         let t = text?.trim().toLowerCase()
 
         if ( t?.length >= this.filterCharsMin ) {
-            // console.log('filtering')
             this.isFiltered = true
             this.match = ( option ) => option.description.toLowerCase().includes( t )
         }
         else {
-            // console.log('not filtering')
             this.isFiltered = false
             this.match = ( o ) => true
         }
-
-        this.changeDetectorRef.detectChanges()
+        // this.changeDetectorRef.detectChanges()
     }
 
     matchesFilter( option: CodeDescription ) {
@@ -329,7 +285,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onSelectionChange( ev ) {
-        // console.log('onSelectionChange',this.single)
         if ( this.single ) {
             this.close()
             this.setInputToSelection()
@@ -339,16 +294,8 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             this.filterInput?.nativeElement.focus()
         }
 
-        if ( this.selectMax > 1 ) {
-            if ( this.selection.value.length >= this.selectMax ) {
-                this.selection.disable()
-            }
-            else {
-                this.selection.enable()
-            }
-        }
-
-        this.changeDetectorRef.detectChanges()
+        this.emitValueChange()
+        // this.changeDetectorRef.detectChanges()
     }
 
     onUpperSelectionChange( ev: MatSelectionListChange ) {
@@ -361,16 +308,13 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCancelClick() {
-        // console.log('onCancelClick')
-        // this.selection.setValue( [] )//null )
         this.setValue( [] )
-        // this.selection.enable()
         this.setInputToSelection()
-        // this.emitValueChange()
     }
 
     onInputFocus() {
-        // console.log('onInputFocus')
+        if ( this.isOpen ) return
+
         this.floatLabel = 'always'
 
         if ( this.filter ) {
@@ -382,7 +326,6 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onCloseClick() {
-        // console.log('onCloseClick')
         this.close()
         this.setInputToSelection()
         this.floatLabel = 'auto'
