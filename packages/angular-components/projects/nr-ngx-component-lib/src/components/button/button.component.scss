@@ -58,6 +58,7 @@
     --nrcl-button-height: 50px;
     --nrcl-icon-padding: 50px;
     --nrcl-button-font-size: 40px;
+    --nrcl-button-font-weight: 500;
     --nrcl-button-padding-left: 50px;
     --nrcl-button-padding-right: 50px;
     --nrcl-button-foreground-color: #red;
@@ -93,7 +94,7 @@
         .label, .content {
             font-family: var( --nrcl-font-family );
             font-size: var( --nrcl-button-font-size );
-            font-weight: 500;
+            font-weight: var( --nrcl-button-font-weight );
 
             width: 100%;
             overflow: hidden;

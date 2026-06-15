@@ -108,7 +108,7 @@ The Button component provides a flexible, Material Design-inspired button with m
 
 export default meta;
 
-export const Primary: StoryObj<ButtonComponent & { tooltipMode: any, widthMode: any, width: number } > = {
+export const Primary: StoryObj<ButtonComponent & { tooltipMode: any, containerWidthMode: any, containerWidth: number, widthMode: any, width: number } > = {
     parameters: {
         docs: {
             description: {
@@ -166,9 +166,17 @@ Adjust the controls to see how different properties affect all button variants s
             if: { arg: 'tooltipMode', eq: '(text)' }
         },
         disabled: { type: 'boolean' },
-        widthMode: {
+        containerWidthMode: {
             control: { type: 'inline-radio' },
             options: [ 'auto', 'set' ],
+        },
+        containerWidth: {
+            if: { arg: 'containerWidthMode', eq: 'set' },
+            control: { type: 'range', min: 0, max: 500 }
+        },
+        widthMode: {
+            control: { type: 'inline-radio' },
+            options: [ 'auto', 'set', '100%' ],
         },
         width: {
             if: { arg: 'widthMode', eq: 'set' },
@@ -182,6 +190,8 @@ Adjust the controls to see how different properties affect all button variants s
         icon: undefined,
         iconRight: undefined,
         disabled: false,        
+        containerWidthMode: 'auto',
+        containerWidth: 200,
         widthMode: 'auto',
         width: 200,
     },
@@ -190,19 +200,32 @@ Adjust the controls to see how different properties affect all button variants s
             args.tooltip = args.tooltipMode
         }
 
+        let buttonArgs = argsToTemplate( args, { exclude: [ 'tooltipMode', 'containerWidthMode', 'containerWidth', 'widthMode', 'width' ] } )
+
+        let containerWidth
+        if ( args.containerWidthMode == 'auto' ) {
+            containerWidth = 'unset'
+        }
+        else {
+            containerWidth = args.containerWidth + 'px'
+        }
+        let containerWidthArg = '[style.width]="containerWidth"'
+
         let width
         if ( args.widthMode == 'auto' ) {
             width = 'unset'
         }
+        if ( args.widthMode == '100%' ) {
+            width = '100%'
+            buttonArgs += ' [style.--nrcl-button-width]="width"'
+        }
         else {
             width = args.width + 'px'
+            buttonArgs += ' [style.--nrcl-button-width]="width"'
         }
-
-        let buttonArgs = argsToTemplate( args, { exclude: [ 'tooltipMode', 'widthMode', 'width' ] } )
-        let widthArg = '[style.width]="width" [style.--nrcl-button-width]="width"'
-
+        
         return {
-            props: { ...args, width },
+            props: { ...args, width, containerWidth },
             styles: [`
                 ::ng-deep registration-wrapper {
                     --registration-display: block;
@@ -239,81 +262,81 @@ Adjust the controls to see how different properties affect all button variants s
             `],
             template: `
                 <div class="grid">
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>(default)</h6>
                         <nrcl-button ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>primary</h6>
                         <nrcl-button primary ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>secondary</h6>
                         <nrcl-button secondary ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>tertiary</h6>
                         <nrcl-button tertiary ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>anchor</h6>
                         <nrcl-button anchor ${ buttonArgs }></nrcl-button> 
                     </article>
 
                     <!-- -------------------------------- -->
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>small</h6>
                         <nrcl-button small ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>primary small</h6>
                         <nrcl-button primary small ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>secondary small</h6>
                         <nrcl-button secondary small ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>tertiary small</h6>
                         <nrcl-button tertiary small ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>anchor small</h6>
                         <nrcl-button anchor small ${ buttonArgs }></nrcl-button> 
                     </article>
 
                     <!-- -------------------------------- -->
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>compact</h6>
                         <nrcl-button compact ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>primary compact</h6>
                         <nrcl-button primary compact ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>secondary compact</h6>
                         <nrcl-button secondary compact ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>tertiary compact</h6>
                         <nrcl-button tertiary compact ${ buttonArgs }></nrcl-button> 
                     </article>
 
-                    <article ${ widthArg }>
+                    <article ${ containerWidthArg }>
                         <h6>anchor compact</h6>
                         <nrcl-button anchor compact ${ buttonArgs }></nrcl-button> 
                     </article>
