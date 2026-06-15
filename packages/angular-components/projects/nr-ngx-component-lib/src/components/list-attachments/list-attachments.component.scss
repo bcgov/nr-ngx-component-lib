@@ -1,16 +1,27 @@
 :host {
     .mat-mdc-table {
         .mat-column-attachmentTypeCode {
-            flex-basis: 150px;
+            flex-basis: 100px;
             flex-grow: 1;
             flex-shrink: 0;
         }
 
-        .mat-column-fileName {
-            flex-basis: 200px;
+        .mat-column-orgUnit {
+            flex-basis: 150px;
             flex-grow: 2;
             flex-shrink: 0;
             word-break: break-word;
+        }
+
+        .mat-column-fileName {
+            flex-basis: 200px;
+            flex-grow: 3;
+            flex-shrink: 0;
+
+            .nrcl-button {
+                width: 100%;
+                --nrcl-button-width: 100%;
+            }
         }
 
         .mat-column-sourceObjectNameCode {
@@ -50,6 +61,18 @@
             flex-grow: 0;
             flex-shrink: 0;
             justify-content: center;
+        }
+    }
+
+    .nrcl-row-list-mobile {
+        section.filename {
+            .value {
+                .nrcl-button {
+                    width: 100%;
+                    --nrcl-button-width: 100%;
+                    --nrcl-button-font-weight: bold;
+                }
+            }
         }
     }
 }

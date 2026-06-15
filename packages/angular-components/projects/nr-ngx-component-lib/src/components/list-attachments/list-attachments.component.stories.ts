@@ -34,7 +34,7 @@ import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.co
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { ListAttachmentsComponent } from './list-attachments.component';
+import { AttachmentsTableRow, ListAttachmentsComponent } from './list-attachments.component';
 
 const meta: Meta<ListAttachmentsComponent> = {
     title: 'List Attachments',
@@ -90,17 +90,17 @@ const meta: Meta<ListAttachmentsComponent> = {
         } ),
         componentWrapperDecorator(
             ( story ) => {
-                return `
-                    <ng-container *rerender="{width, displayMode, canDelete, canDownload}">
-                        <display-mode-wrapper
+                return `                    
+                    <ng-container *rerender="{ width, displayMode, canDelete, canDownload, showOrgUnit }">
+                        <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
-                            [width]="width"
+                            [width]="width"                        
                         >
                             ${ story }
                         </display-mode-wrapper>
                     </ng-container>
-                    `
+                `
             }
         ),
     ],
@@ -125,6 +125,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
         ...displayModeWrapperStory.args,
         canDelete: true,
         canDownload: true,
+        showOrgUnit: false,
     },
     parameters: {
         docs: {
@@ -149,12 +150,12 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
                         attachmentId: v.attachmentGuid,
                         fileId: v.fileIdentifier,
                         sourceObjectUniqueId: v.sourceObjectUniqueId,
-                        orgUnit: ''
+                        orgUnit: v.orgUnit
                     }
                 } )
             },
-            downloadItem: () => {},
-            deleteItem: () => {},
+            downloadItem: (x) => { console.log(x) },
+            deleteItem: (x) => { console.log(x) },
         }
         return {
             props: args,
@@ -163,6 +164,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
                     [rowListProvider]="rowListProvider"
                     [canDelete]="canDelete"
                     [canDownload]="canDownload"
+                    [showOrgUnit]="showOrgUnit"
                 ></nrcl-list-attachments>
             `
         }
@@ -221,6 +223,7 @@ type AttachmentCollection = {
         uploadedBy: string
         uploadedTimestamp: string
         fileIdentifier: string
+        orgUnit: string
     }[]
 }
 
@@ -240,7 +243,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "OTHER",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:08:15",
-                "fileIdentifier": "50281"
+                "fileIdentifier": "50281",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "38CF76E3239E20B6E063690A0A0AA01E",
@@ -251,7 +255,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:47:49",
-                "fileIdentifier": "50321"
+                "fileIdentifier": "50321",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "38CEF34B55AD0DE8E063690A0A0A3EC4",
@@ -262,7 +267,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:11:01",
-                "fileIdentifier": "50291"
+                "fileIdentifier": "50291",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "38CF08826EFA0FBBE063690A0A0A333F",
@@ -273,18 +279,20 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:17:08",
-                "fileIdentifier": "50312"
+                "fileIdentifier": "50312",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "389D5320645DDAC0E063690A0A0AC48A",
                 "sourceObjectUniqueId": "33F2E970411E23A3E063690A0A0A9B26",
                 "sourceObjectNameCode": "EQUIP_ATTACH",
-                "fileName": "avatar-collectible.png",
+                "fileName": "avatar-collectible-collectible-collectible-collectible-collectible.png",
                 "attachmentDescription": "sdfsdfsdfsdsdfsdf",
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-27T23:58:40",
-                "fileIdentifier": "50251"
+                "fileIdentifier": "50251",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "38CEFB6A4F3C0E84E063690A0A0A6415",
@@ -295,7 +303,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T11:13:17",
-                "fileIdentifier": "50301"
+                "fileIdentifier": "50301",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "387E09BBA94B9849E063690A0A0A8253",
@@ -306,7 +315,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-26T10:39:05",
-                "fileIdentifier": "50243"
+                "fileIdentifier": "50243",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "387DB8146A4E8EE0E063690A0A0AFE5A",
@@ -317,7 +327,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "PHOTO",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-26T10:16:15",
-                "fileIdentifier": "50231"
+                "fileIdentifier": "50231",
+                "orgUnit": randomOrgUnit()
             },
             {
                 "attachmentGuid": "38CE8F9D6EF701D7E063690A0A0A7394",
@@ -328,7 +339,8 @@ function attachmentCollection(): AttachmentCollection {
                 "attachmentTypeCode": "OTHER",
                 "uploadedBy": "IDIR\\SFOORD",
                 "uploadedTimestamp": "2025-06-30T10:43:09",
-                "fileIdentifier": "50271"
+                "fileIdentifier": "50271",
+                "orgUnit": randomOrgUnit()
             }
         ]
     }
@@ -339,3 +351,63 @@ function getFileExtension(fileName: string) {
 
     return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length).toUpperCase();
 }
+
+function randomOrgUnit(): string {
+    return orgUnits[ Math.floor( Math.random() * orgUnits.length ) ].description
+}
+
+let orgUnits = [
+  {    "code": "60", "description": "BCWS HQ", },
+  {    "code": "2", "description": "Cariboo Fire Centre", },
+  {    "code": "50", "description": "Coastal Fire Centre", },
+  {    "code": "25", "description": "Kamloops Fire Centre", },
+  {    "code": "42", "description": "Northwest Fire Centre", },
+  {    "code": "8", "description": "Prince George Fire Centre", },
+  {    "code": "34", "description": "Southeast Fire Centre", },
+  {    "code": "6", "description": "100 Mile House Zone", },
+  {    "code": "38", "description": "Arrow Zone", },
+  {    "code": "39", "description": "Boundary Zone", },
+  {    "code": "45", "description": "Bulkley Zone", },
+  {    "code": "46", "description": "Bulkley Zone (Kispiox)", },
+  {    "code": "49", "description": "Cassiar Zone", },
+  {    "code": "5", "description": "Central Cariboo Zone (Horsefly)", },
+  {    "code": "4", "description": "Central Cariboo Zone (Williams Lake)", },
+  {    "code": "7", "description": "Chilcotin Zone", },
+  {    "code": "37", "description": "Columbia Zone", },
+  {    "code": "35", "description": "Cranbrook Zone", },
+  {    "code": "14", "description": "Dawson Creek Zone", },
+  {    "code": "65", "description": "Equipment Depot - Prince George", },
+  {    "code": "16", "description": "Fort Nelson Zone", },
+  {    "code": "15", "description": "Fort St. John Zone", },
+  {    "code": "51", "description": "Fraser Zone", },
+  {    "code": "66", "description": "HQ Finance", },
+  {    "code": "36", "description": "Invermere Zone", },
+  {    "code": "27", "description": "Kamloops Zone (Kamloops)", },
+  {    "code": "40", "description": "Kootenay Lake Zone", },
+  {    "code": "32", "description": "Lillooet Zone", },
+  {    "code": "13", "description": "Mackenzie Zone", },
+  {    "code": "31", "description": "Merritt Zone", },
+  {    "code": "55", "description": "Mid Island Zone", },
+  {    "code": "43", "description": "Nadina Zone (Lakes)", },
+  {    "code": "44", "description": "Nadina Zone (Morice)", },
+  {    "code": "56", "description": "North Island Mid Coast Zone (Campbell River)", },
+  {    "code": "58", "description": "North Island Mid Coast Zone (Mid Coast)", },
+  {    "code": "57", "description": "North Island Mid Coast Zone (Port McNeill)", },
+  {    "code": "52", "description": "Pemberton Zone", },
+  {    "code": "30", "description": "Penticton Zone", },
+  {    "code": "9", "description": "Prince George Zone", },
+  {    "code": "62", "description": "Provincial Air Tanker Centre (PATC)", },
+  {    "code": "63", "description": "Provincial Aviation", },
+  {    "code": "64", "description": "Provincial Equipment Depot - Chilliwack", },
+  {    "code": "61", "description": "Provincial Fire Operations", },
+  {    "code": "3", "description": "Quesnel Zone", },
+  {    "code": "10", "description": "Robson Valley Zone", },
+  {    "code": "47", "description": "Skeena Zone (Kalum)", },
+  {    "code": "48", "description": "Skeena Zone (North Coast)", },
+  {    "code": "54", "description": "South Island Zone", },
+  {    "code": "53", "description": "Sunshine Coast Zone", },
+  {    "code": "12", "description": "VanJam Zone (Fort St. James)", },
+  {    "code": "11", "description": "VanJam Zone (Vanderhoof)", },
+  {    "code": "29", "description": "Vernon Zone (Vernon)",  }
+]
+
