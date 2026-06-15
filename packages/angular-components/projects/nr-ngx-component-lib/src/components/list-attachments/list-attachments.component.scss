@@ -1,14 +1,14 @@
 :host {
     .mat-mdc-table {
         .mat-column-attachmentTypeCode {
-            flex-basis: 100px;
+            flex-basis: 150px;
             flex-grow: 1;
             flex-shrink: 0;
         }
 
         .mat-column-orgUnit {
             flex-basis: 150px;
-            flex-grow: 2;
+            flex-grow: 1;
             flex-shrink: 0;
             word-break: break-word;
         }
@@ -38,14 +38,14 @@
 
         .mat-column-uploadedTimestamp {
             flex-basis: 150px;
-            flex-grow: 1;
+            flex-grow: 0;
             flex-shrink: 0;
         }
 
         .mat-column-description {
             flex-basis: 200px;
-            flex-grow: 3;
-            flex-shrink: 0;
+            flex-grow: 1;
+            flex-shrink: 1;
             word-break: break-word;
         }
 
