@@ -93,8 +93,13 @@
         .label, .content {
             font-family: var( --nrcl-font-family );
             font-size: var( --nrcl-button-font-size );
-            white-space: nowrap;
             font-weight: 500;
+
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            white-space: nowrap;
         }
 
         .content {
@@ -243,10 +248,10 @@
         --nrcl-button-padding-left: 0;
         --nrcl-button-padding-right: 0;
         --nrcl-button-normal-height: 20px;
-        --nrcl-button-normal-padding-horizontal: 0;
-        --nrcl-button-normal-icon-padding-horizontal: 0;
 
         a {
+            box-sizing: border-box;
+
             &:hover {
                 color: var( --nrcl-button-anchor-hover-foreground-color );
             }
@@ -261,6 +266,16 @@
             --nrcl-button-background-color: var( --nrcl-button-anchor-disabled-background-color );
             --nrcl-button-border-color: var( --nrcl-button-anchor-disabled-border-color );
             --nrcl-button-hover-background-color: var( --nrcl-button-anchor-disabled-hover-background-color );
+        }
+    }
+
+    &.disabled {
+        button, a {
+            cursor: default;
+
+            &:hover {
+                color: var( --nrcl-button-foreground-color );
+            }
         }
     }
 }

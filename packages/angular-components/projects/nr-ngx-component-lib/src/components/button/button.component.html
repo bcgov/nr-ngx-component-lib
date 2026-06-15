@@ -2,7 +2,7 @@
     <button
         matRipple
         [disabled]="disabled"
-        [matTooltip]="tooltip"
+        [matTooltip]="tooltipVal"
     >
         @if ( useContent ) {
             <div class="content">
@@ -29,7 +29,11 @@
     </button>
 }
 @else {
-    <a [attr.href]="href" [attr.target]="href && target">
+    <a 
+        [attr.href]="href" 
+        [attr.target]="href && target"
+        [matTooltip]="tooltipVal"
+    >
         @if ( hasIconLeft ) {
             <nrcl-icon class="left" [small]="isIconSmall">{{ icon }}</nrcl-icon>
         }
