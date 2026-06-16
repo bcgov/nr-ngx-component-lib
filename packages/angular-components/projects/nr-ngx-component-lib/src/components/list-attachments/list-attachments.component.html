@@ -17,17 +17,21 @@
                     </ng-container>
 
 <!--                    Only show this column for prep sheet attachment section-->
-                    <ng-container matColumnDef="orgUnit" *ngIf="isPrepSheet">
+                    <ng-container matColumnDef="orgUnit">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Org Unit</mat-header-cell>
                         <mat-cell *matCellDef="let item">
-                            <nrcl-cell-content tooltip>{{ item.orgUnit }}</nrcl-cell-content>
+                            {{ item.orgUnit }}
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="fileName">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>File Name</mat-header-cell>
                         <mat-cell *matCellDef="let item">
-                            {{ item.fileName }}
+                            <nrcl-button anchor tooltip
+                                [label]="item.fileName"
+                                iconRight="download"
+                                (click)="onDownloadClick( item )"
+                            ></nrcl-button>
                         </mat-cell>
                     </ng-container>
 
@@ -64,7 +68,7 @@
                         <mat-cell *matCellDef="let item">
                             <nrcl-button compact
                                 icon="download"
-                                (click)="onDownloadClick( item )"                        
+                                (click)="onDownloadClick( item )"
                             ></nrcl-button>
                         </mat-cell>
                     </ng-container>
@@ -83,7 +87,7 @@
                     <mat-row *matRowDef="let item; columns: columns;"></mat-row>
                 </mat-table>
             </nrcl-row-list-desktop>
-            
+
             <nrcl-gap/>
         }
 
@@ -115,14 +119,15 @@
                 @for ( item of rows | paginate: paginateState( 'mobile-attachments' ); track item.attachmentId ) {
                     <mat-card>
                         <mat-card-content>
-                            <section full-width>
-                                <mat-label>File name</mat-label>
-                                <div class="value">{{ item.fileName }}</div>
-                            </section>
-
-                            <section *ngIf="isPrepSheet">
-                                <mat-label>Org Unit</mat-label>
-                                <div class="value">{{ item.orgUnit }}</div>
+                            <section full-width class="filename">
+                                <mat-label>File Name</mat-label>
+                                <div class="value">
+                                    <nrcl-button anchor
+                                        [label]="item.fileName"
+                                        iconRight="download"
+                                        (click)="onDownloadClick( item )"
+                                    ></nrcl-button>
+                                </div>
                             </section>
 
                             <section>
@@ -138,17 +143,24 @@
                             <section>
                                 <mat-label>Uploaded By</mat-label>
                                 <div class="value">{{ item.uploadedBy }}</div>
-                            </section>                                            
+                            </section>
 
                             <section>
                                 <mat-label>Uploaded Date</mat-label>
                                 <div class="value">{{ item.uploadedTimestamp }}</div>
-                            </section>                                            
+                            </section>
+
+                            @if ( showOrgUnit ) {
+                                <section full-width>
+                                    <mat-label>Org Unit</mat-label>
+                                    <div class="value">{{ item.orgUnit }}</div>
+                                </section>
+                            }
 
                             <section full-width>
                                 <mat-label>Description</mat-label>
                                 <div class="value">{{ item.attachmentDescription }}</div>
-                            </section>                                            
+                            </section>
                         </mat-card-content>
 
                         <mat-card-footer>
@@ -156,7 +168,7 @@
                                 <nrcl-button compact
                                     label="Download"
                                     icon="download"
-                                    (click)="onDownloadClick( item )"                        
+                                    (click)="onDownloadClick( item )"
                                 ></nrcl-button>
                             }
 
@@ -167,7 +179,7 @@
                                     (click)="onDeleteClick( item )"
                                 ></nrcl-button>
                             }
-                        </mat-card-footer>                    
+                        </mat-card-footer>
                     </mat-card>
                 }
             </nrcl-row-list-mobile>

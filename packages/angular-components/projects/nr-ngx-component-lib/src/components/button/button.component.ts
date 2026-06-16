@@ -6,55 +6,56 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
     host: {
-        '[class.disabled]': 'disabled',
-        '[class.primary]': 'isPrimary',
-        '[class.secondary]': 'isSecondary',
-        '[class.tertiary]': 'isTertiary',
-        '[class.anchor]': 'isAnchor',
-        '[class.normal]': '!isCompact && !isSmall',
-        '[class.compact]': 'isCompact',
-        '[class.small]': 'isSmall && !isCompact',
-        '[class.label]': 'hasLabel',
-        '[class.icon-left]': 'hasIconLeft',
-        '[class.icon-right]': 'hasIconRight',
+        '[class.disabled]':     'disabled',
+        '[class.primary]':      'isPrimary',
+        '[class.secondary]':    'isSecondary',
+        '[class.tertiary]':     'isTertiary',
+        '[class.anchor]':       'isAnchor',
+        '[class.normal]':       '!isCompact && !isSmall',
+        '[class.compact]':      'isCompact',
+        '[class.small]':        'isSmall && !isCompact',
+        '[class.label]':        'hasLabel',
+        '[class.icon-left]':    'hasIconLeft',
+        '[class.icon-right]':   'hasIconRight',
         '[class.icon-compact]': 'hasIconCompact',
-        '[class.icon-small]': 'isIconSmall',
+        '[class.icon-small]':   'isIconSmall',
     }
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {
-    @Input() label
-    @Input() icon
-    @Input() iconRight
-    @Input() iconCompact
-    @Input() tooltip
-    @Input() compact
-    @Input() small
+    zone = inject( NgZone )
+
+    @Input() label?: string
+    @Input() icon?: string
+    @Input() iconRight?: string
+    @Input() iconCompact?: string
+    @Input() tooltip?: string | boolean
+    @Input() compact?: string | boolean
+    @Input() small?: string | boolean
     @Input( { transform: booleanAttribute } ) primary = false
     @Input( { transform: booleanAttribute } ) secondary = false
     @Input( { transform: booleanAttribute } ) tertiary = false
     @Input( { transform: booleanAttribute } ) disabled = false
-    @Input() anchor
+    @Input() anchor?: string | boolean | { href: string, target: string }
 
     // the click event is already defined for the host element
     // this declaration makes storybook happy
     @Output() click = new EventEmitter<PointerEvent>()
 
-    isCompact
-    isSmall
-    isPrimary
-    isSecondary
-    isTertiary
-    isAnchor
-    hasIconLeft
-    hasIconRight
-    hasIconCompact
-    isIconSmall
-    hasLabel
-    useContent
-    href
-    target 
-
-    zone = inject( NgZone )
+    protected isCompact = false
+    protected isSmall = false
+    protected isPrimary = false
+    protected isSecondary = false
+    protected isTertiary = false
+    protected isAnchor = false
+    protected hasIconLeft = false
+    protected hasIconRight = false
+    protected hasIconCompact = false
+    protected isIconSmall?: boolean
+    protected hasLabel = false
+    protected useContent = false
+    protected href?: string
+    protected target?: string
+    protected tooltipVal?: string
 
     ngOnChanges( changes: SimpleChanges ): void {
         this.updateState()
@@ -69,6 +70,16 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
     }
 
     updateState() {
+        if ( this.tooltip == null || this.tooltip === false ) {
+            this.tooltipVal = undefined
+        }
+        else if ( this.tooltip == '' || this.tooltip === true ) {
+            this.tooltipVal = this.label
+        }
+        else {
+            this.tooltipVal = this.tooltip
+        }
+
         if ( this.compact == null || this.compact === false ) {
             this.isCompact = false
         }
@@ -81,7 +92,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
 
         if ( this.small == null ) {
             this.isSmall = false
-            this.isIconSmall = null
+            this.isIconSmall = undefined
         }
         else if ( this.small === false ) {
             this.isSmall = false
@@ -92,8 +103,8 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
             this.isIconSmall = true
         }
 
-        this.href = null
-        this.target = null
+        this.href = undefined
+        this.target = undefined
         if ( this.anchor == null || this.anchor === false || this.primary || this.secondary || this.tertiary ) {
             this.isAnchor = false
         }
@@ -102,13 +113,15 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
         }
         else {
             this.isAnchor = true
-            if ( this.anchor.href ) {
-                this.href = this.anchor.href
-                this.target = ( 'target' in this.anchor ) ? this.anchor.target : '_blank'
-            }
-            else {
+            if ( typeof this.anchor == 'string' ) {
                 this.href = this.anchor
                 this.target = '_blank'
+            }
+            else if ( typeof this.anchor == 'boolean' ) {
+            }
+            else {
+                this.href = this.anchor.href
+                this.target = ( 'target' in this.anchor ) ? this.anchor.target : '_blank'
             }
         }
 

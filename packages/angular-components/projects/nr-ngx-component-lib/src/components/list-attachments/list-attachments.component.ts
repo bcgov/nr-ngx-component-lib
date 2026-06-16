@@ -13,7 +13,7 @@ export type AttachmentsTableRow = {
     attachmentDescription: string
     attachmentId: string 
     fileId: string
-    sourceObjectUniqueId: string
+    sourceObjectUniqueId: string,
 }
 
 export type FetchAttachmentsParameters = { 
@@ -40,7 +40,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     @Input() rowListProvider?: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
     @Input() canDownload = true
-    @Input() isPrepSheet = false
+    @Input() showOrgUnit = false
     @Input() noRowsMessage = "No attachments have been added."
 
     DATE_FORMATS = DATE_FORMATS
@@ -55,10 +55,10 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     ]
 
     ngOnChanges(changes: SimpleChanges): void {
-        if ( changes.canDownload || changes.canDelete ) {
+        if ( changes.canDownload || changes.canDelete || changes.showOrgUnit ) {
             this.columns = [ 
                 'attachmentTypeCode',
-                ...(this.isPrepSheet ? ['orgUnit'] : []),
+                ...(this.showOrgUnit ? ['orgUnit'] : []),
                 'fileName', 
                 'sourceObjectNameCode', 
                 'uploadedBy', 

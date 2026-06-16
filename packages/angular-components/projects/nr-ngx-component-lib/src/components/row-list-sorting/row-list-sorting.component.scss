@@ -18,6 +18,12 @@
                 .mat-mdc-radio-group {
                     justify-content: space-evenly;
                     width: 100%;
+
+                    .mat-mdc-radio-button {
+                        .mdc-label {
+                            white-space: nowrap;
+                        }
+                    }
                 }
             }
         }
