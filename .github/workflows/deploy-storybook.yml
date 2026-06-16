@@ -27,7 +27,7 @@ jobs:
       
       - name: Install dependencies
         working-directory: packages/angular-components
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps --force
       
       - name: Build Storybook
         working-directory: packages/angular-components
