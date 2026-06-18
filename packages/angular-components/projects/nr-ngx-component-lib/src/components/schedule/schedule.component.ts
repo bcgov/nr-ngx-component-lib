@@ -1,11 +1,9 @@
-import { AfterContentInit, AfterViewInit, booleanAttribute, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, inject, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
-import { NrclBase } from '../../directives/nrcl.base';
+import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, inject, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
+import { MatMenuPanel } from '@angular/material/menu';
 import moment from 'moment';
-import { RowListBase } from '../../directives/row-list.base';
 import { Observable } from 'rxjs';
 import { PaginationState } from '../../directives/pagination.base';
-import { MatMenu, MatMenuPanel } from '@angular/material/menu';
-// import { PaginationState } from '../../public-api';
+import { RowListBase } from '../../directives/row-list.base';
 
 @Directive( {
     selector: '[nrclScheduleRowHeading]'
@@ -42,6 +40,7 @@ export type ScheduleRowItem = {
     name: string,
     // data?: any
     // template?: TemplateRef<any>
+    icons?: string[],
 }
 
 export type ScheduleRow = {
@@ -273,15 +272,8 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
     host: {
     }
 } )
-export class ScheduleItemIconsComponent implements AfterContentInit, OnChanges {
+export class ScheduleItemIconsComponent {
     @Input() icons: string[] = []
-
-    ngAfterContentInit(): void {
-        throw new Error('Method not implemented.');
-    }
-    ngOnChanges(changes: SimpleChanges): void {
-        throw new Error('Method not implemented.');
-    }
 }
 
 // --------------------------------------------------------------------------------

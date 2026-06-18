@@ -23,7 +23,6 @@
         <h1>Out of Svc</h1>
         <h2>{{ data.allocationType }}</h2>
         <h3>{{ data.shiftType }}</h3>
-        <nrcl-schedule-item-icons icons="data.icons"></nrcl-schedule-item-icons>
     </ng-template>
 
     <ng-template nrclScheduleItem="available-duty-day" let-data>
@@ -35,19 +34,19 @@
     <ng-template nrclScheduleItem="available-standby-day" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
-        <h3>Standby</h3>
+        <h3>Standby Day</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="available-off-day" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
-        <h3>Off</h3>
+        <h3>Day Off</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="available-regular-day" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
-        <h3>Regular</h3>
+        <h3>Regular Day</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-duty-day" let-data>
@@ -59,19 +58,19 @@
     <ng-template nrclScheduleItem="assigned-standby-day" let-data>
         <!-- <h1></h1> -->
         <h2>{{ data.assignmentName }}</h2>
-        <h3>Standby</h3>
+        <h3>Standby Day</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-off-day" let-data>
         <!-- <h1></h1> -->
         <h2>{{ data.assignmentName }}</h2>
-        <h3>Off</h3>
+        <h3>Day Off</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-regular-day" let-data>
         <!-- <h1></h1> -->
         <h2>{{ data.assignmentName }}</h2>
-        <h3>Regular</h3>
+        <h3>Regular Day</h3>
     </ng-template>
 </nrcl-schedule>
 

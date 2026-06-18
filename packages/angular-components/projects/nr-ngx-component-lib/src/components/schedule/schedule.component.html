@@ -59,6 +59,14 @@
                                 [ngTemplateOutlet]="_templates[ rowIndex ][ colIndex ] || empty" 
                                 [ngTemplateOutletContext]="{ $implicit: item }"            
                             ></ng-container>
+                            
+                            @if ( item.icons?.length > 0 ) {
+                                <div class="icons">
+                                    @for ( icon of item.icons; track icon ) {
+                                        <nrcl-icon small>{{ icon }}</nrcl-icon>
+                                    }                                
+                                </div>
+                            }
                         </div>
                     </div>
                 }

@@ -62,8 +62,8 @@ import { TabGroupComponent } from './components/tabs/tab-group/tab-group.compone
 import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
-import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleItemIconsComponent, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 
 @NgModule({
     imports: [
@@ -138,6 +138,7 @@ import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from '
         ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
+        ScheduleItemIconsComponent,
     ],
     exports: [
         ButtonComponent,
@@ -183,6 +184,7 @@ import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from '
         ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
+        ScheduleItemIconsComponent,
     ],
     providers: [
         SnackbarUtilService,

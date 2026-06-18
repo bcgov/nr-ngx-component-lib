@@ -35,7 +35,7 @@ import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.compo
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
-import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleItemIconsComponent, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { MatRippleModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -89,6 +89,7 @@ const meta: Meta<ResourceScheduleComponent> = {
                 IconComponent,
                 ScheduleComponent,
                 ScheduleItemDirective,
+                ScheduleItemIconsComponent,
                 ScheduleRowHeadingDirective,
                 ResourceScheduleRowHeadingDirective,
             ],
@@ -253,22 +254,22 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
 }
 
 let items = [
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty' },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Standby' },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Off' },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Regular' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Duty' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Standby' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Off' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Regular' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Duty' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Standby' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Off' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Regular' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Duty' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Standby' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Off' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Regular' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty Day' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Standby Day' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Day Off' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Regular Day' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Duty Day' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Standby Day' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Day Off' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Regular Day' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Duty Day' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Standby Day' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Day Off' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Regular Day' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Duty Day' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Standby Day' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Day Off' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Regular Day' },
     { name: 'available-duty-day', allocationType: 'Full' },
     { name: 'available-duty-day', allocationType: 'Local' },
     { name: 'available-duty-day', allocationType: 'Other' },
@@ -279,7 +280,7 @@ let items = [
     { name: 'available-off-day', allocationType: 'Local' },
     { name: 'available-off-day', allocationType: 'Other' },
     { name: 'available-regular-day', allocationType: 'Full' },
-    { name: 'available-regular-day', allocationType: 'Local' },
+    { name: 'available-regular-day', allocationType: 'Local', icons: [ 'user-clock', 'roster' ] },
     { name: 'available-regular-day', allocationType: 'Other' },
     { name: 'assigned-duty-day', assignmentName: 'CA1234' },
     { name: 'assigned-standby-day', assignmentName: 'PWCC' },
