@@ -45,14 +45,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
 
     DATE_FORMATS = DATE_FORMATS
     columns: string[] = [] 
-    sortColumns = [
-        { code: 'attachmentTypeCode',   description: 'Attachment Type' }, 
-        { code: 'fileName',             description: 'File Name' }, 
-        { code: 'sourceObjectNameCode', description: 'File Type' }, 
-        { code: 'uploadedBy',           description: 'Uploaded By' }, 
-        { code: 'uploadedTimestamp',    description: 'Uploaded Date' }, 
-        { code: 'description',          description: 'Description' }  
-    ]
+    sortColumns: { code: string; description: string; }[] = []
 
     ngOnChanges(changes: SimpleChanges): void {
         if ( changes.canDownload || changes.canDelete || changes.showOrgUnit ) {
@@ -60,13 +53,25 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
                 'attachmentTypeCode',
                 ...(this.showOrgUnit ? ['orgUnit'] : []),
                 'fileName', 
-                'sourceObjectNameCode', 
+                'fileExtension', 
                 'uploadedBy', 
                 'uploadedTimestamp', 
                 'description',
                 ...( this.canDownload ? ['download'] : [] ),
                 ...( this.canDelete ? ['delete'] : [] )
             ]
+        }
+        
+        if ( changes.showOrgUnit ) {
+            this.sortColumns = [
+                { code: 'attachmentTypeCode', description: 'Attachment Type' },
+                { code: 'fileName', description: 'File Name' },
+                { code: 'fileExtension', description: 'File Type' },
+                { code: 'uploadedBy', description: 'Uploaded By' },
+                { code: 'uploadedTimestamp', description: 'Uploaded Date' },
+                ...(this.showOrgUnit ? [{ code: 'orgUnit', description: 'Org Unit' }] : []),
+                { code: 'description', description: 'Description' }
+            ];
         }
     }
 
