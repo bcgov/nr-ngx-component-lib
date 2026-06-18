@@ -71,8 +71,9 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
 
                         .item {
                             display: flex;
-                            flex-direction: row;
+                            // flex-direction: row;
                             gap: 10px;
+                            align-items: flex-start;
 
                             label {
                                 position: absolute;
@@ -80,7 +81,9 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
                             }
 
                             .nrcl-icon {
-                                color: ${ args.color }
+                                color: ${ args.color };
+                                border: 1px dashed black;
+                                padding: 2px;
                             }
                         }
                     }

@@ -52,6 +52,8 @@
                             matRipple
                             [matMenuTriggerFor]="menu"
                             [matMenuTriggerData]="{ $implicit: item }"
+                            [matTooltip]="item.tooltip"
+                            matTooltipClass="nrcl-schedule-multiline"
                         >
                             <!-- (menuOpened)="td.classList.add('selected-grid-item')" -->
                             <!-- (menuClosed)="td.classList.remove('selected-grid-item')" -->
