@@ -40,7 +40,8 @@ export type ScheduleRowItem = {
     name: string,
     // data?: any
     // template?: TemplateRef<any>
-    icons?: string[],
+    icons?: () => string[],
+    tooltip?: () => string,
 }
 
 export type ScheduleRow = {

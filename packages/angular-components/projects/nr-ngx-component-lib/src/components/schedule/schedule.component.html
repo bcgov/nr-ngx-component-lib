@@ -52,7 +52,7 @@
                             matRipple
                             [matMenuTriggerFor]="menu"
                             [matMenuTriggerData]="{ $implicit: item }"
-                            [matTooltip]="item.tooltip"
+                            [matTooltip]="item?.tooltip?.()"
                             matTooltipClass="nrcl-schedule-multiline"
                         >
                             <!-- (menuOpened)="td.classList.add('selected-grid-item')" -->
@@ -62,9 +62,10 @@
                                 [ngTemplateOutletContext]="{ $implicit: item }"            
                             ></ng-container>
                             
-                            @if ( item.icons?.length > 0 ) {
+                            @let icons = item?.icons?.();
+                            @if ( icons && icons.length > 0 ) {
                                 <div class="icons">
-                                    @for ( icon of item.icons; track icon ) {
+                                    @for ( icon of icons; track icon ) {
                                         <nrcl-icon small>{{ icon }}</nrcl-icon>
                                     }                                
                                 </div>

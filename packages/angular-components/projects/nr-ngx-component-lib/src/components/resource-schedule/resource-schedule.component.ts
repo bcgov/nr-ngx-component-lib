@@ -16,6 +16,7 @@ export class ResourceScheduleRowHeadingDirective {
 // ================================================================================
 
 export type ResourceScheduleItemTypes = 
+    'rostered' |
     'out-of-service' |
     'available-duty-day' |
     'available-standby-day' |

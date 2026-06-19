@@ -280,7 +280,7 @@ let items = [
     { name: 'available-off-day', allocationType: 'Local' },
     { name: 'available-off-day', allocationType: 'Other' },
     { name: 'available-regular-day', allocationType: 'Full' },
-    { name: 'available-regular-day', allocationType: 'Local', icons: [ 'user-clock', 'roster' ], tooltip: 'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY' },
+    { name: 'available-regular-day', allocationType: 'Local', icons: () => [ 'user-clock', 'roster' ], tooltip: ()=>'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY' },
     { name: 'available-regular-day', allocationType: 'Other' },
     { name: 'assigned-duty-day', assignmentName: 'CA1234' },
     { name: 'assigned-standby-day', assignmentName: 'PWCC' },
