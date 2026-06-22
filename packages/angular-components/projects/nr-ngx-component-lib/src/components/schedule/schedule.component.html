@@ -51,7 +51,7 @@
                             [class]="'item-' + item.name" 
                             matRipple
                             [matMenuTriggerFor]="menu"
-                            [matMenuTriggerData]="{ $implicit: item }"
+                            [matMenuTriggerData]="{ $implicit: { item: item, heading: row.heading } }"
                             [matTooltip]="item?.tooltip?.()"
                             matTooltipClass="nrcl-schedule-multiline"
                         >
@@ -59,7 +59,7 @@
                             <!-- (menuClosed)="td.classList.remove('selected-grid-item')" -->
                             <ng-container 
                                 [ngTemplateOutlet]="_templates[ rowIndex ][ colIndex ] || empty" 
-                                [ngTemplateOutletContext]="{ $implicit: item }"            
+                                [ngTemplateOutletContext]="{ $implicit: item }"
                             ></ng-container>
                             
                             @let icons = item?.icons?.();
