@@ -142,6 +142,8 @@
                         cursor: pointer;
                         border-radius: 4px;
                         position: relative;
+                        padding: 4px;
+                        padding-bottom: 8px;
 
                         .icons {
                             position: absolute;
@@ -153,6 +155,27 @@
                             background-color: #f1ebe4;
                             border-radius: 4px;
                             padding: 3px;
+                        }
+
+                        &.travel {
+                            position: relative;
+
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                bottom: 2px;
+                                background-image: url( 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAABAQMAAAD+YPzoAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlP/AOW3MEoAAAAMSURBVHicY+BwEgAAALAAW97nJhUAAAAASUVORK5CYII=' );
+                                background-repeat: no-repeat;
+                                background-size: calc( 100% - 4px );
+                                background-position: bottom;
+                            }
+
+                            &:hover::after {
+                                filter: brightness(0);
+                            }
                         }
                     }
                 }
@@ -184,8 +207,8 @@
     color: #aaa;
 }
 
-    .nrcl-schedule-multiline {
-    white-space: pre-line;
-    max-width: unset;
-    text-align: left;        
-    }
+    // .nrcl-schedule-multiline {
+    // white-space: pre-line;
+    // max-width: unset;
+    // text-align: left;        
+    // }

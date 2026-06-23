@@ -54,9 +54,8 @@
                             [matMenuTriggerData]="{ $implicit: { item: item, heading: row.heading } }"
                             [matTooltip]="item?.tooltip?.()"
                             matTooltipClass="nrcl-schedule-multiline"
+                            [class.travel]="item?.travel"
                         >
-                            <!-- (menuOpened)="td.classList.add('selected-grid-item')" -->
-                            <!-- (menuClosed)="td.classList.remove('selected-grid-item')" -->
                             <ng-container 
                                 [ngTemplateOutlet]="_templates[ rowIndex ][ colIndex ] || empty" 
                                 [ngTemplateOutletContext]="{ $implicit: item }"

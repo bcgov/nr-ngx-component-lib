@@ -42,6 +42,7 @@ export type ScheduleRowItem = {
     // template?: TemplateRef<any>
     icons?: () => string[],
     tooltip?: () => string,
+    travel?: boolean,
 }
 
 export type ScheduleRow = {
@@ -223,7 +224,8 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
 
             return {
                 id: row.id ?? String( i ),
-                heading: clone( row.heading ),
+                // heading: clone( row.heading ),
+                heading: row.heading,
                 items: row.items
                     .then( rowItems => {
                         return Array.from( { length: this.dayCount! } ).map( ( x, j ) => {

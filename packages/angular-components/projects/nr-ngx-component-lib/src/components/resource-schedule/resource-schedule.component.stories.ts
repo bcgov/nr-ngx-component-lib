@@ -163,7 +163,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
             parseSchedule: ( res ) => {
                 return Array.from( { length: 30 } ).map( ( x, i ) => {
                     return {
-                        heading: { row: i },
+                        heading: { row: i, bar: { foo: () => {return 123} } },
                         items: scheduleItems( i * 7, 19, 23 )
                     }
                 } )
@@ -193,7 +193,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     <div>upper-left</div>
 
                     <ng-template nrclResourceScheduleRowHeading let-item>
-                        <div>foo  {{item|json}}</div>
+                        <div>foo  {{item|json}} {{item.bar.foo()|json}}</div>
                     </ng-template>
                 </nrcl-resource-schedule>
 
@@ -254,31 +254,31 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
 }
 
 let items = [
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty Day' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty Day', travel: true },
     { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Standby Day' },
     { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Day Off' },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Regular Day' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Regular Day', travel: true },
     { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Duty Day' },
     { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Standby Day' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Day Off' },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Day Off', travel: true },
     { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Regular Day' },
     { name: 'out-of-service', allocationType: 'Training', shiftType: 'Duty Day' },
     { name: 'out-of-service', allocationType: 'Training', shiftType: 'Standby Day' },
     { name: 'out-of-service', allocationType: 'Training', shiftType: 'Day Off' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Regular Day' },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Regular Day', travel: true },
     { name: 'out-of-service', allocationType: 'Other', shiftType: 'Duty Day' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Standby Day' },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Standby Day', travel: true },
     { name: 'out-of-service', allocationType: 'Other', shiftType: 'Day Off' },
     { name: 'out-of-service', allocationType: 'Other', shiftType: 'Regular Day' },
-    { name: 'available-duty-day', allocationType: 'Full' },
+    { name: 'available-duty-day', allocationType: 'Full', travel: true },
     { name: 'available-duty-day', allocationType: 'Local' },
     { name: 'available-duty-day', allocationType: 'Other' },
     { name: 'available-standby-day', allocationType: 'Full' },
-    { name: 'available-standby-day', allocationType: 'Local' },
+    { name: 'available-standby-day', allocationType: 'Local', travel: true },
     { name: 'available-standby-day', allocationType: 'Other' },
     { name: 'available-off-day', allocationType: 'Full' },
     { name: 'available-off-day', allocationType: 'Local' },
-    { name: 'available-off-day', allocationType: 'Other' },
+    { name: 'available-off-day', allocationType: 'Other', travel: true },
     { name: 'available-regular-day', allocationType: 'Full' },
     { name: 'available-regular-day', allocationType: 'Local', icons: () => [ 'user-clock', 'roster' ], tooltip: ()=>'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY' },
     { name: 'available-regular-day', allocationType: 'Other' },
