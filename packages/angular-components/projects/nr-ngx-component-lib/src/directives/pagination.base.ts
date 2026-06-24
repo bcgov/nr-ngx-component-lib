@@ -17,19 +17,6 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     pageStateService = inject( PageStateService )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    // @Output() isLoadingChange = new EventEmitter<boolean>()
-    
-    // private _isLoading = false
-    // get isLoading() { return this._isLoading }
-    // set isLoading( v: boolean ) { 
-    //     if ( v == this._isLoading ) return        
-    //     this._isLoading = v 
-    //     this.isLoadingChange.emit( v )
-    // }  
-
-    // private _rows: R[] = []
-    // get rows(): R[] { return this._rows }
-
     protected _totalRowCount: number = 0
     get totalRowCount(): number { return this._totalRowCount }
 
@@ -52,60 +39,9 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
         this._filter = this.clone( f )
     }
 
-    // private _loadRowListRequest?: ObservableAborter<L> 
-
-    // constructor() {
-        // super()
-        // this.loadPageState()        
-    // }
-
     ngAfterViewInit(): void {
-        console.log('PaginationBase.ngAfterViewInit')
-        // super.ng
         this.loadPageState()        
     }
-
-    // refreshRowList(): Promise<void> {
-    //     this.isLoading = true
-    //     this.changeDetectorRef.detectChanges()
-
-    //     if ( this._loadRowListRequest )
-    //         this._loadRowListRequest.abort()
-
-    //     this._loadRowListRequest = new ObservableAborter<L>( () => {        
-    //         return this.fetchRowListPage()
-    //     } )
-
-    //     return this._loadRowListRequest.promise
-    //         .then( res => {
-    //             this._totalRowCount = this.parseTotalRowCount( res )
-    //             this._rows = this.parseRows( res )
-    //         } )
-    //         .catch( ( e ) => {
-    //             if ( e instanceof Aborted ) return
-
-    //             this.loadRowListPageFailed( e )
-    //         } )
-    //         .finally( () => {
-    //             this.isLoading = false
-    //             this.changeDetectorRef.detectChanges()
-    //         } )
-    // }
-
-    // abstract fetchRowListPage(): Observable<L> 
-    // abstract parseRows( res: L ): R[] 
-    
-    // parseTotalRowCount( res: L ): number {
-    //     if ( 'totalRowCount' in (res as any) ) return (res as any)[ 'totalRowCount' ]
-
-    //     throw 'Missing res.totalRowCount, might need to override RowListBase.parseTotalRowCount'
-    // }
-
-    // loadRowListPageFailed( error: any ) {
-    //     console.warn( error )
-    //     this._rows = []
-    //     this._totalRowCount = 0
-    // }
 
     clone( obj: any ) {
         return JSON.parse( JSON.stringify( obj ) ) 
@@ -129,11 +65,6 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     onPageNumberChange( ev: number ) {
         this._pageConfig.pageNumber = ev
-
-        // this.refreshRowList()
-        //     .then( () => {
-        //         this.savePageState()
-        //     } )
     }
 
     get initialPageState(): PaginationState<F> {

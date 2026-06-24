@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -25,6 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './components/expansion-panel/footer/expansion-panel-footer.component';
@@ -44,26 +46,24 @@ import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { ListSelectComponent } from './components/list-select/list-select.component';
+import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
 import { RowListDesktopComponent } from './components/row-list-desktop/row-list-desktop.component';
 import { RowListMobileComponent } from './components/row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from './components/row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from './components/row-list-sorting/row-list-sorting.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
+import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
 import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
-import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
-import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
-import { MatTabsModule } from '@angular/material/tabs';
-import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
-import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
-import { ScheduleComponent, ScheduleItemDirective, ScheduleItemIconsComponent, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 
 @NgModule({
     imports: [
@@ -138,7 +138,6 @@ import { ScheduleComponent, ScheduleItemDirective, ScheduleItemIconsComponent, S
         ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
-        ScheduleItemIconsComponent,
     ],
     exports: [
         ButtonComponent,
@@ -184,7 +183,6 @@ import { ScheduleComponent, ScheduleItemDirective, ScheduleItemIconsComponent, S
         ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
-        ScheduleItemIconsComponent,
     ],
     providers: [
         SnackbarUtilService,
