@@ -1,4 +1,3 @@
-    <!-- [schedule]="rows" -->
 <nrcl-schedule #schedule
     [provider]="provider"
     [startDate]="startDate"
@@ -7,10 +6,6 @@
     [menu]="menu"
 >
     <ng-content></ng-content>
-
-    <div menu>
-        <ng-content select="[menu]"></ng-content>
-    </div>
 
     <ng-template nrclScheduleRowHeading let-item>
         <ng-container 

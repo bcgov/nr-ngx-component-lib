@@ -2,10 +2,12 @@
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
@@ -34,10 +36,8 @@ import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.co
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
-import { ScheduleComponent, ScheduleItemDirective, ScheduleItemIconsComponent, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
-import { MatRippleModule } from '@angular/material/core';
-import { MatMenuModule } from '@angular/material/menu';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',
@@ -89,7 +89,6 @@ const meta: Meta<ResourceScheduleComponent> = {
                 IconComponent,
                 ScheduleComponent,
                 ScheduleItemDirective,
-                ScheduleItemIconsComponent,
                 ScheduleRowHeadingDirective,
                 ResourceScheduleRowHeadingDirective,
             ],
@@ -209,17 +208,6 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     }
 }
 
-
-
-                    // <div menu>
-                    //     <button mat-menu-item>Manage Availability</button>
-                    // </div>
-
-
-// <ng-template matMenuContent let-data>
-                        //     {{ data | json }}
-                        // </ng-template>
-
 export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
@@ -236,12 +224,6 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
         }
     },    
     render: ( args ) => {
-        // args.resourceScheduleProvider = {
-        //     fetchEventHistory: () => { return of(eventHistoryCollection()) },
-        //     displayRowListPage: ( res: EventHistoryCollection ) => {
-        //         return []
-        //     },
-        // }
         return {
             props: args,
             template: `

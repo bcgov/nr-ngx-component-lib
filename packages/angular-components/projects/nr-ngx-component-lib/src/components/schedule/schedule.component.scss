@@ -169,7 +169,7 @@
                                 bottom: 2px;
                                 background-image: url( 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAABAQMAAAD+YPzoAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlP/AOW3MEoAAAAMSURBVHicY+BwEgAAALAAW97nJhUAAAAASUVORK5CYII=' );
                                 background-repeat: no-repeat;
-                                background-size: calc( 100% - 4px );
+                                background-size: calc( 100% - 4px ) 2px;
                                 background-position: bottom;
                             }
 
@@ -206,9 +206,3 @@
     align-items: center;
     color: #aaa;
 }
-
-    // .nrcl-schedule-multiline {
-    // white-space: pre-line;
-    // max-width: unset;
-    // text-align: left;        
-    // }

@@ -21,17 +21,11 @@
 
 .nrcl-schedule {
     ::ng-deep .inner.item {
-        // font-size: 13px;
-        // padding: 4px;
-        // margin: 2px;
         display: flex;
         flex-direction: column;
         justify-content: stretch;
-        // gap: 8px;
         align-items: stretch;
-        // overflow: hidden;
         color: var( --nrcl-resource-schedule-item-foregroud-color );
-        // text-shadow: var( --nrcl-resource-schedule-item-text-shadow );
 
         h1, h2, h3 {
             padding: 0;
@@ -43,16 +37,13 @@
             font-size: 15px;
             line-height: 15px;
             text-align: center;
-            // font-weight: bold;
         }
 
         h2 {
             flex-grow: 1;
             font-size: 14px;
             line-height: 14px;
-            // font-weight: bold;
             text-align: center;
-            // justify-self: center;
             display: flex;
             justify-content: center;
             align-items: center;

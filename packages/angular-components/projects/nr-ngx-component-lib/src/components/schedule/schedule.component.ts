@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, inject, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, ContentChild, ContentChildren, Directive, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
 import { MatMenuPanel } from '@angular/material/menu';
 import moment from 'moment';
 import { Observable } from 'rxjs';
@@ -11,10 +11,7 @@ import { RowListBase } from '../../directives/row-list.base';
 export class ScheduleRowHeadingDirective {
     constructor(
         public template: TemplateRef<any>
-    ){
-        // console.log('ScheduleRowHeadingDirective')
-
-    }
+    ){}
 }
 
 // ================================================================================
@@ -27,19 +24,14 @@ export class ScheduleItemDirective {
 
     constructor(
         public template: TemplateRef<any>
-    ){
-        // console.log('ScheduleItemDirective')
-    }
+    ){}
 }
 
 // ================================================================================
 
 export type ScheduleRowItem = {
     id: string,
-    // date: string,
     name: string,
-    // data?: any
-    // template?: TemplateRef<any>
     icons?: () => string[],
     tooltip?: () => string,
     travel?: boolean,
@@ -97,42 +89,28 @@ export interface ScheduleProvider {
         '[style.--nrcl-schedule-day-count]': 'this.dayCount'
     }
 } )
-export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements AfterContentInit, OnChanges {
-    changeDetectorRef = inject( ChangeDetectorRef )
-
+export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements OnChanges {
     @Input() provider?: ScheduleProvider
     @Input() startDate?: string
     @Input( { transform: numberAttribute } ) weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
-    // @Input() schedule?: Schedule
     @Input() menu?: MatMenuPanel
 
     @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>;
     @ContentChild(ScheduleRowHeadingDirective) headerTemplate!: ScheduleRowHeadingDirective
 
-    // protected _rows: Schedule = []
     protected _days: Day[] = []
     protected _weeks: Week[] = []
     protected _templates: TemplateRef<any>[][] = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        // this.makeRows()
         this.refreshRowList()
     }
 
     ngAfterViewInit(): void {
-        console.log('ScheduleComponent.ngAfterViewInit')
-        // this.makeRows()
-        // this.refreshRowList()
         setTimeout(() => {
             super.ngAfterViewInit()
         });
-    }
-
-    ngAfterContentInit(): void {
-        // console.log('ScheduleComponent.ngAfterContentInit')
-        // this.makeRows()
-        // this.refreshRowList()
     }
 
     fetchRowListPage(): Observable<any> {
@@ -150,21 +128,8 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
         if ( !this.provider?.parseSchedule ) throw Error( 'ResourceScheduleComponent.provider.parseSchedule not set' )
 
         let rows = this.provider.parseSchedule( res )
-        // console.log(x)
-        // return x
-
-        // let rows = this.displayResourceSchedule( res )
-
         return this.makeRows( rows )
     }
-
-    // parseTotalRowCount( res: any ): number {
-    //     return res.
-    // }
-
-    // displayResourceSchedule( res: any ): ScheduleRow[] {
-    //     throw new Error( 'Method not implemented.' );
-    // }
 
     getInitialPageState(): PaginationState<{}> {
         if ( !this.provider?.getInitialPageState ) throw Error( 'ResourceScheduleComponent.provider.getInitialPageState not set' )
@@ -224,64 +189,24 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements Af
 
             return {
                 id: row.id ?? String( i ),
-                // heading: clone( row.heading ),
                 heading: row.heading,
                 items: row.items
                     .then( rowItems => {
                         return Array.from( { length: this.dayCount! } ).map( ( x, j ) => {
                             let rowItem = rowItems[ j ]
-                            // let name: string
-                            // let data
-                            // let id
 
                             if ( rowItem == null ) 
                                 return {
                                     id: String( j ),
-                                    // date: this._days[ j ].date,
                                     name: 'empty'
                                 }
                             
-                            // else if ( typeof rowItem == 'string' ) {
-                                // name = rowItem
-                            // }
-                            // else {
-                            //     id = rowItem.id
-                            //     name = rowItem.name
-                            //     data = clone( rowItem.data || null )
-                            // }
-
                             this._templates[ i ][ j ] = this.itemTemplates?.find( i => i.name == rowItem?.name  )?.template!
 
                             return rowItem
-                                // id: String( j ),
-                                // ...rowItem,
-                                // date: this._days[ j ].date,
-                                // name: name,
-                                // template: this.itemTemplates?.find( i => i.name == name )?.template!
-                            // }
                         } )
                     } )
             }
         } ) || []
     }
 }
-
-// --------------------------------------------------------------------------------
-
-@Component( {
-    selector: 'nrcl-schedule-item-icons',
-    templateUrl: './schedule-item-icons.component.html',
-    styleUrl: './schedule-item-icons.component.scss',
-    host: {
-    }
-} )
-export class ScheduleItemIconsComponent {
-    @Input() icons: string[] = []
-}
-
-// --------------------------------------------------------------------------------
-
-function clone<T>( obj: T ): T {
-    return JSON.parse( JSON.stringify( obj ) )
-}
-
