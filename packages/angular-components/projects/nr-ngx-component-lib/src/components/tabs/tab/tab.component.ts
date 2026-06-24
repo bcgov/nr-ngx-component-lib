@@ -37,6 +37,6 @@ export class TabComponent extends NrclBase {
     @Input( { transform: booleanAttribute } ) disabled = false
 
     @ContentChild( TabLabelDirective ) labelTemplate?: TabLabelDirective
-    @ContentChild( TabContentDirective ) contentTemplate?: TabLabelDirective
+    @ContentChild( TabContentDirective ) contentTemplate?: TabContentDirective
     @ViewChild( 'content', { static: true } ) content!: TemplateRef<any>
 }

@@ -71,8 +71,9 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
 
                         .item {
                             display: flex;
-                            flex-direction: row;
+                            // flex-direction: row;
                             gap: 10px;
+                            align-items: flex-start;
 
                             label {
                                 position: absolute;
@@ -80,7 +81,9 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
                             }
 
                             .nrcl-icon {
-                                color: ${ args.color }
+                                color: ${ args.color };
+                                border: 1px dashed black;
+                                padding: 2px;
                             }
                         }
                     }
@@ -95,6 +98,20 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
                         <nrcl-icon small>clear-filters</nrcl-icon> 
                         <nrcl-icon>clear-filters</nrcl-icon> 
                         <nrcl-icon large>clear-filters</nrcl-icon> 
+                    </div>
+
+                    <div class="item">
+                        <label>user-clock</label>
+                        <nrcl-icon small>user-clock</nrcl-icon> 
+                        <nrcl-icon>user-clock</nrcl-icon> 
+                        <nrcl-icon large>user-clock</nrcl-icon> 
+                    </div>
+
+                    <div class="item">
+                        <label>roster</label>
+                        <nrcl-icon small>roster</nrcl-icon> 
+                        <nrcl-icon>roster</nrcl-icon> 
+                        <nrcl-icon large>roster</nrcl-icon> 
                     </div>
                 </section>
 

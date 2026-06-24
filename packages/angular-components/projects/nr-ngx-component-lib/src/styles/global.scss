@@ -5,6 +5,7 @@
     --nrcl-font-size-h2: 22px;
     --nrcl-font-size-h3: 18px;
     --nrcl-font-size-small: 12px;
+    --nrcl-font-size-tooltip: 13px;
     --nrcl-border-radius: 5px;
 
     --nrcl-divider-color: #c6c8cb;
@@ -32,5 +33,23 @@ html {
 
     .nrcl-device-mobile {
         --nrcl-gutter-space: var( --nrcl-device-mobile-gutter-space );
+    }
+
+    .mat-mdc-tooltip-panel {
+        .mat-mdc-tooltip {
+            max-width: unset;
+            
+            .mat-mdc-tooltip-surface {
+                font-family: var( --nrcl-font-family );
+                font-size: var( --nrcl-font-size-tooltip );
+            }
+        }
+
+        .mdc-tooltip--multiline .mat-mdc-tooltip-surface,
+        .mdc-tooltip.multiline .mat-mdc-tooltip-surface {
+            white-space: pre-line;
+            max-width: unset;
+            text-align: left;
+        }
     }
 }

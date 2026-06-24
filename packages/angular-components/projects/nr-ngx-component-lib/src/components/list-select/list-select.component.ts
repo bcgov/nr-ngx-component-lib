@@ -45,7 +45,7 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         } )
     }
 
-    get initialPageState(): RowListState<{}> {
+    getInitialPageState(): RowListState<{}> {
         return {
             filter: {},
             pageConfig: {

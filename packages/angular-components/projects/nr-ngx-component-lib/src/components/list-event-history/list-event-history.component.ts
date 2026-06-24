@@ -65,7 +65,7 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
         return this.rowListProvider.displayRowListPage( res )
     }
 
-    get initialPageState(): RowListState<{}> {
+    getInitialPageState(): RowListState<{}> {
         return {
             filter: {},
             pageConfig: {
