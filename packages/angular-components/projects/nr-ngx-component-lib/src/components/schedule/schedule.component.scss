@@ -1,6 +1,8 @@
 ::ng-deep :root {
     --nrcl-schedule-border-color: #c6c8cb;
     --nrcl-schedule-background-color: white;
+    --nrcl-schedule-alternate-background-color: #f2f2f2;
+    --nrcl-schedule-hover-background-color: #d7d7d7;
 
     --nrcl-schedule-row-weeks-height: 30px;
     --nrcl-schedule-row-weeks-font-size: 15px;
@@ -169,7 +171,7 @@
                                 bottom: 2px;
                                 background-image: url( 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAABAQMAAAD+YPzoAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlP/AOW3MEoAAAAMSURBVHicY+BwEgAAALAAW97nJhUAAAAASUVORK5CYII=' );
                                 background-repeat: no-repeat;
-                                background-size: calc( 100% - 4px ) 2px;
+                                background-size: calc( 100% - 8px ) 3px;
                                 background-position: bottom;
                             }
 
@@ -186,13 +188,31 @@
                     position: sticky;
                     left: 0;
                     z-index: 1;
-                    background: var( --nrcl-schedule-background-color );
+                    // background: var( --nrcl-schedule-background-color );
                     height: var( --nrcl-schedule-row-schedule-height );
 
                     .heading {
                         flex-grow: 1;
                         cursor: default;
                     }
+                }
+            }
+
+            &:nth-child(odd) {
+                .outer {
+                    background-color: var( --nrcl-schedule-background-color );
+                }
+            }
+        
+            &:nth-child(even) {
+                .outer {
+                    background-color: var( --nrcl-schedule-alternate-background-color );
+                }
+            }
+
+            &:hover {
+                .outer {                
+                    background-color: var( --nrcl-schedule-hover-background-color );
                 }
             }
         }
