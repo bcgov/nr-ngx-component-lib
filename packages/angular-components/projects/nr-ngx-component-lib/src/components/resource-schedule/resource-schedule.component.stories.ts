@@ -264,7 +264,7 @@ let items = [
     { name: 'available-regular-day', allocationType: 'Full' },
     { name: 'available-regular-day', allocationType: 'Local', icons: () => [ 'user-clock', 'roster' ], tooltip: ()=>'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY' },
     { name: 'available-regular-day', allocationType: 'Other' },
-    { name: 'assigned-duty-day', assignmentName: 'CA1234' },
+    { name: 'assigned-duty-day', assignmentName: 'CA1234 iufdhgi iuh fdigh sirguh iduhg' },
     { name: 'assigned-standby-day', assignmentName: 'PWCC' },
     { name: 'assigned-off-day', assignmentName: 'CA1234' },
     { name: 'assigned-regular-day',  assignmentName: 'Multiple Assignments' },

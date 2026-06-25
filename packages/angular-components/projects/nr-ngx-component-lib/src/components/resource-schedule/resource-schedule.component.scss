@@ -47,6 +47,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            
+            &.wrap {
+                min-height: 0;
+                overflow: hidden;
+                align-items: flex-start;
+                text-overflow: ellipsis;                
+            }
         }
 
         h3 {
