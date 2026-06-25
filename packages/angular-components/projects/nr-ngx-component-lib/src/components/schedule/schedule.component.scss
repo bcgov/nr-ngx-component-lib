@@ -188,12 +188,12 @@
                     position: sticky;
                     left: 0;
                     z-index: 1;
-                    // background: var( --nrcl-schedule-background-color );
                     height: var( --nrcl-schedule-row-schedule-height );
 
                     .heading {
                         flex-grow: 1;
                         cursor: default;
+                        height: 100%;
                     }
                 }
             }
