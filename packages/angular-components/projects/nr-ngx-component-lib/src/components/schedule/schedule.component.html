@@ -1,88 +1,90 @@
-<div class="schedule">
-    <div class="upper-left">
-        <ng-content></ng-content>
-    </div>
+@if ( rows?.length > 0 ) {
+    <div class="schedule">
+        <div class="upper-left">
+            <ng-content></ng-content>
+        </div>
 
-    <div class="row weeks">
-        @for ( week of _weeks; track $index ) {
-            @if ( week.span == 1 ) {
-                <div class="week">
-                    {{ week.start }}
+        <div class="row weeks">
+            @for ( week of _weeks; track $index ) {
+                @if ( week.span == 1 ) {
+                    <div class="week">
+                        {{ week.start }}
+                    </div>
+                }
+                @else {
+                    <div class="week" [style.grid-column]="'span ' + week.span">
+                        {{ week.start }} - {{ week.end }}
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="row days">    
+            @for ( day of _days; track $index ) {
+                <div class="day"
+                    [class.weekend]="day.isWeekend"
+                    [class.today]="day.isToday"
+                    [class.first]="day.isFirst"
+                >
+                    <div class="day-name">{{ day.dayName }}</div>
+                    <div class="date">{{ day.monthDay }}</div>
                 </div>
             }
-            @else {
-                <div class="week" [style.grid-column]="'span ' + week.span">
-                    {{ week.start }} - {{ week.end }}
-                </div>
-            }
-        }
-    </div>
+        </div>
 
-    <div class="row days">    
-        @for ( day of _days; track $index ) {
-            <div class="day"
-                [class.weekend]="day.isWeekend"
-                [class.today]="day.isToday"
-                [class.first]="day.isFirst"
-            >
-                <div class="day-name">{{ day.dayName }}</div>
-                <div class="date">{{ day.monthDay }}</div>
+        @for ( row of rows | paginate: paginateState( 'nrcl-schedule' ); track row.id; let rowIndex = $index ) {
+            <div class="row items">
+                <div class="outer heading">
+                    <div class="inner heading">
+                        <ng-container 
+                            [ngTemplateOutlet]="headerTemplate?.template" 
+                            [ngTemplateOutletContext]="{ $implicit: row.heading }"            
+                        ></ng-container>
+                    </div>
+                </div>    
+
+                @if ( row.items | async; as rowItems ) {
+                    @for ( item of rowItems; track item.id; let colIndex = $index ) {
+                        <div class="outer item"
+                            [class.menu-open]="itemMenu.menuOpen"
+                        >
+                            <div class="inner item" #itemMenu="matMenuTrigger"
+                                [class]="'item-' + item.name" 
+                                matRipple
+                                [matMenuTriggerFor]="menu"
+                                [matMenuTriggerData]="{ $implicit: { item: item, heading: row.heading } }"
+                                [matTooltip]="item?.tooltip?.()"
+                                matTooltipClass="nrcl-schedule-multiline"
+                                [class.travel]="item?.travel"
+                            >
+                                <ng-container 
+                                    [ngTemplateOutlet]="_templates[ rowIndex ][ colIndex ] || empty" 
+                                    [ngTemplateOutletContext]="{ $implicit: item }"
+                                ></ng-container>
+                                
+                                @let icons = item?.icons?.();
+                                @if ( icons && icons.length > 0 ) {
+                                    <div class="icons">
+                                        @for ( icon of icons; track icon ) {
+                                            <nrcl-icon small>{{ icon }}</nrcl-icon>
+                                        }                                
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                @else {
+                    @for ( day of _days; track day ) {
+                        <div class="item item-loading"></div>
+                    }
+                }
             </div>
         }
     </div>
 
-    @for ( row of rows | paginate: paginateState( 'nrcl-schedule' ); track row.id; let rowIndex = $index ) {
-        <div class="row items">
-            <div class="outer heading">
-                <div class="inner heading">
-                    <ng-container 
-                        [ngTemplateOutlet]="headerTemplate?.template" 
-                        [ngTemplateOutletContext]="{ $implicit: row.heading }"            
-                    ></ng-container>
-                </div>
-            </div>    
-
-            @if ( row.items | async; as rowItems ) {
-                @for ( item of rowItems; track item.id; let colIndex = $index ) {
-                    <div class="outer item"
-                        [class.menu-open]="itemMenu.menuOpen"
-                    >
-                        <div class="inner item" #itemMenu="matMenuTrigger"
-                            [class]="'item-' + item.name" 
-                            matRipple
-                            [matMenuTriggerFor]="menu"
-                            [matMenuTriggerData]="{ $implicit: { item: item, heading: row.heading } }"
-                            [matTooltip]="item?.tooltip?.()"
-                            matTooltipClass="nrcl-schedule-multiline"
-                            [class.travel]="item?.travel"
-                        >
-                            <ng-container 
-                                [ngTemplateOutlet]="_templates[ rowIndex ][ colIndex ] || empty" 
-                                [ngTemplateOutletContext]="{ $implicit: item }"
-                            ></ng-container>
-                            
-                            @let icons = item?.icons?.();
-                            @if ( icons && icons.length > 0 ) {
-                                <div class="icons">
-                                    @for ( icon of icons; track icon ) {
-                                        <nrcl-icon small>{{ icon }}</nrcl-icon>
-                                    }                                
-                                </div>
-                            }
-                        </div>
-                    </div>
-                }
-            }
-            @else {
-                @for ( day of _days; track day ) {
-                    <div class="item item-loading"></div>
-                }
-            }
-        </div>
-    }
-</div>
-
-<nrcl-gap/>
+    <nrcl-gap/>
+}
 
 <nrcl-row-list-pagination
     paginationId="nrcl-schedule"

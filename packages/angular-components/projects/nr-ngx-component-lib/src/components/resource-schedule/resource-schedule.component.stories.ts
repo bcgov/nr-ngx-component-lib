@@ -214,22 +214,53 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
     },
     args: {
         ...displayModeWrapperStory.args,
+        startDate: moment().format( DATE_FORMATS.datePickerInput ),
+        dayCount: 8,
+        weekStart: 0,
     },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
+    render: ( args ) => {
+        args.provider = {
+            fetchSchedule: ( x ) => { return of({
+                totalRowCount: 0
+            }) },
+            parseSchedule: ( res ) => {
+                return []
+            },
+            getInitialPageState: () => {
+                return {
+                    filter: {},
+                    pageConfig: {
+                        pageSize: 20,
+                        pageNumber: 1,
+                        sortActive: 'dateTime',
+                        sortDirection: 'desc',
+                    }
+                }
             }
         }
-    },    
-    render: ( args ) => {
         return {
             props: args,
             template: `
                 <nrcl-resource-schedule
-                    [resourceScheduleProvider]="resourceScheduleProvider"
-                ></nrcl-resource-schedule>
+                    [startDate]="startDate"
+                    [dayCount]="10"
+                    [weekStart]="0"
+                    [provider]="provider"
+                    [menu]="menu"
+                >
+                    <div>upper-left</div>
+
+                    <ng-template nrclResourceScheduleRowHeading let-item>
+                        <div>foo  {{item|json}} {{item.bar.foo()|json}}</div>
+                    </ng-template>
+                </nrcl-resource-schedule>
+
+                <mat-menu #menu="matMenu" class="availability-menu">
+                    <ng-template matMenuContent let-data>
+                        {{ data | json }}
+                    </ng-template>
+                    <button mat-menu-item>Manage Availability</button>
+                </mat-menu>
             `
         }
     }
