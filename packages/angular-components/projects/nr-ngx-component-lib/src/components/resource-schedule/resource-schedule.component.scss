@@ -41,18 +41,19 @@
 
         h2 {
             flex-grow: 1;
-            font-size: 14px;
-            line-height: 14px;
+            font-size: 12px;
+            line-height: 13px;
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
             
             &.wrap {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;        
                 min-height: 0;
                 overflow: hidden;
-                align-items: flex-start;
-                text-overflow: ellipsis;                
             }
         }
 
