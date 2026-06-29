@@ -77,6 +77,7 @@ export interface ScheduleProvider {
     fetchSchedule( x: FetchScheduleParameters ): Observable<any>
     parseSchedule( res: any ): Schedule
     getInitialPageState(): PaginationState<{}>
+    completedRowListPage( inner: () => void ): any
 }
 
 // --------------------------------------------------------------------------------
@@ -125,16 +126,22 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     }
 
     parseRows( res: any ): ScheduleRow[] {
-        if ( !this.provider?.parseSchedule ) throw Error( 'ResourceScheduleComponent.provider.parseSchedule not set' )
+        if ( !this.provider?.parseSchedule ) throw Error( 'ScheduleComponent.provider.parseSchedule not set' )
 
         let rows = this.provider.parseSchedule( res )
         return this.makeRows( rows )
     }
 
     getInitialPageState(): PaginationState<{}> {
-        if ( !this.provider?.getInitialPageState ) throw Error( 'ResourceScheduleComponent.provider.getInitialPageState not set' )
+        if ( !this.provider?.getInitialPageState ) throw Error( 'ScheduleComponent.provider.getInitialPageState not set' )
 
         return this.provider.getInitialPageState()
+    }
+
+    completedRowListPage(): PaginationState<{}> {
+        if ( !this.provider?.completedRowListPage ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
+
+        return this.provider.completedRowListPage( super.completedRowListPage )
     }
 
     onSamePageFilterChange( ev: {} ): void {

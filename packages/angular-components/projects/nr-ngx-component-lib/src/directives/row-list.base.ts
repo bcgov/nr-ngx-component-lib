@@ -16,6 +16,7 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
     private _isLoading = false
     get isLoading() { return this._isLoading }
     set isLoading( v: boolean ) { 
+        console.log(v,this._isLoading)
         if ( v == this._isLoading ) return        
         this._isLoading = v 
         this.isLoadingChange.emit( v )
@@ -56,6 +57,7 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
             .then( res => {
                 this._totalRowCount = this.parseTotalRowCount( res )
                 this._rows = this.parseRows( res )
+                return this.completedRowListPage()
             } )
             .catch( ( e ) => {
                 if ( e instanceof Aborted ) return
@@ -74,6 +76,10 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
         if ( 'totalRowCount' in (res as any) ) return (res as any)[ 'totalRowCount' ]
 
         throw 'Missing res.totalRowCount, might need to override RowListBase.parseTotalRowCount'
+    }
+
+    completedRowListPage() {
+        this.isLoading = false
     }
 
     loadRowListPageFailed( error: any ) {
