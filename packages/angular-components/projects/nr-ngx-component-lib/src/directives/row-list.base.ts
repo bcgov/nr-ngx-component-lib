@@ -16,7 +16,6 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
     private _isLoading = false
     get isLoading() { return this._isLoading }
     set isLoading( v: boolean ) { 
-        console.log(v,this._isLoading)
         if ( v == this._isLoading ) return        
         this._isLoading = v 
         this.isLoadingChange.emit( v )
@@ -26,20 +25,52 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
     get rows(): R[] { return this._rows }
 
     private _loadRowListRequest?: ObservableAborter<L> 
+    private _inProgress = new InProgress()
 
     ngAfterViewInit(): void {
+        // console.log('RowListBase.ngAfterViewInit')
         super.ngAfterViewInit()
         this.refreshRowList()
     }
 
     refreshRowList(): Promise<void> {
-        return this.loadRowList().then( result => this.parseRowList( result ) )
-    }
-
-    loadRowList(): Promise<L> {
+        // console.warn('RowListBase.refreshRowList')
         this.isLoading = true
         this.changeDetectorRef.detectChanges()
 
+        if ( !this._inProgress.isCompleted ) this._inProgress.cancel()
+        let inProgress = this._inProgress = new InProgress()
+
+        return Promise.resolve()
+            .then( () => { 
+                return this.loadRowList() 
+            } )
+            .then( ( res ) => { 
+                if ( !res ) return
+                if ( inProgress.isCancelled ) return
+
+                return this.parseRowList( res ) 
+            } )
+            .then( res => {
+                if ( inProgress.isCancelled ) return
+                
+                return this.completedRowListPage()
+            } )
+            .catch( ( err ) => {
+                if ( err instanceof Aborted ) return
+
+                this.loadRowListPageFailed( err )
+            } )
+            .finally( () => {
+                if ( inProgress.isCancelled ) return
+                inProgress.complete()
+
+                this.isLoading = false
+                this.changeDetectorRef.detectChanges()
+            } )
+    }
+
+    loadRowList(): Promise<L> {
         if ( this._loadRowListRequest )
             this._loadRowListRequest.abort()
 
@@ -57,16 +88,6 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
             .then( res => {
                 this._totalRowCount = this.parseTotalRowCount( res )
                 this._rows = this.parseRows( res )
-                return this.completedRowListPage()
-            } )
-            .catch( ( e ) => {
-                if ( e instanceof Aborted ) return
-
-                this.loadRowListPageFailed( e )
-            } )
-            .finally( () => {
-                this.isLoading = false
-                this.changeDetectorRef.detectChanges()
             } )
     }
 
@@ -78,9 +99,7 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
         throw 'Missing res.totalRowCount, might need to override RowListBase.parseTotalRowCount'
     }
 
-    completedRowListPage() {
-        this.isLoading = false
-    }
+    completedRowListPage() {}
 
     loadRowListPageFailed( error: any ) {
         console.warn( error )
@@ -95,5 +114,28 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
             .then( () => {
                 this.savePageState()
             } )
+    }
+}
+
+class InProgress {
+    private _completed = false
+    private _cancelled = false
+
+    complete() {
+        if ( this.isCancelled ) return
+        this._completed = true
+    }
+
+    cancel() {
+        if ( this.isCompleted ) return
+        this._cancelled = true        
+    }
+
+    get isCompleted() {        
+        return this._completed
+    }
+
+    get isCancelled() {
+        return this._cancelled
     }
 }

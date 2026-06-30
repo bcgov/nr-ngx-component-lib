@@ -74,10 +74,11 @@ export type FetchScheduleRowParameters = {
 }
 
 export interface ScheduleProvider {
+    startloadSchedule( inner: () => Promise<any> ): Promise<any>
     fetchSchedule( x: FetchScheduleParameters ): Observable<any>
     parseSchedule( res: any ): Schedule
     getInitialPageState(): PaginationState<{}>
-    completedRowListPage( inner: () => void ): any
+    completedLoadSchedule( inner: () => void ): any
 }
 
 // --------------------------------------------------------------------------------
@@ -105,13 +106,18 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     protected _templates: TemplateRef<any>[][] = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        this.refreshRowList()
+        // this.refreshRowList()
     }
 
     ngAfterViewInit(): void {
-        setTimeout(() => {
-            super.ngAfterViewInit()
-        });
+        // console.log('ScheduleComponent.ngAfterViewInit')
+        super.ngAfterViewInit()
+    }
+
+    loadRowList(): Promise<any> {
+        if ( !this.provider?.startloadSchedule ) throw Error( 'ScheduleComponent.provider.startloadSchedule not set' )
+     
+        return this.provider.startloadSchedule( super.loadRowList )
     }
 
     fetchRowListPage(): Observable<any> {
@@ -139,13 +145,14 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     }
 
     completedRowListPage(): PaginationState<{}> {
-        if ( !this.provider?.completedRowListPage ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
+        if ( !this.provider?.completedLoadSchedule ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
 
-        return this.provider.completedRowListPage( super.completedRowListPage )
+        return this.provider.completedLoadSchedule( super.completedRowListPage )
     }
 
     onSamePageFilterChange( ev: {} ): void {
         this.filter = ev
+        this.refreshRowList()
     }
 
     makeRows( schedule: Schedule ): Schedule {
