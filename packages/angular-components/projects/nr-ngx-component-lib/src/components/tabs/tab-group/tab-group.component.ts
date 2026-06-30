@@ -37,7 +37,6 @@ export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewI
     isClassic = false
 
     ngOnChanges( changes: SimpleChanges ): void {
-        console.log(changes)
         this.updateState()
     }
 

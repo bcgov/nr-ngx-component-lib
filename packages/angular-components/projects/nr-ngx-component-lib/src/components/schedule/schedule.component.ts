@@ -74,9 +74,11 @@ export type FetchScheduleRowParameters = {
 }
 
 export interface ScheduleProvider {
+    startloadSchedule( inner: () => Promise<any> ): Promise<any>
     fetchSchedule( x: FetchScheduleParameters ): Observable<any>
     parseSchedule( res: any ): Schedule
     getInitialPageState(): PaginationState<{}>
+    completedLoadSchedule( inner: () => void ): any
 }
 
 // --------------------------------------------------------------------------------
@@ -104,13 +106,18 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     protected _templates: TemplateRef<any>[][] = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        this.refreshRowList()
+        // this.refreshRowList()
     }
 
     ngAfterViewInit(): void {
-        setTimeout(() => {
-            super.ngAfterViewInit()
-        });
+        // console.log('ScheduleComponent.ngAfterViewInit')
+        super.ngAfterViewInit()
+    }
+
+    loadRowList(): Promise<any> {
+        if ( !this.provider?.startloadSchedule ) throw Error( 'ScheduleComponent.provider.startloadSchedule not set' )
+     
+        return this.provider.startloadSchedule( super.loadRowList )
     }
 
     fetchRowListPage(): Observable<any> {
@@ -125,20 +132,27 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     }
 
     parseRows( res: any ): ScheduleRow[] {
-        if ( !this.provider?.parseSchedule ) throw Error( 'ResourceScheduleComponent.provider.parseSchedule not set' )
+        if ( !this.provider?.parseSchedule ) throw Error( 'ScheduleComponent.provider.parseSchedule not set' )
 
         let rows = this.provider.parseSchedule( res )
         return this.makeRows( rows )
     }
 
     getInitialPageState(): PaginationState<{}> {
-        if ( !this.provider?.getInitialPageState ) throw Error( 'ResourceScheduleComponent.provider.getInitialPageState not set' )
+        if ( !this.provider?.getInitialPageState ) throw Error( 'ScheduleComponent.provider.getInitialPageState not set' )
 
         return this.provider.getInitialPageState()
     }
 
+    completedRowListPage(): PaginationState<{}> {
+        if ( !this.provider?.completedLoadSchedule ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
+
+        return this.provider.completedLoadSchedule( super.completedRowListPage )
+    }
+
     onSamePageFilterChange( ev: {} ): void {
         this.filter = ev
+        this.refreshRowList()
     }
 
     makeRows( schedule: Schedule ): Schedule {

@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { delay, Observable } from "rxjs";
 
 export class Aborted {
     constructor( public reason: string ) {}
@@ -48,5 +48,33 @@ export class ObservableAborter<T> {
 
     get promise(): Promise<T> {
         return this._promise
+    }
+}
+
+export class ObservableAborterGroup<T> {
+    private _group: ObservableAborter<T>[] = []
+    private _aborted = false
+
+    constructor( private delay = 500 ) {}
+
+    add( observable: () => Observable<T> ): Promise<T> {
+        if ( this._aborted ) throw Error( 'already aborted' )
+
+        let oa = new ObservableAborter<T>( observable, this.delay )
+        this._group.push( oa )
+
+        return oa.promise
+    }
+
+    abort() {
+        if ( this._aborted ) return 
+        this._group.forEach( oa => {
+            oa.abort()
+        } )
+        this._aborted = true
+    }
+
+    get allCompleted(): Promise<void> {
+        return Promise.all( this._group.map( oa => oa.promise.then( res => {}, err => {} ) ) ).then( res => {} )
     }
 }

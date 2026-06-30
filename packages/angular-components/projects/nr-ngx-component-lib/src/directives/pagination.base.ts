@@ -40,6 +40,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     ngAfterViewInit(): void {
+        // console.log('PaginationBase.ngAfterViewInit')
         this.loadPageState()        
     }
 
