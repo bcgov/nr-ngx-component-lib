@@ -62,20 +62,13 @@ type Week = {
 
 // --------------------------------------------------------------------------------
 
-export type FetchScheduleParameters = {
-    pageNumber: number
-    pageSize: number
-    sortActive: string
-    sortDirection: string
-}
-
 export type FetchScheduleRowParameters = {
     resourceId: string
 }
 
 export interface ScheduleProvider {
     startloadSchedule( inner: () => Promise<any> ): Promise<any>
-    fetchSchedule( x: FetchScheduleParameters ): Observable<any>
+    fetchSchedule(): Observable<any>
     parseSchedule( res: any ): Schedule
     getInitialPageState(): PaginationState<{}>
     completedLoadSchedule( inner: () => void ): any
@@ -123,12 +116,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     fetchRowListPage(): Observable<any> {
         if ( !this.provider?.fetchSchedule ) throw Error( 'ScheduleComponent.provider.fetchSchedule not set' )
 
-        return this.provider.fetchSchedule( {
-            pageNumber: this.pageNumber,
-            pageSize: this.pageSize,
-            sortActive: this.sortActive,
-            sortDirection: this.sortDirection,
-        } )
+        return this.provider.fetchSchedule()
     }
 
     parseRows( res: any ): ScheduleRow[] {

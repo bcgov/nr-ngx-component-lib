@@ -10,6 +10,14 @@ export type PaginationConfig = {
     sortDirection: SortDirection
 }
 
+export interface PagingInfoRequest {
+    query?: string;
+    pageNumber: number;
+    pageRowCount: number;
+    sortColumn?: string;
+    sortDirection?: string;
+}
+
 export type PaginationState<F> = { pageConfig: PaginationConfig, filter: F }
 
 @Directive()
@@ -104,6 +112,16 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
             itemsPerPage: this._pageConfig.pageSize,
             currentPage: this._pageConfig.pageNumber,
             totalItems: this._totalRowCount
+        }
+    }
+
+    getPagingInfoRequest( query?: string ): PagingInfoRequest {
+        return {
+            query,
+            pageNumber: this._pageConfig.pageNumber,
+            pageRowCount:  this._pageConfig.pageSize,
+            sortColumn: this.sortActive,
+            sortDirection: this.sortDirection
         }
     }
 }
