@@ -1,6 +1,6 @@
 {
     "name": "@bcgov/nr-ngx-component-lib",
-    "version": "0.0.59",
+    "version": "0.0.60",
     "dependencies": {
         "tslib": "^2.5.1"
     },
