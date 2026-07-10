@@ -125,23 +125,32 @@
 
             &.items {
                 .outer.item {
-                    padding: 2px;
                     box-sizing: border-box;
                     height: var( --nrcl-schedule-row-schedule-height );
                     display: flex;
                     flex-direction: column;
                     justify-content: stretch;
                     align-items: stretch;
+                    border-right: 1px solid var( --nrcl-schedule-border-color );
+                    border-bottom: 1px solid var( --nrcl-schedule-border-color );
 
-                    &.menu-open, &:hover {
-                        background-color: black;                        
-                        border-radius: 6px;
+                    &:hover {
+                        .item {
+                            background-color: #06e;
+                            color: white;
+                        }
+                    }
+
+                    &.menu-open {
+                        .item {
+                            background-color: #036;
+                            color: white;
+                        }
                     }
 
                     .item {
                         flex-grow: 1;
                         cursor: pointer;
-                        border-radius: 4px;
                         position: relative;
                         padding: 4px;
                         padding-bottom: 8px;
@@ -155,6 +164,7 @@
                             background-color: #f1ebe4;
                             border-radius: 4px;
                             padding: 3px;
+                            color: var( --nrcl-schedule-row-days-foreground-color );
                         }
 
                         &.travel {
@@ -171,10 +181,6 @@
                                 background-repeat: no-repeat;
                                 background-size: calc( 100% - 8px ) 3px;
                                 background-position: bottom;
-                            }
-
-                            &:hover::after {
-                                filter: brightness(0);
                             }
                         }
                     }
