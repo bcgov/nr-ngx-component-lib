@@ -38,6 +38,7 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
+import { seedRandom } from 'projects/nr-ngx-component-lib/story-util';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',
@@ -101,7 +102,7 @@ const meta: Meta<ResourceScheduleComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="{width, displayMode}">
+                    <ng-container *rerender="{width, displayMode, leaveEmpty}">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
@@ -127,7 +128,7 @@ const meta: Meta<ResourceScheduleComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean }> = {
+export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number }> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         startDate: {
@@ -147,13 +148,21 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                 max: 6
             }
         },
+        leaveEmpty: {
+            control: {
+                type: 'range',
+                min: 0,
+                max: 100
+            }
+        },
     },
     args: {
         ...displayModeWrapperStory.args,
         startDate: moment().format( DATE_FORMATS.datePickerInput ),
         dayCount: 8,
         weekStart: 0,
-        showMenu: true
+        showMenu: true,
+        leaveEmpty: 0,
     },
     render: ( args ) => {
         args.provider = {
@@ -164,7 +173,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                 return Array.from( { length: 30 } ).map( ( x, i ) => {
                     return {
                         heading: { row: i, bar: { foo: () => {return 123} } },
-                        items: scheduleItems( i * 7, 19, 23 )
+                        items: scheduleItems( i * 7, 19, 23, args.leaveEmpty )
                     }
                 } )
             },
@@ -271,6 +280,8 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
     }
 }
 
+let rand = seedRandom( 1 )
+
 let items = [
     { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty Day', travel: true },
     { name: 'out-of-service', allocationType: 'Leave', shiftType: 'STBY' },
@@ -306,11 +317,20 @@ let items = [
     { name: 'assigned-regular-day',  assignmentName: 'Multiple', shiftType: 'Reg Day' },
 ]
 
-function scheduleItems( start, length, skip ): Promise<ResourceScheduleRowItem[]> {
+function scheduleItems( start, length, skip, empty ): Promise<ResourceScheduleRowItem[]> {
     let len = items.length 
-    return delayed( Array.from( { length } ).map( ( x, i ) => {
-        return { id: String(i), ...items[ ( start + skip * i ) % len ] } as ResourceScheduleRowItem
-    } ) )
+    return delayed( 
+        Array.from( { length } )
+            .map( ( x, i ) => {
+                return { id: String(i), ...items[ ( start + skip * i ) % len ] } as ResourceScheduleRowItem
+            } )
+            .map( i => {
+                if ( rand( 100 ) < empty ) {
+                    i.name = 'empty'
+                }
+                return i
+            } )
+    )
 }
 
 function delayed<T>( val: T ): Promise<T> {
