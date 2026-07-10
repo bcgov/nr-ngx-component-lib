@@ -34,6 +34,7 @@
             font-size: 15px;
             line-height: 18px;
             text-align: center;
+            white-space: nowrap;
         }
 
         h2 {
@@ -44,6 +45,7 @@
             align-items: center;
             
             &.wrap {
+                white-space: wrap;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 2;        
