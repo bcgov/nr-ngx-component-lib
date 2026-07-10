@@ -303,7 +303,7 @@ let items = [
     { name: 'assigned-duty-day', assignmentName: 'CA1234 iufdhgi iuh fdigh sirguh iduhg qwu aoiui sudhuwhfi', shiftType: 'Duty Day' },
     { name: 'assigned-standby-day', assignmentName: 'PWCC', shiftType: 'STBY' },
     { name: 'assigned-off-day', assignmentName: 'CA1234', shiftType: 'Day Off' },
-    { name: 'assigned-regular-day',  assignmentName: 'Multiple Assignments', shiftType: 'Reg Day' },
+    { name: 'assigned-regular-day',  assignmentName: 'Multiple', shiftType: 'Reg Day' },
 ]
 
 function scheduleItems( start, length, skip ): Promise<ResourceScheduleRowItem[]> {

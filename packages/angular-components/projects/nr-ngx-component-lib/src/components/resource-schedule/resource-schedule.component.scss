@@ -31,18 +31,13 @@
             padding: 0;
             margin: 0;
             font-weight: 200;
-        }
-
-        h1 {
             font-size: 15px;
-            line-height: 15px;
+            line-height: 18px;
             text-align: center;
         }
 
         h2 {
             flex-grow: 1;
-            font-size: 12px;
-            line-height: 13px;
             text-align: center;
             display: flex;
             justify-content: center;
@@ -51,16 +46,10 @@
             &.wrap {
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                -webkit-line-clamp: 3;        
+                -webkit-line-clamp: 2;        
                 min-height: 0;
                 overflow: hidden;
             }
-        }
-
-        h3 {
-            font-size: 14px;
-            line-height: 14px;
-            text-align: center;
         }
 
         &.item-out-of-service {
