@@ -110,7 +110,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     loadRowList(): Promise<any> {
         if ( !this.provider?.startloadSchedule ) throw Error( 'ScheduleComponent.provider.startloadSchedule not set' )
      
-        return this.provider.startloadSchedule( super.loadRowList )
+        return this.provider.startloadSchedule( () => { return super.loadRowList() } )
     }
 
     fetchRowListPage(): Observable<any> {

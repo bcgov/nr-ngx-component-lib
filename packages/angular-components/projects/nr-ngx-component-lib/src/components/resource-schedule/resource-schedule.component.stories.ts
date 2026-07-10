@@ -127,7 +127,7 @@ const meta: Meta<ResourceScheduleComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent> = {
+export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean }> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         startDate: {
@@ -153,10 +153,11 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
         startDate: moment().format( DATE_FORMATS.datePickerInput ),
         dayCount: 8,
         weekStart: 0,
+        showMenu: true
     },
     render: ( args ) => {
         args.provider = {
-            fetchSchedule: ( x ) => { return of({
+            fetchSchedule: () => { return of({
                 totalRowCount: 10
             }) },
             parseSchedule: ( res ) => {
@@ -177,7 +178,9 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                         sortDirection: 'desc',
                     }
                 }
-            }
+            },
+            startloadSchedule: ( inner ) => { return inner() },
+            completedLoadSchedule: ( inner ) => { return inner() },
         }
         return {
             props: args,
@@ -187,7 +190,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [dayCount]="dayCount"
                     [weekStart]="weekStart"
                     [provider]="provider"
-                    [menu]="menu"
+                    [menu]="showMenu ? menu : null"
                 >
                     <div>upper-left</div>
 
@@ -220,7 +223,7 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
     },
     render: ( args ) => {
         args.provider = {
-            fetchSchedule: ( x ) => { return of({
+            fetchSchedule: () => { return of({
                 totalRowCount: 0
             }) },
             parseSchedule: ( res ) => {
@@ -236,7 +239,9 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
                         sortDirection: 'desc',
                     }
                 }
-            }
+            },
+            startloadSchedule: ( inner ) => { return inner() },
+            completedLoadSchedule: ( inner ) => { return inner() },
         }
         return {
             props: args,
