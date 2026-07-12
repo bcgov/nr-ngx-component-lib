@@ -230,3 +230,13 @@
     align-items: center;
     color: #aaa;
 }
+
+::ng-deep .cdk-overlay-container {
+    .nrcl-schedule-multiline {
+        .mdc-tooltip__surface {
+            white-space: pre-line;
+            max-width: unset;
+            text-align: left;
+        }
+    }
+}
