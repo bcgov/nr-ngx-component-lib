@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
-import { RowListBase, RowListState } from "../../directives/row-list.base";
+import { RowListBase } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
+import { InitialState } from "../../directives/pagination.base";
 
 export type EventHistoryTableRow = {
     eventTimestamp: string
@@ -20,9 +21,12 @@ export type FetchEventHistoryParameters = {
     sortDirection: string
 }
 
+export type InitialEventHistoryState = Omit<InitialState<{}>,'filter'|'pageConfig'> & Partial<Pick<InitialState<{}>,'filter'|'pageConfig'>>
+
 export interface EventHistoryRowListProvider<R,L=any> {
     fetchEventHistory( x: FetchEventHistoryParameters ): Observable<L>    
     displayRowListPage( res: L ): EventHistoryTableRow[]
+    getInitialPageState(): InitialEventHistoryState
 }
 
 @Component({
@@ -65,15 +69,21 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
         return this.rowListProvider.displayRowListPage( res )
     }
 
-    getInitialPageState(): RowListState<{}> {
-        return {
+    getInitialPageState(): InitialState<{}> {
+        if ( !this.rowListProvider?.getInitialPageState ) throw Error( 'no provider for ListEventHistoryComponent.rowListProvider.getInitialPageState' )
+
+        let state = this.rowListProvider.getInitialPageState()
+
+        return {            
+            instance: state.instance,
             filter: {},
             pageConfig: {
                 pageSize: 20,
                 pageNumber: 1,
                 sortActive: 'dateTime',
                 sortDirection: 'desc',
-            }
+                ...state.pageConfig
+            },
         }
     }
 

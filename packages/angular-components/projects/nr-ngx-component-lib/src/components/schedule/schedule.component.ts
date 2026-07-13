@@ -2,7 +2,7 @@ import { Component, ContentChild, ContentChildren, Directive, Input, numberAttri
 import { MatMenuPanel } from '@angular/material/menu';
 import moment from 'moment';
 import { Observable } from 'rxjs';
-import { PaginationState } from '../../directives/pagination.base';
+import { InitialState, PaginationState } from '../../directives/pagination.base';
 import { RowListBase } from '../../directives/row-list.base';
 
 @Directive( {
@@ -70,7 +70,7 @@ export interface ScheduleProvider {
     startloadSchedule( inner: () => Promise<any> ): Promise<any>
     fetchSchedule(): Observable<any>
     parseSchedule( res: any ): Schedule
-    getInitialPageState(): PaginationState<{}>
+    getInitialPageState(): InitialState<{}>
     completedLoadSchedule( inner: () => void ): any
 }
 
@@ -126,7 +126,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
         return this.makeRows( rows )
     }
 
-    getInitialPageState(): PaginationState<{}> {
+    getInitialPageState(): InitialState<{}> {
         if ( !this.provider?.getInitialPageState ) throw Error( 'ScheduleComponent.provider.getInitialPageState not set' )
 
         return this.provider.getInitialPageState()

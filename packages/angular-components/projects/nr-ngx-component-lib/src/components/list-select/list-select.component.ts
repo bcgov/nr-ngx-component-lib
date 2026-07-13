@@ -1,8 +1,9 @@
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
 import { MatColumnDef, MatTable } from "@angular/material/table";
 import { Observable, of } from "rxjs";
-import { RowListBase, RowListState } from "../../directives/row-list.base";
+import { RowListBase } from "../../directives/row-list.base";
 import { CodeDescription } from "../../utils/code-table.util";
+import { InitialState } from "../../directives/pagination.base";
 
 @Component({
     selector: "nrcl-list-select",
@@ -18,6 +19,9 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
     @Input() noRowsMessage = "No items have been added."
     @Input() displayColumnsProvider: ( cols: string[] ) => string[] = ( cols ) => cols
     @Input() filterProvider: ( option: CodeDescription ) => boolean = () => true
+    @Input() set instance( v: string ) {
+        this._instance = v
+    } 
    
     @Output() valueChange = new EventEmitter<string[]>();
     @Output() filterClear = new EventEmitter<void>();
@@ -45,8 +49,9 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         } )
     }
 
-    getInitialPageState(): RowListState<{}> {
+    getInitialPageState(): InitialState<{}> {
         return {
+            instance: this.instance,
             filter: {},
             pageConfig: {
                 pageSize: 0,

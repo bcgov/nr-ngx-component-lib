@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { Observable } from "rxjs";
-import { RowListBase, RowListState } from "../../directives/row-list.base";
+import { RowListBase } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
+import { InitialState } from "../../public-api";
 
 export type AttachmentsTableRow = {
     attachmentTypeDescription: string
@@ -23,11 +24,14 @@ export type FetchAttachmentsParameters = {
     sortDirection: string
 }
 
+export type InitialAttachmentsState = Omit<InitialState<{}>,'filter'|'pageConfig'> & Partial<Pick<InitialState<{}>,'filter'|'pageConfig'>>
+
 export interface AttachmentRowListProvider<R,L=any> {
     fetchAttachments( x: FetchAttachmentsParameters ): Observable<L>    
     displayRowListPage( res: L ): AttachmentsTableRow[]
     downloadItem( item: R ): any
     deleteItem( item: R ): any
+    getInitialPageState(): InitialAttachmentsState
 }
 
 @Component({
@@ -75,15 +79,21 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
         }
     }
 
-    getInitialPageState(): RowListState<{}> {
-        return {
+    getInitialPageState(): InitialState<{}> {
+        if ( !this.rowListProvider?.getInitialPageState ) throw Error( 'no provider for ListAttachmentsComponent.rowListProvider.getInitialPageState' )
+
+        let state = this.rowListProvider.getInitialPageState()
+
+        return {            
+            instance: state.instance,
             filter: {},
             pageConfig: {
                 pageSize: 10,
                 pageNumber: 1,
                 sortActive: 'uploadedTimestamp',
                 sortDirection: 'desc',
-            }
+                ...state.pageConfig
+            },
         }
     }
 

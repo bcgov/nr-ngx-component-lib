@@ -19,10 +19,12 @@ export interface PagingInfoRequest {
 }
 
 export type PaginationState<F> = { 
-    instance?: string 
+    // instance: string 
     pageConfig: PaginationConfig, 
     filter: F, 
 }
+
+export type InitialState<F> = PaginationState<F> & { instance: string }
 
 @Directive()
 export abstract class PaginationBase<F> extends NrclBase implements AfterViewInit {
@@ -51,10 +53,11 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
         this._filter = this.clone( f )
     }
 
-    private _instance?: string
+    protected _instance?: string
     get instance(): string|undefined {
         return this._instance
     }
+    // private _stateId?: string 
 
     ngAfterViewInit(): void {
         // console.log('PaginationBase.ngAfterViewInit')
@@ -65,7 +68,12 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     onInitPageState() {
         let init = this.getInitialPageState()
         this._instance = init.instance
-        
+
+        // let ref = this.pageStateService.getFunctionRef( this.constructor )
+        // this._stateId = ref
+        // if ( this._instance ) this._stateId += '-' + this._instance
+        // console.log(this._stateId)
+
         let saved = this.retrieveState()
 
         this.setCurrentPageState( saved || init )
@@ -105,13 +113,13 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
             } )
     }
 
-    abstract refresh(): Promise<void> 
+    protected abstract refresh(): Promise<void> 
 
-    get initialPageState(): PaginationState<F> {
-        return this.getInitialPageState()
-    }
+    // get initialPageState(): PaginationState<F> & { instance: string } {
+    //     return this.getInitialPageState()
+    // }
 
-    abstract getInitialPageState(): PaginationState<F>
+    abstract getInitialPageState(): InitialState<F>
 
     getCurrentPageState(): PaginationState<F> {
         return {
@@ -134,13 +142,11 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     persistState( state: PaginationState<F> ) {
-        let ref = this.pageStateService.getFunctionRef( this.constructor, this.instance )
-        this.pageStateService.setPageState( ref, JSON.stringify( state ) )
+        this.pageStateService.setPageState( this._instance!, JSON.stringify( state ) )
     }
 
     retrieveState(): PaginationState<F>|undefined {
-        let ref = this.pageStateService.getFunctionRef( this.constructor, this.instance )
-        let state = this.pageStateService.getPageState( ref )
+        let state = this.pageStateService.getPageState( this._instance! )
         if ( !state ) return
 
         return JSON.parse( state )
