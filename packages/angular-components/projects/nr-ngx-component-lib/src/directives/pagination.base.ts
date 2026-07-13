@@ -18,7 +18,11 @@ export interface PagingInfoRequest {
     sortDirection?: string;
 }
 
-export type PaginationState<F> = { pageConfig: PaginationConfig, filter: F }
+export type PaginationState<F> = { 
+    instance?: string 
+    pageConfig: PaginationConfig, 
+    filter: F, 
+}
 
 @Directive()
 export abstract class PaginationBase<F> extends NrclBase implements AfterViewInit {
@@ -47,9 +51,24 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
         this._filter = this.clone( f )
     }
 
+    private _instance?: string
+    get instance(): string|undefined {
+        return this._instance
+    }
+
     ngAfterViewInit(): void {
         // console.log('PaginationBase.ngAfterViewInit')
-        this.loadPageState()        
+        // this.loadPageState()       
+        this.onInitPageState()
+    }
+
+    onInitPageState() {
+        let init = this.getInitialPageState()
+        this._instance = init.instance
+        
+        let saved = this.retrieveState()
+
+        this.setCurrentPageState( saved || init )
     }
 
     clone( obj: any ) {
@@ -74,7 +93,19 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     onPageNumberChange( ev: number ) {
         this._pageConfig.pageNumber = ev
+
+        this.onPageStateChanged()
     }
+
+    onPageStateChanged(): Promise<void> {
+        return this.refresh()
+            .then( () => {
+                let state = this.getCurrentPageState()
+                this.persistState( state )
+            } )
+    }
+
+    abstract refresh(): Promise<void> 
 
     get initialPageState(): PaginationState<F> {
         return this.getInitialPageState()
@@ -82,18 +113,8 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     abstract getInitialPageState(): PaginationState<F>
 
-    loadPageState() {
-        let state = this.pageStateService.getPageState<PaginationState<F>>( this.constructor, () => this.initialPageState )
-
-        this.filter = state.filter
-        this._pageConfig.pageSize = state.pageConfig.pageSize
-        this._pageConfig.pageNumber = state.pageConfig.pageNumber
-        this._pageConfig.sortActive = state.pageConfig.sortActive
-        this._pageConfig.sortDirection = state.pageConfig.sortDirection
-    }
-
-    savePageState() {
-        let state: PaginationState<F> = this.clone( {            
+    getCurrentPageState(): PaginationState<F> {
+        return {
             filter: this.filter,
             pageConfig: {
                 pageSize: this._pageConfig.pageSize,
@@ -101,10 +122,53 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
                 sortActive: this._pageConfig.sortActive,
                 sortDirection: this._pageConfig.sortDirection,
             }
-        } ) 
-        
-        this.pageStateService.setPageState<PaginationState<F>>( this.constructor, state )
+        }
     }
+
+    setCurrentPageState( state: PaginationState<F> ) {
+        this.filter = state.filter
+        this._pageConfig.pageSize = state.pageConfig.pageSize
+        this._pageConfig.pageNumber = state.pageConfig.pageNumber
+        this._pageConfig.sortActive = state.pageConfig.sortActive
+        this._pageConfig.sortDirection = state.pageConfig.sortDirection
+    }
+
+    persistState( state: PaginationState<F> ) {
+        let ref = this.pageStateService.getFunctionRef( this.constructor, this.instance )
+        this.pageStateService.setPageState( ref, JSON.stringify( state ) )
+    }
+
+    retrieveState(): PaginationState<F>|undefined {
+        let ref = this.pageStateService.getFunctionRef( this.constructor, this.instance )
+        let state = this.pageStateService.getPageState( ref )
+        if ( !state ) return
+
+        return JSON.parse( state )
+    }
+
+    // loadPageState() {
+    //     let state = this.pageStateService.getPageState<PaginationState<F>>( this.constructor, () => this.initialPageState )
+
+    //     this.filter = state.filter
+    //     this._pageConfig.pageSize = state.pageConfig.pageSize
+    //     this._pageConfig.pageNumber = state.pageConfig.pageNumber
+    //     this._pageConfig.sortActive = state.pageConfig.sortActive
+    //     this._pageConfig.sortDirection = state.pageConfig.sortDirection
+    // }
+
+    // savePageState() {
+    //     let state: PaginationState<F> = this.clone( {            
+    //         filter: this.filter,
+    //         pageConfig: {
+    //             pageSize: this._pageConfig.pageSize,
+    //             pageNumber: this._pageConfig.pageNumber,
+    //             sortActive: this._pageConfig.sortActive,
+    //             sortDirection: this._pageConfig.sortDirection,
+    //         }
+    //     } ) 
+        
+    //     this.pageStateService.setPageState<PaginationState<F>>( this.constructor, state )
+    // }
 
     paginateState( id: string ) {
         return {

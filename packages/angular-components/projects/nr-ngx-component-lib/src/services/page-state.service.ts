@@ -1,31 +1,35 @@
 import { Injectable } from "@angular/core";
 
-type StateContainer = {
-    label?: string
-    state: any
-}
-
 @Injectable( {
     providedIn: "root"
 } )
 export class PageStateService {
-    private readonly classRegistry = new WeakMap<Function, StateContainer>();
+    private readonly _referenceRegistry = new WeakMap<Function, string>();
+    private _nextId = 1;
+    private readonly _pageState: { [ key: string ]: string } = {}
 
-    constructor() {
+    getFunctionRef( func: Function, label?: string ): string {
+        if ( this._referenceRegistry.has( func ) )
+            return this._referenceRegistry.get( func )!
+
+        const uniqueId = `${ label || 'func-ref' }-${ this._nextId++ }`
+        this._referenceRegistry.set( func, uniqueId )
+
+        return uniqueId
     }
 
-    getPageState<S>( classConstructor: Function, defaultState: () => S, label?: string ): S {
-        if ( this.classRegistry.has( classConstructor ) ) {
-            let sc = this.classRegistry.get( classConstructor )
-            return sc!.state
-        }
-
-        // this.setPageState( classConstructor, defaultState, label )
-        return defaultState()
+    getPageState( id: string ): string|undefined {
+        if ( id in this._pageState )
+            return this._pageState[ id ]
     }
 
-    setPageState<S>( classConstructor: Function, state: S, label?: string ) {
-        let sc: StateContainer = { label, state }
-        this.classRegistry.set( classConstructor, sc )
+    setPageState( id: string, state: string ) {
+        this._pageState[ id ] = state
+        console.log('setPageState',id,this._pageState)
+    }
+
+    deletePageState( id: string ) {
+        delete this._pageState[ id ]
     }
 }
+

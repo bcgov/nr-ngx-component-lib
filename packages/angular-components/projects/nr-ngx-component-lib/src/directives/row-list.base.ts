@@ -107,13 +107,17 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
         this._totalRowCount = 0
     }
 
-    onPageNumberChange( ev: number ) {
-        super.onPageNumberChange( ev )
+    // onPageNumberChange( ev: number ) {
+    //     super.onPageNumberChange( ev )
 
-        this.refreshRowList()
-            .then( () => {
-                this.savePageState()
-            } )
+    //     this.refreshRowList()
+    //         .then( () => {
+    //             this.savePageState()
+    //         } )
+    // }
+
+    refresh(): Promise<void> {
+        return this.refreshRowList()
     }
 }
 
