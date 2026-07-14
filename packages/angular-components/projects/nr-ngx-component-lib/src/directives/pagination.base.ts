@@ -19,12 +19,11 @@ export interface PagingInfoRequest {
 }
 
 export type PaginationState<F> = { 
-    // instance: string 
     pageConfig: PaginationConfig, 
     filter: F, 
 }
 
-export type InitialState<F> = PaginationState<F> & { instance: string }
+export type InitialState<F> = PaginationState<F> & { instance?: string }
 
 @Directive()
 export abstract class PaginationBase<F> extends NrclBase implements AfterViewInit {
@@ -57,22 +56,15 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     get instance(): string|undefined {
         return this._instance
     }
-    // private _stateId?: string 
 
     ngAfterViewInit(): void {
         // console.log('PaginationBase.ngAfterViewInit')
-        // this.loadPageState()       
         this.onInitPageState()
     }
 
     onInitPageState() {
         let init = this.getInitialPageState()
         this._instance = init.instance
-
-        // let ref = this.pageStateService.getFunctionRef( this.constructor )
-        // this._stateId = ref
-        // if ( this._instance ) this._stateId += '-' + this._instance
-        // console.log(this._stateId)
 
         let saved = this.retrieveState()
 
@@ -115,10 +107,6 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     protected abstract refresh(): Promise<void> 
 
-    // get initialPageState(): PaginationState<F> & { instance: string } {
-    //     return this.getInitialPageState()
-    // }
-
     abstract getInitialPageState(): InitialState<F>
 
     getCurrentPageState(): PaginationState<F> {
@@ -142,39 +130,19 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     persistState( state: PaginationState<F> ) {
+        if ( !this._instance ) return
+
         this.pageStateService.setPageState( this._instance!, JSON.stringify( state ) )
     }
 
     retrieveState(): PaginationState<F>|undefined {
+        if ( !this._instance ) return
+        
         let state = this.pageStateService.getPageState( this._instance! )
         if ( !state ) return
 
         return JSON.parse( state )
     }
-
-    // loadPageState() {
-    //     let state = this.pageStateService.getPageState<PaginationState<F>>( this.constructor, () => this.initialPageState )
-
-    //     this.filter = state.filter
-    //     this._pageConfig.pageSize = state.pageConfig.pageSize
-    //     this._pageConfig.pageNumber = state.pageConfig.pageNumber
-    //     this._pageConfig.sortActive = state.pageConfig.sortActive
-    //     this._pageConfig.sortDirection = state.pageConfig.sortDirection
-    // }
-
-    // savePageState() {
-    //     let state: PaginationState<F> = this.clone( {            
-    //         filter: this.filter,
-    //         pageConfig: {
-    //             pageSize: this._pageConfig.pageSize,
-    //             pageNumber: this._pageConfig.pageNumber,
-    //             sortActive: this._pageConfig.sortActive,
-    //             sortDirection: this._pageConfig.sortDirection,
-    //         }
-    //     } ) 
-        
-    //     this.pageStateService.setPageState<PaginationState<F>>( this.constructor, state )
-    // }
 
     paginateState( id: string ) {
         return {

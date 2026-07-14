@@ -86,8 +86,4 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
             },
         }
     }
-
-    savePageState(): void {
-        // state not saved
-    }
 }

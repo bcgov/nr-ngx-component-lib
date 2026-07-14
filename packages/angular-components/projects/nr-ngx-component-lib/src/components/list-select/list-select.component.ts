@@ -19,9 +19,6 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
     @Input() noRowsMessage = "No items have been added."
     @Input() displayColumnsProvider: ( cols: string[] ) => string[] = ( cols ) => cols
     @Input() filterProvider: ( option: CodeDescription ) => boolean = () => true
-    @Input() set instance( v: string ) {
-        this._instance = v
-    } 
    
     @Output() valueChange = new EventEmitter<string[]>();
     @Output() filterClear = new EventEmitter<void>();
@@ -51,7 +48,7 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
 
     getInitialPageState(): InitialState<{}> {
         return {
-            instance: this.instance,
+            instance: '', // state not saved
             filter: {},
             pageConfig: {
                 pageSize: 0,
@@ -127,9 +124,5 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         if ( this.searchRegexp && !this.searchRegexp.test( option.description ) ) return false
 
         return this.filterProvider( option )
-    }
-
-    savePageState(): void {
-        // state not saved
     }
 }
