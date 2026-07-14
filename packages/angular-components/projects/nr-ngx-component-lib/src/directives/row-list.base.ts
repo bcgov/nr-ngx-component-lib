@@ -2,9 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Directive, EventEmitter, inject, Outp
 import { Observable } from "rxjs";
 import { PageStateService } from "../services/page-state.service";
 import { Aborted, ObservableAborter } from "../utils/row-list.util";
-import { PaginationBase as PaginationBase, PaginationState } from "./pagination.base";
-
-export type RowListState<F> = PaginationState<F>
+import { PaginationBase } from "./pagination.base";
 
 @Directive()
 export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implements AfterViewInit {
@@ -46,13 +44,13 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
                 return this.loadRowList() 
             } )
             .then( ( res ) => { 
+                inProgress.progress()
                 if ( !res ) return
-                if ( inProgress.isCancelled ) return
 
                 return this.parseRowList( res ) 
             } )
             .then( res => {
-                if ( inProgress.isCancelled ) return
+                inProgress.progress()
                 
                 return this.completedRowListPage()
             } )
@@ -62,7 +60,6 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
                 this.loadRowListPageFailed( err )
             } )
             .finally( () => {
-                if ( inProgress.isCancelled ) return
                 inProgress.complete()
 
                 this.isLoading = false
@@ -107,13 +104,8 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
         this._totalRowCount = 0
     }
 
-    onPageNumberChange( ev: number ) {
-        super.onPageNumberChange( ev )
-
-        this.refreshRowList()
-            .then( () => {
-                this.savePageState()
-            } )
+    protected refresh(): Promise<void> {
+        return this.refreshRowList()
     }
 }
 
@@ -129,6 +121,11 @@ class InProgress {
     cancel() {
         if ( this.isCompleted ) return
         this._cancelled = true        
+    }
+
+    progress() {
+        if ( this.isCompleted ) return
+        if ( this.isCancelled ) throw new Aborted('InProgress cancelled')
     }
 
     get isCompleted() {        

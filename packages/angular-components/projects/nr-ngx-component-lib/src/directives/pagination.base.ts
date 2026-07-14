@@ -18,7 +18,12 @@ export interface PagingInfoRequest {
     sortDirection?: string;
 }
 
-export type PaginationState<F> = { pageConfig: PaginationConfig, filter: F }
+export type PaginationState<F> = { 
+    pageConfig: PaginationConfig, 
+    filter: F, 
+}
+
+export type InitialState<F> = PaginationState<F> & { instance?: string }
 
 @Directive()
 export abstract class PaginationBase<F> extends NrclBase implements AfterViewInit {
@@ -47,9 +52,23 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
         this._filter = this.clone( f )
     }
 
+    protected _instance?: string
+    get instance(): string|undefined {
+        return this._instance
+    }
+
     ngAfterViewInit(): void {
         // console.log('PaginationBase.ngAfterViewInit')
-        this.loadPageState()        
+        this.onInitPageState()
+    }
+
+    onInitPageState() {
+        let init = this.getInitialPageState()
+        this._instance = init.instance
+
+        let saved = this.retrieveState()
+
+        this.setCurrentPageState( saved || init )
     }
 
     clone( obj: any ) {
@@ -74,26 +93,24 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     onPageNumberChange( ev: number ) {
         this._pageConfig.pageNumber = ev
+
+        this.onPageStateChanged()
     }
 
-    get initialPageState(): PaginationState<F> {
-        return this.getInitialPageState()
+    onPageStateChanged(): Promise<void> {
+        return this.refresh()
+            .then( () => {
+                let state = this.getCurrentPageState()
+                this.persistState( state )
+            } )
     }
 
-    abstract getInitialPageState(): PaginationState<F>
+    protected abstract refresh(): Promise<void> 
 
-    loadPageState() {
-        let state = this.pageStateService.getPageState<PaginationState<F>>( this.constructor, () => this.initialPageState )
+    abstract getInitialPageState(): InitialState<F>
 
-        this.filter = state.filter
-        this._pageConfig.pageSize = state.pageConfig.pageSize
-        this._pageConfig.pageNumber = state.pageConfig.pageNumber
-        this._pageConfig.sortActive = state.pageConfig.sortActive
-        this._pageConfig.sortDirection = state.pageConfig.sortDirection
-    }
-
-    savePageState() {
-        let state: PaginationState<F> = this.clone( {            
+    getCurrentPageState(): PaginationState<F> {
+        return {
             filter: this.filter,
             pageConfig: {
                 pageSize: this._pageConfig.pageSize,
@@ -101,9 +118,30 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
                 sortActive: this._pageConfig.sortActive,
                 sortDirection: this._pageConfig.sortDirection,
             }
-        } ) 
+        }
+    }
+
+    setCurrentPageState( state: PaginationState<F> ) {
+        this.filter = state.filter
+        this._pageConfig.pageSize = state.pageConfig.pageSize
+        this._pageConfig.pageNumber = state.pageConfig.pageNumber
+        this._pageConfig.sortActive = state.pageConfig.sortActive
+        this._pageConfig.sortDirection = state.pageConfig.sortDirection
+    }
+
+    persistState( state: PaginationState<F> ) {
+        if ( !this._instance ) return
+
+        this.pageStateService.setPageState( this._instance!, JSON.stringify( state ) )
+    }
+
+    retrieveState(): PaginationState<F>|undefined {
+        if ( !this._instance ) return
         
-        this.pageStateService.setPageState<PaginationState<F>>( this.constructor, state )
+        let state = this.pageStateService.getPageState( this._instance! )
+        if ( !state ) return
+
+        return JSON.parse( state )
     }
 
     paginateState( id: string ) {

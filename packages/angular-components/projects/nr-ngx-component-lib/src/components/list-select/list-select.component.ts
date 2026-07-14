@@ -1,8 +1,9 @@
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
 import { MatColumnDef, MatTable } from "@angular/material/table";
 import { Observable, of } from "rxjs";
-import { RowListBase, RowListState } from "../../directives/row-list.base";
+import { RowListBase } from "../../directives/row-list.base";
 import { CodeDescription } from "../../utils/code-table.util";
+import { InitialState } from "../../directives/pagination.base";
 
 @Component({
     selector: "nrcl-list-select",
@@ -45,8 +46,9 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         } )
     }
 
-    getInitialPageState(): RowListState<{}> {
+    getInitialPageState(): InitialState<{}> {
         return {
+            instance: '', // state not saved
             filter: {},
             pageConfig: {
                 pageSize: 0,
@@ -122,9 +124,5 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         if ( this.searchRegexp && !this.searchRegexp.test( option.description ) ) return false
 
         return this.filterProvider( option )
-    }
-
-    savePageState(): void {
-        // state not saved
     }
 }

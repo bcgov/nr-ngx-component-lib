@@ -1,31 +1,22 @@
 import { Injectable } from "@angular/core";
 
-type StateContainer = {
-    label?: string
-    state: any
-}
-
 @Injectable( {
     providedIn: "root"
 } )
 export class PageStateService {
-    private readonly classRegistry = new WeakMap<Function, StateContainer>();
+    private readonly _pageState: { [ key: string ]: string } = {}
 
-    constructor() {
+    getPageState( id: string ): string|undefined {
+        if ( id in this._pageState )
+            return this._pageState[ id ]
     }
 
-    getPageState<S>( classConstructor: Function, defaultState: () => S, label?: string ): S {
-        if ( this.classRegistry.has( classConstructor ) ) {
-            let sc = this.classRegistry.get( classConstructor )
-            return sc!.state
-        }
-
-        // this.setPageState( classConstructor, defaultState, label )
-        return defaultState()
+    setPageState( id: string, state: string ) {
+        this._pageState[ id ] = state
     }
 
-    setPageState<S>( classConstructor: Function, state: S, label?: string ) {
-        let sc: StateContainer = { label, state }
-        this.classRegistry.set( classConstructor, sc )
+    deletePageState( id: string ) {
+        delete this._pageState[ id ]
     }
 }
+
