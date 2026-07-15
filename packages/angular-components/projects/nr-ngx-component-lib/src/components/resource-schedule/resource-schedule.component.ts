@@ -48,6 +48,7 @@ export type ResourceSchedule = ResourceScheduleRow[]
 export class ResourceScheduleComponent {
     @Input() provider?: ScheduleProvider
     @Input() startDate?: string
+    @Input() highlightDate?: string
     @Input() weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() menu?: MatMenuPanel

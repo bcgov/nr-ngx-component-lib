@@ -132,7 +132,12 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         startDate: {
-            type: 'date'
+            type: 'string',
+            control: { type: 'text' }
+        },
+        highlightDate: {
+            type: 'string',
+            control: { type: 'text' }
         },
         dayCount: {
             control: {
@@ -159,6 +164,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     args: {
         ...displayModeWrapperStory.args,
         startDate: moment().format( DATE_FORMATS.datePickerInput ),
+        highlightDate: moment().add( 2, 'day' ).format( DATE_FORMATS.datePickerInput ),
         dayCount: 8,
         weekStart: 0,
         showMenu: true,
@@ -196,6 +202,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
             template: `
                 <nrcl-resource-schedule
                     [startDate]="startDate"
+                    [highlightDate]="highlightDate"
                     [dayCount]="dayCount"
                     [weekStart]="weekStart"
                     [provider]="provider"
@@ -214,7 +221,6 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     </ng-template>
                     <button mat-menu-item>Manage Availability</button>
                 </mat-menu>
-
             `
         }
     }

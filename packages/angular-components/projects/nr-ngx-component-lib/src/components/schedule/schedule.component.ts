@@ -51,7 +51,8 @@ type Day = {
     date: string,
     isWeekend: boolean,
     isToday: boolean,
-    isFirst: boolean
+    isFirst: boolean,
+    isHighlight: boolean,
 }
 
 type Week = {
@@ -90,8 +91,9 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     @Input( { transform: numberAttribute } ) weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() menu?: MatMenuPanel
+    @Input() highlightDate?: string
 
-    @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>;
+    @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>
     @ContentChild(ScheduleRowHeadingDirective) headerTemplate!: ScheduleRowHeadingDirective
 
     protected _days: Day[] = []
@@ -180,7 +182,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
                 isFirst: d.date() == 1,
                 isWeekend: d.day() == 0 || d.day() == 6,
                 isToday: d.isSame( today, 'day' ),
-
+                isHighlight: d.isSame( this.highlightDate, 'day' )
             }
         } )
 

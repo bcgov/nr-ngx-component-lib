@@ -156,6 +156,7 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
             },
             downloadItem: (x) => { console.log(x) },
             deleteItem: (x) => { console.log(x) },
+            getInitialPageState: () => {return {}}
         }
         return {
             props: args,
@@ -195,6 +196,7 @@ export const NoRows: StoryObj<ListAttachmentsComponent & DisplayModeWrapperCompo
             },
             downloadItem: () => {},
             deleteItem: () => {},
+            getInitialPageState: () => {return {}}
         }
         return {
             props: args,

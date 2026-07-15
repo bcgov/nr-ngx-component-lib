@@ -15,6 +15,7 @@
     --nrcl-schedule-row-days-foreground-color: black;
     --nrcl-schedule-row-days-weekend-background-color: #e0f8fc;
     --nrcl-schedule-row-days-today-background-color: #fcf8d9;
+    --nrcl-schedule-row-days-highlight-background-color: #eafce8;
 
     --nrcl-schedule-row-schedule-height: 70px;
     --nrcl-schedule-heading-width: 300px;
@@ -109,6 +110,10 @@
                 
                 &.today {
                     background-color: var( --nrcl-schedule-row-days-today-background-color );
+                }
+
+                &.highlight {
+                    background-color: var( --nrcl-schedule-row-days-highlight-background-color );
                 }
 
                 &.first {

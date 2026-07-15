@@ -147,6 +147,7 @@ export const Primary: StoryObj<ListEventHistoryComponent & DisplayModeWrapperCom
                     }
                 } )
             },
+            getInitialPageState: () => {return {}}
         }
         return {
             props: args,
@@ -180,6 +181,7 @@ export const NoRows: StoryObj<ListEventHistoryComponent & DisplayModeWrapperComp
             displayRowListPage: ( res: EventHistoryCollection ) => {
                 return []
             },
+            getInitialPageState: () => {return {}}
         }
         return {
             props: args,

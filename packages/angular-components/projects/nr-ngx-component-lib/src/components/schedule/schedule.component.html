@@ -25,6 +25,7 @@
                     [class.weekend]="day.isWeekend"
                     [class.today]="day.isToday"
                     [class.first]="day.isFirst"
+                    [class.highlight]="day.isHighlight"
                 >
                     <div class="day-name">{{ day.dayName }}</div>
                     <div class="date">{{ day.monthDay }}</div>
@@ -47,6 +48,7 @@
                     @for ( item of rowItems; track item.id; let colIndex = $index ) {
                         <div class="outer item"
                             [class.menu-open]="itemMenu.menuOpen"
+                            [class.highlight]="_days[ colIndex ].isHighlight"
                         >
                             <div class="inner item" #itemMenu="matMenuTrigger"
                                 [class]="'item-' + item.name" 
