@@ -48,17 +48,18 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> {
                 
                 return this.completedRowListPage()
             } )
+            .then( () => {
+                // console.log('complete',this.isLoading)
+                inProgress.complete()
+
+                this.isLoading = false
+                this.changeDetectorRef.detectChanges()
+            } )
             .catch( ( err ) => {
                 // console.warn(err)
                 if ( err instanceof Aborted ) return
 
                 this.loadRowListPageFailed( err )
-            } )
-            .finally( () => {
-                inProgress.complete()
-
-                this.isLoading = false
-                this.changeDetectorRef.detectChanges()
             } )
     }
 
@@ -97,6 +98,8 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> {
         console.warn( error )
         this._rows = []
         this._totalRowCount = 0
+        this.isLoading = false
+        this.changeDetectorRef.detectChanges()
     }
 
     protected refresh(): Promise<void> {
