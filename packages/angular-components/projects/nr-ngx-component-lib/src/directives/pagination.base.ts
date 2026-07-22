@@ -78,7 +78,9 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     onFilterChange( ev: F ) {
         this.filter = ev 
-        this.onPageNumberChange( 1 )
+        this._pageConfig.pageNumber = 1
+
+        this.onPageStateChanged()
     }
 
     onSortChange( ev: Sort ) {
@@ -88,14 +90,18 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
         this._pageConfig.sortActive = ev.active
         this._pageConfig.sortDirection = ev.direction
-        this.onPageNumberChange( 1 )
+        this._pageConfig.pageNumber = 1
+
+        this.onPageStateChanged()
     }
 
     onPageSizeChange( ev: number ) {
         if ( this._pageConfig.pageSize == ev ) return
 
         this._pageConfig.pageSize = ev 
-        this.onPageNumberChange( 1 )
+        this._pageConfig.pageNumber = 1
+
+        this.onPageStateChanged()
     }
 
     onPageNumberChange( ev: number ) {
