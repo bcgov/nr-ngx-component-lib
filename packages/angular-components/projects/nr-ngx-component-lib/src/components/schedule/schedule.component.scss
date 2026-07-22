@@ -139,7 +139,7 @@
                     border-right: 1px solid var( --nrcl-schedule-border-color );
                     border-bottom: 1px solid var( --nrcl-schedule-border-color );
 
-                    &:hover {
+                    &.hover:hover {
                         .item {
                             background-color: #06e;
                             color: white;

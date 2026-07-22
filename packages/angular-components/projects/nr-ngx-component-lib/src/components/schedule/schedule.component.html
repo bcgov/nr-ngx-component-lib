@@ -49,10 +49,12 @@
                         <div class="outer item"
                             [class.menu-open]="itemMenu.menuOpen"
                             [class.highlight]="_days[ colIndex ].isHighlight"
+                            [class.hover]="hover"
                         >
                             <div class="inner item" #itemMenu="matMenuTrigger"
                                 [class]="'item-' + item.name" 
                                 matRipple
+                                [matRippleDisabled]="!hover"
                                 [matMenuTriggerFor]="menu"
                                 [matMenuTriggerData]="{ $implicit: { item: item, heading: row.heading } }"
                                 [matTooltip]="item?.tooltip?.()"

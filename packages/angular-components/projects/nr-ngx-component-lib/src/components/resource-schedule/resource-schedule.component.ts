@@ -52,6 +52,7 @@ export class ResourceScheduleComponent {
     @Input() weekStart = 0
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() menu?: MatMenuPanel
+    @Input() hover = true
 
     @ViewChild( ScheduleComponent ) scheduleComponent?: ScheduleComponent
 

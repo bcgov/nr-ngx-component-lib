@@ -102,7 +102,7 @@ const meta: Meta<ResourceScheduleComponent> = {
         componentWrapperDecorator( 
             ( story ) => {
                 return `
-                    <ng-container *rerender="{width, displayMode, leaveEmpty}">
+                    <ng-container *rerender="{width, displayMode, leaveEmpty,showHover}">
                         <display-mode-wrapper 
                             [displayMode]="displayMode"
                             [useWidth]="useWidth"
@@ -128,7 +128,7 @@ const meta: Meta<ResourceScheduleComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number }> = {
+export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number, showHover: boolean }> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         startDate: {
@@ -168,6 +168,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
         dayCount: 8,
         weekStart: 0,
         showMenu: true,
+        showHover: true,
         leaveEmpty: 0,
     },
     render: ( args ) => {
@@ -207,6 +208,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [weekStart]="weekStart"
                     [provider]="provider"
                     [menu]="showMenu ? menu : null"
+                    [hover]="showHover"
                 >
                     <div>upper-left</div>
 
