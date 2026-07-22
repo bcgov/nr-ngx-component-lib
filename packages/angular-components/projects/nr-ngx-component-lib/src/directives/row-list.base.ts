@@ -5,7 +5,7 @@ import { Aborted, ObservableAborter } from "../utils/row-list.util";
 import { PaginationBase } from "./pagination.base";
 
 @Directive()
-export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implements AfterViewInit {
+export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> {
     pageStateService = inject( PageStateService )
     changeDetectorRef = inject( ChangeDetectorRef )
 
@@ -24,12 +24,6 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
 
     private _loadRowListRequest?: ObservableAborter<L> 
     private _inProgress = new InProgress()
-
-    ngAfterViewInit(): void {
-        // console.log('RowListBase.ngAfterViewInit')
-        super.ngAfterViewInit()
-        this.refreshRowList()
-    }
 
     refreshRowList(): Promise<void> {
         // console.warn('RowListBase.refreshRowList')
@@ -55,6 +49,7 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> implement
                 return this.completedRowListPage()
             } )
             .catch( ( err ) => {
+                // console.warn(err)
                 if ( err instanceof Aborted ) return
 
                 this.loadRowListPageFailed( err )

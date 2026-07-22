@@ -69,6 +69,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
         let saved = this.retrieveState()
 
         this.setCurrentPageState( saved || init )
+        this.onPageStateChanged()
     }
 
     clone( obj: any ) {
@@ -81,17 +82,25 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onSortChange( ev: Sort ) {
+        if ( this._pageConfig.sortActive == ev.active ) 
+            if ( this._pageConfig.sortDirection == ev.direction ) 
+                return
+
         this._pageConfig.sortActive = ev.active
         this._pageConfig.sortDirection = ev.direction
         this.onPageNumberChange( 1 )
     }
 
     onPageSizeChange( ev: number ) {
+        if ( this._pageConfig.pageSize == ev ) return
+
         this._pageConfig.pageSize = ev 
         this.onPageNumberChange( 1 )
     }
 
     onPageNumberChange( ev: number ) {
+        if ( this._pageConfig.pageNumber == ev ) return
+
         this._pageConfig.pageNumber = ev
 
         this.onPageStateChanged()
