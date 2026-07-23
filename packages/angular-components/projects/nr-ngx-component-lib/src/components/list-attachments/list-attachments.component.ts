@@ -41,6 +41,8 @@ export interface AttachmentRowListProvider<R,L=any> {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> implements OnChanges {
+    static _nextInstance = 0
+
     @Input() rowListProvider?: AttachmentRowListProvider<AttachmentsTableRow>
     @Input() canDelete = true
     @Input() canDownload = true
@@ -50,6 +52,8 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     DATE_FORMATS = DATE_FORMATS
     columns: string[] = [] 
     sortColumns: { code: string; description: string; }[] = []
+    desktopPaginationId = "desktop"
+    mobilePaginationId = "mobile"
 
     ngOnChanges(changes: SimpleChanges): void {
         if ( changes.canDownload || changes.canDelete || changes.showOrgUnit ) {
@@ -84,8 +88,13 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
 
         let state = this.rowListProvider.getInitialPageState()
 
+        ListAttachmentsComponent._nextInstance += 1
+        let inst = state.instance || ( 'list-attachments-' + ListAttachmentsComponent._nextInstance )
+        this.desktopPaginationId = 'desktop-' + inst
+        this.mobilePaginationId = 'mobile-' + inst
+        
         return {            
-            instance: state.instance,
+            instance: inst,
             filter: {},
             pageConfig: {
                 pageSize: 10,

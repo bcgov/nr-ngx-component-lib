@@ -3,7 +3,7 @@
         @if ( rows?.length > 0 ) {
             <nrcl-row-list-desktop [showRowHover]="false">
                 <mat-table
-                    [dataSource]="rows | paginate: paginateState( 'desktop-attachments' )"
+                    [dataSource]="rows | paginate: paginateState( desktopPaginationId )"
                     matSort
                     [matSortActive]="sortActive"
                     [matSortDirection]="sortDirection"
@@ -92,7 +92,7 @@
         }
 
         <nrcl-row-list-pagination
-            paginationId="desktop-attachments"
+            [paginationId]="desktopPaginationId"
             [pageSize]="pageSize"
             [pageNumber]="pageNumber"
             [rowCount]="totalRowCount"
@@ -116,7 +116,7 @@
             <nrcl-gap/>
 
             <nrcl-row-list-mobile>
-                @for ( item of rows | paginate: paginateState( 'mobile-attachments' ); track item.attachmentId ) {
+                @for ( item of rows | paginate: paginateState( mobilePaginationId ); track item.attachmentId ) {
                     <mat-card>
                         <mat-card-content>
                             <section full-width class="filename">
@@ -188,7 +188,7 @@
         }
 
         <nrcl-row-list-pagination
-            paginationId="mobile-attachments"
+            [paginationId]="mobilePaginationId"
             [pageSize]="pageSize"
             [pageNumber]="pageNumber"
             [rowCount]="totalRowCount"

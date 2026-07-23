@@ -36,11 +36,16 @@ export interface EventHistoryRowListProvider<R,L=any> {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableRow> {
+    static _nextInstance = 0
+
     @Input() rowListProvider?: EventHistoryRowListProvider<EventHistoryTableRow>
     @Input() canDelete = true
     @Input() showPagination = false
     @Input() isSupplier: boolean = false
     @Input() noRowsMessage = "No comments have been added."
+
+    desktopPaginationId = "desktop"
+    mobilePaginationId = "mobile"
 
     DATE_FORMATS = DATE_FORMATS
     columns = [ 'dateTime', 'changedBy', 'type', 'section', 'comment' ]
@@ -74,8 +79,13 @@ export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableR
 
         let state = this.rowListProvider.getInitialPageState()
 
+        ListEventHistoryComponent._nextInstance += 1
+        let inst = state.instance || ( 'list-event-history-' + ListEventHistoryComponent._nextInstance )
+        this.desktopPaginationId = 'desktop-' + inst
+        this.mobilePaginationId = 'mobile-' + inst
+
         return {            
-            instance: state.instance,
+            instance: inst,
             filter: {},
             pageConfig: {
                 pageSize: 20,

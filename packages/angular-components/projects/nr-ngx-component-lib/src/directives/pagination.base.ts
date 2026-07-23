@@ -77,6 +77,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onFilterChange( ev: F ) {
+        // console.log('onFilterChange',ev)
         this.filter = ev 
         this._pageConfig.pageNumber = 1
 
@@ -84,6 +85,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onSortChange( ev: Sort ) {
+        // console.log('onSortChange',ev)
         if ( this._pageConfig.sortActive == ev.active ) 
             if ( this._pageConfig.sortDirection == ev.direction ) 
                 return
@@ -96,6 +98,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onPageSizeChange( ev: number ) {
+        // console.log('onPageSizeChange',ev)
         if ( this._pageConfig.pageSize == ev ) return
 
         this._pageConfig.pageSize = ev 
@@ -105,6 +108,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onPageNumberChange( ev: number ) {
+        // console.log('onPageNumberChange',ev)
         if ( this._pageConfig.pageNumber == ev ) return
 
         this._pageConfig.pageNumber = ev
@@ -113,6 +117,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     onPageStateChanged(): Promise<void> {
+        // console.log('onPageStateChanged')
         return this.refresh()
             .then( () => {
                 let state = this.getCurrentPageState()
@@ -125,7 +130,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     abstract getInitialPageState(): InitialState<F>
 
     getCurrentPageState(): PaginationState<F> {
-        return {
+        let state = {
             filter: this.filter,
             pageConfig: {
                 pageSize: this._pageConfig.pageSize,
@@ -134,9 +139,12 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
                 sortDirection: this._pageConfig.sortDirection,
             }
         }
+        // console.log('getCurrentPageState',state)
+        return state
     }
 
     setCurrentPageState( state: PaginationState<F> ) {
+        // console.log('setCurrentPageState',state)
         this.filter = state.filter
         this._pageConfig.pageSize = state.pageConfig.pageSize
         this._pageConfig.pageNumber = state.pageConfig.pageNumber
