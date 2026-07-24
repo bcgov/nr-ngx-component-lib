@@ -71,6 +71,7 @@ export interface ScheduleProvider {
     startloadSchedule( inner: () => Promise<any> ): Promise<any>
     fetchSchedule(): Observable<any>
     parseSchedule( res: any ): Schedule
+    parseTotalRowCount?(res: any): number 
     getInitialPageState(): InitialState<{}>
     completedLoadSchedule( inner: () => void ): any
 }
@@ -127,6 +128,12 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
 
         let rows = this.provider.parseSchedule( res )
         return this.makeRows( rows )
+    }
+
+    parseTotalRowCount(res: any): number {
+        if ( !this.provider?.parseTotalRowCount ) return super.parseTotalRowCount( res )
+
+        return this.provider.parseTotalRowCount( res )
     }
 
     getInitialPageState(): InitialState<{}> {
