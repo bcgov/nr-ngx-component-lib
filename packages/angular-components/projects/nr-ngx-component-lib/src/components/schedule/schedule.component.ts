@@ -93,6 +93,8 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() menu?: MatMenuPanel
     @Input() hover = true
+    @Input() pagination = true
+    @Input() heading = true
     @Input() highlightDate?: string
 
     @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>

@@ -1,8 +1,12 @@
 @if ( rows?.length > 0 ) {
-    <div class="schedule">
-        <div class="upper-left">
-            <ng-content></ng-content>
-        </div>
+    <div class="schedule"
+        [class.heading]="heading"
+    >
+        @if ( heading ) {
+            <div class="upper-left">
+                <ng-content></ng-content>
+            </div>
+        }
 
         <div class="row weeks">
             @for ( week of _weeks; track $index ) {
@@ -35,14 +39,16 @@
 
         @for ( row of rows | paginate: paginateState( 'nrcl-schedule' ); track row.id; let rowIndex = $index ) {
             <div class="row items">
-                <div class="outer heading">
-                    <div class="inner heading">
-                        <ng-container 
-                            [ngTemplateOutlet]="headerTemplate?.template" 
-                            [ngTemplateOutletContext]="{ $implicit: row.heading }"            
-                        ></ng-container>
-                    </div>
-                </div>    
+                @if ( heading ) {
+                    <div class="outer heading">
+                        <div class="inner heading">
+                            <ng-container 
+                                [ngTemplateOutlet]="headerTemplate?.template" 
+                                [ngTemplateOutletContext]="{ $implicit: row.heading }"            
+                            ></ng-container>
+                        </div>
+                    </div>    
+                }
 
                 @if ( row.items | async; as rowItems ) {
                     @for ( item of rowItems; track item.id; let colIndex = $index ) {
@@ -86,18 +92,22 @@
             </div>
         }
     </div>
+}
 
+@if ( rows?.length > 0 && pagination ) {
     <nrcl-gap/>
 }
 
-<nrcl-row-list-pagination
-    paginationId="nrcl-schedule"
-    [pageSize]="pageSize"
-    [pageNumber]="pageNumber"
-    [rowCount]="totalRowCount"
-    (pageNumberChange)="onPageNumberChange( $event )"
-    (pageSizeChange)="onPageSizeChange( $event )"
-></nrcl-row-list-pagination>
+@if ( pagination ) {
+    <nrcl-row-list-pagination
+        paginationId="nrcl-schedule"
+        [pageSize]="pageSize"
+        [pageNumber]="pageNumber"
+        [rowCount]="totalRowCount"
+        (pageNumberChange)="onPageNumberChange( $event )"
+        (pageSizeChange)="onPageSizeChange( $event )"
+    ></nrcl-row-list-pagination>
+}
 
 <ng-template #empty>
 </ng-template>

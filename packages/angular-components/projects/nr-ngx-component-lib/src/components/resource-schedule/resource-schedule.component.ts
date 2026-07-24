@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChild, Directive, Input, numberAttribute, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ContentChild, Directive, Input, numberAttribute, TemplateRef, ViewChild } from "@angular/core";
 import { MatMenuPanel } from "@angular/material/menu";
+import { NrclBase } from "../../directives/nrcl.base";
 import { ScheduleComponent, ScheduleProvider, ScheduleRow, ScheduleRowItem } from "../schedule/schedule.component";
 
 @Directive( {
@@ -45,7 +46,7 @@ export type ResourceSchedule = ResourceScheduleRow[]
     styleUrl: "./resource-schedule.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ResourceScheduleComponent {
+export class ResourceScheduleComponent extends NrclBase {
     @Input() provider?: ScheduleProvider
     @Input() startDate?: string
     @Input() highlightDate?: string
@@ -53,6 +54,8 @@ export class ResourceScheduleComponent {
     @Input( { transform: numberAttribute } ) dayCount?: number
     @Input() menu?: MatMenuPanel
     @Input() hover = true
+    @Input() pagination = true
+    @Input() heading = true
 
     @ViewChild( ScheduleComponent ) scheduleComponent?: ScheduleComponent
 

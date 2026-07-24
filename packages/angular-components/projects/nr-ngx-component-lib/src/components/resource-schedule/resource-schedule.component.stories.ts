@@ -128,7 +128,7 @@ const meta: Meta<ResourceScheduleComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number, showHover: boolean }> = {
+export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number, showHover: boolean, showHeading: boolean }> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         startDate: {
@@ -169,6 +169,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
         weekStart: 0,
         showMenu: true,
         showHover: true,
+        showHeading: true,
         leaveEmpty: 0,
     },
     render: ( args ) => {
@@ -209,6 +210,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [provider]="provider"
                     [menu]="showMenu ? menu : null"
                     [hover]="showHover"
+                    [heading]="showHeading"
                 >
                     <div>upper-left</div>
 

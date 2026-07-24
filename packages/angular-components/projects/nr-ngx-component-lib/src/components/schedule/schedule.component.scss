@@ -29,21 +29,47 @@
     
     .schedule {
         display: grid;
-        grid-template-columns: var( --nrcl-schedule-heading-width ) repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
+        grid-template-columns: repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
         overflow: auto;
         height: 100%;
         flex-grow: 1;
 
-        .upper-left {
-            grid-row: 1 / span 2;
-            grid-column: 1;
-            border-right: 1px solid var( --nrcl-schedule-border-color );
-            border-bottom: 1px solid var( --nrcl-schedule-border-color );
-            position: sticky;
-            top: 0;
-            left: 0;
-            z-index: 2;
-            background: var( --nrcl-schedule-background-color );
+        &.heading {
+            grid-template-columns: var( --nrcl-schedule-heading-width ) repeat( var( --nrcl-schedule-day-count ), var( --nrcl-schedule-item-width ) );
+
+            .upper-left {
+                grid-row: 1 / span 2;
+                grid-column: 1;
+                border-bottom: 1px solid var( --nrcl-schedule-border-color );
+                position: sticky;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                background: var( --nrcl-schedule-background-color );
+            }
+
+            .row {
+                .outer.heading {
+                    border-left: 1px solid var( --nrcl-schedule-border-color );
+                }
+
+                &.items {
+                    .outer.heading {
+                        box-sizing: border-box;
+                        cursor: default;
+                        position: sticky;
+                        left: 0;
+                        z-index: 1;
+                        height: var( --nrcl-schedule-row-schedule-height );
+
+                        .heading {
+                            flex-grow: 1;
+                            cursor: default;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
         }
 
         .row {
@@ -51,19 +77,23 @@
 
             &.weeks > * {
                 height: var( --nrcl-schedule-row-weeks-height );
+
+                &:first-child {
+                    border-left: 1px solid var( --nrcl-schedule-border-color );
+                }
             }
 
             &.days > * {
                 height: var( --nrcl-schedule-row-days-height );
+
+                &:first-child {
+                    border-left: 1px solid var( --nrcl-schedule-border-color );
+                }
             }
 
             .outer.heading, .day, .week {
                 border-right: 1px solid var( --nrcl-schedule-border-color );
                 border-bottom: 1px solid var( --nrcl-schedule-border-color );
-            }
-
-            .outer.heading {
-                border-left: 1px solid var( --nrcl-schedule-border-color );
             }
 
             .outer.item:last-child {
@@ -139,6 +169,10 @@
                     border-right: 1px solid var( --nrcl-schedule-border-color );
                     border-bottom: 1px solid var( --nrcl-schedule-border-color );
 
+                    &:first-child {
+                        border-left: 1px solid var( --nrcl-schedule-border-color );
+                    }
+
                     &.hover:hover {
                         .item {
                             background-color: #06e;
@@ -191,20 +225,20 @@
                     }
                 }
 
-                .outer.heading {
-                    box-sizing: border-box;
-                    cursor: default;
-                    position: sticky;
-                    left: 0;
-                    z-index: 1;
-                    height: var( --nrcl-schedule-row-schedule-height );
+                // .outer.heading {
+                //     box-sizing: border-box;
+                //     cursor: default;
+                //     position: sticky;
+                //     left: 0;
+                //     z-index: 1;
+                //     height: var( --nrcl-schedule-row-schedule-height );
 
-                    .heading {
-                        flex-grow: 1;
-                        cursor: default;
-                        height: 100%;
-                    }
-                }
+                //     .heading {
+                //         flex-grow: 1;
+                //         cursor: default;
+                //         height: 100%;
+                //     }
+                // }
             }
 
             &:nth-child(odd) {
