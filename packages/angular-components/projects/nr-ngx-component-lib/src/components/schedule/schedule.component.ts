@@ -138,7 +138,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     completedRowListPage(): PaginationState<{}> {
         if ( !this.provider?.completedLoadSchedule ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
 
-        return this.provider.completedLoadSchedule( super.completedRowListPage )
+        return this.provider.completedLoadSchedule( () => { return super.completedRowListPage() } )
     }
 
     onSamePageFilterChange( ev: {} ): void {
