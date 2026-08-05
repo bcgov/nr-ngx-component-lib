@@ -38,7 +38,7 @@
         </div>
 
         @for ( row of rows | paginate: paginateState( 'nrcl-schedule' ); track row.id; let rowIndex = $index ) {
-            <div class="row items">
+            <div class="row items" [class]="row.rowClass">
                 @if ( heading ) {
                     <div class="outer heading">
                         <div class="inner heading">

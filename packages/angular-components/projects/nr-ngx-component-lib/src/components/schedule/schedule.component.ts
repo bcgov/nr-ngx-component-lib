@@ -40,7 +40,8 @@ export type ScheduleRowItem = {
 export type ScheduleRow = {
     id?: string,
     heading: any,
-    items: Promise<ScheduleRowItem[]>
+    items: Promise<ScheduleRowItem[]>,
+    rowClass?: string,
 }
 
 export type Schedule = ScheduleRow[]
@@ -68,12 +69,12 @@ export type FetchScheduleRowParameters = {
 }
 
 export interface ScheduleProvider {
-    startloadSchedule( inner: () => Promise<any> ): Promise<any>
+    startloadSchedule?( inner: () => Promise<any> ): Promise<any>
     fetchSchedule(): Observable<any>
     parseSchedule( res: any ): Schedule
     parseTotalRowCount?(res: any): number 
     getInitialPageState(): InitialState<{}>
-    completedLoadSchedule( inner: () => void ): any
+    completedLoadSchedule?( inner: () => void ): any
 }
 
 // --------------------------------------------------------------------------------
@@ -114,7 +115,8 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     }
 
     loadRowList(): Promise<any> {
-        if ( !this.provider?.startloadSchedule ) throw Error( 'ScheduleComponent.provider.startloadSchedule not set' )
+        // if ( !this.provider?.startloadSchedule ) throw Error( 'ScheduleComponent.provider.startloadSchedule not set' )
+        if ( !this.provider?.startloadSchedule ) return super.loadRowList()
      
         return this.provider.startloadSchedule( () => { return super.loadRowList() } )
     }
@@ -145,7 +147,8 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     }
 
     completedRowListPage(): PaginationState<{}> {
-        if ( !this.provider?.completedLoadSchedule ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
+        // if ( !this.provider?.completedLoadSchedule ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
+        if ( !this.provider?.completedLoadSchedule ) return super.completedRowListPage() as any
 
         return this.provider.completedLoadSchedule( () => { return super.completedRowListPage() } )
     }
@@ -203,6 +206,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
 
             return {
                 id: row.id ?? String( i ),
+                rowClass: row.rowClass,
                 heading: row.heading,
                 items: row.items
                     .then( rowItems => {
