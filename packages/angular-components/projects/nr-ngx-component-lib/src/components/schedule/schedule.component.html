@@ -44,7 +44,7 @@
                         <div class="inner heading">
                             <ng-container 
                                 [ngTemplateOutlet]="headerTemplate?.template" 
-                                [ngTemplateOutletContext]="{ $implicit: row.heading }"            
+                                [ngTemplateOutletContext]="{ $implicit: { heading: row.heading, metadata: row.metadata } }"
                             ></ng-container>
                         </div>
                     </div>    
@@ -62,7 +62,7 @@
                                 matRipple
                                 [matRippleDisabled]="!hover"
                                 [matMenuTriggerFor]="menu"
-                                [matMenuTriggerData]="{ $implicit: { item: item, heading: row.heading } }"
+                                [matMenuTriggerData]="{ $implicit: { heading: row.heading, metadata: row.metadata, item: item } }"
                                 [matTooltip]="item?.tooltip?.()"
                                 matTooltipClass="nrcl-schedule-multiline"
                                 [class.travel]="item?.travel"

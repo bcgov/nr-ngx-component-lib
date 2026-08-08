@@ -39,6 +39,7 @@ export type ScheduleRowItem = {
 
 export type ScheduleRow = {
     id?: string,
+    metadata?: any,
     heading: any,
     items: Promise<ScheduleRowItem[]>,
     rowClass?: string,
@@ -207,6 +208,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
             return {
                 id: row.id ?? String( i ),
                 rowClass: row.rowClass,
+                metadata: row.metadata,
                 heading: row.heading,
                 items: row.items
                     .then( rowItems => {
