@@ -64,6 +64,8 @@ import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
+import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
     imports: [
@@ -74,6 +76,7 @@ import { DATE_FORMATS } from './utils/date.util';
         MatCardModule,
         MatCheckboxModule,
         MatChipsModule,
+        MatDatepickerModule,
         MatExpansionModule,
         MatRadioModule,
         MatFormFieldModule,
@@ -138,6 +141,7 @@ import { DATE_FORMATS } from './utils/date.util';
         ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
+        DateNavigatorComponent,
     ],
     exports: [
         ButtonComponent,
@@ -183,6 +187,7 @@ import { DATE_FORMATS } from './utils/date.util';
         ScheduleRowHeadingDirective,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
+        DateNavigatorComponent,
     ],
     providers: [
         SnackbarUtilService,

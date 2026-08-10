@@ -1,0 +1,92 @@
+<nrcl-button tertiary
+    label="Today"
+    icon="event"
+    (click)="onDateNav( 0 )"
+></nrcl-button>
+
+@if ( largeChange ) {
+    <nrcl-button tertiary
+        icon="keyboard_double_arrow_left"
+        (click)="onDateNav( -1 * largeChange )"
+    ></nrcl-button>
+}
+
+@if ( smallChange ) {
+    <nrcl-button tertiary
+        icon="keyboard_arrow_left"
+        (click)="onDateNav( -1 * smallChange )"
+    ></nrcl-button>
+}
+
+<!-- <nrcl-form-field> -->
+
+
+    <!-- floatLabel="always"
+    appearance="fill"
+    subscriptSizing="dynamic" -->
+
+<mat-form-field
+    floatLabel="auto"
+    appearance="outline"
+    subscriptSizing="dynamic"
+>
+    <!-- <mat-label>{{ label }}</mat-label> -->
+
+        <!-- [placeholder]="placeholder" -->
+    <input matInput #input
+        [matDatepicker]="picker"
+        [ngModel]="value" 
+        (ngModelChange)="onDateChange( $event )"
+
+        maxlength="10" 
+        (focus)="onInputFocus()"
+    >
+    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+    <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+    <mat-datepicker #picker
+        (opened)="onDatepickerOpened( $event )"
+    ></mat-datepicker>
+
+    <!-- <input matInput class="search-input"             /> -->
+        <!-- [ngModel]="value"  -->
+        <!-- (ngModelChange)="onDateChange( $event )" -->
+        <!-- [placeholder]="placeholder" -->
+        <!-- maxlength="10"  -->
+        <!-- appWFDateMask -->
+    <!-- > -->
+        <!-- [owlDateTime]="selectedDateDT"  -->
+
+    <!-- @if ( hint ) {
+        <mat-hint>{{ hint }}</mat-hint>
+    } -->
+
+    <nrcl-button tertiary matSuffix
+        icon="arrow_drop_down"
+    (click)="picker.open()"
+
+    ></nrcl-button> 
+        <!-- [owlDateTimeTrigger]="selectedDateDT"  -->
+</mat-form-field>
+<!-- </nrcl-form-field> -->
+
+<!-- <owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time> -->
+
+<!-- <nrcl-button tertiary
+    icon="event"
+    (click)="picker.open()"
+></nrcl-button> -->
+
+
+@if ( smallChange ) {
+    <nrcl-button tertiary
+        icon="keyboard_arrow_right"
+        (click)="onDateNav( smallChange )"
+    ></nrcl-button>
+}
+
+@if ( largeChange ) {
+    <nrcl-button tertiary
+        icon="keyboard_double_arrow_right"
+        (click)="onDateNav( largeChange )"
+    ></nrcl-button>
+}
