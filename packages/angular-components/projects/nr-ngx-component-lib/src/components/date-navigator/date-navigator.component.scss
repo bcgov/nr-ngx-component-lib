@@ -1,10 +1,10 @@
 ::ng-deep :root {
-    --nrcl-filter-date-width: 200px;
-    --nrcl-filter-date-height: var( --nrcl-filter-height );
+    --nrcl-date-navigator-width: 200px;
+    --nrcl-date-navigator-height: var( --nrcl-filter-height );
 }
 
 :host {
-    --mat-form-field-container-height: calc( var( --nrcl-filter-date-height ) - 4px );
+    --mat-form-field-container-height: calc( var( --nrcl-date-navigator-height ) - 4px );
     --mat-form-field-container-vertical-padding: 8px;
     --mat-form-field-container-text-size: 15px;
     --mdc-outlined-text-field-focus-label-text-color: black;
@@ -12,7 +12,7 @@
     --mdc-outlined-text-field-focus-outline-width: 0;
     --mdc-outlined-text-field-outline-width: 0;
 
-    // width: var( --nrcl-filter-date-width );
+    // width: var( --nrcl-date-navigator-width );
     // display: block;
 
     display: flex;
@@ -20,15 +20,15 @@
 
     ::ng-deep {
         .mat-mdc-form-field {
-                    width: var( --nrcl-filter-date-width );
+            width: var( --nrcl-date-navigator-width );
             // width: 100%;
         
             .mat-mdc-text-field-wrapper {
                 background-color: white;
-                height: var( --nrcl-filter-date-height );
+                height: var( --nrcl-date-navigator-height );
 
                 .mat-mdc-form-field-infix {
-                    width: var( --nrcl-filter-date-width );
+                    width: var( --nrcl-date-navigator-width );
                 }
             }
         }
