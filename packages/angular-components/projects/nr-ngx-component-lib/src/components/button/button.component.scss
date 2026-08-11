@@ -66,6 +66,8 @@
     --nrcl-button-border-color: #yellow;
     --nrcl-button-hover-background-color: #blue;
 
+    display: flex;
+    
     button, a {
         display: inline-flex;
         align-items: center;

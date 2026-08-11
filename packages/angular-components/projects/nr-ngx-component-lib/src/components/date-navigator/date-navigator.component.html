@@ -20,26 +20,17 @@
 
 <mat-form-field
     floatLabel="auto"
-    appearance="outline"
+    appearance="fill"
     subscriptSizing="dynamic"
 >
-    <!-- <mat-label>{{ label }}</mat-label> -->
-
     <input matInput #input
         [matDatepicker]="picker"
-        (focus)="onInputFocus()"
+        (focus)="onInputFocus( $event )"
         [ngModel]="date" 
         (ngModelChange)="onDateChange( $event )"
     >
 
-    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-
     <mat-datepicker #picker></mat-datepicker>
-
-    <nrcl-button tertiary matSuffix
-        [icon]="picker.opened ? 'arrow_drop_up' : 'arrow_drop_down'"
-        (click)="picker.open()"
-    ></nrcl-button> 
 </mat-form-field>
 
 @if ( smallChange ) {
