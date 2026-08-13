@@ -58,7 +58,8 @@
             background-color: var( --nrcl-resource-schedule-item-out-of-service-background-color );
         }
 
-        &.item-rostered {
+
+        &.item-available-rostered {
             background-color: var( --nrcl-resource-schedule-item-rostered-background-color );
         }
 
@@ -76,6 +77,11 @@
 
         &.item-available-regular-day {
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
+        }
+
+
+        &.item-assigned-rostered {
+            background-color: var( --nrcl-resource-schedule-item-rostered-background-color );
         }
 
         &.item-assigned-duty-day {

@@ -16,12 +16,15 @@ export class ResourceScheduleRowHeadingDirective {
 
 export type ResourceScheduleItemTypes = 
     'empty' |
-    'rostered' |
     'out-of-service' |
+
+    'available-rostered' |
     'available-duty-day' |
     'available-standby-day' |
     'available-off-day' |
     'available-regular-day' |
+
+    'assigned-rostered' |
     'assigned-duty-day' |
     'assigned-standby-day' |
     'assigned-off-day' |
