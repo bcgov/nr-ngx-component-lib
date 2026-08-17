@@ -35,6 +35,8 @@
             line-height: 18px;
             text-align: center;
             white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
         }
 
         h2 {

@@ -25,6 +25,7 @@
         <h3>{{ data.shiftType }}</h3>
     </ng-template>
 
+    
     <ng-template nrclScheduleItem="available-rostered" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
@@ -35,53 +36,54 @@
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
         <h3>{{ data.shiftType }}</h3>
-        <!-- <h3>Duty Day</h3> -->
     </ng-template>
 
     <ng-template nrclScheduleItem="available-standby-day" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
         <h3>{{ data.shiftType }}</h3>
-        <!-- <h3>STBY</h3> -->
     </ng-template>
 
     <ng-template nrclScheduleItem="available-off-day" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
         <h3>{{ data.shiftType }}</h3>
-        <!-- <h3>Day Off</h3> -->
     </ng-template>
 
     <ng-template nrclScheduleItem="available-regular-day" let-data>
         <h1>Available</h1>
         <h2>{{ data.allocationType }}</h2>
         <h3>{{ data.shiftType }}</h3>
-        <!-- <h3>Reg Day</h3> -->
     </ng-template>
 
 
     <ng-template nrclScheduleItem="assigned-rostered" let-data>
-        <h2 class="wrap">{{ data.assignmentName }}</h2>
+        <h1>{{ data.assignmentName }}</h1>
+        <h2>{{ data.functionName }}</h2>
         <h3>{{ data.shiftType }}</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-duty-day" let-data>
-        <h2 class="wrap">{{ data.assignmentName }}</h2>
+        <h1>{{ data.assignmentName }}</h1>
+        <h2>{{ data.functionName }}</h2>
         <h3>{{ data.shiftType }}</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-standby-day" let-data>
-        <h2 class="wrap">{{ data.assignmentName }}</h2>
+        <h1>{{ data.assignmentName }}</h1>
+        <h2>{{ data.functionName }}</h2>
         <h3>{{ data.shiftType }}</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-off-day" let-data>
-        <h2 class="wrap">{{ data.assignmentName }}</h2>
+        <h1>{{ data.assignmentName }}</h1>
+        <h2>{{ data.functionName }}</h2>
         <h3>{{ data.shiftType }}</h3>
     </ng-template>
 
     <ng-template nrclScheduleItem="assigned-regular-day" let-data>
-        <h2 class="wrap">{{ data.assignmentName }}</h2>
+        <h1>{{ data.assignmentName }}</h1>
+        <h2>{{ data.functionName }}</h2>
         <h3>{{ data.shiftType }}</h3>
     </ng-template>
 </nrcl-schedule>

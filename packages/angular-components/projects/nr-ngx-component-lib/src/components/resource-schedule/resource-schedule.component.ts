@@ -35,6 +35,7 @@ export type ResourceScheduleRowItem = ScheduleRowItem & {
     allocationType?: string,
     shiftType?: string,
     assignmentName?: string,
+    functionName?: string,
 }
 
 export type ResourceScheduleRow = ScheduleRow & {
