@@ -63,8 +63,8 @@
                                 [matRippleDisabled]="!hover"
                                 [matMenuTriggerFor]="menu"
                                 [matMenuTriggerData]="{ $implicit: { heading: row.heading, metadata: row.metadata, item: item } }"
-                                [matTooltip]="item?.tooltip?.()"
-                                matTooltipClass="nrcl-schedule-multiline"
+                                [nrclTooltip]="item?.tooltip?.()"
+                                nrclTooltipClass="nrcl-schedule-multiline"
                                 [class.travel]="item?.travel"
                             >
                                 <ng-container 

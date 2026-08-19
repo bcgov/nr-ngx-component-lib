@@ -39,6 +39,7 @@ import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.co
 import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
 import { seedRandom } from 'projects/nr-ngx-component-lib/story-util';
+import { TooltipComponent, TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',
@@ -92,6 +93,7 @@ const meta: Meta<ResourceScheduleComponent> = {
                 ScheduleItemDirective,
                 ScheduleRowHeadingDirective,
                 ResourceScheduleRowHeadingDirective,
+                TooltipDirective,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

@@ -18,7 +18,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltipModule, TooltipComponent } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
@@ -66,6 +66,7 @@ import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
 import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 
 @NgModule({
     imports: [
@@ -142,6 +143,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
         DateNavigatorComponent,
+        TooltipDirective,
+        TooltipComponent,
     ],
     exports: [
         ButtonComponent,
@@ -188,6 +191,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
         DateNavigatorComponent,
+        TooltipDirective,
+        TooltipComponent,
     ],
     providers: [
         SnackbarUtilService,

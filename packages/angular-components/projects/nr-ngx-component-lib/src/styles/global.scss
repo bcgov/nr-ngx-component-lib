@@ -52,4 +52,19 @@ html {
             text-align: left;
         }
     }
+
+    .nrcl-tooltip-panel {
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
+        background-color: #FAF9F8;
+        color: #75767D;
+        padding: 16px;
+        border-radius: 8px;
+        font-family: var( --nrcl-font-family );
+        font-size: var( --nrcl-font-size-tooltip );
+        box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 
+                    0px 6px 10px 0px rgba(0,0,0,0.14), 
+                    0px 1px 18px 0px rgba(0,0,0,0.12);
+    }
 }
