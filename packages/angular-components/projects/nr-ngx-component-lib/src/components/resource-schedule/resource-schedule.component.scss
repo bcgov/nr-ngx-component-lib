@@ -12,6 +12,7 @@
     --nrcl-resource-schedule-item-standby-day-background-color: #f6cf43;
     --nrcl-resource-schedule-item-out-of-service-background-color: #f55353;
     --nrcl-resource-schedule-item-rostered-background-color: #ba9ef7;
+    --nrcl-resource-schedule-item-hired-background-color: #0aa64673;
 }
 
 :host {
@@ -79,6 +80,10 @@
 
         &.item-available-regular-day {
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
+        }
+
+        &.item-available-hired {
+            background-color: var( --nrcl-resource-schedule-item-hired-background-color );
         }
 
 

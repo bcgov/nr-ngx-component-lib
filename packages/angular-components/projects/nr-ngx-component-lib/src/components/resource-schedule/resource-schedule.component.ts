@@ -23,6 +23,7 @@ export type ResourceScheduleItemTypes =
     'available-standby-day' |
     'available-off-day' |
     'available-regular-day' |
+    'available-hired' |
 
     'assigned-rostered' |
     'assigned-duty-day' |

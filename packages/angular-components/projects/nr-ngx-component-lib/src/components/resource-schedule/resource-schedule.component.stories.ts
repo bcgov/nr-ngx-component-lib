@@ -196,8 +196,8 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     }
                 }
             },
-            startloadSchedule: ( inner ) => { return inner() },
-            completedLoadSchedule: ( inner ) => { return inner() },
+            // startloadSchedule: ( inner ) => { return inner() },
+            // completedLoadSchedule: ( inner ) => { return inner() },
         }
         return {
             props: args,
@@ -215,7 +215,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     <div>upper-left</div>
 
                     <ng-template nrclResourceScheduleRowHeading let-item>
-                        <div>foo  {{item|json}} {{item.bar.foo()|json}}</div>
+                        <div>foo  {{item|json}}</div>
                     </ng-template>
                 </nrcl-resource-schedule>
 
@@ -259,8 +259,8 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
                     }
                 }
             },
-            startloadSchedule: ( inner ) => { return inner() },
-            completedLoadSchedule: ( inner ) => { return inner() },
+            // startloadSchedule: ( inner ) => { return inner() },
+            // completedLoadSchedule: ( inner ) => { return inner() },
         }
         return {
             props: args,
@@ -321,6 +321,8 @@ let items = [
     { name: 'available-regular-day', allocationType: 'Full', shiftType: 'Reg Day' },
     { name: 'available-regular-day', allocationType: 'Local Only', icons: () => [ 'user-clock', 'roster' ], tooltip: ()=>'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY', shiftType: 'Reg Day' },
     { name: 'available-regular-day', allocationType: 'Other', shiftType: 'Reg Day' },
+    { name: 'available-hired' },
+    { name: 'empty' },
     { name: 'assigned-duty-day', assignmentName: 'CA1234 iufdhgi iuh fdigh sirguh iduhg qwu aoiui sudhuwhfi', shiftType: 'Duty Day' },
     { name: 'assigned-standby-day', assignmentName: 'PWCC', shiftType: 'STBY' },
     { name: 'assigned-off-day', assignmentName: 'CA1234', shiftType: 'Day Off' },
