@@ -4,7 +4,6 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
 @Component( {
     selector: 'nrcl-default-tooltip',
-    standalone: true,
     template: `
         {{ text }}
     `,
