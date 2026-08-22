@@ -64,7 +64,8 @@
                                 [matMenuTriggerFor]="menu"
                                 [matMenuTriggerData]="{ $implicit: { heading: row.heading, metadata: row.metadata, item: item } }"
                                 [nrclTooltip]="item?.tooltip?.()"
-                                nrclTooltipClass="nrcl-schedule-multiline"
+                                nrclTooltipClass="schedule"
+                                [nrclTooltipContext]="{ $implicit: { heading: row.heading, metadata: row.metadata, item: item } }"
                                 [class.travel]="item?.travel"
                             >
                                 <ng-container 

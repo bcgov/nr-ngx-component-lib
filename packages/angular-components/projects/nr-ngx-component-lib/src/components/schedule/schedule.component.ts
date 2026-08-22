@@ -33,7 +33,7 @@ export type ScheduleRowItem = {
     id: string,
     name: string,
     icons?: () => string[],
-    tooltip?: () => string,
+    tooltip?: () => string | TemplateRef<any>,
     travel?: boolean,
 }
 

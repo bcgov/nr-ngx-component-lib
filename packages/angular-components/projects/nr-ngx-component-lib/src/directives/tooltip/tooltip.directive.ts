@@ -43,8 +43,8 @@ export class TooltipDirective {
             .position()
             .flexibleConnectedTo( this.elementRef )
             .withPositions( [
-                { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 0 }, // Bottom
-                { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -0 } // Top fallback
+                { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 8 }, // Bottom
+                { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -8 } // Top fallback
             ] )
 
         this.overlayRef = this.overlay.create( {

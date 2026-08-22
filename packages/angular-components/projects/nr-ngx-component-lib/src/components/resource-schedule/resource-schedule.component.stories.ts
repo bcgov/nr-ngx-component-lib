@@ -36,7 +36,7 @@ import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.co
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
+import { ScheduleComponent, ScheduleItemDirective, ScheduleProvider, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
 import { seedRandom } from 'projects/nr-ngx-component-lib/story-util';
 import { TooltipComponent, TooltipDirective } from '../../directives/tooltip/tooltip.directive';
@@ -130,7 +130,7 @@ const meta: Meta<ResourceScheduleComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number, showHover: boolean, showHeading: boolean }> = {
+export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComponent & { showMenu: boolean, leaveEmpty: number, showHover: boolean, showHeading: boolean, makeProvider: ( x ) => ScheduleProvider }> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         startDate: {
@@ -175,7 +175,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
         leaveEmpty: 0,
     },
     render: ( args ) => {
-        args.provider = {
+        args.makeProvider = ( tr ) => { return {
             fetchSchedule: () => { return of({
                 totalRowCount: 10
             }) },
@@ -183,7 +183,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                 return Array.from( { length: 30 } ).map( ( x, i ) => {
                     return {
                         heading: { row: i, bar: { foo: () => {return 123} } },
-                        items: scheduleItems( i * 7, 19, 23, args.leaveEmpty )
+                        items: scheduleItems( i * 7, 19, 23, args.leaveEmpty, tr )
                     }
                 } )
             },
@@ -200,7 +200,8 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
             },
             // startloadSchedule: ( inner ) => { return inner() },
             // completedLoadSchedule: ( inner ) => { return inner() },
-        }
+        } }
+
         return {
             props: args,
             template: `
@@ -209,7 +210,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     [highlightDate]="highlightDate"
                     [dayCount]="dayCount"
                     [weekStart]="weekStart"
-                    [provider]="provider"
+                    [provider]="makeProvider(tooltip)"
                     [menu]="showMenu ? menu : null"
                     [hover]="showHover"
                     [heading]="showHeading"
@@ -227,6 +228,12 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
                     </ng-template>
                     <button mat-menu-item>Manage Availability</button>
                 </mat-menu>
+
+                <ng-template #tooltip let-row>
+                    <div>top</div>
+                    {{ row | json }}
+                    <div>bottom</div>
+                </ng-template>                
             `
         }
     }
@@ -318,7 +325,7 @@ let items = [
     { name: 'available-standby-day', allocationType: 'Local Only', travel: true, shiftType: 'STBY' },
     { name: 'available-standby-day', allocationType: 'Other', shiftType: 'STBY' },
     { name: 'available-off-day', allocationType: 'Full', shiftType: 'Day Off' },
-    { name: 'available-off-day', allocationType: 'Local Only', shiftType: 'Day Off' },
+    { name: 'available-off-day', allocationType: 'Local Only', shiftType: 'Day Off', tooltip: true },
     { name: 'available-off-day', allocationType: 'Other', travel: true, shiftType: 'Day Off' },
     { name: 'available-regular-day', allocationType: 'Full', shiftType: 'Reg Day' },
     { name: 'available-regular-day', allocationType: 'Local Only', icons: () => [ 'user-clock', 'roster' ], tooltip: ()=>'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY', shiftType: 'Reg Day' },
@@ -332,7 +339,7 @@ let items = [
     { name: 'rostered', allocationType: 'Other', shiftType: 'Reg Day', icons: () => [ 'roster' ] },
 ]
 
-function scheduleItems( start, length, skip, empty ): Promise<ResourceScheduleRowItem[]> {
+function scheduleItems( start, length, skip, empty, tmpl ): Promise<ResourceScheduleRowItem[]> {
     let len = items.length 
     return delayed( 
         Array.from( { length } )
@@ -342,6 +349,12 @@ function scheduleItems( start, length, skip, empty ): Promise<ResourceScheduleRo
             .map( i => {
                 if ( rand( 100 ) < empty ) {
                     i.name = 'empty'
+                }
+                return i
+            } )
+            .map( i => {
+                if ( (i.tooltip as any) === true ) {
+                    i.tooltip = () => tmpl
                 }
                 return i
             } )
