@@ -17,7 +17,10 @@ export class ResourceScheduleRowHeadingDirective {
 export type ResourceScheduleItemTypes = 
     'empty' |
     'out-of-service' |
-
+    
+    'aircraft-out-of-service' |
+    'aircraft-available' |
+    
     'available-rostered' |
     'available-duty-day' |
     'available-standby-day' |
