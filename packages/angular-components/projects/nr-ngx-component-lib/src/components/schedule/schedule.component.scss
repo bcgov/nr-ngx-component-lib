@@ -241,17 +241,17 @@
                 // }
             }
 
-            // &:nth-child(odd) {
-            //     .outer {
-            //         background-color: var( --nrcl-schedule-background-color );
-            //     }
-            // }
+            &:nth-child(odd) {
+                .outer {
+                    background-color: var( --nrcl-schedule-background-color );
+                }
+            }
         
-            // &:nth-child(even) {
-            //     .outer {
-            //         background-color: var( --nrcl-schedule-alternate-background-color );
-            //     }
-            // }
+            &:nth-child(even) {
+                .outer {
+                    background-color: var( --nrcl-schedule-alternate-background-color );
+                }
+            }
 
             &:hover {
                 .outer {                

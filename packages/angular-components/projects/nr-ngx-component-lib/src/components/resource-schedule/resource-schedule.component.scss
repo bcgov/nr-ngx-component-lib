@@ -13,6 +13,7 @@
     --nrcl-resource-schedule-item-out-of-service-background-color: #F55353;
     --nrcl-resource-schedule-item-rostered-background-color:       #BCA8F1;
     --nrcl-resource-schedule-item-hired-background-color:          #CEEDDA;
+    --nrcl-resource-schedule-item-empty-background-color:          #FFFFFF;
 }
 
 :host {
@@ -33,7 +34,7 @@
             margin: 0;
             font-weight: 200;
             font-size: 15px;
-            line-height: 20px;
+            line-height: 18px;
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
@@ -57,8 +58,12 @@
             }
         }
 
-        &.item-out-of-service {
+        &.item-out-of-service, &.item-aircraft-out-of-service {
             background-color: var( --nrcl-resource-schedule-item-out-of-service-background-color );
+        }
+
+        &.item-empty {
+            background-color: var( --nrcl-resource-schedule-item-empty-background-color );
         }
 
 
@@ -78,7 +83,7 @@
             background-color: var( --nrcl-resource-schedule-item-off-day-background-color );
         }
 
-        &.item-available-regular-day {
+        &.item-available-regular-day, &.item-aircraft-available {
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
         }
 
