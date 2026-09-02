@@ -37,10 +37,12 @@ export class TooltipDirective {
     @Input( { alias: 'nrclTooltipDelay', transform: numberAttribute } ) tooltipDelay = 300
 
     private overlayRef: OverlayRef | null = null
+    private showTooltipTimeout?: any
     private hideTooltipTimeout?: any
 
     @HostListener( 'mouseenter' )
     show() {
+        if ( this.showTooltipTimeout ) clearTimeout( this.showTooltipTimeout )
         if ( this.hideTooltipTimeout ) clearTimeout( this.hideTooltipTimeout )
 
         if ( this.overlayRef || !this.tooltipTemplate ) return
@@ -71,23 +73,28 @@ export class TooltipDirective {
 
         if ( this.tooltipTemplate instanceof TemplateRef ) {
             const portal = new TemplatePortal( this.tooltipTemplate, this.viewContainerRef, this.tooltipContext )
-            setTimeout(() => {
+            this.showTooltipTimeout = setTimeout(() => {
                 this.overlayRef?.attach( portal )
+                this.showTooltipTimeout = null
             }, this.tooltipDelay )
         }
         else {
             const componentPortal = new ComponentPortal( TooltipComponent, this.viewContainerRef )
-            setTimeout(() => {
+            this.showTooltipTimeout = setTimeout(() => {
                 const componentRef = this.overlayRef?.attach( componentPortal )
 
                 if ( componentRef )
                     componentRef.instance.text = this.tooltipTemplate as string
+
+                this.showTooltipTimeout = null
             }, this.tooltipDelay )
         }
     }
 
     @HostListener( 'mouseleave' )
     hide() {
+        if ( this.showTooltipTimeout ) clearTimeout( this.showTooltipTimeout )
+
         this.hideTooltipTimeout = setTimeout(() => {
             this.closeTooltip()
         }, this.tooltipDelay )

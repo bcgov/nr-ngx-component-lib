@@ -211,7 +211,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
         return {
             props: args,
             template: `
-                <nrcl-resource-schedule
+                <nrcl-resource-schedule #res
                     [startDate]="startDate"
                     [highlightDate]="highlightDate"
                     [dayCount]="dayCount"
@@ -237,7 +237,7 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
 
                 <ng-template #tooltip let-row>
                     <div>top</div>
-                    {{ row | json }}
+                    <!-- {{ row | json }} -->
                     <div>bottom</div>
                 </ng-template>                
             `
@@ -308,43 +308,43 @@ export const NoRows: StoryObj<ResourceScheduleComponent & DisplayModeWrapperComp
 let rand = seedRandom( 1 )
 
 let items = [
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty Day', travel: true },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'STBY' },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Day Off' },
-    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Reg Day', travel: true },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Duty Day' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'STBY' },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Day Off', travel: true },
-    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Reg Day' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Duty Day' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'STBY' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Day Off' },
-    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Reg Day', travel: true },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Duty Day' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'STBY', travel: true },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Day Off' },
-    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Reg Day' },
-    { name: 'out-of-service' },
-    { name: 'available-duty-day', allocationType: 'Full', travel: true, shiftType: 'Duty Day' },
-    { name: 'available-duty-day', allocationType: 'Local Only', shiftType: 'Duty Day' },
-    { name: 'available-duty-day', allocationType: 'Other', shiftType: 'Duty Day' },
-    { name: 'available-standby-day', allocationType: 'Full', shiftType: 'STBY' },
-    { name: 'available-standby-day', allocationType: 'Local Only', travel: true, shiftType: 'STBY' },
-    { name: 'available-standby-day', allocationType: 'Other', shiftType: 'STBY' },
-    { name: 'available-off-day', allocationType: 'Full', shiftType: 'Day Off' },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Duty Day', travel: true, tooltip: true },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'STBY', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Day Off', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Leave', shiftType: 'Reg Day', travel: true, tooltip: true },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Duty Day', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'STBY', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Day Off', travel: true, tooltip: true },
+    { name: 'out-of-service', allocationType: 'Reset', shiftType: 'Reg Day', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Duty Day', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'STBY', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Day Off', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Training', shiftType: 'Reg Day', travel: true, tooltip: true },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Duty Day', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'STBY', travel: true, tooltip: true },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Day Off', tooltip: true },
+    { name: 'out-of-service', allocationType: 'Other', shiftType: 'Reg Day', tooltip: true },
+    { name: 'out-of-service', tooltip: true  },
+    { name: 'available-duty-day', allocationType: 'Full', travel: true, shiftType: 'Duty Day', tooltip: true  },
+    { name: 'available-duty-day', allocationType: 'Local Only', shiftType: 'Duty Day', tooltip: true  },
+    { name: 'available-duty-day', allocationType: 'Other', shiftType: 'Duty Day', tooltip: true  },
+    { name: 'available-standby-day', allocationType: 'Full', shiftType: 'STBY', tooltip: true  },
+    { name: 'available-standby-day', allocationType: 'Local Only', travel: true, shiftType: 'STBY', tooltip: true  },
+    { name: 'available-standby-day', allocationType: 'Other', shiftType: 'STBY', tooltip: true  },
+    { name: 'available-off-day', allocationType: 'Full', shiftType: 'Day Off', tooltip: true  },
     { name: 'available-off-day', allocationType: 'Local Only', shiftType: 'Day Off', tooltip: true },
-    { name: 'available-off-day', allocationType: 'Other', travel: true, shiftType: 'Day Off' },
-    { name: 'available-regular-day', allocationType: 'Full', shiftType: 'Reg Day' },
+    { name: 'available-off-day', allocationType: 'Other', travel: true, shiftType: 'Day Off', tooltip: true  },
+    { name: 'available-regular-day', allocationType: 'Full', shiftType: 'Reg Day', tooltip: true  },
     { name: 'available-regular-day', allocationType: 'Local Only', icons: () => [ 'user-clock', 'roster' ], tooltip: ()=>'CaFC\nCentral Cariboo Zone (Williams Lake)\nSTBY', shiftType: 'Reg Day' },
-    { name: 'available-regular-day', allocationType: 'Other', shiftType: 'Reg Day' },
-    { name: 'available-regular-day' },
-    { name: 'available-hired' },
+    { name: 'available-regular-day', allocationType: 'Other', shiftType: 'Reg Day', tooltip: true  },
+    { name: 'available-regular-day', tooltip: true  },
+    { name: 'available-hired', tooltip: true  },
     { name: 'empty' },
-    { name: 'assigned-duty-day', assignmentName: 'CA1234 iufdhgi iuh fdigh sirguh iduhg qwu aoiui sudhuwhfi', shiftType: 'Duty Day' },
-    { name: 'assigned-standby-day', assignmentName: 'PWCC', shiftType: 'STBY' },
-    { name: 'assigned-off-day', assignmentName: 'CA1234', shiftType: 'Day Off' },
-    { name: 'assigned-regular-day',  assignmentName: 'Multiple', shiftType: 'Reg Day' },
-    { name: 'rostered', allocationType: 'Other', shiftType: 'Reg Day', icons: () => [ 'roster' ] },
+    { name: 'assigned-duty-day', assignmentName: 'CA1234 iufdhgi iuh fdigh sirguh iduhg qwu aoiui sudhuwhfi', shiftType: 'Duty Day', tooltip: true  },
+    { name: 'assigned-standby-day', assignmentName: 'PWCC', shiftType: 'STBY', tooltip: true  },
+    { name: 'assigned-off-day', assignmentName: 'CA1234', shiftType: 'Day Off', tooltip: true  },
+    { name: 'assigned-regular-day',  assignmentName: 'Multiple', shiftType: 'Reg Day', tooltip: true  },
+    { name: 'rostered', allocationType: 'Other', shiftType: 'Reg Day', icons: () => [ 'roster' ], tooltip: true  },
 ]
 
 function scheduleItems( start, length, skip, empty, tmpl ): Promise<ResourceScheduleRowItem[]> {
