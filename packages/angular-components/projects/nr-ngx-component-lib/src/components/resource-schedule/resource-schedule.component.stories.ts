@@ -176,9 +176,15 @@ export const Primary: StoryObj<ResourceScheduleComponent & DisplayModeWrapperCom
     },
     render: ( args ) => {
         args.makeProvider = ( tr ) => { return {
-            fetchSchedule: () => { return of({
-                totalRowCount: 10
-            }) },
+            fetchSchedule: () => { return of(
+                new Promise( ( res, rej ) => {
+                    setTimeout( () => {
+                        res( {
+                            totalRowCount: 10
+                        } )
+                    }, 1000 )
+                } )
+            ) },
             parseSchedule: ( res ) => {
                 return Array.from( { length: 30 } ).map( ( x, i ) => {
                     return {

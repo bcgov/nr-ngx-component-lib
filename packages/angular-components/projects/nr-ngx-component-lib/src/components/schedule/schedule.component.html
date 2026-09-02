@@ -100,14 +100,19 @@
 }
 
 @if ( pagination ) {
-    <nrcl-row-list-pagination
-        paginationId="nrcl-schedule"
-        [pageSize]="pageSize"
-        [pageNumber]="pageNumber"
-        [rowCount]="totalRowCount"
-        (pageNumberChange)="onPageNumberChange( $event )"
-        (pageSizeChange)="onPageSizeChange( $event )"
-    ></nrcl-row-list-pagination>
+    @if ( isFirstLoad ) {
+        <div class="loading-rows">{{ loadingMessage }}</div>
+    }
+    @else {
+        <nrcl-row-list-pagination
+            paginationId="nrcl-schedule"
+            [pageSize]="pageSize"
+            [pageNumber]="pageNumber"
+            [rowCount]="totalRowCount"
+            (pageNumberChange)="onPageNumberChange( $event )"
+            (pageSizeChange)="onPageSizeChange( $event )"
+        ></nrcl-row-list-pagination>
+    }
 }
 
 <ng-template #empty>
