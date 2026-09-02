@@ -2,6 +2,8 @@ import { Directive, Input, TemplateRef, ViewContainerRef, HostListener, ElementR
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
+
+
 @Component( {
     selector: 'nrcl-default-tooltip',
     template: `
@@ -35,7 +37,7 @@ export class TooltipDirective {
     @Input( { alias: 'nrclTooltipDelay', transform: numberAttribute } ) tooltipDelay = 300
 
     private overlayRef: OverlayRef | null = null
-    private hideTooltipTimeout?: NodeJS.Timeout
+    private hideTooltipTimeout?: any
 
     @HostListener( 'mouseenter' )
     show() {
