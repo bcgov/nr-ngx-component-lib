@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, HostListener, ElementRef, inject, Component, numberAttribute } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef, HostListener, ElementRef, inject, Component, numberAttribute, Renderer2 } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
@@ -27,6 +27,7 @@ export class TooltipDirective {
     private overlay = inject( Overlay )
     private elementRef = inject( ElementRef )
     private viewContainerRef = inject( ViewContainerRef )
+    private renderer = inject( Renderer2 )
 
     @Input( 'nrclTooltip' ) tooltipTemplate!: TemplateRef<any> | string
     @Input( 'nrclTooltipContext' ) tooltipContext: any
@@ -34,9 +35,12 @@ export class TooltipDirective {
     @Input( { alias: 'nrclTooltipDelay', transform: numberAttribute } ) tooltipDelay = 300
 
     private overlayRef: OverlayRef | null = null
+    private hideTooltipTimeout?: NodeJS.Timeout
 
     @HostListener( 'mouseenter' )
     show() {
+        if ( this.hideTooltipTimeout ) clearTimeout( this.hideTooltipTimeout )
+
         if ( this.overlayRef || !this.tooltipTemplate ) return
 
         const positionStrategy = this.overlay
@@ -53,10 +57,20 @@ export class TooltipDirective {
             panelClass: [ 'nrcl-tooltip-panel', ...( this.tooltipClass ? [ this.tooltipClass ]: [] ) ],
         } )
 
+        const overlayElement = this.overlayRef.overlayElement;
+
+        this.renderer.listen(overlayElement, 'mouseenter', () => {
+            if (this.hideTooltipTimeout) clearTimeout(this.hideTooltipTimeout);
+        });
+
+        this.renderer.listen(overlayElement, 'mouseleave', () => {
+            this.hide();
+        } )
+
         if ( this.tooltipTemplate instanceof TemplateRef ) {
             const portal = new TemplatePortal( this.tooltipTemplate, this.viewContainerRef, this.tooltipContext )
             setTimeout(() => {
-                this.overlayRef?.attach( portal )            
+                this.overlayRef?.attach( portal )
             }, this.tooltipDelay )
         }
         else {
@@ -64,7 +78,7 @@ export class TooltipDirective {
             setTimeout(() => {
                 const componentRef = this.overlayRef?.attach( componentPortal )
 
-                if ( componentRef ) 
+                if ( componentRef )
                     componentRef.instance.text = this.tooltipTemplate as string
             }, this.tooltipDelay )
         }
@@ -72,7 +86,9 @@ export class TooltipDirective {
 
     @HostListener( 'mouseleave' )
     hide() {
-        this.closeTooltip()
+        this.hideTooltipTimeout = setTimeout(() => {
+            this.closeTooltip()
+        }, this.tooltipDelay )
     }
 
     ngOnDestroy() {

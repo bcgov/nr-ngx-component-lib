@@ -67,6 +67,9 @@ export const Primary: StoryObj<TooltipDirective & { width: number }> = {
                     <p>The content</p>
                     <p>source: {{ ctx.name }}</p>
                     <h6>The footer</h6>
+                    <nrcl-button anchor
+                        label="click me"
+                    ></nrcl-button>
                 </ng-template>
             `
         }
