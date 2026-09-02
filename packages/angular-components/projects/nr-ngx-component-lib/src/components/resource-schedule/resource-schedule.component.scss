@@ -47,18 +47,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            
+
             &.wrap {
                 white-space: wrap;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                -webkit-line-clamp: 2;        
+                -webkit-line-clamp: 2;
                 min-height: 0;
                 overflow: hidden;
             }
         }
 
-        &:has( h2:empty ) {            
+        &:has( h2:empty ):has( h3:empty ) {
             h1 {
                 flex-grow: 1;
                 text-align: center;
@@ -66,12 +66,14 @@
                 justify-content: center;
                 align-items: center;
             }
-            h2 { display: none; }
+            h2, h3 { display: none; }
         }
+
 
         &.item-out-of-service {
             background-color: var( --nrcl-resource-schedule-item-out-of-service-background-color );
         }
+
 
         &.item-empty {
             background-color: var( --nrcl-resource-schedule-item-empty-background-color );
