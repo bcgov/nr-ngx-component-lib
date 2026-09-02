@@ -58,7 +58,18 @@
             }
         }
 
-        &.item-out-of-service, &.item-aircraft-out-of-service {
+        &:has( h2:empty ) {            
+            h1 {
+                flex-grow: 1;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            h2 { display: none; }
+        }
+
+        &.item-out-of-service {
             background-color: var( --nrcl-resource-schedule-item-out-of-service-background-color );
         }
 
@@ -83,7 +94,7 @@
             background-color: var( --nrcl-resource-schedule-item-off-day-background-color );
         }
 
-        &.item-available-regular-day, &.item-aircraft-available {
+        &.item-available-regular-day {
             background-color: var( --nrcl-resource-schedule-item-regular-day-background-color );
         }
 
