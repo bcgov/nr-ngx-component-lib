@@ -14,6 +14,10 @@ const config: StorybookConfig = {
         { 
             from: "../projects/nr-ngx-component-lib/src/styles", 
             to: "/styles" 
+        },
+        {
+            from: "../projects/nr-ngx-component-lib/src/assets",
+            to: "/assets"
         }
     ],
     core: {

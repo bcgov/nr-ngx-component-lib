@@ -1,0 +1,34 @@
+@if (skipLinksEnabled) {
+    <a
+        class="skip-link"
+        [href]="'#' + skipLinkTarget"
+    >
+        {{ skipLinkLabel }}
+    </a>
+}
+
+<header
+    class="bcds-header-mobile"
+    role="banner"
+>
+    <div class="bcds-header-mobile--container">
+
+        <a
+            class="logo-link"
+            [routerLink]="homeUrl"
+            aria-label="BC Wildfire Service home"
+        >
+        <img class="bcgov-logo"
+            src="assets/BCWS_H1_rgb_pos.png">
+        </a>
+
+        <h1 class="bcds-header-mobile--title">
+            {{ siteTitle }}
+        </h1>
+
+        <div class="header-mobile-actions">
+            <ng-content select="[action]"></ng-content>
+        </div>
+
+    </div>
+</header>
