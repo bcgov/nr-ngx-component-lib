@@ -9,11 +9,10 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> {
     pageStateService = inject( PageStateService )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-
     @Output() isLoadingChange = new EventEmitter<boolean>()
     
     private _isFirstLoad = true
-    get isFirstLoad() { return this._isLoading }
+    get isFirstLoad() { return this._isFirstLoad }
 
     private _isLoading = false
     get isLoading() { return this._isLoading }
