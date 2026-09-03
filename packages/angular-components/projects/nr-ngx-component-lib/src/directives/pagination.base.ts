@@ -76,35 +76,35 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
         return JSON.parse( JSON.stringify( obj ) ) 
     }
 
-    onFilterChange( ev: F ) {
+    onFilterChange( ev: F ): Promise<void> {
         // console.log('onFilterChange',ev)
         this.filter = ev 
         this._pageConfig.pageNumber = 1
 
-        this.onPageStateChanged()
+        return this.onPageStateChanged()
     }
 
-    onSortChange( ev: Sort ) {
+    onSortChange( ev: Sort ): Promise<void> {
         // console.log('onSortChange',ev)
         if ( this._pageConfig.sortActive == ev.active ) 
             if ( this._pageConfig.sortDirection == ev.direction ) 
-                return
+                return Promise.resolve()
 
         this._pageConfig.sortActive = ev.active
         this._pageConfig.sortDirection = ev.direction
         this._pageConfig.pageNumber = 1
 
-        this.onPageStateChanged()
+        return this.onPageStateChanged()
     }
 
-    onPageSizeChange( ev: number ) {
+    onPageSizeChange( ev: number ): Promise<void> {
         // console.log('onPageSizeChange',ev)
-        if ( this._pageConfig.pageSize == ev ) return
+        if ( this._pageConfig.pageSize == ev ) return Promise.resolve()
 
         this._pageConfig.pageSize = ev 
         this._pageConfig.pageNumber = 1
 
-        this.onPageStateChanged()
+        return this.onPageStateChanged()
     }
 
     onPageNumberChange( ev: number ) {
@@ -113,7 +113,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
         this._pageConfig.pageNumber = ev
 
-        this.onPageStateChanged()
+        return this.onPageStateChanged()
     }
 
     onPageStateChanged(): Promise<void> {
