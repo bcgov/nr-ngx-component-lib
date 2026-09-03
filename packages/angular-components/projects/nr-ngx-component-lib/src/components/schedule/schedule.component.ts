@@ -98,7 +98,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     @Input() pagination = true
     @Input() heading = true
     @Input() highlightDate?: string
-    @Input() loadingMessage = 'Loading schedule.'
+    @Input() loadingMessage = 'Loading...'
 
     @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>
     @ContentChild(ScheduleRowHeadingDirective) headerTemplate!: ScheduleRowHeadingDirective
