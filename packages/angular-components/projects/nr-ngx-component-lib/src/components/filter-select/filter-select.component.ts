@@ -175,7 +175,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         let mod = JSON.stringify( this.selection.value )
         // console.log(this.label,old,mod,this.options.map(o=>o.code))
 
-        if ( old == mod ) return
+        if ( old == 'null' || old == mod ) return
 
         this.emitValueChange()
     }
