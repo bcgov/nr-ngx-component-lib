@@ -5,13 +5,27 @@ import {
     StoryObj
 } from "@storybook/angular";
 
+import {
+    DisplayModeWrapperComponent,
+    displayModeWrapperStory
+} from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+
+import {
+    DeviceViewComponent,
+    DesktopViewDirective,
+    MobileViewDirective
+} from '../device-view/device-view.component';
+
+import { ConfigurationService } from '../../services/configuration.service';
+
+
 import { MatButtonModule } from "@angular/material/button";
 
-import { HeaderComponent } from "./header-desktop.component";
+import { HeaderComponent } from "./header.component";
 import { ButtonComponent } from "../button/button.component";
 
 const meta: Meta<HeaderComponent> = {
-    title: "Header (Desktop)",
+    title: "Header",
     component: HeaderComponent,
 
     decorators: [
@@ -20,15 +34,28 @@ const meta: Meta<HeaderComponent> = {
                 MatButtonModule
             ],
             declarations: [
-                ButtonComponent
+                ButtonComponent,
+                DisplayModeWrapperComponent,
+                DeviceViewComponent,
+                DesktopViewDirective,
+                MobileViewDirective
+            ],
+            providers: [
+                ConfigurationService
             ]
         }),
 
         componentWrapperDecorator(
             story => `
-                <div style="width:100%">
-                    ${story}
-                </div>
+                <ng-container *rerender="displayMode">
+                    <display-mode-wrapper
+                        [displayMode]="displayMode"
+                        [useWidth]="useWidth"
+                        [width]="width"
+                    >
+                        ${story}
+                    </display-mode-wrapper>
+                </ng-container>
             `
         )
     ],
@@ -54,13 +81,12 @@ BC Wildfire Service application header based on the BC Government Design System.
 ## Usage
 
 \`\`\`html
-<nrcl-header-desktop
-    siteTitle="Wildfire DataMart"
+<nrcl-application-header
+    title="Wildfire DataMart"
 >
     
-        Menu
-    </nrcl-button>
-</nrcl-header-desktop>
+     
+</nrcl-application-header>
 \`\`\`
 `
             }
@@ -68,7 +94,7 @@ BC Wildfire Service application header based on the BC Government Design System.
     },
 
     args: {
-        siteTitle: "Wildfire DataMart",
+        title: "Wildfire DataMart",
         homeUrl: "/"
     }
 };
@@ -78,16 +104,27 @@ export default meta;
 type Story = StoryObj<HeaderComponent>;
 
 export const Primary: Story = {
+    argTypes: {
+
+    ...displayModeWrapperStory.argTypes
+
+    },
     render: args => ({
         props: args,
         template: `
-            <nrcl-header-desktop
-                [siteTitle]="siteTitle"
+            <nrcl-application-header
+                [title]="title"
                 [homeUrl]="homeUrl"
                 [skipLinksEnabled]="skipLinksEnabled"
                 [skipLinkTarget]="skipLinkTarget"
+                [skipLinkLabel]="skipLinkLabel"
+                logoSrc="assets/BCWS_H1_rgb_pos.png"
+                logoAlt="BC Wildfire Service logo"
+                logoLinkAriaLabel="BC Wildfire Service home"
+                [showMenu]="showMenu"
+                [menuTitle]="menuTitle"
             >
-            </nrcl-header-desktop>
+            </nrcl-application-header>
 
             <main id="main-content">
                 <p> 
@@ -150,41 +187,14 @@ export const Primary: Story = {
         `
     }),
     args: {
-        siteTitle: 'Wildfire DataMart',
+        ...displayModeWrapperStory.args,
+        title: 'Wildfire DataMart',
         homeUrl: '/',
         skipLinksEnabled: true,
-        skipLinkTarget: 'main-content'
+        skipLinkTarget: 'main-content',
+        skipLinkLabel: 'Skip to main content',
+        showMenu: false,
+        menuTitle: "-"
     }
 };
 
-export const WithMenu: Story = {
-    render: args => ({
-        props: args,
-        template: `
-            <nrcl-header-desktop
-                [siteTitle]="siteTitle"
-                [homeUrl]="homeUrl"
-                [skipLinksEnabled]="skipLinksEnabled"
-                [skipLinkTarget]="skipLinkTarget"
-            >
-                <nrcl-button action>
-                    Menu
-                </nrcl-button>
-            </nrcl-header-desktop>
-
-            <main id="main-content">
-                <p>
-                    Placeholder menu story. The Menu button demonstrates
-                    where the future navigation menu component will be
-                    projected into the header.
-                </p>
-            </main>
-        `
-    }),
-    args: {
-        siteTitle: 'Wildfire DataMart',
-        homeUrl: '/',
-        skipLinksEnabled: true,
-        skipLinkTarget: 'main-content'
-    }
-};
