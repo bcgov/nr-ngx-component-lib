@@ -14,13 +14,13 @@
     color: #003366;
     text-decoration: none;
 
-    &:focus {
+    &:focus-visible {
         left: 1rem;
         top: 1rem;
         z-index: 1000;
 
         outline: 3px solid #38598a;
-        outline-offset: 2px;
+        outline-offset: 1px;
     }
 }
 

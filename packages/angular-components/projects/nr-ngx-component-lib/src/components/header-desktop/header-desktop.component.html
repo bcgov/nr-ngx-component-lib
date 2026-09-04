@@ -1,36 +1,28 @@
-@if (skipLinksEnabled) {
 
-    <a
-        class="skip-link"
-        [href]="'#' + skipLinkTarget"
-    >
-        Skip to main content
-    </a>
-
-    <a
-        class="skip-link"
-        [attr.href]="homeUrl"
-    >
-        Skip to home
-    </a>
-}
 <header
     class="bcds-header-desktop"
     role="banner"
 >
     <div class="bcds-header-desktop--container">
-
         <div class="header-desktop-brand">
 
-            <a
-                class="logo-link"
-                [routerLink]="homeUrl"
+            <a class="logo-link"
+                [attr.href]="homeUrl"
                 aria-label="BC Wildfire Service home"
             >
             <img class="bcgov-logo"
-                src="assets/BCWS_H1_rgb_pos.png">
-                 
+                src="assets/BCWS_H1_rgb_pos.png"
+                alt="BC Wildfire Service logo">
             </a>
+
+            @if (skipLinksEnabled) {
+                <a class="skip-link"
+                    [href]="'#' + skipLinkTarget"
+                >
+                    Skip to main content
+                </a>
+
+            }
 
             <div class="bcds-header-desktop--line"></div>
 

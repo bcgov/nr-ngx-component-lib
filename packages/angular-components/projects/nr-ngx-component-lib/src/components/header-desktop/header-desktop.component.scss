@@ -3,23 +3,6 @@
     font-family: var(--nrcl-font-family);
 }
 
-.skip-link {
-    position: absolute;
-    left: -9999px;
-    top: 0;
-
-    &:focus {
-        left: 1rem;
-        top: 1rem;
-        z-index: 1000;
-
-        padding: 0.75rem 1rem;
-        background: white;
-        color: #003366;
-        border: 2px solid #38598a;
-        text-decoration: none;
-    }
-}
 
 .bcds-header-desktop {
     display: flex;
@@ -56,7 +39,7 @@
 
     &:focus-visible {
         outline: 3px solid #38598a;
-        outline-offset: 2px;
+        outline-offset: 1px;
     }
 }
 
