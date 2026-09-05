@@ -90,9 +90,8 @@
         }
 
         &:focus-visible {
-            outline: 3px solid #38598A;
+            outline: 3px solid var(--nrcl-focus-color);
             outline-offset: 2px;
-            
         }
 
         border-width: 1px;
