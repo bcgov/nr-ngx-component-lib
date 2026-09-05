@@ -9,7 +9,7 @@
     top: 0;
 
     font: var(--nrcl-typography-regular-body);
-
+    line-height: 1.2;
     padding: 0.5rem 0.75rem;
 
     background: var(--nrcl-background-color);
@@ -91,7 +91,7 @@
 
 
 .desktop-actions {
-   display: flex;
+    display: flex;
     align-items: center;
     gap: var(--nrcl-gutter-space);
     flex-shrink: 0;
