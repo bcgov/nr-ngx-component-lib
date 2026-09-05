@@ -1,0 +1,87 @@
+
+    <nrcl-device-view>
+        <ng-template desktop-view>
+            <header
+                class="desktop"
+                role="banner"
+            >
+                <div class="desktop-container">
+                    <div class="desktop-brand">
+
+                        <a class="logo-link"
+                            [attr.href]="homeUrl"
+                            [attr.aria-label]="logoLinkAriaLabel"
+                        >
+                        <img class="logo"
+                            [src]="logoSrc"
+                            [alt]="logoAlt">
+                        </a>
+
+                        @if (skipLinksEnabled) {
+                            <a class="skip-link"
+                                [href]="'#' + skipLinkTarget"
+                            >
+                                {{ skipLinkLabel }}
+                            </a>
+
+                        }
+
+                        <div class="desktop-divider"></div>
+
+                        <h1 class="desktop-title">
+                            {{ title }}
+                        </h1>
+
+                    </div>
+
+                     @if (showMenu) {
+                    <div class="desktop-actions">
+                        <nrcl-button>
+                            {{menuTitle}}
+                        </nrcl-button>
+                    </div>
+                    }
+                </div>
+            </header>
+        </ng-template>
+        <ng-template mobile-view>
+            @if (skipLinksEnabled) {
+                <a
+                    class="skip-link"
+                    [href]="'#' + skipLinkTarget"
+                >
+                    {{ skipLinkLabel }}
+                </a>
+            }
+
+            <header
+                class="mobile"
+                role="banner"
+            >
+                <div class="mobile-container">
+
+                    <a
+                        class="logo-link"
+                        [attr.href]="homeUrl"
+                        [attr.aria-label]="logoLinkAriaLabel"
+                    >
+                    <img class="logo"
+                        [src]="logoSrc"
+                        [alt]="logoAlt">
+                    </a>
+
+                    <h1 class="mobile-title">
+                        {{ title }}
+                    </h1>
+
+                    @if (showMenu) {
+                    <div class="mobile-actions">
+                        <nrcl-button>
+                            {{menuTitle}}
+                        </nrcl-button>
+                    </div>
+                    }
+                </div>
+            </header>
+        </ng-template>
+    </nrcl-device-view>

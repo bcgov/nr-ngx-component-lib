@@ -32,8 +32,7 @@ export class DisplayModeWrapperComponent implements OnInit, OnChanges {
 
     getWidth() {
         if ( !this.useWidth ) {
-            if ( this.displayMode == 'desktop' ) return '100%'
-            if ( this.displayMode == 'mobile' ) return '400px'
+            return '100%'
         }
         return this.width + 'px'
     }

@@ -89,6 +89,11 @@
             background-color: var( --nrcl-button-hover-background-color );
         }
 
+        &:focus-visible {
+            outline: 3px solid var(--nrcl-focus-color);
+            outline-offset: 2px;
+        }
+
         border-width: 1px;
         border-style: solid;
         border-radius: 4px;
