@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './device-view.component';
 
@@ -70,7 +70,7 @@ const meta: Meta<DeviceViewComponent> = {
 
 export default meta;
 
-export const Primary: StoryObj<DeviceViewComponent & { displayMode: DisplayMode }> = {
+export const Primary: StoryObj<DeviceViewComponent & DisplayModeWrapperComponent> = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
     },
