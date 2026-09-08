@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ApplicationHeaderComponent } from './components/application-header/application-header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
@@ -99,6 +100,7 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         MatTabsModule
     ],
     declarations: [
+        ApplicationHeaderComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,
@@ -147,6 +149,7 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         TooltipComponent,
     ],
     exports: [
+        ApplicationHeaderComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,

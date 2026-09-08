@@ -52,6 +52,7 @@
     --nrcl-button-anchor-disabled-background-color: transparent;
     --nrcl-button-anchor-disabled-border-color: transparent;
     --nrcl-button-anchor-disabled-hover-background-color: transparent;
+    --nrcl-button-focus-color: #2e5dd7;
 }
 
 :host {
@@ -90,7 +91,7 @@
         }
 
         &:focus-visible {
-            outline: 3px solid var(--nrcl-focus-color);
+            outline: 3px solid var(--nrcl-button-focus-color);
             outline-offset: 2px;
         }
 

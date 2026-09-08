@@ -3,15 +3,15 @@ import {
     Component,
     Input
 } from "@angular/core";
-import { NrclBase } from "dist/nr-ngx-component-lib";
+import { NrclBase } from '../../directives/nrcl.base';
 
 @Component({
-    selector: "nrcl-application-header",
-    templateUrl: "./header.component.html",
-    styleUrl: "./header.component.scss",
+    selector: "application-header",
+    templateUrl: "./application-header.component.html",
+    styleUrl: "./application-header.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent extends NrclBase{
+export class ApplicationHeaderComponent extends NrclBase{
 
     @Input() skipLinksEnabled = false;
 

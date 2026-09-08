@@ -1,6 +1,7 @@
 /*
  * Public API Surface of wfcc-application-ui
  */
+export * from './components/application-header/application-header.component'
 export * from './components/button/button.component'
 export * from './components/cell-content/cell-content.component'
 export * from './components/device-view/device-view.component'

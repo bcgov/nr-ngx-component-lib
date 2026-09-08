@@ -1,0 +1,184 @@
+::ng-deep :root {
+    --nrcl-header-focus-color: #2e5dd7;
+    --nrcl-header-mobile-min-height: 56px;
+    --nrcl-header-desktop-min-height: 65px;
+
+    --nrcl-header-background-color: #FFFFFF;
+    --nrcl-header-title-color: #2D2D2D;
+    --nrcl-header-link-color: #255A90;
+    --nrcl-header-divider-color: #D8D8D8;
+    --nrcl-header-surface-color-border-default: #D8D8D8;
+
+    --nrcl-header-divider-height: 32px;
+    --nrcl-header-logo-width: 129px;
+    --nrcl-header-logo-width-mobile: 100px;
+    --nrcl-header-border-width-small: 1px;
+
+    --nrcl-header-layout-padding-none: 0;
+    --nrcl-header-layout-padding-small: 0.5rem;
+    --nrcl-header-layout-padding-medium: 1rem;
+}
+
+:host {
+    display: block;
+    font-family: var(--nrcl-font-family);
+    
+}
+
+.skip-link {
+    position: absolute;
+    margin-left: -100000px;
+    top: 0;
+
+    font: var(--nrcl-typography-regular-body);
+    line-height: 1.2;
+    padding: 0.5rem 0.75rem;
+
+    background: var(--nrcl-header-background-color);
+    color: var(--nrcl-header-link-color);
+
+    text-decoration: underline;
+
+    &:focus-visible {
+        margin-left: 0;
+        top: 1rem;
+        z-index: 1000;
+
+        outline: 3px solid var(--nrcl-header-focus-color);
+        outline-offset: 2px;
+    }
+}
+.logo {
+    width: var(--nrcl-header-logo-width);
+    min-width: var(--nrcl-header-logo-width);
+    height: auto;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    &:focus-visible {
+        outline: 3px solid var(--nrcl-header-focus-color);
+        outline-offset: 1px;
+    }
+}
+
+.desktop {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--nrcl-header-background-color);
+    border-bottom: var(--nrcl-header-border-width-small) solid
+    var(--nrcl-header-surface-color-border-default);
+    min-height: var(--nrcl-header-desktop-min-height);
+    padding: var(--nrcl-header-layout-padding-none) var(--nrcl-header-layout-padding-medium);
+    width: 100%;
+    flex-grow: 1;
+}
+
+.desktop-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: var(--nrcl-header-layout-padding-medium);
+
+    width: 100%;
+    min-height: var(--nrcl-header-desktop-min-height);
+}
+
+.desktop-title {
+    margin: 0;
+    flex-grow:1;
+
+    font: var(--nrcl-typography-bold-h4);
+    color: var(--nrcl-header-title-color);
+
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.desktop-brand {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: var(--nrcl-header-layout-padding-medium);
+    min-width: 0;
+}
+
+
+.desktop-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--nrcl-gutter-space);
+    flex-shrink: 0;
+    padding-right: 1rem;
+}
+
+.desktop-divider {
+    width: var(--nrcl-header-border-width-small);
+    height: var(--nrcl-header-divider-height);
+    background-color: var(--nrcl-header-divider-color);
+}
+
+.mobile .logo {
+    width: var(--nrcl-header-logo-width-mobile);
+    min-width: var(--nrcl-header-logo-width-mobile);
+}
+
+.mobile {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    background-color: var(--nrcl-header-background-color);
+
+    box-sizing: border-box;
+
+    border-bottom:
+        var(--nrcl-header-border-width-small)
+        solid
+        var(--nrcl-header-surface-color-border-default);
+}
+
+.mobile-container {
+    padding: 0 var(--nrcl-header-layout-padding-small);
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    gap: var(--nrcl-device-mobile-gutter-space);
+
+    width: 100%;
+    min-height: var(--nrcl-header-mobile-min-height);
+    max-width: 100%;
+
+}
+
+.mobile-title {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    color: var(--nrcl-header-title-color);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: normal;
+    overflow: visible;
+    
+}
+
+.mobile-actions {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

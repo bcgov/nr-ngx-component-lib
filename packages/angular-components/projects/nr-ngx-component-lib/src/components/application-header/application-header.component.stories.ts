@@ -21,12 +21,12 @@ import { ConfigurationService } from '../../services/configuration.service';
 
 import { MatButtonModule } from "@angular/material/button";
 
-import { HeaderComponent } from "./header.component";
+import { ApplicationHeaderComponent } from "./application-header.component";
 import { ButtonComponent } from "../button/button.component";
 
-const meta: Meta<HeaderComponent> = {
+const meta: Meta<ApplicationHeaderComponent> = {
     title: "Header",
-    component: HeaderComponent,
+    component: ApplicationHeaderComponent,
 
     decorators: [
         moduleMetadata({
@@ -81,12 +81,12 @@ BC Wildfire Service application header based on the BC Government Design System.
 ## Usage
 
 \`\`\`html
-<nrcl-application-header
+<application-header
     title="Wildfire DataMart"
 >
     
      
-</nrcl-application-header>
+</application-header>
 \`\`\`
 `
             }
@@ -101,7 +101,7 @@ BC Wildfire Service application header based on the BC Government Design System.
 
 export default meta;
 
-type Story = StoryObj<HeaderComponent>;
+type Story = StoryObj<ApplicationHeaderComponent>;
 
 export const Primary: Story = {
     argTypes: {
@@ -112,7 +112,7 @@ export const Primary: Story = {
     render: args => ({
         props: args,
         template: `
-            <nrcl-application-header
+            <application-header
                 [title]="title"
                 [homeUrl]="homeUrl"
                 [skipLinksEnabled]="skipLinksEnabled"
@@ -124,7 +124,7 @@ export const Primary: Story = {
                 [showMenu]="showMenu"
                 [menuTitle]="menuTitle"
             >
-            </nrcl-application-header>
+            </application-header>
 
             <main id="main-content">
                 <p> 
