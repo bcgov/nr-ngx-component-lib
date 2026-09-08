@@ -17,6 +17,9 @@
     --nrcl-header-layout-padding-none: 0;
     --nrcl-header-layout-padding-small: 0.5rem;
     --nrcl-header-layout-padding-medium: 1rem;
+
+    --nrcl-header-typography-regular-body: 400 1rem/1.688rem 'BC Sans';
+    --nrcl-header-typography-bold-h4: 700 1.5rem/2.25rem 'BC Sans';
 }
 
 :host {
@@ -30,7 +33,7 @@
     margin-left: -100000px;
     top: 0;
 
-    font: var(--nrcl-typography-regular-body);
+    font: var(--nrcl-header-typography-regular-body);
     line-height: 1.2;
     padding: 0.5rem 0.75rem;
 
@@ -96,7 +99,7 @@
     margin: 0;
     flex-grow:1;
 
-    font: var(--nrcl-typography-bold-h4);
+    font: var(--nrcl-header-typography-bold-h4);
     color: var(--nrcl-header-title-color);
 
     white-space: normal;

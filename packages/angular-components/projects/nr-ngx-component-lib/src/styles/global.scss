@@ -19,17 +19,11 @@
     --nrcl-filter-width-6: calc( 6 * var( --nrcl-filter-width-1 ) + 5 * var( --nrcl-filter-gap ) ); 
     --nrcl-filter-height: 40px;
 
-
-    --nrcl-typography-regular-body: 400 1rem/1.688rem 'BC Sans';
-    --nrcl-typography-bold-h4: 700 1.5rem/2.25rem 'BC Sans';
-
     // desktop
     --nrcl-device-desktop-gutter-space: 16px;
     
-
     //mobile
     --nrcl-device-mobile-gutter-space: 8px;
-    
 }
 
 html {
