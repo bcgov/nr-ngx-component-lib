@@ -45,7 +45,5 @@ export class MobileViewDirective {
 export class DeviceViewComponent extends ConfigurationSubscriberBase {
     @ContentChild( DesktopViewDirective ) desktopContent!: DesktopViewDirective;
     @ContentChild( MobileViewDirective ) mobileContent!: MobileViewDirective;
-
-    changeDetectorRef = inject( ChangeDetectorRef )
 }
 

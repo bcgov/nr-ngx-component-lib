@@ -1,7 +1,8 @@
 
-import { Component, OnInit, OnChanges, Input, inject, ChangeDetectorRef } from "@angular/core"
-import { ConfigurationService, DisplayMode } from "../src/services/configuration.service"
+import { Component, HostListener, Input, OnChanges, OnInit } from "@angular/core"
 import { StoryObj } from "@storybook/angular"
+import { ConfigurationSubscriberBase } from "../src/directives/configuration-subscriber.base"
+import { DisplayMode } from "../src/services/configuration.service"
 
 @Component( {
     selector: 'display-mode-wrapper',
@@ -13,20 +14,25 @@ import { StoryObj } from "@storybook/angular"
         '[class.nrcl-device-mobile]': "displayMode == 'mobile'"     
     }
 } )
-export class DisplayModeWrapperComponent implements OnInit, OnChanges {
-    @Input() displayMode: DisplayMode = 'desktop'
+export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase implements OnInit, OnChanges {
+    @Input() displayMode: DisplayMode | 'auto' = 'auto'
     @Input() width
     @Input() useWidth = false
-
-    configurationService = inject( ConfigurationService )
     
     ngOnInit() {
-        this.configurationService.update( { displayMode: this.displayMode } )
+        // this.configurationService.update( { displayMode: this.displayMode } )
+        this.onResize()
+        super.ngOnInit()
     }
 
     ngOnChanges( changes ) {
         if ( changes.displayMode ) {
-            this.configurationService.update( { displayMode: this.displayMode } )
+            if ( this.displayMode == 'auto' ) {
+                this.onResize()
+            }
+            else {
+                this.configurationService.update( { displayMode: this.displayMode } )
+            }
         }
     }
 
@@ -36,13 +42,29 @@ export class DisplayModeWrapperComponent implements OnInit, OnChanges {
         }
         return this.width + 'px'
     }
+
+    @HostListener("window:resize", ["$event"])
+    onResize() {
+        if ( this.displayMode != 'auto' ) return
+
+        if ( window.innerWidth < 768 || ( window.innerWidth < 900 && window.innerHeight < 450 ) ) {
+            this.configurationService.update( { displayMode: 'mobile' } )
+        } 
+        else {
+            this.configurationService.update( { displayMode: 'desktop' } )
+        }
+    }
+
+    onConfigurationChange() {
+        console.log( 'onConfigurationChange', this.configuration )
+    }
 }
 
 export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
     argTypes: {
         displayMode: {
             control: 'inline-radio',
-            options: ['desktop', 'mobile'],
+            options: ['auto', 'desktop', 'mobile'],
             description: 'Display mode for the component'
         },
         useWidth: { name: 'set width manually' },
@@ -53,12 +75,14 @@ export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
                 min: 350,
                 max: 2000
             }
-        }
+        },
+        // auto: { name: 'automatically set display mode' },
     },
     args: {
-        displayMode: 'desktop',
+        displayMode: 'auto',
         useWidth: false,
         width: 400,
+        // auto: true,
     },
 }
 
