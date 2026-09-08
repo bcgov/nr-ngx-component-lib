@@ -39,9 +39,12 @@ export class TooltipDirective {
     private overlayRef: OverlayRef | null = null
     private showTooltipTimeout?: any
     private hideTooltipTimeout?: any
+    private mouseEnterListener?: any
+    private mouseLeaveListener?: any
 
     @HostListener( 'mouseenter' )
     show() {
+        // console.log('mouseenter' )
         if ( this.showTooltipTimeout ) clearTimeout( this.showTooltipTimeout )
         if ( this.hideTooltipTimeout ) clearTimeout( this.hideTooltipTimeout )
 
@@ -63,11 +66,13 @@ export class TooltipDirective {
 
         const overlayElement = this.overlayRef.overlayElement;
 
-        this.renderer.listen(overlayElement, 'mouseenter', () => {
+        this.mouseEnterListener = this.renderer.listen(overlayElement, 'mouseenter', () => {
+            // console.log('overlay.mouseenter' )
             if (this.hideTooltipTimeout) clearTimeout(this.hideTooltipTimeout);
         });
 
-        this.renderer.listen(overlayElement, 'mouseleave', () => {
+        this.mouseLeaveListener = this.renderer.listen(overlayElement, 'mouseleave', () => {
+            // console.log('overlay.mouseleave' )
             this.hide();
         } )
 
@@ -93,6 +98,7 @@ export class TooltipDirective {
 
     @HostListener( 'mouseleave' )
     hide() {
+        // console.log('mouseleave')
         if ( this.showTooltipTimeout ) clearTimeout( this.showTooltipTimeout )
 
         this.hideTooltipTimeout = setTimeout(() => {
@@ -110,5 +116,8 @@ export class TooltipDirective {
             this.overlayRef.dispose()
             this.overlayRef = null
         }
+
+        if ( this.mouseEnterListener ) this.mouseEnterListener()
+        if ( this.mouseLeaveListener ) this.mouseLeaveListener()
     }
 }

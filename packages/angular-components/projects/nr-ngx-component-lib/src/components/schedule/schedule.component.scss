@@ -220,6 +220,7 @@
                                 background-repeat: no-repeat;
                                 background-size: calc( 100% - 8px ) 3px;
                                 background-position: bottom;
+                                pointer-events: none;
                             }
                         }
                     }
