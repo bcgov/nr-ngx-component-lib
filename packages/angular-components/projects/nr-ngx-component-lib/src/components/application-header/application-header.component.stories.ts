@@ -20,6 +20,7 @@ import { ConfigurationService } from '../../services/configuration.service';
 
 
 import { MatButtonModule } from "@angular/material/button";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ApplicationHeaderComponent } from "./application-header.component";
 import { ButtonComponent } from "../button/button.component";
@@ -81,12 +82,12 @@ BC Wildfire Service application header based on the BC Government Design System.
 ## Usage
 
 \`\`\`html
-<application-header
+<nrcl-application-header
     title="Wildfire DataMart"
 >
     
      
-</application-header>
+</nrcl-application-header>
 \`\`\`
 `
             }
@@ -112,7 +113,7 @@ export const Primary: Story = {
     render: args => ({
         props: args,
         template: `
-            <application-header
+            <nrcl-application-header
                 [title]="title"
                 [homeUrl]="homeUrl"
                 [skipLinksEnabled]="skipLinksEnabled"
@@ -124,7 +125,7 @@ export const Primary: Story = {
                 [showMenu]="showMenu"
                 [menuTitle]="menuTitle"
             >
-            </application-header>
+            </nrcl-application-header>
 
             <main id="main-content">
                 <p> 

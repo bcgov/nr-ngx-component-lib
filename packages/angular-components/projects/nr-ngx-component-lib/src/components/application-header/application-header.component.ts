@@ -6,7 +6,7 @@ import {
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component({
-    selector: "application-header",
+    selector: "nrcl-application-header",
     templateUrl: "./application-header.component.html",
     styleUrl: "./application-header.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
