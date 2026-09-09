@@ -5,7 +5,7 @@
             #menuTrigger
             secondary
             [id]="triggerId"
-            [attr.aria-label]="trigger.label || 'Menu'"
+            [ariaLabel]="trigger.label || 'Menu'"
             [attr.aria-expanded]="isOpen"
             [attr.aria-controls]="menuId"
             (click)="toggleMenu()"
@@ -51,7 +51,7 @@
             #menuTrigger
             secondary
             [id]="triggerId"
-            [attr.aria-label]="trigger.label || 'Menu'"
+            [ariaLabel]="trigger.label || 'Menu'"
             [attr.aria-expanded]="isOpen"
             [attr.aria-controls]="menuId"
             (click)="toggleMenu()"

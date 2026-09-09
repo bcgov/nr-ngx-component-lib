@@ -28,6 +28,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
     focusTarget?: ElementRef<HTMLElement>;
 
     @Input() label?: string
+    @Input() ariaLabel?: string;
     @Input() icon?: string
     @Input() iconRight?: string
     @Input() iconCompact?: string
