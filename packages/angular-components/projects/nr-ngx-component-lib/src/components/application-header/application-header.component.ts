@@ -5,6 +5,8 @@ import {
 } from "@angular/core";
 import { NrclBase } from '../../directives/nrcl.base';
 
+import { MenuItem, MenuTrigger } from '../menu/menu.component';
+
 @Component({
     selector: "nrcl-application-header",
     templateUrl: "./application-header.component.html",
@@ -33,5 +35,12 @@ export class ApplicationHeaderComponent extends NrclBase{
 
     @Input() menuTitle = "";
 
+    @Input() menuItems: MenuItem[] = [];
+
+    @Input()
+    menuTrigger: MenuTrigger = {
+        label: 'Menu',
+        icon: 'menu'
+    };
     
 }
