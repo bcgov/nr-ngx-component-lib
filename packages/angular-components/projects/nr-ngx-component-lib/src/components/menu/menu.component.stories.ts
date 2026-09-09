@@ -91,7 +91,7 @@ export const Primary: Story = {
         items: [
             {
                 label: 'Home',
-                icon: 'home'
+                icon: 'home-outline'
             },
             {
                 label: 'Download Data',

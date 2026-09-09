@@ -211,7 +211,7 @@ export const Primary: Story = {
         menuItems: [
             {
                 label: 'Home',
-                icon: 'home'
+                icon: 'home-outline'
             },
             {
                 label: 'Download Data',

@@ -27,6 +27,7 @@
                         role="menuitem"
                         [href]="item.href"
                         [target]="item.target"
+                        (click)="onMenuItemClick()"
                     >
                     <div class="menu-item-icon">
                         @if (item.icon) {
@@ -74,6 +75,7 @@
                         role="menuitem"
                         [href]="item.href"
                         [target]="item.target"
+                        (click)="onMenuItemClick()"
                     >
                     <div class="menu-item-icon">
                         @if (item.icon) {

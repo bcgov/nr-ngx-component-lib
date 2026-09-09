@@ -60,6 +60,10 @@ export class MenuComponent extends NrclBase {
         }
     }
 
+    onMenuItemClick(): void {
+        this.isOpen = false;
+    }
+
     closeMenu(): void {
         this.isOpen = false;
 

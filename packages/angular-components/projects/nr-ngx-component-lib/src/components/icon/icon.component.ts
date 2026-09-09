@@ -25,7 +25,7 @@ export class IconComponent extends NrclBase implements AfterContentInit {
     domSanitizer = inject( DomSanitizer )    
 
     ngAfterContentInit(): void {
-        this.name = this.elementRef?.nativeElement?.textContent
+        this.name = this.elementRef?.nativeElement?.textContent?.trim();
         if ( ICON[ this.name ] ) this.svg = this.domSanitizer.bypassSecurityTrustHtml( ICON[ this.name ] )
     }
 }
@@ -58,5 +58,10 @@ const ICON = {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="120 -840 720 720">
             <path d="M120-180v-600q0-24.75 17.625-42.375T180-840h600q24.75 0 42.375 17.625T840-780v600q0 24.75-17.625 42.375T780-120H180q-24.75 0-42.375-17.625T120-180Zm60-440h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z" />
         </svg>
-    `
+    `,
+    'home-outline': `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+            <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
+        </svg>
+    `,
 }
