@@ -33,8 +33,6 @@ export class ApplicationHeaderComponent extends NrclBase{
 
     @Input() logoLinkAriaLabel = "";
 
-    @Input() menuTitle = "";
-
     @Input() menuItems: MenuItem[] = [];
 
     @Input()

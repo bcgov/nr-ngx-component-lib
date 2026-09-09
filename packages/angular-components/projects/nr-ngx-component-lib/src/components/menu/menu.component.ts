@@ -37,7 +37,6 @@ export class MenuComponent extends NrclBase {
     @ViewChild('menuTrigger')
     menuTriggerComponent!: ButtonComponent;
 
-    @Input() showRowHover = true;
     @Input() items: MenuItem[] = [];
 
     @Input()

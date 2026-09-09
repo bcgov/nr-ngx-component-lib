@@ -17,19 +17,14 @@
     --nrcl-menu-hover-background-color: #EDEBE9;
     --nrcl-menu-pressed-background-color: #E0DEDC;
     --nrcl-menu-active-border-color: #2E5DD7;
-}
-
-
-:host.mobile {
-    .menu-panel {
-        width: 100vw;
-    }
+    --nrcl-menu-desktop-offset-right: -32px;
+    --nrcl-menu-min-width: 300px;
 }
 
 .menu-panel {
     position: absolute;
     top: 100%;
-    right: -32px;
+    right: var(--nrcl-menu-desktop-offset-right);
     z-index: 1000;
 
     display: flex;
@@ -45,7 +40,7 @@
     
     border-radius: 4px;
 
-    min-width: 300px;
+    min-width: var(--nrcl-menu-min-width);
 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
