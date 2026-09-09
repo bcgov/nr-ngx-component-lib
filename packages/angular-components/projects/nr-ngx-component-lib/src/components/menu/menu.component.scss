@@ -15,13 +15,12 @@
     --nrcl-menu-pressed-background-color: #E0DEDC;
     --nrcl-menu-active-border-color: #2E5DD7;
 }
-.menu-panel {
-    background: var(--nrcl-menu-background-color);
 
-    border:
-        var(--nrcl-menu-border-width-small)
-        solid
-        var(--nrcl-menu-border-color);
+
+:host.mobile {
+    .menu-panel {
+        width: 100vw;
+    }
 }
 
 .menu-panel {
@@ -42,6 +41,23 @@
 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+.mobile-menu-panel {
+    position: fixed;
+
+    top: var(--nrcl-application-header-mobile-min-height);
+
+    left: 0;
+
+    width: 100vw;
+
+    height:
+        calc(
+            100vh -
+            var(--nrcl-application-header-mobile-min-height)
+        );
+}
+
 .menu-container {
     position: relative;
     display: inline-block;

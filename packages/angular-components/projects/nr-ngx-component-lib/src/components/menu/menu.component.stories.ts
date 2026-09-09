@@ -1,8 +1,20 @@
 import {
+    componentWrapperDecorator,
+    moduleMetadata,
     Meta,
-    StoryObj,
-    moduleMetadata
+    StoryObj
 } from '@storybook/angular';
+
+import {
+    DisplayModeWrapperComponent,
+    displayModeWrapperStory
+} from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+
+import {
+    DeviceViewComponent,
+    DesktopViewDirective,
+    MobileViewDirective
+} from '../device-view/device-view.component';
 
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,13 +32,33 @@ const meta: Meta<MenuComponent> = {
 
         moduleMetadata({
             imports: [
-                MatIconModule
+                MatIconModule,
+                MatTooltipModule,
+                MatRippleModule,
+
             ],
             declarations: [
                 ButtonComponent,
-                IconComponent
+                IconComponent,
+                DisplayModeWrapperComponent,
+                DeviceViewComponent,
+                DesktopViewDirective,
+                MobileViewDirective
             ]
-        })
+        }),
+        componentWrapperDecorator(
+            story => `
+                <ng-container *rerender="displayMode">
+                    <display-mode-wrapper
+                        [displayMode]="displayMode"
+                        [useWidth]="useWidth"
+                        [width]="width"
+                    >
+                        ${story}
+                    </display-mode-wrapper>
+                </ng-container>
+            `
+        )
     ],
 
     tags: ['autodocs']
@@ -37,6 +69,11 @@ export default meta;
 type Story = StoryObj<MenuComponent>;
 
 export const Primary: Story = {
+    argTypes: {
+
+    ...displayModeWrapperStory.argTypes
+
+    },
     render: args => ({
         props: args,
         template: `
@@ -50,6 +87,7 @@ export const Primary: Story = {
         `
     }),
     args: {
+        ...displayModeWrapperStory.args,
         items: [
             {
                 label: 'Home',

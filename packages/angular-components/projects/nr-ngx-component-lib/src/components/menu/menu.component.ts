@@ -18,6 +18,11 @@ export interface MenuItem {
     external?: boolean;
 }
 
+export interface MenuTrigger {
+    label?: string;
+    icon?: string;
+}
+
 @Component({
     selector: "nrcl-menu",
     templateUrl: "./menu.component.html",
@@ -30,14 +35,21 @@ export class MenuComponent extends NrclBase {
     menuItems!: QueryList<ElementRef<HTMLAnchorElement>>;
 
     @ViewChild('menuTrigger')
-    trigger!: ButtonComponent;
+    menuTriggerComponent!: ButtonComponent;
 
     @Input() showRowHover = true;
     @Input() items: MenuItem[] = [];
 
+    @Input()
+    trigger: MenuTrigger = {
+        label: 'Menu',
+        icon: 'menu'
+    };
+
     isOpen = false;
 
     menuId = 'nrcl-menu';
+    triggerId = 'nrcl-menu-trigger';
 
     toggleMenu(): void {
         this.isOpen = !this.isOpen;
@@ -53,7 +65,7 @@ export class MenuComponent extends NrclBase {
         this.isOpen = false;
 
         setTimeout(() => {
-            this.trigger?.focus();
+            this.menuTriggerComponent?.focus();
         });
     }
 
