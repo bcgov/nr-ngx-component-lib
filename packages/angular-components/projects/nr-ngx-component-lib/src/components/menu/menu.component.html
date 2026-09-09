@@ -1,0 +1,41 @@
+<div class="menu-container">
+<nrcl-button
+    #menuTrigger
+    secondary
+    aria-label="Menu"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-controls]="menuId"
+    (click)="toggleMenu()"
+>
+    Menu
+</nrcl-button>
+
+@if (isOpen) {
+    <div
+        class="menu-panel"
+        [id]="menuId"
+        role="menu"
+        (keydown)="onMenuKeyDown($event)"
+    >
+        @for (item of items; track item.label) {
+            <a
+                #menuItem
+                role="menuitem"
+                [href]="item.href"
+                [target]="item.target"
+            >
+            <div class="menu-item-icon">
+                @if (item.icon) {
+                    <nrcl-icon>
+                        {{ item.icon }}
+                    </nrcl-icon>
+                }
+            </div>
+            <span class="menu-item-label">
+                {{ item.label }}
+            </span>
+            </a>
+        }
+    </div>
+}
+</div>

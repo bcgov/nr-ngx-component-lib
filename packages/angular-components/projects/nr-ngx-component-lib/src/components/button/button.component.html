@@ -1,5 +1,6 @@
 @if ( !isAnchor ) {
     <button
+        #focusTarget
         matRipple
         [disabled]="disabled"
         [matTooltip]="tooltipVal"
@@ -30,6 +31,7 @@
 }
 @else {
     <a 
+        #focusTarget
         [attr.href]="href" 
         [attr.target]="href && target"
         [matTooltip]="tooltipVal"
