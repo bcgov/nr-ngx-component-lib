@@ -38,6 +38,9 @@ class DialogDummyComponent {
             title: this.title,
             template: this.template,
             context: this.context,
+        },
+        {
+            disableClose: false
         }).afterClosed().toPromise()
             .then( res => {
                 console.log( res )
