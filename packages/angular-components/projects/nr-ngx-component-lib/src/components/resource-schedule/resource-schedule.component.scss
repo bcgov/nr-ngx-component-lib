@@ -25,7 +25,7 @@
     ::ng-deep .inner.item {
         display: flex;
         flex-direction: column;
-        justify-content: stretch;
+        justify-content: center;
         align-items: stretch;
         color: var( --nrcl-resource-schedule-item-foreground-color );
 
@@ -59,13 +59,6 @@
         }
 
         &:has( h2:empty ):has( h3:empty ) {
-            h1 {
-                flex-grow: 1;
-                text-align: center;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
             h2, h3 { display: none; }
         }
 
