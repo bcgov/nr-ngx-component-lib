@@ -782,6 +782,7 @@ export const SelectableRows: StoryObj<RowListDesktopComponent & RowListArgs> = {
                     [rowCount]="rowCount"
                     (pageNumberChange)="onPageNumberChange($event)"
                     (pageSizeChange)="onPageSizeChange($event)"
+                    [showBoundaryLinks]="true"
                 >
                 </nrcl-row-list-pagination>
             `

@@ -11,8 +11,22 @@
 
 @if ( hasRows ) {
     <div class="pagination">
-        <pagination-controls 
-            [id]="paginationId" 
+
+        @if (showBoundaryLinks) {
+            <a
+                class="pagination-boundary pagination-first"
+                [class.disabled]="pageNumber <= 1"
+                [attr.aria-disabled]="pageNumber <= 1"
+                [attr.tabindex]="pageNumber <= 1 ? -1 : 0"
+                aria-label="First page"
+                (click)="pageNumber > 1 && onPageNumberChange(1)"
+                (keyup.enter)="pageNumber > 1 && onPageNumberChange(1)"
+            >
+            </a>
+        }
+
+        <pagination-controls
+            [id]="paginationId"
             [maxSize]="paginationMaxSize"
             [responsive]="false"
             [directionLinks]="true"
@@ -21,6 +35,20 @@
             [autoHide]="false"
             (pageChange)="onPageNumberChange( $event )"
         ></pagination-controls>
+
+        @if (showBoundaryLinks) {
+            <a
+                class="pagination-boundary pagination-last"
+                [class.disabled]="pageNumber >= pageCount"
+                [attr.aria-disabled]="pageNumber >= pageCount"
+                [attr.tabindex]="pageNumber >= pageCount ? -1 : 0"
+                aria-label="Last page"
+                (click)="pageNumber < pageCount && onPageNumberChange(pageCount)"
+                (keyup.enter)="pageNumber < pageCount && onPageNumberChange(pageCount)"
+            >
+            </a>
+        }
+
     </div>
 }
 
