@@ -31,7 +31,7 @@
         bottom: 0;
 
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
 
@@ -161,5 +161,52 @@
             grid-column: 1 / span 2;
             grid-row: 2;
         }
+    }
+}
+
+.pagination-boundary {
+    display: inline-block;
+
+    position: relative;
+    top: 2px;
+
+    width: 45px;
+    height: 40px;
+    line-height: 40px;
+
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    &:hover:not(.disabled) {
+        background-color: #FFD3A0;
+    }
+
+    &.disabled {
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    &::before {
+        font-family: 'Material Symbols Outlined';
+        vertical-align: middle;
+        display: inline;
+        font-size: 25px;
+        margin: 0;
+        line-height: 40px;
+        padding: 0 10px;
+    }
+}
+
+.pagination-first {
+    &::before {
+        content: 'first_page';
+    }
+}
+
+.pagination-last {
+    &::before {
+        content: 'last_page';
     }
 }

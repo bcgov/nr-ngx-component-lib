@@ -48,6 +48,7 @@ import { ListAttachmentsComponent } from './components/list-attachments/list-att
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { ListSelectComponent } from './components/list-select/list-select.component';
 import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
+import { MenuComponent } from './components/menu/menu.component';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
@@ -117,6 +118,7 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         GapComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
+        MenuComponent,
         PageContainerComponent,
         PageHeaderComponent,
         RowListDesktopComponent,
@@ -166,6 +168,7 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         GapComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
+        MenuComponent,
         PageContainerComponent,
         PageHeaderComponent,
         RowListDesktopComponent,

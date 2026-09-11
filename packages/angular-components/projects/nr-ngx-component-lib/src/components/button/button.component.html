@@ -1,8 +1,10 @@
 @if ( !isAnchor ) {
     <button
+        #focusTarget
         matRipple
         [disabled]="disabled"
         [matTooltip]="tooltipVal"
+        [attr.aria-label]="ariaLabel"
     >
         @if ( useContent ) {
             <div class="content">
@@ -30,9 +32,11 @@
 }
 @else {
     <a 
+        #focusTarget
         [attr.href]="href" 
         [attr.target]="href && target"
         [matTooltip]="tooltipVal"
+        [attr.aria-label]="ariaLabel"
     >
         @if ( hasIconLeft ) {
             <nrcl-icon class="left" [small]="isIconSmall">{{ icon }}</nrcl-icon>

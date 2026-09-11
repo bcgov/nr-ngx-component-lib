@@ -33,12 +33,14 @@
 
                 </div>
 
-                    @if (showMenu) {
-                <div class="desktop-actions">
-                    <nrcl-button>
-                        {{menuTitle}}
-                    </nrcl-button>
-                </div>
+                @if (showMenu) {
+                    <div class="desktop-actions">
+                        <nrcl-menu
+                            [items]="menuItems"
+                            [trigger]="menuTrigger"
+                        >
+                        </nrcl-menu>
+                    </div>
                 }
             </div>
         </header>
@@ -74,11 +76,13 @@
                 </h1>
 
                 @if (showMenu) {
-                <div class="mobile-actions">
-                    <nrcl-button>
-                        {{menuTitle}}
-                    </nrcl-button>
-                </div>
+                    <div class="mobile-actions">
+                        <nrcl-menu
+                            [items]="menuItems"
+                            [trigger]="menuTrigger"
+                        >
+                        </nrcl-menu>
+                    </div>
                 }
             </div>
         </header>

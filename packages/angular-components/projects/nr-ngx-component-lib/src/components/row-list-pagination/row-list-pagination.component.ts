@@ -39,6 +39,7 @@ export class RowListPaginationComponent extends NrclBase implements AfterViewIni
     @Input() rowCount
     @Input() showPageSize = true 
     @Input() noRowsMessage = 'No records to display.'
+    @Input() showBoundaryLinks = false;
 
     @Output() pageSizeChange = new EventEmitter<number>();
     @Output() pageNumberChange = new EventEmitter<number>();

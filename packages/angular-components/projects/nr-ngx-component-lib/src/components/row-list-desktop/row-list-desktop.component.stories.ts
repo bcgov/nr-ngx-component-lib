@@ -21,6 +21,8 @@ import { RowListDesktopComponent } from './row-list-desktop.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from '../button/button.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 const meta: Meta<RowListDesktopComponent> = {
     title: 'Row List (Desktop)',
@@ -41,6 +43,7 @@ const meta: Meta<RowListDesktopComponent> = {
                 MatSortModule,
                 NgxPaginationModule,
                 MatListModule,  
+                MatCheckboxModule,
             ],
             // declare components that are used in the template
             declarations: [
@@ -563,3 +566,226 @@ export const Alternate: StoryObj<RowListDesktopComponent & RowListArgs> = {
         }
     }
 }
+
+export const SelectableRows: StoryObj<RowListDesktopComponent & RowListArgs> = {
+    args: {
+        ...rowListStory.args,
+        showRowHover: true,
+    },
+    argTypes: {
+        ...rowListStory.argTypes,
+    },
+    render: (args) => {
+        const [, setArgs] = useArgs();
+
+        return {
+            styles: [`
+                .mat-mdc-table {
+                    .mat-column-selected {
+                        width: 64px;
+                        min-width: 64px;
+                        max-width: 64px;
+                    }
+
+                    .mat-column-make {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .mat-column-model {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .mat-column-classification {
+                        min-width: 200px;
+                        max-width: 300px;
+                    }
+
+                    .mat-column-category {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .mat-column-crewNumber {
+                        min-width: 100px;
+                        max-width: 100px;
+                    }
+
+                    .mat-column-remove {
+                        width: 80px;
+                        min-width: 80px;
+                        max-width: 80px;
+                    }
+                }
+
+                .column-center {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                }
+            `],
+            props: {
+                ...args,
+                rows: rowListItems(args.rowCount),
+                columns: [
+                    'selected',
+                    'make',
+                    'model',
+                    'classification',
+                    'category',
+                    'crewNumber',
+                    'remove'
+                ],
+                onPageNumberChange: (ev) => {
+                    setArgs({
+                        pageNumber: ev
+                    });
+                },
+                onPageSizeChange: (ev) => {
+                    setArgs({
+                        pageSize: ev,
+                        pageNumber: 1
+                    });
+                },
+                onSortChange: (ev) => {
+                    setArgs({
+                        sortColumn: ev.active || null,
+                        sortDirection: ev.direction,
+                    });
+                }
+            },
+            template: `
+                <nrcl-row-list-desktop [showRowHover]="showRowHover">
+                    <mat-table
+                        [dataSource]="rows | paginate: {
+                            id: 'desktop-selectable-story',
+                            itemsPerPage: pageSize,
+                            currentPage: pageNumber,
+                            totalItems: rowCount
+                        }"
+                        matSort
+                        [matSortActive]="sortColumn"
+                        [matSortDirection]="sortDirection"
+                        (matSortChange)="onSortChange($event)"
+                    >
+
+                        <ng-container matColumnDef="selected">
+                            <mat-header-cell *matHeaderCellDef>
+                                <div class="column-center">
+                                    <mat-checkbox
+                                        aria-label="Select all rows"
+                                    ></mat-checkbox>
+                                </div>
+                            </mat-header-cell>
+
+                            <mat-cell *matCellDef="let item">
+                                <div class="column-center">
+                                    <mat-checkbox
+                                        [aria-label]="'Select ' + item.make"
+                                    ></mat-checkbox>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="make">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Make
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <nrcl-cell-content tooltip>
+                                    {{ item.make }}
+                                </nrcl-cell-content>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="model">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Model
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <nrcl-cell-content tooltip>
+                                    {{ item.model }}
+                                </nrcl-cell-content>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="classification">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Classification
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <nrcl-cell-content tooltip>
+                                    {{ item.classification }}
+                                </nrcl-cell-content>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="category">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Category
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <nrcl-cell-content tooltip>
+                                    {{ item.category }}
+                                </nrcl-cell-content>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="crewNumber">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Crew Count
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <nrcl-cell-content tooltip>
+                                    {{ item.crewNumber }}
+                                </nrcl-cell-content>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="remove">
+                            <mat-header-cell *matHeaderCellDef>
+                                Remove
+                            </mat-header-cell>
+
+                            <mat-cell *matCellDef="let item">
+                                <div class="column-center">
+                                    <nrcl-button
+                                        compact
+                                        iconCompact="delete"
+                                        tooltip="Remove"
+                                        ariaLabel="Remove row"
+                                    >
+                                    </nrcl-button>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row
+                            *matHeaderRowDef="columns; sticky: true"
+                        ></mat-header-row>
+
+                        <mat-row
+                            *matRowDef="let item; columns: columns;"
+                        ></mat-row>
+
+                    </mat-table>
+                </nrcl-row-list-desktop>
+
+                <nrcl-gap vertical></nrcl-gap>
+
+                <nrcl-row-list-pagination
+                    paginationId="desktop-selectable-story"
+                    [pageSize]="pageSize"
+                    [pageNumber]="pageNumber"
+                    [rowCount]="rowCount"
+                    (pageNumberChange)="onPageNumberChange($event)"
+                    (pageSizeChange)="onPageSizeChange($event)"
+                    [showBoundaryLinks]="true"
+                >
+                </nrcl-row-list-pagination>
+            `
+        };
+    }
+};

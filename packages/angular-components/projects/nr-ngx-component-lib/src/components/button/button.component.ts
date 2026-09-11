@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ElementRef, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ConfigurationSubscriberBase } from '../../directives/configuration-subscriber.base';
 
 @Component( {
@@ -24,7 +24,11 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {
     zone = inject( NgZone )
 
+    @ViewChild('focusTarget', { read: ElementRef })
+    focusTarget?: ElementRef<HTMLElement>;
+
     @Input() label?: string
+    @Input() ariaLabel?: string;
     @Input() icon?: string
     @Input() iconRight?: string
     @Input() iconCompact?: string
@@ -138,5 +142,9 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
         }
 
         this.useContent = !this.hasLabel && !this.hasIconLeft && !this.hasIconRight && !this.hasIconCompact
+    }
+
+    focus(): void {
+        this.focusTarget?.nativeElement.focus();
     }
 }

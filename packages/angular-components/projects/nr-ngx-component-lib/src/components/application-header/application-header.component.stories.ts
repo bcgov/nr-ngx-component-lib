@@ -19,8 +19,13 @@ import {
 import { ConfigurationService } from '../../services/configuration.service';
 
 
+import { MenuComponent } from '../menu/menu.component';
+import { IconComponent } from '../icon/icon.component';
+
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
 
 import { ApplicationHeaderComponent } from "./application-header.component";
 import { ButtonComponent } from "../button/button.component";
@@ -32,17 +37,19 @@ const meta: Meta<ApplicationHeaderComponent> = {
     decorators: [
         moduleMetadata({
             imports: [
-                MatButtonModule
+                MatButtonModule,
+                MatIconModule,
+                MatRippleModule,
+                MatTooltipModule
             ],
             declarations: [
                 ButtonComponent,
+                MenuComponent,
+                IconComponent,
                 DisplayModeWrapperComponent,
                 DeviceViewComponent,
                 DesktopViewDirective,
                 MobileViewDirective
-            ],
-            providers: [
-                ConfigurationService
             ]
         }),
 
@@ -123,7 +130,8 @@ export const Primary: Story = {
                 logoAlt="BC Wildfire Service logo"
                 logoLinkAriaLabel="BC Wildfire Service home"
                 [showMenu]="showMenu"
-                [menuTitle]="menuTitle"
+                [menuItems]="menuItems"
+                [menuTrigger]="menuTrigger"
             >
             </nrcl-application-header>
 
@@ -194,8 +202,47 @@ export const Primary: Story = {
         skipLinksEnabled: true,
         skipLinkTarget: 'main-content',
         skipLinkLabel: 'Skip to main content',
-        showMenu: false,
-        menuTitle: "-"
+        showMenu: true,
+        menuTrigger: {
+            label: 'Menu',
+            icon: 'menu'
+        },
+
+        menuItems: [
+            {
+                label: 'Home',
+                icon: 'home-outline'
+            },
+            {
+                label: 'Download Data',
+                icon: 'get_app'
+            },
+            {
+                label: 'Weather Station List',
+                icon: 'format_list_bulleted'
+            },
+            {
+                label: 'Graph QL and API',
+                icon: 'control_camera'
+            },
+            {
+                label: 'MCP Server',
+                icon: 'mcp-server'
+            },
+            {
+                label: 'Data Information',
+                icon: 'info'
+            },
+            {
+                label: 'Disclaimer'
+            },
+            {
+                label: 'Privacy'
+            },
+            {
+                label: 'Copyright'
+            }
+        ]
     }
 };
 

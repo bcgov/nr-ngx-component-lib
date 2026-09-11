@@ -25,7 +25,7 @@ export class IconComponent extends NrclBase implements AfterContentInit {
     domSanitizer = inject( DomSanitizer )    
 
     ngAfterContentInit(): void {
-        this.name = this.elementRef?.nativeElement?.textContent
+        this.name = this.elementRef?.nativeElement?.textContent?.trim();
         if ( ICON[ this.name ] ) this.svg = this.domSanitizer.bypassSecurityTrustHtml( ICON[ this.name ] )
     }
 }
@@ -58,5 +58,38 @@ const ICON = {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="120 -840 720 720">
             <path d="M120-180v-600q0-24.75 17.625-42.375T180-840h600q24.75 0 42.375 17.625T840-780v600q0 24.75-17.625 42.375T780-120H180q-24.75 0-42.375-17.625T120-180Zm60-440h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z" />
         </svg>
-    `
+    `,
+    'home-outline': `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+            <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
+        </svg>
+    `,
+    'mcp-server': `
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 180 180"
+            fill="none"
+        >
+            <path
+                d="M18 84.8528L85.8822 16.9706C95.2548 7.59798 110.451 7.59798 119.823 16.9706C129.196 26.3431 129.196 41.5391 119.823 50.9117L68.5581 102.177"
+                stroke="currentColor"
+                stroke-width="8"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M69.2652 101.47L119.823 50.9117C129.196 41.5391 144.392 41.5391 153.765 50.9117L154.118 51.2652C163.491 60.6378 163.491 75.8338 154.118 85.2063L92.7248 146.6C89.6006 149.724 89.6006 154.789 92.7248 157.913L105.331 170.52"
+                stroke="currentColor"
+                stroke-width="8"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M102.853 33.9411L52.6482 84.1457C43.2756 93.5183 43.2756 108.714 52.6482 118.087C62.0208 127.459 77.2167 127.459 86.5893 118.087L136.794 67.8822"
+                stroke="currentColor"
+                stroke-width="8"
+                stroke-linecap="round"
+            />
+        </svg>
+    `,
 }
