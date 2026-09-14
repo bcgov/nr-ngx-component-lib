@@ -31,7 +31,7 @@ import { ApplicationHeaderComponent } from "./application-header.component";
 import { ButtonComponent } from "../button/button.component";
 
 const meta: Meta<ApplicationHeaderComponent> = {
-    title: "Header",
+    title: "Application Header",
     component: ApplicationHeaderComponent,
 
     decorators: [

@@ -20,13 +20,68 @@
 
     --nrcl-application-header-typography-regular-body: 400 1rem/1.688rem 'BC Sans';
     --nrcl-application-header-typography-bold-h4: 700 1.5rem/2.25rem 'BC Sans';
+
+    --nrcl-application-header-logo-url: url( './assets/bc-wildfire-service.png' );
+    --nrcl-application-header-logo-width: 130px;
+    --nrcl-application-header-logo-height: 35px;
 }
 
 :host {
     display: block;
     font-family: var(--nrcl-font-family);
-    
+
+    header {
+        .logo-title {
+            .logo {
+                display: inline-block;
+                background-image: var( --nrcl-application-header-logo-url );
+                background-size: var( --nrcl-application-header-logo-width ) auto;
+                background-position: left center;
+                background-repeat: no-repeat;
+                height: var( --nrcl-application-header-logo-height );
+                width: var( --nrcl-application-header-logo-width );
+            }
+
+            .skip {
+                position: absolute;
+                margin-left: -100000px;
+                top: 0;
+
+                font: var(--nrcl-application-header-typography-regular-body);
+                line-height: 1.2;
+                padding: 0.5rem 0.75rem;
+
+                background: var(--nrcl-application-header-background-color);
+                color: var(--nrcl-application-header-link-color);
+
+                text-decoration: underline;
+
+                &:focus-visible {
+                    margin-left: 0;
+                    top: 1rem;
+                    z-index: 1000;
+
+                    outline: 3px solid var(--nrcl-application-header-focus-color);
+                    outline-offset: 2px;
+                }
+            }
+
+            .title {
+                margin: 0;
+                flex-grow:1;
+
+                font: var(--nrcl-application-header-typography-bold-h4);
+                color: var(--nrcl-application-header-title-color);
+
+                white-space: normal;
+                overflow-wrap: break-word;
+            }
+        }
+    }
 }
+
+
+/*
 
 .skip-link {
     position: absolute;
@@ -186,3 +241,6 @@
     align-items: center;
     justify-content: center;
 }
+
+
+*/

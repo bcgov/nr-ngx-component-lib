@@ -1,20 +1,44 @@
+<header role="banner">
+    <div class="logo-title">
+        <div class="logo"
+            [attr.aria-label]="logoLinkAriaLabel"
+            (click)="onClickLogo()"
+        ></div>
+
+        @if ( skipLabel ) {
+            <div class="skip"
+                (click)="$event.stopPropagation(); onClickSkip()"
+            >
+                {{ skipLinkLabel }}
+            </div>
+        }
+
+        <div class="divider"></div>
+
+        <h1 class="title">
+            {{ title }}
+        </h1>
+    </div>
+
+    <ng-content select="nrcl-menu"></ng-content>
+</header>
+
+
+
+<!--
 <nrcl-device-view>
     <ng-template desktop-view>
-        <header
-            class="desktop"
-            role="banner"
-        >
+        <header role="banner">
             <div class="desktop-container">
                 <div class="desktop-brand">
-
                     <a class="logo-link"
                         [attr.href]="homeUrl"
                         [attr.aria-label]="logoLinkAriaLabel"
                     >
-                    <img class="logo"
-                        [src]="logoSrc"
-                        [alt]="logoAlt">
-                    </a>
+                        <img class="logo"
+                            [src]="logoSrc"
+                            [alt]="logoAlt">
+                        </a>
 
                     @if (skipLinksEnabled) {
                         <a class="skip-link"
@@ -88,3 +112,6 @@
         </header>
     </ng-template>
 </nrcl-device-view>
+
+
+-->
