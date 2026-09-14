@@ -30,12 +30,37 @@
     display: block;
     font-family: var(--nrcl-font-family);
 
+
     header {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        background-color: var(--nrcl-application-header-background-color);
+        border-bottom: var(--nrcl-application-header-border-width-small) solid
+        var(--nrcl-application-header-surface-color-border-default);
+        min-height: var(--nrcl-application-header-desktop-min-height);
+        padding: var(--nrcl-application-header-layout-padding-none) var(--nrcl-application-header-layout-padding-medium);
+        width: 100%;
+        flex-grow: 1;
+
         .logo-title {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            gap: var(--nrcl-application-header-layout-padding-medium);
+
+            width: 100%;
+            min-height: var(--nrcl-application-header-desktop-min-height);
+
             .logo {
                 display: inline-block;
                 background-image: var( --nrcl-application-header-logo-url );
-                background-size: var( --nrcl-application-header-logo-width ) auto;
+                background-size: contain;
+                // background-size: var( --nrcl-application-header-logo-width ) auto;
                 background-position: left center;
                 background-repeat: no-repeat;
                 height: var( --nrcl-application-header-logo-height );
@@ -64,6 +89,9 @@
                     outline: 3px solid var(--nrcl-application-header-focus-color);
                     outline-offset: 2px;
                 }
+            }
+
+            .divider {
             }
 
             .title {
