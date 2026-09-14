@@ -9,6 +9,7 @@
     background-color: white;
     position: relative;
     height: 100%;
+    font-family: var( --nrcl-font-family );
 
     .top-left {
         position: absolute;
@@ -48,5 +49,12 @@
         height: var( --registration-size );
         border-top: var( --registration-border-size ) dashed green;
         border-left: var( --registration-border-size ) dashed green;
+    }
+
+    .mode {
+        position: absolute;
+        font-size: 12px;
+        top: -18px;
+        left: 5px;
     }
 }

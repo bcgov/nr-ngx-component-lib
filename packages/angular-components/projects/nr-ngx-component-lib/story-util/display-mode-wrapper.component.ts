@@ -10,8 +10,6 @@ import { DisplayMode } from "../src/services/configuration.service"
     templateUrl: './display-mode-wrapper.component.html',
     host: {
         '[style.width]': 'getWidth()',
-        '[class.nrcl-device-desktop]': "displayMode == 'desktop'",
-        '[class.nrcl-device-mobile]': "displayMode == 'mobile'"     
     }
 } )
 export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase implements OnInit, OnChanges {
@@ -20,7 +18,6 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
     @Input() useWidth = false
     
     ngOnInit() {
-        // this.configurationService.update( { displayMode: this.displayMode } )
         this.onResize()
         super.ngOnInit()
     }
@@ -38,7 +35,9 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
 
     getWidth() {
         if ( !this.useWidth ) {
-            return '100%'
+            if ( this.displayMode == 'auto' ) return '100%'
+            if ( this.displayMode == 'desktop' ) return '100%'
+            if ( this.displayMode == 'mobile' ) return '400px'
         }
         return this.width + 'px'
     }
@@ -76,13 +75,11 @@ export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
                 max: 2000
             }
         },
-        // auto: { name: 'automatically set display mode' },
     },
     args: {
         displayMode: 'auto',
         useWidth: false,
         width: 400,
-        // auto: true,
     },
 }
 
