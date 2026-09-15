@@ -4,29 +4,26 @@ import {
     Meta,
     StoryObj
 } from '@storybook/angular';
-
 import {
     DisplayModeWrapperComponent,
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-
 import {
     DeviceViewComponent,
     DesktopViewDirective,
     MobileViewDirective
 } from '../device-view/device-view.component';
-
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { MenuComponent } from './menu.component';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
+import { ApplicationMenuComponent } from './application-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
 
-const meta: Meta<MenuComponent> = {
-    title: 'Menu',
-    component: MenuComponent,
+const meta: Meta<ApplicationMenuComponent> = {
+    title: 'Application Menu',
+    component: ApplicationMenuComponent,
 
     decorators: [
 
@@ -35,15 +32,15 @@ const meta: Meta<MenuComponent> = {
                 MatIconModule,
                 MatTooltipModule,
                 MatRippleModule,
-
+                MatMenuModule
             ],
             declarations: [
                 ButtonComponent,
                 IconComponent,
-                DisplayModeWrapperComponent,
-                DeviceViewComponent,
-                DesktopViewDirective,
-                MobileViewDirective
+                // DisplayModeWrapperComponent,
+                // DeviceViewComponent,
+                // DesktopViewDirective,
+                // MobileViewDirective
             ]
         }),
         componentWrapperDecorator(
@@ -66,26 +63,12 @@ const meta: Meta<MenuComponent> = {
 
 export default meta;
 
-type Story = StoryObj<MenuComponent>;
+type Story = StoryObj<ApplicationMenuComponent>;
 
 export const Primary: Story = {
     argTypes: {
-
-    ...displayModeWrapperStory.argTypes
-
+        ...displayModeWrapperStory.argTypes
     },
-    render: args => ({
-        props: args,
-        template: `
-            <nrcl-menu [items]="items">
-
-                <nrcl-button secondary>
-                    Menu
-                </nrcl-button>
-
-            </nrcl-menu>
-        `
-    }),
     args: {
         ...displayModeWrapperStory.args,
         items: [
@@ -123,5 +106,14 @@ export const Primary: Story = {
                 label: 'Copyright'
             }
         ]
-    }
+    },
+    render: args => ({
+        props: args,
+        template: `
+            <nrcl-application-menu 
+                label="Menu"
+                [items]="items"
+            ></nrcl-application-menu>
+        `
+    }),
 };

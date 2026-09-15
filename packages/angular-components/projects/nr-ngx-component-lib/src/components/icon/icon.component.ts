@@ -31,6 +31,10 @@ export class IconComponent extends NrclBase implements AfterContentInit {
 }
 
 const ICON = {
+    'empty': `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="120 -840 720 720">
+        </svg>
+    `,
     'clear-filters': `
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 -7.934265 133.15887 133.15887" height="100%" width="100%">
             <g transform="translate(-34.473864,-66.676034)">

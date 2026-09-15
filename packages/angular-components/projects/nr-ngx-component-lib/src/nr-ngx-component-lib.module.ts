@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -24,8 +25,10 @@ import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ApplicationHeaderComponent } from './components/application-header/application-header.component';
+import { ApplicationMenuComponent, ApplicationMenuItemComponent } from './components/application-menu/application-menu.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
+import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -48,7 +51,6 @@ import { ListAttachmentsComponent } from './components/list-attachments/list-att
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { ListSelectComponent } from './components/list-select/list-select.component';
 import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
@@ -61,14 +63,12 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
 import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
+import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip.directive';
 
 @NgModule({
     imports: [
@@ -102,6 +102,8 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
     ],
     declarations: [
         ApplicationHeaderComponent,
+        ApplicationMenuComponent,
+        ApplicationMenuItemComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,
@@ -118,7 +120,6 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         GapComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
-        MenuComponent,
         PageContainerComponent,
         PageHeaderComponent,
         RowListDesktopComponent,
@@ -152,6 +153,8 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
     ],
     exports: [
         ApplicationHeaderComponent,
+        ApplicationMenuComponent,
+        ApplicationMenuItemComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,
@@ -168,7 +171,6 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         GapComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
-        MenuComponent,
         PageContainerComponent,
         PageHeaderComponent,
         RowListDesktopComponent,
