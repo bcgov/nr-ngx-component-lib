@@ -1,16 +1,20 @@
 <header role="banner">
     <div class="logo-title">
         <div class="logo"
-            [attr.aria-label]="logoLinkAriaLabel"
+            role="button"
+            tabindex="0"
+            [attr.aria-label]="logoAriaLabel"
             (click)="onClickLogo()"
         ></div>
 
 
         @if ( skipLabel ) {
             <div class="skip"
+                role="button"
+                tabindex="0"
                 (click)="$event.stopPropagation(); onClickSkip()"
             >
-                {{ skipLinkLabel }}
+                {{ skipLabel }}
             </div>
         }
 

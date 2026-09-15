@@ -100,11 +100,6 @@ BC Wildfire Service application header based on the BC Government Design System.
             }
         }
     },
-
-    args: {
-        title: "Wildfire DataMart",
-        homeUrl: "/"
-    }
 };
 
 export default meta;
@@ -113,26 +108,69 @@ type Story = StoryObj<ApplicationHeaderComponent>;
 
 export const Primary: Story = {
     argTypes: {
+        ...displayModeWrapperStory.argTypes
+    },
+    args: {
+        ...displayModeWrapperStory.args,
+        title: 'Wildfire DataMart',
+        // homeUrl: '/',
+        // skipLinksEnabled: true,
+        // skipLinkTarget: 'main-content',
+        skipLabel: 'Skip to main content',
+        logoAriaLabel: 'BC Wildfire Service logo',
+        // showMenu: true,
+        // menuTrigger: {
+            // label: 'Menu',
+            // icon: 'menu'
+        // },
 
-    ...displayModeWrapperStory.argTypes
-
+        // menuItems: [
+        //     {
+        //         label: 'Home',
+        //         icon: 'home-outline'
+        //     },
+        //     {
+        //         label: 'Download Data',
+        //         icon: 'get_app'
+        //     },
+        //     {
+        //         label: 'Weather Station List',
+        //         icon: 'format_list_bulleted'
+        //     },
+        //     {
+        //         label: 'Graph QL and API',
+        //         icon: 'control_camera'
+        //     },
+        //     {
+        //         label: 'MCP Server',
+        //         icon: 'mcp-server'
+        //     },
+        //     {
+        //         label: 'Data Information',
+        //         icon: 'info'
+        //     },
+        //     {
+        //         label: 'Disclaimer'
+        //     },
+        //     {
+        //         label: 'Privacy'
+        //     },
+        //     {
+        //         label: 'Copyright'
+        //     }
+        // ]
     },
     render: args => ({
         props: args,
         template: `
             <nrcl-application-header
                 [title]="title"
-                [homeUrl]="homeUrl"
-                [skipLinksEnabled]="skipLinksEnabled"
-                [skipLinkTarget]="skipLinkTarget"
-                [skipLinkLabel]="skipLinkLabel"
-                logoSrc="assets/BCWS_H1_rgb_pos.png"
-                logoAlt="BC Wildfire Service logo"
-                logoLinkAriaLabel="BC Wildfire Service home"
-                [showMenu]="showMenu"
-                [menuItems]="menuItems"
-                [menuTrigger]="menuTrigger"
+                [skipLabel]="skipLabel"
+                [logoAriaLabel]="logoAriaLabel"
             >
+                <nrcl-application-menu>
+
+                </nrcl-application-menu>
             </nrcl-application-header>
 
             <main id="main-content">
@@ -194,55 +232,6 @@ export const Primary: Story = {
                                     
             </main>
         `
-    }),
-    args: {
-        ...displayModeWrapperStory.args,
-        title: 'Wildfire DataMart',
-        homeUrl: '/',
-        skipLinksEnabled: true,
-        skipLinkTarget: 'main-content',
-        skipLinkLabel: 'Skip to main content',
-        showMenu: true,
-        menuTrigger: {
-            label: 'Menu',
-            icon: 'menu'
-        },
-
-        menuItems: [
-            {
-                label: 'Home',
-                icon: 'home-outline'
-            },
-            {
-                label: 'Download Data',
-                icon: 'get_app'
-            },
-            {
-                label: 'Weather Station List',
-                icon: 'format_list_bulleted'
-            },
-            {
-                label: 'Graph QL and API',
-                icon: 'control_camera'
-            },
-            {
-                label: 'MCP Server',
-                icon: 'mcp-server'
-            },
-            {
-                label: 'Data Information',
-                icon: 'info'
-            },
-            {
-                label: 'Disclaimer'
-            },
-            {
-                label: 'Privacy'
-            },
-            {
-                label: 'Copyright'
-            }
-        ]
-    }
+    })
 };
 

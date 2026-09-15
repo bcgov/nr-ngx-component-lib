@@ -30,20 +30,18 @@
     display: block;
     font-family: var(--nrcl-font-family);
 
-
     header {
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        background-color: var(--nrcl-application-header-background-color);
-        border-bottom: var(--nrcl-application-header-border-width-small) solid
-        var(--nrcl-application-header-surface-color-border-default);
-        min-height: var(--nrcl-application-header-desktop-min-height);
-        padding: var(--nrcl-application-header-layout-padding-none) var(--nrcl-application-header-layout-padding-medium);
+        background-color: var( --nrcl-application-header-background-color );
+        border-bottom: var( --nrcl-application-header-border-width-small ) solid var(--nrcl-application-header-surface-color-border-default);
+        min-height: var( --nrcl-application-header-desktop-min-height );
+        //padding: var(--nrcl-application-header-layout-padding-none) var(--nrcl-application-header-layout-padding-medium);
         width: 100%;
-        flex-grow: 1;
+        //flex-grow: 1;
 
         .logo-title {
             flex-grow: 1;
@@ -60,11 +58,15 @@
                 display: inline-block;
                 background-image: var( --nrcl-application-header-logo-url );
                 background-size: contain;
-                // background-size: var( --nrcl-application-header-logo-width ) auto;
                 background-position: left center;
                 background-repeat: no-repeat;
                 height: var( --nrcl-application-header-logo-height );
                 width: var( --nrcl-application-header-logo-width );
+
+                &:focus-visible {
+                    outline: 3px solid var(--nrcl-application-header-focus-color);
+                    outline-offset: 4px;
+                }
             }
 
             .skip {
@@ -92,6 +94,10 @@
             }
 
             .divider {
+                display: block;
+                width: var( --nrcl-application-header-border-width-small );
+                height: var( --nrcl-application-header-desktop-min-height );
+                border-left: var( --nrcl-application-header-border-width-small ) solid var( --nrcl-application-header-surface-color-border-default );
             }
 
             .title {

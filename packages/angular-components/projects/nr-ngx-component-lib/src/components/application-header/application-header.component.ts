@@ -14,31 +14,31 @@ import { MenuItem, MenuTrigger } from '../menu/menu.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicationHeaderComponent extends NrclBase{
-
-    @Input() skipLinksEnabled = false;
-
-    @Input() showMenu = false;
-
-    @Input() homeUrl = "/";
-
-    @Input() skipLinkTarget = "";
-
-    @Input() skipLinkLabel = "";
-
     @Input() title = "";
+    @Input() logoAriaLabel = "";
+    @Input() skipLabel = "";
 
-    @Input() logoSrc = "";
+    // @Input() skipLinksEnabled = false;
 
-    @Input() logoAlt = "";
+    // @Input() showMenu = false;
 
-    @Input() logoLinkAriaLabel = "";
+    // @Input() homeUrl = "/";
 
-    @Input() menuItems: MenuItem[] = [];
+    // @Input() skipLinkTarget = "";
 
-    @Input()
-    menuTrigger: MenuTrigger = {
-        label: 'Menu',
-        icon: 'menu'
-    };
+
+
+    // @Input() logoSrc = "";
+
+    // @Input() logoAlt = "";
+
+
+    // @Input() menuItems: MenuItem[] = [];
+
+    // @Input()
+    // menuTrigger: MenuTrigger = {
+    //     label: 'Menu',
+    //     icon: 'menu'
+    // };
     
 }
