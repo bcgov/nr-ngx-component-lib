@@ -1,29 +1,27 @@
 ::ng-deep :root {
     --nrcl-application-header-focus-color: #2e5dd7;
-    --nrcl-application-header-mobile-min-height: 56px;
-    --nrcl-application-header-desktop-min-height: 65px;
-
     --nrcl-application-header-background-color: #FFFFFF;
     --nrcl-application-header-title-color: #2D2D2D;
     --nrcl-application-header-link-color: #255A90;
-    --nrcl-application-header-divider-color: #D8D8D8;
-    --nrcl-application-header-surface-color-border-default: #D8D8D8;
+    --nrcl-application-header-border-color: #D8D8D8;
 
     --nrcl-application-header-divider-height: 32px;
-    --nrcl-application-header-logo-width: 129px;
-    --nrcl-application-header-logo-width-mobile: 100px;
-    --nrcl-application-header-border-width-small: 1px;
+    --nrcl-application-header-border-width: 1px;
 
-    --nrcl-application-header-layout-padding-none: 0;
-    --nrcl-application-header-layout-padding-small: 0.5rem;
-    --nrcl-application-header-layout-padding-medium: 1rem;
-
-    --nrcl-application-header-typography-regular-body: 400 1rem/1.688rem 'BC Sans';
-    --nrcl-application-header-typography-bold-h4: 700 1.5rem/2.25rem 'BC Sans';
+    --nrcl-application-header-font: 400 16px / 18px BCSans;
 
     --nrcl-application-header-logo-url: url( './assets/bc-wildfire-service.png' );
-    --nrcl-application-header-logo-width: 130px;
-    --nrcl-application-header-logo-height: 35px;
+    --nrcl-application-header-logo-aspect: calc( 1663 / 450 );
+
+    --nrcl-application-header-desktop-min-height: 65px;
+    --nrcl-application-header-desktop-logo-width: 129px;
+    --nrcl-application-header-desktop-padding: 16px;
+    --nrcl-application-header-desktop-title-font: 700 24px / 36px BCSans;
+
+    --nrcl-application-header-mobile-min-height: 56px;
+    --nrcl-application-header-mobile-logo-width: 100px;
+    --nrcl-application-header-mobile-padding: 8px;
+    --nrcl-application-header-mobile-title-font: 700 16px / 18px BCSans;
 }
 
 :host {
@@ -37,11 +35,8 @@
         align-items: center;
         justify-content: space-around;
         background-color: var( --nrcl-application-header-background-color );
-        border-bottom: var( --nrcl-application-header-border-width-small ) solid var(--nrcl-application-header-surface-color-border-default);
-        min-height: var( --nrcl-application-header-desktop-min-height );
-        //padding: var(--nrcl-application-header-layout-padding-none) var(--nrcl-application-header-layout-padding-medium);
+        border-bottom: var( --nrcl-application-header-border-width ) solid var(--nrcl-application-header-border-color);
         width: 100%;
-        //flex-grow: 1;
 
         .logo-title {
             flex-grow: 1;
@@ -49,19 +44,13 @@
             flex-direction: row;
             align-items: center;
 
-            gap: var(--nrcl-application-header-layout-padding-medium);
-
-            width: 100%;
-            min-height: var(--nrcl-application-header-desktop-min-height);
-
             .logo {
                 display: inline-block;
                 background-image: var( --nrcl-application-header-logo-url );
                 background-size: contain;
                 background-position: left center;
                 background-repeat: no-repeat;
-                height: var( --nrcl-application-header-logo-height );
-                width: var( --nrcl-application-header-logo-width );
+                cursor: pointer;
 
                 &:focus-visible {
                     outline: 3px solid var(--nrcl-application-header-focus-color);
@@ -72,48 +61,96 @@
             .skip {
                 position: absolute;
                 margin-left: -100000px;
-                top: 0;
-
-                font: var(--nrcl-application-header-typography-regular-body);
-                line-height: 1.2;
-                padding: 0.5rem 0.75rem;
-
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font: var(--nrcl-application-header-font);
                 background: var(--nrcl-application-header-background-color);
                 color: var(--nrcl-application-header-link-color);
-
                 text-decoration: underline;
 
                 &:focus-visible {
                     margin-left: 0;
-                    top: 1rem;
                     z-index: 1000;
-
                     outline: 3px solid var(--nrcl-application-header-focus-color);
-                    outline-offset: 2px;
+                    cursor: pointer;
                 }
             }
 
             .divider {
                 display: block;
-                width: var( --nrcl-application-header-border-width-small );
-                height: var( --nrcl-application-header-desktop-min-height );
-                border-left: var( --nrcl-application-header-border-width-small ) solid var( --nrcl-application-header-surface-color-border-default );
+                width: var( --nrcl-application-header-border-width );
+                height: var( --nrcl-application-header-divider-height );
+                border-left: var( --nrcl-application-header-border-width ) solid var( --nrcl-application-header-border-color );
             }
 
             .title {
-                margin: 0;
                 flex-grow:1;
-
-                font: var(--nrcl-application-header-typography-bold-h4);
-                color: var(--nrcl-application-header-title-color);
-
+                margin: 0;
+                padding: 0;
                 white-space: normal;
                 overflow-wrap: break-word;
+                overflow: visible;
             }
         }
     }
 }
 
+:host-context( .nrcl-device-desktop ) {
+    :host {        
+        header {
+            min-height: var( --nrcl-application-header-desktop-min-height );
+
+            .logo-title {
+                gap: var(--nrcl-application-header-desktop-padding);
+
+                .logo {
+                    width: var( --nrcl-application-header-desktop-logo-width );
+                    height: calc( var( --nrcl-application-header-desktop-logo-width ) / var( --nrcl-application-header-logo-aspect ) );
+                }
+
+                .skip {
+                    height: calc( var( --nrcl-application-header-desktop-logo-width ) / var( --nrcl-application-header-logo-aspect ) );
+                    top: calc( ( var( --nrcl-application-header-desktop-min-height ) - var( --nrcl-application-header-desktop-logo-width ) / var( --nrcl-application-header-logo-aspect ) ) / 2 );
+                    padding-left: var(--nrcl-application-header-desktop-padding);
+                    padding-right: var(--nrcl-application-header-desktop-padding);
+                }
+
+                .title {
+                    font: var( --nrcl-application-header-desktop-title-font );
+                }
+            }
+        }
+    }
+}
+
+:host-context( .nrcl-device-mobile ) {
+    :host {        
+        header {
+            min-height: var( --nrcl-application-header-mobile-min-height );
+
+            .logo-title {
+                gap: var(--nrcl-application-header-mobile-padding);
+
+                .logo {
+                    width: var( --nrcl-application-header-mobile-logo-width );
+                    height: calc( var( --nrcl-application-header-mobile-logo-width ) / var( --nrcl-application-header-logo-aspect ) );
+                }
+
+                .skip {
+                    height: calc( var( --nrcl-application-header-mobile-logo-width ) / var( --nrcl-application-header-logo-aspect ) );
+                    top: calc( ( var( --nrcl-application-header-mobile-min-height ) - var( --nrcl-application-header-mobile-logo-width ) / var( --nrcl-application-header-logo-aspect ) ) / 2 );
+                    padding-left: var(--nrcl-application-header-mobile-padding);
+                    padding-right: var(--nrcl-application-header-mobile-padding);
+                }
+
+                .title {
+                    font: var( --nrcl-application-header-mobile-title-font );
+                }
+            }
+        }
+    }
+}
 
 /*
 
@@ -165,7 +202,7 @@
     justify-content: space-around;
     background-color: var(--nrcl-application-header-background-color);
     border-bottom: var(--nrcl-application-header-border-width-small) solid
-    var(--nrcl-application-header-surface-color-border-default);
+    var(--nrcl-application-header-border-color);
     min-height: var(--nrcl-application-header-desktop-min-height);
     padding: var(--nrcl-application-header-layout-padding-none) var(--nrcl-application-header-layout-padding-medium);
     width: 100%;
@@ -237,7 +274,7 @@
     border-bottom:
         var(--nrcl-application-header-border-width-small)
         solid
-        var(--nrcl-application-header-surface-color-border-default);
+        var(--nrcl-application-header-border-color);
 }
 
 .mobile-container {

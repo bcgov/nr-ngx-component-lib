@@ -5,6 +5,7 @@
             tabindex="0"
             [attr.aria-label]="logoAriaLabel"
             (click)="onClickLogo()"
+            (keydown)="onKeyDownLogo($event)"
         ></div>
 
 
@@ -12,7 +13,8 @@
             <div class="skip"
                 role="button"
                 tabindex="0"
-                (click)="$event.stopPropagation(); onClickSkip()"
+                (click)="onClickSkip()"
+                (keydown)="onKeyDownSkip($event)"
             >
                 {{ skipLabel }}
             </div>

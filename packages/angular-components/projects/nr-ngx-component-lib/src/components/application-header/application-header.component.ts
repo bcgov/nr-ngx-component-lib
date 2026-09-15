@@ -1,11 +1,11 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    Input
+    EventEmitter,
+    Input,
+    Output
 } from "@angular/core";
 import { NrclBase } from '../../directives/nrcl.base';
-
-import { MenuItem, MenuTrigger } from '../menu/menu.component';
 
 @Component({
     selector: "nrcl-application-header",
@@ -18,27 +18,30 @@ export class ApplicationHeaderComponent extends NrclBase{
     @Input() logoAriaLabel = "";
     @Input() skipLabel = "";
 
-    // @Input() skipLinksEnabled = false;
+    @Output() clickLogo = new EventEmitter()
+    @Output() clickSkip = new EventEmitter()
 
-    // @Input() showMenu = false;
+    onClickLogo() {
+        this.clickLogo.emit()
+    }
 
-    // @Input() homeUrl = "/";
+    onKeyDownLogo( ev ) {
+        switch ( ev.key ) {
+            case 'Enter': 
+                this.clickLogo.emit()
+                break
+        }
+    }
 
-    // @Input() skipLinkTarget = "";
+    onClickSkip() {
+        this.clickSkip.emit()
+    }   
 
-
-
-    // @Input() logoSrc = "";
-
-    // @Input() logoAlt = "";
-
-
-    // @Input() menuItems: MenuItem[] = [];
-
-    // @Input()
-    // menuTrigger: MenuTrigger = {
-    //     label: 'Menu',
-    //     icon: 'menu'
-    // };
-    
+    onKeyDownSkip( ev ) {
+        switch ( ev.key ) {
+            case 'Enter': 
+                this.clickSkip.emit()
+                break
+        }
+    }
 }
