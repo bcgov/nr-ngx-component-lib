@@ -13,7 +13,7 @@ import { NrclBase } from '../../directives/nrcl.base';
     styleUrl: "./application-header.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApplicationHeaderComponent extends NrclBase{
+export class ApplicationHeaderComponent extends NrclBase {
     @Input() title = "";
     @Input() logoAriaLabel = "";
     @Input() skipLabel = "";

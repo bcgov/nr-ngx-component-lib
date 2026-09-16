@@ -25,7 +25,7 @@ import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ApplicationHeaderComponent } from './components/application-header/application-header.component';
-import { ApplicationMenuComponent, ApplicationMenuItemComponent } from './components/application-menu/application-menu.component';
+import { ApplicationMenuComponent } from './components/application-menu/application-menu.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
@@ -103,7 +103,6 @@ import { DATE_FORMATS } from './utils/date.util';
     declarations: [
         ApplicationHeaderComponent,
         ApplicationMenuComponent,
-        ApplicationMenuItemComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,
@@ -154,7 +153,6 @@ import { DATE_FORMATS } from './utils/date.util';
     exports: [
         ApplicationHeaderComponent,
         ApplicationMenuComponent,
-        ApplicationMenuItemComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,

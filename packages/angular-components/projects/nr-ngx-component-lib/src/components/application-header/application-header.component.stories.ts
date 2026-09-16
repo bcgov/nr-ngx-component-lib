@@ -22,6 +22,7 @@ import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
 import { ButtonComponent } from "../button/button.component";
 import { ApplicationHeaderComponent } from "./application-header.component";
 import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
+import { MatMenuModule } from "@angular/material/menu";
 
 const meta: Meta<ApplicationHeaderComponent> = {
     title: "Application Header",
@@ -33,7 +34,8 @@ const meta: Meta<ApplicationHeaderComponent> = {
                 MatButtonModule,
                 MatIconModule,
                 MatRippleModule,
-                MatTooltipModule
+                MatTooltipModule,
+                MatMenuModule
             ],
             declarations: [
                 ButtonComponent,
@@ -119,44 +121,56 @@ export const Primary: Story = {
             // icon: 'menu'
         // },
 
-        // menuItems: [
-        //     {
-        //         label: 'Home',
-        //         icon: 'home-outline'
-        //     },
-        //     {
-        //         label: 'Download Data',
-        //         icon: 'get_app'
-        //     },
-        //     {
-        //         label: 'Weather Station List',
-        //         icon: 'format_list_bulleted'
-        //     },
-        //     {
-        //         label: 'Graph QL and API',
-        //         icon: 'control_camera'
-        //     },
-        //     {
-        //         label: 'MCP Server',
-        //         icon: 'mcp-server'
-        //     },
-        //     {
-        //         label: 'Data Information',
-        //         icon: 'info'
-        //     },
-        //     {
-        //         label: 'Disclaimer'
-        //     },
-        //     {
-        //         label: 'Privacy'
-        //     },
-        //     {
-        //         label: 'Copyright'
-        //     }
-        // ]
     },
     render: args => ({
-        props: args,
+        props: {
+            ...args,
+            menuItems: [
+                {
+                    id: 'home',
+                    label: 'Home',
+                    icon: 'home-outline'
+                },
+                {
+                    id: 'download',
+                    label: 'Download Data',
+                    icon: 'get_app'
+                },
+                {
+                    id: 'list',
+                    label: 'Weather Station List',
+                    icon: 'format_list_bulleted'
+                },
+                {
+                    id: 'graph',
+                    label: 'Graph QL and API',
+                    icon: 'control_camera'
+                },
+                {
+                    id: 'server',
+                    label: 'MCP Server',
+                    icon: 'mcp-server'
+                },
+                {
+                    id: 'data',
+                    label: 'Data Information',
+                    icon: 'info'
+                },
+                {
+                    id: 'disclaimer',
+                    label: 'Disclaimer'
+                },
+                {
+                    id: 'privacy',
+                    label: 'Privacy'
+                },
+                {
+                    id: 'copyright',
+                    label: 'Copyright'
+                }
+            ],
+
+        },
         template: `
             <nrcl-application-header
                 [title]="title"
@@ -165,9 +179,10 @@ export const Primary: Story = {
                 (clickLogo)="clickLogo()"
                 (clickSkip)="clickSkip()"
             >
-                <nrcl-application-menu>
-
-                </nrcl-application-menu>
+                <nrcl-application-menu
+                    label="Menu"
+                    [items]="menuItems"
+                ></nrcl-application-menu>
             </nrcl-application-header>
 
             <main id="main-content">

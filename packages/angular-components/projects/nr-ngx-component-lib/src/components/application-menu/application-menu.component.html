@@ -1,111 +1,19 @@
-<!-- <nrcl-device-view> -->
-    <!-- <ng-template desktop-view> -->
-        <div class="menu-container">
-            <nrcl-button secondary #menuTrigger                
-                [label]="label"
-                [id]="triggerId"
-                [ariaLabel]="label || 'Menu'"
-                [attr.aria-expanded]="isOpen"
-                [attr.aria-controls]="menuId"
-                (click)="toggleMenu()"
-                [iconRight]="icon"
-                [matMenuTriggerFor]="menu"
-                (menuOpened)="onMenuOpened()"
-                (keydown)="onMenuKeyDown($event)"
-            ></nrcl-button>
+<nrcl-button secondary #menuTrigger                
+    [label]="desktopVisible && label"
+    [ariaLabel]="label || 'Menu'"
+    [icon]="icon"
+    [matMenuTriggerFor]="menu"
+></nrcl-button>
 
-            <mat-menu #menu="matMenu">
-                @for (item of items; track item.label) {
-                    <div mat-menu-item nrcl-menu-item
-                    ></div>
-                    <!-- <nrcl-button tertiary style="--nrcl-button-width: 100%" class="item"
-                        [label]="item.label"
-                        [icon]="item.icon || 'empty'"
-                    ></nrcl-button> -->
-                }                
-            </mat-menu>
-
-            <!-- @if (isOpen) {
-                <div
-                    class="menu-panel"
-                    [id]="menuId"
-                    role="menu"
-                    [attr.aria-labelledby]="triggerId"
-                    (keydown)="onMenuKeyDown($event)"
-                >
-                    @for (item of items; track item.label) {
-                        <a
-                            #menuItem
-                            role="menuitem"
-                            [href]="item.href"
-                            [target]="item.target"
-                            (click)="onMenuItemClick()"
-                        >
-                        <div class="menu-item-icon">
-                            @if (item.icon) {
-                                <nrcl-icon>
-                                    {{ item.icon }}
-                                </nrcl-icon>
-                            }
-                        </div>
-                        <span class="menu-item-label">
-                            {{ item.label }}
-                        </span>
-                        </a>
-                    }
-                </div>
-            } -->
-        </div>
-    <!-- </ng-template> -->
-<!--
-    <ng-template mobile-view>
-        <div class="menu-container">
-        <nrcl-button
-            #menuTrigger
-            secondary
-            [id]="triggerId"
-            [ariaLabel]="trigger.label || 'Menu'"
-            [attr.aria-expanded]="isOpen"
-            [attr.aria-controls]="menuId"
-            (click)="toggleMenu()"
-        >
-            <nrcl-icon>
-                {{ trigger.icon }}
-            </nrcl-icon>
-        </nrcl-button>
-
-        @if (isOpen) {
-            <div
-                    class="menu-panel mobile-menu-panel"
-                    [id]="menuId"
-                    role="menu"
-                    [attr.aria-labelledby]="triggerId"
-                    (keydown)="onMenuKeyDown($event)"
-                >
-                @for (item of items; track item.label) {
-                    <a
-                        #menuItem
-                        role="menuitem"
-                        [href]="item.href"
-                        [target]="item.target"
-                        (click)="onMenuItemClick()"
-                    >
-                    <div class="menu-item-icon">
-                        @if (item.icon) {
-                            <nrcl-icon>
-                                {{ item.icon }}
-                            </nrcl-icon>
-                        }
-                    </div>
-                    <span class="menu-item-label">
-                        {{ item.label }}
-                    </span>
-                    </a>
-                }
-            </div>
-        }
-        </div>
-    </ng-template>
-</nrcl-device-view>
-
--->
+<mat-menu #menu="matMenu"
+    class="nrcl-application-menu"
+>
+    @for ( item of items; track item.label ) {
+            <button mat-menu-item class="nrcl-application-menu-item"
+            (click)="onClickItem( item )"
+            >
+            <nrcl-icon>{{ item.icon || 'empty' }}</nrcl-icon>
+            <span class="label">{{ item.label }}</span>                        
+        </button>
+    }                
+</mat-menu>
