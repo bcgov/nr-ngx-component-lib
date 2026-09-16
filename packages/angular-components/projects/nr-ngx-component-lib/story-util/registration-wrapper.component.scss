@@ -1,60 +1,81 @@
 ::ng-deep :root {
     --registration-display: block;
-    --registration-size: 20px;
-    --registration-border-size: 2px;
+    --registration-size: 10px;
+    --registration-border: 2px solid #999;
 }
     
 :host {
-    display: var( --registration-display );
-    background-color: white;
     position: relative;
-    height: 100%;
     font-family: var( --nrcl-font-family );
+    height: 100%;
+    display: block;
+    // overflow: hidden;
 
-    .top-left {
+    .content {
         position: absolute;
-        top: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        left: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        width: var( --registration-size );
-        height: var( --registration-size );
-        border-bottom: var( --registration-border-size ) dashed green;
-        border-right: var( --registration-border-size ) dashed green;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        display: var( --registration-display );
+        background-color: white;
+        // height: 100%;
+        overflow: hidden;
     }
 
-    .top-right {
+    .marks {
         position: absolute;
-        top: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        right: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        width: var( --registration-size );
-        height: var( --registration-size );
-        border-bottom: var( --registration-border-size ) dashed green;
-        border-left: var( --registration-border-size ) dashed green;
-    }
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
-    .bottom-left {
-        position: absolute;
-        bottom: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        left: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        width: var( --registration-size );
-        height: var( --registration-size );
-        border-top: var( --registration-border-size ) dashed green;
-        border-right: var( --registration-border-size ) dashed green;
-    }
+        .top-left {
+            position: absolute;
+            top: calc( -1 * var( --registration-size ) );
+            left: calc( -1 * var( --registration-size ) );
+            width: var( --registration-size );
+            height: var( --registration-size );
+            border-bottom: var( --registration-border );
+            border-right: var( --registration-border );
+        }
 
-    .bottom-right {
-        position: absolute;
-        bottom: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        right: calc( -1 * var( --registration-size ) - var( --registration-border-size ) );
-        width: var( --registration-size );
-        height: var( --registration-size );
-        border-top: var( --registration-border-size ) dashed green;
-        border-left: var( --registration-border-size ) dashed green;
-    }
+        .top-right {
+            position: absolute;
+            top: calc( -1 * var( --registration-size ) );
+            right: calc( -1 * var( --registration-size ) );
+            width: var( --registration-size );
+            height: var( --registration-size );
+            border-bottom: var( --registration-border );
+            border-left: var( --registration-border );
+        }
 
-    .mode {
-        position: absolute;
-        font-size: 12px;
-        top: -18px;
-        left: 5px;
+        .bottom-left {
+            position: absolute;
+            bottom: calc( -1 * var( --registration-size ) );
+            left: calc( -1 * var( --registration-size ) );
+            width: var( --registration-size );
+            height: var( --registration-size );
+            border-top: var( --registration-border );
+            border-right: var( --registration-border );
+        }
+
+        .bottom-right {
+            position: absolute;
+            bottom: calc( -1 * var( --registration-size ) );
+            right: calc( -1 * var( --registration-size ) );
+            width: var( --registration-size );
+            height: var( --registration-size );
+            border-top: var( --registration-border );
+            border-left: var( --registration-border );
+        }
+
+        .mode {
+            position: absolute;
+            font-size: 12px;
+            top: -18px;
+            left: 5px;
+        }
     }
 }

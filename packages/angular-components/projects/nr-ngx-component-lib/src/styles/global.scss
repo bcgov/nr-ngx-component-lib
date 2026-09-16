@@ -79,24 +79,28 @@ html {
         }
     }
 
-    .nrcl-application-menu {
-        .nrcl-application-menu-item {
-            .mat-mdc-menu-item-text {
-                display: flex;
-                gap: 8px;
+    .cdk-overlay-pane:has( .nrcl-application-menu ) {
+        height: 100%;
 
-                .nrcl-icon {
-                    flex-grow: 0;
-
-                    .mat-icon {
-                        margin: 0;
-                    }
-                }
-
-                .label {
-                    flex-grow: 1;
+        .nrcl-application-menu {
+            .nrcl-application-menu-item {
+                .mat-mdc-menu-item-text {
                     display: flex;
-                    align-items: center;                    
+                    gap: 8px;
+
+                    .nrcl-icon {
+                        flex-grow: 0;
+
+                        .mat-icon {
+                            margin: 0;
+                        }
+                    }
+
+                    .label {
+                        flex-grow: 1;
+                        display: flex;
+                        align-items: center;                    
+                    }
                 }
             }
         }

@@ -69,6 +69,7 @@ import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
+import { ApplicationComponent } from './components/application/application.component';
 
 @NgModule({
     imports: [
@@ -101,6 +102,7 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
+        ApplicationComponent,
         ApplicationHeaderComponent,
         ApplicationMenuComponent,
         ButtonComponent,
@@ -151,6 +153,7 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipComponent,
     ],
     exports: [
+        ApplicationComponent,
         ApplicationHeaderComponent,
         ApplicationMenuComponent,
         ButtonComponent,

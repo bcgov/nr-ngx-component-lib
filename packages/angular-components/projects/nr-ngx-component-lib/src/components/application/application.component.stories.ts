@@ -20,13 +20,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
 import { ButtonComponent } from "../button/button.component";
-import { ApplicationHeaderComponent } from "./application-header.component";
 import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
 import { MatMenuModule } from "@angular/material/menu";
+import { ApplicationComponent } from "./application.component";
+import { ApplicationHeaderComponent } from "../application-header/application-header.component";
 
-const meta: Meta<ApplicationHeaderComponent> = {
-    title: "Application Header",
-    component: ApplicationHeaderComponent,
+const meta: Meta<ApplicationComponent> = {
+    title: "Application",
+    component: ApplicationComponent,
 
     decorators: [
         moduleMetadata({
@@ -40,6 +41,7 @@ const meta: Meta<ApplicationHeaderComponent> = {
             declarations: [
                 ButtonComponent,
                 ApplicationMenuComponent,
+                ApplicationHeaderComponent,
                 IconComponent,
                 DisplayModeWrapperComponent,
                 DeviceViewComponent,
@@ -68,30 +70,7 @@ const meta: Meta<ApplicationHeaderComponent> = {
     parameters: {
         docs: {
             description: {
-                component: `
-BC Wildfire Service application header based on the BC Government Design System.
-
-## Features
-
-- BC Wildfire Service logo
-- Site title
-- Responsive layout
-- Accessible skip link
-- Keyboard accessible logo
-- Content projection for actions
-- Non-sticky header
-
-## Usage
-
-\`\`\`html
-<nrcl-application-header
-    title="Wildfire DataMart"
->
-    
-     
-</nrcl-application-header>
-\`\`\`
-`
+                component: ``
             }
         }
     },
@@ -99,28 +78,14 @@ BC Wildfire Service application header based on the BC Government Design System.
 
 export default meta;
 
-type Story = StoryObj<ApplicationHeaderComponent>;
+type Story = StoryObj<ApplicationComponent>;
 
 export const Primary: Story = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
-        clickLogo: { action: 'clickLogo' },
-        clickSkip: { action: 'clickSkip' }
     },
     args: {
         ...displayModeWrapperStory.args,
-        title: 'Wildfire DataMart',
-        // homeUrl: '/',
-        // skipLinksEnabled: true,
-        // skipLinkTarget: 'main-content',
-        skipLabel: 'Skip to main content',
-        logoAriaLabel: 'BC Wildfire Service logo',
-        // showMenu: true,
-        // menuTrigger: {
-            // label: 'Menu',
-            // icon: 'menu'
-        // },
-
     },
     render: args => ({
         props: {
@@ -172,18 +137,22 @@ export const Primary: Story = {
 
         },
         template: `
-            <nrcl-application-header
-                [title]="title"
-                [skipLabel]="skipLabel"
-                [logoAriaLabel]="logoAriaLabel"
-                (clickLogo)="clickLogo()"
-                (clickSkip)="clickSkip()"
-            >
-                <nrcl-application-menu
-                    label="Menu"
-                    [items]="menuItems"
-                ></nrcl-application-menu>
-            </nrcl-application-header>
+            <nrcl-application>
+                <nrcl-application-header
+                    title="Wildfire DataMart"
+                    skipLabel="Skip to main content"
+                    logoAriaLabel="BC Wildfire Service logo"
+                >
+                    <nrcl-application-menu
+                        label="Menu"
+                        [items]="menuItems"
+                    ></nrcl-application-menu>
+                </nrcl-application-header>
+
+                <p>${ loremIpsum }</p>
+                <p>${ loremIpsum }</p>
+                <p>${ loremIpsum }</p>
+            </nrcl-application>
         `
     })
 };
