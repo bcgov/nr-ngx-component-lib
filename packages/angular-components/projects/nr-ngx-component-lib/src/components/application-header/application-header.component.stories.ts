@@ -22,6 +22,7 @@ import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
 import { ButtonComponent } from "../button/button.component";
 import { ApplicationHeaderComponent } from "./application-header.component";
 import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
+import { ApplicationComponent } from "../application/application.component";
 import { MatMenuModule } from "@angular/material/menu";
 
 const meta: Meta<ApplicationHeaderComponent> = {
@@ -40,6 +41,7 @@ const meta: Meta<ApplicationHeaderComponent> = {
             declarations: [
                 ButtonComponent,
                 ApplicationMenuComponent,
+                ApplicationComponent,
                 IconComponent,
                 DisplayModeWrapperComponent,
                 DeviceViewComponent,
@@ -172,18 +174,20 @@ export const Primary: Story = {
 
         },
         template: `
-            <nrcl-application-header
-                [title]="title"
-                [skipLabel]="skipLabel"
-                [logoAriaLabel]="logoAriaLabel"
-                (clickLogo)="clickLogo()"
-                (clickSkip)="clickSkip()"
-            >
-                <nrcl-application-menu
-                    label="Menu"
-                    [items]="menuItems"
-                ></nrcl-application-menu>
-            </nrcl-application-header>
+            <nrcl-application>
+                <nrcl-application-header
+                    [title]="title"
+                    [skipLabel]="skipLabel"
+                    [logoAriaLabel]="logoAriaLabel"
+                    (clickLogo)="clickLogo()"
+                    (clickSkip)="clickSkip()"
+                >
+                    <nrcl-application-menu
+                        label="Menu"
+                        [items]="menuItems"
+                    ></nrcl-application-menu>
+                </nrcl-application-header>
+            </nrcl-application>
         `
     })
 };

@@ -14,6 +14,7 @@ import {
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { ApplicationMenuComponent } from './application-menu.component';
+import { ApplicationComponent } from "../application/application.component";
 
 const meta: Meta<ApplicationMenuComponent> = {
     title: 'Application Menu',
@@ -25,11 +26,12 @@ const meta: Meta<ApplicationMenuComponent> = {
                 MatIconModule,
                 MatTooltipModule,
                 MatRippleModule,
-                MatMenuModule
+                MatMenuModule,
             ],
             declarations: [
                 ButtonComponent,
                 IconComponent,
+                ApplicationComponent,
             ]
         }),
         componentWrapperDecorator(
@@ -110,11 +112,13 @@ export const Primary: Story = {
     render: args => ({
         props: args,
         template: `
-            <nrcl-application-menu 
-                [label]="label"
-                [items]="items"
-                (itemClick)="itemClick( $event )"
-            ></nrcl-application-menu>
+            <nrcl-application>
+                <nrcl-application-menu 
+                    [label]="label"
+                    [items]="items"
+                    (itemClick)="itemClick( $event )"
+                ></nrcl-application-menu>
+            </nrcl-application>
         `
     }),
 };

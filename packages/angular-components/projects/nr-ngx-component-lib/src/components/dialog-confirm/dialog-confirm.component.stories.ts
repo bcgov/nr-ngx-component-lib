@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, inject, Input, TemplateRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +26,7 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { GapComponent } from '../gap/gap.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
+import { useArgs } from 'storybook/preview-api';
 
 @Component( {
     selector: 'dialog-dummy',
@@ -104,6 +105,7 @@ const meta: Meta<DialogDummyComponent> = {
                 MatIconModule,
                 BrowserAnimationsModule,
                 FormsModule,
+                ReactiveFormsModule,
                 MatButtonModule,
                 MatFormFieldModule,
                 MatSelectModule,
@@ -175,6 +177,7 @@ export const Fullscreen: StoryObj<DialogDummyFullscreenComponent> = {
         title: 'Selected Stations'
     },
     render: (args) => {
+        const [, setArgs] = useArgs();
         return {
             props: {
                 ...args,
@@ -191,6 +194,15 @@ export const Fullscreen: StoryObj<DialogDummyFullscreenComponent> = {
                 ],
                 context: {
                     name: 'foo'
+                },
+                onPageNumberChange: (ev) => {
+                    setArgs({
+                        pageNumber: ev
+                        });
+                    },
+                    onPageSizeChange: (ev) => {
+                     setArgs({ pageSize: ev, pageNumber: 1
+                    });
                 }
             },
             styles: [`
