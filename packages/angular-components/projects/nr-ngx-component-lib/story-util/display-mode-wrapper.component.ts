@@ -10,17 +10,16 @@ import { DisplayMode } from "../src/services/configuration.service"
     templateUrl: './display-mode-wrapper.component.html',
     host: {
         '[style.width]': 'getWidth()',
-        '[class.nrcl-device-desktop]': "displayMode == 'desktop'",
-        '[class.nrcl-device-mobile]': "displayMode == 'mobile'"     
     }
 } )
 export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase implements OnInit, OnChanges {
     @Input() displayMode: DisplayMode | 'auto' = 'auto'
     @Input() width
     @Input() useWidth = false
+    @Input() bodyPadding = 16
     
     ngOnInit() {
-        // this.configurationService.update( { displayMode: this.displayMode } )
+        this.updateBodyPadding()
         this.onResize()
         super.ngOnInit()
     }
@@ -34,11 +33,17 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
                 this.configurationService.update( { displayMode: this.displayMode } )
             }
         }
+
+        if ( changes.bodyPadding ) {
+            this.updateBodyPadding()
+        }
     }
 
     getWidth() {
         if ( !this.useWidth ) {
-            return '100%'
+            if ( this.displayMode == 'auto' ) return '100%'
+            if ( this.displayMode == 'desktop' ) return '100%'
+            if ( this.displayMode == 'mobile' ) return '400px'
         }
         return this.width + 'px'
     }
@@ -58,6 +63,10 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
     onConfigurationChange() {
         console.log( 'onConfigurationChange', this.configuration )
     }
+
+    updateBodyPadding() {
+        document.documentElement.style.setProperty( '--display-mode-wrapper-body-padding', this.bodyPadding + 'px' )
+    }
 }
 
 export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
@@ -76,13 +85,11 @@ export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
                 max: 2000
             }
         },
-        // auto: { name: 'automatically set display mode' },
     },
     args: {
         displayMode: 'auto',
         useWidth: false,
         width: 400,
-        // auto: true,
     },
 }
 

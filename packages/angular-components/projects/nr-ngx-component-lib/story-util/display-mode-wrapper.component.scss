@@ -2,8 +2,9 @@
     height: 100%; 
     --wf1-gutter-space: 16px;
 
-    body { 
+    body.sb-show-main.sb-main-padded { 
         height: 100%;
+        padding: var( --display-mode-wrapper-body-padding );
     }
 
     #storybook-root { 

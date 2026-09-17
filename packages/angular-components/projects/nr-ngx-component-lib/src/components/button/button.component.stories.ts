@@ -141,6 +141,9 @@ Adjust the controls to see how different properties affect all button variants s
             options: [ 'none', 'Ok', 'Add Resources', 'Clear', 'This label is too long and just goes on and on' ],
             mapping: { 'none': undefined }
         },
+        ariaLabel: {
+            control: { type: 'text' }
+        },
         icon: {
             control: { type: 'inline-radio' },
             options: [ 'none', 'add', 'get_app', 'clear-filters', 'launch' ],
@@ -185,6 +188,7 @@ Adjust the controls to see how different properties affect all button variants s
     },
     args: {
         label: 'Add Resources',
+        ariaLabel: 'Add Resources Button',
         tooltipMode: 'null',
         tooltip: undefined,
         icon: undefined,

@@ -1,5 +1,10 @@
-<div class="registration top-left"></div>
-<div class="registration top-right"></div>
-<div class="registration bottom-left"></div>
-<div class="registration bottom-right"></div>
-<ng-content></ng-content>
+<div class="marks">
+    <div class="registration top-left"></div>
+    <div class="registration top-right"></div>
+    <div class="registration bottom-left"></div>
+    <div class="registration bottom-right"></div>
+    <div class="mode">{{ configuration.displayMode }}</div>
+</div>
+<div class="content">
+    <ng-content></ng-content>
+</div>

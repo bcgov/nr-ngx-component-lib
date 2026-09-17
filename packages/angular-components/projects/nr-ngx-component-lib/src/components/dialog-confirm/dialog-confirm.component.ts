@@ -7,6 +7,7 @@ export type DialogConfirmConfig = {
     cancelLabel?
     template: TemplateRef<any>,
     context?: any
+    showActions?: boolean
 }
 
 @Component({
@@ -19,4 +20,5 @@ export class DialogConfirmComponent extends DialogBase<DialogConfirmConfig> {
     title = this.config.title
     saveLabel = this.config.saveLabel || 'Confirm'
     cancelLabel = this.config.cancelLabel || 'Cancel'
+    showActions = this.config.showActions ?? true
 }

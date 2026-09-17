@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -24,8 +25,10 @@ import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ApplicationHeaderComponent } from './components/application-header/application-header.component';
+import { ApplicationMenuComponent } from './components/application-menu/application-menu.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
+import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -60,14 +63,13 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
 import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
+import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { ApplicationComponent } from './components/application/application.component';
 
 @NgModule({
     imports: [
@@ -100,7 +102,9 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         MatTabsModule
     ],
     declarations: [
+        ApplicationComponent,
         ApplicationHeaderComponent,
+        ApplicationMenuComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,
@@ -149,7 +153,9 @@ import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip
         TooltipComponent,
     ],
     exports: [
+        ApplicationComponent,
         ApplicationHeaderComponent,
+        ApplicationMenuComponent,
         ButtonComponent,
         CellContentComponent,
         ExpansionPanelComponent,

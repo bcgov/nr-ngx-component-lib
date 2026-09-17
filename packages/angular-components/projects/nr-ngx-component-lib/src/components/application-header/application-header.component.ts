@@ -1,7 +1,9 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    Input
+    EventEmitter,
+    Input,
+    Output
 } from "@angular/core";
 import { NrclBase } from '../../directives/nrcl.base';
 
@@ -11,27 +13,35 @@ import { NrclBase } from '../../directives/nrcl.base';
     styleUrl: "./application-header.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApplicationHeaderComponent extends NrclBase{
-
-    @Input() skipLinksEnabled = false;
-
-    @Input() showMenu = false;
-
-    @Input() homeUrl = "/";
-
-    @Input() skipLinkTarget = "";
-
-    @Input() skipLinkLabel = "";
-
+export class ApplicationHeaderComponent extends NrclBase {
     @Input() title = "";
+    @Input() logoAriaLabel = "";
+    @Input() skipLabel = "";
 
-    @Input() logoSrc = "";
+    @Output() clickLogo = new EventEmitter()
+    @Output() clickSkip = new EventEmitter()
 
-    @Input() logoAlt = "";
+    onClickLogo() {
+        this.clickLogo.emit()
+    }
 
-    @Input() logoLinkAriaLabel = "";
+    onKeyDownLogo( ev ) {
+        switch ( ev.key ) {
+            case 'Enter': 
+                this.clickLogo.emit()
+                break
+        }
+    }
 
-    @Input() menuTitle = "";
+    onClickSkip() {
+        this.clickSkip.emit()
+    }   
 
-    
+    onKeyDownSkip( ev ) {
+        switch ( ev.key ) {
+            case 'Enter': 
+                this.clickSkip.emit()
+                break
+        }
+    }
 }

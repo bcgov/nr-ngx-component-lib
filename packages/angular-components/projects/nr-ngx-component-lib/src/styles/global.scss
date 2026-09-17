@@ -78,4 +78,47 @@ html {
             border-radius: 4px;
         }
     }
+    
+    .cdk-overlay-pane:has( .nrcl-application-menu ) {
+        .nrcl-application-menu {
+            .nrcl-application-menu-item {
+                .mat-mdc-menu-item-text {
+                    display: flex;
+                    gap: 8px;
+
+                    .nrcl-icon {
+                        flex-grow: 0;
+
+                        .mat-icon {
+                            margin: 0;
+                        }
+                    }
+
+                    .label {
+                        flex-grow: 1;
+                        display: flex;
+                        align-items: center;                    
+                    }
+                }
+            }
+        }
+    }
+
+    body.nrcl-device-desktop {
+        .cdk-overlay-pane:has( .nrcl-application-menu ) {
+            flex-grow: 1;
+        }
+    }
+
+    body.nrcl-device-mobile {
+        .cdk-overlay-pane:has( .nrcl-application-menu ) {
+            bottom: 0;
+            width: 100%;
+
+            .nrcl-application-menu {
+                width: 100%;
+                max-width: unset;
+            }
+        }
+    }
 }
