@@ -16,8 +16,10 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
     @Input() displayMode: DisplayMode | 'auto' = 'auto'
     @Input() width
     @Input() useWidth = false
+    @Input() bodyPadding = 16
     
     ngOnInit() {
+        this.updateBodyPadding()
         this.onResize()
         super.ngOnInit()
     }
@@ -30,6 +32,10 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
             else {
                 this.configurationService.update( { displayMode: this.displayMode } )
             }
+        }
+
+        if ( changes.bodyPadding ) {
+            this.updateBodyPadding()
         }
     }
 
@@ -56,6 +62,10 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
 
     onConfigurationChange() {
         console.log( 'onConfigurationChange', this.configuration )
+    }
+
+    updateBodyPadding() {
+        document.documentElement.style.setProperty( '--display-mode-wrapper-body-padding', this.bodyPadding + 'px' )
     }
 }
 

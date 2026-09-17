@@ -78,10 +78,8 @@ html {
             border-radius: 4px;
         }
     }
-
+    
     .cdk-overlay-pane:has( .nrcl-application-menu ) {
-        height: 100%;
-
         .nrcl-application-menu {
             .nrcl-application-menu-item {
                 .mat-mdc-menu-item-text {
@@ -102,6 +100,24 @@ html {
                         align-items: center;                    
                     }
                 }
+            }
+        }
+    }
+
+    body.nrcl-device-desktop {
+        .cdk-overlay-pane:has( .nrcl-application-menu ) {
+            flex-grow: 1;
+        }
+    }
+
+    body.nrcl-device-mobile {
+        .cdk-overlay-pane:has( .nrcl-application-menu ) {
+            bottom: 0;
+            width: 100%;
+
+            .nrcl-application-menu {
+                width: 100%;
+                max-width: unset;
             }
         }
     }

@@ -53,7 +53,8 @@ const meta: Meta<ApplicationComponent> = {
         componentWrapperDecorator(
             story => `
                 <ng-container *rerender="displayMode">
-                    <display-mode-wrapper
+                    <display-mode-wrapper 
+                        bodyPadding="0"
                         [displayMode]="displayMode"
                         [useWidth]="useWidth"
                         [width]="width"

@@ -10,7 +10,7 @@
 >
     @for ( item of items; track item.label ) {
             <button mat-menu-item class="nrcl-application-menu-item"
-            (click)="onClickItem( item )"
+                (click)="onClickItem( item )"
             >
             <nrcl-icon>{{ item.icon || 'empty' }}</nrcl-icon>
             <span class="label">{{ item.label }}</span>                        

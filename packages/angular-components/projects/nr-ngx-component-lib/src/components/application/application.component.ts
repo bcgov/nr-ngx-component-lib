@@ -1,9 +1,6 @@
 import {
     ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    Output
+    Component
 } from "@angular/core";
 import { NrclBase } from '../../directives/nrcl.base';
 
@@ -14,34 +11,4 @@ import { NrclBase } from '../../directives/nrcl.base';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicationComponent extends NrclBase {
-    // @Input() title = "";
-    // @Input() logoAriaLabel = "";
-    // @Input() skipLabel = "";
-
-    // @Output() clickLogo = new EventEmitter()
-    // @Output() clickSkip = new EventEmitter()
-
-    // onClickLogo() {
-    //     this.clickLogo.emit()
-    // }
-
-    // onKeyDownLogo( ev ) {
-    //     switch ( ev.key ) {
-    //         case 'Enter': 
-    //             this.clickLogo.emit()
-    //             break
-    //     }
-    // }
-
-    // onClickSkip() {
-    //     this.clickSkip.emit()
-    // }   
-
-    // onKeyDownSkip( ev ) {
-    //     switch ( ev.key ) {
-    //         case 'Enter': 
-    //             this.clickSkip.emit()
-    //             break
-    //     }
-    // }
 }
