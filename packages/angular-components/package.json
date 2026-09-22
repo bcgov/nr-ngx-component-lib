@@ -54,6 +54,6 @@
     "storybook": "=10.4.6",
     "ts-node": "~10.7.0",
     "tslint": "~6.1.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.8.3"
   }
 }
