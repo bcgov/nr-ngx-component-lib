@@ -23,7 +23,8 @@ export type RowListPaginationWidth = 'sufficient'|'tight'|'restrictive'
         '[class.width-sufficient]': "componentWidth == 'sufficient'",
         '[class.width-tight]': "componentWidth == 'tight'",
         '[class.width-restrictive]': "componentWidth == 'restrictive'",
-    }
+    },
+    standalone: false
 })
 export class RowListPaginationComponent extends NrclBase implements AfterViewInit {
     @Input() paginationId = '1'

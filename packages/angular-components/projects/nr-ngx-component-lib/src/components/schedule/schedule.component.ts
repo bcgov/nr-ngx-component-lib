@@ -6,7 +6,8 @@ import { InitialState, PaginationState } from '../../directives/pagination.base'
 import { RowListBase } from '../../directives/row-list.base';
 
 @Directive( {
-    selector: '[nrclScheduleRowHeading]'
+    selector: '[nrclScheduleRowHeading]',
+    standalone: false
 } )
 export class ScheduleRowHeadingDirective {
     constructor(
@@ -17,7 +18,8 @@ export class ScheduleRowHeadingDirective {
 // ================================================================================
 
 @Directive( {
-    selector: '[nrclScheduleItem]'
+    selector: '[nrclScheduleItem]',
+    standalone: false
 } )
 export class ScheduleItemDirective {
     @Input( 'nrclScheduleItem' ) name?: string
@@ -86,7 +88,8 @@ export interface ScheduleProvider {
     styleUrl: './schedule.component.scss',
     host: {
         '[style.--nrcl-schedule-day-count]': 'this.dayCount'
-    }
+    },
+    standalone: false
 } )
 export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements OnChanges {
     @Input() provider?: ScheduleProvider

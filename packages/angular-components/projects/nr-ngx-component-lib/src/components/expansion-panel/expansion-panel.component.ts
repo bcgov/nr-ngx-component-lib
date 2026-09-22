@@ -8,10 +8,11 @@ import { NrclBase } from "../../directives/nrcl.base";
     styleUrl: "./expansion-panel.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.is-loading]':   'isLoading',
-        '[class.expanded]':     'matExpansionPanel?.expanded',
-        '[class.disabled]':     'disabled',
-    }
+        '[class.is-loading]': 'isLoading',
+        '[class.expanded]': 'matExpansionPanel?.expanded',
+        '[class.disabled]': 'disabled',
+    },
+    standalone: false
 })
 export class ExpansionPanelComponent extends NrclBase {
     @Input() isLoading: boolean = false;

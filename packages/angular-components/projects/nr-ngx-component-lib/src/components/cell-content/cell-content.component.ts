@@ -5,6 +5,7 @@ import { NrclBase } from '../../directives/nrcl.base';
     selector: 'nrcl-cell-content',
     templateUrl: './cell-content.component.html',
     styleUrl: './cell-content.component.scss',
+    standalone: false
 } )
 export class CellContentComponent extends NrclBase implements AfterContentInit {
     @Input() tooltip

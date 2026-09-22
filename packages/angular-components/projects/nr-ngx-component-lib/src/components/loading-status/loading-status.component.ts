@@ -7,7 +7,8 @@ import { NrclBase } from '../../directives/nrcl.base';
     templateUrl: './loading-status.component.html',
     host: {
         '[class.is-loading]': "loading",
-    }
+    },
+    standalone: false
 } )
 export class LoadingStatusComponent extends NrclBase {
     @Input( { transform: booleanAttribute } ) loading = false

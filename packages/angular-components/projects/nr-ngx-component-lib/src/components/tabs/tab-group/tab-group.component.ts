@@ -16,7 +16,8 @@ export type ActivateTabEvent = {
     host: {
         '[class.look-standard]': 'isStandard',
         '[class.look-classic]': 'isClassic',
-    }
+    },
+    standalone: false
 } )
 export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewInit {
     elementRef = inject( ElementRef )

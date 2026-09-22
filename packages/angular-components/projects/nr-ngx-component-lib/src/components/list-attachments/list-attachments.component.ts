@@ -38,7 +38,8 @@ export interface AttachmentRowListProvider<R,L=any> {
     selector: "nrcl-list-attachments",
     templateUrl: "./list-attachments.component.html",
     styleUrl: "./list-attachments.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> implements OnChanges {
     static _nextInstance = 0

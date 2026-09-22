@@ -17,7 +17,8 @@ export interface MenuItem {
     selector: "nrcl-application-menu",
     templateUrl: "./application-menu.component.html",
     styleUrl: "./application-menu.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ApplicationMenuComponent extends ConfigurationSubscriberBase {
     @Input() label?: string

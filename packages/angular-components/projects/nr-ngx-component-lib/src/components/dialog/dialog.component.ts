@@ -6,6 +6,7 @@ import { NrclBase } from "../../directives/nrcl.base";
     templateUrl: './dialog.component.html',
     styleUrl: './dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DialogComponent extends NrclBase {
     @Input() title: string;
