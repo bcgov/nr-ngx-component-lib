@@ -8,6 +8,9 @@
     "build-storybook": "ng run nr-ngx-component-lib:build-storybook",
     "ng": "ng"
   },
+  "engines": {
+    "node": "^22.0.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.25",
@@ -25,8 +28,8 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.0.3",
-    "@angular-devkit/schematics": "^18.0.3",
+    "@angular-devkit/build-angular": "^19.2.27",
+    "@angular-devkit/schematics": "^19.2.27",
     "@angular/cli": "^19.2.27",
     "@angular/compiler-cli": "^19.2.25",
     "@angular/language-service": "^19.2.25",
@@ -48,7 +51,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
     "moment": "^2.29.1",
-    "ng-packagr": "^18.0.3",
+    "ng-packagr": "^19.2.2",
     "ngx-pagination": "^6.0.3",
     "storybook": "=10.4.6",
     "ts-node": "~10.7.0",

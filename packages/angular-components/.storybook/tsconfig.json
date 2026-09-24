@@ -6,7 +6,15 @@
         ],
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
-        "typeRoots": ["../node_modules/@types"]
+        "typeRoots": ["../node_modules/@types"],
+        "moduleResolution": "bundler",
+        "noEmit": true,
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable",
+            "ESNext.Disposable" 
+        ]
     },
     "exclude": [
         "../src/test.ts",

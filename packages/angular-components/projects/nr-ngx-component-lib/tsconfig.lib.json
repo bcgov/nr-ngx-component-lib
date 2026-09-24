@@ -9,7 +9,8 @@
         "types": [],
         "lib": [
             "dom",
-            "es2018"
+            "es2022",
+            "ESNext.Disposable"
         ]
     },
     "angularCompilerOptions": {
