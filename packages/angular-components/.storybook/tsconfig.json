@@ -6,7 +6,12 @@
         ],
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
-        "typeRoots": ["../node_modules/@types"]
+        "typeRoots": ["../node_modules/@types"],
+        "lib": [
+            "dom",
+            "es2018",
+            "ESNext"            
+        ]
     },
     "exclude": [
         "../src/test.ts",
