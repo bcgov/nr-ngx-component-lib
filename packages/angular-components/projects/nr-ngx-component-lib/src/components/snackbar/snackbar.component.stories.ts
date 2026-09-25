@@ -18,7 +18,8 @@ import { SnackbarComponent, SnackbarType } from './snackbar.component';
             label="Show SnackBar"
             (click)="onOpenSnackBar()"
         ></nrcl-button>
-    `, 
+    `,
+    standalone: false
 } )
 class DummyComponent {
     @Input() message = 'Test Label'

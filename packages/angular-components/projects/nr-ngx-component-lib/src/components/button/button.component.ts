@@ -6,20 +6,21 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
     host: {
-        '[class.disabled]':     'disabled',
-        '[class.primary]':      'isPrimary',
-        '[class.secondary]':    'isSecondary',
-        '[class.tertiary]':     'isTertiary',
-        '[class.anchor]':       'isAnchor',
-        '[class.normal]':       '!isCompact && !isSmall',
-        '[class.compact]':      'isCompact',
-        '[class.small]':        'isSmall && !isCompact',
-        '[class.label]':        'hasLabel',
-        '[class.icon-left]':    'hasIconLeft',
-        '[class.icon-right]':   'hasIconRight',
+        '[class.disabled]': 'disabled',
+        '[class.primary]': 'isPrimary',
+        '[class.secondary]': 'isSecondary',
+        '[class.tertiary]': 'isTertiary',
+        '[class.anchor]': 'isAnchor',
+        '[class.normal]': '!isCompact && !isSmall',
+        '[class.compact]': 'isCompact',
+        '[class.small]': 'isSmall && !isCompact',
+        '[class.label]': 'hasLabel',
+        '[class.icon-left]': 'hasIconLeft',
+        '[class.icon-right]': 'hasIconRight',
         '[class.icon-compact]': 'hasIconCompact',
-        '[class.icon-small]':   'isIconSmall',
-    }
+        '[class.icon-small]': 'isIconSmall',
+    },
+    standalone: false
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {
     zone = inject( NgZone )

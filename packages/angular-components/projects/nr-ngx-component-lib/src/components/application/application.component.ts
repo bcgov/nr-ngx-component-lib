@@ -8,7 +8,8 @@ import { NrclBase } from '../../directives/nrcl.base';
     selector: "nrcl-application",
     templateUrl: "./application.component.html",
     styleUrl: "./application.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ApplicationComponent extends NrclBase {
 }

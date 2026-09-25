@@ -5,6 +5,7 @@ import { NrclBase } from "../../../directives/nrcl.base";
     selector: "nrcl-expansion-panel-section",
     templateUrl: './expansion-panel-section.component.html',
     styleUrl: './expansion-panel-section.component.scss',
+    standalone: false
 })
 export class ExpansionPanelSectionComponent extends NrclBase {
 }

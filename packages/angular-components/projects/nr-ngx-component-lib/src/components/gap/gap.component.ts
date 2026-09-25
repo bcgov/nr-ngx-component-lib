@@ -8,6 +8,7 @@ type Position = (typeof POSITIONS)[number]
     selector: 'nrcl-gap',
     templateUrl: './gap.component.html',
     styleUrl: './gap.component.scss',
+    standalone: false
 } )
 export class GapComponent extends NrclBase implements OnChanges, OnInit {
     @Input() horizontal

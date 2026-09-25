@@ -2,7 +2,8 @@ import { ChangeDetectorRef, Component, ContentChild, Directive, HostListener, in
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
 @Directive({
-    selector: "[desktop-view]"
+    selector: "[desktop-view]",
+    standalone: false
 })
 export class DesktopViewDirective {
     constructor(
@@ -12,7 +13,8 @@ export class DesktopViewDirective {
 
 
 @Directive({
-    selector: "[mobile-view]"
+    selector: "[mobile-view]",
+    standalone: false
 })
 export class MobileViewDirective {
     constructor(
@@ -40,7 +42,8 @@ export class MobileViewDirective {
         :host:empty {
             display: none;
         }
-    `]
+    `],
+    standalone: false
 })
 export class DeviceViewComponent extends ConfigurationSubscriberBase {
     @ContentChild( DesktopViewDirective ) desktopContent!: DesktopViewDirective;

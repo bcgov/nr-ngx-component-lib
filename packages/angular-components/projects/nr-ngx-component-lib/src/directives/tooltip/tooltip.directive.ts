@@ -9,12 +9,13 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
     template: `
         {{ text }}
     `,
-    styles: [ `
+    styles: [`
         :host {
             white-space: pre-line;
             text-align: left;
         }
-    `]
+    `],
+    standalone: false
 } )
 export class TooltipComponent {
     @Input() text: string = '';
@@ -24,6 +25,7 @@ export class TooltipComponent {
 
 @Directive( {
     selector: '[nrclTooltip]',
+    standalone: false
 } )
 export class TooltipDirective {
     private overlay = inject( Overlay )

@@ -9,7 +9,8 @@ import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '
     template: `
         <div>Sentinal {{ name }}</div>
         <ng-content></ng-content>
-    `, 
+    `,
+    standalone: false
 } )
 class SentinalComponent implements OnInit, OnDestroy {
     @Input() name

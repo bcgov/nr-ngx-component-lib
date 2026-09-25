@@ -18,7 +18,8 @@ import { FilterSearchComponent } from "../filter-search/filter-search.component"
     host: {
         '[class.hide-filters]': '!showFilters',
         '[class.has-search]': '!!search'
-    }
+    },
+    standalone: false
 } )
 export class FiltersPanelComponent extends NrclBase {
     @Input() showClear = true

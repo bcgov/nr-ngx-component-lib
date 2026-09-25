@@ -9,7 +9,8 @@ import { NrclBase } from '../../directives/nrcl.base';
         '[class]': "'status-' + status",
         '[class.normal]': "!large",
         '[class.large]': "large"
-    }
+    },
+    standalone: false
 } )
 export class IndicatorComponent extends NrclBase implements AfterContentChecked {
     private _content = 'none'

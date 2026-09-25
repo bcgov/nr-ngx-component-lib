@@ -13,7 +13,8 @@ import { ConfigurationSubscriberBase } from "../../directives/configuration-subs
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.isLoading]': 'isLoading',
-    }
+    },
+    standalone: false
 })
 export class PageHeaderComponent extends ConfigurationSubscriberBase {
     @Input() isLoading = false

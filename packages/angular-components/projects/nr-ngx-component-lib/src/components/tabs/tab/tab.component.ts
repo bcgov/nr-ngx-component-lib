@@ -2,7 +2,8 @@ import { booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive
 import { NrclBase } from '../../../directives/nrcl.base';
 
 @Directive( {
-    selector: '[nrclTabLabel]'
+    selector: '[nrclTabLabel]',
+    standalone: false
 } )
 export class TabLabelDirective {
     constructor(
@@ -13,7 +14,8 @@ export class TabLabelDirective {
 // ================================================================================
 
 @Directive( {
-    selector: '[nrclTabContent]'
+    selector: '[nrclTabContent]',
+    standalone: false
 } )
 export class TabContentDirective {
     constructor(
@@ -27,6 +29,7 @@ export class TabContentDirective {
     selector: 'nrcl-tab',
     templateUrl: './tab.component.html',
     styleUrl: './tab.component.scss',
+    standalone: false
 } )
 export class TabComponent extends NrclBase {
     elementRef = inject( ElementRef )

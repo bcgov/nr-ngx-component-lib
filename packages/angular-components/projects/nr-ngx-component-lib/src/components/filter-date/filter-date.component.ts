@@ -16,7 +16,8 @@ import { NrclBase } from "../../directives/nrcl.base";
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[style.--nrcl-filter-date-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    }
+    },
+    standalone: false
 } )
 export class FilterDateComponent extends NrclBase {
     @Input() label = '[label]]'

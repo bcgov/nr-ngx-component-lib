@@ -19,7 +19,8 @@ import { NrclBase } from "../../directives/nrcl.base";
     host: {
         '[class.has-value]': "hasValue",
         '[style.--nrcl-filter-search-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    }
+    },
+    standalone: false
 } )
 export class FilterSearchComponent extends NrclBase {
     @Input() label = 'Search'
