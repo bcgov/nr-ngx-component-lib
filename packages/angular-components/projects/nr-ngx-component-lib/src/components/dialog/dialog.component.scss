@@ -15,7 +15,7 @@
             padding: 0;
             font-weight: normal;
             font-family: var( --nrcl-font-family );
-            font-size: var( --mdc-dialog-subhead-size, 1rem );
+            font-size: var( --mat-dialog-subhead-size, 1rem );
             display: flex;
             align-items: center;    
         }
@@ -90,7 +90,7 @@
     mat-dialog-container.mat-mdc-dialog-container {
         font-family: var( --nrcl-font-family );
         font-size: var( --nrcl-font-size );
-        --mdc-dialog-supporting-text-color: rgba(0, 0, 0, 0.87);
+        --mat-dialog-supporting-text-color: rgba(0, 0, 0, 0.87);
         
         .mat-mdc-dialog-content {
             font-family: var( --nrcl-font-family );

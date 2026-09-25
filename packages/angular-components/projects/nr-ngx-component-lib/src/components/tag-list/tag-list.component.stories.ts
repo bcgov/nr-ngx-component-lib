@@ -163,7 +163,7 @@ export const Template: StoryObj<TagListComponent & { displayMode: DisplayMode, i
 
                 .nrcl-tag-list {
                     .mat-mdc-standard-chip {
-                        --mdc-chip-container-height: auto;
+                        --mat-chip-container-height: auto;
                     }
                 }
             `],
