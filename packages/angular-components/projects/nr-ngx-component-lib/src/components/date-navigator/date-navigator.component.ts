@@ -10,7 +10,7 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
     templateUrl: './date-navigator.component.html',
     styleUrl: './date-navigator.component.scss',
     providers: [
-        provideMomentDateAdapter( {
+        provideMomentDateAdapter({
             parse: {
                 dateInput: 'YYYY-MM-DD'
             },
@@ -20,8 +20,9 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
                 dateA11yLabel: 'LL',
                 monthYearA11yLabel: 'MMMM YYYY',
             }
-        } )
-    ]
+        })
+    ],
+    standalone: false
 } )
 export class DateNavigatorComponent extends NrclBase implements OnChanges {
     elementRef = inject( ElementRef )

@@ -9,7 +9,8 @@ import { InitialState } from "../../directives/pagination.base";
     selector: "nrcl-list-select",
     templateUrl: "./list-select.component.html",
     styleUrl: "./list-select.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> implements OnChanges, AfterContentInit {
     @Input() options: CodeDescription[]

@@ -12,7 +12,8 @@ import { NrclBase } from "../../directives/nrcl.base";
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[style.--nrcl-filter-container-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    }
+    },
+    standalone: false
 } )
 export class FilterContainerComponent extends NrclBase {
     @Input() label 

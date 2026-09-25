@@ -19,7 +19,8 @@ export type TagItem = {
     selector: "nrcl-tag-list",
     templateUrl: "./tag-list.component.html",
     styleUrl: "./tag-list.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TagListComponent extends NrclBase {
     @Input() items: TagItem[]

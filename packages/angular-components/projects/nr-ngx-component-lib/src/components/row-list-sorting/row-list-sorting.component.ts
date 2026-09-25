@@ -13,6 +13,7 @@ import { NrclBase } from "../../directives/nrcl.base";
     selector: "nrcl-row-list-sorting",
     templateUrl: "./row-list-sorting.component.html",
     styleUrl: "./row-list-sorting.component.scss",
+    standalone: false
 })
 export class RowListSortingComponent extends NrclBase {
     @Input() sortColumn: string

@@ -5,6 +5,7 @@ import { NrclBase } from "../../../directives/nrcl.base";
     selector: "nrcl-expansion-panel-footer",
     templateUrl: './expansion-panel-footer.component.html',
     styleUrl: './expansion-panel-footer.component.scss',
+    standalone: false
 })
 export class ExpansionPanelFooterComponent extends NrclBase {
     @Input() saveEnabled 

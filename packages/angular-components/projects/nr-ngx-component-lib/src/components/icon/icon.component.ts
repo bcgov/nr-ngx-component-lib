@@ -8,11 +8,12 @@ import { NrclBase } from '../../directives/nrcl.base';
     styleUrl: './icon.component.scss',
     host: {
         '[class.show-icon]': '!svg',
-        '[class.show-svg]':  '!!svg',
-        '[class.small]':  'small',
-        '[class.normal]':  '( !small && !large ) || ( small && large )',
-        '[class.large]':  'large',
-    }
+        '[class.show-svg]': '!!svg',
+        '[class.small]': 'small',
+        '[class.normal]': '( !small && !large ) || ( small && large )',
+        '[class.large]': 'large',
+    },
+    standalone: false
 } )
 export class IconComponent extends NrclBase implements AfterContentInit {   
     @Input( { transform: booleanAttribute } ) small = false

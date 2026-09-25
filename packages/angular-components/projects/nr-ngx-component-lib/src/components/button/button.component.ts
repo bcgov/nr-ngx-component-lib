@@ -20,6 +20,8 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
         '[class.icon-compact]': 'hasIconCompact',
         '[class.icon-small]':   'isIconSmall',
     }
+    },
+    standalone: false
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {
     zone = inject( NgZone )

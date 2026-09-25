@@ -11,7 +11,8 @@ import { OnInit, OnDestroy, Input, Component } from '@angular/core';
     template: `
         <div>Sentinel {{ name }}</div>
         <ng-content></ng-content>
-    `, 
+    `,
+    standalone: false
 } )
 class SentinalComponent implements OnInit, OnDestroy {
     @Input() name

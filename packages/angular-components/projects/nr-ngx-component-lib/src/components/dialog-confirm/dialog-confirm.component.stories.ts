@@ -35,7 +35,8 @@ import { useArgs } from 'storybook/preview-api';
             label="Open Dialog" 
             (click)="onClick()"
         ></nrcl-button>
-    `, 
+    `,
+    standalone: false
 } )
 class DialogDummyComponent {
     dialogService = inject( DialogService )
@@ -67,6 +68,7 @@ class DialogDummyComponent {
             (click)="onClick()"
         ></nrcl-button>
     `,
+    standalone: false
 })
 class DialogDummyFullscreenComponent {
     dialogService = inject(DialogService)

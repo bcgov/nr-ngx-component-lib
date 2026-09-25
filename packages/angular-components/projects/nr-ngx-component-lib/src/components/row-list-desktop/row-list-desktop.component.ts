@@ -12,7 +12,8 @@ import { NrclBase } from "../../directives/nrcl.base";
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.show-row-hover]': 'showRowHover'
-    }
+    },
+    standalone: false
 })
 export class RowListDesktopComponent extends NrclBase {
     @Input() showRowHover = true

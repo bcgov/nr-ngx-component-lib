@@ -33,7 +33,8 @@ export interface EventHistoryRowListProvider<R,L=any> {
     selector: "nrcl-list-event-history",
     templateUrl: "./list-event-history.component.html",
     styleUrl: "./list-event-history.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableRow> {
     static _nextInstance = 0

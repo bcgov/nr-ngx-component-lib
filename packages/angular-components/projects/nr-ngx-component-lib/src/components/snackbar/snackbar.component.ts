@@ -15,7 +15,8 @@ export type SnackbarConfig = {
     styleUrl: "./snackbar.component.scss",
     host: {
         '[class]': 'className'
-    }
+    },
+    standalone: false
 })
 export class SnackbarComponent extends NrclBase {
     constructor(

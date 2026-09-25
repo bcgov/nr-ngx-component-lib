@@ -15,6 +15,7 @@ export type DialogConfirmConfig = {
     templateUrl: './dialog-confirm.component.html',
     styleUrl: './dialog-confirm.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DialogConfirmComponent extends DialogBase<DialogConfirmConfig> {
     title = this.config.title

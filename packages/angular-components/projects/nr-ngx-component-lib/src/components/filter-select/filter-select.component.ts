@@ -48,7 +48,8 @@ import { CodeDescription } from "../../utils/code-table.util";
         '[class.is-closed]': "!isOpen",
         '[class.use-filter]': "filter",
         '[style.--nrcl-filter-select-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    }
+    },
+    standalone: false
 } )
 export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges, OnDestroy, AfterViewInit {
     changeDetectorRef = inject( ChangeDetectorRef )
