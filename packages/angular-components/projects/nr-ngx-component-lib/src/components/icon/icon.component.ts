@@ -1,4 +1,4 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NrclBase } from '../../directives/nrcl.base';
 
@@ -13,6 +13,7 @@ import { NrclBase } from '../../directives/nrcl.base';
         '[class.normal]': '( !small && !large ) || ( small && large )',
         '[class.large]': 'large',
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class IconComponent extends NrclBase implements AfterContentInit {   

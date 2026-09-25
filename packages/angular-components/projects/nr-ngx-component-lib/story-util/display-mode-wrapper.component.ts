@@ -1,5 +1,5 @@
 
-import { Component, HostListener, Input, OnChanges, OnInit } from "@angular/core"
+import { Component, HostListener, Input, OnChanges, OnInit, ChangeDetectionStrategy } from "@angular/core"
 import { StoryObj } from "@storybook/angular"
 import { ConfigurationSubscriberBase } from "../src/directives/configuration-subscriber.base"
 import { DisplayMode } from "../src/services/configuration.service"
@@ -11,6 +11,7 @@ import { DisplayMode } from "../src/services/configuration.service"
     host: {
         '[style.width]': 'getWidth()',
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase implements OnInit, OnChanges {

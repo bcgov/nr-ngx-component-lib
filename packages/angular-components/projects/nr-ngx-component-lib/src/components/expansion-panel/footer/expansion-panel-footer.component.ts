@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from "@angular/core";
 import { NrclBase } from "../../../directives/nrcl.base";
 
 @Component({
     selector: "nrcl-expansion-panel-footer",
     templateUrl: './expansion-panel-footer.component.html',
     styleUrl: './expansion-panel-footer.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ExpansionPanelFooterComponent extends NrclBase {

@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, Input } from '@angular/core';
+import { booleanAttribute, Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
@@ -8,6 +8,7 @@ import { NrclBase } from '../../directives/nrcl.base';
     host: {
         '[class.is-loading]': "loading",
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class LoadingStatusComponent extends NrclBase {

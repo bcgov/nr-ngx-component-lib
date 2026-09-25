@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 const POSITIONS = [ 'before', 'middle', 'after', 'none' ] as const
@@ -8,6 +8,7 @@ type Position = (typeof POSITIONS)[number]
     selector: 'nrcl-gap',
     templateUrl: './gap.component.html',
     styleUrl: './gap.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class GapComponent extends NrclBase implements OnChanges, OnInit {

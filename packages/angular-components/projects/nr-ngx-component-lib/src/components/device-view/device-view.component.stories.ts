@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
@@ -10,6 +10,7 @@ import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '
         <div>Sentinal {{ name }}</div>
         <ng-content></ng-content>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 class SentinalComponent implements OnInit, OnDestroy {

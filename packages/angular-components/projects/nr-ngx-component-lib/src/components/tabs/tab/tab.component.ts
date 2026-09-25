@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, inject, Input, TemplateRef, ViewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, inject, Input, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { NrclBase } from '../../../directives/nrcl.base';
 
 @Directive( {
@@ -29,6 +29,7 @@ export class TabContentDirective {
     selector: 'nrcl-tab',
     templateUrl: './tab.component.html',
     styleUrl: './tab.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class TabComponent extends NrclBase {

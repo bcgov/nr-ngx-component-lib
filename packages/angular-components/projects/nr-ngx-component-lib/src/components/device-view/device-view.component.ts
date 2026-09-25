@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ContentChild, Directive, HostListener, inject, TemplateRef } from "@angular/core";
+import { ChangeDetectorRef, Component, ContentChild, Directive, HostListener, inject, TemplateRef, ChangeDetectionStrategy } from "@angular/core";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
 @Directive({
@@ -43,6 +43,7 @@ export class MobileViewDirective {
             display: none;
         }
     `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DeviceViewComponent extends ConfigurationSubscriberBase {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, Input, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, inject, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -36,6 +36,7 @@ import { useArgs } from 'storybook/preview-api';
             (click)="onClick()"
         ></nrcl-button>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 class DialogDummyComponent {
@@ -68,6 +69,7 @@ class DialogDummyComponent {
             (click)="onClick()"
         ></nrcl-button>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class DialogDummyFullscreenComponent {

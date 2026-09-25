@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, inject, Input, numberAttribute, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, numberAttribute, OnChanges, Output, SimpleChanges, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import moment, { Moment } from 'moment';
 import { NrclBase } from '../../directives/nrcl.base';
@@ -22,6 +22,7 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
             }
         })
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class DateNavigatorComponent extends NrclBase implements OnChanges {

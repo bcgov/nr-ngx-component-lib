@@ -43,7 +43,7 @@
                     <div class="outer heading">
                         <div class="inner heading">
                             <ng-container 
-                                [ngTemplateOutlet]="headerTemplate?.template" 
+                                [ngTemplateOutlet]="$safeNavigationMigration(headerTemplate?.template)" 
                                 [ngTemplateOutletContext]="{ $implicit: { heading: row.heading, metadata: row.metadata } }"
                             ></ng-container>
                         </div>
@@ -63,7 +63,7 @@
                                 [matRippleDisabled]="!hover"
                                 [matMenuTriggerFor]="menu"
                                 [matMenuTriggerData]="{ $implicit: { heading: row.heading, metadata: row.metadata, item: item } }"
-                                [nrclTooltip]="item?.tooltip?.()"
+                                [nrclTooltip]="$safeNavigationMigration(item?.tooltip?.())"
                                 nrclTooltipClass="schedule"
                                 [nrclTooltipContext]="{ $implicit: { heading: row.heading, metadata: row.metadata, item: item } }"
                                 [class.travel]="item?.travel"
@@ -73,7 +73,7 @@
                                     [ngTemplateOutletContext]="{ $implicit: item }"
                                 ></ng-container>
                                 
-                                @let icons = item?.icons?.();
+                                @let icons = $safeNavigationMigration(item?.icons?.());
                                 @if ( icons && icons.length > 0 ) {
                                     <div class="icons">
                                         @for ( icon of icons; track icon ) {

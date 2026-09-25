@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, HostListener, ElementRef, inject, Component, numberAttribute, Renderer2 } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef, HostListener, ElementRef, inject, Component, numberAttribute, Renderer2, ChangeDetectionStrategy } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
@@ -15,6 +15,7 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
             text-align: left;
         }
     `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class TooltipComponent {

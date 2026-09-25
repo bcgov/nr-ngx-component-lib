@@ -1,4 +1,4 @@
-import { AfterContentChecked, booleanAttribute, Component, ElementRef, inject, Input } from '@angular/core';
+import { AfterContentChecked, booleanAttribute, Component, ElementRef, inject, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
@@ -10,6 +10,7 @@ import { NrclBase } from '../../directives/nrcl.base';
         '[class.normal]': "!large",
         '[class.large]': "large"
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class IndicatorComponent extends NrclBase implements AfterContentChecked {

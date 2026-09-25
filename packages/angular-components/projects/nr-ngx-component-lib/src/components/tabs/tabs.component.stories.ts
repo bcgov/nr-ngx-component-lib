@@ -4,7 +4,7 @@ import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } f
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
 import { TabComponent, TabContentDirective, TabLabelDirective } from './tab/tab.component';
-import { OnInit, OnDestroy, Input, Component } from '@angular/core';
+import { OnInit, OnDestroy, Input, Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component( {
     selector: 'sentinel',
@@ -12,6 +12,7 @@ import { OnInit, OnDestroy, Input, Component } from '@angular/core';
         <div>Sentinel {{ name }}</div>
         <ng-content></ng-content>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 class SentinalComponent implements OnInit, OnDestroy {

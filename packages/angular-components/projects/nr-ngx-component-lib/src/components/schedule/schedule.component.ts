@@ -1,4 +1,4 @@
-import { Component, ContentChild, ContentChildren, Directive, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, ContentChild, ContentChildren, Directive, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { MatMenuPanel } from '@angular/material/menu';
 import moment from 'moment';
 import { Observable } from 'rxjs';
@@ -89,6 +89,7 @@ export interface ScheduleProvider {
     host: {
         '[style.--nrcl-schedule-day-count]': 'this.dayCount'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements OnChanges {

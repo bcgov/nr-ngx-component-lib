@@ -1,8 +1,9 @@
 import {
-    Component,
-    EventEmitter,
-    Input,
-    Output
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { CodeDescription } from "../../utils/code-table.util";
 import { Sort, SortDirection } from "@angular/material/sort";
@@ -13,6 +14,7 @@ import { NrclBase } from "../../directives/nrcl.base";
     selector: "nrcl-row-list-sorting",
     templateUrl: "./row-list-sorting.component.html",
     styleUrl: "./row-list-sorting.component.scss",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RowListSortingComponent extends NrclBase {

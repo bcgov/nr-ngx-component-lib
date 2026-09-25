@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ElementRef, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ConfigurationSubscriberBase } from '../../directives/configuration-subscriber.base';
 
 @Component( {
@@ -20,6 +20,7 @@ import { ConfigurationSubscriberBase } from '../../directives/configuration-subs
         '[class.icon-compact]': 'hasIconCompact',
         '[class.icon-small]': 'isIconSmall',
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {

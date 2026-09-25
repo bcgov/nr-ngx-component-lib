@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
@@ -15,6 +15,7 @@ import { NrclBase } from '../../directives/nrcl.base';
     host: {
         '[class.selected]': "selected"
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 } )
 export class IndicatorSelectComponent extends NrclBase {

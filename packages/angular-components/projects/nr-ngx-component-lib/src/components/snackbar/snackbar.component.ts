@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, ChangeDetectionStrategy } from "@angular/core";
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from "@angular/material/snack-bar";
 import { NrclBase } from "../../directives/nrcl.base";
 
@@ -16,6 +16,7 @@ export type SnackbarConfig = {
     host: {
         '[class]': 'className'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SnackbarComponent extends NrclBase {
