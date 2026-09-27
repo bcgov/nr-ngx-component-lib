@@ -22,7 +22,7 @@ export class GapComponent extends NrclBase implements OnChanges, OnInit {
     @HostBinding( 'style.--nrcl-gap-multiple' )
     multiple = 1
 
-    ngOnInit(): void {
+    override ngOnInit(): void {
         super.ngOnInit()
         this.updateState()
     }

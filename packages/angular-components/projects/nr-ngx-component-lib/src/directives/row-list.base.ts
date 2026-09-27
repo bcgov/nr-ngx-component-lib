@@ -1,14 +1,10 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, EventEmitter, inject, Output } from "@angular/core";
+import { Directive, EventEmitter, Output } from "@angular/core";
 import { Observable } from "rxjs";
-import { PageStateService } from "../services/page-state.service";
 import { Aborted, ObservableAborter } from "../utils/row-list.util";
 import { PaginationBase } from "./pagination.base";
 
 @Directive()
 export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> {
-    pageStateService = inject( PageStateService )
-    changeDetectorRef = inject( ChangeDetectorRef )
-
     @Output() isLoadingChange = new EventEmitter<boolean>()
     
     private _isFirstLoad = true
@@ -41,8 +37,8 @@ export abstract class RowListBase<F,R,L=any> extends PaginationBase<F> {
                 return this.loadRowList() 
             } )
             .then( ( res ) => { 
-                inProgress.progress()
-                if ( !res ) return
+                inProgress.progress()                
+                if ( !res ) return undefined
 
                 return this.parseRowList( res ) 
             } )

@@ -1,4 +1,4 @@
-import { AfterViewInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, inject, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, inject, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTab, MatTabGroup, MatTabGroupBaseHeader } from '@angular/material/tabs';
 import { NrclBase } from '../../../directives/nrcl.base';
 import { TabComponent } from '../tab/tab.component';
@@ -21,7 +21,6 @@ export type ActivateTabEvent = {
     standalone: false
 } )
 export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewInit {
-    elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
     @Input( { transform: booleanAttribute } ) standard = false

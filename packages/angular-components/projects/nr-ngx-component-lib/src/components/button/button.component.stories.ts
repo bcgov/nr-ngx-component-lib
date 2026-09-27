@@ -2,7 +2,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from '../../../story-util/display-mode-wrapper.component';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 

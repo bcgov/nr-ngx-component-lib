@@ -10,7 +10,7 @@ import {
 } from '@storybook/angular';
 import {
     displayModeWrapperStory
-} from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+} from '../../../story-util/display-mode-wrapper.component';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { ApplicationMenuComponent } from './application-menu.component';

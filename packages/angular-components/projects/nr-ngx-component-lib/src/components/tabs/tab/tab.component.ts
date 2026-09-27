@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, inject, Input, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, Directive, inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NrclBase } from '../../../directives/nrcl.base';
 
 @Directive( {
@@ -33,7 +33,6 @@ export class TabContentDirective {
     standalone: false
 } )
 export class TabComponent extends NrclBase {
-    elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
     @Input() name?: string

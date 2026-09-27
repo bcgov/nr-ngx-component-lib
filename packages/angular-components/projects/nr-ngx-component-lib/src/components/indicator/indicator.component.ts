@@ -1,4 +1,4 @@
-import { AfterContentChecked, booleanAttribute, Component, ElementRef, inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { AfterContentChecked, booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
@@ -29,11 +29,8 @@ export class IndicatorComponent extends NrclBase implements AfterContentChecked 
 
     @Input( { transform: booleanAttribute } ) large = false
     
-    elementRef = inject( ElementRef )
-
     ngAfterContentChecked(): void {        
         let t = this.elementRef?.nativeElement?.textContent
         this._content = t?.toLowerCase().trim().replace( /[^-a-z0-9]+/g, '-' ) || 'none'
     }
-
 }

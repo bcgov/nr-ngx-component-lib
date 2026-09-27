@@ -15,8 +15,8 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } fro
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import moment from 'moment';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { of } from 'rxjs';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from '../../../story-util/display-mode-wrapper.component';
 import { ConfigurationService } from '../../services/configuration.service';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';
@@ -34,7 +34,7 @@ import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.co
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { AttachmentsTableRow, ListAttachmentsComponent } from './list-attachments.component';
+import { ListAttachmentsComponent } from './list-attachments.component';
 
 const meta: Meta<ListAttachmentsComponent> = {
     title: 'List Attachments',
@@ -349,7 +349,7 @@ function attachmentCollection(): AttachmentCollection {
 }
 
 function getFileExtension(fileName: string) {
-    if(!fileName) { return; }
+    if(!fileName) { return undefined }
 
     return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length).toUpperCase();
 }

@@ -1,9 +1,9 @@
-import { Component, ElementRef, EventEmitter, inject, Input, numberAttribute, OnChanges, Output, SimpleChanges, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, numberAttribute, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDatepicker } from '@angular/material/datepicker';
 import moment, { Moment } from 'moment';
 import { NrclBase } from '../../directives/nrcl.base';
 import { DATE_FORMATS } from '../../utils/date.util';
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 
 @Component( {
     selector: 'nrcl-date-navigator',
@@ -26,8 +26,6 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
     standalone: false
 } )
 export class DateNavigatorComponent extends NrclBase implements OnChanges {
-    elementRef = inject( ElementRef )
-
     @Input() value = moment().format( DATE_FORMATS.datePickerInput )   
     @Input( { transform: numberAttribute } ) largeChange = 7
     @Input( { transform: numberAttribute } ) smallChange = 1
@@ -40,7 +38,7 @@ export class DateNavigatorComponent extends NrclBase implements OnChanges {
     date?: Moment
 
     ngOnChanges( changes: SimpleChanges ): void {
-        if ( changes.value ) {
+        if ( changes['value'] ) {
             this.date = moment( this.value )
         }
     }

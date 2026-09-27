@@ -1,7 +1,5 @@
 import {
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
     Directive,
     inject,
     OnDestroy,
@@ -18,7 +16,7 @@ export class ConfigurationSubscriberBase extends NrclBase implements OnInit, OnD
     configurationService = inject( ConfigurationService )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    ngOnInit(): void {
+    override ngOnInit(): void {
         super.ngOnInit()
         this.configurationSubscription = this.configurationService.configurationObservable.subscribe( ( c ) => {
             this.configuration = c

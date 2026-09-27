@@ -57,7 +57,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     mobilePaginationId = "mobile"
 
     ngOnChanges(changes: SimpleChanges): void {
-        if ( changes.canDownload || changes.canDelete || changes.showOrgUnit ) {
+        if ( changes['canDownload'] || changes['canDelete'] || changes['showOrgUnit'] ) {
             this.columns = [ 
                 'attachmentTypeCode',
                 ...(this.showOrgUnit ? ['orgUnit'] : []),
@@ -71,7 +71,7 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
             ]
         }
         
-        if ( changes.showOrgUnit ) {
+        if ( changes['showOrgUnit'] ) {
             this.sortColumns = [
                 { code: 'attachmentTypeCode', description: 'Attachment Type' },
                 { code: 'fileName', description: 'File Name' },

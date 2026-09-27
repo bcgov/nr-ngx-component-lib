@@ -24,7 +24,7 @@ import {
 import { FormControl } from "@angular/forms";
 import { MatSelectionListChange } from "@angular/material/list";
 import { DomSanitizer } from "@angular/platform-browser";
-import { fromEvent, Observable, Subscription } from "rxjs";
+import { fromEvent, Subscription } from "rxjs";
 import { NrclBase } from "../../directives/nrcl.base";
 import { CodeDescription } from "../../utils/code-table.util";
 
@@ -93,7 +93,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     match: ( option: CodeDescription ) => boolean = ( o ) => true
     clickSubscription?: Subscription
 
-    ngOnInit(): void {
+    override ngOnInit(): void {
         super.ngOnInit()
 
         this.clickSubscription = fromEvent<MouseEvent>( document, 'click' )
@@ -122,9 +122,9 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     ngOnChanges( changes: SimpleChanges ): void {
         if ( this.isOpen ) return
 
-        if ( changes.options ) {
-            let pv = JSON.stringify( changes.options.previousValue )
-            let cv = JSON.stringify( changes.options.currentValue )
+        if ( changes['options'] ) {
+            let pv = JSON.stringify( changes['options'].previousValue )
+            let cv = JSON.stringify( changes['options'].currentValue )
 
             if ( pv != cv ) {
                 let vals = this.selection.value 
@@ -136,7 +136,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
             }
         }
 
-        if ( changes.value ) {
+        if ( changes['value'] ) {
             if ( this.value ) {
                 this.setValue( this.value )
             }

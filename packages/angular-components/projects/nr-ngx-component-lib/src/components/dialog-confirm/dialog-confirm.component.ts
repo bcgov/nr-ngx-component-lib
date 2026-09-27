@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, TemplateRef } from "@angular/core";
 import { DialogBase } from "../../directives/dialog.base";
 
 export type DialogConfirmConfig = {
@@ -19,7 +19,7 @@ export type DialogConfirmConfig = {
 })
 export class DialogConfirmComponent extends DialogBase<DialogConfirmConfig> {
     title = this.config.title
-    saveLabel = this.config.saveLabel || 'Confirm'
-    cancelLabel = this.config.cancelLabel || 'Cancel'
+    override saveLabel = this.config.saveLabel || 'Confirm'
+    override cancelLabel = this.config.cancelLabel || 'Cancel'
     showActions = this.config.showActions ?? true
 }

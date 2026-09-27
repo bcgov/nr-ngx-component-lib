@@ -109,7 +109,7 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
 
     onPageNumberChange( ev: number ) {
         // console.log('onPageNumberChange',ev)
-        if ( this._pageConfig.pageNumber == ev ) return
+        if ( this._pageConfig.pageNumber == ev ) return undefined
 
         this._pageConfig.pageNumber = ev
 
@@ -153,16 +153,16 @@ export abstract class PaginationBase<F> extends NrclBase implements AfterViewIni
     }
 
     persistState( state: PaginationState<F> ) {
-        if ( !this._instance ) return
+        if ( !this._instance ) return undefined
 
         this.pageStateService.setPageState( this._instance!, JSON.stringify( state ) )
     }
 
     retrieveState(): PaginationState<F>|undefined {
-        if ( !this._instance ) return
+        if ( !this._instance ) return undefined
         
         let state = this.pageStateService.getPageState( this._instance! )
-        if ( !state ) return
+        if ( !state ) return undefined
 
         return JSON.parse( state )
     }

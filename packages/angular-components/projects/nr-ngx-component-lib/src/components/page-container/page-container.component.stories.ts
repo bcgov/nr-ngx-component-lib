@@ -15,8 +15,8 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } fro
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { useArgs } from 'storybook/preview-api';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { fruitOptions, RowListArgs, rowListStory } from 'projects/nr-ngx-component-lib/story-util';
-import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { fruitOptions, RowListArgs, rowListStory } from '../../../story-util';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from '../../../story-util/display-mode-wrapper.component';
 import { ConfigurationService } from '../../services/configuration.service';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';

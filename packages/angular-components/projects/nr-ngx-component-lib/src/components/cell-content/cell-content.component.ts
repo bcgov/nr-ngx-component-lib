@@ -1,4 +1,4 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
 
 @Component( {
@@ -9,11 +9,10 @@ import { NrclBase } from '../../directives/nrcl.base';
     standalone: false
 } )
 export class CellContentComponent extends NrclBase implements AfterContentInit {
-    @Input() tooltip
-    @Input() content
-    
-    elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
+
+    @Input() tooltip
+    @Input() content    
 
     tooltipContent
 

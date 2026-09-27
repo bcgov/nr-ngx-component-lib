@@ -20,7 +20,7 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
     @Input() useWidth = false
     @Input() bodyPadding = 16
     
-    ngOnInit() {
+    override ngOnInit() {
         this.updateBodyPadding()
         this.onResize()
         super.ngOnInit()
@@ -62,7 +62,7 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
         }
     }
 
-    onConfigurationChange() {
+    override onConfigurationChange() {
         console.log( 'onConfigurationChange', this.configuration )
     }
 

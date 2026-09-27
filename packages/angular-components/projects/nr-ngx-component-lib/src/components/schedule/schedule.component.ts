@@ -115,12 +115,12 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
         // this.refreshRowList()
     }
 
-    ngAfterViewInit(): void {
+    override ngAfterViewInit(): void {
         // console.log('ScheduleComponent.ngAfterViewInit')
         super.ngAfterViewInit()
     }
 
-    loadRowList(): Promise<any> {
+    override loadRowList(): Promise<any> {
         // if ( !this.provider?.startloadSchedule ) throw Error( 'ScheduleComponent.provider.startloadSchedule not set' )
         if ( !this.provider?.startloadSchedule ) return super.loadRowList()
      
@@ -140,7 +140,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
         return this.makeRows( rows )
     }
 
-    parseTotalRowCount(res: any): number {
+    override parseTotalRowCount(res: any): number {
         if ( !this.provider?.parseTotalRowCount ) return super.parseTotalRowCount( res )
 
         return this.provider.parseTotalRowCount( res )
@@ -152,7 +152,7 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
         return this.provider.getInitialPageState()
     }
 
-    completedRowListPage(): PaginationState<{}> {
+    override completedRowListPage(): PaginationState<{}> {
         // if ( !this.provider?.completedLoadSchedule ) throw Error( 'ScheduleComponent.provider.completedRowListPage not set' )
         if ( !this.provider?.completedLoadSchedule ) return super.completedRowListPage() as any
 

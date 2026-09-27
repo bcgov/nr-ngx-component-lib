@@ -7,7 +7,7 @@ import {
 import {
     DisplayModeWrapperComponent,
     displayModeWrapperStory
-} from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+} from '../../../story-util/display-mode-wrapper.component';
 import {
     DesktopViewDirective,
     DeviceViewComponent,
@@ -18,7 +18,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
+import { loremIpsum } from "../../../story-util";
 import { ButtonComponent } from "../button/button.component";
 import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
 import { MatMenuModule } from "@angular/material/menu";

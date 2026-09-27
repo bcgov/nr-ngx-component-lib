@@ -34,7 +34,7 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
     displayColumns = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        if ( changes.options ) {
+        if ( changes['options'] ) {
             this.refreshRowList()
         }
     }
@@ -68,7 +68,7 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
         return res
     }
 
-    parseTotalRowCount( res: any ): number {
+    override parseTotalRowCount( res: any ): number {
         return res.length
     }
 

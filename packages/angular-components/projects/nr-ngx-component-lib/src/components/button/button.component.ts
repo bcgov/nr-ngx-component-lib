@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ElementRef, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ConfigurationSubscriberBase } from '../../directives/configuration-subscriber.base';
 
 @Component( {
@@ -64,7 +64,7 @@ export class ButtonComponent extends ConfigurationSubscriberBase implements OnCh
         this.updateState()
     }
 
-    onConfigurationChange(): void {
+    override onConfigurationChange(): void {
         // apparently this is needed to ensure that the host binding updates properly
         this.zone.run( () => {
             this.updateState()

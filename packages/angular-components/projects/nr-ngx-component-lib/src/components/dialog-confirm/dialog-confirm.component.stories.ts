@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, TemplateRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -6,27 +6,27 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DialogService } from '../../services/dialog.service';
-import { DialogComponent } from '../dialog/dialog.component';
-import { DialogConfirmComponent } from './dialog-confirm.component';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { rowListItems } from 'projects/nr-ngx-component-lib/story-util';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.component';
-import { CellContentComponent } from '../cell-content/cell-content.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
-import { GapComponent } from '../gap/gap.component';
+import { useArgs } from 'storybook/preview-api';
+import { rowListItems } from '../../../story-util';
+import { DialogService } from '../../services/dialog.service';
+import { ButtonComponent } from '../button/button.component';
+import { CellContentComponent } from '../cell-content/cell-content.component';
+import { DialogComponent } from '../dialog/dialog.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { useArgs } from 'storybook/preview-api';
+import { GapComponent } from '../gap/gap.component';
+import { IconComponent } from '../icon/icon.component';
+import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.component';
+import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
+import { DialogConfirmComponent } from './dialog-confirm.component';
 
 @Component( {
     selector: 'dialog-dummy',

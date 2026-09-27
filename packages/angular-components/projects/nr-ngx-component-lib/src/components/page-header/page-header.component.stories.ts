@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from '../../../story-util/display-mode-wrapper.component';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ButtonComponent } from '../button/button.component';
 import { PageContainerComponent } from '../page-container/page-container.component';

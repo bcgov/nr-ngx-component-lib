@@ -3,7 +3,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
     HostListener,
     inject,
@@ -27,6 +26,8 @@ export type RowListPaginationWidth = 'sufficient'|'tight'|'restrictive'
     standalone: false
 })
 export class RowListPaginationComponent extends NrclBase implements AfterViewInit {
+    changeDetectorRef = inject( ChangeDetectorRef )
+
     @Input() paginationId = '1'
     @Input() pageSizeOptions = [ 
         { code: 5,   description: '5 Rows' },
@@ -46,9 +47,6 @@ export class RowListPaginationComponent extends NrclBase implements AfterViewIni
 
     componentWidth: RowListPaginationWidth = 'sufficient'
     paginationMaxSize = 5
-
-    elementRef = inject( ElementRef )
-    changeDetectorRef = inject( ChangeDetectorRef )
     
     ngAfterViewInit(): void {
         this.checkWidth()

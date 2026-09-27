@@ -17,8 +17,10 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } fro
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import moment from 'moment';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { of } from 'rxjs';
+import { seedRandom } from '../../../story-util';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from '../../../story-util/display-mode-wrapper.component';
+import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { ConfigurationService } from '../../services/configuration.service';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';
@@ -38,8 +40,6 @@ import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagi
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { ScheduleComponent, ScheduleItemDirective, ScheduleProvider, ScheduleRowHeadingDirective } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
-import { seedRandom } from 'projects/nr-ngx-component-lib/story-util';
-import { TooltipComponent, TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',

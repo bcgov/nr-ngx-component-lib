@@ -1,10 +1,9 @@
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTooltipModule, TooltipComponent } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { DisplayModeWrapperComponent, displayModeWrapperStory } from '../../../story-util/display-mode-wrapper.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
 import { TabComponent, TabContentDirective, TabLabelDirective } from './tab/tab.component';
-import { OnInit, OnDestroy, Input, Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component( {
     selector: 'sentinel',

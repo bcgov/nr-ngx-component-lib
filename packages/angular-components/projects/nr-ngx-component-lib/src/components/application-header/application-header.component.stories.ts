@@ -1,3 +1,8 @@
+import { MatButtonModule } from "@angular/material/button";
+import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
     componentWrapperDecorator,
     Meta,
@@ -7,23 +12,17 @@ import {
 import {
     DisplayModeWrapperComponent,
     displayModeWrapperStory
-} from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+} from '../../../story-util/display-mode-wrapper.component';
+import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
+import { ApplicationComponent } from "../application/application.component";
+import { ButtonComponent } from "../button/button.component";
 import {
     DesktopViewDirective,
     DeviceViewComponent,
     MobileViewDirective
 } from '../device-view/device-view.component';
 import { IconComponent } from '../icon/icon.component';
-import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
-import { ButtonComponent } from "../button/button.component";
 import { ApplicationHeaderComponent } from "./application-header.component";
-import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
-import { ApplicationComponent } from "../application/application.component";
-import { MatMenuModule } from "@angular/material/menu";
 
 const meta: Meta<ApplicationHeaderComponent> = {
     title: "Application Header",

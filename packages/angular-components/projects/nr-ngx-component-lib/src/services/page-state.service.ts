@@ -9,6 +9,8 @@ export class PageStateService {
     getPageState( id: string ): string|undefined {
         if ( id in this._pageState )
             return this._pageState[ id ]
+
+        return undefined
     }
 
     setPageState( id: string, state: string ) {

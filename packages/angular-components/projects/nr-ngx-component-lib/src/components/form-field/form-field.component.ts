@@ -30,7 +30,7 @@ export class FormFieldComponent extends NrclBase implements OnChanges {
     renderer = inject( Renderer2 )
 
     ngOnChanges( changes: SimpleChanges ): void {
-        if ( changes.readonly ) {
+        if ( changes['readonly'] ) {
             if ( this.readonly ) {
                 makeFormFieldReadonly( this.renderer, this.element.nativeElement )
             }
