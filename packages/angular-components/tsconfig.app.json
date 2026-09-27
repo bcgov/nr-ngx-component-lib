@@ -4,5 +4,8 @@
         "outDir": "./out-tsc/app",
         "types": []
     },
-    "exclude": []
+    "exclude": [],
+    "include": [
+        "projects/**/*.ts"
+    ],
 }

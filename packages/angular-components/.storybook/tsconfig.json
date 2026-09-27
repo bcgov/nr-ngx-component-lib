@@ -4,7 +4,9 @@
         "types": [
             "node"
         ],
+        "moduleResolution": "bundler",
         "allowSyntheticDefaultImports": true,
+        "noEmit": true,
         "resolveJsonModule": true,
         "typeRoots": ["../node_modules/@types"],
         "lib": [
@@ -19,6 +21,7 @@
         "../examples/**"
     ],
     "include": [
+        "../projects/nr-ngx-component-lib/src/**/*.ts",
         "../projects/nr-ngx-component-lib/src/**/*.stories.*",
         "../projects/nr-ngx-component-lib/src/docs/**/*.mdx",
         "./preview.ts"
