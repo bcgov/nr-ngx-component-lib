@@ -27,6 +27,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { fromEvent, Subscription } from "rxjs";
 import { NrclBase } from "../../directives/nrcl.base";
 import { CodeDescription } from "../../utils/code-table.util";
+import { FloatLabelType } from "@angular/material/form-field";
 
 /**
  * A filter select component that allows users to select multiple options from a list.
@@ -83,7 +84,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
     @Output() valueChange = new EventEmitter<string[]>();
 
-    floatLabel = 'auto'
+    floatLabel: FloatLabelType = 'auto'
     inputValue?: string
     isFiltered = false
     isOpen = false

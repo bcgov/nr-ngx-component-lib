@@ -18,7 +18,7 @@
         },
         "strictMetadataEmit": true,
         "enableResourceInlining": true,
-        "strictTemplates": false
+        "strictTemplates": true
     },
     "exclude": [
         "src/test.ts",

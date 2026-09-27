@@ -27,7 +27,7 @@
 @if ( hasRows && showPageSize ) {
     <nrcl-filter-select class="page-size"
         label="Page Size"
-        [value]="[ pageSize ]"
+        [value]="[ `${ pageSize }` ]"
         [options]="pageSizeOptions"
         (valueChange)="onPageSizeChange( $event[ 0 ] )"
         selectMax="1"

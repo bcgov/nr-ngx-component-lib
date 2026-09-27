@@ -7,6 +7,7 @@ import {
     HostListener,
     inject,
     Input,
+    numberAttribute,
     Output
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
@@ -30,15 +31,15 @@ export class RowListPaginationComponent extends NrclBase implements AfterViewIni
 
     @Input() paginationId = '1'
     @Input() pageSizeOptions = [ 
-        { code: 5,   description: '5 Rows' },
-        { code: 10,  description: '10 Rows' },
-        { code: 20,  description: '20 Rows' },
-        { code: 50,  description: '50 Rows' },
-        { code: 100, description: '100 Rows' },
+        { code: '5',   description: '5 Rows' },
+        { code: '10',  description: '10 Rows' },
+        { code: '20',  description: '20 Rows' },
+        { code: '50',  description: '50 Rows' },
+        { code: '100', description: '100 Rows' },
     ]
-    @Input() pageSize = 20
-    @Input() pageNumber
-    @Input() rowCount
+    @Input( { transform: numberAttribute } ) pageSize = 20
+    @Input( { transform: numberAttribute } ) pageNumber: number
+    @Input( { transform: numberAttribute } ) rowCount: number
     @Input() showPageSize = true 
     @Input() noRowsMessage = 'No records to display.'
 
