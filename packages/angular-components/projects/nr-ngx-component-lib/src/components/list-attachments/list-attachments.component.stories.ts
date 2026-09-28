@@ -11,7 +11,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import moment from 'moment';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -34,7 +33,7 @@ import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.co
 import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { AttachmentsTableRow, ListAttachmentsComponent } from './list-attachments.component';
+import { ListAttachmentsComponent } from './list-attachments.component';
 
 const meta: Meta<ListAttachmentsComponent> = {
     title: 'List Attachments',
@@ -54,8 +53,6 @@ const meta: Meta<ListAttachmentsComponent> = {
                 MatTooltipModule,
                 ReactiveFormsModule,
                 MatListModule,
-                OwlDateTimeModule,
-                OwlMomentDateTimeModule,
                 MatProgressSpinner,
                 NgxPaginationModule,
                 MatTableModule,
@@ -85,7 +82,6 @@ const meta: Meta<ListAttachmentsComponent> = {
             // List of providers that should be available to the root component and all its children.
             providers: [
                 ConfigurationService,
-                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
             ],
         } ),
         componentWrapperDecorator(

@@ -30,7 +30,6 @@
     "@angular/cli": "^20.3.37",
     "@angular/compiler-cli": "^20.3.32",
     "@angular/language-service": "^20.3.32",
-    "@busacca/ng-pick-datetime": "^12.0.0",
     "@storybook/addon-docs": "=10.4.6",
     "@storybook/addon-onboarding": "=10.4.6",
     "@storybook/angular": "=10.4.6",
