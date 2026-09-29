@@ -11,7 +11,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import moment from 'moment';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -54,8 +53,6 @@ const meta: Meta<ListEventHistoryComponent> = {
                 MatTooltipModule,
                 ReactiveFormsModule,
                 MatListModule,
-                OwlDateTimeModule,
-                OwlMomentDateTimeModule,
                 MatProgressSpinner,
                 NgxPaginationModule,
                 MatTableModule,
@@ -85,7 +82,6 @@ const meta: Meta<ListEventHistoryComponent> = {
             // List of providers that should be available to the root component and all its children.
             providers: [
                 ConfigurationService,
-                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
             ],
         } ),
         componentWrapperDecorator( 

@@ -7,12 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { fruitOptions } from '../../../story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from '../../../story-util/display-mode-wrapper.component';
 import { useArgs } from 'storybook/preview-api';
-import { DATE_FORMATS } from '../../utils/date.util';
 import { ButtonComponent } from '../button/button.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
@@ -40,8 +38,6 @@ const meta: Meta<FiltersPanelComponent> = {
                 MatTooltipModule,
                 ReactiveFormsModule,
                 MatListModule,                  
-                OwlDateTimeModule,
-                OwlMomentDateTimeModule,
             ],
             // declare components that are used in the template
             declarations: [
@@ -57,7 +53,6 @@ const meta: Meta<FiltersPanelComponent> = {
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
             ],
         } ),
         componentWrapperDecorator( 
