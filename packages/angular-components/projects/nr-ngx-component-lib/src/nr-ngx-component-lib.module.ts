@@ -22,7 +22,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
 import { FilterSearchComponent } from './components/filter-search/filter-search.component';
@@ -79,8 +78,6 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTooltipModule,
         ReactiveFormsModule,
         RouterModule,
-        OwlDateTimeModule,
-        OwlMomentDateTimeModule,
         NgxPaginationModule,
         MatDialogModule,
         MatTabsModule
@@ -156,7 +153,6 @@ import { DATE_FORMATS } from './utils/date.util';
         ConfigurationService,
         PageStateService,
         DialogService,
-        { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
     ]
 })
 export class NrNgxComponentLibModule {

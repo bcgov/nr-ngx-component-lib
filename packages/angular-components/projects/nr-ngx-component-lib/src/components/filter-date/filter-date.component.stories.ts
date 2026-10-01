@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterDateComponent } from './filter-date.component';
 import { DATE_FORMATS } from '../../utils/date.util';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
 import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<FilterDateComponent> = {
@@ -23,8 +22,6 @@ const meta: Meta<FilterDateComponent> = {
                 MatIconModule,
                 MatInputModule,
                 ReactiveFormsModule,
-                OwlDateTimeModule,
-                OwlMomentDateTimeModule,
             ],
             // declare components that are used in the template
             declarations: [
@@ -32,7 +29,6 @@ const meta: Meta<FilterDateComponent> = {
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
             ],
         } ),
     ],
