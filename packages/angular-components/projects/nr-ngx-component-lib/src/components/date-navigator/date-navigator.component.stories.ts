@@ -1,17 +1,8 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
-import { MatRippleModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import moment from 'moment';
 import { ConfigurationService } from '../../services/configuration.service';
 import { DATE_FORMATS } from '../../utils/date.util';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
 import { DateNavigatorComponent } from './date-navigator.component';
 
 const meta: Meta<DateNavigatorComponent> = {
@@ -22,19 +13,9 @@ const meta: Meta<DateNavigatorComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatDatepickerModule,
-                MatTooltipModule,
-                MatIconModule,
-                MatRippleModule,
-                MatInputModule,
-                MatFormFieldModule,
-                FormsModule,
-                ReactiveFormsModule,
             ],
             // declare components that are used in the template
             declarations: [
-                ButtonComponent,
-                IconComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

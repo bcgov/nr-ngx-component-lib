@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, ContentChild, Directive, HostListener, inject, TemplateRef } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
+import { Component, ContentChild, Directive, TemplateRef } from "@angular/core";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
 @Directive({
-    selector: "[desktop-view]"
+    selector: "[desktop-view]",
 })
 export class DesktopViewDirective {
     constructor(
@@ -12,7 +13,7 @@ export class DesktopViewDirective {
 
 
 @Directive({
-    selector: "[mobile-view]"
+    selector: "[mobile-view]",
 })
 export class MobileViewDirective {
     constructor(
@@ -40,7 +41,10 @@ export class MobileViewDirective {
         :host:empty {
             display: none;
         }
-    `]
+    `],
+    imports: [
+        NgTemplateOutlet,
+    ]
 })
 export class DeviceViewComponent extends ConfigurationSubscriberBase {
     @ContentChild( DesktopViewDirective ) desktopContent!: DesktopViewDirective;
