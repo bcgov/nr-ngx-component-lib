@@ -1,15 +1,24 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ButtonComponent } from "../button/button.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { IconComponent } from "../icon/icon.component";
 
 @Component({
     selector: 'nrcl-dialog',
     templateUrl: './dialog.component.html',
     styleUrl: './dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        MatProgressSpinnerModule,
+        ButtonComponent,
+        MatDialogModule,
+        IconComponent
+    ]
 })
 export class DialogComponent extends NrclBase {
-    @Input() title: string;
+    @Input() title?: string;
     @Input() isLoading = false
     @Input() showClose = false
     @Input() saveLabel = 'Save'
