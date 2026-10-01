@@ -24,9 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CellContentComponent } from './components/cell-content/cell-content.component';
-import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
@@ -97,10 +94,6 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        CellContentComponent,
-        DateNavigatorComponent,
-        DesktopViewDirective,
-        DeviceViewComponent,
         DialogComponent,
         DialogConfirmComponent,
         ExpansionPanelComponent,
@@ -121,7 +114,6 @@ import { DATE_FORMATS } from './utils/date.util';
         ListEventHistoryComponent,
         ListSelectComponent,
         LoadingStatusComponent,
-        MobileViewDirective,
         PageContainerComponent,
         PageHeaderComponent,
         ResourceScheduleComponent,
@@ -143,10 +135,6 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipDirective,
     ],
     exports: [
-        CellContentComponent,
-        DateNavigatorComponent,
-        DesktopViewDirective,
-        DeviceViewComponent,
         DialogComponent,
         DialogConfirmComponent,
         ExpansionPanelComponent,
@@ -167,7 +155,6 @@ import { DATE_FORMATS } from './utils/date.util';
         ListEventHistoryComponent,
         ListSelectComponent,
         LoadingStatusComponent,
-        MobileViewDirective,
         PageContainerComponent,
         PageHeaderComponent,
         ResourceScheduleComponent,
