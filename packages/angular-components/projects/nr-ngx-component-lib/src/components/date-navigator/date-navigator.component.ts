@@ -1,13 +1,13 @@
 import { Component, ElementRef, EventEmitter, inject, Input, numberAttribute, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import moment, { Moment } from 'moment';
 import { NrclBase } from '../../directives/nrcl.base';
 import { DATE_FORMATS } from '../../utils/date.util';
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { ButtonComponent } from '../button/button.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 @Component( {
     selector: 'nrcl-date-navigator',
@@ -32,7 +32,6 @@ import { MatInputModule } from '@angular/material/input';
         MatInputModule,
         MatFormFieldModule,
         FormsModule,
-        ReactiveFormsModule,
     ]
 } )
 export class DateNavigatorComponent extends NrclBase implements OnChanges {

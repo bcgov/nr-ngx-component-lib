@@ -1,12 +1,10 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { FilterContainerComponent } from './filter-container.component';
+import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
+import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { ConfigurationService } from '../../public-api';
+import { FilterContainerComponent } from './filter-container.component';
 
 const meta: Meta<FilterContainerComponent> = {
     title: 'Filter Container',
@@ -17,21 +15,31 @@ const meta: Meta<FilterContainerComponent> = {
             // import necessary ngModules or standalone components
             imports: [
                 FormsModule,
-                MatButtonModule,
                 MatCheckboxModule,
                 MatRadioModule,
                 MatFormFieldModule,                
-                MatIconModule,
-                MatInputModule,
-                ReactiveFormsModule,
             ],
             // declare components that are used in the template
             declarations: [
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
+                ConfigurationService
             ],
         } ),
+        componentWrapperDecorator(
+            ( story ) => {
+                return `
+                    <ng-container *rerender="displayMode">
+                        <display-mode-wrapper
+                            style="--registration-content-overflow: visible"
+                        >
+                            ${ story }
+                        </display-mode-wrapper>
+                    </ng-container>
+                `
+            }
+        ),
     ],
     tags: ['autodocs'],
     parameters: {
@@ -72,7 +80,32 @@ A flexible container component for grouping filter controls with a consistent vi
 
 export default meta;
 
-export const Primary: StoryObj<FilterContainerComponent & { width: number, height: number }> = {
+export const Primary: StoryObj<FilterContainerComponent> = {
+    argTypes: {
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
+        }
+    },
+    args: {
+        label: 'Container',
+        hint: '',
+        wide: null
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            template: `
+                <nrcl-filter-container ${ argsToTemplate(args) }>
+                    Hello
+                </nrcl-filter-container> 
+            `
+        }
+    }
+}
+
+export const CustomSize: StoryObj<FilterContainerComponent & { width: number, height: number }> = {
     argTypes: {
         width: {
             control: {
@@ -84,41 +117,25 @@ export const Primary: StoryObj<FilterContainerComponent & { width: number, heigh
         height: {
             control: {
                 type: 'range',
-                min: 40,
+                min: 0,
                 max: 300
             }
         },
-        wide: {
-            control: { type: 'inline-radio' },
-            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
-            mapping: { 'none': undefined }
-        }
     },
     args: {
         width: 308,
         height: 0,
         label: 'Container',
         hint: '',
-        wide: null
     },
     render: ( args ) => {
         return {
             props: args,
-            styles: [`
-                :host {
-                    display: flex;
-                    gap: 20px;
-                }
-            `],
             template: `
                 <nrcl-filter-container ${ argsToTemplate(args,{exclude:['width','height']}) } 
                     [style.--nrcl-filter-container-width]="width + 'px'"
                     [style.--nrcl-filter-container-height]="height ? height + 'px' : 'unset'"
                 >
-                    <div style="border: 1px dashed blue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">Hello</div>
-                </nrcl-filter-container> 
-
-                <nrcl-filter-container ${ argsToTemplate(args,{exclude:['width','height']}) }>
                     <div style="border: 1px dashed blue; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">Hello</div>
                 </nrcl-filter-container> 
             `

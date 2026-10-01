@@ -24,7 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FilterContainerComponent } from './components/filter-container/filter-container.component';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
 import { FilterSearchComponent } from './components/filter-search/filter-search.component';
 import { FilterSelectComponent } from './components/filter-select/filter-select.component';
@@ -87,7 +86,6 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        FilterContainerComponent,
         FilterDateComponent,
         FilterSearchComponent,
         FilterSelectComponent,
@@ -121,7 +119,6 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipDirective,
     ],
     exports: [
-        FilterContainerComponent,
         FilterDateComponent,
         FilterSearchComponent,
         FilterSelectComponent,
