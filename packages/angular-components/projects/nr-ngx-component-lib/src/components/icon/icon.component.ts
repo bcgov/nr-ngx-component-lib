@@ -1,7 +1,7 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
+import { AfterContentInit, booleanAttribute, Component, ElementRef, inject, Input } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NrclBase } from '../../directives/nrcl.base';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component( {
     selector: 'nrcl-icon',
