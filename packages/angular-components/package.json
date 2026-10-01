@@ -25,13 +25,11 @@
     "zone.js": "~0.14.6"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.0.3",
-    "@angular-devkit/schematics": "^18.0.3",
-    "@angular/cli": "^18.0.3",
-    "@angular/compiler": "^18.0.2",
-    "@angular/compiler-cli": "^18.0.2",
-    "@angular/language-service": "^18.0.2",
-    "@busacca/ng-pick-datetime": "^12.0.0",
+    "@angular-devkit/build-angular": "^21.2.24",
+    "@angular-devkit/schematics": "^21.2.24",
+    "@angular/cli": "^21.2.24",
+    "@angular/compiler-cli": "^21.2.24",
+    "@angular/language-service": "^21.2.24",
     "@storybook/addon-docs": "=10.4.6",
     "@storybook/addon-onboarding": "=10.4.6",
     "@storybook/angular": "=10.4.6",

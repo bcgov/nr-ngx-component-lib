@@ -32,7 +32,6 @@
                         "styles": [
                             "projects/nr-ngx-component-lib/src/styles/global.scss",
                             "projects/nr-ngx-component-lib/src/styles/material.scss",
-                            "node_modules/@busacca/ng-pick-datetime/assets/style/picker.scss"
                         ]
                     }
                 },
@@ -46,7 +45,6 @@
                         "styles": [
                             "projects/nr-ngx-component-lib/src/styles/global.scss",
                             "projects/nr-ngx-component-lib/src/styles/material.scss",
-                            "node_modules/@busacca/ng-pick-datetime/assets/style/picker.scss"
                         ]
                     }
                 }

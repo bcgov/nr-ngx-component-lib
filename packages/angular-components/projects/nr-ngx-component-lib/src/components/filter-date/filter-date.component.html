@@ -9,7 +9,6 @@
         [ngModel]="value" 
         (ngModelChange)="onDateChange( $event )"
         [placeholder]="placeholder"
-        [owlDateTime]="selectedDateDT" 
         maxlength="10" 
         appWFDateMask
     >
@@ -20,8 +19,5 @@
 
     <nrcl-button tertiary matSuffix
         icon="event"
-        [owlDateTimeTrigger]="selectedDateDT" 
     ></nrcl-button>
 </mat-form-field>
-
-<owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time>
