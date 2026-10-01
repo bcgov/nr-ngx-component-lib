@@ -31,7 +31,6 @@ import { FilterSelectComponent } from './components/filter-select/filter-select.
 import { FiltersPanelComponent } from './components/filters-panel/filters-panel.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
-import { GapComponent } from './components/gap/gap.component';
 import { IndicatorSelectComponent } from './components/indicator-select/indicator-select.component';
 import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
@@ -95,7 +94,6 @@ import { DATE_FORMATS } from './utils/date.util';
         FiltersPanelComponent,
         FormFieldComponent,
         FormLayoutComponent,
-        GapComponent,
         IndicatorComponent,
         IndicatorSelectComponent,
         ListAttachmentsComponent,
@@ -130,7 +128,6 @@ import { DATE_FORMATS } from './utils/date.util';
         FiltersPanelComponent,
         FormFieldComponent,
         FormLayoutComponent,
-        GapComponent,
         IndicatorComponent,
         IndicatorSelectComponent,
         ListAttachmentsComponent,
