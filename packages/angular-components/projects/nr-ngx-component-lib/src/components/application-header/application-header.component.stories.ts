@@ -5,49 +5,20 @@ import {
     StoryObj
 } from "@storybook/angular";
 import {
-    DisplayModeWrapperComponent,
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import {
-    DesktopViewDirective,
-    DeviceViewComponent,
-    MobileViewDirective
-} from '../device-view/device-view.component';
-import { IconComponent } from '../icon/icon.component';
-import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
-import { ButtonComponent } from "../button/button.component";
-import { ApplicationHeaderComponent } from "./application-header.component";
 import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
-import { ApplicationComponent } from "../application/application.component";
-import { MatMenuModule } from "@angular/material/menu";
+import { ApplicationHeaderComponent } from "./application-header.component";
 
 const meta: Meta<ApplicationHeaderComponent> = {
-    title: "Application Header",
+    title: "Application/Header",
     component: ApplicationHeaderComponent,
 
     decorators: [
         moduleMetadata({
             imports: [
-                MatButtonModule,
-                MatIconModule,
-                MatRippleModule,
-                MatTooltipModule,
-                MatMenuModule
+                ApplicationMenuComponent
             ],
-            declarations: [
-                ButtonComponent,
-                ApplicationMenuComponent,
-                ApplicationComponent,
-                IconComponent,
-                DisplayModeWrapperComponent,
-                DeviceViewComponent,
-                DesktopViewDirective,
-                MobileViewDirective
-            ]
         }),
 
         componentWrapperDecorator(
@@ -112,17 +83,8 @@ export const Primary: Story = {
     args: {
         ...displayModeWrapperStory.args,
         title: 'Wildfire DataMart',
-        // homeUrl: '/',
-        // skipLinksEnabled: true,
-        // skipLinkTarget: 'main-content',
         skipLabel: 'Skip to main content',
         logoAriaLabel: 'BC Wildfire Service logo',
-        // showMenu: true,
-        // menuTrigger: {
-            // label: 'Menu',
-            // icon: 'menu'
-        // },
-
     },
     render: args => ({
         props: {
@@ -174,20 +136,18 @@ export const Primary: Story = {
 
         },
         template: `
-            <nrcl-application>
-                <nrcl-application-header
-                    [title]="title"
-                    [skipLabel]="skipLabel"
-                    [logoAriaLabel]="logoAriaLabel"
-                    (clickLogo)="clickLogo()"
-                    (clickSkip)="clickSkip()"
-                >
-                    <nrcl-application-menu
-                        label="Menu"
-                        [items]="menuItems"
-                    ></nrcl-application-menu>
-                </nrcl-application-header>
-            </nrcl-application>
+            <nrcl-application-header
+                [title]="title"
+                [skipLabel]="skipLabel"
+                [logoAriaLabel]="logoAriaLabel"
+                (clickLogo)="clickLogo()"
+                (clickSkip)="clickSkip()"
+            >
+                <nrcl-application-menu
+                    label="Menu"
+                    [items]="menuItems"
+                ></nrcl-application-menu>
+            </nrcl-application-header>
         `
     })
 };

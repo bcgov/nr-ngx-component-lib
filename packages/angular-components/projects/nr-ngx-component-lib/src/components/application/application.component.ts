@@ -9,7 +9,6 @@ import { NrclBase } from '../../directives/nrcl.base';
     templateUrl: "./application.component.html",
     styleUrl: "./application.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
 })
 export class ApplicationComponent extends NrclBase {
 }

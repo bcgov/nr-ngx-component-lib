@@ -1,5 +1,3 @@
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 
@@ -11,8 +9,6 @@ const meta: Meta<IconComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatTooltipModule,
-                MatIconModule
             ],
             // declare components that are used in the template
             declarations: [
