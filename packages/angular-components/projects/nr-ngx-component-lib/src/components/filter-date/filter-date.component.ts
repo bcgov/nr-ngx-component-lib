@@ -5,9 +5,13 @@ import {
     Input,
     Output
 } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import moment from "moment";
-import { DATE_FORMATS } from "../../utils/date.util";
 import { NrclBase } from "../../directives/nrcl.base";
+import { DATE_FORMATS } from "../../utils/date.util";
+import { ButtonComponent } from "../button/button.component";
 
 @Component( {
     selector: "nrcl-filter-date",
@@ -16,7 +20,13 @@ import { NrclBase } from "../../directives/nrcl.base";
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[style.--nrcl-filter-date-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    }
+    },
+    imports: [
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        ButtonComponent
+    ]
 } )
 export class FilterDateComponent extends NrclBase {
     @Input() label = '[label]]'
