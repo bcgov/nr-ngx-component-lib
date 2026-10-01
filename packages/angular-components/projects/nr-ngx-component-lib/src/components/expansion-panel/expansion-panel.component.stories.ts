@@ -1,13 +1,7 @@
-import { MatRippleModule } from '@angular/material/core';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { ButtonComponent } from '../button/button.component';
 import { GapComponent } from '../gap/gap.component';
-import { IconComponent } from '../icon/icon.component';
 import { ExpansionPanelComponent } from './expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './footer/expansion-panel-footer.component';
 import { ExpansionPanelHeaderComponent } from './header/expansion-panel-header.component';
@@ -21,20 +15,14 @@ const meta: Meta<ExpansionPanelComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatTooltipModule,
-                MatIconModule,
-                MatRippleModule,
-                MatExpansionModule,
-                MatProgressSpinnerModule
-            ],
-            // declare components that are used in the template
-            declarations: [
                 ButtonComponent,
                 ExpansionPanelHeaderComponent,
                 ExpansionPanelFooterComponent,
                 ExpansionPanelSectionComponent,
-                IconComponent,
                 GapComponent
+            ],
+            // declare components that are used in the template
+            declarations: [
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -46,6 +34,7 @@ const meta: Meta<ExpansionPanelComponent> = {
                     <ng-container *rerender="displayMode">
                         <display-mode-wrapper
                             [displayMode]="displayMode"
+                            style="--registration-content-overflow: visible"
                         >
                             ${ story }
                         </display-mode-wrapper>
@@ -87,12 +76,12 @@ The expansion panel consists of three parts:
     <h2 panel>Section Title</h2>
     <nrcl-button primary>Add Item</nrcl-button>
   </nrcl-expansion-panel-header>
-  
+
   <div>
     <!-- Your expandable content here -->
     <p>Content that can be shown or hidden</p>
   </div>
-  
+
   <nrcl-expansion-panel-footer
     (cancelClick)="onCancel()"
     (saveClick)="onSave()"
@@ -129,7 +118,7 @@ The expansion panel consists of three parts:
 
 ### Controlled Expansion
 \`\`\`html
-<nrcl-expansion-panel 
+<nrcl-expansion-panel
   [expanded]="isExpanded"
   (expandedChange)="isExpanded = $event"
 >
@@ -294,7 +283,7 @@ Use the controls below to experiment with different expansion panel configuratio
         return {
             props: {
                 ...args,
-                addClick: ( ev ) => { ev.stopPropagation(); console.log('addClick') } 
+                addClick: ( ev ) => { ev.stopPropagation(); console.log('addClick') }
             },
             styles: [`
                 ::ng-deep .component-container-block {
@@ -306,11 +295,11 @@ Use the controls below to experiment with different expansion panel configuratio
                     <nrcl-expansion-panel-header>
                         <h2 panel>Assignments</h2>
                         @if ( subtitle ) { <h3 panel>Subtitle for Assignments</h3> }
-                        
+
                         <nrcl-button primary
                             (click)="addClick( $event )"
                         >Add Assignment</nrcl-button>
-                    </nrcl-expansion-panel-header>                   
+                    </nrcl-expansion-panel-header>
 
                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
 
@@ -380,7 +369,7 @@ export const Sections: StoryObj<ExpansionPanelComponent & DisplayModeWrapperComp
         return {
             props: {
                 ...args,
-                addClick: ( ev ) => { ev.stopPropagation(); console.log('addClick') } 
+                addClick: ( ev ) => { ev.stopPropagation(); console.log('addClick') }
             },
             styles: [`
                 ::ng-deep .component-container-block {
@@ -391,17 +380,17 @@ export const Sections: StoryObj<ExpansionPanelComponent & DisplayModeWrapperComp
                 <nrcl-expansion-panel ${ argsToTemplate( args, { include: argsExpansionPanelComponent } ) }>
                     <nrcl-expansion-panel-header>
                         <h2 panel>Assignments</h2>
-                        
+
                         <nrcl-button primary
                             (click)="addClick( $event )"
                         >Add Assignment</nrcl-button>
-                    </nrcl-expansion-panel-header>                   
+                    </nrcl-expansion-panel-header>
 
                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
 
                     <nrcl-expansion-panel-section>
                         <h3>Assignments</h3>
-                        
+
                         <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                     </nrcl-expansion-panel-section>
 
@@ -411,14 +400,14 @@ export const Sections: StoryObj<ExpansionPanelComponent & DisplayModeWrapperComp
 
                             <nrcl-button class="add"
                                 label="Add Location"
-                            ></nrcl-button>                        
+                            ></nrcl-button>
                         </h3>
-                        
+
                         <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                     </nrcl-expansion-panel-section>
 
                     <nrcl-gap vertical/>
-                    
+
                     <nrcl-expansion-panel-footer [saveEnabled]="true" [cancelEnabled]="true">
                     </nrcl-expansion-panel-footer>
                 </nrcl-expansion-panel>

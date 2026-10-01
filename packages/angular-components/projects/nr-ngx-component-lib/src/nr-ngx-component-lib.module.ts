@@ -24,12 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
-import { ExpansionPanelFooterComponent } from './components/expansion-panel/footer/expansion-panel-footer.component';
-import { ExpansionPanelHeaderComponent } from './components/expansion-panel/header/expansion-panel-header.component';
-import { ExpansionPanelSectionComponent } from './components/expansion-panel/section/expansion-panel-section.component';
 import { FilterContainerComponent } from './components/filter-container/filter-container.component';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
 import { FilterSearchComponent } from './components/filter-search/filter-search.component';
@@ -94,12 +88,6 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        DialogComponent,
-        DialogConfirmComponent,
-        ExpansionPanelComponent,
-        ExpansionPanelFooterComponent,
-        ExpansionPanelHeaderComponent,
-        ExpansionPanelSectionComponent,
         FilterContainerComponent,
         FilterDateComponent,
         FilterSearchComponent,
@@ -135,12 +123,6 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipDirective,
     ],
     exports: [
-        DialogComponent,
-        DialogConfirmComponent,
-        ExpansionPanelComponent,
-        ExpansionPanelFooterComponent,
-        ExpansionPanelHeaderComponent,
-        ExpansionPanelSectionComponent,
         FilterContainerComponent,
         FilterDateComponent,
         FilterSearchComponent,

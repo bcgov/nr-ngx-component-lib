@@ -2,6 +2,7 @@
     --registration-display: block;
     --registration-size: 10px;
     --registration-border: 2px solid #999;
+    --registration-content-overflow: hidden;
 }
     
 :host {
@@ -21,7 +22,7 @@
         display: var( --registration-display );
         background-color: white;
         // height: 100%;
-        overflow: hidden;
+        overflow: var( --registration-content-overflow );
     }
 
     .marks {

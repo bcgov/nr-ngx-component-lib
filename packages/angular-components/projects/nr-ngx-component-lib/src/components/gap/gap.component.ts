@@ -8,12 +8,11 @@ type Position = (typeof POSITIONS)[number]
     selector: 'nrcl-gap',
     templateUrl: './gap.component.html',
     styleUrl: './gap.component.scss',
-    standalone: false
 } )
 export class GapComponent extends NrclBase implements OnChanges, OnInit {
-    @Input() horizontal
-    @Input() vertical
-    @Input() divider
+    @Input() horizontal?: string|false
+    @Input() vertical?: string|false
+    @Input() divider?: string|false
 
     @HostBinding( 'class' )
     componentClass
@@ -36,8 +35,8 @@ export class GapComponent extends NrclBase implements OnChanges, OnInit {
         let dividerPosition: Position = 'none'
 
         if ( this.divider != null && this.divider !== false ) {
-            if ( this.divider == '' || POSITIONS.includes( this.divider ) ) {
-                dividerPosition = this.divider || 'middle'
+            if ( this.divider == '' || POSITIONS.includes( this.divider as Position ) ) {
+                dividerPosition = this.divider as Position || 'middle'
                 if ( dividerPosition == 'middle' ) defaultMultiple = 2
             }
         }
