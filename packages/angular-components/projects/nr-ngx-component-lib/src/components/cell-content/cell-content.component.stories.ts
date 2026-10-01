@@ -17,17 +17,17 @@ const meta: Meta<CellContentComponent & { width: number }> = {
             providers: [
             ],
         } ),
-        componentWrapperDecorator( 
-            ( story ) => {
-                return `
-                    <ng-container *rerender="{width, tooltip}">
-                        <registration-wrapper style="--registration-display: inline-block;">
-                            ${ story }
-                        </registration-wrapper>
-                    </ng-container>
-                `
-            }
-        ),        
+        // componentWrapperDecorator( 
+        //     ( story ) => {
+        //         return `
+        //             <ng-container *rerender="{width, tooltip}">
+        //                 <registration-wrapper style="--registration-display: inline-block;">
+        //                     ${ story }
+        //                 </registration-wrapper>
+        //             </ng-container>
+        //         `
+        //     }
+        // ),        
     ],
     tags: ['autodocs'],
     parameters: {

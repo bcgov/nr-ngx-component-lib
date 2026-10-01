@@ -1,6 +1,4 @@
-import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ConfigurationService } from '../../public-api';
@@ -14,10 +12,8 @@ const meta: Meta<FilterContainerComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
                 MatCheckboxModule,
                 MatRadioModule,
-                MatFormFieldModule,                
             ],
             // declare components that are used in the template
             declarations: [
@@ -151,17 +147,11 @@ export const Checkboxes: StoryObj<FilterContainerComponent> = {
                 <nrcl-filter-container style="--nrcl-filter-container-width: max-content;"
                     label="Resource Fire Centre"
                 >
-                    <mat-checkbox 
-                        [(ngModel)]="selectedFireCentreHome"
-                        (change)="onChangeFilters()"
-                    >
+                    <mat-checkbox>
                         Home
                     </mat-checkbox>
 
-                    <mat-checkbox 
-                        [(ngModel)]="selectedFireCentreOther"
-                        (change)="onChangeFilters()"
-                    >
+                    <mat-checkbox>
                         Outside
                     </mat-checkbox>
                 </nrcl-filter-container>

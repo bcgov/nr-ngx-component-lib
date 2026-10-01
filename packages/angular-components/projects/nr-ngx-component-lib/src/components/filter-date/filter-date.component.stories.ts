@@ -1,12 +1,5 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterDateComponent } from './filter-date.component';
-import { DATE_FORMATS } from '../../utils/date.util';
-import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<FilterDateComponent> = {
     title: 'Filter Date',
@@ -16,21 +9,27 @@ const meta: Meta<FilterDateComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatButtonModule,
-                MatFormFieldModule,
-                MatIconModule,
-                MatInputModule,
-                ReactiveFormsModule,
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
             ],
         } ),
+        componentWrapperDecorator(
+            ( story ) => {
+                return `
+                    <ng-container *rerender="displayMode">
+                        <display-mode-wrapper
+                            style="--registration-content-overflow: visible"
+                        >
+                            ${ story }
+                        </display-mode-wrapper>
+                    </ng-container>
+                `
+            }
+        ),
     ],
     tags: ['autodocs'],
     parameters: {
@@ -75,7 +74,33 @@ Date formatting is controlled by the \`DATE_FORMATS\` configuration provided to 
 
 export default meta;
 
-export const Primary: StoryObj<FilterDateComponent & { width: number }> = {
+export const Primary: StoryObj<FilterDateComponent> = {
+    argTypes: {
+        valueChange: { action: 'valueChange' },
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
+        }
+    },
+    args: {
+        label: 'Start Date',
+        value: '',
+        hint: '',
+        wide: null
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            template: `
+                <nrcl-filter-date ${ argsToTemplate(args) } 
+                ></nrcl-filter-date>
+            `
+        }
+    }
+}
+
+export const CustomWidth: StoryObj<FilterDateComponent & { width: number }> = {
     argTypes: {
         width: {
             control: {
@@ -85,18 +110,12 @@ export const Primary: StoryObj<FilterDateComponent & { width: number }> = {
             }
         },
         valueChange: { action: 'valueChange' },
-        wide: {
-            control: { type: 'inline-radio' },
-            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
-            mapping: { 'none': undefined }
-        }
     },
     args: {
         width: 158,
         label: 'Start Date',
         value: '',
         hint: '',
-        wide: null
     },
     render: ( args ) => {
         return {
@@ -110,9 +129,6 @@ export const Primary: StoryObj<FilterDateComponent & { width: number }> = {
             template: `
                 <nrcl-filter-date ${ argsToTemplate(args,{exclude:['width']}) } 
                     [style.--nrcl-filter-date-width.px]="width"
-                ></nrcl-filter-date>
-
-                <nrcl-filter-date ${ argsToTemplate(args,{exclude:['width']}) } 
                 ></nrcl-filter-date>
             `
         }
