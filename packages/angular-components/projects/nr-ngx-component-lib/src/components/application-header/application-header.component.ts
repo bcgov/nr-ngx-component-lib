@@ -11,7 +11,7 @@ import { NrclBase } from '../../directives/nrcl.base';
     selector: "nrcl-application-header",
     templateUrl: "./application-header.component.html",
     styleUrl: "./application-header.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicationHeaderComponent extends NrclBase {
     @Input() title = "";

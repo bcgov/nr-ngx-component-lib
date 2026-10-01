@@ -4,26 +4,13 @@ import {
     moduleMetadata,
     StoryObj
 } from "@storybook/angular";
+import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
 import {
-    DisplayModeWrapperComponent,
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import {
-    DesktopViewDirective,
-    DeviceViewComponent,
-    MobileViewDirective
-} from '../device-view/device-view.component';
-import { IconComponent } from '../icon/icon.component';
-import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
-import { ButtonComponent } from "../button/button.component";
-import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
-import { MatMenuModule } from "@angular/material/menu";
-import { ApplicationComponent } from "./application.component";
 import { ApplicationHeaderComponent } from "../application-header/application-header.component";
+import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
+import { ApplicationComponent } from "./application.component";
 
 const meta: Meta<ApplicationComponent> = {
     title: "Application",
@@ -32,22 +19,9 @@ const meta: Meta<ApplicationComponent> = {
     decorators: [
         moduleMetadata({
             imports: [
-                MatButtonModule,
-                MatIconModule,
-                MatRippleModule,
-                MatTooltipModule,
-                MatMenuModule
-            ],
-            declarations: [
-                ButtonComponent,
-                ApplicationMenuComponent,
                 ApplicationHeaderComponent,
-                IconComponent,
-                DisplayModeWrapperComponent,
-                DeviceViewComponent,
-                DesktopViewDirective,
-                MobileViewDirective
-            ]
+                ApplicationMenuComponent,
+            ],
         }),
 
         componentWrapperDecorator(

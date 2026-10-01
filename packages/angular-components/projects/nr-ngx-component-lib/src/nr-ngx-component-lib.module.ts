@@ -24,9 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ApplicationHeaderComponent } from './components/application-header/application-header.component';
-import { ApplicationMenuComponent } from './components/application-menu/application-menu.component';
-import { ButtonComponent } from './components/button/button.component';
 import { CellContentComponent } from './components/cell-content/cell-content.component';
 import { DateNavigatorComponent } from './components/date-navigator/date-navigator.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './components/device-view/device-view.component';
@@ -44,7 +41,6 @@ import { FiltersPanelComponent } from './components/filters-panel/filters-panel.
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { GapComponent } from './components/gap/gap.component';
-import { IconComponent } from './components/icon/icon.component';
 import { IndicatorSelectComponent } from './components/indicator-select/indicator-select.component';
 import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
@@ -69,7 +65,6 @@ import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
 import { DATE_FORMATS } from './utils/date.util';
-import { ApplicationComponent } from './components/application/application.component';
 
 @NgModule({
     imports: [
@@ -102,14 +97,15 @@ import { ApplicationComponent } from './components/application/application.compo
         MatTabsModule
     ],
     declarations: [
-        ApplicationComponent,
-        ApplicationHeaderComponent,
-        ApplicationMenuComponent,
-        ButtonComponent,
         CellContentComponent,
+        DateNavigatorComponent,
+        DesktopViewDirective,
+        DeviceViewComponent,
+        DialogComponent,
+        DialogConfirmComponent,
         ExpansionPanelComponent,
-        ExpansionPanelHeaderComponent,
         ExpansionPanelFooterComponent,
+        ExpansionPanelHeaderComponent,
         ExpansionPanelSectionComponent,
         FilterContainerComponent,
         FilterDateComponent,
@@ -119,48 +115,43 @@ import { ApplicationComponent } from './components/application/application.compo
         FormFieldComponent,
         FormLayoutComponent,
         GapComponent,
+        IndicatorComponent,
+        IndicatorSelectComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
+        ListSelectComponent,
+        LoadingStatusComponent,
+        MobileViewDirective,
         PageContainerComponent,
         PageHeaderComponent,
+        ResourceScheduleComponent,
+        ResourceScheduleRowHeadingDirective,
         RowListDesktopComponent,
         RowListMobileComponent,
         RowListPaginationComponent,
         RowListSortingComponent,
-        SnackbarComponent,
-        TagListComponent,
-        DesktopViewDirective,
-        MobileViewDirective,
-        DeviceViewComponent,
-        IconComponent,
-        IndicatorComponent,
-        DialogComponent,
-        DialogConfirmComponent,
-        IndicatorSelectComponent,
-        ListSelectComponent,
-        TabGroupComponent,
-        TabComponent,
-        TabLabelDirective,
-        TabContentDirective,
-        LoadingStatusComponent,
         ScheduleComponent,
         ScheduleItemDirective,
         ScheduleRowHeadingDirective,
-        ResourceScheduleComponent,
-        ResourceScheduleRowHeadingDirective,
-        DateNavigatorComponent,
-        TooltipDirective,
+        SnackbarComponent,
+        TabComponent,
+        TabContentDirective,
+        TabGroupComponent,
+        TabLabelDirective,
+        TagListComponent,
         TooltipComponent,
+        TooltipDirective,
     ],
     exports: [
-        ApplicationComponent,
-        ApplicationHeaderComponent,
-        ApplicationMenuComponent,
-        ButtonComponent,
         CellContentComponent,
+        DateNavigatorComponent,
+        DesktopViewDirective,
+        DeviceViewComponent,
+        DialogComponent,
+        DialogConfirmComponent,
         ExpansionPanelComponent,
-        ExpansionPanelHeaderComponent,
         ExpansionPanelFooterComponent,
+        ExpansionPanelHeaderComponent,
         ExpansionPanelSectionComponent,
         FilterContainerComponent,
         FilterDateComponent,
@@ -170,38 +161,32 @@ import { ApplicationComponent } from './components/application/application.compo
         FormFieldComponent,
         FormLayoutComponent,
         GapComponent,
+        IndicatorComponent,
+        IndicatorSelectComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
+        ListSelectComponent,
+        LoadingStatusComponent,
+        MobileViewDirective,
         PageContainerComponent,
         PageHeaderComponent,
+        ResourceScheduleComponent,
+        ResourceScheduleRowHeadingDirective,
         RowListDesktopComponent,
         RowListMobileComponent,
         RowListPaginationComponent,
         RowListSortingComponent,
-        SnackbarComponent,
-        TagListComponent,
-        DesktopViewDirective,
-        MobileViewDirective,
-        DeviceViewComponent,
-        IconComponent,
-        IndicatorComponent,
-        DialogComponent,
-        DialogConfirmComponent,
-        IndicatorSelectComponent,
-        ListSelectComponent,
-        TabGroupComponent,
-        TabComponent,
-        TabLabelDirective,
-        TabContentDirective,
-        LoadingStatusComponent,
         ScheduleComponent,
         ScheduleItemDirective,
         ScheduleRowHeadingDirective,
-        ResourceScheduleComponent,
-        ResourceScheduleRowHeadingDirective,
-        DateNavigatorComponent,
-        TooltipDirective,
+        SnackbarComponent,
+        TabComponent,
+        TabContentDirective,
+        TabGroupComponent,
+        TabLabelDirective,
+        TagListComponent,
         TooltipComponent,
+        TooltipDirective,
     ],
     providers: [
         SnackbarUtilService,
