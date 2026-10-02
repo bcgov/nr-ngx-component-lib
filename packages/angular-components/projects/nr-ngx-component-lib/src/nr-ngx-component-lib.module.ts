@@ -26,8 +26,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { ListSelectComponent } from './components/list-select/list-select.component';
-import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
-import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
@@ -66,21 +64,11 @@ import { DATE_FORMATS } from './utils/date.util';
         ListAttachmentsComponent,
         ListEventHistoryComponent,
         ListSelectComponent,
-        ResourceScheduleComponent,
-        ResourceScheduleRowHeadingDirective,
-        ScheduleComponent,
-        ScheduleItemDirective,
-        ScheduleRowHeadingDirective,
     ],
     exports: [
         ListAttachmentsComponent,
         ListEventHistoryComponent,
         ListSelectComponent,
-        ResourceScheduleComponent,
-        ResourceScheduleRowHeadingDirective,
-        ScheduleComponent,
-        ScheduleItemDirective,
-        ScheduleRowHeadingDirective,
     ],
     providers: [
         SnackbarUtilService,

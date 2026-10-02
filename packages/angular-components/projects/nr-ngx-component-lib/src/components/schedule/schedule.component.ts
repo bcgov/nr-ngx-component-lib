@@ -1,13 +1,19 @@
 import { Component, ContentChild, ContentChildren, Directive, Input, numberAttribute, OnChanges, QueryList, SimpleChanges, TemplateRef } from '@angular/core';
-import { MatMenuPanel } from '@angular/material/menu';
+import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
 import moment from 'moment';
 import { Observable } from 'rxjs';
 import { InitialState, PaginationState } from '../../directives/pagination.base';
 import { RowListBase } from '../../directives/row-list.base';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
+import { MatRippleModule } from '@angular/material/core';
+import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { GapComponent } from '../gap/gap.component';
+import { IconComponent } from '../icon/icon.component';
 
 @Directive( {
     selector: '[nrclScheduleRowHeading]',
-    standalone: false
 } )
 export class ScheduleRowHeadingDirective {
     constructor(
@@ -19,7 +25,6 @@ export class ScheduleRowHeadingDirective {
 
 @Directive( {
     selector: '[nrclScheduleItem]',
-    standalone: false
 } )
 export class ScheduleItemDirective {
     @Input( 'nrclScheduleItem' ) name?: string
@@ -89,7 +94,17 @@ export interface ScheduleProvider {
     host: {
         '[style.--nrcl-schedule-day-count]': 'this.dayCount'
     },
-    standalone: false
+    imports: [
+        NgTemplateOutlet,
+        TooltipDirective,
+        MatRippleModule,
+        RowListPaginationComponent,
+        NgxPaginationModule,
+        GapComponent,
+        AsyncPipe,
+        MatMenuModule,
+        IconComponent
+    ]
 } )
 export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements OnChanges {
     @Input() provider?: ScheduleProvider
