@@ -120,12 +120,6 @@ export const CustomWidth: StoryObj<FilterDateComponent & { width: number }> = {
     render: ( args ) => {
         return {
             props: args,
-            styles: [`
-                :host {
-                    display: flex;
-                    gap: 20px;
-                }
-            `],
             template: `
                 <nrcl-filter-date ${ argsToTemplate(args,{exclude:['width']}) } 
                     [style.--nrcl-filter-date-width.px]="width"

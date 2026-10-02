@@ -1,23 +1,13 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { useArgs } from 'storybook/preview-api';
-import { ButtonComponent } from '../button/button.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { FilterSearchComponent } from '../filter-search/filter-search.component';
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { IconComponent } from '../icon/icon.component';
 import { FiltersPanelComponent } from './filters-panel.component';
 
 const meta: Meta<FiltersPanelComponent> = {
@@ -28,28 +18,15 @@ const meta: Meta<FiltersPanelComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatButtonModule,
                 MatCheckboxModule,
                 MatRadioModule,
-                MatFormFieldModule,                
-                MatIconModule,
-                MatInputModule,
-                MatTooltipModule,
-                ReactiveFormsModule,
-                MatListModule,                  
-            ],
-            // declare components that are used in the template
-            declarations: [
                 FilterDateComponent,
                 FilterSearchComponent,
                 FilterSelectComponent,
                 FilterContainerComponent,
-                DesktopViewDirective,
-                MobileViewDirective,
-                DeviceViewComponent,
-                IconComponent,
-                ButtonComponent
+            ],
+            // declare components that are used in the template
+            declarations: [
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -248,17 +225,11 @@ export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperC
                     <nrcl-filter-container
                         label="Resource Fire Centre"
                     >
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreHome"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox>
                             Home
                         </mat-checkbox>
 
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreOther"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox>
                             Outside
                         </mat-checkbox>
                     </nrcl-filter-container>
@@ -335,17 +306,11 @@ export const NoSearch: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
                     <nrcl-filter-container
                         label="Resource Fire Centre"
                     >
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreHome"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox >
                             Home
                         </mat-checkbox>
 
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreOther"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox >
                             Outside
                         </mat-checkbox>
                     </nrcl-filter-container>

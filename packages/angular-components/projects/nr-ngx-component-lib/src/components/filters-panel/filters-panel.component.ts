@@ -2,13 +2,14 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    contentChild,
     EventEmitter,
     Input,
     Output
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
+import { ButtonComponent } from "../button/button.component";
 import { FilterSearchComponent } from "../filter-search/filter-search.component";
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from "../device-view/device-view.component";
 
 @Component( {
     selector: "nrcl-filters-panel",
@@ -18,7 +19,13 @@ import { FilterSearchComponent } from "../filter-search/filter-search.component"
     host: {
         '[class.hide-filters]': '!showFilters',
         '[class.has-search]': '!!search'
-    }
+    },
+    imports: [
+        ButtonComponent,
+        DeviceViewComponent,
+        DesktopViewDirective,
+        MobileViewDirective
+    ]
 } )
 export class FiltersPanelComponent extends NrclBase {
     @Input() showClear = true

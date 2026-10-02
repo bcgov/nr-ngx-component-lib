@@ -23,10 +23,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FilterDateComponent } from './components/filter-date/filter-date.component';
-import { FilterSearchComponent } from './components/filter-search/filter-search.component';
-import { FilterSelectComponent } from './components/filter-select/filter-select.component';
-import { FiltersPanelComponent } from './components/filters-panel/filters-panel.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { IndicatorSelectComponent } from './components/indicator-select/indicator-select.component';
@@ -83,10 +79,6 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        FilterDateComponent,
-        FilterSearchComponent,
-        FilterSelectComponent,
-        FiltersPanelComponent,
         FormFieldComponent,
         FormLayoutComponent,
         IndicatorComponent,
@@ -116,10 +108,6 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipDirective,
     ],
     exports: [
-        FilterDateComponent,
-        FilterSearchComponent,
-        FilterSelectComponent,
-        FiltersPanelComponent,
         FormFieldComponent,
         FormLayoutComponent,
         IndicatorComponent,
