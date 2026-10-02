@@ -10,6 +10,10 @@ import {
     ViewChild
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
+import { FormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { ButtonComponent } from "../button/button.component";
 
 @Component( {
     selector: "nrcl-filter-search",
@@ -20,7 +24,12 @@ import { NrclBase } from "../../directives/nrcl.base";
         '[class.has-value]': "hasValue",
         '[style.--nrcl-filter-search-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
     },
-    standalone: false
+    imports: [
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        ButtonComponent
+    ]
 } )
 export class FilterSearchComponent extends NrclBase {
     @Input() label = 'Search'

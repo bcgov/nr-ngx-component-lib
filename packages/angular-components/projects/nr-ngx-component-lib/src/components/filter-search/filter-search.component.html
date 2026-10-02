@@ -15,11 +15,11 @@
     @if ( hint ) {
         <mat-hint>{{ hint }}</mat-hint>
     }
-
-    @if ( value ) {
-        <nrcl-button tertiary matSuffix
-            icon="close"
-            (click)="onCancelClick($event); $event.stopPropagation()"
-        ></nrcl-button>
-    }                
 </mat-form-field>
+
+@if ( value ) {
+    <nrcl-button tertiary
+        icon="close"
+        (click)="onCancelClick($event); $event.stopPropagation()"
+    ></nrcl-button>
+}                
