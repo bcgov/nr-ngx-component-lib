@@ -23,19 +23,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { IndicatorSelectComponent } from './components/indicator-select/indicator-select.component';
-import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
 import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
 import { ListSelectComponent } from './components/list-select/list-select.component';
-import { LoadingStatusComponent } from './components/loading-status/loading-status.component';
-import { PageContainerComponent } from './components/page-container/page-container.component';
-import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
-import { RowListDesktopComponent } from './components/row-list-desktop/row-list-desktop.component';
-import { RowListMobileComponent } from './components/row-list-mobile/row-list-mobile.component';
-import { RowListPaginationComponent } from './components/row-list-pagination/row-list-pagination.component';
-import { RowListSortingComponent } from './components/row-list-sorting/row-list-sorting.component';
 import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
@@ -77,20 +68,11 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        IndicatorComponent,
-        IndicatorSelectComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
         ListSelectComponent,
-        LoadingStatusComponent,
-        PageContainerComponent,
-        PageHeaderComponent,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
-        RowListDesktopComponent,
-        RowListMobileComponent,
-        RowListPaginationComponent,
-        RowListSortingComponent,
         ScheduleComponent,
         ScheduleItemDirective,
         ScheduleRowHeadingDirective,
@@ -104,20 +86,11 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipDirective,
     ],
     exports: [
-        IndicatorComponent,
-        IndicatorSelectComponent,
         ListAttachmentsComponent,
         ListEventHistoryComponent,
         ListSelectComponent,
-        LoadingStatusComponent,
-        PageContainerComponent,
-        PageHeaderComponent,
         ResourceScheduleComponent,
         ResourceScheduleRowHeadingDirective,
-        RowListDesktopComponent,
-        RowListMobileComponent,
-        RowListPaginationComponent,
-        RowListSortingComponent,
         ScheduleComponent,
         ScheduleItemDirective,
         ScheduleRowHeadingDirective,

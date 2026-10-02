@@ -44,20 +44,19 @@ const meta: Meta<RowListDesktopComponent> = {
                 NgxPaginationModule,
                 MatListModule,  
                 MatCheckboxModule,
-            ],
-            // declare components that are used in the template
-            declarations: [
                 CellContentComponent,
                 FilterSelectComponent,
                 FilterContainerComponent,
                 GapComponent,
-                DisplayModeWrapperComponent,
                 RowListPaginationComponent,
                 DeviceViewComponent,
                 DesktopViewDirective,
                 MobileViewDirective,
                 IconComponent,
                 ButtonComponent,                
+            ],
+            // declare components that are used in the template
+            declarations: [
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

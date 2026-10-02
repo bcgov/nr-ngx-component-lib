@@ -1,25 +1,8 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { useArgs } from 'storybook/preview-api';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { fruitOptions, RowListArgs, rowListStory } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { ConfigurationService } from '../../services/configuration.service';
-import { DATE_FORMATS } from '../../utils/date.util';
+import { useArgs } from 'storybook/preview-api';
 import { ButtonComponent } from '../button/button.component';
-import { CellContentComponent } from '../cell-content/cell-content.component';
 import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 import { FilterContainerComponent } from '../filter-container/filter-container.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
@@ -27,7 +10,6 @@ import { FilterSearchComponent } from '../filter-search/filter-search.component'
 import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { FiltersPanelComponent } from '../filters-panel/filters-panel.component';
 import { GapComponent } from '../gap/gap.component';
-import { IconComponent } from '../icon/icon.component';
 import { PageHeaderComponent } from '../page-header/page-header.component';
 import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.component';
 import { Primary as RowListDesktopPrimary } from '../row-list-desktop/row-list-desktop.component.stories';
@@ -36,6 +18,9 @@ import { Primary as RowListMobilePrimary } from '../row-list-mobile/row-list-mob
 import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { PageContainerComponent } from './page-container.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 const meta: Meta<PageContainerComponent> = {
     title: 'Page Container',
@@ -45,32 +30,12 @@ const meta: Meta<PageContainerComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatButtonModule,
-                MatCheckboxModule,
-                MatRadioModule,
-                MatFormFieldModule,
-                MatIconModule,
-                MatInputModule,
-                MatTooltipModule,
-                ReactiveFormsModule,
-                MatListModule,
-                MatProgressSpinner,
-                NgxPaginationModule,
-                MatTableModule,
-                MatSortModule,
-                MatCardModule
-            ],
-            // declare components that are used in the template
-            declarations: [
-                CellContentComponent,
                 FilterContainerComponent,
                 FilterSelectComponent,
                 FiltersPanelComponent,
                 FilterSearchComponent,
                 FilterDateComponent,
                 GapComponent,
-                PageContainerComponent,
                 PageHeaderComponent,
                 RowListDesktopComponent,
                 RowListMobileComponent,
@@ -80,11 +45,15 @@ const meta: Meta<PageContainerComponent> = {
                 DeviceViewComponent,
                 DesktopViewDirective,
                 MobileViewDirective,
-                IconComponent
+                NgxPaginationModule,
+                MatTableModule,
+                MatCardModule
+            ],
+            // declare components that are used in the template
+            declarations: [
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                ConfigurationService,
             ],
         } ),
         componentWrapperDecorator( 

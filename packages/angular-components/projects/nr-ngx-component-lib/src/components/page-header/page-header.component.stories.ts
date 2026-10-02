@@ -1,15 +1,10 @@
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { ConfigurationService } from '../../services/configuration.service';
 import { ButtonComponent } from '../button/button.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IndicatorComponent } from '../indicator/indicator.component';
 import { PageContainerComponent } from '../page-container/page-container.component';
 import { PageHeaderComponent } from './page-header.component';
-import { IndicatorComponent } from '../indicator/indicator.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
 
 const meta: Meta<PageHeaderComponent> = {
     title: 'Page Header',
@@ -19,13 +14,6 @@ const meta: Meta<PageHeaderComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatIconModule,
-                MatProgressSpinnerModule,
-                MatTooltipModule,
-                MatRippleModule
-            ],
-            // declare components that are used in the template
-            declarations: [
                 ButtonComponent,
                 PageContainerComponent,
                 IndicatorComponent,
@@ -33,9 +21,11 @@ const meta: Meta<PageHeaderComponent> = {
                 MobileViewDirective,
                 DeviceViewComponent
             ],
+            // declare components that are used in the template
+            declarations: [
+            ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                ConfigurationService
             ],
         } ),
         componentWrapperDecorator( 

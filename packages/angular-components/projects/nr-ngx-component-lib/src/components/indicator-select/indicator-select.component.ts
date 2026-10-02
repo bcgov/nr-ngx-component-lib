@@ -14,7 +14,7 @@ import { NrclBase } from '../../directives/nrcl.base';
     `,
     host: {
         '[class.selected]': "selected"
-    }
+    },
 } )
 export class IndicatorSelectComponent extends NrclBase {
     @Input() selected = false
