@@ -20,7 +20,6 @@ import { NrclBase } from "../../directives/nrcl.base";
         '[class.required]': "required",
         '[class.readonly]': "readonly",
     },
-    standalone: false
 })
 export class FormFieldComponent extends NrclBase implements OnChanges {
     @Input( { transform: booleanAttribute } ) required

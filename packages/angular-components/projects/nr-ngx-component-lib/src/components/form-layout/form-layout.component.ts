@@ -9,7 +9,6 @@ import { NrclBase } from "../../directives/nrcl.base";
     template: "<ng-content></ng-content>",
     styleUrl: "./form-layout.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
 })
 export class FormLayoutComponent extends NrclBase {
 }

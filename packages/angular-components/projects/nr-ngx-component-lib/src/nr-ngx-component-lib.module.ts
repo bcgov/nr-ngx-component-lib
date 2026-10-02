@@ -23,8 +23,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormFieldComponent } from './components/form-field/form-field.component';
-import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { IndicatorSelectComponent } from './components/indicator-select/indicator-select.component';
 import { IndicatorComponent } from './components/indicator/indicator.component';
 import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
@@ -79,8 +77,6 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        FormFieldComponent,
-        FormLayoutComponent,
         IndicatorComponent,
         IndicatorSelectComponent,
         ListAttachmentsComponent,
@@ -108,8 +104,6 @@ import { DATE_FORMATS } from './utils/date.util';
         TooltipDirective,
     ],
     exports: [
-        FormFieldComponent,
-        FormLayoutComponent,
         IndicatorComponent,
         IndicatorSelectComponent,
         ListAttachmentsComponent,
