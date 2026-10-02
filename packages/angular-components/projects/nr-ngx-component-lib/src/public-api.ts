@@ -58,5 +58,3 @@ export * from './utils/code-table.util'
 export * from './utils/date.util'
 export * from './utils/filter.util'
 export * from './utils/row-list.util'
-
-export * from './nr-ngx-component-lib.module'
