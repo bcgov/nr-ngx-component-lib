@@ -1,7 +1,8 @@
 import { AfterViewInit, booleanAttribute, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, inject, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from '@angular/core';
-import { MatTab, MatTabGroup, MatTabGroupBaseHeader } from '@angular/material/tabs';
+import { MatTab, MatTabGroup, MatTabGroupBaseHeader, MatTabsModule } from '@angular/material/tabs';
 import { NrclBase } from '../../../directives/nrcl.base';
 import { TabComponent } from '../tab/tab.component';
+import { NgTemplateOutlet } from '@angular/common';
 
 export type ActivateTabEvent = {
     tab: number,
@@ -17,7 +18,10 @@ export type ActivateTabEvent = {
         '[class.look-standard]': 'isStandard',
         '[class.look-classic]': 'isClassic',
     },
-    standalone: false
+    imports: [
+        MatTabsModule,
+        NgTemplateOutlet
+    ]
 } )
 export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewInit {
     elementRef = inject( ElementRef )

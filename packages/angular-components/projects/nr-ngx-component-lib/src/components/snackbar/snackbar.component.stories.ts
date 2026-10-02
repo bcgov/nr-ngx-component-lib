@@ -1,14 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayMode } from '../../services/configuration.service';
 import { SnackbarUtilService } from '../../services/snackbar-util.service';
 import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
 import { SnackbarComponent, SnackbarType } from './snackbar.component';
 
 @Component( {
@@ -101,18 +95,11 @@ Use the controls below to test different snackbar types and messages. Click the 
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatIconModule,
-                MatSnackBarModule,
-                MatButtonModule,
-                MatTooltipModule,
-                MatIconModule,
-                MatRippleModule
+                SnackbarComponent,
+                ButtonComponent,
             ],
             // declare components that are used in the template
             declarations: [
-                SnackbarComponent,
-                ButtonComponent,
-                IconComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

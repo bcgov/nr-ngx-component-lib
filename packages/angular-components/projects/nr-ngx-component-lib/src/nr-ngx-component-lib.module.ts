@@ -28,11 +28,6 @@ import { ListEventHistoryComponent } from './components/list-event-history/list-
 import { ListSelectComponent } from './components/list-select/list-select.component';
 import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective } from './components/resource-schedule/resource-schedule.component';
 import { ScheduleComponent, ScheduleItemDirective, ScheduleRowHeadingDirective } from './components/schedule/schedule.component';
-import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { TabGroupComponent } from './components/tabs/tab-group/tab-group.component';
-import { TabComponent, TabContentDirective, TabLabelDirective } from './components/tabs/tab/tab.component';
-import { TagListComponent } from './components/tag-list/tag-list.component';
-import { TooltipComponent, TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
@@ -76,14 +71,6 @@ import { DATE_FORMATS } from './utils/date.util';
         ScheduleComponent,
         ScheduleItemDirective,
         ScheduleRowHeadingDirective,
-        SnackbarComponent,
-        TabComponent,
-        TabContentDirective,
-        TabGroupComponent,
-        TabLabelDirective,
-        TagListComponent,
-        TooltipComponent,
-        TooltipDirective,
     ],
     exports: [
         ListAttachmentsComponent,
@@ -94,14 +81,6 @@ import { DATE_FORMATS } from './utils/date.util';
         ScheduleComponent,
         ScheduleItemDirective,
         ScheduleRowHeadingDirective,
-        SnackbarComponent,
-        TabComponent,
-        TabContentDirective,
-        TabGroupComponent,
-        TabLabelDirective,
-        TagListComponent,
-        TooltipComponent,
-        TooltipDirective,
     ],
     providers: [
         SnackbarUtilService,

@@ -1,15 +1,5 @@
-import { TextFieldModule } from '@angular/cdk/text-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
+import { DisplayMode } from '../../services/configuration.service';
 import { TagListComponent } from './tag-list.component';
 
 const meta: Meta<TagListComponent> = {
@@ -20,24 +10,12 @@ const meta: Meta<TagListComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatFormFieldModule,
-                MatInputModule,
-                MatTooltipModule,
-                ReactiveFormsModule,
-                TextFieldModule,
-                MatSelectModule,
-                MatChipsModule,
-                MatIconModule                       
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent,
-                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                ConfigurationService
             ],
         } ),
         componentWrapperDecorator( 
