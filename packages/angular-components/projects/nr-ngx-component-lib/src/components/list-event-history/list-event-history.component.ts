@@ -3,6 +3,18 @@ import { Observable } from "rxjs";
 import { RowListBase } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
 import { InitialState } from "../../directives/pagination.base";
+import { MatCardModule } from "@angular/material/card";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableModule } from "@angular/material/table";
+import { NgxPaginationModule } from "ngx-pagination";
+import { ButtonComponent } from "../button/button.component";
+import { CellContentComponent } from "../cell-content/cell-content.component";
+import { DeviceViewComponent, DesktopViewDirective, MobileViewDirective } from "../device-view/device-view.component";
+import { GapComponent } from "../gap/gap.component";
+import { RowListDesktopComponent } from "../row-list-desktop/row-list-desktop.component";
+import { RowListMobileComponent } from "../row-list-mobile/row-list-mobile.component";
+import { RowListPaginationComponent } from "../row-list-pagination/row-list-pagination.component";
+import { RowListSortingComponent } from "../row-list-sorting/row-list-sorting.component";
 
 export type EventHistoryTableRow = {
     eventTimestamp: string
@@ -34,7 +46,22 @@ export interface EventHistoryRowListProvider<R,L=any> {
     templateUrl: "./list-event-history.component.html",
     styleUrl: "./list-event-history.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        DeviceViewComponent,
+        DesktopViewDirective,
+        MobileViewDirective,
+        RowListDesktopComponent,
+        RowListMobileComponent,
+        RowListSortingComponent,
+        RowListPaginationComponent,
+        MatTableModule,
+        MatCardModule,
+        ButtonComponent,
+        GapComponent,
+        CellContentComponent,
+        NgxPaginationModule,
+        MatSortModule
+    ]
 })
 export class ListEventHistoryComponent extends RowListBase<{},EventHistoryTableRow> {
     static _nextInstance = 0

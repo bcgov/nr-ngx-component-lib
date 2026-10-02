@@ -2,7 +2,19 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } f
 import { Observable } from "rxjs";
 import { RowListBase } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
-import { InitialState } from "../../public-api";
+import { InitialState } from "../../directives/pagination.base";
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from "../device-view/device-view.component";
+import { RowListDesktopComponent } from "../row-list-desktop/row-list-desktop.component";
+import { RowListMobileComponent } from "../row-list-mobile/row-list-mobile.component";
+import { RowListSortingComponent } from "../row-list-sorting/row-list-sorting.component";
+import { RowListPaginationComponent } from "../row-list-pagination/row-list-pagination.component";
+import { MatTableModule } from "@angular/material/table";
+import { MatCardModule } from "@angular/material/card";
+import { ButtonComponent } from "../button/button.component";
+import { GapComponent } from "../gap/gap.component";
+import { CellContentComponent } from "../cell-content/cell-content.component";
+import { NgxPaginationModule } from "ngx-pagination";
+import { MatSortModule } from "@angular/material/sort";
 
 export type AttachmentsTableRow = {
     attachmentTypeDescription: string
@@ -39,7 +51,22 @@ export interface AttachmentRowListProvider<R,L=any> {
     templateUrl: "./list-attachments.component.html",
     styleUrl: "./list-attachments.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        DeviceViewComponent,
+        DesktopViewDirective,
+        MobileViewDirective,
+        RowListDesktopComponent,
+        RowListMobileComponent,
+        RowListSortingComponent,
+        RowListPaginationComponent,
+        MatTableModule,
+        MatCardModule,
+        ButtonComponent,
+        GapComponent,
+        CellContentComponent,
+        NgxPaginationModule,
+        MatSortModule
+    ]
 })
 export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow> implements OnChanges {
     static _nextInstance = 0

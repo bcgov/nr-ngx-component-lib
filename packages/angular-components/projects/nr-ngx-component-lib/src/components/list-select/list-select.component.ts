@@ -1,16 +1,36 @@
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
-import { MatColumnDef, MatTable } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
+import { MatColumnDef, MatTable, MatTableModule } from "@angular/material/table";
+import { NgxPaginationModule } from "ngx-pagination";
 import { Observable, of } from "rxjs";
+import { InitialState } from "../../directives/pagination.base";
 import { RowListBase } from "../../directives/row-list.base";
 import { CodeDescription } from "../../utils/code-table.util";
-import { InitialState } from "../../directives/pagination.base";
+import { CellContentComponent } from "../cell-content/cell-content.component";
+import { FilterSearchComponent } from "../filter-search/filter-search.component";
+import { FiltersPanelComponent } from "../filters-panel/filters-panel.component";
+import { IndicatorSelectComponent } from "../indicator-select/indicator-select.component";
+import { RowListDesktopComponent } from "../row-list-desktop/row-list-desktop.component";
+import { RowListPaginationComponent } from "../row-list-pagination/row-list-pagination.component";
+import { RowListSortingComponent } from "../row-list-sorting/row-list-sorting.component";
 
 @Component({
     selector: "nrcl-list-select",
     templateUrl: "./list-select.component.html",
     styleUrl: "./list-select.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [
+        RowListDesktopComponent,
+        RowListSortingComponent,
+        RowListPaginationComponent,
+        MatTableModule,
+        CellContentComponent,
+        NgxPaginationModule,
+        MatSortModule,
+        IndicatorSelectComponent,
+        FiltersPanelComponent,
+        FilterSearchComponent,
+    ]
 })
 export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> implements OnChanges, AfterContentInit {
     @Input() options: CodeDescription[]
