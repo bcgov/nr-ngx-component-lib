@@ -11,13 +11,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ]
 } )
 export class CellContentComponent extends NrclBase implements AfterContentInit {
-    @Input() tooltip
-    @Input() content
-    
-    elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    tooltipContent
+    @Input() tooltip?: string|boolean
+    @Input() content?: string|false
+    
+    tooltipContent?: string
 
     ngAfterContentInit(): void {
         setTimeout( () => {
