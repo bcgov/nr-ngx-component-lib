@@ -23,9 +23,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ListAttachmentsComponent } from './components/list-attachments/list-attachments.component';
-import { ListEventHistoryComponent } from './components/list-event-history/list-event-history.component';
-import { ListSelectComponent } from './components/list-select/list-select.component';
 import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
@@ -61,14 +58,8 @@ import { DATE_FORMATS } from './utils/date.util';
         MatTabsModule
     ],
     declarations: [
-        ListAttachmentsComponent,
-        ListEventHistoryComponent,
-        ListSelectComponent,
     ],
     exports: [
-        ListAttachmentsComponent,
-        ListEventHistoryComponent,
-        ListSelectComponent,
     ],
     providers: [
         SnackbarUtilService,

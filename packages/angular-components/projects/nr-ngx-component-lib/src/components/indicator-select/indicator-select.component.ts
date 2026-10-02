@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
+import { IconComponent } from '../icon/icon.component';
 
 @Component( {
     selector: 'nrcl-indicator-select',
@@ -15,6 +16,9 @@ import { NrclBase } from '../../directives/nrcl.base';
     host: {
         '[class.selected]': "selected"
     },
+    imports: [
+        IconComponent
+    ]
 } )
 export class IndicatorSelectComponent extends NrclBase {
     @Input() selected = false
