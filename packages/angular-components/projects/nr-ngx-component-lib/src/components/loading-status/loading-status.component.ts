@@ -1,5 +1,6 @@
 import { booleanAttribute, Component, Input } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component( {
     selector: 'nrcl-loading-status',
@@ -8,7 +9,9 @@ import { NrclBase } from '../../directives/nrcl.base';
     host: {
         '[class.is-loading]': "loading",
     },
-    standalone: false
+    imports: [
+        MatProgressSpinnerModule
+    ]
 } )
 export class LoadingStatusComponent extends NrclBase {
     @Input( { transform: booleanAttribute } ) loading = false

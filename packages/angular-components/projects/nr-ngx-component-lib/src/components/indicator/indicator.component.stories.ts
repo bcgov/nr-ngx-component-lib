@@ -1,5 +1,4 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { ConfigurationService } from '../../services/configuration.service';
 import { IndicatorComponent } from './indicator.component';
 
 const meta: Meta<IndicatorComponent> = {
@@ -16,7 +15,6 @@ const meta: Meta<IndicatorComponent> = {
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                ConfigurationService
             ],
         } ),
     ],

@@ -9,6 +9,5 @@ import { NrclBase } from "../../directives/nrcl.base";
     templateUrl: "./page-container.component.html",
     styleUrl: "./page-container.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
 } )
 export class PageContainerComponent extends NrclBase {}

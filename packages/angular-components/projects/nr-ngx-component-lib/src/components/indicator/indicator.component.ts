@@ -10,7 +10,6 @@ import { NrclBase } from '../../directives/nrcl.base';
         '[class.normal]': "!large",
         '[class.large]': "large"
     },
-    standalone: false
 } )
 export class IndicatorComponent extends NrclBase implements AfterContentChecked {
     private _content = 'none'
@@ -34,5 +33,4 @@ export class IndicatorComponent extends NrclBase implements AfterContentChecked 
         let t = this.elementRef?.nativeElement?.textContent
         this._content = t?.toLowerCase().trim().replace( /[^-a-z0-9]+/g, '-' ) || 'none'
     }
-
 }
