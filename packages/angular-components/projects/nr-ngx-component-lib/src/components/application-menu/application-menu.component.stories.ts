@@ -43,7 +43,7 @@ type Story = StoryObj<ApplicationMenuComponent>;
 export const Primary: Story = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
-        itemClick: { action: 'itemClick' }
+        menuItemClick: { action: 'menuItemClick' }
     },
     args: {
         ...displayModeWrapperStory.args,
@@ -99,7 +99,7 @@ export const Primary: Story = {
             <nrcl-application-menu 
                 [label]="label"
                 [items]="items"
-                (itemClick)="itemClick( $event )"
+                (menuItemClick)="menuItemClick( $event )"
             ></nrcl-application-menu>
         `
     }),
