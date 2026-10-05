@@ -18,29 +18,29 @@ export class ApplicationHeaderComponent extends NrclBase {
     @Input() logoAriaLabel = "";
     @Input() skipLabel = "";
 
-    @Output() clickLogo = new EventEmitter()
-    @Output() clickSkip = new EventEmitter()
+    @Output() logoClick = new EventEmitter()
+    @Output() skipClick = new EventEmitter()
 
-    onClickLogo() {
-        this.clickLogo.emit()
+    onLogoClick() {
+        this.logoClick.emit()
     }
 
-    onKeyDownLogo( ev ) {
+    onLogoKeyDown( ev ) {
         switch ( ev.key ) {
             case 'Enter': 
-                this.clickLogo.emit()
+                this.logoClick.emit()
                 break
         }
     }
 
-    onClickSkip() {
-        this.clickSkip.emit()
+    onSkipClick() {
+        this.skipClick.emit()
     }   
 
-    onKeyDownSkip( ev ) {
+    onSkipKeyDown( ev ) {
         switch ( ev.key ) {
             case 'Enter': 
-                this.clickSkip.emit()
+                this.skipClick.emit()
                 break
         }
     }

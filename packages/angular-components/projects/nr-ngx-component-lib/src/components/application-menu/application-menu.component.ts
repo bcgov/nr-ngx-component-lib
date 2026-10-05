@@ -32,9 +32,9 @@ export class ApplicationMenuComponent extends ConfigurationSubscriberBase {
     @Input() icon = 'menu'
     @Input() items: MenuItem[] = [];
 
-    @Output() itemClick = new EventEmitter<string>()
+    @Output() menuItemClick = new EventEmitter<string>()
 
-    onClickItem( item: MenuItem ) {
-        this.itemClick.emit( item.id )
+    onMenuItemClick( item: MenuItem ) {
+        this.menuItemClick.emit( item.id )
     }
 }
