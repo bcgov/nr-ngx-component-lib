@@ -10,14 +10,29 @@
         (ngModelChange)="onDateChange( $event )"
         [placeholder]="placeholder"
         maxlength="10" 
-        appWFDateMask
+        [matDatepicker]="picker"
+        (focus)="onInputFocus()"
+        (click)="onInputFocus()"
     >
 
     @if ( hint ) {
         <mat-hint>{{ hint }}</mat-hint>
     }
+
+    <mat-datepicker #picker
+        (opened)="onDatepickerOpened( $event )"
+    ></mat-datepicker>
 </mat-form-field>
 
-<nrcl-button tertiary
-    icon="event"
-></nrcl-button>
+@if ( isOpen || !hasValue || !clear ) {
+    <nrcl-button tertiary 
+        icon="event"
+        (click)="picker.open()"
+    ></nrcl-button>
+}
+@else {
+    <nrcl-button tertiary [class.hide]=""
+        icon="close"
+        (click)="onCancelClick()"
+    ></nrcl-button>
+}

@@ -87,7 +87,8 @@ export const Primary: StoryObj<FilterDateComponent> = {
         label: 'Start Date',
         value: '',
         hint: '',
-        wide: null
+        wide: null,
+        clear: true
     },
     render: ( args ) => {
         return {
@@ -116,6 +117,7 @@ export const CustomWidth: StoryObj<FilterDateComponent & { width: number }> = {
         label: 'Start Date',
         value: '',
         hint: '',
+        clear: true
     },
     render: ( args ) => {
         return {
