@@ -81,23 +81,36 @@ html {
     
     .cdk-overlay-pane:has( .nrcl-application-menu ) {
         .nrcl-application-menu {
-            .nrcl-application-menu-item {
-                .mat-mdc-menu-item-text {
-                    display: flex;
-                    gap: 8px;
+            .mat-mdc-menu-content {
+                padding: 4px;
 
-                    .nrcl-icon {
-                        flex-grow: 0;
+                .nrcl-application-menu-item {
+                    .mat-mdc-menu-item-text {
+                        display: flex;
+                        gap: 8px;
 
-                        .mat-icon {
-                            margin: 0;
+                        .nrcl-icon {
+                            flex-grow: 0;
+
+                            .mat-icon {
+                                margin: 0;
+                            }
+                        }
+
+                        .label {
+                            flex-grow: 1;
+                            display: flex;
+                            align-items: center;                        
                         }
                     }
 
-                    .label {
-                        flex-grow: 1;
-                        display: flex;
-                        align-items: center;                    
+                    &.cdk-keyboard-focused {
+                        background-color: #ffffff;
+                        outline: 2px solid #2E5DD7;
+                    }
+
+                    &:hover {
+                        background-color: #EDEBE9;
                     }
                 }
             }
