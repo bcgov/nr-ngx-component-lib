@@ -51,21 +51,21 @@ import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
 export class FilterDateComponent extends NrclBase implements OnChanges {
     @Input() label = '[label]]'
     @Input() placeholder = 'Select...'
-    @Input() hint
-    @Input() value = moment().format( DATE_FORMATS.datePickerInput )
-    @Input() wide 
+    @Input() hint?: string
+    @Input() value: string|null = moment().format( DATE_FORMATS.datePickerInput )
+    @Input() wide?: string
     @Input( { transform: booleanAttribute } ) clear = true
 
-    @Output() valueChange = new EventEmitter<string>();
+    @Output() valueChange = new EventEmitter<string|null>();
 
-    @ViewChild( 'picker' ) picker: MatDatepicker<Moment>
-    @ViewChild( MatInput ) input: MatInput
+    @ViewChild( 'picker' ) picker?: MatDatepicker<Moment>
+    @ViewChild( MatInput ) input?: MatInput
 
     ngOnChanges( changes: SimpleChanges ): void {
         console.log(changes)
     }
 
-    onDateChange( ev ) {
+    onDateChange( ev: Moment ) {
         if ( !ev ) {
             this.valueChange.emit( null )
             return
@@ -76,15 +76,7 @@ export class FilterDateComponent extends NrclBase implements OnChanges {
     }
 
     onInputFocus() {
-        // console.log('onInputFocus')
-        this.picker.open()
-    }
-
-    onDatepickerOpened() {
-        // console.log('onDatepickerOpened')
-        setTimeout(() => {
-            this.input.focus()
-        },100)
+        this.picker?.open()
     }
 
     onCancelClick() {
