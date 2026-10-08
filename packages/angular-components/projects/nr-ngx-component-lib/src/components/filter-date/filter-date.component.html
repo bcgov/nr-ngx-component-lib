@@ -5,19 +5,31 @@
 >
     <mat-label>{{ label }}</mat-label>
 
-    <input matInput class="search-input"            
-        [ngModel]="value" 
+    <input matInput class="search-input" readonly
+        [ngModel]="value"
         (ngModelChange)="onDateChange( $event )"
         [placeholder]="placeholder"
-        maxlength="10" 
-        appWFDateMask
+        maxlength="10"
+        (click)="onInputFocus()"
+        [matDatepicker]="picker"
     >
 
     @if ( hint ) {
         <mat-hint>{{ hint }}</mat-hint>
     }
+
+    <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
-<nrcl-button tertiary
-    icon="event"
-></nrcl-button>
+@if ( isOpen || !hasValue || !clear ) {
+    <nrcl-button tertiary
+        icon="event"
+        (click)="picker.open()"
+    ></nrcl-button>
+}
+@else {
+    <nrcl-button tertiary
+        icon="close"
+        (click)="onCancelClick()"
+    ></nrcl-button>
+}

@@ -11,6 +11,7 @@
     @for ( item of items; track item.label ) {
         <button mat-menu-item class="nrcl-application-menu-item"
             (click)="onMenuItemClick( item )"
+            [aria-current]="currentItemId == item.id ? 'page' : null"
         >
             <nrcl-icon>{{ item.icon || 'empty' }}</nrcl-icon>
             <span class="label">{{ item.label }}</span>                        

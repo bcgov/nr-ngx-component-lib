@@ -35,24 +35,42 @@ const meta: Meta<IconComponent> = {
 export default meta;
 
 export const Primary: StoryObj<IconComponent & { color: string }> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
-    },    
     argTypes: {
         color: { control: { type: 'color' } },
     },
     args: {
-        color: 'black'
+        color: 'black',
+        fill: true
     },
     render: ( args ) => {
         console.log(args.color)
         return {
-            props: args,
+            props: { 
+                ...args,
+                materialIcons: [
+                    'add_box', 
+                    'add', 
+                    'arrow_forward', 
+                    'cancel', 
+                    'check_circle', 
+                    'cloud_upload', 
+                    'error', 
+                    'expand_less', 
+                    'expand_more', 
+                    'info', 
+                    'remove', 
+                    'warning', 
+                    'indeterminate_check_box', 
+                ],
+                icons: [
+                    '__missing__',
+                    'clear-filters',
+                    'user-clock',
+                    'roster',
+                    'home-outline',
+                    'mcp-server',
+                ]
+            },
             styles: [`
                 :host {
                     font-family: var( --nrcl-font-family );
@@ -60,16 +78,17 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
 
                     section {
                         display: flex;
-                        flex-direction: row-wrap;
+                        flex-wrap: wrap;
                         gap: 20px;
-                        position: relative;
                         margin-top: 30px;
+                        width: 100%;
 
                         .item {
                             display: flex;
-                            // flex-direction: row;
                             gap: 10px;
                             align-items: flex-start;
+                            position: relative;
+                            padding-bottom: 20px;
 
                             label {
                                 position: absolute;
@@ -89,60 +108,44 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
                 <h3>NRCL Icons</h3>
                 
                 <section>
-                    <div class="item">
-                        <label>clear-filter</label>
-                        <nrcl-icon small>clear-filters</nrcl-icon> 
-                        <nrcl-icon>clear-filters</nrcl-icon> 
-                        <nrcl-icon large>clear-filters</nrcl-icon> 
-                    </div>
-
-                    <div class="item">
-                        <label>user-clock</label>
-                        <nrcl-icon small>user-clock</nrcl-icon> 
-                        <nrcl-icon>user-clock</nrcl-icon> 
-                        <nrcl-icon large>user-clock</nrcl-icon> 
-                    </div>
-
-                    <div class="item">
-                        <label>roster</label>
-                        <nrcl-icon small>roster</nrcl-icon> 
-                        <nrcl-icon>roster</nrcl-icon> 
-                        <nrcl-icon large>roster</nrcl-icon> 
-                    </div>
+                    @for ( icon of icons; track icon ) {
+                        <div class="item">
+                            <label>{{ icon }}</label>
+                            <nrcl-icon [fill]="fill" small>{{ icon }}</nrcl-icon> 
+                            <nrcl-icon [fill]="fill">{{ icon }}</nrcl-icon> 
+                            <nrcl-icon [fill]="fill" large>{{ icon }}</nrcl-icon> 
+                        </div>
+                    }
                 </section>
 
                 <h3>Material Icons</h3>
 
                 <section>
-                    <div class="item">
-                        <label>remove</label>
-                        <nrcl-icon small>remove</nrcl-icon> 
-                        <nrcl-icon>remove</nrcl-icon> 
-                        <nrcl-icon large>remove</nrcl-icon> 
-                    </div>
-
-                    <div class="item">
-                        <label>add</label>
-                        <nrcl-icon small>add</nrcl-icon> 
-                        <nrcl-icon>add</nrcl-icon> 
-                        <nrcl-icon large>add</nrcl-icon> 
-                    </div>
-
-                    <div class="item">
-                        <label>expand_less</label>
-                        <nrcl-icon small>expand_less</nrcl-icon> 
-                        <nrcl-icon>expand_less</nrcl-icon> 
-                        <nrcl-icon large>expand_less</nrcl-icon> 
-                    </div>
-
-                    <div class="item">
-                        <label>expand_more</label>
-                        <nrcl-icon small>expand_more</nrcl-icon> 
-                        <nrcl-icon>expand_more</nrcl-icon> 
-                        <nrcl-icon large>expand_more</nrcl-icon> 
-                    </div>
-            </section>
+                    @for ( icon of materialIcons; track icon ) {
+                        <div class="item">
+                            <label>{{ icon }}</label>
+                            <nrcl-icon [fill]="fill" small>{{ icon }}</nrcl-icon> 
+                            <nrcl-icon [fill]="fill">{{ icon }}</nrcl-icon> 
+                            <nrcl-icon [fill]="fill" large>{{ icon }}</nrcl-icon> 
+                        </div>
+                    }
+                </section>
             `
         }
     }
 }
+
+export const Icon: StoryObj<IconComponent & { icon: string }> = {
+    args: {
+        icon: 'info'
+    },
+    render: ( args ) => {
+        return {
+            props: { ...args },
+            template: `
+                <nrcl-icon *rerender="icon">{{ icon }}</nrcl-icon> 
+            `
+        }
+    }
+}
+

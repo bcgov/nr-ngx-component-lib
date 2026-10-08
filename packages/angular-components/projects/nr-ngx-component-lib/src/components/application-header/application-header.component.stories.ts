@@ -77,8 +77,8 @@ type Story = StoryObj<ApplicationHeaderComponent>;
 export const Primary: Story = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
-        clickLogo: { action: 'clickLogo' },
-        clickSkip: { action: 'clickSkip' }
+        logoClick: { action: 'logoClick' },
+        skipClick: { action: 'skipClick' }
     },
     args: {
         ...displayModeWrapperStory.args,
@@ -140,8 +140,8 @@ export const Primary: Story = {
                 [title]="title"
                 [skipLabel]="skipLabel"
                 [logoAriaLabel]="logoAriaLabel"
-                (clickLogo)="clickLogo()"
-                (clickSkip)="clickSkip()"
+                (logoClick)="logoClick()"
+                (skipClick)="skipClick()"
             >
                 <nrcl-application-menu
                     label="Menu"

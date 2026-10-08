@@ -43,7 +43,8 @@ type Story = StoryObj<ApplicationMenuComponent>;
 export const Primary: Story = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
-        itemClick: { action: 'itemClick' }
+        menuItemClick: { action: 'menuItemClick' },
+        currentItemId: { type: 'string' }
     },
     args: {
         ...displayModeWrapperStory.args,
@@ -91,7 +92,8 @@ export const Primary: Story = {
                 label: 'Copyright'
             }
         ],
-        label: 'Menu'
+        label: 'Menu',
+        currentItemId: "home",
     },
     render: args => ({
         props: args,
@@ -99,7 +101,8 @@ export const Primary: Story = {
             <nrcl-application-menu 
                 [label]="label"
                 [items]="items"
-                (itemClick)="itemClick( $event )"
+                (menuItemClick)="menuItemClick( $event )"
+                [currentItemId]="currentItemId"
             ></nrcl-application-menu>
         `
     }),
