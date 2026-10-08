@@ -31,6 +31,7 @@ export class ApplicationMenuComponent extends ConfigurationSubscriberBase {
     @Input() label?: string
     @Input() icon = 'menu'
     @Input() items: MenuItem[] = [];
+    @Input() currentItemId?: string
 
     @Output() menuItemClick = new EventEmitter<string>()
 
