@@ -18,9 +18,7 @@
         <mat-hint>{{ hint }}</mat-hint>
     }
 
-    <mat-datepicker #picker
-        (opened)="onDatepickerOpened( $event )"
-    ></mat-datepicker>
+    <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
 @if ( isOpen || !hasValue || !clear ) {
