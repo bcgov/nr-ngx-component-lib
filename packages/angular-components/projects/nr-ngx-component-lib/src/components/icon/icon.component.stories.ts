@@ -1,6 +1,5 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { IconComponent } from './icon.component';
-import { IconService } from '../../services/icon.service';
 
 const meta: Meta<IconComponent> = {
     title: 'Icon',
@@ -36,14 +35,6 @@ const meta: Meta<IconComponent> = {
 export default meta;
 
 export const Primary: StoryObj<IconComponent & { color: string }> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
-    },    
     argTypes: {
         color: { control: { type: 'color' } },
     },
@@ -94,7 +85,6 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
 
                         .item {
                             display: flex;
-                            // flex-direction: row;
                             gap: 10px;
                             align-items: flex-start;
                             position: relative;
@@ -145,4 +135,17 @@ export const Primary: StoryObj<IconComponent & { color: string }> = {
     }
 }
 
-// cloud_upload, arrow_forward, warning, indeterminate_check_box, add_box, check_circle, cancel, info, error, remove, add, expand_less, expand_more, 
+export const Icon: StoryObj<IconComponent & { icon: string }> = {
+    args: {
+        icon: 'info'
+    },
+    render: ( args ) => {
+        return {
+            props: { ...args },
+            template: `
+                <nrcl-icon *rerender="icon">{{ icon }}</nrcl-icon> 
+            `
+        }
+    }
+}
+
