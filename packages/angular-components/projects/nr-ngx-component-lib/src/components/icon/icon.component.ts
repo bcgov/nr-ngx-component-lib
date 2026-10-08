@@ -29,9 +29,40 @@ export class IconComponent extends NrclBase implements AfterContentInit {
     @Input( { transform: booleanAttribute } ) fill = true
 
     svg?: SafeHtml
+    icon?: string
 
     ngAfterContentInit(): void {
-        let name: string = this.elementRef?.nativeElement?.textContent?.trim();
-        if ( this.iconService.isIcon( name ) ) this.svg = this.iconService.getIcon( name )
+        let text: string = this.elementRef?.nativeElement?.textContent?.trim();
+
+        if ( !text.includes( ';' ) ) {
+            this.showIcon( text )
+            return
+        }
+
+        try {
+            let nameConfig = text.split( ';' )
+
+            let cfg = JSON.parse( nameConfig[ 1 ] )           
+            if ( 'fill' in cfg ) this.fill = cfg.fill
+            if ( 'large' in cfg ) this.large = cfg.large
+            if ( 'small' in cfg ) this.small = cfg.small
+
+            this.showIcon( nameConfig[ 0 ].trim() )
+        }
+        catch ( e ) {
+            console.error( `Unable to parse icon config: '${ text }'`, e )
+            this.showIcon( '__missing__' )
+        }
+    }
+
+    showIcon( name: string ) {
+        if ( this.iconService.isIcon( name ) ) {
+            this.svg = this.iconService.getIcon( name )
+            this.icon = undefined
+        }
+        else {
+            this.icon = name
+            this.svg = undefined
+        }
     }
 }

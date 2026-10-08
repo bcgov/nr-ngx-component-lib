@@ -5,7 +5,7 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
     providedIn: 'root'
 })
 export class IconService {
-    domSanitizer = inject( DomSanitizer )    
+    domSanitizer = inject( DomSanitizer )
 
     private _icon: { [ name: string ]: SafeHtml } = {}
 
@@ -18,6 +18,11 @@ export class IconService {
             console.warn( `An icon named '${ name }' already exists, it will be overwritten` )
         }
 
+        if ( !/^[-a-z0-9_]+$/.test( name ) ) {
+            console.warn( 'icon name must match /^[-a-z0-9_]+$/' )
+            throw Error( 'Invalid icon name' )
+        }
+        
         this._icon[ name ] = this.domSanitizer.bypassSecurityTrustHtml( svg )
     }
 
@@ -41,10 +46,10 @@ export class IconService {
             <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="100%" height="100%">
                 <!-- Box Outline -->
                 <rect x="3" y="3" width="18" height="18" rx="3" ry="3" fill="none" stroke="#333333" stroke-width="2" stroke-linejoin="round"/>
-                
+
                 <!-- Question Mark -->
                 <path d="M12 14v-1c0-1 1-1.5 2-2.5s1.5-2 1.5-3c0-2-1.5-3.5-3.5-3.5S8.5 5.5 8.5 7.5" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
-                
+
                 <!-- Question Mark Dot -->
                 <circle cx="12" cy="17" r="1.25" fill="#333333"/>
             </svg>
