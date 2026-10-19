@@ -1,22 +1,24 @@
 <div mat-dialog-title >
     <div class="title-bar">
-        <h1>{{ title }}</h1>
+        <ng-content select="section[header]">
+            <h1>{{ title }}</h1>
 
-        <div style="flex: 1 0"></div>
+            <div style="flex: 1 0"></div>
 
-        @if ( isLoading ) {
-            <div class="spinner-header">
-                <mat-spinner [diameter]="25"></mat-spinner>
-            </div>
-        }
+            @if ( isLoading ) {
+                <div class="spinner-header">
+                    <mat-spinner [diameter]="25"></mat-spinner>
+                </div>
+            }
 
-        @if ( showClose ) {
-            <nrcl-button tertiary class="close"
-                icon="close"
-                ariaLabel="Close dialog"
-                (click)="cancelClick.emit()"
-            ></nrcl-button>                                
-        }
+            @if ( showClose ) {
+                <nrcl-button tertiary class="close"
+                    icon="close"
+                    ariaLabel="Close dialog"
+                    (click)="cancelClick.emit()"
+                ></nrcl-button>                                
+            }
+        </ng-content>
     </div>
 
     <ng-content select="section[title]"></ng-content>
@@ -32,31 +34,31 @@
 
 @if ( showActions ) {
     <div mat-dialog-actions align="end">
-        <ng-content select="section[actions]"></ng-content>
-
         <div class="action-button-wrapper">        
-            @if ( saveEnabled && showWarning ) {
-                <div class="warning">
-                    <nrcl-icon attr.alt="Unsaved Changes">warning</nrcl-icon>
-                    <span>Unsaved Changes</span>
-                </div>
-            }            
-            
-            @if ( cancelEnabled != null ) {
-                <nrcl-button 
-                    [label]="cancelLabel"
-                    (click)="cancelClick.emit()"
-                    [disabled]="!cancelEnabled"
-                ></nrcl-button>
-            }
+            <ng-content select="section[actions]">
+                @if ( saveEnabled && showWarning ) {
+                    <div class="warning">
+                        <nrcl-icon attr.alt="Unsaved Changes">warning</nrcl-icon>
+                        <span>Unsaved Changes</span>
+                    </div>
+                }            
+                
+                @if ( cancelEnabled != null ) {
+                    <nrcl-button 
+                        [label]="cancelLabel"
+                        (click)="cancelClick.emit()"
+                        [disabled]="!cancelEnabled"
+                    ></nrcl-button>
+                }
 
-            @if ( saveEnabled != null ) {
-                <nrcl-button primary
-                    [label]="saveLabel"
-                    (click)="saveClick.emit()" 
-                    [disabled]="!saveEnabled"
-                ></nrcl-button>
-            }
+                @if ( saveEnabled != null ) {
+                    <nrcl-button primary
+                        [label]="saveLabel"
+                        (click)="saveClick.emit()" 
+                        [disabled]="!saveEnabled"
+                    ></nrcl-button>
+                }
+            </ng-content>
         </div>
     </div>
 }
