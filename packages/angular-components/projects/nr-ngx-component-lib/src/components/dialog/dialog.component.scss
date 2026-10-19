@@ -10,6 +10,10 @@
         color: white;
         padding: var(--nrcl-gutter-space);
     
+        ::ng-deep section[header] {
+            display: contents;
+        }
+
         h1 {
             margin: 0;
             padding: 0;
@@ -71,6 +75,10 @@
                 justify-content: flex-end;
                 gap: 8px;
                 width: 100%;
+
+                section[actions] {
+                    display: contents;
+                }
 
                 .warning {
                     display: flex;
@@ -170,5 +178,4 @@
             }            
         }
     }
-
 }
