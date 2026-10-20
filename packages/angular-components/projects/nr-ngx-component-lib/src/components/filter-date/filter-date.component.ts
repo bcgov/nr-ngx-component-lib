@@ -52,11 +52,11 @@ export class FilterDateComponent extends NrclBase implements OnChanges {
     @Input() label = '[label]]'
     @Input() placeholder = 'Select...'
     @Input() hint?: string
-    @Input() value: string|null = moment().format( DATE_FORMATS.datePickerInput )
+    @Input() value: string|undefined = moment().format( DATE_FORMATS.datePickerInput )
     @Input() wide?: string
     @Input( { transform: booleanAttribute } ) clear = true
 
-    @Output() valueChange = new EventEmitter<string|null>();
+    @Output() valueChange = new EventEmitter<string|undefined>();
 
     @ViewChild( 'picker' ) picker?: MatDatepicker<Moment>
     @ViewChild( MatInput ) input?: MatInput
@@ -67,7 +67,7 @@ export class FilterDateComponent extends NrclBase implements OnChanges {
 
     onDateChange( ev: Moment ) {
         if ( !ev ) {
-            this.valueChange.emit( null )
+            this.valueChange.emit( undefined )
             return
         }
 
@@ -80,7 +80,7 @@ export class FilterDateComponent extends NrclBase implements OnChanges {
     }
 
     onCancelClick() {
-        this.value = null
+        this.value = undefined
         this.valueChange.emit( this.value )
     }
 

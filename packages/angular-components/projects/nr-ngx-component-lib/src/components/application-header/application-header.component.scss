@@ -37,7 +37,7 @@
         background-color: var( --nrcl-application-header-background-color );
         border-bottom: var( --nrcl-application-header-border-width ) solid var(--nrcl-application-header-border-color);
         width: 100%;
-        padding-bottom: var( --nrcl-gutter-space );
+        padding: var( --nrcl-gutter-space );
 
         .logo-title {
             flex-grow: 1;

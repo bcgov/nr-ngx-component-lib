@@ -22,21 +22,21 @@ export class DialogBase<CONFIG, RESULT = any> extends NrclBase {
     
     saveLabel = 'Save'
 
-    private _saveEnabled = false
+    private _saveEnabled: boolean|null = false
     get saveEnabled() { return this._saveEnabled }
-    set saveEnabled( v: boolean ) { this._saveEnabled = v }
+    set saveEnabled( v: boolean|null ) { this._saveEnabled = v }
 
     cancelLabel = 'Cancel'
 
-    private _cancelEnabled = false
+    private _cancelEnabled: boolean|null = false
     get cancelEnabled() { return this._cancelEnabled }
-    set cancelEnabled( v: boolean ) { this._cancelEnabled = v }
+    set cancelEnabled( v: boolean|null ) { this._cancelEnabled = v }
 
     config: CONFIG = inject( MAT_DIALOG_DATA )
     // result: RESULT
     
     getResult(): RESULT {
-        return null
+        return null as RESULT
     }
 
     onSaveClick() {
