@@ -22,9 +22,9 @@ export class DialogComponent extends NrclBase {
     @Input() isLoading = false
     @Input() showClose = false
     @Input() saveLabel = 'Save'
-    @Input() saveEnabled = false
+    @Input() saveEnabled: boolean|null = false
     @Input() cancelLabel = 'Cancel'
-    @Input() cancelEnabled = true
+    @Input() cancelEnabled: boolean|null = true
     @Input() showWarning = true
     @Input() showActions = true
 
