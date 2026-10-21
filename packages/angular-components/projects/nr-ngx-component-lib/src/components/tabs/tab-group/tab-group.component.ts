@@ -29,6 +29,7 @@ export class TabGroupComponent extends NrclBase implements OnChanges, AfterViewI
 
     @Input( { transform: booleanAttribute } ) standard = false
     @Input( { transform: booleanAttribute } ) classic = false
+    @Input( { transform: booleanAttribute } ) stretched = false
     @Input() selectedTab = -1
 
     @Output() selectedTabChange = new EventEmitter<{ index: number, name?: string }>()
