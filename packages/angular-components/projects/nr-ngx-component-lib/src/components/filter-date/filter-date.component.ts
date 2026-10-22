@@ -48,7 +48,7 @@ import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
         })
     ]
 } )
-export class FilterDateComponent extends NrclBase implements OnChanges {
+export class FilterDateComponent extends NrclBase {
     @Input() label = '[label]]'
     @Input() placeholder = 'Select...'
     @Input() hint?: string
@@ -60,10 +60,6 @@ export class FilterDateComponent extends NrclBase implements OnChanges {
 
     @ViewChild( 'picker' ) picker?: MatDatepicker<Moment>
     @ViewChild( MatInput ) input?: MatInput
-
-    ngOnChanges( changes: SimpleChanges ): void {
-        console.log(changes)
-    }
 
     onDateChange( ev: Moment ) {
         if ( !ev ) {
