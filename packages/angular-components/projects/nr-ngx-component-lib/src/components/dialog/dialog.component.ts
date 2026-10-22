@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { NrclBase } from "../../directives/nrcl.base";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { ButtonComponent } from "../button/button.component";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
+import { ButtonComponent } from "../button/button.component";
 import { IconComponent } from "../icon/icon.component";
 
 @Component({
@@ -17,7 +17,7 @@ import { IconComponent } from "../icon/icon.component";
         IconComponent
     ]
 })
-export class DialogComponent extends NrclBase {
+export class DialogComponent extends ConfigurationSubscriberBase {
     @Input() title?: string;
     @Input() isLoading = false
     @Input() showClose = false
