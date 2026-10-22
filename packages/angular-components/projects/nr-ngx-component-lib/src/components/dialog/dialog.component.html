@@ -45,6 +45,8 @@
                 
                 @if ( cancelEnabled != null ) {
                     <nrcl-button 
+                        [secondary]="isStyle2025"
+                        [tertiary]="isStyle2026"
                         [label]="cancelLabel"
                         (click)="cancelClick.emit()"
                         [disabled]="!cancelEnabled"
@@ -52,7 +54,9 @@
                 }
 
                 @if ( saveEnabled != null ) {
-                    <nrcl-button primary
+                    <nrcl-button 
+                        [primary]="isStyle2025"
+                        [secondary]="isStyle2026"
                         [label]="saveLabel"
                         (click)="saveClick.emit()" 
                         [disabled]="!saveEnabled"
