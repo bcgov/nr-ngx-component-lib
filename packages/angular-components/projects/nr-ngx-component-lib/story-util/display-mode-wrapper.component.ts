@@ -2,7 +2,7 @@
 import { Component, HostListener, Input, OnChanges, OnInit } from "@angular/core"
 import { StoryObj } from "@storybook/angular"
 import { ConfigurationSubscriberBase } from "../src/directives/configuration-subscriber.base"
-import { DisplayMode } from "../src/services/configuration.service"
+import { DisplayMode, InterfaceStyle } from "../src/services/configuration.service"
 
 @Component( {
     selector: 'display-mode-wrapper',
@@ -15,6 +15,7 @@ import { DisplayMode } from "../src/services/configuration.service"
 } )
 export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase implements OnInit, OnChanges {
     @Input() displayMode: DisplayMode | 'auto' = 'auto'
+    @Input() interfaceStyle: InterfaceStyle = '2025'
     @Input() width
     @Input() useWidth = false
     @Input() bodyPadding = 16
@@ -33,6 +34,10 @@ export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase imp
             else {
                 this.configurationService.update( { displayMode: this.displayMode } )
             }
+        }
+
+        if ( changes.interfaceStyle ) {
+            this.configurationService.update( { interfaceStyle: this.interfaceStyle } )
         }
 
         if ( changes.bodyPadding ) {
@@ -77,6 +82,10 @@ export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
             options: ['auto', 'desktop', 'mobile'],
             description: 'Display mode for the component'
         },
+        interfaceStyle: {
+            control: 'inline-radio',
+            options: [ '2025', '2026' ],
+        },
         useWidth: { name: 'set width manually' },
         width: {
             if: { arg: 'useWidth', truthy: true },
@@ -89,10 +98,11 @@ export const displayModeWrapperStory: StoryObj<DisplayModeWrapperComponent> = {
     },
     args: {
         displayMode: 'auto',
+        interfaceStyle: '2025',
         useWidth: false,
         width: 400,
     },
 }
 
-export const displayModeWrapperStoryArgs: Array<keyof DisplayModeWrapperComponent> = [ 'displayMode', 'useWidth', 'width' ]
+export const displayModeWrapperStoryArgs: Array<keyof DisplayModeWrapperComponent> = [ 'displayMode', 'interfaceStyle', 'useWidth', 'width' ]
 
