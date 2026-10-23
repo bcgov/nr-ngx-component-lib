@@ -88,7 +88,9 @@ export const Primary: StoryObj<FilterDateComponent> = {
         value: '',
         hint: '',
         wide: null,
-        clear: true
+        clear: true,
+        min: '',
+        max: '',
     },
     render: ( args ) => {
         return {

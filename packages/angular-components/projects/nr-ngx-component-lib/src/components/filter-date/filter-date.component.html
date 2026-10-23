@@ -12,7 +12,20 @@
         maxlength="10"
         (click)="onInputFocus()"
         [matDatepicker]="picker"
+        [min]="min"
+        [max]="max"
+        #filter="ngModel"
     >
+
+    @if ( filter.invalid && ( filter.dirty || filter.touched ) ) {
+        @if ( filter.hasError( 'matDatepickerMin' ) ) {
+            <mat-error>{{ minErrorMessage }}</mat-error>
+        }
+
+        @if ( filter.hasError( 'matDatepickerMax' ) ) {
+            <mat-error>{{ maxErrorMessage }}</mat-error>
+        }
+    }
 
     @if ( hint ) {
         <mat-hint>{{ hint }}</mat-hint>
