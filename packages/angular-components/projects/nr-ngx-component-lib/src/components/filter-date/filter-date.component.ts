@@ -18,6 +18,7 @@ import { DATE_FORMATS } from "../../utils/date.util";
 import { ButtonComponent } from "../button/button.component";
 import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
 import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
+import { JsonPipe } from "@angular/common";
 
 @Component( {
     selector: "nrcl-filter-date",
@@ -32,7 +33,7 @@ import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
         MatFormFieldModule,
         MatDatepickerModule,
         FormsModule,
-        ButtonComponent
+        ButtonComponent,
     ],
     providers: [
         provideMomentDateAdapter({
@@ -49,12 +50,16 @@ import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
     ]
 } )
 export class FilterDateComponent extends NrclBase {
-    @Input() label = '[label]]'
+    @Input() label = '[label]'
     @Input() placeholder = 'Select...'
     @Input() hint?: string
     @Input() value: string|undefined = moment().format( DATE_FORMATS.datePickerInput )
     @Input() wide?: string
     @Input( { transform: booleanAttribute } ) clear = true
+    @Input() min?: string
+    @Input() minErrorMessage = 'Date is too soon'
+    @Input() max?: string
+    @Input() maxErrorMessage = 'Date is too late'
 
     @Output() valueChange = new EventEmitter<string|undefined>();
 

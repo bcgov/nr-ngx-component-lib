@@ -31,6 +31,12 @@
 
                 .mat-mdc-form-field-infix {
                     width: var( --nrcl-filter-date-width );
+
+                    .mat-mdc-form-field-error {
+                        position: absolute;
+                        padding-top: 4px;
+                        font-size: 12px;
+                    }
                 }
             }
         }
