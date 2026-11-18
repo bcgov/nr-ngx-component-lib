@@ -108,6 +108,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     selection = new FormControl()
     match: ( option: CodeDescription ) => boolean = ( o ) => true
     clickSubscription?: Subscription
+    suppressOpenOnFocus = false
 
     ngOnInit(): void {
         super.ngOnInit()
@@ -211,7 +212,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
         this.valueChange.emit( this.selection.value || [] )
     }
 
-    open() {
+    open( focusList: false | 'first' | 'last' = false ) {
         if ( this.isOpen ) return
 
         this.isOpen = true
@@ -256,11 +257,100 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
 
         // Focus input after overlay is attached
         setTimeout( () => {
-            this.filterInput?.nativeElement.focus();
+            if ( focusList ) {
+                this.focusOption( focusList )
+            }
+            else {
+                this.filterInput?.nativeElement.focus();
+            }
 
-            // prevent list from scrolling when selection changes            
+            // prevent list from scrolling when selection changes
             this.overlayRef?.overlayElement.children[0].scroll( 0, 1 )
         },100 )
+    }
+
+    /**
+     * Move keyboard focus into the option list in the overlay.
+     * The overlay lives at the end of <body>, so it can't be reached by
+     * tabbing in a real app; arrow keys on the input bring focus here instead.
+     */
+    focusOption( which: 'first' | 'last' ) {
+        const overlayEl = this.overlayRef?.overlayElement
+        if ( !overlayEl ) return
+
+        const options = Array.from( overlayEl.querySelectorAll<HTMLElement>( 'mat-list-option:not(.hide)' ) )
+        if ( !options.length ) return
+
+        const selected = this.single ? options.find( o => o.getAttribute( 'aria-selected' ) == 'true' ) : null
+        const target = selected || ( which == 'last' ? options[ options.length - 1 ] : options[ 0 ] )
+
+        target.focus()
+    }
+
+    /**
+     * Return focus to the input without re-opening the overlay.
+     */
+    focusInput() {
+        this.suppressOpenOnFocus = true
+        this.filterInput?.nativeElement.focus()
+        this.suppressOpenOnFocus = false
+    }
+
+    closeAndReset() {
+        this.close()
+        this.setInputToSelection()
+        this.floatLabel = 'auto'
+        this.changeDetectorRef.markForCheck()
+    }
+
+    onInputKeydown( ev: KeyboardEvent ) {
+        switch ( ev.key ) {
+            case 'ArrowDown':
+            case 'ArrowUp': {
+                ev.preventDefault()
+                const which = ev.key == 'ArrowDown' ? 'first' : 'last'
+                if ( this.isOpen ) {
+                    this.focusOption( which )
+                }
+                else {
+                    this.floatLabel = 'always'
+                    this.open( which )
+                }
+                break
+            }
+
+            case 'Escape':
+                if ( this.isOpen ) {
+                    ev.preventDefault()
+                    this.closeAndReset()
+                }
+                break
+
+            case 'Tab':
+                // focus is leaving the component, don't leave the overlay hanging open
+                if ( this.isOpen ) {
+                    this.closeAndReset()
+                }
+                break
+        }
+    }
+
+    onOverlayKeydown( ev: KeyboardEvent ) {
+        switch ( ev.key ) {
+            case 'Escape':
+                ev.preventDefault()
+                this.closeAndReset()
+                this.focusInput()
+                break
+
+            case 'Tab':
+                // overlay is at the end of the document, so tabbing from here would
+                // leave the page; return to the input so tab order continues from there
+                ev.preventDefault()
+                this.closeAndReset()
+                this.focusInput()
+                break
+        }
     }
 
     close() {
@@ -302,12 +392,18 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onSelectionChange( ev ) {
+        const focusWasInOverlay = this.overlayRef?.overlayElement.contains( document.activeElement )
+
         if ( this.single ) {
             this.close()
             this.setInputToSelection()
             this.floatLabel = 'auto'
+            // keyboard selection: don't drop focus to <body> when the overlay is disposed
+            if ( focusWasInOverlay ) this.focusInput()
         }
-        else {
+        else if ( !focusWasInOverlay ) {
+            // mouse selection: keep focus on the input for continued filtering;
+            // keyboard selection: leave focus in the list so arrows keep working
             this.filterInput?.nativeElement.focus()
         }
 
@@ -330,7 +426,7 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     }
 
     onInputFocus() {
-        if ( this.isOpen ) return
+        if ( this.isOpen || this.suppressOpenOnFocus ) return
 
         this.floatLabel = 'always'
 

@@ -12,7 +12,7 @@
         [placeholder]="placeholder" 
         [value]="inputValue"
         (input)="onInput( $event )"
-        (keydown.escape)="close()"
+        (keydown)="onInputKeydown( $event )"
         (focus)="onInputFocus()"
         [matTooltip]="inputValue"
         [readonly]="!filter"
@@ -35,7 +35,9 @@
 ></nrcl-button>
 
 <ng-template #overlayTemplate>
-    <div class="nrcl filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass">
+    <div class="nrcl filter-select-options" [class.multiple]="!single" [class.single]="single" [class]="overlayClass"
+        (keydown)="onOverlayKeydown( $event )"
+    >
         @if ( !isFiltered && ( !single || filterCharsMin ) && summary ) {
             @if ( !selection?.value?.length && ( hint || filterCharsMin ) ) {
                 <div class="selection-overview">
