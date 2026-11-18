@@ -32,6 +32,7 @@ export class FiltersPanelComponent extends NrclBase {
     @Input() showFilters = true
     @Input() hasAdvancedFilters = false
     @Input() showAdvancedFilters = false
+    @Input() moreFiltersLabels = ['See More','See Less']
 
     @Output() clearFilters = new EventEmitter()
     @Output() showFiltersChange = new EventEmitter<boolean>()

@@ -9,23 +9,23 @@
         <ng-template desktop-view>
             @if ( showFilters && hasAdvancedFilters ) {
                 @if ( showAdvancedFilters ) {
-                    <nrcl-button secondary
-                        label="Less"
-                        icon="remove"
+                    <nrcl-button tertiary
+                        [label]="moreFiltersLabels[1]"
+                        iconRight="expand_less"
                         (click)="onHideAdvancedClick()"
                     ></nrcl-button>
                 }
                 @else {
-                    <nrcl-button secondary
-                        label="More"
-                        icon="add"
+                    <nrcl-button tertiary
+                        [label]="moreFiltersLabels[0]"
+                        iconRight="expand_more"
                         (click)="onShowAdvancedClick()"
                     ></nrcl-button>
                 }
             }
 
                 @if ( showClear && showFilters ) {
-                <nrcl-button primary
+                <nrcl-button secondary
                     label="Clear"
                     icon="clear-filters"
                     (click)="onClearClick()"
@@ -48,23 +48,23 @@
         <ng-template mobile-view>
             @if ( hasAdvancedFilters ) {
                 @if ( showAdvancedFilters ) {
-                    <nrcl-button secondary
-                        label="Less"
-                        icon="remove"
+                    <nrcl-button tertiary
+                        [label]="moreFiltersLabels[1]"
+                        iconRight="expand_less"
                         (click)="onHideAdvancedClick()"
                     ></nrcl-button>
                 }
                 @else {
-                    <nrcl-button secondary
-                        label="More"
-                        icon="add"
+                    <nrcl-button tertiary
+                        [label]="moreFiltersLabels[0]"
+                        iconRight="expand_more"
                         (click)="onShowAdvancedClick()"
                     ></nrcl-button>
                 }
             }
 
             @if ( showClear ) {
-                <nrcl-button primary
+                <nrcl-button secondary
                     label="Clear"
                     icon="clear-filters"
                     (click)="onClearClick()"
