@@ -26,7 +26,7 @@
 
                 @if ( showClear && showFilters ) {
                 <nrcl-button secondary
-                    label="Clear"
+                    [label]="clearLabel"
                     icon="clear-filters"
                     (click)="onClearClick()"
                 ></nrcl-button>
@@ -65,7 +65,7 @@
 
             @if ( showClear ) {
                 <nrcl-button secondary
-                    label="Clear"
+                    [label]="clearLabel"
                     icon="clear-filters"
                     (click)="onClearClick()"
                 ></nrcl-button>
