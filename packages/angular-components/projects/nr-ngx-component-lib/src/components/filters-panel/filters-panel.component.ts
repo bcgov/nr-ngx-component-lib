@@ -29,6 +29,7 @@ import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from "
 } )
 export class FiltersPanelComponent extends NrclBase {
     @Input() showClear = true
+    @Input() clearLabel = 'Clear'
     @Input() showFilters = true
     @Input() hasAdvancedFilters = false
     @Input() showAdvancedFilters = false
