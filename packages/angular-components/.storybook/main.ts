@@ -1,11 +1,24 @@
 import type { StorybookConfig } from '@storybook/angular';
+import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
     "stories": [
-        "../projects/nr-ngx-component-lib/src/docs/**/*.mdx",
+        "../projects/nr-ngx-component-lib/src/**/*.mdx",
         "../projects/nr-ngx-component-lib/src/**/*.stories.ts",
     ],    
-    "addons": ["@storybook/addon-docs"],
+    "addons": [
+        {
+            name: "@storybook/addon-docs",
+            options: {
+                // GitHub-flavoured markdown, so tables in .mdx files render
+                mdxPluginOptions: {
+                    mdxCompileOptions: {
+                        remarkPlugins: [ remarkGfm ],
+                    },
+                },
+            },
+        },
+    ],
     "framework": {
         "name": "@storybook/angular",
         "options": {}

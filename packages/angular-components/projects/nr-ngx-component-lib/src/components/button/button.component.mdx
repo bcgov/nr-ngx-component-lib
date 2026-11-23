@@ -1,0 +1,202 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './button.component.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+`<nrcl-button>` renders a styled `<button>` (or an `<a>` in anchor mode) with style variants, sizes, icons,
+an optional tooltip, and a compact mode that can switch on per display mode. Interactive examples are
+under [Examples](#examples).
+
+## Usage
+
+`ButtonComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+```html
+<!-- Default (secondary style at normal size) -->
+<nrcl-button label="Cancel"></nrcl-button>
+
+<!-- Primary action with a leading icon -->
+<nrcl-button primary label="Add Resources" icon="add" (click)="onAdd()"></nrcl-button>
+
+<!-- Small button (tertiary style by default) -->
+<nrcl-button small label="Clear" icon="clear-filters"></nrcl-button>
+
+<!-- Normal button on desktop, compact icon button on mobile -->
+<nrcl-button compact="mobile"
+    label="Clear"
+    iconCompact="clear-filters"
+    tooltip
+></nrcl-button>
+
+<!-- Link styled as text -->
+<nrcl-button anchor="https://www2.gov.bc.ca" label="BC Government" iconRight="launch"></nrcl-button>
+```
+
+## Style variants
+
+| Attribute   | Use for |
+|-------------|---------|
+| `primary`   | The main action in a view or dialog. |
+| `secondary` | Supporting actions next to a primary button. |
+| `tertiary`  | Low-emphasis actions, toolbars, and actions inside lists. |
+| `anchor`    | Text-style links. See [Anchor mode](#anchor-mode). |
+
+With no variant set, the style depends on size: a **normal** button is **secondary**, and a **small** or
+**compact** button is **tertiary**.
+
+If more than one variant is set, `primary` wins over `secondary`, and `secondary` wins over `tertiary`.
+Setting any of the three turns anchor mode off.
+
+## Sizes
+
+| Size    | How to set it | Height | Notes |
+|---------|---------------|--------|-------|
+| Normal  | (default)     | 36px   | |
+| Small   | `small`       | 24px   | Smaller font and icon. |
+| Compact | `compact`     | 44px   | The icon sits above a small label, for toolbars and mobile layouts. `iconRight` is hidden. |
+
+`compact` takes:
+
+- `compact` or `[compact]="true"`: always compact.
+- `compact="desktop"` or `compact="mobile"`: compact only when the current display mode from
+  `ConfigurationService` matches, so one button can be full size on desktop and compact on mobile.
+- Left off or `[compact]="false"`: never compact.
+
+`compact` overrides `small`.
+
+## Icons
+
+| Input         | Shown when |
+|---------------|------------|
+| `icon`        | Before the label. In compact mode it's the compact icon unless `iconCompact` is set. |
+| `iconRight`   | After the label. Needs a `label`, and is hidden in compact mode. |
+| `iconCompact` | Only in compact mode. Falls back to `icon`. |
+
+Icon names are passed to `nrcl-icon`, so Material Symbols names (`add`, `launch`) and the library's custom
+icons (`clear-filters`) both work.
+
+Icon size follows `small`. Anchor buttons use small icons by default; set `[small]="false"` to give an
+anchor normal-sized icons.
+
+## Tooltip
+
+| `tooltip` value                         | Result |
+|-----------------------------------------|--------|
+| left off, `null`, or `false`            | No tooltip. |
+| `tooltip` (no value) or `[tooltip]="true"` | The `label` is used as the tooltip. Useful for compact buttons, where the label can be truncated. |
+| any other string                        | That text. |
+
+## Anchor mode
+
+`anchor` renders an `<a>` styled as underlined link text instead of a `<button>`.
+
+| `anchor` value                 | Result |
+|--------------------------------|--------|
+| `anchor` or `[anchor]="true"`  | Link style with no `href`. Handle `(click)` yourself. |
+| a URL string                   | `href` set to that URL, opening in a new tab (`target="_blank"`). |
+| `{ href, target }`             | `href` and `target` as given. `target` defaults to `_blank`. |
+
+Two limits apply in anchor mode:
+
+- `disabled` changes the colours only. The link can still be followed and still emits `(click)`.
+- Projected content isn't rendered. Use `label` and the icon inputs.
+
+## Projected content
+
+When none of `label`, `icon`, `iconRight`, or `iconCompact` are set, the button shows its projected content
+instead, for layouts the inputs can't express:
+
+```html
+<nrcl-button primary>
+    <nrcl-icon>cloud_upload</nrcl-icon>
+    Upload File
+    <nrcl-icon>arrow_forward</nrcl-icon>
+</nrcl-button>
+```
+
+Setting any of those inputs replaces the projected content.
+
+## Events
+
+`(click)` is the native click event on the host element. A disabled `<button>` doesn't emit it (but see the
+anchor mode limits above).
+
+## Accessibility
+
+- Set `ariaLabel` when the visible text doesn't describe the action, especially for compact buttons with a
+  truncated or missing label. A tooltip isn't a replacement for an accessible name.
+- Keyboard focus shows a 3px outline in `--nrcl-button-focus-color`.
+
+## Inputs
+
+| Input        | Type | Default | Description |
+|--------------|------|---------|-------------|
+| `label`      | `string` | | Button text. |
+| `ariaLabel`  | `string` | | Sets `aria-label` on the inner `<button>` or `<a>`. |
+| `icon`       | `string` | | Icon before the label, and the compact icon if `iconCompact` isn't set. |
+| `iconRight`  | `string` | | Icon after the label. |
+| `iconCompact`| `string` | | Icon used in compact mode. |
+| `tooltip`    | `string \| boolean` | | See [Tooltip](#tooltip). |
+| `primary`    | `boolean` | `false` | Primary style. |
+| `secondary`  | `boolean` | `false` | Secondary style. |
+| `tertiary`   | `boolean` | `false` | Tertiary style. |
+| `anchor`     | `string \| boolean \| { href, target }` | | See [Anchor mode](#anchor-mode). |
+| `small`      | `string \| boolean` | | Small size. `false` also forces normal-sized icons. |
+| `compact`    | `string \| boolean` | | `true`, `'desktop'`, or `'mobile'`. See [Sizes](#sizes). |
+| `disabled`   | `boolean` | `false` | Disables the button. |
+
+| Output  | Type | Description |
+|---------|------|-------------|
+| `click` | `PointerEvent` | The native click event. |
+
+## Styling
+
+Set `--nrcl-button-width` on a button to give it a fixed width; a long label is truncated with an ellipsis.
+
+```html
+<nrcl-button primary label="Save" style="--nrcl-button-width: 100%"></nrcl-button>
+```
+
+The rest of the look comes from CSS custom properties defined on `:root`, which you can override globally
+or on a single button:
+
+| Group | Properties |
+|-------|------------|
+| Sizes | `--nrcl-button-{normal,small,compact}-height`, `-padding-horizontal`, `-font-size`, `-icon-size`, and `--nrcl-button-{normal,small}-icon-padding-horizontal` |
+| Colours | `--nrcl-button-{primary,secondary,tertiary,anchor}-{foreground,background,border,hover-background}-color` |
+| Disabled colours | `--nrcl-button-{primary,secondary,tertiary,anchor}-disabled-{foreground,background,border,hover-background}-color` |
+| Other | `--nrcl-button-anchor-hover-foreground-color`, `--nrcl-button-focus-color` |
+
+## Examples
+
+### All variants
+
+Every style and size combination, side by side. The controls apply to all of them at once, including
+container and button width.
+
+<Canvas of={ButtonStories.Primary} />
+<Controls of={ButtonStories.Primary} />
+
+### Playground
+
+One button with every input available. Switch the display mode to see `compact="desktop"` and
+`compact="mobile"` change.
+
+<Canvas of={ButtonStories.AllOptions} />
+<Controls of={ButtonStories.AllOptions} />
+
+### Projected content
+
+The same content projected in two orders, icon first and label first.
+
+<Canvas of={ButtonStories.ProjectedContent} />
+<Controls of={ButtonStories.ProjectedContent} />
+
+### Inline
+
+A button inside a line of text, which is how anchor buttons are usually used.
+
+<Canvas of={ButtonStories.Inline} />
+<Controls of={ButtonStories.Inline} />
