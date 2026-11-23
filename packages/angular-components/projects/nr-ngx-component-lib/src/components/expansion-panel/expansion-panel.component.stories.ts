@@ -1,11 +1,7 @@
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { ButtonComponent } from '../button/button.component';
-import { GapComponent } from '../gap/gap.component';
 import { ExpansionPanelComponent } from './expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './footer/expansion-panel-footer.component';
-import { ExpansionPanelHeaderComponent } from './header/expansion-panel-header.component';
-import { ExpansionPanelSectionComponent } from './section/expansion-panel-section.component';
 
 const meta: Meta<ExpansionPanelComponent> = {
     title: 'Expansion Panel',
@@ -15,11 +11,6 @@ const meta: Meta<ExpansionPanelComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                ButtonComponent,
-                ExpansionPanelHeaderComponent,
-                ExpansionPanelFooterComponent,
-                ExpansionPanelSectionComponent,
-                GapComponent
             ],
             // declare components that are used in the template
             declarations: [

@@ -6,7 +6,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/n
 import { of } from 'rxjs';
 import { DATE_FORMATS } from '../../utils/date.util';
 import { ScheduleProvider } from '../schedule/schedule.component';
-import { ResourceScheduleComponent, ResourceScheduleRowHeadingDirective, ResourceScheduleRowItem } from './resource-schedule.component';
+import { ResourceScheduleComponent, ResourceScheduleRowItem } from './resource-schedule.component';
 
 const meta: Meta<ResourceScheduleComponent> = {
     title: 'Composite/Resource Schedule',
@@ -16,7 +16,6 @@ const meta: Meta<ResourceScheduleComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                ResourceScheduleRowHeadingDirective,
                 MatMenuModule
             ],
             // declare components that are used in the template

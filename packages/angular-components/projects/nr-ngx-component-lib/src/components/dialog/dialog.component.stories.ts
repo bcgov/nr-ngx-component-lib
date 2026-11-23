@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, inject, Input, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DialogService } from '../../services/dialog.service';
-import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -46,11 +45,7 @@ import { MatDialogRef } from '@angular/material/dialog';
                 </section>
             </nrcl-dialog>
         </ng-template>
-    `,
-    imports: [
-        ButtonComponent,
-        DialogComponent
-    ],
+    `
 } )
 class DialogStoryComponent extends DialogComponent implements AfterViewInit, OnDestroy {
     dialogService = inject( DialogService )

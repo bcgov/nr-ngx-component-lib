@@ -11,9 +11,6 @@ import {
     Output
 } from "@angular/core";
 import { NrclBase } from "../../directives/nrcl.base";
-import { FilterContainerComponent } from "../filter-container/filter-container.component";
-import { NgxPaginationModule } from "ngx-pagination";
-import { FilterSelectComponent } from "../filter-select/filter-select.component";
 
 export type RowListPaginationWidth = 'sufficient'|'tight'|'restrictive'
 
@@ -26,12 +23,7 @@ export type RowListPaginationWidth = 'sufficient'|'tight'|'restrictive'
         '[class.width-sufficient]': "componentWidth == 'sufficient'",
         '[class.width-tight]': "componentWidth == 'tight'",
         '[class.width-restrictive]': "componentWidth == 'restrictive'",
-    },
-    imports: [
-        FilterContainerComponent,
-        NgxPaginationModule,
-        FilterSelectComponent
-    ]
+    }
 })
 export class RowListPaginationComponent extends NrclBase implements AfterViewInit {
     @Input() paginationId = '1'

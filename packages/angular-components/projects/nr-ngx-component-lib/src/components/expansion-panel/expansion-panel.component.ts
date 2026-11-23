@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
-import { MatExpansionModule, MatExpansionPanel } from "@angular/material/expansion";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatExpansionPanel } from "@angular/material/expansion";
 import { NrclBase } from "../../directives/nrcl.base";
 
 @Component({
@@ -12,11 +11,7 @@ import { NrclBase } from "../../directives/nrcl.base";
         '[class.is-loading]': 'isLoading',
         '[class.expanded]': 'matExpansionPanel?.expanded',
         '[class.disabled]': 'disabled',
-    },
-    imports: [
-        MatExpansionModule,
-        MatProgressSpinnerModule,
-    ]
+    }
 })
 export class ExpansionPanelComponent extends NrclBase {
     @Input() isLoading: boolean = false;

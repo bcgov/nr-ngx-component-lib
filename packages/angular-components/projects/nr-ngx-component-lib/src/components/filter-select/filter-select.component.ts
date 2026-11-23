@@ -1,6 +1,5 @@
 import { Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { TemplatePortal } from "@angular/cdk/portal";
-import { NgTemplateOutlet } from "@angular/common";
 import {
     AfterViewInit,
     booleanAttribute,
@@ -22,17 +21,12 @@ import {
     ViewChild,
     ViewContainerRef
 } from "@angular/core";
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatListModule, MatSelectionListChange } from "@angular/material/list";
-import { MatTooltipModule } from "@angular/material/tooltip";
+import { FormControl } from "@angular/forms";
+import { MatSelectionListChange } from "@angular/material/list";
 import { DomSanitizer } from "@angular/platform-browser";
 import { fromEvent, Subscription } from "rxjs";
 import { NrclBase } from "../../directives/nrcl.base";
 import { CodeDescription } from "../../utils/code-table.util";
-import { ButtonComponent } from "../button/button.component";
 
 /**
  * A filter select component that allows users to select multiple options from a list.
@@ -54,18 +48,7 @@ import { ButtonComponent } from "../button/button.component";
         '[class.is-closed]': "!isOpen",
         '[class.use-filter]': "filter",
         '[style.--nrcl-filter-select-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    },
-    imports: [
-        MatInputModule,
-        MatFormFieldModule,
-        FormsModule,
-        ButtonComponent,
-        MatCheckboxModule,
-        MatListModule,
-        MatTooltipModule,
-        ReactiveFormsModule,
-        NgTemplateOutlet,
-    ]
+    }
 } )
 export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges, OnDestroy, AfterViewInit {
     changeDetectorRef = inject( ChangeDetectorRef )

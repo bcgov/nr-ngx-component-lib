@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Directive, Input, numberAttribute, TemplateRef, ViewChild } from "@angular/core";
 import { MatMenuPanel } from "@angular/material/menu";
 import { NrclBase } from "../../directives/nrcl.base";
-import { ScheduleComponent, ScheduleItemDirective, ScheduleProvider, ScheduleRow, ScheduleRowHeadingDirective, ScheduleRowItem } from "../schedule/schedule.component";
-import { NgTemplateOutlet } from "@angular/common";
+import { ScheduleComponent, ScheduleProvider, ScheduleRow, ScheduleRowItem } from "../schedule/schedule.component";
 
 @Directive( {
     selector: '[nrclResourceScheduleRowHeading]',
@@ -51,13 +50,7 @@ export type ResourceSchedule = ResourceScheduleRow[]
     selector: "nrcl-resource-schedule",
     templateUrl: "./resource-schedule.component.html",
     styleUrl: "./resource-schedule.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ScheduleComponent,
-        NgTemplateOutlet,
-        ScheduleItemDirective,
-        ScheduleRowHeadingDirective
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResourceScheduleComponent extends NrclBase {
     @Input() provider?: ScheduleProvider

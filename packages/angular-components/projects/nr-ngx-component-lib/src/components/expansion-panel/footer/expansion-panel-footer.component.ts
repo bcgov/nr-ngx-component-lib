@@ -1,16 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { NrclBase } from "../../../directives/nrcl.base";
-import { ButtonComponent } from "../../button/button.component";
-import { IconComponent } from "../../icon/icon.component";
 
 @Component({
     selector: "nrcl-expansion-panel-footer",
     templateUrl: './expansion-panel-footer.component.html',
-    styleUrl: './expansion-panel-footer.component.scss',
-    imports: [
-        ButtonComponent,
-        IconComponent
-    ]
+    styleUrl: './expansion-panel-footer.component.scss'
 })
 export class ExpansionPanelFooterComponent extends NrclBase {
     @Input() saveEnabled?: boolean 

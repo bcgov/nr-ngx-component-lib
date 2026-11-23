@@ -1,21 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
-import { ButtonComponent } from "../button/button.component";
-import { IconComponent } from "../icon/icon.component";
 
 @Component({
     selector: 'nrcl-dialog',
     templateUrl: './dialog.component.html',
     styleUrl: './dialog.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        MatProgressSpinnerModule,
-        ButtonComponent,
-        MatDialogModule,
-        IconComponent
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogComponent extends ConfigurationSubscriberBase {
     @Input() title?: string;

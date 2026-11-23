@@ -6,9 +6,6 @@ import {
     Output
 } from "@angular/core";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
-import { ButtonComponent } from "../button/button.component";
-import { IconComponent } from "../icon/icon.component";
-import { MatMenuModule } from "@angular/material/menu";
 
 export interface MenuItem {
     id: string
@@ -20,12 +17,7 @@ export interface MenuItem {
     selector: "nrcl-application-menu",
     templateUrl: "./application-menu.component.html",
     styleUrl: "./application-menu.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        MatMenuModule,
-        ButtonComponent,
-        IconComponent
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicationMenuComponent extends ConfigurationSubscriberBase {
     @Input() label?: string

@@ -1,8 +1,5 @@
 import { booleanAttribute, Component, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { MatRippleModule } from '@angular/material/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { ConfigurationSubscriberBase } from '../../directives/configuration-subscriber.base';
-import { IconComponent } from '../icon/icon.component';
 
 @Component( {
     selector: 'nrcl-button',
@@ -22,12 +19,7 @@ import { IconComponent } from '../icon/icon.component';
         '[class.icon-right]':   'hasIconRight',
         '[class.icon-compact]': 'hasIconCompact',
         '[class.icon-small]': 'isIconSmall',
-    },
-    imports: [
-        MatTooltipModule,
-        MatRippleModule,
-        IconComponent
-    ]
+    }
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {
     zone = inject( NgZone )

@@ -9,14 +9,11 @@ import {
     SimpleChanges,
     ViewChild
 } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInput, MatInputModule } from "@angular/material/input";
+import { MatInput } from "@angular/material/input";
 import moment, { Moment } from "moment";
 import { NrclBase } from "../../directives/nrcl.base";
 import { DATE_FORMATS } from "../../utils/date.util";
-import { ButtonComponent } from "../button/button.component";
-import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
+import { MatDatepicker } from "@angular/material/datepicker";
 import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
 import { JsonPipe } from "@angular/common";
 
@@ -28,13 +25,6 @@ import { JsonPipe } from "@angular/common";
     host: {
         '[style.--nrcl-filter-date-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
     },
-    imports: [
-        MatInputModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        FormsModule,
-        ButtonComponent,
-    ],
     providers: [
         provideMomentDateAdapter({
             parse: {

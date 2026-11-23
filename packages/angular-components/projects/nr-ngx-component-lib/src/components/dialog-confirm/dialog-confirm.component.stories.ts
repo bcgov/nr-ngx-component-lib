@@ -1,7 +1,6 @@
 import { Component, inject, Input, TemplateRef } from '@angular/core';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DialogService } from '../../services/dialog.service';
-import { ButtonComponent } from '../button/button.component';
 
 @Component( {
     selector: 'dialog-dummy',
@@ -10,10 +9,7 @@ import { ButtonComponent } from '../button/button.component';
             label="Open Dialog" 
             (click)="onClick()"
         ></nrcl-button>
-    `,
-    imports: [
-        ButtonComponent
-    ]
+    `
 } )
 class DialogDummyComponent {
     dialogService = inject( DialogService )
@@ -86,6 +82,7 @@ const meta: Meta<DialogDummyComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
+                DialogDummyComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
