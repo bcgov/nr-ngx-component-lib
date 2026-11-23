@@ -4,25 +4,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { useArgs } from 'storybook/preview-api';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CellContentComponent } from '../cell-content/cell-content.component';
-import { FilterContainerComponent } from '../filter-container/filter-container.component';
-import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { GapComponent } from '../gap/gap.component';
-import { MatListModule } from '@angular/material/list';
-import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { RowListArgs, rowListItems, rowListStory } from 'projects/nr-ngx-component-lib/story-util';
+import { useArgs } from 'storybook/preview-api';
 import { RowListMobileComponent } from './row-list-mobile.component';
-import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
-import { MatRadioModule } from '@angular/material/radio';
-import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
-import { RowListArgs, rowListItems, rowListStory, seedRandom } from 'projects/nr-ngx-component-lib/story-util';
-import { IconComponent } from '../icon/icon.component';
-import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<RowListMobileComponent> = {
     title: 'Row List (Mobile)',
@@ -44,19 +35,9 @@ const meta: Meta<RowListMobileComponent> = {
                 NgxPaginationModule,
                 MatCardModule,
                 MatListModule,  
-                MatRadioModule
-            ],
+                MatRadioModule],
             // declare components that are used in the template
             declarations: [
-                CellContentComponent,
-                FilterSelectComponent,
-                FilterContainerComponent,
-                GapComponent,
-                DisplayModeWrapperComponent,
-                RowListSortingComponent,
-                RowListPaginationComponent,
-                IconComponent,
-                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -103,8 +84,6 @@ Unlike the desktop table view, mobile lists use cards to present information in 
 ### Basic Card List with Sorting and Pagination
 \`\`\`typescript
 import { RowListMobileComponent } from '@wf-design-system/row-list-mobile';
-import { RowListSortingComponent } from '@wf-design-system/row-list-sorting';
-import { RowListPaginationComponent } from '@wf-design-system/row-list-pagination';
 
 @Component({
   template: \`

@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
-import { NrclBase } from "../../directives/nrcl.base";
+import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
 @Component({
     selector: 'nrcl-dialog',
     templateUrl: './dialog.component.html',
     styleUrl: './dialog.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogComponent extends NrclBase {
-    @Input() title: string;
+export class DialogComponent extends ConfigurationSubscriberBase {
+    @Input() title?: string;
     @Input() isLoading = false
     @Input() showClose = false
     @Input() saveLabel = 'Save'
-    @Input() saveEnabled = false
+    @Input() saveEnabled: boolean|null = false
     @Input() cancelLabel = 'Cancel'
-    @Input() cancelEnabled = true
+    @Input() cancelEnabled: boolean|null = true
     @Input() showWarning = true
     @Input() showActions = true
 

@@ -1,7 +1,13 @@
 :host {
-    display: block;
     font-family: var(--nrcl-font-family);
-    height: 100%;
-    overflow: auto;
-    padding: var( --nrcl-gutter-space );
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    main {
+        flex-grow: 1;
+        overflow: auto;
+    }
 }

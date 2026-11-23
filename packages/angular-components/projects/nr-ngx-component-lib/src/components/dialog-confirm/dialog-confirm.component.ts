@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { DialogBase } from "../../directives/dialog.base";
 
 export type DialogConfirmConfig = {
-    title
-    saveLabel?
-    cancelLabel?
+    title: string
+    saveLabel?: string 
+    cancelLabel?: string
     template: TemplateRef<any>,
     context?: any
     showActions?: boolean
@@ -14,7 +14,7 @@ export type DialogConfirmConfig = {
     selector: 'nrcl-dialog-confirm',
     templateUrl: './dialog-confirm.component.html',
     styleUrl: './dialog-confirm.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogConfirmComponent extends DialogBase<DialogConfirmConfig> {
     title = this.config.title

@@ -1,25 +1,24 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './device-view.component';
+import { DeviceViewComponent } from './device-view.component';
 
 @Component( {
-    selector: 'sentinal',
+    selector: 'sentinel',
     template: `
-        <div>Sentinal {{ name }}</div>
+        <div>Sentinel {{ name }}</div>
         <ng-content></ng-content>
-    `, 
+    `
 } )
-class SentinalComponent implements OnInit, OnDestroy {
+class SentinelComponent implements OnInit, OnDestroy {
     @Input() name
     
     ngOnInit(): void {
-        console.log('init sentinal', this.name)
+        console.log('init sentinel', this.name)
     }
 
     ngOnDestroy(): void {
-        console.log('destroy sentinal', this.name)
+        console.log('destroy sentinel', this.name)
     }
 }
 
@@ -34,13 +33,10 @@ const meta: Meta<DeviceViewComponent> = {
             ],
             // declare components that are used in the template
             declarations: [
-                SentinalComponent,
-                DesktopViewDirective,
-                MobileViewDirective
+                SentinelComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                ConfigurationService
             ],
         } ),
         componentWrapperDecorator( 
@@ -84,15 +80,15 @@ export const Primary: StoryObj<DeviceViewComponent & DisplayModeWrapperComponent
                 <div>Before device-view</div>
                 <nrcl-device-view>
                     <ng-template desktop-view>
-                        <sentinal name="desktop">
+                        <sentinel name="desktop">
                             <div>Inside desktopView</div>
-                        </sentinal>
+                        </sentinel>
                     </ng-template>
 
                     <ng-template mobile-view>
-                        <sentinal name="mobile">
+                        <sentinel name="mobile">
                             <div>Inside mobileView</div>
-                        </sentinal>
+                        </sentinel>
                     </ng-template>
                 </nrcl-device-view>
                 <div>After device-view</div>

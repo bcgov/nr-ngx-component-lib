@@ -2,8 +2,6 @@ import { Directive, Input, TemplateRef, ViewContainerRef, HostListener, ElementR
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
-
-
 @Component( {
     selector: 'nrcl-default-tooltip',
     template: `
@@ -14,7 +12,7 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
             white-space: pre-line;
             text-align: left;
         }
-    `]
+    `],
 } )
 export class TooltipComponent {
     @Input() text: string = '';

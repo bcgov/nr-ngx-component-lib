@@ -3,7 +3,6 @@ import {
     Component,
     Input
 } from "@angular/core";
-import { NrclBase } from "../../directives/nrcl.base";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
 @Component({

@@ -1,9 +1,5 @@
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
@@ -13,18 +9,14 @@ const meta: Meta<ButtonComponent> = {
         // Apply metadata to all stories
         moduleMetadata( {
             // import necessary ngModules or standalone components
-            imports: [
-                MatTooltipModule,
-                MatIconModule,
-                MatRippleModule
-            ],
-            // declare components that are used in the template
-            declarations: [
-                IconComponent,
-            ],
+            // imports: [
+            // ],
+            // // declare components that are used in the template
+            // declarations: [
+            // ],
             // List of providers that should be available to the root component and all its children.
-            providers: [
-            ],
+            // providers: [
+            // ],
         } ),
         componentWrapperDecorator( 
             ( story ) => {

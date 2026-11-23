@@ -23,10 +23,11 @@ export class ApplicationMenuComponent extends ConfigurationSubscriberBase {
     @Input() label?: string
     @Input() icon = 'menu'
     @Input() items: MenuItem[] = [];
+    @Input() currentItemId?: string
 
-    @Output() itemClick = new EventEmitter<string>()
+    @Output() menuItemClick = new EventEmitter<string>()
 
-    onClickItem( item: MenuItem ) {
-        this.itemClick.emit( item.id )
+    onMenuItemClick( item: MenuItem ) {
+        this.menuItemClick.emit( item.id )
     }
 }

@@ -1,7 +1,3 @@
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import {
     componentWrapperDecorator,
     Meta,
@@ -11,28 +7,16 @@ import {
 import {
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
 import { ApplicationMenuComponent } from './application-menu.component';
-import { ApplicationComponent } from "../application/application.component";
 
 const meta: Meta<ApplicationMenuComponent> = {
-    title: 'Application Menu',
+    title: 'Application/Menu',
     component: ApplicationMenuComponent,
 
     decorators: [
         moduleMetadata({
             imports: [
-                MatIconModule,
-                MatTooltipModule,
-                MatRippleModule,
-                MatMenuModule,
             ],
-            declarations: [
-                ButtonComponent,
-                IconComponent,
-                ApplicationComponent,
-            ]
         }),
         componentWrapperDecorator(
             story => `
@@ -59,7 +43,8 @@ type Story = StoryObj<ApplicationMenuComponent>;
 export const Primary: Story = {
     argTypes: {
         ...displayModeWrapperStory.argTypes,
-        itemClick: { action: 'itemClick' }
+        menuItemClick: { action: 'menuItemClick' },
+        currentItemId: { type: 'string' }
     },
     args: {
         ...displayModeWrapperStory.args,
@@ -107,18 +92,18 @@ export const Primary: Story = {
                 label: 'Copyright'
             }
         ],
-        label: 'Menu'
+        label: 'Menu',
+        currentItemId: "home",
     },
     render: args => ({
         props: args,
         template: `
-            <nrcl-application>
-                <nrcl-application-menu 
-                    [label]="label"
-                    [items]="items"
-                    (itemClick)="itemClick( $event )"
-                ></nrcl-application-menu>
-            </nrcl-application>
+            <nrcl-application-menu 
+                [label]="label"
+                [items]="items"
+                (menuItemClick)="menuItemClick( $event )"
+                [currentItemId]="currentItemId"
+            ></nrcl-application-menu>
         `
     }),
 };

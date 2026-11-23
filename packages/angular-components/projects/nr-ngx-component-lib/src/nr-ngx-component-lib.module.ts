@@ -16,13 +16,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from "@busacca/ng-pick-datetime";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ApplicationHeaderComponent } from './components/application-header/application-header.component';
 import { ApplicationMenuComponent } from './components/application-menu/application-menu.component';
@@ -68,7 +68,6 @@ import { ConfigurationService } from './services/configuration.service';
 import { DialogService } from './services/dialog.service';
 import { PageStateService } from './services/page-state.service';
 import { SnackbarUtilService } from './services/snackbar-util.service';
-import { DATE_FORMATS } from './utils/date.util';
 import { ApplicationComponent } from './components/application/application.component';
 
 @NgModule({
@@ -95,11 +94,10 @@ import { ApplicationComponent } from './components/application/application.compo
         MatTooltipModule,
         ReactiveFormsModule,
         RouterModule,
-        OwlDateTimeModule,
-        OwlMomentDateTimeModule,
         NgxPaginationModule,
         MatDialogModule,
-        MatTabsModule
+        MatTabsModule,
+        MatSnackBarModule
     ],
     declarations: [
         ApplicationComponent,
@@ -208,7 +206,6 @@ import { ApplicationComponent } from './components/application/application.compo
         ConfigurationService,
         PageStateService,
         DialogService,
-        { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
     ]
 })
 export class NrNgxComponentLibModule {

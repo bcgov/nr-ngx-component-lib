@@ -1,22 +1,6 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrapperStoryArgs } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { FilterContainerComponent } from '../filter-container/filter-container.component';
-import { FilterDateComponent } from '../filter-date/filter-date.component';
-import { FilterSearchComponent } from '../filter-search/filter-search.component';
-import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { IconComponent } from '../icon/icon.component';
 import { RowListPaginationComponent } from './row-list-pagination.component';
-import { ButtonComponent } from '../button/button.component';
 
 type CollectionParametersDesktopComponentExtended = RowListPaginationComponent & { width?: number }
 
@@ -28,28 +12,9 @@ const meta: Meta<CollectionParametersDesktopComponentExtended> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatIconModule,
-                BrowserAnimationsModule,
-                FormsModule,
-                MatButtonModule,
-                NgxPaginationModule,
-                MatCheckboxModule,
-                MatFormFieldModule,                
-                MatInputModule,
-                MatListModule,  
-                MatTooltipModule,
-                ReactiveFormsModule,
-                NgxPaginationModule,
             ],
             // declare components that are used in the template
             declarations: [
-                FilterSelectComponent,
-                FilterContainerComponent,
-                FilterDateComponent,
-                FilterSearchComponent,
-                FilterSelectComponent,
-                IconComponent,
-                ButtonComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

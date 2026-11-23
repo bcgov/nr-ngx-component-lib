@@ -4,7 +4,7 @@ import { NrclBase } from "../../directives/nrcl.base";
 import { ScheduleComponent, ScheduleProvider, ScheduleRow, ScheduleRowItem } from "../schedule/schedule.component";
 
 @Directive( {
-    selector: '[nrclResourceScheduleRowHeading]'
+    selector: '[nrclResourceScheduleRowHeading]',
 } )
 export class ResourceScheduleRowHeadingDirective {
     constructor(

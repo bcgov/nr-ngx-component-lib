@@ -5,23 +5,44 @@
 >
     <mat-label>{{ label }}</mat-label>
 
-    <input matInput class="search-input"            
-        [ngModel]="value" 
+    <input matInput class="search-input" readonly
+        [ngModel]="value"
         (ngModelChange)="onDateChange( $event )"
         [placeholder]="placeholder"
-        [owlDateTime]="selectedDateDT" 
-        maxlength="10" 
-        appWFDateMask
+        maxlength="10"
+        (click)="onInputFocus()"
+        [matDatepicker]="picker"
+        [min]="min"
+        [max]="max"
+        #filter="ngModel"
     >
+
+    @if ( filter.invalid && ( filter.dirty || filter.touched ) ) {
+        @if ( filter.hasError( 'matDatepickerMin' ) ) {
+            <mat-error>{{ minErrorMessage }}</mat-error>
+        }
+
+        @if ( filter.hasError( 'matDatepickerMax' ) ) {
+            <mat-error>{{ maxErrorMessage }}</mat-error>
+        }
+    }
 
     @if ( hint ) {
         <mat-hint>{{ hint }}</mat-hint>
     }
 
-    <nrcl-button tertiary matSuffix
-        icon="event"
-        [owlDateTimeTrigger]="selectedDateDT" 
-    ></nrcl-button>
+    <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
-<owl-date-time #selectedDateDT pickerType="calendar"></owl-date-time>
+@if ( isOpen || !hasValue || !clear ) {
+    <nrcl-button tertiary
+        icon="event"
+        (click)="picker.open()"
+    ></nrcl-button>
+}
+@else {
+    <nrcl-button tertiary
+        icon="close"
+        (click)="onCancelClick()"
+    ></nrcl-button>
+}

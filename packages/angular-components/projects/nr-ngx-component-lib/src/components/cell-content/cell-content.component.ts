@@ -4,16 +4,15 @@ import { NrclBase } from '../../directives/nrcl.base';
 @Component( {
     selector: 'nrcl-cell-content',
     templateUrl: './cell-content.component.html',
-    styleUrl: './cell-content.component.scss',
+    styleUrl: './cell-content.component.scss'
 } )
 export class CellContentComponent extends NrclBase implements AfterContentInit {
-    @Input() tooltip
-    @Input() content
-    
-    elementRef = inject( ElementRef )
     changeDetectorRef = inject( ChangeDetectorRef )
 
-    tooltipContent
+    @Input() tooltip?: string|boolean
+    @Input() content?: string|false
+    
+    tooltipContent?: string
 
     ngAfterContentInit(): void {
         setTimeout( () => {

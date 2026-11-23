@@ -4,11 +4,11 @@ import { NrclBase } from "../../../directives/nrcl.base";
 @Component({
     selector: "nrcl-expansion-panel-footer",
     templateUrl: './expansion-panel-footer.component.html',
-    styleUrl: './expansion-panel-footer.component.scss',
+    styleUrl: './expansion-panel-footer.component.scss'
 })
 export class ExpansionPanelFooterComponent extends NrclBase {
-    @Input() saveEnabled 
-    @Input() cancelEnabled 
+    @Input() saveEnabled?: boolean 
+    @Input() cancelEnabled?: boolean
     @Input() warningMessage = 'Unsaved Changes'
     @Input() showWarning = false
 

@@ -1,12 +1,5 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { FilterSearchComponent } from './filter-search.component';
-import { IconComponent } from '../icon/icon.component';
-import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<FilterSearchComponent> = {
     title: 'Filter Search',
@@ -16,25 +9,27 @@ const meta: Meta<FilterSearchComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatButtonModule,
-                // MatCheckboxModule,
-                MatFormFieldModule,                
-                MatIconModule,
-                MatInputModule,
-                // MatListModule,  
-                // MatTooltipModule,
-                ReactiveFormsModule,
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent,
-                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
             ],
         } ),
+        componentWrapperDecorator(
+            ( story ) => {
+                return `
+                    <ng-container *rerender="displayMode">
+                        <display-mode-wrapper
+                            style="--registration-content-overflow: visible"
+                        >
+                            ${ story }
+                        </display-mode-wrapper>
+                    </ng-container>
+                `
+            }
+        ),
     ],
     tags: ['autodocs'],
     parameters: {
@@ -87,7 +82,34 @@ Use the controls below to test the component. Adjust the width to see how it res
 
 export default meta;
 
-export const Primary: StoryObj<FilterSearchComponent & { width: number }> = {
+export const Primary: StoryObj<FilterSearchComponent> = {
+    argTypes: {
+        label: { type: 'string' },
+        value: { type: 'string' },
+        hint: { type: 'string' },
+        placeholder: { type: 'string' },
+        valueChange: { action: 'valueChange' },
+        wide: {
+            control: { type: 'inline-radio' },
+            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
+            mapping: { 'none': undefined }
+        }
+    },
+    args: {
+        wide: null,
+    },
+    render: ( args ) => {
+        return {
+            props: args,
+            template: `
+                <nrcl-filter-search ${ argsToTemplate(args) } 
+                ></nrcl-filter-search> 
+            `
+        }
+    }
+}
+
+export const CustomSize: StoryObj<FilterSearchComponent & { width: number }> = {
     argTypes: {
         width: {
             control: {
@@ -101,11 +123,6 @@ export const Primary: StoryObj<FilterSearchComponent & { width: number }> = {
         hint: { type: 'string' },
         placeholder: { type: 'string' },
         valueChange: { action: 'valueChange' },
-        wide: {
-            control: { type: 'inline-radio' },
-            options: [ 'none', '1', '2', '3', '4', '5', '6' ],
-            mapping: { 'none': undefined }
-        }
     },
     args: {
         width: 308,
@@ -113,19 +130,10 @@ export const Primary: StoryObj<FilterSearchComponent & { width: number }> = {
     },
     render: ( args ) => {
         return {
-            styles: [`
-                :host {
-                    display: flex;
-                    gap: 20px;
-                }
-            `],
             props: args,
             template: `
                 <nrcl-filter-search ${ argsToTemplate(args, {exclude:['width']} ) } 
                     [style.--nrcl-filter-search-width.px]="width"
-                ></nrcl-filter-search> 
-
-                <nrcl-filter-search ${ argsToTemplate(args, {exclude:['width']} ) } 
                 ></nrcl-filter-search> 
             `
         }

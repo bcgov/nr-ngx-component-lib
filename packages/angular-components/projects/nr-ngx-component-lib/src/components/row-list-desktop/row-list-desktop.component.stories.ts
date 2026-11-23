@@ -12,15 +12,7 @@ import { useArgs } from 'storybook/preview-api';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RowListArgs, rowListItems, rowListStory, seedRandom } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { CellContentComponent } from '../cell-content/cell-content.component';
-import { FilterContainerComponent } from '../filter-container/filter-container.component';
-import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { GapComponent } from '../gap/gap.component';
-import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
 import { RowListDesktopComponent } from './row-list-desktop.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
-import { IconComponent } from '../icon/icon.component';
-import { ButtonComponent } from '../button/button.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
@@ -43,21 +35,10 @@ const meta: Meta<RowListDesktopComponent> = {
                 MatSortModule,
                 NgxPaginationModule,
                 MatListModule,  
-                MatCheckboxModule,
+                MatCheckboxModule,                
             ],
             // declare components that are used in the template
             declarations: [
-                CellContentComponent,
-                FilterSelectComponent,
-                FilterContainerComponent,
-                GapComponent,
-                DisplayModeWrapperComponent,
-                RowListPaginationComponent,
-                DeviceViewComponent,
-                DesktopViewDirective,
-                MobileViewDirective,
-                IconComponent,
-                ButtonComponent,                
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -103,7 +84,6 @@ It handles table layout, scrolling containers, and integrates with sorting and p
 ### Basic Table with Sorting and Pagination
 \`\`\`typescript
 import { RowListDesktopComponent } from '@wf-design-system/row-list-desktop';
-import { RowListPaginationComponent } from '@wf-design-system/row-list-pagination';
 
 @Component({
   template: \`

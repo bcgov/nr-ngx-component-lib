@@ -53,6 +53,7 @@ export * from './services/snackbar-util.service'
 export * from './services/configuration.service'
 export * from './services/page-state.service'
 export * from './services/dialog.service'
+export * from './services/icon.service'
 
 export * from './utils/code-table.util'
 export * from './utils/date.util'

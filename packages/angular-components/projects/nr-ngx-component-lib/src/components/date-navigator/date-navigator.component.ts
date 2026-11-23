@@ -1,9 +1,9 @@
 import { Component, ElementRef, EventEmitter, inject, Input, numberAttribute, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDatepicker } from '@angular/material/datepicker';
 import moment, { Moment } from 'moment';
 import { NrclBase } from '../../directives/nrcl.base';
 import { DATE_FORMATS } from '../../utils/date.util';
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 
 @Component( {
     selector: 'nrcl-date-navigator',
@@ -20,7 +20,7 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
                 dateA11yLabel: 'LL',
                 monthYearA11yLabel: 'MMMM YYYY',
             }
-        } )
+        })
     ]
 } )
 export class DateNavigatorComponent extends NrclBase implements OnChanges {

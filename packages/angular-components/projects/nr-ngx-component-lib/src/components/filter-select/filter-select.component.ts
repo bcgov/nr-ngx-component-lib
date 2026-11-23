@@ -24,7 +24,7 @@ import {
 import { FormControl } from "@angular/forms";
 import { MatSelectionListChange } from "@angular/material/list";
 import { DomSanitizer } from "@angular/platform-browser";
-import { fromEvent, Observable, Subscription } from "rxjs";
+import { fromEvent, Subscription } from "rxjs";
 import { NrclBase } from "../../directives/nrcl.base";
 import { CodeDescription } from "../../utils/code-table.util";
 

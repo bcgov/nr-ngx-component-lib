@@ -1,4 +1,3 @@
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { CellContentComponent } from './cell-content.component';
 
@@ -10,7 +9,6 @@ const meta: Meta<CellContentComponent & { width: number }> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatTooltipModule,
             ],
             // declare components that are used in the template
             declarations: [
@@ -23,9 +21,7 @@ const meta: Meta<CellContentComponent & { width: number }> = {
             ( story ) => {
                 return `
                     <ng-container *rerender="{width, tooltip}">
-                        <registration-wrapper style="--registration-display: inline-block;">
-                            ${ story }
-                        </registration-wrapper>
+                        ${ story }
                     </ng-container>
                 `
             }

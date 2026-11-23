@@ -34,7 +34,7 @@
             }
         }
 
-        & > ::ng-deep .mat-expansion-panel-content {
+        & > ::ng-deep .mat-expansion-panel-content-wrapper .mat-expansion-panel-content {
             font-family: var( --nrcl-font-family );
             font-size: var( --nrcl-font-size );
         
