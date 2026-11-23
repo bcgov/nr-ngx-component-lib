@@ -1,7 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta 
-  title="Components/Overview" 
+  title="Introduction/Components" 
   parameters={{
     layout: 'fullscreen',
   }}
@@ -9,56 +9,98 @@ import { Meta, Story } from '@storybook/addon-docs/blocks';
 
 # Components
 
-Browse all available components in the NR Angular Component Library.
+Every component in the NR Angular Component Library, grouped the same way as the sidebar. All of them are
+declared and exported by `NrNgxComponentLibModule`.
 
-## Form Components
+## Foundations
 
-| Component | Description | Story |
-|-----------|-------------|-------|
-| `FormFieldComponent` | Material form field with label, hint, and error states | [Story](/story/components-form-field--docs) |
-| `FilterSearchComponent` | Search input with filtering | [Story](/story/components-filter-search--docs) |
-| `FilterSelectComponent` | Dropdown select filter | [Story](/story/components-filter-select--docs) |
-| `FilterDateComponent` | Date range filter | [Story](/story/components-filter-date--docs) |
-| `FilterContainerComponent` | Container for multiple filters | [Story](/story/components-filter-container--docs) |
-| `FiltersPanelComponent` | Panel with collapsible filters | [Story](/story/components-filters-panel--docs) |
+Building blocks used by the other components.
 
-## Layout Components
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `IconComponent` | Material Symbols and the library's custom icons | [Icon](?path=/docs/foundations-icon--docs) |
+| `GapComponent` | Spacing between elements | [Gap](?path=/docs/foundations-gap--docs) |
+| `TooltipDirective` | Tooltip on any element | [Tooltip](?path=/story/foundations-tooltip--primary) |
+| `DeviceViewComponent` | Shows different content on desktop and mobile | [Device View](?path=/docs/foundations-device-view--docs) |
 
-| Component | Description | Story |
-|-----------|-------------|-------|
-| `PageHeaderComponent` | Page header with title and actions | [Story](/story/components-page-header--docs) |
-| `PageContainerComponent` | Main content container | [Story](/story/components-page-container--docs) |
-| `GapComponent` | Spacing/gap utility | [Story](/story/components-gap--docs) |
-| `FormLayoutComponent` | Form layout wrapper | [Story](/story/components-form-layout--docs) |
+## Actions
 
-## Data Display Components
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `ButtonComponent` | Button with style variants, sizes, icons, and a responsive compact mode | [Button](?path=/docs/actions-button--docs) |
 
-| Component | Description | Story |
-|-----------|-------------|-------|
-| `RowListDesktopComponent` | Desktop table/list view | [Story](/story/components-row-list-desktop--docs) |
-| `RowListMobileComponent` | Mobile list view | [Story](/story/components-row-list-mobile--docs) |
-| `RowListPaginationComponent` | Pagination controls | [Story](/story/components-row-list-pagination--docs) |
-| `RowListSortingComponent` | Sorting controls | [Story](/story/components-row-list-sorting--docs) |
-| `CellContentComponent` | Cell content display | [Story](/story/components-cell-content--docs) |
-| `TagListComponent` | List of tags/labels | [Story](/story/components-tag-list--docs) |
-| `ListAttachmentsComponent` | File attachment list | [Story](/story/components-list-attachments--docs) |
-| `ListEventHistoryComponent` | Event history timeline | [Story](/story/components-list-event-history--docs) |
+## App Shell
 
-## Feedback Components
+Set up once per application.
 
-| Component | Description | Story |
-|-----------|-------------|-------|
-| `DialogConfirmComponent` | Confirmation dialog | [Story](/story/components-dialog-confirm--docs) |
-| `SnackbarComponent` | Toast notification | [Story](/story/components-snackbar--docs) |
-| `IndicatorComponent` | Status indicator | [Story](/story/components-indicator--docs) |
-| `IndicatorSelectComponent` | Indicator dropdown select | [Story](/story/components-indicator-select--docs) |
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `ApplicationComponent` | Application frame holding the header, menu, and page content | [Application](?path=/docs/app-shell-application--docs) |
+| `ApplicationHeaderComponent` | Title bar with the application name and actions | [Application Header](?path=/docs/app-shell-application-header--docs) |
+| `ApplicationMenuComponent` | Navigation menu | [Application Menu](?path=/docs/app-shell-application-menu--docs) |
 
-## Other Components
+## Page Layout
 
-| Component | Description | Story |
-|-----------|-------------|-------|
-| `ButtonComponent` | Button with style variants, sizes, icons, and a responsive compact mode | [Docs](?path=/docs/button--docs) |
-| `IconComponent` | Icon wrapper | [Story](/story/components-icon--docs) |
-| `ExpansionPanelComponent` | Collapsible panel | [Story](/story/components-expansion-panel--docs) |
-| `ListSelectComponent` | Selectable list | [Story](/story/components-list-select--docs) |
-| `DeviceViewComponent` | Device preview | [Story](/story/components-device-view--docs) |
+Used on every page.
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `PageContainerComponent` | Main content container | [Page Container](?path=/docs/page-layout-page-container--docs) |
+| `PageHeaderComponent` | Page header with title and actions | [Page Header](?path=/docs/page-layout-page-header--docs) |
+| `ExpansionPanelComponent` | Collapsible panel | [Expansion Panel](?path=/docs/page-layout-expansion-panel--docs) |
+| `TabGroupComponent` | Tabs, in standard and classic styles | [Tabs](?path=/docs/page-layout-tabs--docs) |
+
+## Filtering
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `FiltersPanelComponent` | Panel with collapsible filters | [Filters Panel](?path=/docs/filtering-filters-panel--docs) |
+| `FilterContainerComponent` | Container for multiple filters | [Filter Container](?path=/docs/filtering-filter-container--docs) |
+| `FilterSearchComponent` | Search input | [Filter Search](?path=/docs/filtering-filter-search--docs) |
+| `FilterSelectComponent` | Dropdown select filter | [Filter Select](?path=/docs/filtering-filter-select--docs) |
+| `FilterDateComponent` | Date range filter | [Filter Date](?path=/docs/filtering-filter-date--docs) |
+
+## Lists & Tables
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `RowListDesktopComponent` | Table view for desktop | [Row List (Desktop)](?path=/docs/lists-tables-row-list-desktop--docs) |
+| `RowListMobileComponent` | Card list view for mobile | [Row List (Mobile)](?path=/docs/lists-tables-row-list-mobile--docs) |
+| `RowListPaginationComponent` | Pagination controls | [Row List Pagination](?path=/docs/lists-tables-row-list-pagination--docs) |
+| `RowListSortingComponent` | Sorting controls | [Row List Sorting](?path=/docs/lists-tables-row-list-sorting--docs) |
+| `CellContentComponent` | Content of a row list cell | [Cell Content](?path=/docs/lists-tables-cell-content--docs) |
+
+## Forms
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `FormLayoutComponent` | Form layout wrapper | [Form Layout](?path=/docs/forms-form-layout--docs) |
+| `FormFieldComponent` | Form field with label, hint, and error states | [Form Field](?path=/docs/forms-form-field--docs) |
+| `ListSelectComponent` | Selectable list | [List Select](?path=/docs/forms-list-select--docs) |
+| `IndicatorSelectComponent` | Select for indicator values | No docs yet |
+
+## Data Display
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `TagListComponent` | List of tags | [Tag List](?path=/docs/data-display-tag-list--docs) |
+| `IndicatorComponent` | Status indicator | [Indicator](?path=/docs/data-display-indicator--docs) |
+| `ListAttachmentsComponent` | File attachment list | [List Attachments](?path=/docs/data-display-list-attachments--docs) |
+| `ListEventHistoryComponent` | Event history timeline | [List Event History](?path=/docs/data-display-list-event-history--docs) |
+| `DateNavigatorComponent` | Steps through dates | [Date Navigator](?path=/docs/data-display-date-navigator--docs) |
+
+## Scheduling
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `ScheduleComponent` | Base schedule grid | No docs yet |
+| `ResourceScheduleComponent` | Schedule of resources over time | [Resource Schedule](?path=/docs/scheduling-resource-schedule--docs) |
+
+## Feedback & Overlays
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `DialogComponent` | Dialog frame, opened with `DialogService` | [Dialog](?path=/story/feedback-overlays-dialog--primary) |
+| `DialogConfirmComponent` | Confirmation dialog | [Dialog Confirm](?path=/story/feedback-overlays-dialog-confirm--primary) |
+| `SnackbarComponent` | Toast notification, opened with `SnackbarUtilService` | [Snack Bar](?path=/docs/feedback-overlays-snack-bar--docs) |
+| `LoadingStatusComponent` | Loading state | [Loading Status](?path=/docs/feedback-overlays-loading-status--docs) |

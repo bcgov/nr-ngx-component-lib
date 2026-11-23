@@ -2,7 +2,7 @@ import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { LoadingStatusComponent } from './loading-status.component';
 
 const meta: Meta<LoadingStatusComponent> = {
-    title: 'Loading Status',
+    title: 'Feedback & Overlays/Loading Status',
     component: LoadingStatusComponent,
     decorators: [
         // Apply metadata to all stories

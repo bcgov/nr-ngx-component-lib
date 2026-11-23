@@ -2,7 +2,7 @@ import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { TooltipDirective } from './tooltip.directive';
 
 const meta: Meta<TooltipDirective & { width: number }> = {
-    title: 'Tooltip',
+    title: 'Foundations/Tooltip',
     component: TooltipDirective,
     decorators: [
         // Apply metadata to all stories

@@ -77,7 +77,7 @@ class DialogStoryComponent extends DialogComponent implements AfterViewInit, OnD
 
 
 const meta: Meta<DialogStoryComponent> = {
-    title: 'Dialog',
+    title: 'Feedback & Overlays/Dialog',
     component: DialogStoryComponent,
     decorators: [
     //     // Apply metadata to all stories

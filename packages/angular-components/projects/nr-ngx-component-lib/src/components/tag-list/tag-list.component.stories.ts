@@ -3,7 +3,7 @@ import { DisplayMode } from '../../services/configuration.service';
 import { TagListComponent } from './tag-list.component';
 
 const meta: Meta<TagListComponent> = {
-    title: 'Tag List',
+    title: 'Data Display/Tag List',
     component: TagListComponent,
     decorators: [
         // Apply metadata to all stories

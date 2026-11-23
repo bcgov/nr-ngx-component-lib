@@ -16,7 +16,7 @@ import { useArgs } from 'storybook/preview-api';
 import { RowListMobileComponent } from './row-list-mobile.component';
 
 const meta: Meta<RowListMobileComponent> = {
-    title: 'Row List (Mobile)',
+    title: 'Lists & Tables/Row List (Mobile)',
     component: RowListMobileComponent,
     decorators: [
         // Apply metadata to all stories

@@ -9,7 +9,7 @@ import { DisplayMode } from '../../services/configuration.service';
 import { FormLayoutComponent } from './form-layout.component';
 
 const meta: Meta<FormLayoutComponent> = {
-    title: 'Form Layout',
+    title: 'Forms/Form Layout',
     component: FormLayoutComponent,
     decorators: [
         // Apply metadata to all stories

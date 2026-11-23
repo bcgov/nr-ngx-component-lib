@@ -17,7 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 const meta: Meta<RowListDesktopComponent> = {
-    title: 'Row List (Desktop)',
+    title: 'Lists & Tables/Row List (Desktop)',
     component: RowListDesktopComponent,
     decorators: [
         // Apply metadata to all stories

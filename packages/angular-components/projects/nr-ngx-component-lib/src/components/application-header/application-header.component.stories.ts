@@ -10,7 +10,7 @@ import {
 import { ApplicationHeaderComponent } from "./application-header.component";
 
 const meta: Meta<ApplicationHeaderComponent> = {
-    title: "Application/Header",
+    title: 'App Shell/Application Header',
     component: ApplicationHeaderComponent,
 
     decorators: [

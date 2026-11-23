@@ -3,7 +3,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrappe
 import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
-    title: 'Button',
+    title: 'Actions/Button',
     component: ButtonComponent,
     decorators: [
         // Apply metadata to all stories

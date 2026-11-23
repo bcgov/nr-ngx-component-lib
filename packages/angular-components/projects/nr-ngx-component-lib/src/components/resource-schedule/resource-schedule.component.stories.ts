@@ -9,7 +9,7 @@ import { ScheduleProvider } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowItem } from './resource-schedule.component';
 
 const meta: Meta<ResourceScheduleComponent> = {
-    title: 'Composite/Resource Schedule',
+    title: 'Scheduling/Resource Schedule',
     component: ResourceScheduleComponent,
     decorators: [
         // Apply metadata to all stories
