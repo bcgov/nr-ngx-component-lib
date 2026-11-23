@@ -36,6 +36,12 @@ const meta: Meta<ButtonComponent> = {
         docs: {
             source: {
                 excludeDecorators: true
+            },
+            // display-mode-wrapper fills its container, so in docs each story needs
+            // its own iframe with a fixed height; inline it collapses to zero height
+            story: {
+                inline: false,
+                height: '140px'
             }
         }
     },
@@ -44,6 +50,13 @@ const meta: Meta<ButtonComponent> = {
 export default meta;
 
 export const Primary: StoryObj<ButtonComponent & { tooltipMode: any, containerWidthMode: any, containerWidth: number, widthMode: any, width: number } > = {
+    parameters: {
+        docs: {
+            story: {
+                height: '380px'
+            }
+        }
+    },
     argTypes: {
         label: {
             control: { type: 'inline-radio' },
