@@ -22,6 +22,16 @@ const config: StorybookConfig = {
     ],
     core: {
         enableCrashReports: false
+    },
+    webpackFinal: async ( config ) => {
+        // @storybook/angular 10 imports ɵgetComponentDef, which only exists in Angular 19+.
+        // On Angular 18 the call is wrapped in try/catch and storybook falls back to the
+        // @Input/@Output decorator metadata, so the missing export is harmless here.
+        config.ignoreWarnings = [
+            ...( config.ignoreWarnings ?? [] ),
+            { module: /@storybook[\\/]angular/, message: /ɵgetComponentDef/ },
+        ]
+        return config
     }
 };
 export default config;
