@@ -9,7 +9,7 @@ import { ConfigurationService, DisplayMode } from '../../services/configuration.
 import { FormFieldComponent } from './form-field.component';
 
 const meta: Meta<FormFieldComponent> = {
-    title: 'Form Field',
+    title: 'Forms/Form Field',
     component: FormFieldComponent,
     decorators: [
         // Apply metadata to all stories

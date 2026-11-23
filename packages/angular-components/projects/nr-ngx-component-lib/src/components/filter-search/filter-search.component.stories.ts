@@ -2,7 +2,7 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { FilterSearchComponent } from './filter-search.component';
 
 const meta: Meta<FilterSearchComponent> = {
-    title: 'Filter Search',
+    title: 'Filtering/Filter Search',
     component: FilterSearchComponent,
     decorators: [
         // Apply metadata to all stories

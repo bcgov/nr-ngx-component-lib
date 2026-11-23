@@ -11,7 +11,7 @@ import { FilterSelectComponent } from '../filter-select/filter-select.component'
 import { FiltersPanelComponent } from './filters-panel.component';
 
 const meta: Meta<FiltersPanelComponent> = {
-    title: 'Filters Panel',
+    title: 'Filtering/Filters Panel',
     component: FiltersPanelComponent,
     decorators: [
         // Apply metadata to all stories

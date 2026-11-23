@@ -76,7 +76,7 @@ class DialogDummyComponent {
 // }
 
 const meta: Meta<DialogDummyComponent> = {
-    title: 'Dialog Confirm',
+    title: 'Feedback & Overlays/Dialog Confirm',
     component: DialogDummyComponent,
     decorators: [
         // Apply metadata to all stories

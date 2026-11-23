@@ -23,7 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 
 const meta: Meta<PageContainerComponent> = {
-    title: 'Page Container',
+    title: 'Page Layout/Page Container',
     component: PageContainerComponent,
     decorators: [
         // Apply metadata to all stories

@@ -7,7 +7,7 @@ import { PageContainerComponent } from '../page-container/page-container.compone
 import { PageHeaderComponent } from './page-header.component';
 
 const meta: Meta<PageHeaderComponent> = {
-    title: 'Page Header',
+    title: 'Page Layout/Page Header',
     component: PageHeaderComponent,
     decorators: [
         // Apply metadata to all stories

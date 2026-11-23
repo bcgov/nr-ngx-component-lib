@@ -4,7 +4,7 @@ import { useArgs } from 'storybook/preview-api';
 import { FilterSelectComponent } from './filter-select.component';
 
 const meta: Meta<FilterSelectComponent> = {
-    title: 'Filter Select',
+    title: 'Filtering/Filter Select',
     component: FilterSelectComponent,
     decorators: [
         // Apply metadata to all stories

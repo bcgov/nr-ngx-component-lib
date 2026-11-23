@@ -6,7 +6,7 @@ import { DATE_FORMATS } from '../../utils/date.util';
 import { ListAttachmentsComponent } from './list-attachments.component';
 
 const meta: Meta<ListAttachmentsComponent> = {
-    title: 'List Attachments',
+    title: 'Data Display/List Attachments',
     component: ListAttachmentsComponent,
     decorators: [
         // Apply metadata to all stories
