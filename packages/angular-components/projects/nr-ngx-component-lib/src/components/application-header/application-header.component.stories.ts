@@ -33,39 +33,6 @@ const meta: Meta<ApplicationHeaderComponent> = {
             `
         )
     ],
-
-    tags: ["autodocs"],
-
-    parameters: {
-        docs: {
-            description: {
-                component: `
-BC Wildfire Service application header based on the BC Government Design System.
-
-## Features
-
-- BC Wildfire Service logo
-- Site title
-- Responsive layout
-- Accessible skip link
-- Keyboard accessible logo
-- Content projection for actions
-- Non-sticky header
-
-## Usage
-
-\`\`\`html
-<nrcl-application-header
-    title="Wildfire DataMart"
->
-    
-     
-</nrcl-application-header>
-\`\`\`
-`
-            }
-        }
-    },
 };
 
 export default meta;
