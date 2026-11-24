@@ -7,7 +7,7 @@ import { useArgs } from 'storybook/preview-api';
 import { FiltersPanelComponent } from './filters-panel.component';
 
 const meta: Meta<FiltersPanelComponent> = {
-    title: 'Inputs and Controls/Filters Panel',
+    title: 'Inputs and Controls/Filters/Filters Panel',
     component: FiltersPanelComponent,
     decorators: [
         // Apply metadata to all stories

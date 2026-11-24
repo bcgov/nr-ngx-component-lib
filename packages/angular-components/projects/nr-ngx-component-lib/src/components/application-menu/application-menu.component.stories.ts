@@ -10,7 +10,7 @@ import {
 import { ApplicationMenuComponent } from './application-menu.component';
 
 const meta: Meta<ApplicationMenuComponent> = {
-    title: 'Navigation and Structure/Application Menu',
+    title: 'Navigation and Structure/Application/Application Menu',
     component: ApplicationMenuComponent,
 
     decorators: [
