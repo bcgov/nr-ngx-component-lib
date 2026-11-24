@@ -2,7 +2,7 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { FilterDateComponent } from './filter-date.component';
 
 const meta: Meta<FilterDateComponent> = {
-    title: 'Inputs and Controls/Filter Date',
+    title: 'Inputs and Controls/Filters/Filter Date',
     component: FilterDateComponent,
     decorators: [
         // Apply metadata to all stories

@@ -5,7 +5,7 @@ import { ConfigurationService } from '../../public-api';
 import { FilterContainerComponent } from './filter-container.component';
 
 const meta: Meta<FilterContainerComponent> = {
-    title: 'Inputs and Controls/Filter Container',
+    title: 'Inputs and Controls/Filters/Filter Container',
     component: FilterContainerComponent,
     decorators: [
         // Apply metadata to all stories
