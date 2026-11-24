@@ -1,0 +1,175 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as TabsStories from './tabs.component.stories';
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+`<nrcl-tab-group>` shows one of several `<nrcl-tab>` panels at a time, built on Angular Material tabs. It has
+two looks, **standard** and **classic**, and an `activateTab` event that can stop the user leaving a tab, for
+example when it has unsaved changes. Interactive examples are under [Examples](#examples).
+
+`TabGroupComponent`, `TabComponent`, and the `nrclTabLabel` and `nrclTabContent` directives are declared and
+exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<nrcl-tab-group standard
+    [selectedTab]="selectedIndex"
+    (selectedTabChange)="selectedIndex = $event.index"
+    (activateTab)="onActivateTab( $event )"
+>
+    <nrcl-tab name="details" label="Details">
+        <app-details></app-details>
+    </nrcl-tab>
+
+    <nrcl-tab name="history" label="History">
+        <ng-template nrclTabContent>
+            <app-history></app-history>
+        </ng-template>
+    </nrcl-tab>
+
+    <nrcl-tab name="audit" label="Audit" disabled>
+        ...
+    </nrcl-tab>
+</nrcl-tab-group>
+```
+
+## Looks
+
+| Attribute | Look |
+|-----------|------|
+| `standard` | Tab labels in a row with an underline under the active tab, and a line under the row. The content has space above it and no border. |
+| `classic` | Folder-style tabs: bordered labels joined to a bordered content box. The active tab is bold and joins the content box. |
+
+Set one of them. With neither, or both, the tab group has no library styling and looks like a plain Angular
+Material tab group.
+
+Add `stretched` to make the tab labels share the full width of the group.
+
+## Tabs
+
+Each `<nrcl-tab>` is one tab.
+
+### Label
+
+Use the `label` input for text. For other content, such as an icon or a count, use an
+`<ng-template nrclTabLabel>` instead:
+
+```html
+<nrcl-tab name="alerts">
+    <ng-template nrclTabLabel>
+        Alerts <nrcl-indicator>3</nrcl-indicator>
+    </ng-template>
+    ...
+</nrcl-tab>
+```
+
+### Content
+
+There are two ways to give a tab its content, and they differ in when the content is created:
+
+| How | Created | When you leave the tab |
+|-----|---------|------------------------|
+| Content directly inside `<nrcl-tab>` | Once, when the tab group is created, even if the tab is never opened. | Kept, with its state. |
+| Inside `<ng-template nrclTabContent>` | Each time the tab is opened. | Destroyed. Opening the tab again creates it again. |
+
+Use `nrclTabContent` for content that's expensive to create or loads data, so it only loads when the user
+opens the tab. Use direct content when the tab's state, such as form input, must survive switching tabs.
+
+### Tab inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | | Tab label text. Ignored when there's an `nrclTabLabel` template. |
+| `name` | `string` | | Identifies the tab in `selectedTabChange` and `activateTab`, so your code doesn't depend on tab order. |
+| `disabled` | `boolean` | `false` | The tab can't be selected. |
+
+## Selecting tabs
+
+`selectedTab` sets the selected tab by index. The default, `-1`, selects the first tab.
+
+`selectedTabChange` emits `{ index, name }` after the selected tab changes. Because the event is an object
+rather than the index, don't use two-way binding (`[(selectedTab)]`). Bind the input and output separately,
+as in [Usage](#usage).
+
+### Stopping a tab change
+
+`activateTab` emits when the user clicks a different tab, before it's selected. To keep the current tab,
+call `cancel()` on the event with a promise that resolves to `true`. Call it before your handler returns. The
+promise can resolve later, for example after a confirmation dialog:
+
+```typescript
+import { ActivateTabEvent } from '@bcgov/nr-ngx-component-lib';
+
+onActivateTab( event: ActivateTabEvent ) {
+    if ( !this.form.dirty ) return;
+
+    // confirmDiscardChanges() returns a Promise<boolean>, true if the user agrees to lose their changes
+    event.cancel( this.confirmDiscardChanges().then( discard => !discard ) );
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `tab` | `number` | Index of the tab the user clicked. |
+| `name` | `string` | `name` of the tab the user clicked. |
+| `cancel` | `( shouldCancel: Promise<boolean> ) => void` | Resolve to `true` to stay on the current tab, or `false` to switch. |
+
+`activateTab` only covers mouse clicks. Selecting a tab with the keyboard (arrow keys, then Enter or Space)
+switches straight away without emitting it.
+
+### Tab group inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `standard` | `boolean` | `false` | Standard look. |
+| `classic` | `boolean` | `false` | Classic look. |
+| `stretched` | `boolean` | `false` | Tab labels fill the width of the group. |
+| `selectedTab` | `number` | `-1` | Index of the selected tab. `-1` selects the first tab. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `selectedTabChange` | `{ index: number, name?: string }` | The selected tab changed. |
+| `activateTab` | `ActivateTabEvent` | The user clicked a different tab. See [Stopping a tab change](#stopping-a-tab-change). |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-tab-group-header-font-size` | Label size. Default 17px. |
+| `--nrcl-tab-group-header-{active,inactive,disabled}-foreground-color` | Label colours. The active colour is also the standard look's underline. |
+| `--nrcl-tab-group-header-{active,inactive,disabled}-background-color` | Label backgrounds. |
+| `--nrcl-tab-group-border-color`, `--nrcl-tab-group-border-radius` | Classic look borders. |
+| `--nrcl-tag-group-header-padding` | Classic look label padding. Defaults to `--nrcl-gutter-space`. |
+| `--nrcl-tag-group-content-padding` | Classic look content padding. Defaults to `--nrcl-gutter-space`. |
+
+The two padding properties are spelled `tag-group`, not `tab-group`.
+
+Two classes change the layout when added to `<nrcl-tab-group>`:
+
+| Class | Effect |
+|-------|--------|
+| `no-tab-padding` | Removes the padding and fixed height from the tab labels. |
+| `no-body-scrolling` | Lets the content overflow the tab body instead of scrolling inside it, for example so a dropdown isn't clipped. |
+
+## Examples
+
+The examples log to the browser console when each tab's content is created and destroyed, so you can see the
+difference between direct content and `nrclTabContent`. Tabs 1 to 4 use `nrclTabContent`. Tabs 5 and 6 use
+direct content. Tab 3 is disabled.
+
+### Standard
+
+`activateTab` lets every change through.
+
+<Canvas of={TabsStories.Standard} />
+<Controls of={TabsStories.Standard} />
+
+### Classic
+
+Clicking another tab asks for confirmation first, and stays on the current tab if you cancel.
+
+<Canvas of={TabsStories.Classic} />
+<Controls of={TabsStories.Classic} />
