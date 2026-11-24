@@ -2,7 +2,7 @@ import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { IndicatorComponent } from './indicator.component';
 
 const meta: Meta<IndicatorComponent> = {
-    title: 'Notification and Feedback/Indicator',
+    title: 'Inputs and Controls/Indicator',
     component: IndicatorComponent,
     decorators: [
         // Apply metadata to all stories

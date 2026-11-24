@@ -19,8 +19,8 @@ The application frame and page layout.
 | Component | Description | Docs |
 |-----------|-------------|------|
 | `ApplicationComponent` | Application frame holding the header, menu, and page content | [Application](?path=/docs/navigation-and-structure-application--docs) |
-| `ApplicationHeaderComponent` | Title bar with the application name and actions | [Application Header](?path=/docs/navigation-and-structure-application-header--docs) |
-| `ApplicationMenuComponent` | Navigation menu | [Application Menu](?path=/docs/navigation-and-structure-application-menu--docs) |
+| `ApplicationHeaderComponent` | Title bar with the application name and actions | [Application Header](?path=/docs/navigation-and-structure-application-application-header--docs) |
+| `ApplicationMenuComponent` | Navigation menu | [Application Menu](?path=/docs/navigation-and-structure-application-application-menu--docs) |
 | `PageContainerComponent` | Main content container | [Page Container](?path=/docs/navigation-and-structure-page-container--docs) |
 | `PageHeaderComponent` | Page header with title and actions | [Page Header](?path=/docs/navigation-and-structure-page-header--docs) |
 | `ExpansionPanelComponent` | Collapsible panel | [Expansion Panel](?path=/docs/navigation-and-structure-expansion-panel--docs) |
@@ -28,23 +28,23 @@ The application frame and page layout.
 
 ## Inputs and Controls
 
-Buttons, form fields, filters, and list controls.
+Buttons, form fields, filters, and other interactive elements.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
 | `ButtonComponent` | Button with style variants, sizes, icons, and a responsive compact mode | [Button](?path=/docs/inputs-and-controls-button--docs) |
 | `FormLayoutComponent` | Form layout wrapper | [Form Layout](?path=/docs/inputs-and-controls-form-layout--docs) |
 | `FormFieldComponent` | Form field with label, hint, and error states | [Form Field](?path=/docs/inputs-and-controls-form-field--docs) |
-| `ListSelectComponent` | Selectable list | [List Select](?path=/docs/inputs-and-controls-list-select--docs) |
-| `IndicatorSelectComponent` | Select for indicator values | No docs yet |
-| `FiltersPanelComponent` | Panel with collapsible filters | [Filters Panel](?path=/docs/inputs-and-controls-filters-panel--docs) |
-| `FilterContainerComponent` | Container for multiple filters | [Filter Container](?path=/docs/inputs-and-controls-filter-container--docs) |
-| `FilterSearchComponent` | Search input | [Filter Search](?path=/docs/inputs-and-controls-filter-search--docs) |
-| `FilterSelectComponent` | Dropdown select filter | [Filter Select](?path=/docs/inputs-and-controls-filter-select--docs) |
-| `FilterDateComponent` | Date range filter | [Filter Date](?path=/docs/inputs-and-controls-filter-date--docs) |
+| `FiltersPanelComponent` | Panel with collapsible filters | [Filters Panel](?path=/docs/inputs-and-controls-filters-filters-panel--docs) |
+| `FilterContainerComponent` | Container for multiple filters | [Filter Container](?path=/docs/inputs-and-controls-filters-filter-container--docs) |
+| `FilterSearchComponent` | Search input | [Filter Search](?path=/docs/inputs-and-controls-filters-filter-search--docs) |
+| `FilterSelectComponent` | Dropdown select filter | [Filter Select](?path=/docs/inputs-and-controls-filters-filter-select--docs) |
+| `FilterDateComponent` | Date range filter | [Filter Date](?path=/docs/inputs-and-controls-filters-filter-date--docs) |
 | `DateNavigatorComponent` | Steps through dates | [Date Navigator](?path=/docs/inputs-and-controls-date-navigator--docs) |
-| `RowListPaginationComponent` | Pagination controls for a row list | [Row List Pagination](?path=/docs/inputs-and-controls-row-list-pagination--docs) |
-| `RowListSortingComponent` | Sorting controls for a row list | [Row List Sorting](?path=/docs/inputs-and-controls-row-list-sorting--docs) |
+| `CellContentComponent` | Content of a row list cell | [Cell Content](?path=/docs/inputs-and-controls-cell-content--docs) |
+| `IndicatorComponent` | Status indicator | [Indicator](?path=/docs/inputs-and-controls-indicator--docs) |
+| `TagListComponent` | List of tags | [Tag List](?path=/docs/inputs-and-controls-tag-list--docs) |
+| `IndicatorSelectComponent` | Select for indicator values | No docs yet |
 
 ## Content
 
@@ -52,32 +52,34 @@ Components that present data.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
-| `RowListDesktopComponent` | Table view for desktop | [Row List (Desktop)](?path=/docs/content-row-list-desktop--docs) |
-| `RowListMobileComponent` | Card list view for mobile | [Row List (Mobile)](?path=/docs/content-row-list-mobile--docs) |
-| `CellContentComponent` | Content of a row list cell | [Cell Content](?path=/docs/content-cell-content--docs) |
-| `TagListComponent` | List of tags | [Tag List](?path=/docs/content-tag-list--docs) |
+| `RowListDesktopComponent` | Table view for desktop | [Row List (Desktop)](?path=/docs/content-row-list-row-list-desktop--docs) |
+| `RowListMobileComponent` | Card list view for mobile | [Row List (Mobile)](?path=/docs/content-row-list-row-list-mobile--docs) |
+| `RowListPaginationComponent` | Pagination controls for the row lists | [Row List Pagination](?path=/docs/content-row-list-row-list-pagination--docs) |
+| `RowListSortingComponent` | Sorting controls for the row lists | [Row List Sorting](?path=/docs/content-row-list-row-list-sorting--docs) |
 | `ListAttachmentsComponent` | File attachment list | [List Attachments](?path=/docs/content-list-attachments--docs) |
 | `ListEventHistoryComponent` | Event history timeline | [List Event History](?path=/docs/content-list-event-history--docs) |
-| `ScheduleComponent` | Base schedule grid | No docs yet |
+| `ListSelectComponent` | Selectable list | [List Select](?path=/docs/content-list-select--docs) |
 | `ResourceScheduleComponent` | Schedule of resources over time | [Resource Schedule](?path=/docs/content-resource-schedule--docs) |
-| `IconComponent` | Material Symbols and the library's custom icons | [Icon](?path=/docs/content-icon--docs) |
+| `ScheduleComponent` | Base schedule grid | No docs yet |
 
 ## Notification and Feedback
+
+Dialogs, notifications, and status.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
 | `DialogComponent` | Dialog frame, opened with `DialogService` | [Dialog](?path=/story/notification-and-feedback-dialog--primary) |
 | `DialogConfirmComponent` | Confirmation dialog | [Dialog Confirm](?path=/story/notification-and-feedback-dialog-confirm--primary) |
-| `SnackbarComponent` | Toast notification, opened with `SnackbarUtilService` | [Snack Bar](?path=/docs/notification-and-feedback-snack-bar--docs) |
 | `LoadingStatusComponent` | Loading state | [Loading Status](?path=/docs/notification-and-feedback-loading-status--docs) |
-| `IndicatorComponent` | Status indicator | [Indicator](?path=/docs/notification-and-feedback-indicator--docs) |
+| `SnackbarComponent` | Toast notification, opened with `SnackbarUtilService` | [Snack Bar](?path=/docs/notification-and-feedback-snack-bar--docs) |
 | `TooltipDirective` | Tooltip on any element | [Tooltip](?path=/story/notification-and-feedback-tooltip--primary) |
 
 ## Utility
 
-Layout helpers with no visual output of their own.
+Helpers for layout, icons, and responsive behaviour.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
-| `GapComponent` | Spacing between elements | [Gap](?path=/docs/utility-gap--docs) |
 | `DeviceViewComponent` | Shows different content on desktop and mobile | [Device View](?path=/docs/utility-device-view--docs) |
+| `GapComponent` | Spacing between elements | [Gap](?path=/docs/utility-gap--docs) |
+| `IconComponent` | Material Symbols and the library's custom icons | [Icon](?path=/docs/utility-icon--docs) |

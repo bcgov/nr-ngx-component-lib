@@ -24,7 +24,7 @@ import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.co
 import { RowListMobileComponent } from './row-list-mobile.component';
 
 const meta: Meta<RowListMobileComponent> = {
-    title: 'Content/Row List (Mobile)',
+    title: 'Content/Row List/Row List (Mobile)',
     component: RowListMobileComponent,
     decorators: [
         // Apply metadata to all stories
