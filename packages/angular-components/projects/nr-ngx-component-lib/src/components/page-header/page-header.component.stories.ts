@@ -3,7 +3,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/n
 import { PageHeaderComponent } from './page-header.component';
 
 const meta: Meta<PageHeaderComponent> = {
-    title: 'Page Layout/Page Header',
+    title: 'Navigation and Structure/Page Header',
     component: PageHeaderComponent,
     decorators: [
         // Apply metadata to all stories

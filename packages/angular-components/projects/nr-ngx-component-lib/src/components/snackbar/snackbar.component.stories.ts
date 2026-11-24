@@ -45,7 +45,7 @@ class DummyComponent {
 type DummyComponentEx = DummyComponent & { displayMode: DisplayMode }
 
 const meta: Meta<DummyComponentEx> = {
-    title: 'Feedback & Overlays/Snack Bar',
+    title: 'Notification and Feedback/Snack Bar',
     parameters: {
         docs: {
             description: {

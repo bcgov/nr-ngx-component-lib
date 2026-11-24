@@ -4,7 +4,7 @@ import { ExpansionPanelComponent } from './expansion-panel.component';
 import { ExpansionPanelFooterComponent } from './footer/expansion-panel-footer.component';
 
 const meta: Meta<ExpansionPanelComponent> = {
-    title: 'Page Layout/Expansion Panel',
+    title: 'Navigation and Structure/Expansion Panel',
     component: ExpansionPanelComponent,
     decorators: [
         // Apply metadata to all stories

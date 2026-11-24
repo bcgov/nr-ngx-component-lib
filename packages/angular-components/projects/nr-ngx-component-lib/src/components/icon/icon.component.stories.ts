@@ -2,7 +2,7 @@ import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 
 const meta: Meta<IconComponent> = {
-    title: 'Foundations/Icon',
+    title: 'Content/Icon',
     component: IconComponent,
     decorators: [
         // Apply metadata to all stories

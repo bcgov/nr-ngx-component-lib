@@ -5,7 +5,7 @@ import { RowListPaginationComponent } from './row-list-pagination.component';
 type CollectionParametersDesktopComponentExtended = RowListPaginationComponent & { width?: number }
 
 const meta: Meta<CollectionParametersDesktopComponentExtended> = {
-    title: 'Lists & Tables/Row List Pagination',
+    title: 'Inputs and Controls/Row List Pagination',
     component: RowListPaginationComponent,
     decorators: [
         // Apply metadata to all stories

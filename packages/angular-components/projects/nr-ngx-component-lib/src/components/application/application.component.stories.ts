@@ -11,7 +11,7 @@ import {
 import { ApplicationComponent } from "./application.component";
 
 const meta: Meta<ApplicationComponent> = {
-    title: 'App Shell/Application',
+    title: 'Navigation and Structure/Application',
     component: ApplicationComponent,
 
     decorators: [

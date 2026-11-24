@@ -2,7 +2,7 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { CellContentComponent } from './cell-content.component';
 
 const meta: Meta<CellContentComponent & { width: number }> = {
-    title: 'Lists & Tables/Cell Content',
+    title: 'Content/Cell Content',
     component: CellContentComponent,
     decorators: [
         // Apply metadata to all stories
