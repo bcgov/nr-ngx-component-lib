@@ -60,7 +60,6 @@ const meta: Meta<DisplayModeWrapperComponent & TabGroupComponent> = {
             }
         ),
     ],
-    tags: ['autodocs'],
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         selectedTabChange: { action: 'selectedTabChange' },
@@ -119,6 +118,7 @@ export const Classic: StoryObj<DisplayModeWrapperComponent> = {
                     [style.width.px]="width"
                     [selectedTab]="selectedTab"
                     (selectedTabChange)="selectedTabChange($event)"
+                    (activateTab)="activateTab($event)"
                 >
                     ${ tabs }
                 </nrcl-tab-group>
