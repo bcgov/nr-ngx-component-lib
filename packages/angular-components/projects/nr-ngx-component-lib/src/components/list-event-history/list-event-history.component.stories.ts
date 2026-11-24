@@ -7,7 +7,7 @@ import { DATE_FORMATS } from '../../utils/date.util';
 import { ListEventHistoryComponent } from './list-event-history.component';
 
 const meta: Meta<ListEventHistoryComponent> = {
-    title: 'Data Display/List Event History',
+    title: 'Content/List Event History',
     component: ListEventHistoryComponent,
     decorators: [
         // Apply metadata to all stories

@@ -11,7 +11,7 @@ import { ApplicationMenuComponent } from "../application-menu/application-menu.c
 import { ApplicationHeaderComponent } from "./application-header.component";
 
 const meta: Meta<ApplicationHeaderComponent> = {
-    title: 'App Shell/Application Header',
+    title: 'Navigation and Structure/Application Header',
     component: ApplicationHeaderComponent,
 
     decorators: [

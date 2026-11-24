@@ -25,7 +25,7 @@ class SentinalComponent implements OnInit, OnDestroy {
 }
 
 const meta: Meta<DisplayModeWrapperComponent & TabGroupComponent> = {
-    title: 'Page Layout/Tabs',
+    title: 'Navigation and Structure/Tabs',
     // component: TabGroupComponent,
     decorators: [
         // Apply metadata to all stories

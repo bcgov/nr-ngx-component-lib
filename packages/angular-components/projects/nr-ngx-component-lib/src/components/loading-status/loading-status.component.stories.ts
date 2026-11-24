@@ -3,7 +3,7 @@ import { ButtonComponent } from '../button/button.component';
 import { LoadingStatusComponent } from './loading-status.component';
 
 const meta: Meta<LoadingStatusComponent> = {
-    title: 'Feedback & Overlays/Loading Status',
+    title: 'Notification and Feedback/Loading Status',
     component: LoadingStatusComponent,
     decorators: [
         // Apply metadata to all stories

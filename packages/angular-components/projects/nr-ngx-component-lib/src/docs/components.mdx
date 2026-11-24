@@ -12,95 +12,72 @@ import { Meta } from '@storybook/addon-docs/blocks';
 Every component in the NR Angular Component Library, grouped the same way as the sidebar. All of them are
 declared and exported by `NrNgxComponentLibModule`.
 
-## Foundations
+## Navigation and Structure
 
-Building blocks used by the other components.
-
-| Component | Description | Docs |
-|-----------|-------------|------|
-| `IconComponent` | Material Symbols and the library's custom icons | [Icon](?path=/docs/foundations-icon--docs) |
-| `GapComponent` | Spacing between elements | [Gap](?path=/docs/foundations-gap--docs) |
-| `TooltipDirective` | Tooltip on any element | [Tooltip](?path=/story/foundations-tooltip--primary) |
-| `DeviceViewComponent` | Shows different content on desktop and mobile | [Device View](?path=/docs/foundations-device-view--docs) |
-
-## Actions
+The application frame and page layout.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
-| `ButtonComponent` | Button with style variants, sizes, icons, and a responsive compact mode | [Button](?path=/docs/actions-button--docs) |
+| `ApplicationComponent` | Application frame holding the header, menu, and page content | [Application](?path=/docs/navigation-and-structure-application--docs) |
+| `ApplicationHeaderComponent` | Title bar with the application name and actions | [Application Header](?path=/docs/navigation-and-structure-application-header--docs) |
+| `ApplicationMenuComponent` | Navigation menu | [Application Menu](?path=/docs/navigation-and-structure-application-menu--docs) |
+| `PageContainerComponent` | Main content container | [Page Container](?path=/docs/navigation-and-structure-page-container--docs) |
+| `PageHeaderComponent` | Page header with title and actions | [Page Header](?path=/docs/navigation-and-structure-page-header--docs) |
+| `ExpansionPanelComponent` | Collapsible panel | [Expansion Panel](?path=/docs/navigation-and-structure-expansion-panel--docs) |
+| `TabGroupComponent` | Tabs, in standard and classic styles | [Tabs](?path=/docs/navigation-and-structure-tabs--docs) |
 
-## App Shell
+## Inputs and Controls
 
-Set up once per application.
-
-| Component | Description | Docs |
-|-----------|-------------|------|
-| `ApplicationComponent` | Application frame holding the header, menu, and page content | [Application](?path=/docs/app-shell-application--docs) |
-| `ApplicationHeaderComponent` | Title bar with the application name and actions | [Application Header](?path=/docs/app-shell-application-header--docs) |
-| `ApplicationMenuComponent` | Navigation menu | [Application Menu](?path=/docs/app-shell-application-menu--docs) |
-
-## Page Layout
-
-Used on every page.
+Buttons, form fields, filters, and list controls.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
-| `PageContainerComponent` | Main content container | [Page Container](?path=/docs/page-layout-page-container--docs) |
-| `PageHeaderComponent` | Page header with title and actions | [Page Header](?path=/docs/page-layout-page-header--docs) |
-| `ExpansionPanelComponent` | Collapsible panel | [Expansion Panel](?path=/docs/page-layout-expansion-panel--docs) |
-| `TabGroupComponent` | Tabs, in standard and classic styles | [Tabs](?path=/docs/page-layout-tabs--docs) |
-
-## Filtering
-
-| Component | Description | Docs |
-|-----------|-------------|------|
-| `FiltersPanelComponent` | Panel with collapsible filters | [Filters Panel](?path=/docs/filtering-filters-panel--docs) |
-| `FilterContainerComponent` | Container for multiple filters | [Filter Container](?path=/docs/filtering-filter-container--docs) |
-| `FilterSearchComponent` | Search input | [Filter Search](?path=/docs/filtering-filter-search--docs) |
-| `FilterSelectComponent` | Dropdown select filter | [Filter Select](?path=/docs/filtering-filter-select--docs) |
-| `FilterDateComponent` | Date range filter | [Filter Date](?path=/docs/filtering-filter-date--docs) |
-
-## Lists & Tables
-
-| Component | Description | Docs |
-|-----------|-------------|------|
-| `RowListDesktopComponent` | Table view for desktop | [Row List (Desktop)](?path=/docs/lists-tables-row-list-desktop--docs) |
-| `RowListMobileComponent` | Card list view for mobile | [Row List (Mobile)](?path=/docs/lists-tables-row-list-mobile--docs) |
-| `RowListPaginationComponent` | Pagination controls | [Row List Pagination](?path=/docs/lists-tables-row-list-pagination--docs) |
-| `RowListSortingComponent` | Sorting controls | [Row List Sorting](?path=/docs/lists-tables-row-list-sorting--docs) |
-| `CellContentComponent` | Content of a row list cell | [Cell Content](?path=/docs/lists-tables-cell-content--docs) |
-
-## Forms
-
-| Component | Description | Docs |
-|-----------|-------------|------|
-| `FormLayoutComponent` | Form layout wrapper | [Form Layout](?path=/docs/forms-form-layout--docs) |
-| `FormFieldComponent` | Form field with label, hint, and error states | [Form Field](?path=/docs/forms-form-field--docs) |
-| `ListSelectComponent` | Selectable list | [List Select](?path=/docs/forms-list-select--docs) |
+| `ButtonComponent` | Button with style variants, sizes, icons, and a responsive compact mode | [Button](?path=/docs/inputs-and-controls-button--docs) |
+| `FormLayoutComponent` | Form layout wrapper | [Form Layout](?path=/docs/inputs-and-controls-form-layout--docs) |
+| `FormFieldComponent` | Form field with label, hint, and error states | [Form Field](?path=/docs/inputs-and-controls-form-field--docs) |
+| `ListSelectComponent` | Selectable list | [List Select](?path=/docs/inputs-and-controls-list-select--docs) |
 | `IndicatorSelectComponent` | Select for indicator values | No docs yet |
+| `FiltersPanelComponent` | Panel with collapsible filters | [Filters Panel](?path=/docs/inputs-and-controls-filters-panel--docs) |
+| `FilterContainerComponent` | Container for multiple filters | [Filter Container](?path=/docs/inputs-and-controls-filter-container--docs) |
+| `FilterSearchComponent` | Search input | [Filter Search](?path=/docs/inputs-and-controls-filter-search--docs) |
+| `FilterSelectComponent` | Dropdown select filter | [Filter Select](?path=/docs/inputs-and-controls-filter-select--docs) |
+| `FilterDateComponent` | Date range filter | [Filter Date](?path=/docs/inputs-and-controls-filter-date--docs) |
+| `DateNavigatorComponent` | Steps through dates | [Date Navigator](?path=/docs/inputs-and-controls-date-navigator--docs) |
+| `RowListPaginationComponent` | Pagination controls for a row list | [Row List Pagination](?path=/docs/inputs-and-controls-row-list-pagination--docs) |
+| `RowListSortingComponent` | Sorting controls for a row list | [Row List Sorting](?path=/docs/inputs-and-controls-row-list-sorting--docs) |
 
-## Data Display
+## Content
+
+Components that present data.
 
 | Component | Description | Docs |
 |-----------|-------------|------|
-| `TagListComponent` | List of tags | [Tag List](?path=/docs/data-display-tag-list--docs) |
-| `IndicatorComponent` | Status indicator | [Indicator](?path=/docs/data-display-indicator--docs) |
-| `ListAttachmentsComponent` | File attachment list | [List Attachments](?path=/docs/data-display-list-attachments--docs) |
-| `ListEventHistoryComponent` | Event history timeline | [List Event History](?path=/docs/data-display-list-event-history--docs) |
-| `DateNavigatorComponent` | Steps through dates | [Date Navigator](?path=/docs/data-display-date-navigator--docs) |
-
-## Scheduling
-
-| Component | Description | Docs |
-|-----------|-------------|------|
+| `RowListDesktopComponent` | Table view for desktop | [Row List (Desktop)](?path=/docs/content-row-list-desktop--docs) |
+| `RowListMobileComponent` | Card list view for mobile | [Row List (Mobile)](?path=/docs/content-row-list-mobile--docs) |
+| `CellContentComponent` | Content of a row list cell | [Cell Content](?path=/docs/content-cell-content--docs) |
+| `TagListComponent` | List of tags | [Tag List](?path=/docs/content-tag-list--docs) |
+| `ListAttachmentsComponent` | File attachment list | [List Attachments](?path=/docs/content-list-attachments--docs) |
+| `ListEventHistoryComponent` | Event history timeline | [List Event History](?path=/docs/content-list-event-history--docs) |
 | `ScheduleComponent` | Base schedule grid | No docs yet |
-| `ResourceScheduleComponent` | Schedule of resources over time | [Resource Schedule](?path=/docs/scheduling-resource-schedule--docs) |
+| `ResourceScheduleComponent` | Schedule of resources over time | [Resource Schedule](?path=/docs/content-resource-schedule--docs) |
+| `IconComponent` | Material Symbols and the library's custom icons | [Icon](?path=/docs/content-icon--docs) |
 
-## Feedback & Overlays
+## Notification and Feedback
 
 | Component | Description | Docs |
 |-----------|-------------|------|
-| `DialogComponent` | Dialog frame, opened with `DialogService` | [Dialog](?path=/story/feedback-overlays-dialog--primary) |
-| `DialogConfirmComponent` | Confirmation dialog | [Dialog Confirm](?path=/story/feedback-overlays-dialog-confirm--primary) |
-| `SnackbarComponent` | Toast notification, opened with `SnackbarUtilService` | [Snack Bar](?path=/docs/feedback-overlays-snack-bar--docs) |
-| `LoadingStatusComponent` | Loading state | [Loading Status](?path=/docs/feedback-overlays-loading-status--docs) |
+| `DialogComponent` | Dialog frame, opened with `DialogService` | [Dialog](?path=/story/notification-and-feedback-dialog--primary) |
+| `DialogConfirmComponent` | Confirmation dialog | [Dialog Confirm](?path=/story/notification-and-feedback-dialog-confirm--primary) |
+| `SnackbarComponent` | Toast notification, opened with `SnackbarUtilService` | [Snack Bar](?path=/docs/notification-and-feedback-snack-bar--docs) |
+| `LoadingStatusComponent` | Loading state | [Loading Status](?path=/docs/notification-and-feedback-loading-status--docs) |
+| `IndicatorComponent` | Status indicator | [Indicator](?path=/docs/notification-and-feedback-indicator--docs) |
+| `TooltipDirective` | Tooltip on any element | [Tooltip](?path=/story/notification-and-feedback-tooltip--primary) |
+
+## Utility
+
+Layout helpers with no visual output of their own.
+
+| Component | Description | Docs |
+|-----------|-------------|------|
+| `GapComponent` | Spacing between elements | [Gap](?path=/docs/utility-gap--docs) |
+| `DeviceViewComponent` | Shows different content on desktop and mobile | [Device View](?path=/docs/utility-device-view--docs) |

@@ -10,7 +10,7 @@ import { FormFieldComponent } from '../form-field/form-field.component';
 import { FormLayoutComponent } from './form-layout.component';
 
 const meta: Meta<FormLayoutComponent> = {
-    title: 'Forms/Form Layout',
+    title: 'Inputs and Controls/Form Layout',
     component: FormLayoutComponent,
     decorators: [
         // Apply metadata to all stories

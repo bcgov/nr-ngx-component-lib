@@ -4,7 +4,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/n
 import { ListSelectComponent } from './list-select.component';
 
 const meta: Meta<ListSelectComponent<any>> = {
-    title: 'Forms/List Select',
+    title: 'Inputs and Controls/List Select',
     component: ListSelectComponent,
     decorators: [
         // Apply metadata to all stories

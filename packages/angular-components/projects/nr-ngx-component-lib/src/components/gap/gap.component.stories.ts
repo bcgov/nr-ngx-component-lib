@@ -3,7 +3,7 @@ import { ConfigurationService, DisplayMode } from '../../services/configuration.
 import { GapComponent } from './gap.component';
 
 const meta: Meta<GapComponent> = {
-    title: 'Foundations/Gap',
+    title: 'Utility/Gap',
     component: GapComponent,
     decorators: [
         // Apply metadata to all stories

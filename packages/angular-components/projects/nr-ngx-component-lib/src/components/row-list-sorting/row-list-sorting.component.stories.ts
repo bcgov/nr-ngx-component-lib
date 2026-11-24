@@ -3,7 +3,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory, displayModeWrappe
 import { RowListSortingComponent } from './row-list-sorting.component';
 
 const meta: Meta<RowListSortingComponent> = {
-    title: 'Lists & Tables/Row List Sorting',
+    title: 'Inputs and Controls/Row List Sorting',
     component: RowListSortingComponent,
     decorators: [
         // Apply metadata to all stories
