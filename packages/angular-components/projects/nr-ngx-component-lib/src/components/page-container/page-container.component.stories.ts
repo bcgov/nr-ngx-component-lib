@@ -72,97 +72,12 @@ const meta: Meta<PageContainerComponent> = {
             }
         ),        
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A layout container component that provides consistent spacing and structure for page content.
-This component serves as the main wrapper for page layouts, automatically handling gaps between sections and providing a standardized page structure.
-
-## Purpose
-
-The page container establishes the foundational layout structure for application pages.
-It ensures consistent spacing between page sections and works seamlessly with responsive components to adapt layouts between desktop and mobile views.
-
-## Features
-
-- **Automatic Section Spacing**: Adds consistent vertical gaps between child sections
-- **Responsive Layout**: Works with device-view components for adaptive layouts
-- **Page Structure**: Provides standardized container for headers, filters, and content
-- **Integration Ready**: Designed to work with other layout components (PageHeader, FiltersPanel, RowList)
-
-## Usage
-
-### Basic Layout with Sections
-\`\`\`typescript
-import { PageContainerComponent } from '@wf-design-system/page-container';
-
-@Component({
-  template: \`
-    <nrcl-page-container>
-      <section>First section content</section>
-      <section>Second section content</section>
-      <section>Third section content</section>
-    </nrcl-page-container>
-  \`
-})
-export class MyPageComponent {}
-\`\`\`
-
-
-### Complete Page Layout
-\`\`\`typescript
-<nrcl-page-container>
-  <nrcl-page-header>
-    <h1>Page Title</h1>
-    <button mat-raised-button>Action</button>
-  </nrcl-page-header>
-  
-  <nrcl-gap vertical/>
-  
-  <nrcl-filters-panel>
-    <nrcl-filter-search></nrcl-filter-search>
-    <nrcl-filter-select></nrcl-filter-select>
-  </nrcl-filters-panel>
-  
-  <section>
-    <!-- Main content here -->
-  </section>
-</nrcl-page-container>
-\`\`\`
-
-## Common Use Cases
-
-- List pages with headers and filters
-- Dashboard layouts with multiple sections
-- Form pages with consistent spacing
-- Any page requiring standardized layout structure
-
-## Interactive Demo
-
-Toggle display mode and adjust width to see how the page container adapts to different screen sizes and device types.
-                `
-            }
-        }
-    },
 }
 
 export default meta;
 
 export const Sections: StoryObj<PageContainerComponent & DisplayModeWrapperComponent> = {
     ...displayModeWrapperStory,
-    parameters: {
-        docs: {
-            description: {
-                story: `
-Demonstrates the basic page container with multiple sections.
-The container automatically adds consistent vertical spacing between each section element.
-This is the foundational layout pattern for organizing page content.
-                `
-            }
-        }
-    },    
     render: ( args ) => {
         return {
             props: args,
@@ -178,18 +93,6 @@ This is the foundational layout pattern for organizing page content.
 
 export const PageHeader: StoryObj<PageContainerComponent & DisplayModeWrapperComponent & { isLoading: boolean, header1: string, header2: string }> = {
     argTypes: displayModeWrapperStory.argTypes,
-    parameters: {
-        docs: {
-            description: {
-                story: `
-Demonstrates a page container with a page header component.
-The page header includes a title, optional subtitle, and action button.
-Toggle the loading state to see the loading indicator behavior.
-Adjust header text to see how dynamic content is displayed.                
-                `
-            }
-        }
-    },    
     args: {
         ...displayModeWrapperStory.args,
         header1: 'Prep Sheets',
@@ -216,18 +119,6 @@ Adjust header text to see how dynamic content is displayed.
 }
 
 export const RowList: StoryObj<PageContainerComponent & DisplayModeWrapperComponent & RowListArgs> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-A complete page layout example showing a typical list page implementation.
-Includes page header with title and action button, filters panel with search and select filters, and responsive row list that switches between desktop table and mobile card views.
-This demonstrates the full integration of multiple layout components within the page container.
-Toggle display mode to see how the layout adapts between desktop and mobile experiences.
-                `
-            }
-        }
-    },    
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         ...rowListStory.argTypes,
