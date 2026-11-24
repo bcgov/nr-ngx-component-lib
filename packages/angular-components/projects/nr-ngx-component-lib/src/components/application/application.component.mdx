@@ -1,0 +1,191 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ApplicationStories from './application.component.stories';
+import * as HeaderStories from '../application-header/application-header.component.stories';
+import * as MenuStories from '../application-menu/application-menu.component.stories';
+
+<Meta of={ApplicationStories} />
+
+# Application
+
+Three components make up the application shell:
+
+| Component | Selector | Role |
+|-----------|----------|------|
+| `ApplicationComponent` | `<nrcl-application>` | Fills the window, keeps the header at the top, and scrolls the page content under it. |
+| `ApplicationHeaderComponent` | `<nrcl-application-header>` | The BC Wildfire Service logo, a skip link, the application title, and a slot for the menu. |
+| `ApplicationMenuComponent` | `<nrcl-application-menu>` | A menu button that opens the application's navigation. |
+
+All three are declared and exported by `NrNgxComponentLibModule`. Interactive examples are under
+[Examples](#examples).
+
+## Usage
+
+Use the shell once, in your root component, with the router outlet as the page content:
+
+```html
+<nrcl-application>
+    <nrcl-application-header
+        title="Wildfire DataMart"
+        logoAriaLabel="BC Wildfire Service home"
+        skipLabel="Skip to main content"
+        (logoClick)="goHome()"
+        (skipClick)="skipToContent()"
+    >
+        <nrcl-application-menu
+            label="Menu"
+            [items]="menuItems"
+            [currentItemId]="currentPageId"
+            (menuItemClick)="navigate( $event )"
+        ></nrcl-application-menu>
+    </nrcl-application-header>
+
+    <router-outlet></router-outlet>
+</nrcl-application>
+```
+
+```typescript
+import { MenuItem } from '@bcgov/nr-ngx-component-lib';
+
+menuItems: MenuItem[] = [
+    { id: 'home', label: 'Home', icon: 'home-outline' },
+    { id: 'stations', label: 'Weather Station List', icon: 'format_list_bulleted' },
+    { id: 'disclaimer', label: 'Disclaimer' },
+];
+
+navigate( id: string ) {
+    this.router.navigate( [ id ] );
+}
+```
+
+The components don't navigate on their own. Each one emits an event, and your app decides what happens.
+
+## Application
+
+`<nrcl-application>` is a full-height (`100vh`) column. The `<nrcl-application-header>` goes at the top,
+and all other content goes in a `<main>` element below it that scrolls on its own, so the header stays in
+view without being sticky.
+
+Only a `<nrcl-application-header>` element is placed in the header slot. Everything else is page content.
+
+`<nrcl-application>` has no inputs or outputs.
+
+## Application Header
+
+The header shows, from left to right:
+
+- **Logo:** the BC Wildfire Service logo. It acts as a button: clicking it, or pressing Enter while it has
+  focus, emits `logoClick`. Usually you navigate to the home page.
+- **Skip link:** hidden until it gets keyboard focus, so it's the first thing a keyboard user reaches.
+  Clicking it or pressing Enter emits `skipClick`. Leave `skipLabel` empty to remove it.
+- **Title:** `title`, in an `<h1>`. Long titles wrap.
+- **Menu:** a projected `<nrcl-application-menu>`, on the right. Other projected content isn't shown.
+
+On mobile the logo, title font, and spacing are smaller.
+
+### Handling the skip link
+
+`skipClick` only emits the event. To skip the header, move focus to your main content:
+
+```typescript
+skipToContent() {
+    document.querySelector<HTMLElement>( '#main-content' )?.focus();
+}
+```
+
+```html
+<h1 id="main-content" tabindex="-1">Page title</h1>
+```
+
+### Header inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `title` | `string` | `''` | Application title. |
+| `logoAriaLabel` | `string` | `''` | Accessible name for the logo button. Describe what it does, for example "BC Wildfire Service home". |
+| `skipLabel` | `string` | `''` | Text of the skip link. The skip link isn't rendered when this is empty. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `logoClick` | `void` | The logo was clicked, or Enter was pressed on it. |
+| `skipClick` | `void` | The skip link was clicked, or Enter was pressed on it. |
+
+## Application Menu
+
+`<nrcl-application-menu>` renders a secondary [button](?path=/docs/inputs-and-controls-button--docs) that
+opens a menu of `items`.
+
+- **Desktop:** the button shows the icon and `label`.
+- **Mobile:** the button shows only the icon, and the menu opens across the full width of the screen.
+
+The button's accessible name is `label`, or "Menu" if `label` isn't set.
+
+Each item shows its `icon` and `label`. Items without an icon are indented to line up with the ones that
+have one. Choosing an item emits `menuItemClick` with the item's `id`.
+
+The item whose `id` matches `currentItemId` is marked with `aria-current="page"`. It has no visual highlight.
+
+### Menu inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `items` | `MenuItem[]` | `[]` | Menu items. Labels must be unique. |
+| `label` | `string` | | Button text on desktop, and the button's accessible name. |
+| `icon` | `string` | `'menu'` | Button icon. Any `nrcl-icon` name. |
+| `currentItemId` | `string` | | `id` of the item for the current page. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `menuItemClick` | `string` | The `id` of the chosen item. |
+
+```typescript
+interface MenuItem {
+    id: string;      // emitted by menuItemClick
+    label: string;
+    icon?: string;   // any nrcl-icon name
+}
+```
+
+## Styling
+
+The header is styled with CSS custom properties on `:root`. To use a different logo, set the image and its
+aspect ratio (width / height):
+
+```css
+:root {
+    --nrcl-application-header-logo-url: url( '/assets/my-logo.png' );
+    --nrcl-application-header-logo-aspect: calc( 1200 / 300 );
+}
+```
+
+| Group | Properties |
+|-------|------------|
+| Logo | `--nrcl-application-header-logo-url`, `--nrcl-application-header-logo-aspect`, `--nrcl-application-header-{desktop,mobile}-logo-width` |
+| Colours | `--nrcl-application-header-{background,title,link,border,focus}-color` |
+| Fonts | `--nrcl-application-header-font` (skip link), `--nrcl-application-header-{desktop,mobile}-title-font` |
+| Spacing | `--nrcl-application-header-{desktop,mobile}-padding` (gap between logo, divider, and title), `--nrcl-application-header-border-width` |
+
+The header's outer padding is `--nrcl-gutter-space`, which follows the display mode.
+
+The menu panel is styled in `global.scss`, using the `nrcl-application-menu` and `nrcl-application-menu-item`
+classes.
+
+## Examples
+
+### Application
+
+The full shell, with a header, menu, and scrolling content. Switch the display mode to see the mobile layout.
+
+<Canvas of={ApplicationStories.Primary} />
+<Controls of={ApplicationStories.Primary} />
+
+### Application Header
+
+<Canvas of={HeaderStories.Primary} />
+<Controls of={HeaderStories.Primary} />
+
+### Application Menu
+
+Open the menu to see the items. `currentItemId` is set to `home`.
+
+<Canvas of={MenuStories.Primary} />
+<Controls of={MenuStories.Primary} />

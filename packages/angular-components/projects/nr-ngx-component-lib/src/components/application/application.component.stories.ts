@@ -40,15 +40,6 @@ const meta: Meta<ApplicationComponent> = {
         )
     ],
 
-    tags: ["autodocs"],
-
-    parameters: {
-        docs: {
-            description: {
-                component: ``
-            }
-        }
-    },
 };
 
 export default meta;
@@ -63,6 +54,13 @@ export const Primary: Story = {
         ...displayModeWrapperStory.args,
     },
     render: args => ({
+        // nrcl-application fills the viewport; on the docs page that's the whole docs frame,
+        // so give the inline example a fixed height instead.
+        styles: [ `
+            :host-context( .docs-story ) nrcl-application {
+                height: 480px;
+            }
+        ` ],
         props: {
             ...args,
             menuItems: [

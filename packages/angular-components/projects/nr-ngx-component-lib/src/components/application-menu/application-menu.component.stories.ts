@@ -32,8 +32,6 @@ const meta: Meta<ApplicationMenuComponent> = {
             `
         )
     ],
-
-    tags: ['autodocs']
 };
 
 export default meta;
