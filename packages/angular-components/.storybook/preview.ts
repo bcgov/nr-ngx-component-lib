@@ -16,9 +16,9 @@ const preview: Preview = {
             storySort: {
                 order: [
                     'Introduction', [ 'Getting Started', 'Components' ],
-                    'Navigation and Structure', [ 'Application', 'Application Header', 'Application Menu', 'Page Container', 'Page Header' ],
-                    'Inputs and Controls', [ 'Button', 'Form Layout', 'Form Field', 'List Select', 'Filters Panel', 'Filter Container', 'Filter Search', 'Filter Select', 'Filter Date', 'Date Navigator' ],
-                    'Content', [ 'Row List (Desktop)', 'Row List (Mobile)', 'Cell Content' ],
+                    'Navigation and Structure', [ 'Application', [ 'Application Header', 'Application Menu' ], 'Page Container', 'Page Header' ],
+                    'Inputs and Controls', [ 'Button', 'Form Layout', 'Form Field', 'Filters', [ 'Filters Panel', 'Filter Container', 'Filter Search', 'Filter Select', 'Filter Date' ], 'Date Navigator' ],
+                    'Content', [ 'Row List', [ 'Row List (Desktop)', 'Row List (Mobile)', 'Row List Pagination', 'Row List Sorting' ] ],
                     'Notification and Feedback', [ 'Dialog', 'Dialog Confirm' ],
                     'Utility',
                 ],
