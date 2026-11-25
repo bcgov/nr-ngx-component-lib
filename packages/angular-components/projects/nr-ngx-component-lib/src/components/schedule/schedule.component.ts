@@ -121,6 +121,10 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     @ContentChildren(ScheduleItemDirective) itemTemplates!: QueryList<ScheduleItemDirective>
     @ContentChild(ScheduleRowHeadingDirective) headerTemplate!: ScheduleRowHeadingDirective
 
+    static _nextPaginationId = 0
+    // unique per instance, so schedules on the same page page separately
+    readonly paginationId = 'nrcl-schedule-' + ( ++ScheduleComponent._nextPaginationId )
+
     protected _days: Day[] = []
     protected _weeks: Week[] = []
     protected _templates: TemplateRef<any>[][] = []
