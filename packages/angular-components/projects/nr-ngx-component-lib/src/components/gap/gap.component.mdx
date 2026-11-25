@@ -1,0 +1,83 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as GapStories from './gap.component.stories';
+
+<Meta of={GapStories} />
+
+# Gap
+
+`<nrcl-gap>` adds a space between elements, sized to the gutter, which is 16px on desktop and 8px on
+mobile. It can also draw a dividing line. Use it instead of margins, so spacing stays consistent and follows
+the display mode. Interactive examples are under [Examples](#examples).
+
+`GapComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-page-header>...</nrcl-page-header>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-filters-panel>...</nrcl-filters-panel>
+```
+
+```html
+<div style="display: flex">
+    <nrcl-button label="Back"></nrcl-button>
+    <nrcl-gap horizontal divider></nrcl-gap>
+    <nrcl-button label="Next"></nrcl-button>
+</div>
+```
+
+## Direction
+
+| Attribute | Gap |
+|-----------|-----|
+| `vertical`, or neither | A space between elements stacked one above the other. It's a block, the full width of its container. |
+| `horizontal` | A space between elements side by side. Use it in a flex row. It stretches to the row's height. |
+
+## Dividers
+
+`divider` draws a 1px line across the gap, in `--nrcl-divider-color`:
+
+| Attribute | Line | Gap size |
+|-----------|------|----------|
+| `divider` or `divider="middle"` | In the middle | 2 gutters, a gutter each side of the line |
+| `divider="before"` | At the start: the top, or the left | 1 gutter |
+| `divider="after"` | At the end: the bottom, or the right | 1 gutter |
+
+## Size
+
+Without a divider, a gap is 1 gutter.
+
+With a divider, set the size in gutters with a number: `<nrcl-gap vertical="3" divider>` is 3 gutters tall
+with the line in the middle. The number is ignored without a divider.
+
+## Inputs
+
+| Input | Type | Description |
+|-------|------|-------------|
+| `vertical` | `string` | Vertical gap. A number sets the size in gutters, with a divider. |
+| `horizontal` | `string` | Horizontal gap. A number sets the size in gutters, with a divider. Ignored when `vertical` is set. |
+| `divider` | `string` | Draws a line: `''` or `'middle'`, `'before'`, or `'after'`. `'none'`, or any other value, draws none. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-gutter-space` | The gap size. Set by the display mode from `--nrcl-device-desktop-gutter-space` (16px) and `--nrcl-device-mobile-gutter-space` (8px). |
+| `--nrcl-divider-color` | The line. |
+
+## Examples
+
+Use the controls to try each direction, size, and divider position.
+
+### Vertical
+
+<Canvas of={GapStories.Vertical} />
+<Controls of={GapStories.Vertical} />
+
+### Horizontal
+
+<Canvas of={GapStories.Horizontal} />
+<Controls of={GapStories.Horizontal} />

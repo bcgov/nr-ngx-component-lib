@@ -1,0 +1,99 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as RowListMobileStories from './row-list-mobile.component.stories';
+
+<Meta of={RowListMobileStories} />
+
+# Row List (Mobile)
+
+`<nrcl-row-list-mobile>` styles a list of Angular Material cards placed inside it, one card per record. It's
+the mobile half of the [row list](?path=/docs/content-row-list--docs); on desktop, show the same records
+in a [desktop row list](?path=/docs/content-row-list-row-list-desktop--docs). An interactive example is
+under [Example](#example).
+
+`RowListMobileComponent` is standalone: add it to your component's `imports`. Your component also needs
+`MatCardModule`, which the library doesn't re-export.
+
+## Usage
+
+```html
+<nrcl-row-list-sorting ...></nrcl-row-list-sorting>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-row-list-mobile>
+    @for ( fire of rows | paginate: { id: 'fires', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: rowCount }; track fire.id ) {
+        <mat-card>
+            <mat-card-title>
+                <section title>
+                    <h2>{{ fire.name }}</h2>
+                    <h3>{{ fire.number }}</h3>
+                </section>
+
+                <section actions>
+                    <nrcl-button compact label="Edit" icon="edit" (click)="edit( fire )"></nrcl-button>
+                </section>
+            </mat-card-title>
+
+            <mat-card-content>
+                <section>
+                    <mat-label>Fire Centre</mat-label>
+                    <div class="value">{{ fire.fireCentre }}</div>
+                </section>
+
+                <section>
+                    <mat-label>Size (ha)</mat-label>
+                    <div class="value">{{ fire.size }}</div>
+                </section>
+
+                <section full-width>
+                    <mat-label>Description</mat-label>
+                    <div class="value">{{ fire.description }}</div>
+                </section>
+            </mat-card-content>
+
+            <mat-card-footer>
+                <nrcl-button compact label="Delete" icon="delete" (click)="delete( fire )"></nrcl-button>
+            </mat-card-footer>
+        </mat-card>
+    }
+</nrcl-row-list-mobile>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-row-list-pagination paginationId="fires" ...></nrcl-row-list-pagination>
+```
+
+There are no column headers on mobile, so use a
+[`<nrcl-row-list-sorting>`](?path=/docs/content-row-list-row-list-sorting--docs) above the list to let
+the user sort.
+
+## Card layout
+
+The cards have a border and no shadow, with `--nrcl-gutter-space` between them. Each card has up to three
+parts, all optional:
+
+| Part | Markup | Layout |
+|------|--------|--------|
+| Title | `<mat-card-title>`, containing `<section title>` and `<section actions>` | A grey bar. `<section title>` takes the space on the left, with an `<h2>` and an `<h3>` below it. `<section actions>` sits on the right, for [compact buttons](?path=/docs/inputs-and-controls-button--docs). |
+| Content | `<mat-card-content>`, containing `<section>`s | Two columns. Each `<section>` is a `<mat-label>` above a `<div class="value">` in bold. Add `full-width` to a `<section>` to make it span both columns. An empty value shows a dash. |
+| Footer | `<mat-card-footer>` | A grey bar with its content aligned right, for buttons. Hidden when empty. |
+
+## Inputs and outputs
+
+`<nrcl-row-list-mobile>` has no inputs or outputs.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-row-list-mobile-border-color` | Card border. |
+| `--nrcl-row-list-mobile-header-background-color`, `--nrcl-row-list-mobile-header-border-color` | Title bar. |
+| `--nrcl-row-list-mobile-footer-background-color`, `--nrcl-row-list-mobile-footer-border-color` | Footer bar. |
+
+## Example
+
+Cards with a title, two actions, and content sections, with sorting and paging controls. The sorting control
+doesn't sort the cards in this example. Use `rowCount` to change the number of cards.
+
+<Canvas of={RowListMobileStories.Primary} />
+<Controls of={RowListMobileStories.Primary} />

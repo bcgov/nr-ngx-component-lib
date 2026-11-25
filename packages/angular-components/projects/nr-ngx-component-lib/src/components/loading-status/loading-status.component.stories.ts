@@ -3,7 +3,7 @@ import { ButtonComponent } from '../button/button.component';
 import { LoadingStatusComponent } from './loading-status.component';
 
 const meta: Meta<LoadingStatusComponent> = {
-    title: 'Loading Status',
+    title: 'Notification and Feedback/Loading Status',
     component: LoadingStatusComponent,
     decorators: [
         // Apply metadata to all stories
@@ -20,7 +20,6 @@ const meta: Meta<LoadingStatusComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
 }
 
 export default meta;

@@ -1,0 +1,130 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as PageHeaderStories from './page-header.component.stories';
+
+<Meta of={PageHeaderStories} />
+
+# Page Header
+
+`<nrcl-page-header>` is the top of a page: its title, an optional status indicator, the page's main actions,
+and a loading spinner. It has a different layout for desktop and mobile. Interactive examples are under
+[Examples](#examples).
+
+`PageHeaderComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+Put the page header first inside a [page container](?path=/docs/navigation-and-structure-page-container--docs).
+Mark each piece of content with the slot it belongs in:
+
+```html
+<nrcl-page-container>
+    <nrcl-page-header [isLoading]="loading">
+        <h1>Prep Sheets</h1>
+        <h2>Fire Centre 3</h2>
+
+        <nrcl-indicator large>Active</nrcl-indicator>
+
+        <div left-side>Last updated 10:42</div>
+
+        <nrcl-button primary action label="Create Prep Sheet" (click)="create()"></nrcl-button>
+        <nrcl-button action label="Export" (click)="export()"></nrcl-button>
+
+        <div right-side>12 prep sheets</div>
+    </nrcl-page-header>
+</nrcl-page-container>
+```
+
+## Slots
+
+The page header places projected content by element or attribute:
+
+| Content | Slot |
+|---------|------|
+| `<h1>` | Page title. |
+| `<h2>` | Subtitle, below the title. |
+| `<nrcl-indicator>`, or any element with `indicator` | Status indicator. |
+| Elements with `left-side` | Below the title. |
+| Elements with `action` | Action buttons. |
+| Elements with `right-side` | Below the actions. |
+| Anything else | Below the actions, after the `right-side` content. |
+
+Add the `action` attribute to buttons. A button without it goes in the "anything else" slot below the
+actions, so it doesn't line up with them and isn't hidden while loading.
+
+An `<h1>` or `<h2>` with `action` or `right-side` goes in that slot instead of the title.
+
+## Layout
+
+### Desktop
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│ Title           [Indicator]           [Action] [Action] [Action] │
+│ Subtitle                                         right-side      │
+│ left-side                                                        │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+- The title and subtitle are on the left, with the `left-side` content below them.
+- The indicator sits next to the title and is vertically centred on the action buttons.
+- The actions are on the right, with the `right-side` and other content below them. Actions wrap onto more
+  lines when there isn't room.
+
+### Mobile
+
+```
+┌───────────────────────────┐
+│ Title           Indicator │
+│ Subtitle                  │
+│ [Action] [Action]         │
+│ left-side                 │
+│ right-side                │
+└───────────────────────────┘
+```
+
+- The indicator floats to the right of the title.
+- The actions go on their own row below the title, aligned left, and wrap.
+- The `left-side` and then the `right-side` content go below the actions.
+
+In both modes the header has `--nrcl-gutter-space` above it and no space below it. Use a
+[`<nrcl-gap vertical>`](?path=/docs/utility-gap--docs) to separate it from the content that follows.
+
+## Loading
+
+Set `isLoading` while the page's data loads. A spinner appears and the content it covers is hidden:
+
+| Display mode | Spinner | Hidden while loading |
+|--------------|---------|----------------------|
+| Desktop | Right end of the actions | The `action` content. It keeps its space, so the layout doesn't shift. |
+| Mobile | In place of the indicator | The indicator. The actions stay visible and usable. |
+
+Hidden actions can't be clicked. On mobile the actions stay usable, so disable them yourself if they mustn't be
+used while loading.
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `isLoading` | `boolean` | `false` | Shows the loading spinner. See [Loading](#loading). |
+
+The page header has no outputs. Handle events on the projected content.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-font-size-h1` | Title size. Default 35px. |
+| `--nrcl-font-size-h2` | Subtitle size. Default 22px. |
+| `--nrcl-gutter-space` | Space above the header and between actions. Follows the display mode. |
+| `--nrcl-button-normal-height` | Height of the indicator area on desktop, so the indicator lines up with the buttons. |
+
+The title and subtitle use font weight 200 and have their margins removed.
+
+## Examples
+
+### All slots
+
+Every slot filled. Switch the display mode to compare the layouts, and turn on `isLoading` to see the spinner.
+
+<Canvas of={PageHeaderStories.Primary} />
+<Controls of={PageHeaderStories.Primary} />

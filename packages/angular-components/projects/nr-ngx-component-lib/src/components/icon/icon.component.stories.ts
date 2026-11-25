@@ -2,7 +2,7 @@ import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 
 const meta: Meta<IconComponent> = {
-    title: 'Icon',
+    title: 'Utility/Icon',
     component: IconComponent,
     decorators: [
         // Apply metadata to all stories
@@ -18,13 +18,8 @@ const meta: Meta<IconComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
     parameters: {
         docs: {
-            description: {
-                component: `
-                `
-            },
             source: {
                 excludeDecorators: true
             }

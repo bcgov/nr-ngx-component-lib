@@ -1,0 +1,54 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as DeviceViewStories from './device-view.component.stories';
+
+<Meta of={DeviceViewStories} />
+
+# Device View
+
+`<nrcl-device-view>` shows one template on desktop and another on mobile, following the display mode from
+[`ConfigurationService`](?path=/docs/services-configurationservice--docs). Use it where the two layouts differ too much for CSS, such as a table on desktop and
+a list of cards on mobile. An interactive example is under [Example](#example).
+
+`DeviceViewComponent` and the `desktop-view` and `mobile-view` directives are standalone: add them to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-device-view>
+    <ng-template desktop-view>
+        <nrcl-row-list-desktop>...</nrcl-row-list-desktop>
+    </ng-template>
+
+    <ng-template mobile-view>
+        <nrcl-row-list-mobile>...</nrcl-row-list-mobile>
+    </ng-template>
+</nrcl-device-view>
+```
+
+Either template can be left out, to show something on one kind of device only.
+
+## Display mode
+
+The display mode isn't worked out from the screen size. Your app sets it with [`ConfigurationService`](?path=/docs/services-configurationservice--docs), as in
+[Display mode and interface style](?path=/docs/introduction-getting-started--docs#display-mode-and-interface-style).
+Until it's set, the mode is `desktop`.
+
+## Behaviour
+
+- **Only the current template exists.** When the display mode changes, the other template's content is
+  destroyed and the new one's created, so any state in it, such as a scroll position or form input, is
+  lost. Keep that state in your component instead.
+- **`<nrcl-device-view>` adds no box of its own** (`display: contents`), so its content takes part in the
+  parent's flex or grid layout as if the device view weren't there.
+
+## Inputs and outputs
+
+`<nrcl-device-view>` has no inputs or outputs.
+
+## Example
+
+Switch the display mode to swap between the two templates. The browser console logs each template's content
+being created and destroyed.
+
+<Canvas of={DeviceViewStories.Primary} />
+<Controls of={DeviceViewStories.Primary} />

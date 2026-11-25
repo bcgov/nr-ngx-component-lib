@@ -1,0 +1,86 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as IndicatorStories from './indicator.component.stories';
+
+<Meta of={IndicatorStories} />
+
+# Indicator
+
+`<nrcl-indicator>` shows a short status, such as "Active" or "Complete", as bold text in a box. It adds a
+CSS class named after its text, so you can colour each status. An interactive example is under
+[Example](#example).
+
+`IndicatorComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-indicator>{{ incident.status }}</nrcl-indicator>
+```
+
+Indicators are inline, so they can sit in a line of text. Add `large` for bigger text, for example next to a
+page title in a [page header](?path=/docs/navigation-and-structure-page-header--docs):
+
+```html
+<nrcl-indicator large>Active</nrcl-indicator>
+```
+
+With no text, an indicator shows "(None)" in grey.
+
+## Status colours
+
+The indicator gets a `status-` class from its text: the text in lower case, with each run of characters
+other than letters, digits, and hyphens replaced by a hyphen.
+
+| Text | Class |
+|------|-------|
+| `Active` | `status-active` |
+| `Not defined` | `status-not-defined` |
+| `Out of Service` | `status-out-of-service` |
+| no text | `status-none` |
+
+The indicators are black on grey by default. Set the colours for each status in your own styles:
+
+```css
+.status-active {
+    --nrcl-indicator-text-color: #2e8540;
+    --nrcl-indicator-border-color: #2e8540;
+}
+
+.status-complete {
+    --nrcl-indicator-text-color: #1a5a96;
+    --nrcl-indicator-border-color: #1a5a96;
+}
+```
+
+To colour by a value other than the text, for example a code when the text is translated, set `status`.
+The class uses it instead, and the text is unchanged:
+
+```html
+<nrcl-indicator [status]="incident.statusCode">{{ incident.statusLabel }}</nrcl-indicator>
+```
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `large` | `boolean` | `false` | Larger text. |
+| `status` | `string` | from the text | Sets the class to `status-` and this value. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-indicator-text-color` | Text colour. Default black. |
+| `--nrcl-indicator-border-color` | Border colour. Default black. |
+| `--nrcl-indicator-background-color` | Background. Default light grey. |
+| `--nrcl-indicator-min-width` | Minimum width, so short statuses line up. Default 80px. |
+| `--nrcl-indicator-normal-font-size` | Text size. Default `--nrcl-font-size-small`. |
+| `--nrcl-indicator-large-font-size` | Text size with `large`. Default `--nrcl-font-size`. |
+
+## Example
+
+The example colours Active red, Future green, and Complete blue. The others keep the default colours. Each
+value is shown twice: once in a line of text, and once in a flex row.
+
+<Canvas of={IndicatorStories.Primary} />
+<Controls of={IndicatorStories.Primary} />

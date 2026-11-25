@@ -3,7 +3,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import { TooltipDirective } from './tooltip.directive';
 
 const meta: Meta<TooltipDirective & { width: number }> = {
-    title: 'Tooltip',
+    title: 'Notification and Feedback/Tooltip',
     component: TooltipDirective,
     decorators: [
         // Apply metadata to all stories

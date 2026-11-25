@@ -4,7 +4,7 @@ import { useArgs } from 'storybook/preview-api';
 import { FilterSelectComponent } from './filter-select.component';
 
 const meta: Meta<FilterSelectComponent> = {
-    title: 'Filter Select',
+    title: 'Inputs and Controls/Filters/Filter Select',
     component: FilterSelectComponent,
     decorators: [
         // Apply metadata to all stories
@@ -20,36 +20,7 @@ const meta: Meta<FilterSelectComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
     excludeStories: [ 'fruitOptions' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A powerful multi-select component with filtering capabilities.
-
-## Features
-- **Multi-select**: Choose multiple options from a list
-- **Search**: Filter options by typing
-- **Selection limits**: Optionally restrict maximum selections
-- **Tooltips**: Show full descriptions on hover
-- **Summary view**: Display selected items in a compact format
-
-## Usage Example
-
-\`\`\`typescript
-<nrcl-filter-select
-  label="Fruit"
-  [value]="selectedFruits"
-  [options]="fruitOptions"
-  [selectMax]="5"
-  (valueChange)="onFruitChange($event)"
-></nrcl-filter-select>
-\`\`\`
-                `
-            }
-        }
-    },
     argTypes: {
         selectMax: {
             control: {
@@ -91,13 +62,6 @@ A powerful multi-select component with filtering capabilities.
 export default meta;
 
 export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
-    parameters: {
-        docs: {
-            description: {
-                story: 'The default configuration with all features enabled. Try selecting multiple fruits!'
-            }
-        }
-    },
     argTypes: {
         width: {
             control: {

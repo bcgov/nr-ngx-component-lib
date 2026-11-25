@@ -1,0 +1,213 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FilterSelectStories from './filter-select.component.stories';
+
+<Meta of={FilterSelectStories} />
+
+# Filter Select
+
+`<nrcl-filter-select>` picks one or more options from a list, for filtering a list of records. Typing in
+the box narrows the options. It's one of the [filter components](?path=/docs/inputs-and-controls-filters--docs).
+Interactive examples are under [Examples](#examples).
+
+`FilterSelectComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-filter-select
+    label="Fire Centre"
+    [options]="fireCentres"
+    [value]="selectedFireCentres"
+    (valueChange)="selectedFireCentres = $event; load()"
+></nrcl-filter-select>
+```
+
+```typescript
+import { CodeDescription } from '@bcgov/nr-ngx-component-lib';
+
+fireCentres: CodeDescription[] = [
+    { code: 'CFC', description: 'Cariboo Fire Centre' },
+    { code: 'KFC', description: 'Kamloops Fire Centre' },
+];
+selectedFireCentres: string[] = [];
+```
+
+## Options and value
+
+`options` is a list of `CodeDescription` objects, `{ code, description }`. The list shows the
+descriptions, and `value` holds the codes.
+
+`value` is always a `string[]`, even when only one option can be picked. For a single value, the library
+exports `wrapFilterValue()`, which turns `'CFC'` into `[ 'CFC' ]` and `null` into `[]`, and
+`unwrapFilterValue()`, which turns `[ 'CFC' ]` into `'CFC'` and `[]` into `''`. To call them from a
+template, make them properties of your component (`wrapFilterValue = wrapFilterValue`):
+
+```html
+<nrcl-filter-select selectMax="1"
+    [value]="wrapFilterValue( fireCentre )"
+    (valueChange)="fireCentre = unwrapFilterValue( $event )"
+    ...
+></nrcl-filter-select>
+```
+
+**Codes that aren't in `options` are dropped.** If `value` holds a code that isn't in `options`, or
+`options` changes so a selected code is no longer there, the component removes it and emits `valueChange`
+with what's left. This is what makes [linked selects](#linked-selects) work.
+
+`valueChange` emits each time an option is picked or unpicked, not when the list closes.
+
+## Picking options
+
+Clicking the box opens the list below it, or above if there's no room below. It closes when the user clicks
+outside it, presses Escape, or clicks the **▲** button.
+
+| `selectMax` | Behaviour |
+|-------------|-----------|
+| `0` (default) | Pick any number. The list stays open while picking. |
+| `1` | Pick one. Picking closes the list. |
+| `2` or more | Pick up to that many. Once the limit is reached, the list is disabled until one is unpicked. |
+
+When more than one can be picked, the top of the list summarises the selection: "Selected 2 of 9 options",
+followed by the selected options, which can be unpicked there. It says "All options selected" when
+everything is picked, and shows the `hint` when nothing is. Set `[summary]="false"` to leave it out.
+
+When the list is closed, the box shows the selected descriptions, separated by commas. Hover over the box to
+see them all in a tooltip. With a selection, the **▼** button becomes an **×** that clears it. Set
+`[clear]="false"` to keep the **▼**, so the user can change the selection but not empty it.
+
+## Narrowing the options
+
+With the list open, typing in the box hides options whose description doesn't contain the text. Case is
+ignored. Set `[filter]="false"` to turn this off, for short lists.
+
+For very long lists, set `filterCharsMin` to show no options until the user has typed that many characters.
+`filterCharsMinMessage` tells them to type, and defaults to `'Too many options'`, so change it to something
+more helpful, such as `'Type 2 or more letters to search'`.
+
+## Customizing options
+
+**In the list**, put an `<ng-template>` inside the component. It gets each option as its context:
+
+```html
+<nrcl-filter-select label="Resource" [options]="resources">
+    <ng-template let-option>
+        <b>{{ option.code }}</b> {{ option.description }}
+    </ng-template>
+</nrcl-filter-select>
+```
+
+You can pass the template with the `optionTemplate` input instead.
+
+**In the box**, after the list closes, `optionFormatter` sets the text for each selected option. It's
+called with the option and `true`, and must return plain text:
+
+```typescript
+formatResource = ( option: CodeDescription ) => `${ option.code } - ${ option.description }`;
+```
+
+`optionFormatter` doesn't change the list. Use a template for that.
+
+## Linked selects
+
+When one select's options depend on another's value, change the second select's `options` when the first
+changes. Selected codes that aren't in the new options are dropped, and the second select emits
+`valueChange`:
+
+```html
+<nrcl-filter-select label="Fire Centre" selectMax="1"
+    [options]="fireCentres"
+    [value]="fireCentre"
+    (valueChange)="fireCentre = $event; zones = zonesFor( $event[ 0 ] )"
+></nrcl-filter-select>
+
+<nrcl-filter-select label="Zone"
+    [options]="zones"
+    [value]="zone"
+    (valueChange)="zone = $event"
+></nrcl-filter-select>
+```
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | | Label. |
+| `placeholder` | `string` | `'Filter...'` | Shown in the box while the list is open. |
+| `hint` | `string` | | Shown in the summary at the top of the list, unless everything is selected. |
+| `options` | `CodeDescription[]` | `[]` | Options to pick from. |
+| `value` | `string[]` | `[]` | Codes of the selected options. |
+| `selectMax` | `number` | `0` | Most options that can be picked. `0` for no limit. |
+| `summary` | `boolean` | `true` | Shows the selection summary at the top of the list. |
+| `clear` | `boolean` | `true` | Shows an **×** to clear the selection. |
+| `tooltips` | `boolean` | `true` | Shows each option's description in a tooltip, for descriptions too long to fit. |
+| `filter` | `boolean` | `true` | Typing narrows the options. |
+| `filterCharsMin` | `number` | `0` | Characters to type before any options show. |
+| `filterCharsMinMessage` | `string` | `'Too many options'` | Shown while fewer than `filterCharsMin` characters are typed. |
+| `optionTemplate` | `TemplateRef` | | Template for each option in the list. |
+| `optionFormatter` | `( option, plaintext ) => string` | the description | Text for a selected option in the box. |
+| `overlayClass` | `string` | | Class added to the list's panel. The panel is in an overlay at the end of `<body>`, so style it from a global stylesheet. |
+| `wide` | `string` | | Width in filter units, `'1'` to `'6'`. Default 2. See [Filters](?path=/docs/inputs-and-controls-filters--docs#widths). |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `valueChange` | `string[]` | The selection changed. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-filter-select-width` | Width. Overrides `wide`. |
+| `--nrcl-filter-select-height` | Height. Default `--nrcl-filter-height`, 40px. |
+
+The list is at least as wide as the box, and at most twice as wide and 300px high.
+
+## Examples
+
+### Select
+
+All the options are controls.
+
+<Canvas of={FilterSelectStories.Primary} />
+<Controls of={FilterSelectStories.Primary} exclude={[ 'width' ]} />
+
+### Side by side
+
+Two selects next to each other.
+
+<Canvas of={FilterSelectStories.Multiple} />
+
+### Pick one
+
+`selectMax="1"`: picking an option closes the list.
+
+<Canvas of={FilterSelectStories.Single} />
+<Controls of={FilterSelectStories.Single} />
+
+### No clear button
+
+`[clear]="false"`, with Apple selected to start with.
+
+<Canvas of={FilterSelectStories.NoClear} />
+<Controls of={FilterSelectStories.NoClear} />
+
+### Linked
+
+The second select's options depend on the first's value. Pick a fruit in the first, then some options in
+the second, then change the first.
+
+<Canvas of={FilterSelectStories.Linked} />
+
+### Formatted selection
+
+`optionFormatter` adds each option's `extra` field to the text in the box after the list closes. The list
+itself is unchanged.
+
+<Canvas of={FilterSelectStories.FormatOption} />
+<Controls of={FilterSelectStories.FormatOption} />
+
+### Type to search
+
+`filterCharsMin="1"`: no options show until you type a letter.
+
+<Canvas of={FilterSelectStories.FilterCharsMin} />
+<Controls of={FilterSelectStories.FilterCharsMin} />

@@ -1,0 +1,87 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FormLayoutStories from './form-layout.component.stories';
+
+<Meta of={FormLayoutStories} />
+
+# Form Layout
+
+`<nrcl-form-layout>` lays out form fields in a grid of equal columns. The number of columns follows the
+display mode, so a form goes from four columns on desktop to two on mobile without any work from you. An
+interactive example is under [Example](#example).
+
+`FormLayoutComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-form-layout>
+    <nrcl-form-field>
+        <mat-form-field floatLabel="always">
+            <mat-label>Fire Number</mat-label>
+            <input matInput formControlName="fireNumber">
+        </mat-form-field>
+    </nrcl-form-field>
+
+    <nrcl-form-field layoutwidth="2">
+        <mat-form-field floatLabel="always">
+            <mat-label>Fire Name</mat-label>
+            <input matInput formControlName="fireName">
+        </mat-form-field>
+    </nrcl-form-field>
+
+    <nrcl-form-field layoutwidth="full">
+        <mat-form-field floatLabel="always">
+            <mat-label>Observed Fire Behaviour</mat-label>
+            <textarea matInput cdkTextareaAutosize formControlName="behaviour"></textarea>
+        </mat-form-field>
+    </nrcl-form-field>
+</nrcl-form-layout>
+```
+
+Fields are usually [`<nrcl-form-field>`s](?path=/docs/inputs-and-controls-form-field--docs), but any
+element works. Each direct child takes one column, and the grid fills left to right, starting a new row
+when one is full.
+
+## Columns
+
+| Display mode | Columns |
+|--------------|---------|
+| Desktop | 4 |
+| Mobile | 2 |
+| Not set | 3 |
+
+The display mode comes from [`ConfigurationService`](?path=/docs/services-configurationservice--docs). See
+[Display mode](?path=/docs/introduction-getting-started--docs#display-mode-and-interface-style).
+
+## Field widths
+
+Set `layoutwidth` on a direct child to make it wider:
+
+| Attribute | Width |
+|-----------|-------|
+| none | 1 column. |
+| `layoutwidth="2"` | 2 columns. On mobile that's the full width. |
+| `layoutwidth="full"` | The full width. |
+
+## Inputs and outputs
+
+`<nrcl-form-layout>` has no inputs or outputs.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-device-desktop-form-layout-columns` | Columns on desktop. Default 4. |
+| `--nrcl-device-mobile-form-layout-columns` | Columns on mobile. Default 2. |
+| `--nrcl-form-layout-columns` | Columns when no display mode is set. Default 3. |
+| `--nrcl-gutter-space` | Space between columns. |
+
+There's no space between rows. The fields' own label and hint space separates them.
+
+## Example
+
+Five fields: one column, two columns, one, one, then the full width. Switch the display mode to see the
+column count change.
+
+<Canvas of={FormLayoutStories.Primary} />
+<Controls of={FormLayoutStories.Primary} />

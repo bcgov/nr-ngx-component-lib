@@ -4,7 +4,7 @@ import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/n
 import { ListSelectComponent } from './list-select.component';
 
 const meta: Meta<ListSelectComponent<any>> = {
-    title: 'List Select',
+    title: 'Content/List Select',
     component: ListSelectComponent,
     decorators: [
         // Apply metadata to all stories
@@ -35,15 +35,6 @@ const meta: Meta<ListSelectComponent<any>> = {
             }
         ),
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    },
 }
 
 export default meta;
@@ -56,14 +47,6 @@ export const Primary: StoryObj<ListSelectComponent<any> & DisplayModeWrapperComp
         ...displayModeWrapperStory.args,
         descriptionLabel: 'Fruit',
         single: false
-    },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
     },
     render: ( args ) => {
         args.options = fruitOptions()

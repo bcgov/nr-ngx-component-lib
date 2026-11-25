@@ -49,6 +49,7 @@
     "moment": "^2.31.0",
     "ng-packagr": "^21.2.7",
     "ngx-pagination": "^6.0.3",
+    "remark-gfm": "^4.0.1",
     "storybook": "=10.4.6",
     "ts-node": "~10.7.0",
     "tslint": "~6.1.3",

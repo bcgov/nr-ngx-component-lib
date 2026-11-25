@@ -10,7 +10,7 @@ import { FormFieldComponent } from '../form-field/form-field.component';
 import { FormLayoutComponent } from './form-layout.component';
 
 const meta: Meta<FormLayoutComponent> = {
-    title: 'Form Layout',
+    title: 'Inputs and Controls/Form Layout',
     component: FormLayoutComponent,
     decorators: [
         // Apply metadata to all stories
@@ -47,22 +47,6 @@ const meta: Meta<FormLayoutComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-The \`FormLayoutComponent\` is a structural container designed to align form controls. 
-It handles spacing and column distribution across different screen sizes.
-
-## Usage
-- Use inside a form container.
-- Place \`nrcl-form-field\` components as direct children.
-- Control field width using the \`layoutwidth\` attribute on the children                
-                `
-            }
-        }
-    }  
 }
 
 export default meta;

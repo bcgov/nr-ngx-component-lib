@@ -1,0 +1,79 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FilterContainerStories from './filter-container.component.stories';
+
+<Meta of={FilterContainerStories} />
+
+# Filter Container
+
+`<nrcl-filter-container>` is a labelled box with the same border, height, and label as the other
+[filter components](?path=/docs/inputs-and-controls-filters--docs). Put any other control inside it, such
+as checkboxes or radio buttons, so it lines up with the filters around it. Interactive examples are under
+[Examples](#examples).
+
+`FilterContainerComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-filter-container label="Fire Centre" wide="3">
+    <mat-checkbox [(ngModel)]="filter.home" (change)="load()">Home</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.outside" (change)="load()">Outside</mat-checkbox>
+</nrcl-filter-container>
+```
+
+The container lays its content out in a row, with `--nrcl-gutter-space` between items, centred vertically.
+It restyles `<mat-checkbox>` and `<mat-radio-group>` to fit the box's height. The radio buttons in a group
+are put in a row too.
+
+The container has no value. Bind the controls inside it as you normally would, and import their modules,
+such as `MatCheckboxModule` or `MatRadioModule`, in your own component.
+
+## Width
+
+Checkboxes and radio buttons with long labels usually need more than the default 2 units. Set `wide`, or
+size the container to its content:
+
+```html
+<nrcl-filter-container label="Fire Centre" style="--nrcl-filter-container-width: max-content">
+```
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | | Label, shown on the box's top border. |
+| `hint` | `string` | | Text below the box. |
+| `wide` | `string` | | Width in filter units, `'1'` to `'6'`. Default 2. See [Filters](?path=/docs/inputs-and-controls-filters--docs#widths). |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-filter-container-width` | Width. Overrides `wide`. |
+| `--nrcl-filter-container-height` | Height. Default `--nrcl-filter-height`, 40px. |
+
+## Examples
+
+### Container
+
+<Canvas of={FilterContainerStories.Primary} />
+<Controls of={FilterContainerStories.Primary} />
+
+### Custom size
+
+Set the width and height with the style properties. The dashed box shows the content area.
+
+<Canvas of={FilterContainerStories.CustomSize} />
+<Controls of={FilterContainerStories.CustomSize} />
+
+### Checkboxes
+
+Sized to its content with `--nrcl-filter-container-width: max-content`.
+
+<Canvas of={FilterContainerStories.Checkboxes} />
+
+### Radio buttons
+
+Stretched to fill a row.
+
+<Canvas of={FilterContainerStories.RadioButtons} />

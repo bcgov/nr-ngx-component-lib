@@ -1,0 +1,115 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as RowListDesktopStories from './row-list-desktop.component.stories';
+
+<Meta of={RowListDesktopStories} />
+
+# Row List (Desktop)
+
+`<nrcl-row-list-desktop>` styles an Angular Material table placed inside it: striped rows, highlighted
+selected rows, a highlight under the pointer, and horizontal scrolling when the columns don't fit. It's
+the desktop half of the [row list](?path=/docs/content-row-list--docs); on mobile, show the same records
+with a [mobile row list](?path=/docs/content-row-list-row-list-mobile--docs). Interactive examples are
+under [Examples](#examples).
+
+`RowListDesktopComponent` is standalone: add it to your component's `imports`. Your component also needs
+`MatTableModule`, and `MatSortModule` for sortable columns, which the library doesn't re-export.
+
+## Usage
+
+```html
+<nrcl-row-list-desktop>
+    <mat-table matSort
+        [dataSource]="rows | paginate: { id: 'fires', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: rowCount }"
+        [matSortActive]="sortColumn"
+        [matSortDirection]="sortDirection"
+        (matSortChange)="onSortChange( $event )"
+    >
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Fire Name</mat-header-cell>
+            <mat-cell *matCellDef="let fire">
+                <nrcl-cell-content tooltip>{{ fire.name }}</nrcl-cell-content>
+            </mat-cell>
+        </ng-container>
+
+        <!-- more columns -->
+
+        <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let fire; columns: columns"
+            [class.selected]="fire.id == selectedId"
+            (click)="open( fire )"
+        ></mat-row>
+    </mat-table>
+</nrcl-row-list-desktop>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-row-list-pagination paginationId="fires" ...></nrcl-row-list-pagination>
+```
+
+The component only adds styling. You write the table, the sorting, and the paging as usual for Angular
+Material and [ngx-pagination](?path=/docs/content-row-list-row-list-pagination--docs).
+
+- **Either table form works:** `<mat-table>` with `<mat-row>` elements, or `<table mat-table>` with
+  `<tr mat-row>`.
+- **Wrap cell text in [`<nrcl-cell-content>`](?path=/docs/inputs-and-controls-cell-content--docs)** to keep
+  each row on one line, cutting long values off with an ellipsis.
+- **Make the header row sticky** (`sticky: true`) so it stays in view while the page scrolls.
+- **Set column widths** with the `.mat-column-<name>` classes Material adds to each cell:
+
+```css
+.mat-column-name {
+    min-width: 200px;
+    max-width: 300px;
+}
+```
+
+## Rows
+
+| What | How |
+|------|-----|
+| Striping | Every other row has the alternate background. |
+| Selected rows | Add the `selected` class to a row. It gets the selected background, instead of the stripe. |
+| Hover | With `showRowHover` (the default), the row under the pointer is highlighted and the pointer becomes a hand. Turn it off when clicking a row does nothing. |
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `showRowHover` | `boolean` | `true` | Highlights the row under the pointer, and shows a hand pointer. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-row-list-background-color` | Rows. Default white. |
+| `--nrcl-row-list-alternate-background-color` | Every other row. Default light grey. |
+| `--nrcl-row-list-hover-background-color` | Row under the pointer. |
+| `--nrcl-row-list-selected-background-color` | Selected rows. Default light green. |
+| `--nrcl-row-list-hover-selected-background-color` | Selected row under the pointer. |
+
+Cells have 5px padding and use `--nrcl-font-family` and `--nrcl-font-size`.
+
+## Examples
+
+The examples have paging and sorting controls, but they don't sort the rows: they only show the sort arrow
+moving. Use `rowCount` to change the number of rows.
+
+### `<mat-table>`
+
+<Canvas of={RowListDesktopStories.Primary} />
+<Controls of={RowListDesktopStories.Primary} />
+
+### `<table mat-table>`
+
+The same table, using the native table elements.
+
+<Canvas of={RowListDesktopStories.Alternate} />
+<Controls of={RowListDesktopStories.Alternate} />
+
+### Checkbox and button columns
+
+A checkbox column for selecting rows, and a column with a remove button. The checkboxes and buttons aren't
+connected to anything in this example.
+
+<Canvas of={RowListDesktopStories.SelectableRows} />
+<Controls of={RowListDesktopStories.SelectableRows} />

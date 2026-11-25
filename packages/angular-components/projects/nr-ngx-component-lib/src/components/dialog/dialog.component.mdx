@@ -1,0 +1,179 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as DialogStories from './dialog.component.stories';
+
+<Meta of={DialogStories} />
+
+# Dialog
+
+`<nrcl-dialog>` is the layout for a dialog: a title bar, content that scrolls, and a bar of Save and Cancel
+buttons. Open it with [`DialogService`](?path=/docs/services-dialogservice--docs), which wraps Angular Material's `MatDialog`. An interactive example
+is under [Example](#example).
+
+`DialogComponent` is standalone: add it to your component's `imports`. `DialogService` and `DialogBase`
+are exported by the library.
+
+For a simple yes-or-no question, use a [confirm dialog](?path=/docs/notification-and-feedback-dialog-confirm--docs)
+instead.
+
+## Opening a dialog
+
+Write the dialog as a component that extends [`DialogBase`](?path=/docs/directives-dialogbase--docs), and open it with `DialogService.openDialog()`:
+
+```typescript
+import { DialogBase, DialogService } from '@bcgov/nr-ngx-component-lib';
+
+@Component( {
+    selector: 'app-rename-dialog',
+    template: `
+        <nrcl-dialog
+            title="Rename Fire"
+            [saveEnabled]="name.trim() != ''"
+            [cancelEnabled]="true"
+            [showWarning]="false"
+            (saveClick)="onSaveClick()"
+            (cancelClick)="onCancelClick()"
+        >
+            <nrcl-form-field>
+                <mat-form-field floatLabel="always">
+                    <mat-label>Fire Name</mat-label>
+                    <input matInput [(ngModel)]="name">
+                </mat-form-field>
+            </nrcl-form-field>
+        </nrcl-dialog>
+    `,
+} )
+export class RenameDialogComponent extends DialogBase<{ name: string }, string> {
+    name = this.config.name;
+
+    getResult() {
+        return this.name;
+    }
+}
+```
+
+```typescript
+dialogService = inject( DialogService );
+
+rename( fire: Fire ) {
+    this.dialogService.openDialog( RenameDialogComponent, { name: fire.name } )
+        .afterClosed()
+        .subscribe( result => {
+            if ( result == 'cancel' ) return;
+            this.save( { ...fire, name: result } );
+        } );
+}
+```
+
+`DialogBase<CONFIG, RESULT>` gives the dialog:
+
+| Member | Description |
+|--------|-------------|
+| `config` | The data passed to `openDialog()`. |
+| `dialogRef` | The `MatDialogRef`, to close the dialog yourself. |
+| `onSaveClick()` | Closes the dialog with the result of `getResult()`. |
+| `onCancelClick()` | Closes the dialog with `'cancel'`. |
+| `getResult()` | Override it to return the dialog's result. Returns `null` unless overridden. |
+
+To open a dialog from a template in the same component instead, use
+`dialogService.openDialogTemplate( templateRef, data )`, and close it with the `MatDialogRef` it returns.
+
+### Defaults
+
+`DialogService` opens dialogs with these `MatDialogConfig` settings. Pass a third argument to change any of
+them:
+
+| Setting | Value | Effect |
+|---------|-------|--------|
+| `disableClose` | `true` | Escape and clicking outside the dialog don't close it. Only your buttons do. |
+| `autoFocus` | `false` | Nothing in the dialog gets focus when it opens. |
+| `maxWidth` | `800` | The dialog is at most 800px wide. |
+| `closeOnNavigation` | `false` | The dialog stays open when the route changes. |
+| `panelClass` | `'nrcl-dialog'` | Needed for the dialog's styles. Keep it if you change `panelClass`. |
+
+## Layout
+
+| Part | Contents |
+|------|----------|
+| Title bar | `title`, a spinner while `isLoading`, and a **×** with `showClose`. |
+| Content | Everything inside `<nrcl-dialog>` without a section attribute. It scrolls when it's too tall. |
+| Actions bar | An "Unsaved Changes" warning, then Cancel and Save. Hidden with `[showActions]="false"`. |
+
+To replace or add to the parts, put these elements inside `<nrcl-dialog>`:
+
+| Element | Goes |
+|---------|------|
+| `<section header>` | Replaces the whole title bar. |
+| `<section title>` | Below the title bar, outside the scrolling content. For tabs or a summary. |
+| `<section footer>` | Between the content and the actions bar, outside the scrolling content. |
+| `<section actions>` | Replaces the warning and buttons in the actions bar. |
+
+## Buttons
+
+The buttons only emit events. **Close the dialog in your handlers**, as `onSaveClick()` and
+`onCancelClick()` do.
+
+`saveEnabled` and `cancelEnabled` each have three states:
+
+| Value | Button |
+|-------|--------|
+| `null` or `undefined` | Not shown. |
+| `false` | Shown and disabled. |
+| `true` | Shown and enabled. |
+
+By default Save is shown and disabled, and Cancel is enabled.
+
+With `showWarning`, which is on by default, the actions bar shows "Unsaved Changes" whenever Save is
+enabled. Turn it off for dialogs where an enabled Save doesn't mean there are changes.
+
+The **×** from `showClose` emits `cancelClick`, like Cancel.
+
+## Interface style
+
+The dialog follows the interface style from [`ConfigurationService`](?path=/docs/services-configurationservice--docs). See
+[Display mode and interface style](?path=/docs/introduction-getting-started--docs#display-mode-and-interface-style).
+
+| Style | Title bar | Actions bar | Save | Cancel |
+|-------|-----------|-------------|------|--------|
+| 2025 | Dark blue | Grey | Primary | Secondary |
+| 2026 | White, with a line below | White | Secondary | Tertiary |
+
+On mobile, the dialog takes the full width of the screen, less the gutters.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `title` | `string` | | Title. |
+| `isLoading` | `boolean` | `false` | Shows a spinner in the title bar. The buttons stay as they are. |
+| `showClose` | `boolean` | `false` | Shows a **×** in the title bar. |
+| `saveLabel` | `string` | `'Save'` | Save button text. |
+| `saveEnabled` | `boolean \| null` | `false` | See [Buttons](#buttons). |
+| `cancelLabel` | `string` | `'Cancel'` | Cancel button text. |
+| `cancelEnabled` | `boolean \| null` | `true` | See [Buttons](#buttons). |
+| `showWarning` | `boolean` | `true` | Shows "Unsaved Changes" while Save is enabled. |
+| `showActions` | `boolean` | `true` | Shows the actions bar. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `saveClick` | `void` | Save was clicked. |
+| `cancelClick` | `void` | Cancel or the **×** was clicked. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-dialog-title-bar-background-color`, `--nrcl-dialog-title-bar-foreground-color` | Title bar. |
+| `--nrcl-dialog-actions-background-color`, `--nrcl-dialog-actions-foreground-color` | Actions bar. |
+| `--nrcl-dialog-spinner-color` | Spinner. |
+| `--nrcl-dialog-border-color` | Lines between the parts. |
+
+The colours are set per interface style, so set them inside `.nrcl-style-2025` or `.nrcl-style-2026`.
+
+## Example
+
+The dialog opens when the example loads, and **Open Dialog** opens it again. It has a `<section title>`,
+content, and a `<section footer>`, shaded green. The buttons don't close it in this example; reload the page
+to close it.
+
+<Canvas of={DialogStories.Primary} story={{ inline: false, height: '520px' }} />
+<Controls of={DialogStories.Primary} exclude={[ 'label', 'useHeader', 'useActions' ]} />

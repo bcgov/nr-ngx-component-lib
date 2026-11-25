@@ -1,0 +1,78 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FormFieldStories from './form-field.component.stories';
+
+<Meta of={FormFieldStories} />
+
+# Form Field
+
+`<nrcl-form-field>` wraps an Angular Material `<mat-form-field>` and gives it the library's look: full
+width, no side padding, and consistent label and hint spacing. It can also mark the field as required, and
+make it read-only. An interactive example is under [Example](#example).
+
+`FormFieldComponent` is standalone: add it to your component's `imports`. Your component also needs
+`MatFormFieldModule` and `MatInputModule`, which the library doesn't re-export.
+
+## Usage
+
+```html
+<nrcl-form-field required>
+    <mat-form-field floatLabel="always">
+        <mat-label>Fire Name</mat-label>
+        <input matInput formControlName="fireName">
+    </mat-form-field>
+</nrcl-form-field>
+```
+
+Put one `<mat-form-field>` inside each `<nrcl-form-field>`. It works with `<input matInput>`,
+`<textarea matInput>`, and `<select matNativeControl>`. Use `floatLabel="always"` so the label stays above
+the field instead of sitting inside it when the field is empty.
+
+To arrange several fields in columns, put them in a
+[`<nrcl-form-layout>`](?path=/docs/inputs-and-controls-form-layout--docs).
+
+## Required
+
+`required` adds a red asterisk after the label. Material's own required marker is hidden, so there's only
+ever one asterisk.
+
+`required` only changes the label. It doesn't validate anything, so also add a `Validators.required`
+validator, or the `required` attribute on the input, to stop the form being submitted empty.
+
+## Read-only
+
+`readonly` stops the user changing the field's value, while still showing it. Use it instead of `disabled`
+for values the user should be able to read and copy but not change.
+
+It sets the `readonly` attribute on the first `<input>` or `<textarea>` in the field. For a native
+`<select>`, it disables every option instead. The cursor changes to "not allowed", and the underline is
+dashed.
+
+Some limits:
+
+- **`<mat-select>` isn't covered.** It isn't a native `<select>`, so it stays editable. Disable its form
+  control instead.
+- **It's applied when `readonly` changes.** An input that's added later, for example inside an `@if`,
+  doesn't get the attribute until `readonly` changes again.
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `required` | `boolean` | `false` | Adds a red asterisk to the label. |
+| `readonly` | `boolean` | `false` | Makes the field read-only. |
+
+Both accept a bare attribute: `<nrcl-form-field required>` is the same as `[required]="true"`.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-form-field-subscript-min-height` | Space reserved below the field for a hint or error. Default 22px. |
+| `--nrcl-font-family`, `--nrcl-font-size` | Field text. |
+
+## Example
+
+A textarea, a text input, and a native select. Use the controls to make them required or read-only.
+
+<Canvas of={FormFieldStories.Primary} />
+<Controls of={FormFieldStories.Primary} />

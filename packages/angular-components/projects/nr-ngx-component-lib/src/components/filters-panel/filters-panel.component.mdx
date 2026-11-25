@@ -1,0 +1,150 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FiltersPanelStories from './filters-panel.component.stories';
+
+<Meta of={FiltersPanelStories} />
+
+# Filters Panel
+
+`<nrcl-filters-panel>` is the grey box that holds a list's search box and filters. It places the
+[filter components](?path=/docs/inputs-and-controls-filters--docs) you put in it, and adds a **Clear**
+button and, optionally, **See More** / **See Less** for filters that are hidden until asked for.
+Interactive examples are under [Examples](#examples).
+
+`FiltersPanelComponent` is standalone: add it to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-filters-panel (clearFilters)="clearFilters()">
+    <nrcl-filter-search
+        [value]="filter.search"
+        (valueChange)="filter.search = $event; load()"
+    ></nrcl-filter-search>
+
+    <nrcl-filter-select
+        label="Status"
+        [options]="statusOptions"
+        [value]="filter.status"
+        (valueChange)="filter.status = $event; load()"
+    ></nrcl-filter-select>
+
+    <nrcl-filter-date
+        label="From"
+        [value]="filter.from"
+        (valueChange)="filter.from = $event; load()"
+    ></nrcl-filter-date>
+</nrcl-filters-panel>
+```
+
+## Layout
+
+The panel places each child by what it is:
+
+| Child | Desktop | Mobile |
+|-------|---------|--------|
+| `<nrcl-filter-search>` | First row, up to 4 filter widths wide, with the buttons at the right end of the row. | First row, full width. |
+| Other filters | Rows below, wrapping, each at its own width. | Two columns. Each filter fills its column, whatever its `wide` setting. |
+| Elements with `advanced` | After the other filters, only while advanced filters are shown. | The same. |
+| Buttons | Next to the search box. Without a search box, at the top right, and the filters wrap around them. | Below the filters, aligned right. |
+
+## Clearing filters
+
+The **Clear** button emits `clearFilters`. The panel doesn't know the filter values, so your handler has to
+reset them:
+
+```typescript
+clearFilters() {
+    this.filter = { search: null, status: [], from: null };
+    this.load();
+}
+```
+
+Hide the button with `[showClear]="false"`. Change its text with `clearLabel`.
+
+## Advanced filters
+
+To keep less-used filters out of the way, set `hasAdvancedFilters` and mark those filters with the
+`advanced` attribute:
+
+```html
+<nrcl-filters-panel hasAdvancedFilters [(showAdvancedFilters)]="showMore">
+    <nrcl-filter-search></nrcl-filter-search>
+    <nrcl-filter-select label="Status" [options]="statusOptions"></nrcl-filter-select>
+
+    <nrcl-filter-select advanced label="Fire Centre" [options]="fireCentreOptions"></nrcl-filter-select>
+    <nrcl-filter-date advanced label="From"></nrcl-filter-date>
+</nrcl-filters-panel>
+```
+
+A **See More** button appears, and switches to **See Less** while the advanced filters show. The panel keeps
+track of whether they're shown itself. Bind `showAdvancedFilters` if you want to set it, or remember it,
+for example between visits to the page. Change the button text with `moreFiltersLabels`.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `showClear` | `boolean` | `true` | Shows the Clear button. |
+| `clearLabel` | `string` | `'Clear'` | Clear button text. |
+| `hasAdvancedFilters` | `boolean` | `false` | Shows the See More / See Less button, and lets `advanced` filters show. |
+| `showAdvancedFilters` | `boolean` | `false` | Whether the `advanced` filters are shown. |
+| `moreFiltersLabels` | `[ string, string ]` | `[ 'See More', 'See Less' ]` | Text for the button while the advanced filters are hidden, and while they're shown. |
+| `showFilters` | `boolean` | `true` | When `false`, hides the Clear and See More buttons on desktop. The filters stay visible. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `clearFilters` | `void` | Clear was clicked. |
+| `showAdvancedFiltersChange` | `boolean` | See More or See Less was clicked. |
+| `showFiltersChange` | `boolean` | Declared, but nothing in the panel emits it. |
+
+## Styling
+
+The panel has a light grey background, a rounded border, and 8px padding. The search box width comes from
+`--nrcl-filter-width-4`, and the other filters' widths from their `wide` setting. See
+[Filters](?path=/docs/inputs-and-controls-filters--docs#widths).
+
+## Examples
+
+Switch the display mode on any example to see the mobile layout.
+
+### Empty
+
+The panel with no filters, showing only its buttons.
+
+<Canvas of={FiltersPanelStories.Empty} />
+<Controls of={FiltersPanelStories.Empty} exclude={[ 'actionStyle' ]} />
+
+### Populated
+
+A search box, a select, and a date.
+
+<Canvas of={FiltersPanelStories.Populated} />
+<Controls of={FiltersPanelStories.Populated} exclude={[ 'actionStyle' ]} />
+
+### More filters
+
+Enough filters to wrap onto a second row, including two filter containers.
+
+<Canvas of={FiltersPanelStories.PopulatedMore} />
+<Controls of={FiltersPanelStories.PopulatedMore} exclude={[ 'actionStyle' ]} />
+
+### No search
+
+Without a search box, the buttons move to the top right.
+
+<Canvas of={FiltersPanelStories.NoSearch} />
+<Controls of={FiltersPanelStories.NoSearch} exclude={[ 'actionStyle' ]} />
+
+### Clearing filters
+
+Pick some values, then click Clear to reset them all.
+
+<Canvas of={FiltersPanelStories.ClearFilters} />
+<Controls of={FiltersPanelStories.ClearFilters} exclude={[ 'actionStyle' ]} />
+
+### Advanced filters
+
+Click See More to show the filters marked `advanced`.
+
+<Canvas of={FiltersPanelStories.Advanced} />
+<Controls of={FiltersPanelStories.Advanced} exclude={[ 'actionStyle' ]} />

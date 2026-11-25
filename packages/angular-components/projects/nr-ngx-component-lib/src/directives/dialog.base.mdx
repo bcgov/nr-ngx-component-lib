@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Directives/DialogBase" />
+
+# DialogBase
+
+`DialogBase<CONFIG, RESULT>` is the base class for a dialog component opened with
+[DialogService](?path=/docs/services-dialogservice--docs)`.openDialog()`. It gives the dialog the data it
+was opened with, and closes it with a result. It extends [NrclBase](?path=/docs/directives-nrclbase--docs).
+
+The [Dialog](?path=/docs/notification-and-feedback-dialog--docs) page has a full example.
+
+## Usage
+
+```typescript
+import { DialogBase } from '@bcgov/nr-ngx-component-lib';
+
+@Component( {
+    selector: 'app-rename-dialog',
+    template: `
+        <nrcl-dialog title="Rename Fire"
+            [saveEnabled]="name.trim() != ''"
+            (saveClick)="onSaveClick()"
+            (cancelClick)="onCancelClick()"
+        >
+            ...
+        </nrcl-dialog>
+    `,
+} )
+export class RenameDialogComponent extends DialogBase<{ name: string }, string> {
+    name = this.config.name;
+
+    getResult() {
+        return this.name;
+    }
+}
+```
+
+`CONFIG` is the type of the data passed to `openDialog()`, and `RESULT` the type of the result.
+
+## Results
+
+`dialogService.openDialog()` returns a `MatDialogRef`. Its `afterClosed()` emits:
+
+| Closed by | Result |
+|-----------|--------|
+| `onSaveClick()` | What `getResult()` returns. |
+| `onCancelClick()` | `'cancel'`. |
+| `dialogRef.close( value )` | `value`. |
+| Escape or clicking outside, if allowed | `undefined`. |
+
+The result type is `DialogBaseResult<RESULT>`, which is `RESULT | 'cancel'`.
+
+## Members
+
+| Member | Description |
+|--------|-------------|
+| `config` | The data passed to `openDialog()`. |
+| `dialogRef` | The `MatDialogRef`. |
+| `getResult()` | Override it to return the result. Returns `null` unless overridden. |
+| `onSaveClick()` | Closes the dialog with `getResult()`. |
+| `onCancelClick()` | Closes the dialog with `'cancel'`. |
+| `isLoading`, `saveLabel`, `saveEnabled`, `cancelLabel`, `cancelEnabled` | Properties to bind to `<nrcl-dialog>`'s inputs of the same names, if you want them. Nothing binds them for you. `saveEnabled` and `cancelEnabled` start `false`. |
+
+## Extended by
+
+[Dialog Confirm](?path=/docs/notification-and-feedback-dialog-confirm--docs).

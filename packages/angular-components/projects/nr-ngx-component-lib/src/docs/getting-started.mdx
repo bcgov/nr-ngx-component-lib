@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta 
   title="Introduction/Getting Started" 
@@ -9,58 +9,141 @@ import { Meta, Story } from '@storybook/addon-docs/blocks';
 
 # Getting Started
 
-Welcome to the NR Angular Component Library — a reusable Angular components built on Angular Material.
+The NR Angular Component Library (`@bcgov/nr-ngx-component-lib`) provides Angular components for Natural
+Resources applications: an application shell, page layouts, filters, row lists, forms, dialogs, and
+notifications. It's built on Angular Material, and every component adapts to desktop and mobile display modes.
 
-<Story name="Welcome">
-  {{
-    template: `<div style="padding: 2rem; text-align: center;">
-      <h1>Welcome to NR Angular Component Library</h1>
-      <p>Browse the sidebar to explore components</p>
-    </div>`,
-  }}
-</Story>
+The [Components](?path=/docs/introduction-components--docs) page lists everything in the library.
+
+## Versions
+
+The library's major version matches the Angular major version it supports.
+
+| Library | Angular | Components |
+|---------|---------|------------|
+| `18.x`  | 18      | Declared in `NrNgxComponentLibModule` (`standalone: false`) |
+| `21.x`  | 21      | Standalone |
+
+This documentation is for `21.x`.
 
 ## Installation
 
 ```bash
-npm install nr-ngx-component-lib
+npm install @bcgov/nr-ngx-component-lib@21
+```
+
+The library also needs Angular Material and the Moment date adapter, which the date components use:
+
+```bash
+npm install @angular/material@21 @angular/material-moment-adapter@21 moment
 ```
 
 ## Setup
 
-Import the module in your Angular application:
+### 1. Import the components
+
+Every component and directive is standalone. Import the ones you use from `@bcgov/nr-ngx-component-lib` and
+add them to your component's `imports`. The services are provided in root, so they need no setup.
 
 ```typescript
-import { NrNgxComponentLibModule } from 'nr-ngx-component-lib';
+import { Component } from '@angular/core';
+import { ButtonComponent, PageHeaderComponent } from '@bcgov/nr-ngx-component-lib';
 
-@NgModule({
-  imports: [
-    NrNgxComponentLibModule
-  ]
+@Component({
+    selector: 'app-resources',
+    imports: [
+        ButtonComponent,
+        PageHeaderComponent,
+    ],
+    templateUrl: './resources.component.html',
 })
-export class AppModule {}
+export class ResourcesComponent {}
 ```
 
-## Available Components
+### 2. Add the styles
 
-| Component | Description |
-|-----------|-------------|
-| `ButtonComponent` | Material Design button with multiple variants |
-| `IconComponent` | Icon wrapper with size and color options |
-| `DialogConfirmComponent` | Confirmation dialog modal |
-| `FilterSearchComponent` | Search input with filtering |
-| `FilterSelectComponent` | Dropdown select filter |
-| `FilterDateComponent` | Date range filter |
-| `PageHeaderComponent` | Page header with title and actions |
-| `PageContainerComponent` | Main content container |
-| `SnackbarComponent` | Toast notification |
-| And more... |
+The package ships its stylesheets in `styles/`. Add them to the `styles` array in `angular.json`:
 
-## Storybook
+```json
+"styles": [
+    "node_modules/@bcgov/nr-ngx-component-lib/styles/bc-sans/css/BCSans.css",
+    "node_modules/@bcgov/nr-ngx-component-lib/styles/global.scss",
+    "node_modules/@bcgov/nr-ngx-component-lib/styles/material.scss",
+    "src/styles.scss"
+]
+```
 
-This library uses Storybook for component development and documentation. Browse the sidebar to explore all available components.
+| File | Contents |
+|------|----------|
+| `bc-sans/css/BCSans.css` | The BC Sans font. Leave it out if your app already loads it. |
+| `global.scss` | The library's CSS custom properties (`--nrcl-*`) and global rules. Required. |
+| `material.scss` | An Angular Material theme that matches the library. Leave it out if your app defines its own theme. |
 
-Each component story includes:
-- **Canvas**: Interactive playground
-- **Docs**: Auto-generated documentation
-- **Knobs/Controls**: Adjust props in real-time
+### 3. Load the icon font
+
+`nrcl-icon` and the icon inputs on other components use **Material Symbols Outlined**. Add it to
+`index.html`:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet" />
+```
+
+## Using components
+
+Components use the `nrcl-` prefix:
+
+```html
+<nrcl-page-header>
+    <h1>Resources</h1>
+    <nrcl-button action primary label="Add Resource" icon="add" (click)="onAdd()"></nrcl-button>
+</nrcl-page-header>
+```
+
+Each component's page in the sidebar has interactive examples. Change the inputs in the **Controls** panel to
+see how the component responds.
+
+## Display mode and interface style
+
+Many components lay themselves out differently on desktop and mobile. [`ConfigurationService`](?path=/docs/services-configurationservice--docs) holds the current
+settings, and components update when they change:
+
+| Setting | Values | Default |
+|---------|--------|---------|
+| `displayMode` | `'desktop'`, `'mobile'` | `'desktop'` |
+| `interfaceStyle` | `'2025'`, `'2026'` | `'2025'` |
+
+The library doesn't detect the device itself. Set the display mode from your app, for example from a
+breakpoint observer:
+
+```typescript
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ConfigurationService } from '@bcgov/nr-ngx-component-lib';
+
+export class AppComponent {
+    constructor( configurationService: ConfigurationService, breakpointObserver: BreakpointObserver ) {
+        breakpointObserver.observe( '(max-width: 768px)' ).subscribe( ( state ) => {
+            configurationService.update( { displayMode: state.matches ? 'mobile' : 'desktop' } )
+        } )
+    }
+}
+```
+
+The service also sets classes on `<body>` (`nrcl-device-desktop` or `nrcl-device-mobile`, and
+`nrcl-style-2025` or `nrcl-style-2026`) so your own styles can follow the same settings.
+
+## Services
+
+| Service | Use it to |
+|---------|-----------|
+| [`ConfigurationService`](?path=/docs/services-configurationservice--docs) | Read and change the display mode and interface style. |
+| [`DialogService`](?path=/docs/services-dialogservice--docs) | Open dialogs (`openDialog`, `openDialogTemplate`), or a confirmation dialog with `openConfirmDialog`. |
+| [`SnackbarUtilService`](?path=/docs/services-snackbarutilservice--docs) | Show snack bar notifications. |
+| [`IconService`](?path=/docs/services-iconservice--docs) | Register your own SVG icons for `nrcl-icon`, with `defineIcon( name, svg )`. |
+| [`PageStateService`](?path=/docs/services-pagestateservice--docs) | Store a page's state as a string under an ID, for example to restore filters when the user returns to the page. It's kept in memory only. |
+
+## Customizing
+
+Components are styled with CSS custom properties, so you can change their look without overriding internal
+selectors. Global values such as `--nrcl-font-family`, `--nrcl-font-size`, and `--nrcl-border-radius` are
+defined on `:root` in `global.scss`, and each component documents its own properties. For example, see
+[Button](?path=/docs/inputs-and-controls-button--docs#styling).

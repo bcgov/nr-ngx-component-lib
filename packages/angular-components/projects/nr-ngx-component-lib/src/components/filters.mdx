@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+{/* Index page for the Filters folder: its title is the folder's path, so clicking the folder opens it. */}
+<Meta title="Inputs and Controls/Filters" />
+
+# Filters
+
+The filter components make up the search and filter bar above a list of records. A
+`<nrcl-filters-panel>` lays out a search box and a row of filters, with buttons to clear the filters and to
+show more of them.
+
+| Component | Selector | Role | Docs |
+|-----------|----------|------|------|
+| `FiltersPanelComponent` | `<nrcl-filters-panel>` | Lays out the filters, with Clear and See More / See Less buttons. | [Filters Panel](?path=/docs/inputs-and-controls-filters-filters-panel--docs) |
+| `FilterSearchComponent` | `<nrcl-filter-search>` | Free-text search box. | [Filter Search](?path=/docs/inputs-and-controls-filters-filter-search--docs) |
+| `FilterSelectComponent` | `<nrcl-filter-select>` | Pick one or more options from a list that can be searched. | [Filter Select](?path=/docs/inputs-and-controls-filters-filter-select--docs) |
+| `FilterDateComponent` | `<nrcl-filter-date>` | Pick a date. | [Filter Date](?path=/docs/inputs-and-controls-filters-filter-date--docs) |
+| `FilterContainerComponent` | `<nrcl-filter-container>` | A labelled box, styled like the other filters, for any other control, such as radio buttons or checkboxes. | [Filter Container](?path=/docs/inputs-and-controls-filters-filter-container--docs) |
+
+All five are standalone: add them to your component's `imports`.
+
+## Usage
+
+```html
+<nrcl-filters-panel
+    hasAdvancedFilters
+    [(showAdvancedFilters)]="showMore"
+    (clearFilters)="clearFilters()"
+>
+    <nrcl-filter-search
+        [value]="search"
+        (valueChange)="search = $event; load()"
+    ></nrcl-filter-search>
+
+    <nrcl-filter-select
+        label="Status"
+        [options]="statusOptions"
+        [value]="status"
+        (valueChange)="status = $event; load()"
+    ></nrcl-filter-select>
+
+    <nrcl-filter-date
+        label="From"
+        [value]="fromDate"
+        (valueChange)="fromDate = $event; load()"
+    ></nrcl-filter-date>
+
+    <nrcl-filter-container advanced label="Fire Centre" wide="3">
+        <mat-checkbox>Home</mat-checkbox>
+        <mat-checkbox>Outside</mat-checkbox>
+    </nrcl-filter-container>
+</nrcl-filters-panel>
+```
+
+## How they fit together
+
+- **The panel places its content by type.** A `<nrcl-filter-search>` goes in the top row, next to the
+  panel's buttons. Elements with the `advanced` attribute only show when `hasAdvancedFilters` and
+  `showAdvancedFilters` are both set. Everything else goes in the row of filters.
+- **The panel's buttons only emit events.** Clear emits `clearFilters`, and your handler resets the
+  filter values. See More / See Less emits `showAdvancedFiltersChange`, so `[(showAdvancedFilters)]` works.
+- **On desktop the buttons sit next to the search box. On mobile they move below the filters.**
+- **The filters aren't form controls.** Each one has a `value` input and a `valueChange` output; they don't
+  work with `formControlName` or `ngModel`. Bind `[value]` and handle `(valueChange)`, as above.
+
+## Values
+
+| Filter | `value` type | Notes |
+|--------|--------------|-------|
+| `<nrcl-filter-search>` | `string` | `valueChange` emits on every keystroke, so debounce it before searching. |
+| `<nrcl-filter-select>` | `string[]` | Always an array, even with `selectMax="1"`. `wrapFilterValue()` and `unwrapFilterValue()`, exported by the library, convert between a single value and the array. |
+| `<nrcl-filter-date>` | `string`, as `YYYY-MM-DD` | **Starts at today's date** if you don't bind `value`. Emits `undefined` when cleared. |
+
+`<nrcl-filter-select>` takes its options as `CodeDescription[]` (`{ code, description }`). The `value`
+holds the codes.
+
+## Widths
+
+Filters have fixed widths, measured in units, so a row of them lines up. Each filter is 2 units wide by
+default. Set `wide` to a number from `1` to `6` to change that, for example `wide="4"` for a long
+label or a group of radio buttons. A width of N units includes the gaps between them, so one `wide="4"`
+filter takes the same space as two default ones.
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-filter-width-1` | One unit. Default 100px. |
+| `--nrcl-filter-gap` | Space between filters. Default 8px. |
