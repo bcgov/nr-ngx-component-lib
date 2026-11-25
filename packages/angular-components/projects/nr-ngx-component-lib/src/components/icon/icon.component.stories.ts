@@ -18,13 +18,8 @@ const meta: Meta<IconComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
     parameters: {
         docs: {
-            description: {
-                component: `
-                `
-            },
             source: {
                 excludeDecorators: true
             }
