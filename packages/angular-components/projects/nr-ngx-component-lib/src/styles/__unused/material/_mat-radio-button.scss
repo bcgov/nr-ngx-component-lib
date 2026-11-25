@@ -1,16 +1,16 @@
 @import '../variables';
 
 .mat-mdc-radio-button.mat-accent {
-    // --mdc-radio-disabled-selected-icon-color: #000;
-    // --mdc-radio-disabled-unselected-icon-color: #000;
-    // --mdc-radio-unselected-focus-icon-color: #212121;
-    // --mdc-radio-unselected-hover-icon-color: #212121;
-    // --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
-    // --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
-    --mdc-radio-selected-focus-icon-color: $colour-blue;
-    --mdc-radio-selected-hover-icon-color: $colour-blue;
-    --mdc-radio-selected-icon-color: $colour-blue;
-    --mdc-radio-selected-pressed-icon-color: $colour-blue;
+    // --mat-radio-disabled-selected-icon-color: #000;
+    // --mat-radio-disabled-unselected-icon-color: #000;
+    // --mat-radio-unselected-focus-icon-color: #212121;
+    // --mat-radio-unselected-hover-icon-color: #212121;
+    // --mat-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    // --mat-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mat-radio-selected-focus-icon-color: $colour-blue;
+    --mat-radio-selected-hover-icon-color: $colour-blue;
+    --mat-radio-selected-icon-color: $colour-blue;
+    --mat-radio-selected-pressed-icon-color: $colour-blue;
     // --mat-mdc-radio-ripple-color: #000;
     --mat-mdc-radio-checked-ripple-color: $colour-blue;
 

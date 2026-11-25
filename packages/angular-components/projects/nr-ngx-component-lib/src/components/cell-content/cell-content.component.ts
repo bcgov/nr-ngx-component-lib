@@ -1,10 +1,14 @@
 import { AfterContentInit, booleanAttribute, ChangeDetectorRef, Component, ElementRef, inject, Input } from '@angular/core';
 import { NrclBase } from '../../directives/nrcl.base';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component( {
     selector: 'nrcl-cell-content',
     templateUrl: './cell-content.component.html',
-    styleUrl: './cell-content.component.scss'
+    styleUrl: './cell-content.component.scss',
+    imports: [
+        MatTooltipModule
+    ]
 } )
 export class CellContentComponent extends NrclBase implements AfterContentInit {
     changeDetectorRef = inject( ChangeDetectorRef )

@@ -9,7 +9,7 @@ import * as FilterDateStories from './filter-date.component.stories';
 [filter components](?path=/docs/inputs-and-controls-filters--docs), built on the Angular Material
 datepicker. Interactive examples are under [Examples](#examples).
 
-`FilterDateComponent` is declared and exported by `NrNgxComponentLibModule`. It provides its own Moment
+`FilterDateComponent` is standalone: add it to your component's `imports`. It provides its own Moment
 date adapter, so it needs the `moment` and `@angular/material-moment-adapter` packages from
 [Installation](?path=/docs/introduction-getting-started--docs#installation).
 
@@ -29,7 +29,9 @@ The user can't type a date. Clicking the box, or the calendar button, opens the 
 ## Value
 
 `value` is a string in `YYYY-MM-DD` form, for example `'2026-11-25'`. The box shows it as
-`November 25, 2026`.
+`November 25, 2026`. To show it another way, set `displayFormat` to a
+[Moment format](https://momentjs.com/docs/#/displaying/format/), for example `displayFormat="YYYY-MM-DD"` or
+`displayFormat="MMM D"`. It only changes what the box shows: `value` is always `YYYY-MM-DD`.
 
 **If you don't bind `value`, it starts at today's date.** Bind `[value]="null"`, or a variable that starts
 empty, to start with no date.
@@ -51,6 +53,7 @@ is set outside them, the box shows `minErrorMessage` or `maxErrorMessage` once t
 | `placeholder` | `string` | `'Select...'` | Shown in the box while it has focus and no date. |
 | `hint` | `string` | | Text below the box. |
 | `value` | `string` | Today | Selected date, `YYYY-MM-DD`. |
+| `displayFormat` | `string` | `'MMMM D, YYYY'` | Moment format for the date shown in the box. |
 | `clear` | `boolean` | `true` | Shows an **×** to clear the date. |
 | `min` | `string` | | Earliest date that can be picked, `YYYY-MM-DD`. |
 | `max` | `string` | | Latest date that can be picked, `YYYY-MM-DD`. |

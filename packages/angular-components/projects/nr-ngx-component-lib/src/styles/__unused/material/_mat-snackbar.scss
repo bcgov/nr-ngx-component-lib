@@ -15,7 +15,7 @@
     }
 
     &.snackbar-success {
-        --mdc-snackbar-container-color: #{ $colour-success };
+        --mat-snackbar-container-color: #{ $colour-success };
 
         .mat-mdc-snackbar-surface {
             padding-right: 8px;
@@ -23,7 +23,7 @@
     }
 
     &.snackbar-error {
-        --mdc-snackbar-container-color: #{ $colour-errors };
+        --mat-snackbar-container-color: #{ $colour-errors };
 
         .mat-mdc-snackbar-surface {
             padding-right: 8px;
@@ -31,7 +31,7 @@
     }
 
     &.snackbar-info {
-        --mdc-snackbar-container-color: #{ $colour-blue-grey };
+        --mat-snackbar-container-color: #{ $colour-blue-grey };
 
         .mat-mdc-snackbar-surface {
             padding-right: 8px;
@@ -39,7 +39,7 @@
     }
 
     &.snackbar-update {
-        --mdc-snackbar-container-color: #{ $colour-blue-grey };
+        --mat-snackbar-container-color: #{ $colour-blue-grey };
 
         .mat-mdc-snackbar-surface {
             padding-right: 8px;

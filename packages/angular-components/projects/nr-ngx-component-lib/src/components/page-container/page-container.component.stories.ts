@@ -2,8 +2,21 @@ import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } f
 import { fruitOptions, RowListArgs, rowListStory } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { useArgs } from 'storybook/preview-api';
+import { ButtonComponent } from '../button/button.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { FilterContainerComponent } from '../filter-container/filter-container.component';
+import { FilterDateComponent } from '../filter-date/filter-date.component';
+import { FilterSearchComponent } from '../filter-search/filter-search.component';
+import { FilterSelectComponent } from '../filter-select/filter-select.component';
+import { FiltersPanelComponent } from '../filters-panel/filters-panel.component';
+import { GapComponent } from '../gap/gap.component';
+import { PageHeaderComponent } from '../page-header/page-header.component';
+import { RowListDesktopComponent } from '../row-list-desktop/row-list-desktop.component';
 import { Primary as RowListDesktopPrimary } from '../row-list-desktop/row-list-desktop.component.stories';
+import { RowListMobileComponent } from '../row-list-mobile/row-list-mobile.component';
 import { Primary as RowListMobilePrimary } from '../row-list-mobile/row-list-mobile.component.stories';
+import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
+import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { PageContainerComponent } from './page-container.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableModule } from '@angular/material/table';
@@ -17,6 +30,21 @@ const meta: Meta<PageContainerComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
+                FilterContainerComponent,
+                FilterSelectComponent,
+                FiltersPanelComponent,
+                FilterSearchComponent,
+                FilterDateComponent,
+                GapComponent,
+                PageHeaderComponent,
+                RowListDesktopComponent,
+                RowListMobileComponent,
+                RowListPaginationComponent,
+                RowListSortingComponent,
+                ButtonComponent,
+                DeviceViewComponent,
+                DesktopViewDirective,
+                MobileViewDirective,
                 NgxPaginationModule,
                 MatTableModule,
                 MatCardModule

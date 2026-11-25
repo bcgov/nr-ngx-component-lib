@@ -10,7 +10,8 @@ import { DisplayMode, InterfaceStyle } from "../src/services/configuration.servi
     templateUrl: './display-mode-wrapper.component.html',
     host: {
         '[style.width]': 'getWidth()',
-    }
+    },
+    standalone: false
 } )
 export class DisplayModeWrapperComponent extends ConfigurationSubscriberBase implements OnInit, OnChanges {
     @Input() displayMode: DisplayMode | 'auto' = 'auto'

@@ -13,6 +13,14 @@ import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } f
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RowListArgs, rowListItems, rowListStory } from 'projects/nr-ngx-component-lib/story-util';
 import { useArgs } from 'storybook/preview-api';
+import { ButtonComponent } from '../button/button.component';
+import { CellContentComponent } from '../cell-content/cell-content.component';
+import { FilterContainerComponent } from '../filter-container/filter-container.component';
+import { FilterSelectComponent } from '../filter-select/filter-select.component';
+import { GapComponent } from '../gap/gap.component';
+import { IconComponent } from '../icon/icon.component';
+import { RowListPaginationComponent } from '../row-list-pagination/row-list-pagination.component';
+import { RowListSortingComponent } from '../row-list-sorting/row-list-sorting.component';
 import { RowListMobileComponent } from './row-list-mobile.component';
 
 const meta: Meta<RowListMobileComponent> = {
@@ -35,7 +43,16 @@ const meta: Meta<RowListMobileComponent> = {
                 NgxPaginationModule,
                 MatCardModule,
                 MatListModule,  
-                MatRadioModule],
+                MatRadioModule,
+                CellContentComponent,
+                FilterSelectComponent,
+                FilterContainerComponent,
+                GapComponent,
+                RowListSortingComponent,
+                RowListPaginationComponent,
+                IconComponent,
+                ButtonComponent
+            ],
             // declare components that are used in the template
             declarations: [
             ],

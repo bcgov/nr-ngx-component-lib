@@ -1,4 +1,5 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { ButtonComponent } from '../button/button.component';
 import { LoadingStatusComponent } from './loading-status.component';
 
 const meta: Meta<LoadingStatusComponent> = {
@@ -9,6 +10,7 @@ const meta: Meta<LoadingStatusComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
+                ButtonComponent
             ],
             // declare components that are used in the template
             declarations: [

@@ -7,7 +7,7 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
     template: `
         {{ text }}
     `,
-    styles: [ `
+    styles: [`
         :host {
             white-space: pre-line;
             text-align: left;

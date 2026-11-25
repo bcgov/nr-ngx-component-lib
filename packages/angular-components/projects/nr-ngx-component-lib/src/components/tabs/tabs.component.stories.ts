@@ -3,13 +3,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
+import { TabComponent, TabContentDirective, TabLabelDirective } from './tab/tab.component';
 
 @Component( {
     selector: 'sentinel',
     template: `
         <div>Sentinel {{ name }}</div>
         <ng-content></ng-content>
-    `
+    `,
 } )
 class SentinalComponent implements OnInit, OnDestroy {
     @Input() name
@@ -32,10 +33,14 @@ const meta: Meta<DisplayModeWrapperComponent & TabGroupComponent> = {
             // import necessary ngModules or standalone components
             imports: [
                 MatTabsModule,
+                TabComponent,
+                TabGroupComponent,
+                TabLabelDirective,
+                TabContentDirective,
+                SentinalComponent
             ],
             // declare components that are used in the template
             declarations: [
-                SentinalComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

@@ -7,6 +7,7 @@ import {
 import {
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
 import { ApplicationHeaderComponent } from "./application-header.component";
 
 const meta: Meta<ApplicationHeaderComponent> = {
@@ -16,6 +17,7 @@ const meta: Meta<ApplicationHeaderComponent> = {
     decorators: [
         moduleMetadata({
             imports: [
+                ApplicationMenuComponent
             ],
         }),
 

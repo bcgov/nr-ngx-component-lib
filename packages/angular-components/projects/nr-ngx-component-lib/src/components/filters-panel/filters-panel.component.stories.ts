@@ -4,6 +4,10 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { useArgs } from 'storybook/preview-api';
+import { FilterContainerComponent } from '../filter-container/filter-container.component';
+import { FilterDateComponent } from '../filter-date/filter-date.component';
+import { FilterSearchComponent } from '../filter-search/filter-search.component';
+import { FilterSelectComponent } from '../filter-select/filter-select.component';
 import { FiltersPanelComponent } from './filters-panel.component';
 
 const meta: Meta<FiltersPanelComponent> = {
@@ -16,6 +20,10 @@ const meta: Meta<FiltersPanelComponent> = {
             imports: [
                 MatCheckboxModule,
                 MatRadioModule,
+                FilterDateComponent,
+                FilterSearchComponent,
+                FilterSelectComponent,
+                FilterContainerComponent,
             ],
             // declare components that are used in the template
             declarations: [

@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from "@angular/common";
 import { Component, ContentChild, Directive, TemplateRef } from "@angular/core";
 import { ConfigurationSubscriberBase } from "../../directives/configuration-subscriber.base";
 
@@ -40,7 +41,10 @@ export class MobileViewDirective {
         :host:empty {
             display: none;
         }
-    `]
+    `],
+    imports: [
+        NgTemplateOutlet,
+    ]
 })
 export class DeviceViewComponent extends ConfigurationSubscriberBase {
     @ContentChild( DesktopViewDirective ) desktopContent!: DesktopViewDirective;

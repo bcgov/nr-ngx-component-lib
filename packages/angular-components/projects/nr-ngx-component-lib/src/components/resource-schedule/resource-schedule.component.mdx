@@ -10,8 +10,7 @@ a piece of equipment, and one column per day. Each cell shows the resource's sta
 available, assigned, or out of service, in a colour for the kind of day. Clicking a cell can open a menu.
 Interactive examples are under [Examples](#examples).
 
-`ResourceScheduleComponent` and the `nrclResourceScheduleRowHeading` directive are declared and exported by
-`NrNgxComponentLibModule`. Your module also needs `MatMenuModule` for the cell menu, and the
+`ResourceScheduleComponent` and the `nrclResourceScheduleRowHeading` directive are standalone: add them to your component's `imports`. Your component also needs `MatMenuModule` for the cell menu, and the
 `ngx-pagination` package for paging.
 
 ## Usage

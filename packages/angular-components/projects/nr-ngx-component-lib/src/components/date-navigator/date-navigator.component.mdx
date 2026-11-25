@@ -9,7 +9,7 @@ import * as DateNavigatorStories from './date-navigator.component.stories';
 It has a **Today** button, buttons to go back or forward by a day or a week, and the date itself, which
 opens a calendar when clicked. An interactive example is under [Example](#example).
 
-`DateNavigatorComponent` is declared and exported by `NrNgxComponentLibModule`. It provides its own Moment
+`DateNavigatorComponent` is standalone: add it to your component's `imports`. It provides its own Moment
 date adapter, so it needs the `moment` and `@angular/material-moment-adapter` packages from
 [Installation](?path=/docs/introduction-getting-started--docs#installation).
 

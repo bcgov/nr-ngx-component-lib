@@ -1,4 +1,5 @@
 import { AfterContentInit, booleanAttribute, Component, inject, Input } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { SafeHtml } from '@angular/platform-browser';
 import { NrclBase } from '../../directives/nrcl.base';
 import { IconService } from '../../services/icon.service';
@@ -15,7 +16,10 @@ import { IconService } from '../../services/icon.service';
         '[class.large]': 'large',
         '[class.filled]': 'fill',
         '[class.unfilled]': '!fill',
-    }
+    },
+    imports: [
+        MatIconModule
+    ]
 } )
 export class IconComponent extends NrclBase implements AfterContentInit {   
     iconService = inject( IconService )

@@ -1,7 +1,8 @@
 import { Directive, TemplateRef, ViewContainerRef, Input } from "@angular/core";
 
 @Directive( {
-    selector: '[rerender]'
+    selector: '[rerender]',
+    standalone: false
 } )
 export class RerenderDirective {
     private _previous

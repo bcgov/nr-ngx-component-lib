@@ -6,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayMode } from '../../services/configuration.service';
+import { FormFieldComponent } from '../form-field/form-field.component';
 import { FormLayoutComponent } from './form-layout.component';
 
 const meta: Meta<FormLayoutComponent> = {
@@ -22,7 +23,9 @@ const meta: Meta<FormLayoutComponent> = {
                 MatTooltipModule,
                 ReactiveFormsModule,
                 TextFieldModule,
-                MatSelectModule],
+                MatSelectModule,
+                FormFieldComponent
+            ],
             // declare components that are used in the template
             declarations: [
             ],

@@ -1,25 +1,33 @@
 import { booleanAttribute, Component, EventEmitter, inject, Input, NgZone, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { MatRippleModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ConfigurationSubscriberBase } from '../../directives/configuration-subscriber.base';
+import { IconComponent } from '../icon/icon.component';
 
 @Component( {
     selector: 'nrcl-button',
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
     host: {
-        '[class.disabled]':     'disabled',
-        '[class.primary]':      'isPrimary',
-        '[class.secondary]':    'isSecondary',
-        '[class.tertiary]':     'isTertiary',
-        '[class.anchor]':       'isAnchor',
-        '[class.normal]':       '!isCompact && !isSmall',
-        '[class.compact]':      'isCompact',
-        '[class.small]':        'isSmall && !isCompact',
-        '[class.label]':        'hasLabel',
-        '[class.icon-left]':    'hasIconLeft',
-        '[class.icon-right]':   'hasIconRight',
+        '[class.disabled]': 'disabled',
+        '[class.primary]': 'isPrimary',
+        '[class.secondary]': 'isSecondary',
+        '[class.tertiary]': 'isTertiary',
+        '[class.anchor]': 'isAnchor',
+        '[class.normal]': '!isCompact && !isSmall',
+        '[class.compact]': 'isCompact',
+        '[class.small]': 'isSmall && !isCompact',
+        '[class.label]': 'hasLabel',
+        '[class.icon-left]': 'hasIconLeft',
+        '[class.icon-right]': 'hasIconRight',
         '[class.icon-compact]': 'hasIconCompact',
         '[class.icon-small]': 'isIconSmall',
-    }
+    },
+    imports: [
+        MatTooltipModule,
+        MatRippleModule,
+        IconComponent
+    ]
 } )
 export class ButtonComponent extends ConfigurationSubscriberBase implements OnChanges {
     zone = inject( NgZone )

@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayMode } from '../../services/configuration.service';
 import { SnackbarUtilService } from '../../services/snackbar-util.service';
-import { SnackbarType } from './snackbar.component';
+import { ButtonComponent } from '../button/button.component';
+import { SnackbarComponent, SnackbarType } from './snackbar.component';
 
 @Component( {
     selector: 'storybook-dummy-component',
@@ -11,7 +12,8 @@ import { SnackbarType } from './snackbar.component';
             label="Show SnackBar"
             (click)="onOpenSnackBar()"
         ></nrcl-button>
-    ` 
+    `,
+    standalone: false
 } )
 class DummyComponent {
     @Input() message = 'Test Label'
@@ -52,10 +54,11 @@ const meta: Meta<DummyComponentEx> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
+                SnackbarComponent,
+                ButtonComponent,
             ],
             // declare components that are used in the template
             declarations: [
-                DummyComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

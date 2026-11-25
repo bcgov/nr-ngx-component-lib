@@ -5,6 +5,7 @@ import { ConfigurationSubscriberBase } from "../src/directives/configuration-sub
     selector: 'registration-wrapper',
     styleUrl: './registration-wrapper.component.scss',
     templateUrl: './registration-wrapper.component.html',
+    standalone: false
 } )
 export class RegistrationWrapperComponent extends ConfigurationSubscriberBase {
 }

@@ -1,14 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import { DeviceViewComponent } from './device-view.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from './device-view.component';
 
 @Component( {
     selector: 'sentinel',
     template: `
         <div>Sentinel {{ name }}</div>
         <ng-content></ng-content>
-    `
+    `,
 } )
 class SentinelComponent implements OnInit, OnDestroy {
     @Input() name
@@ -30,10 +30,12 @@ const meta: Meta<DeviceViewComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
+                SentinelComponent,
+                DesktopViewDirective,
+                MobileViewDirective
             ],
             // declare components that are used in the template
             declarations: [
-                SentinelComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [

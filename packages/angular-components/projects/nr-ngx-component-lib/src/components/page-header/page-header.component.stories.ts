@@ -1,5 +1,9 @@
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { ButtonComponent } from '../button/button.component';
+import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
+import { IndicatorComponent } from '../indicator/indicator.component';
+import { PageContainerComponent } from '../page-container/page-container.component';
 import { PageHeaderComponent } from './page-header.component';
 
 const meta: Meta<PageHeaderComponent> = {
@@ -10,6 +14,12 @@ const meta: Meta<PageHeaderComponent> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
+                ButtonComponent,
+                PageContainerComponent,
+                IndicatorComponent,
+                DesktopViewDirective,
+                MobileViewDirective,
+                DeviceViewComponent
             ],
             // declare components that are used in the template
             declarations: [

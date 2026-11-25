@@ -8,6 +8,8 @@ import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
 import {
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
+import { ApplicationHeaderComponent } from "../application-header/application-header.component";
+import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
 import { ApplicationComponent } from "./application.component";
 
 const meta: Meta<ApplicationComponent> = {
@@ -17,6 +19,8 @@ const meta: Meta<ApplicationComponent> = {
     decorators: [
         moduleMetadata({
             imports: [
+                ApplicationHeaderComponent,
+                ApplicationMenuComponent,
             ],
         }),
 

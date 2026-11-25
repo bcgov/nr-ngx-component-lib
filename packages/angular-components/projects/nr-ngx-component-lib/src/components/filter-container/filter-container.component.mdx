@@ -10,7 +10,7 @@ import * as FilterContainerStories from './filter-container.component.stories';
 as checkboxes or radio buttons, so it lines up with the filters around it. Interactive examples are under
 [Examples](#examples).
 
-`FilterContainerComponent` is declared and exported by `NrNgxComponentLibModule`.
+`FilterContainerComponent` is standalone: add it to your component's `imports`.
 
 ## Usage
 
@@ -26,7 +26,7 @@ It restyles `<mat-checkbox>` and `<mat-radio-group>` to fit the box's height. Th
 are put in a row too.
 
 The container has no value. Bind the controls inside it as you normally would, and import their modules,
-such as `MatCheckboxModule` or `MatRadioModule`, in your own module.
+such as `MatCheckboxModule` or `MatRadioModule`, in your own component.
 
 ## Width
 

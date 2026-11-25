@@ -1,4 +1,5 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { ButtonComponent } from '../../components/button/button.component';
 import { TooltipDirective } from './tooltip.directive';
 
 const meta: Meta<TooltipDirective & { width: number }> = {
@@ -9,6 +10,7 @@ const meta: Meta<TooltipDirective & { width: number }> = {
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
+                ButtonComponent
             ],
             // declare components that are used in the template
             declarations: [
