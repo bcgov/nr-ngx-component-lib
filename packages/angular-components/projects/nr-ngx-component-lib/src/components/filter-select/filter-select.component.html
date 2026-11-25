@@ -127,5 +127,5 @@
 </ng-template>
 
 <ng-template #defaultOptionTemplateRef let-ctx>
-    <span>{{ ctx.description }}</span>
+    <span [innerHTML]="optionFormatter( ctx, false )"></span>
 </ng-template>
