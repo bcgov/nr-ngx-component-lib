@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Services/IconService" />
+
+# IconService
+
+`IconService` holds the SVG icons that [`<nrcl-icon>`](?path=/docs/utility-icon--docs) can show by name,
+alongside the Material Symbols font. It's provided in the root injector, and starts with the library's own
+icons.
+
+## Adding icons
+
+```typescript
+import { IconService } from '@bcgov/nr-ngx-component-lib';
+
+constructor() {
+    inject( IconService ).defineIcon( 'helicopter', `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="..."/>
+        </svg>
+    ` );
+}
+```
+
+```html
+<nrcl-icon>helicopter</nrcl-icon>
+<nrcl-button label="Dispatch" icon="helicopter"></nrcl-button>
+```
+
+Define icons before anything shows them, for example in your root component's constructor. An icon element
+reads its name once, when it's created.
+
+- **Names** may only use lower-case letters, digits, `-`, and `_`. Any other name throws an error.
+- **A name that's already defined is replaced**, with a warning in the console. This includes the
+  library's icons.
+- **Defined icons come first.** An icon with the same name as a Material Symbols icon is shown instead
+  of it.
+- **The SVG isn't sanitised.** It's inserted as it is, so only use SVG from a source you trust.
+- **Size and colour:** give the SVG a `viewBox` and no fixed `width` or `height`, so it scales to the icon
+  size. It's filled with the text colour, `currentColor`.
+
+## Methods
+
+| Method | Description |
+|--------|-------------|
+| `defineIcon( name, svg )` | Adds or replaces an icon. |
+| `isIcon( name )` | `true` if an icon with that name is defined. |
+| `getIcon( name )` | The icon's SVG, as `SafeHtml`. Returns the `__missing__` icon for an unknown name. |
+
+## Library icons
+
+`clear-filters`, `home-outline`, `mcp-server`, `roster`, and `user-clock`, plus `empty`, a blank icon, and
+`__missing__`, a box with a question mark. The [Icon](?path=/docs/utility-icon--docs#all-icons) page shows
+them.

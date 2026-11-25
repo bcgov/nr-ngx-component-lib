@@ -6,7 +6,7 @@ import * as DialogStories from './dialog.component.stories';
 # Dialog
 
 `<nrcl-dialog>` is the layout for a dialog: a title bar, content that scrolls, and a bar of Save and Cancel
-buttons. Open it with `DialogService`, which wraps Angular Material's `MatDialog`. An interactive example
+buttons. Open it with [`DialogService`](?path=/docs/services-dialogservice--docs), which wraps Angular Material's `MatDialog`. An interactive example
 is under [Example](#example).
 
 `DialogComponent` is declared and exported by `NrNgxComponentLibModule`. `DialogService` and `DialogBase`
@@ -17,7 +17,7 @@ instead.
 
 ## Opening a dialog
 
-Write the dialog as a component that extends `DialogBase`, and open it with `DialogService.openDialog()`:
+Write the dialog as a component that extends [`DialogBase`](?path=/docs/directives-dialogbase--docs), and open it with `DialogService.openDialog()`:
 
 ```typescript
 import { DialogBase, DialogService } from '@bcgov/nr-ngx-component-lib';
@@ -129,7 +129,7 @@ The **×** from `showClose` emits `cancelClick`, like Cancel.
 
 ## Interface style
 
-The dialog follows the interface style from `ConfigurationService`. See
+The dialog follows the interface style from [`ConfigurationService`](?path=/docs/services-configurationservice--docs). See
 [Display mode and interface style](?path=/docs/introduction-getting-started--docs#display-mode-and-interface-style).
 
 | Style | Title bar | Actions bar | Save | Cancel |
