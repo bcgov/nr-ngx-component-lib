@@ -4,43 +4,57 @@ on:
   push:
     branches:
       - "main"
+  # lets the deploy be run again from the Actions tab without a new push
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# one deployment at a time; a newer push waits for the current deploy instead of cancelling it
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        working-directory: packages/angular-components
+        run: npm install --legacy-peer-deps --force
+
+      - name: Build Storybook
+        working-directory: packages/angular-components
+        run: npm run build-storybook
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: packages/angular-components/storybook-static
+
+  # Deploying in its own job, after the build job has finished, gives the uploaded artifact time to be
+  # listed. In the same job, deploy-pages can look for it too soon and fail with
+  # 'No artifacts named "github-pages" were found'.
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      
-      - name: Install dependencies
-        working-directory: packages/angular-components
-        run: npm install --legacy-peer-deps --force
-      
-      - name: Build Storybook
-        working-directory: packages/angular-components
-        run: npm run build-storybook
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: packages/angular-components/storybook-static
-      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
