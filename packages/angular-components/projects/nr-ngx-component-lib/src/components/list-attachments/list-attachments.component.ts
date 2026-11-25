@@ -78,37 +78,46 @@ export class ListAttachmentsComponent extends RowListBase<{},AttachmentsTableRow
     @Input() noRowsMessage = "No attachments have been added."
 
     DATE_FORMATS = DATE_FORMATS
-    columns: string[] = [] 
-    sortColumns: { code: string; description: string; }[] = []
+    // built from the input defaults here, since ngOnChanges doesn't run when none of the inputs are bound
+    columns: string[] = this.buildColumns()
+    sortColumns: { code: string; description: string; }[] = this.buildSortColumns()
     desktopPaginationId = "desktop"
     mobilePaginationId = "mobile"
 
     ngOnChanges(changes: SimpleChanges): void {
         if ( changes.canDownload || changes.canDelete || changes.showOrgUnit ) {
-            this.columns = [ 
-                'attachmentTypeCode',
-                ...(this.showOrgUnit ? ['orgUnit'] : []),
-                'fileName', 
-                'fileExtension', 
-                'uploadedBy', 
-                'uploadedTimestamp', 
-                'description',
-                ...( this.canDownload ? ['download'] : [] ),
-                ...( this.canDelete ? ['delete'] : [] )
-            ]
+            this.columns = this.buildColumns()
         }
-        
+
         if ( changes.showOrgUnit ) {
-            this.sortColumns = [
-                { code: 'attachmentTypeCode', description: 'Attachment Type' },
-                { code: 'fileName', description: 'File Name' },
-                { code: 'fileExtension', description: 'File Type' },
-                { code: 'uploadedBy', description: 'Uploaded By' },
-                { code: 'uploadedTimestamp', description: 'Uploaded Date' },
-                ...(this.showOrgUnit ? [{ code: 'orgUnit', description: 'Org Unit' }] : []),
-                { code: 'description', description: 'Description' }
-            ];
+            this.sortColumns = this.buildSortColumns()
         }
+    }
+
+    buildColumns(): string[] {
+        return [
+            'attachmentTypeCode',
+            ...(this.showOrgUnit ? ['orgUnit'] : []),
+            'fileName',
+            'fileExtension',
+            'uploadedBy',
+            'uploadedTimestamp',
+            'description',
+            ...( this.canDownload ? ['download'] : [] ),
+            ...( this.canDelete ? ['delete'] : [] )
+        ]
+    }
+
+    buildSortColumns(): { code: string; description: string; }[] {
+        return [
+            { code: 'attachmentTypeCode', description: 'Attachment Type' },
+            { code: 'fileName', description: 'File Name' },
+            { code: 'fileExtension', description: 'File Type' },
+            { code: 'uploadedBy', description: 'Uploaded By' },
+            { code: 'uploadedTimestamp', description: 'Uploaded Date' },
+            ...(this.showOrgUnit ? [{ code: 'orgUnit', description: 'Org Unit' }] : []),
+            { code: 'description', description: 'Description' }
+        ]
     }
 
     getInitialPageState(): InitialState<{}> {

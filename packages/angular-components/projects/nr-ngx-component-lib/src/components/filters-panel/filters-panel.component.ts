@@ -36,6 +36,10 @@ export class FiltersPanelComponent extends NrclBase {
     @Input() moreFiltersLabels = ['See More','See Less']
 
     @Output() clearFilters = new EventEmitter()
+    /**
+     * @deprecated The panel no longer has a button to show or hide the filters, so this is only emitted
+     * when `onShowClick` or `onHideClick` is called from code. Set `showFilters` directly instead.
+     */
     @Output() showFiltersChange = new EventEmitter<boolean>()
     @Output() showAdvancedFiltersChange = new EventEmitter<boolean>()
 

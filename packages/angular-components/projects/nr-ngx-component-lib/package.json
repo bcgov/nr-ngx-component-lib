@@ -4,6 +4,18 @@
     "dependencies": {
         "tslib": "^2.5.1"
     },
+    "peerDependencies": {
+        "@angular/cdk": "^21.0.0",
+        "@angular/common": "^21.0.0",
+        "@angular/core": "^21.0.0",
+        "@angular/forms": "^21.0.0",
+        "@angular/material": "^21.0.0",
+        "@angular/material-moment-adapter": "^21.0.0",
+        "@angular/platform-browser": "^21.0.0",
+        "moment": "^2.29.0",
+        "ngx-pagination": "^6.0.0",
+        "rxjs": "^7.4.0"
+    },
     "exports": {
         ".": {
             "sass": "./styles/global.scss"

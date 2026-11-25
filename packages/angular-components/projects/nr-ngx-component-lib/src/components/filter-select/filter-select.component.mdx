@@ -98,14 +98,20 @@ more helpful, such as `'Type 2 or more letters to search'`.
 
 You can pass the template with the `optionTemplate` input instead.
 
-**In the box**, after the list closes, `optionFormatter` sets the text for each selected option. It's
-called with the option and `true`, and must return plain text:
+**With `optionFormatter`**, one function formats both the list and the box. It's called with the option
+and a `plaintext` flag:
+
+- `true`: the text for a selected option in the box, after the list closes. Return plain text.
+- `false`: the option in the list. Return HTML. Angular sanitizes it, and escape any text that comes from
+  your data.
 
 ```typescript
-formatResource = ( option: CodeDescription ) => `${ option.code } - ${ option.description }`;
+formatResource = ( option: CodeDescription, plaintext: boolean ) => plaintext
+    ? `${ option.code } - ${ option.description }`
+    : `<b>${ option.code }</b> - ${ option.description }`;
 ```
 
-`optionFormatter` doesn't change the list. Use a template for that.
+A template, if you give one, takes over the list, and `optionFormatter` then only sets the text in the box.
 
 ## Linked selects
 
@@ -144,7 +150,7 @@ changes. Selected codes that aren't in the new options are dropped, and the seco
 | `filterCharsMin` | `number` | `0` | Characters to type before any options show. |
 | `filterCharsMinMessage` | `string` | `'Too many options'` | Shown while fewer than `filterCharsMin` characters are typed. |
 | `optionTemplate` | `TemplateRef` | | Template for each option in the list. |
-| `optionFormatter` | `( option, plaintext ) => string` | the description | Text for a selected option in the box. |
+| `optionFormatter` | `( option, plaintext ) => string` | the description | Formats an option: plain text for the box when `plaintext` is `true`, HTML for the list when it's `false`. |
 | `overlayClass` | `string` | | Class added to the list's panel. The panel is in an overlay at the end of `<body>`, so style it from a global stylesheet. |
 | `wide` | `string` | | Width in filter units, `'1'` to `'6'`. Default 2. See [Filters](?path=/docs/inputs-and-controls-filters--docs#widths). |
 
@@ -199,8 +205,8 @@ the second, then change the first.
 
 ### Formatted selection
 
-`optionFormatter` adds each option's `extra` field to the text in the box after the list closes. The list
-itself is unchanged.
+`optionFormatter` adds each option's `extra` field, both in the list and in the box after the list
+closes.
 
 <Canvas of={FilterSelectStories.FormatOption} />
 <Controls of={FilterSelectStories.FormatOption} />

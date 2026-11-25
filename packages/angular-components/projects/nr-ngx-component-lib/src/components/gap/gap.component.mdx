@@ -48,17 +48,17 @@ the display mode. Interactive examples are under [Examples](#examples).
 
 ## Size
 
-Without a divider, a gap is 1 gutter.
+Without a number, a gap is 1 gutter, or the size in the table above when it has a divider.
 
-With a divider, set the size in gutters with a number: `<nrcl-gap vertical="3" divider>` is 3 gutters tall
-with the line in the middle. The number is ignored without a divider.
+Set the size in gutters with a number: `<nrcl-gap vertical="3">` is 3 gutters tall, and
+`<nrcl-gap vertical="3" divider>` is 3 gutters tall with the line in the middle.
 
 ## Inputs
 
 | Input | Type | Description |
 |-------|------|-------------|
-| `vertical` | `string` | Vertical gap. A number sets the size in gutters, with a divider. |
-| `horizontal` | `string` | Horizontal gap. A number sets the size in gutters, with a divider. Ignored when `vertical` is set. |
+| `vertical` | `string` | Vertical gap. A number sets the size in gutters. |
+| `horizontal` | `string` | Horizontal gap. A number sets the size in gutters. Ignored when `vertical` is set. |
 | `divider` | `string` | Draws a line: `''` or `'middle'`, `'before'`, or `'after'`. `'none'`, or any other value, draws none. |
 
 ## Styling

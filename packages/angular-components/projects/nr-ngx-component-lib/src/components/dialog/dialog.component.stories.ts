@@ -27,11 +27,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 
                 [saveLabel]="saveLabel"
                 [saveEnabled]="saveEnabled"
-                (saveClick)="saveClick.emit()"
+                (saveClick)="onStorySaveClick()"
 
                 [cancelLabel]="cancelLabel"
                 [cancelEnabled]="cancelEnabled"
-                (cancelClick)="cancelClick.emit()"
+                (cancelClick)="onStoryCancelClick()"
             >
                 <section title>
                     title
@@ -69,6 +69,17 @@ class DialogStoryComponent extends DialogComponent implements AfterViewInit, OnD
 
     ngOnDestroy(): void {
         if ( this.dialogRef ) this.dialogRef.close()
+    }
+
+    // emit for the actions panel, then close, as an app's handlers would
+    onStorySaveClick() {
+        this.saveClick.emit()
+        this.dialogRef?.close( 'save' )
+    }
+
+    onStoryCancelClick() {
+        this.cancelClick.emit()
+        this.dialogRef?.close( 'cancel' )
     }
 
     onClick() {

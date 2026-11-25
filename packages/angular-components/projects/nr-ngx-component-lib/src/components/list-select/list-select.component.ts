@@ -131,8 +131,9 @@ export class ListSelectComponent<T> extends RowListBase<{},CodeDescription> impl
 
         let t = this.searchText?.trim()
         if ( t ) {
-            t = t.toLowerCase().replace( /\s+/g, '.*' )
-            this.searchRegexp = new RegExp( t, 'i' ) 
+            // match the words in order, treating regex characters in them as literal text
+            const words = t.split( /\s+/ ).map( w => w.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ) )
+            this.searchRegexp = new RegExp( words.join( '.*' ), 'i' )
         }
         else {
             this.searchRegexp = null

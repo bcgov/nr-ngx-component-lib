@@ -43,6 +43,10 @@ import { ButtonComponent } from "../button/button.component";
  * - Tooltips for long descriptions
  * - Summary display of selected items
  */
+function escapeHtml( text: string ): string {
+    return String( text ?? '' ).replace( /[&<>"']/g, c => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' } )[ c ] )
+}
+
 @Component( {
     selector: "nrcl-filter-select",
     templateUrl: "./filter-select.component.html",
@@ -91,7 +95,8 @@ export class FilterSelectComponent extends NrclBase implements OnInit, OnChanges
     @Input( { transform: booleanAttribute } ) clear = true
     @Input( { transform: booleanAttribute } ) filter = true
     @Input( { transform: numberAttribute } ) filterCharsMin = 0
-    @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => o.description    
+    // plaintext true: text for the box. plaintext false: HTML for the option in the list (sanitized by Angular)
+    @Input() optionFormatter: ( option: CodeDescription, plaintext: boolean ) => string = ( o, p ) => p ? o.description : escapeHtml( o.description )
     @Input() optionTemplate?: TemplateRef<any> 
     @Input() overlayClass?: string
     @Input() wide?: string 

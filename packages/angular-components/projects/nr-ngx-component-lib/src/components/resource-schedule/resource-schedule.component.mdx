@@ -136,19 +136,18 @@ ripple when the pointer is over a cell.
 
 ## Changing dates
 
-**The schedule doesn't reload when `startDate`, `dayCount`, or `weekStart` change.** After changing them,
-call `refreshRowList()` on the inner schedule, which is built on [`RowListBase`](?path=/docs/directives-rowlistbase--docs):
+The schedule reloads when `startDate`, `dayCount`, or `weekStart` change, so change your own copy of the
+date and let the binding pass it on. Your provider's `fetchSchedule` should read the same date:
 
 ```typescript
-@ViewChild( 'schedule' ) schedule: ResourceScheduleComponent;
-
 nextWeek() {
     this.startDate = moment( this.startDate ).add( 7, 'day' ).format( 'YYYY-MM-DD' );
-    setTimeout( () => this.schedule.scheduleComponent.refreshRowList() );
 }
 ```
 
-The `setTimeout` lets the new `startDate` reach the schedule first.
+To reload for any other reason, call `refreshRowList()` on the inner schedule, which is built on
+[`RowListBase`](?path=/docs/directives-rowlistbase--docs):
+`this.schedule.scheduleComponent.refreshRowList()`.
 
 ## Inputs
 
@@ -163,8 +162,6 @@ The `setTimeout` lets the new `startDate` reach the schedule first.
 | `hover` | `boolean` | `true` | Highlights the cell under the pointer. |
 | `heading` | `boolean` | `true` | Shows the row headings and the top left corner. |
 | `pagination` | `boolean` | `true` | Shows the paging controls, and "Loading..." until the first load is done. |
-
-Only one schedule per page can have paging controls: their pagination id is fixed.
 
 ## Styling
 

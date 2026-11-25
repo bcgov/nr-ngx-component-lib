@@ -138,7 +138,7 @@ export const Icon: StoryObj<IconComponent & { icon: string }> = {
         return {
             props: { ...args },
             template: `
-                <nrcl-icon *rerender="icon">{{ icon }}</nrcl-icon> 
+                <nrcl-icon>{{ icon }}</nrcl-icon>
             `
         }
     }

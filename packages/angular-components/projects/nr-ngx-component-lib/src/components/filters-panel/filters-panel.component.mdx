@@ -95,7 +95,7 @@ for example between visits to the page. Change the button text with `moreFilters
 |--------|------|-------------|
 | `clearFilters` | `void` | Clear was clicked. |
 | `showAdvancedFiltersChange` | `boolean` | See More or See Less was clicked. |
-| `showFiltersChange` | `boolean` | Declared, but nothing in the panel emits it. |
+| `showFiltersChange` | `boolean` | Deprecated. The panel has no show/hide button, so this only emits if your code calls `onShowClick()` or `onHideClick()`. Set `showFilters` instead. |
 
 ## Styling
 

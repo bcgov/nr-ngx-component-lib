@@ -37,7 +37,7 @@
             }
         </div>
 
-        @for ( row of rows | paginate: paginateState( 'nrcl-schedule' ); track row.id; let rowIndex = $index ) {
+        @for ( row of rows | paginate: paginateState( paginationId ); track row.id; let rowIndex = $index ) {
             <div class="row items" [class]="row.rowClass">
                 @if ( heading ) {
                     <div class="outer heading">
@@ -105,7 +105,7 @@
     }
     @else {
         <nrcl-row-list-pagination
-            paginationId="nrcl-schedule"
+            [paginationId]="paginationId"
             [pageSize]="pageSize"
             [pageNumber]="pageNumber"
             [rowCount]="totalRowCount"
