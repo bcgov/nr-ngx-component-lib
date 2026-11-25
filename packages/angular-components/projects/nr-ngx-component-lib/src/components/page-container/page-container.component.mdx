@@ -1,0 +1,95 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as PageContainerStories from './page-container.component.stories';
+
+<Meta of={PageContainerStories} />
+
+# Page Container
+
+`<nrcl-page-container>` wraps the content of a page. It stacks its children in a column and adds the
+horizontal page margin, which changes with the display mode. Interactive examples are under
+[Examples](#examples).
+
+`PageContainerComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+Use one page container as the outer element of each page, usually the component a route displays:
+
+```html
+<nrcl-page-container>
+    <nrcl-page-header>
+        <h1>Prep Sheets</h1>
+        <nrcl-button primary action label="Create Prep Sheet"></nrcl-button>
+    </nrcl-page-header>
+
+    <nrcl-gap vertical></nrcl-gap>
+
+    <nrcl-filters-panel>
+        <nrcl-filter-search></nrcl-filter-search>
+    </nrcl-filters-panel>
+
+    <section>
+        <!-- page content -->
+    </section>
+</nrcl-page-container>
+```
+
+Inside `<nrcl-application>`, the page container goes in the scrolling content area, below the
+[application header](?path=/docs/navigation-and-structure-application--docs).
+
+## Layout
+
+| | |
+|---|---|
+| Direction | Children stack vertically (`flex-direction: column`). |
+| Size | Full width and full height of its parent. |
+| Horizontal padding | `--nrcl-gutter-space` on the left and right: 16px on desktop, 8px on mobile. |
+| Vertical padding | None. `<nrcl-page-header>` adds its own space at the top. |
+| Font | `--nrcl-font-family` at `--nrcl-font-size`. |
+
+### Spacing between sections
+
+The page container doesn't add space between its children. Put a
+[`<nrcl-gap vertical>`](?path=/docs/utility-gap--docs) between sections where you want space. It uses the
+same `--nrcl-gutter-space`, so the spacing matches the page margins in both display modes.
+
+```html
+<nrcl-page-header>...</nrcl-page-header>
+<nrcl-gap vertical></nrcl-gap>
+<nrcl-filters-panel>...</nrcl-filters-panel>
+```
+
+### Different content on desktop and mobile
+
+To show different content in each display mode, such as a table on desktop and cards on mobile, use
+[`<nrcl-device-view>`](?path=/docs/utility-device-view--docs) inside the page container. The
+[Row list example](#row-list) does this.
+
+## Inputs and outputs
+
+`<nrcl-page-container>` has no inputs or outputs.
+
+## Examples
+
+### Sections
+
+Two sections inside a page container. They're outlined to show the container's horizontal padding, and they
+touch because the container adds no space between them.
+
+<Canvas of={PageContainerStories.Sections} />
+<Controls of={PageContainerStories.Sections} />
+
+### Page header
+
+A page container with a [page header](?path=/docs/navigation-and-structure-page-header--docs).
+
+<Canvas of={PageContainerStories.PageHeader} />
+<Controls of={PageContainerStories.PageHeader} />
+
+### Row list
+
+A complete list page: a page header, a filters panel, and a row list that's a table on desktop and cards on
+mobile. Switch the display mode to see both.
+
+<Canvas of={PageContainerStories.RowList} />
+<Controls of={PageContainerStories.RowList} />

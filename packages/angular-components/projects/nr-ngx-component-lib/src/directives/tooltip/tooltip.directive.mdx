@@ -1,0 +1,75 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TooltipStories from './tooltip.directive.stories';
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+The `nrclTooltip` directive shows a tooltip when the pointer is over an element. The tooltip can be plain
+text, or a template with any content, including links and buttons the user can move the pointer onto. An
+interactive example is under [Example](#example).
+
+`TooltipDirective` is declared and exported by `NrNgxComponentLibModule`.
+
+For a short text tooltip, Angular Material's `matTooltip` also works, and is what
+[buttons](?path=/docs/inputs-and-controls-button--docs) and
+[cell content](?path=/docs/inputs-and-controls-cell-content--docs) use. Use `nrclTooltip` for richer
+content.
+
+## Usage
+
+Plain text:
+
+```html
+<span nrclTooltip="Discovered by aircraft patrol">Aerial</span>
+```
+
+`\n` in the text starts a new line.
+
+A template, with a value passed in with `nrclTooltipContext`:
+
+```html
+<span [nrclTooltip]="fireTooltip" [nrclTooltipContext]="{ $implicit: fire }">{{ fire.name }}</span>
+
+<ng-template #fireTooltip let-fire>
+    <h3>{{ fire.name }}</h3>
+    <p>{{ fire.size }} ha, {{ fire.status }}</p>
+    <nrcl-button anchor label="Open" (click)="open( fire )"></nrcl-button>
+</ng-template>
+```
+
+## Behaviour
+
+- **The tooltip opens 300ms after the pointer moves onto the element**, below it and aligned to its left
+  edge. If there's no room below, it opens above.
+- **It closes 300ms after the pointer leaves**, unless the pointer moves onto the tooltip. It then stays
+  open until the pointer leaves the tooltip, so its links and buttons can be clicked.
+- **Change the delay** with `nrclTooltipDelay`, in milliseconds. It's used for both opening and closing.
+- **It only responds to the pointer.** It doesn't open when the element gets keyboard focus, or on a
+  touch screen. Don't put anything in a tooltip that the user can't find another way.
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `nrclTooltip` | `string` or `TemplateRef` | | Tooltip text or template. Nothing shows when it's empty. |
+| `nrclTooltipContext` | any | | Context for the template. Use `{ $implicit: value }` for `let-name`. |
+| `nrclTooltipClass` | `string` | | Class added to the tooltip panel. |
+| `nrclTooltipDelay` | `number` | `300` | Milliseconds before opening and before closing. |
+
+## Styling
+
+| Tooltip | Look |
+|---------|------|
+| Template | Light background, grey text at `--nrcl-font-size-tooltip`, 16px padding, rounded corners, and a shadow. |
+| Text | White 13px text on dark grey, like Material's `matTooltip`. |
+
+The tooltip panel has the `nrcl-tooltip-panel` class, and is in an overlay at the end of `<body>`. Style it,
+or your `nrclTooltipClass`, from a global stylesheet.
+
+## Example
+
+Hover over each item. The first two use a template, with a link you can move the pointer onto and click. The
+last two use text, the last with two lines.
+
+<Canvas of={TooltipStories.Primary} />

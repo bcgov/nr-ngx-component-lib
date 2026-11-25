@@ -1,0 +1,81 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as DialogConfirmStories from './dialog-confirm.component.stories';
+
+<Meta of={DialogConfirmStories} />
+
+# Dialog Confirm
+
+A confirm dialog asks the user to confirm or cancel an action, such as deleting a record. You open it with
+[`DialogService`](?path=/docs/services-dialogservice--docs)`.openConfirmDialog()`, giving it a title and a template for the message. It's a
+[dialog](?path=/docs/notification-and-feedback-dialog--docs) with a **×**, a **Cancel** button, and a
+**Confirm** button. An interactive example is under [Example](#example).
+
+`DialogConfirmComponent` is declared and exported by `NrNgxComponentLibModule`. `DialogService` is
+exported by the library.
+
+## Usage
+
+```html
+<ng-template #deleteMessage let-fire>
+    <p>Delete <b>{{ fire.name }}</b>? This can't be undone.</p>
+</ng-template>
+```
+
+```typescript
+import { DialogService } from '@bcgov/nr-ngx-component-lib';
+
+dialogService = inject( DialogService );
+
+@ViewChild( 'deleteMessage' ) deleteMessage: TemplateRef<any>;
+
+delete( fire: Fire ) {
+    this.dialogService.openConfirmDialog( {
+        title: 'Delete Fire',
+        saveLabel: 'Delete',
+        template: this.deleteMessage,
+        context: fire,
+    } )
+    .afterClosed()
+    .subscribe( result => {
+        if ( result == 'cancel' ) return;
+        this.api.deleteFire( fire.id );
+    } );
+}
+```
+
+The dialog shows the template, with `context` as its value (`let-fire` above).
+
+## Result
+
+`afterClosed()` emits:
+
+| User | Result |
+|------|--------|
+| Clicked **Confirm** | `null` |
+| Clicked **Cancel** or **×** | `'cancel'` |
+
+By default, Escape and clicking outside the dialog don't close it, so those are the only two results. If
+you allow them, with `{ disableClose: false }` as the second argument, closing that way gives `undefined`.
+Check for `null` to be sure the user confirmed.
+
+## Config
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `title` | `string` | | Title. Required. |
+| `template` | `TemplateRef` | | Message. Required. |
+| `context` | any | | Passed to the template as its value. |
+| `saveLabel` | `string` | `'Confirm'` | Confirm button text, for example `'Delete'`. |
+| `cancelLabel` | `string` | `'Cancel'` | Cancel button text. |
+| `showActions` | `boolean` | `true` | Shows the Cancel and Confirm buttons. Without them, only the **×** closes the dialog. |
+
+`openConfirmDialog()` takes a `MatDialogConfig` as a second argument, to change the
+[dialog defaults](?path=/docs/notification-and-feedback-dialog--docs#defaults).
+
+## Example
+
+Click **Open Dialog**. The template shows a value from `context`. The result is logged to the browser
+console.
+
+<Canvas of={DialogConfirmStories.Primary} />
+<Controls of={DialogConfirmStories.Primary} exclude={[ 'template', 'context' ]} />

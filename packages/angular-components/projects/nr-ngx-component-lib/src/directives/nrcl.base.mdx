@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Directives/NrclBase" />
+
+# NrclBase
+
+`NrclBase` is the base class of every component in the library. It adds two classes to the component's
+element: `nrcl`, and `nrcl-` followed by the element name. For example, `<nrcl-button>` gets
+`class="nrcl nrcl-button"`.
+
+The library's styles use these classes to style one component inside another, for example
+`.nrcl-filter-select` inside a filters panel. You can use them the same way in your own styles.
+
+## Extending it
+
+You only need `NrclBase` to write a component that the library's styles treat like one of its own:
+
+```typescript
+import { NrclBase } from '@bcgov/nr-ngx-component-lib';
+
+@Component( {
+    selector: 'app-fire-badge',
+    template: `...`,
+} )
+export class FireBadgeComponent extends NrclBase {}
+```
+
+`<app-fire-badge>` then gets `class="nrcl app-fire-badge"`.
+
+The classes are set in `ngOnInit()`. If your component has its own `ngOnInit()`, call `super.ngOnInit()`
+from it.
+
+## Members
+
+| Member | Description |
+|--------|-------------|
+| `elementRef` | The component's `ElementRef`. |
+| `elementClass` | The classes added to the element. Bound to the element's `class`. |
+| `ngOnInit()` | Sets `elementClass`. |
+
+## Extended by
+
+Every library component, through these more specific base classes:
+
+| Base class | Adds |
+|------------|------|
+| [ConfigurationSubscriberBase](?path=/docs/directives-configurationsubscriberbase--docs) | The current display mode and interface style. |
+| [DialogBase](?path=/docs/directives-dialogbase--docs) | Dialog results. |
+| [PaginationBase](?path=/docs/directives-paginationbase--docs) | Page, page size, sort, and filter state. |
+| [RowListBase](?path=/docs/directives-rowlistbase--docs) | Loading rows a page at a time. |

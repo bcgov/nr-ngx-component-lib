@@ -1,0 +1,142 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Directives/RowListBase" />
+
+# RowListBase
+
+`RowListBase<F, R, L>` is the base class for a list component that loads its rows a page at a time from a
+server. You say how to fetch a page and how to read the rows from the response. The class handles the
+page, sort, and filter state, cancels requests the user no longer needs, and keeps track of loading.
+
+The library's [List Attachments](?path=/docs/content-list-attachments--docs),
+[List Event History](?path=/docs/content-list-event-history--docs),
+[List Select](?path=/docs/content-list-select--docs), and
+[Resource Schedule](?path=/docs/content-resource-schedule--docs) extend it. It extends
+[PaginationBase](?path=/docs/directives-paginationbase--docs), which keeps the state.
+
+| Type parameter | Is |
+|----------------|----|
+| `F` | The filter. |
+| `R` | A row. |
+| `L` | The server's response. |
+
+## Usage
+
+```typescript
+import { InitialState, RowListBase } from '@bcgov/nr-ngx-component-lib';
+
+type FireFilter = { search: string, status: string[] };
+type FirePage = { totalRowCount: number, collection: Fire[] };
+
+@Component( {
+    selector: 'app-fire-list',
+    templateUrl: './fire-list.component.html',
+} )
+export class FireListComponent extends RowListBase<FireFilter, Fire, FirePage> {
+    api = inject( FireApiService );
+
+    getInitialPageState(): InitialState<FireFilter> {
+        return {
+            instance: 'fire-list',
+            filter: { search: '', status: [] },
+            pageConfig: { pageSize: 20, pageNumber: 1, sortActive: 'name', sortDirection: 'asc' },
+        };
+    }
+
+    fetchRowListPage(): Observable<FirePage> {
+        return this.api.getFires( {
+            ...this.getPagingInfoRequest( this.filter.search ),
+            status: this.filter.status,
+        } );
+    }
+
+    parseRows( res: FirePage ): Fire[] {
+        return res.collection;
+    }
+
+    clearFilters() {
+        this.onFilterChange( { search: '', status: [] } );
+    }
+}
+```
+
+```html
+<nrcl-filters-panel (clearFilters)="clearFilters()">
+    <nrcl-filter-search
+        [value]="filter?.search"
+        (valueChange)="onFilterChange( { search: $event, status: filter.status } )"
+    ></nrcl-filter-search>
+
+    <nrcl-filter-select label="Status"
+        [options]="statusOptions"
+        [value]="filter?.status"
+        (valueChange)="onFilterChange( { search: filter.search, status: $event } )"
+    ></nrcl-filter-select>
+</nrcl-filters-panel>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-row-list-desktop>
+    <mat-table matSort
+        [dataSource]="rows | paginate: paginateState( 'fires' )"
+        [matSortActive]="sortActive"
+        [matSortDirection]="sortDirection"
+        (matSortChange)="onSortChange( $event )"
+    >
+        ...
+    </mat-table>
+</nrcl-row-list-desktop>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-row-list-pagination
+    paginationId="fires"
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    [rowCount]="totalRowCount"
+    (pageNumberChange)="onPageNumberChange( $event )"
+    (pageSizeChange)="onPageSizeChange( $event )"
+></nrcl-row-list-pagination>
+```
+
+See the [row list](?path=/docs/content-row-list--docs) components for the table, cards, and paging
+controls.
+
+## What you implement
+
+| Method | Required | Description |
+|--------|----------|-------------|
+| `getInitialPageState()` | yes | Starting state. See [PaginationBase](?path=/docs/directives-paginationbase--docs#starting-state). |
+| `fetchRowListPage()` | yes | Returns an `Observable` of the current page, using `pageNumber`, `pageSize`, `sortActive`, `sortDirection`, and `filter`. Only its first value is used. |
+| `parseRows( res )` | yes | Returns the rows from the response. |
+| `parseTotalRowCount( res )` | no | Returns the total number of rows. By default it reads `res.totalRowCount`, and the load fails if there isn't one. |
+| `completedRowListPage()` | no | Called after the rows are set. |
+| `loadRowListPageFailed( error )` | no | Called when loading fails. By default it logs a warning and empties the list. |
+
+## Loading
+
+The list loads when it's created, and again whenever the page, page size, sort, or filter changes. Call
+`refreshRowList()` to load it again yourself, for example after saving a change.
+
+- **Requests wait 500ms.** `fetchRowListPage()` is subscribed to half a second after the load starts.
+- **Only the latest load counts.** A new load cancels the one in progress: if its request hasn't been sent
+  yet it never is, and if it has, it's unsubscribed from. Typing in a search box therefore sends one
+  request after the user pauses, not one per letter.
+- **Failures empty the list.** If the request errors, or the response has no total row count, the list
+  is emptied and `loadRowListPageFailed()` is called.
+
+## Members
+
+| Member | Description |
+|--------|-------------|
+| `rows` | The rows of the current page. |
+| `totalRowCount` | Total rows across all pages. |
+| `isLoading` | `true` while a page is loading. |
+| `isFirstLoad` | `true` until the first load finishes. Use it to show a loading message instead of "no rows". |
+| `refreshRowList()` | Loads the current page again. Returns a promise that resolves when it's done. |
+
+Plus the state and methods of [PaginationBase](?path=/docs/directives-paginationbase--docs).
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `isLoadingChange` | `boolean` | `isLoading` changed. |

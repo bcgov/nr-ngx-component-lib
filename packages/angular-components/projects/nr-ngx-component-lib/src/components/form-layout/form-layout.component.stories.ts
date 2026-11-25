@@ -5,12 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { ConfigurationService, DisplayMode } from '../../services/configuration.service';
-import { FormFieldComponent } from '../form-field/form-field.component';
+import { DisplayMode } from '../../services/configuration.service';
 import { FormLayoutComponent } from './form-layout.component';
 
 const meta: Meta<FormLayoutComponent> = {
-    title: 'Form Layout',
+    title: 'Inputs and Controls/Form Layout',
     component: FormLayoutComponent,
     decorators: [
         // Apply metadata to all stories
@@ -23,15 +22,12 @@ const meta: Meta<FormLayoutComponent> = {
                 MatTooltipModule,
                 ReactiveFormsModule,
                 TextFieldModule,
-                MatSelectModule                
-            ],
+                MatSelectModule],
             // declare components that are used in the template
             declarations: [
-                FormFieldComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                ConfigurationService
             ],
         } ),
         componentWrapperDecorator( 
@@ -48,22 +44,6 @@ const meta: Meta<FormLayoutComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-The \`FormLayoutComponent\` is a structural container designed to align form controls. 
-It handles spacing and column distribution across different screen sizes.
-
-## Usage
-- Use inside a form container.
-- Place \`nrcl-form-field\` components as direct children.
-- Control field width using the \`layoutwidth\` attribute on the children                
-                `
-            }
-        }
-    }  
 }
 
 export default meta;

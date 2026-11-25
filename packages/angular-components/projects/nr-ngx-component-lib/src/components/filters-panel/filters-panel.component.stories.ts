@@ -1,63 +1,27 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlMomentDateTimeModule } from '@busacca/ng-pick-datetime';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { fruitOptions } from 'projects/nr-ngx-component-lib/story-util';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { useArgs } from 'storybook/preview-api';
-import { DATE_FORMATS } from '../../utils/date.util';
-import { ButtonComponent } from '../button/button.component';
-import { DesktopViewDirective, DeviceViewComponent, MobileViewDirective } from '../device-view/device-view.component';
-import { FilterContainerComponent } from '../filter-container/filter-container.component';
-import { FilterDateComponent } from '../filter-date/filter-date.component';
-import { FilterSearchComponent } from '../filter-search/filter-search.component';
-import { FilterSelectComponent } from '../filter-select/filter-select.component';
-import { IconComponent } from '../icon/icon.component';
 import { FiltersPanelComponent } from './filters-panel.component';
 
 const meta: Meta<FiltersPanelComponent> = {
-    title: 'Filters Panel',
+    title: 'Inputs and Controls/Filters/Filters Panel',
     component: FiltersPanelComponent,
     decorators: [
         // Apply metadata to all stories
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatButtonModule,
                 MatCheckboxModule,
                 MatRadioModule,
-                MatFormFieldModule,                
-                MatIconModule,
-                MatInputModule,
-                MatTooltipModule,
-                ReactiveFormsModule,
-                MatListModule,                  
-                OwlDateTimeModule,
-                OwlMomentDateTimeModule,
             ],
             // declare components that are used in the template
             declarations: [
-                FilterDateComponent,
-                FilterSearchComponent,
-                FilterSelectComponent,
-                FilterContainerComponent,
-                DesktopViewDirective,
-                MobileViewDirective,
-                DeviceViewComponent,
-                IconComponent,
-                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
-                { provide: OWL_DATE_TIME_FORMATS, useValue: DATE_FORMATS },
             ],
         } ),
         componentWrapperDecorator( 
@@ -76,49 +40,6 @@ const meta: Meta<FiltersPanelComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A container component that provides a consistent layout and behavior for filter controls in your application.
-
-## Features
-- **Flexible content projection**: Accepts any filter components as children
-- **Clear filters functionality**: Optional "Clear All" button to reset all filters at once
-- **Consistent layout**: Automatically arranges filter controls in a vertical stack
-- **Action handling**: Emits events when filters are cleared
-
-## Usage
-
-\`\`\`html
-<nrcl-filters-panel 
-  [showClear]="true"
-  (clearFilters)="onClearFilters()"
->
-  <nrcl-filter-search></nrcl-filter-search>
-  <nrcl-filter-select label="Category" [options]="categories"></nrcl-filter-select>
-  <nrcl-filter-date label="Start Date"></nrcl-filter-date>
-</nrcl-filters-panel>
-\`\`\`
-
-## Best Practices
-
-1. **Group related filters**: Place filters that work together within the same panel
-2. **Use clear labels**: Ensure each filter has a descriptive label
-3. **Enable clear button**: Set \`[showClear]="true"\` when multiple filters are present
-4. **Handle clear events**: Implement \`(clearFilters)\` to reset your data model
-
-## Layout
-
-The panel automatically:
-- Stacks filter components vertically
-- Provides consistent spacing between filters
-- Positions the "Clear All" button at the bottom (when enabled)                
-                `
-            }
-        }
-    }      
 }
 
 export default meta;
@@ -253,17 +174,11 @@ export const PopulatedMore: StoryObj<FiltersPanelComponent & DisplayModeWrapperC
                     <nrcl-filter-container
                         label="Resource Fire Centre"
                     >
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreHome"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox>
                             Home
                         </mat-checkbox>
 
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreOther"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox>
                             Outside
                         </mat-checkbox>
                     </nrcl-filter-container>
@@ -340,17 +255,11 @@ export const NoSearch: StoryObj<FiltersPanelComponent & DisplayModeWrapperCompon
                     <nrcl-filter-container
                         label="Resource Fire Centre"
                     >
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreHome"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox >
                             Home
                         </mat-checkbox>
 
-                        <mat-checkbox 
-                            [(ngModel)]="selectedFireCentreOther"
-                            (change)="onChangeFilters()"
-                        >
+                        <mat-checkbox >
                             Outside
                         </mat-checkbox>
                     </nrcl-filter-container>

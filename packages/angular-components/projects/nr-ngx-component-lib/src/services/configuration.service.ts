@@ -2,9 +2,11 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 
 export type DisplayMode = 'desktop' | 'mobile'
+export type InterfaceStyle = '2025' | '2026'
 
 export type Configuration = {
     displayMode: DisplayMode 
+    interfaceStyle: InterfaceStyle
 }
 
 @Injectable({
@@ -12,7 +14,8 @@ export type Configuration = {
 })
 export class ConfigurationService {
     private _defaultConfiguration: Configuration = {
-        displayMode: 'desktop'
+        displayMode: 'desktop',
+        interfaceStyle: '2025'
     }
 
     private configSubject = new BehaviorSubject<Configuration>(this._defaultConfiguration);
@@ -25,6 +28,9 @@ export class ConfigurationService {
             let el = document.querySelector( 'body' ) as HTMLElement
             el.classList.toggle( 'nrcl-device-desktop', c.displayMode == 'desktop' )
             el.classList.toggle( 'nrcl-device-mobile', c.displayMode == 'mobile' )
+
+            el.classList.toggle( 'nrcl-style-2025', c.interfaceStyle == '2025' )
+            el.classList.toggle( 'nrcl-style-2026', c.interfaceStyle == '2026' )
         } )
     }
 

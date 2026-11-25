@@ -8,7 +8,7 @@ import { NrclBase } from "../../directives/nrcl.base";
     selector: "nrcl-row-list-mobile",
     templateUrl: "./row-list-mobile.component.html",
     styleUrl: "./row-list-mobile.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RowListMobileComponent extends NrclBase {
 }

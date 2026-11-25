@@ -8,11 +8,12 @@ import { CodeDescription } from "../../utils/code-table.util";
 import { Sort, SortDirection } from "@angular/material/sort";
 import { unwrapFilterValue, wrapFilterValue } from "../../utils/filter.util";
 import { NrclBase } from "../../directives/nrcl.base";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @Component({
     selector: "nrcl-row-list-sorting",
     templateUrl: "./row-list-sorting.component.html",
-    styleUrl: "./row-list-sorting.component.scss",
+    styleUrl: "./row-list-sorting.component.scss"
 })
 export class RowListSortingComponent extends NrclBase {
     @Input() sortColumn: string

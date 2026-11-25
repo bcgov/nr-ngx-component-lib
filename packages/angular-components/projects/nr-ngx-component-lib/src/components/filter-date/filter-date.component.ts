@@ -1,13 +1,21 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
     Input,
-    Output
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewChild
 } from "@angular/core";
-import moment from "moment";
-import { DATE_FORMATS } from "../../utils/date.util";
+import { MatInput } from "@angular/material/input";
+import moment, { Moment } from "moment";
 import { NrclBase } from "../../directives/nrcl.base";
+import { DATE_FORMATS } from "../../utils/date.util";
+import { MatDatepicker } from "@angular/material/datepicker";
+import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
+import { JsonPipe } from "@angular/common";
 
 @Component( {
     selector: "nrcl-filter-date",
@@ -16,24 +24,62 @@ import { NrclBase } from "../../directives/nrcl.base";
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[style.--nrcl-filter-date-width]': 'this.wide ? "var( --nrcl-filter-width-" + this.wide + " )" : null'
-    }
+    },
+    providers: [
+        provideMomentDateAdapter({
+            parse: {
+                dateInput: 'YYYY-MM-DD'
+            },
+            display: {
+                dateInput: 'MMMM D, YYYY', // Change how date appears in the input
+                monthYearLabel: 'MMM YYYY',
+                dateA11yLabel: 'LL',
+                monthYearA11yLabel: 'MMMM YYYY',
+            }
+        })
+    ]
 } )
 export class FilterDateComponent extends NrclBase {
-    @Input() label = '[label]]'
+    @Input() label = '[label]'
     @Input() placeholder = 'Select...'
-    @Input() hint
-    @Input() value = moment().format( DATE_FORMATS.datePickerInput )
-    @Input() wide 
+    @Input() hint?: string
+    @Input() value: string|undefined = moment().format( DATE_FORMATS.datePickerInput )
+    @Input() wide?: string
+    @Input( { transform: booleanAttribute } ) clear = true
+    @Input() min?: string
+    @Input() minErrorMessage = 'Date is too soon'
+    @Input() max?: string
+    @Input() maxErrorMessage = 'Date is too late'
 
-    @Output() valueChange = new EventEmitter<string>();
+    @Output() valueChange = new EventEmitter<string|undefined>();
 
-    onDateChange( ev ) {
+    @ViewChild( 'picker' ) picker?: MatDatepicker<Moment>
+    @ViewChild( MatInput ) input?: MatInput
+
+    onDateChange( ev: Moment ) {
         if ( !ev ) {
-            this.valueChange.emit( null )
+            this.valueChange.emit( undefined )
             return
         }
 
-        let date = ev.format( DATE_FORMATS.datePickerInput )
-        this.valueChange.emit( date )
+        this.value = ev.format( DATE_FORMATS.datePickerInput )
+        this.valueChange.emit( this.value )
+    }
+
+    onInputFocus() {
+        this.picker?.open()
+    }
+
+    onCancelClick() {
+        this.value = undefined
+        this.valueChange.emit( this.value )
+    }
+
+    get isOpen() {
+        return this.picker?.opened ?? false
+    }
+
+    get hasValue() {
+        return !!this.value
     }
 }

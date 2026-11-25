@@ -2,6 +2,7 @@
     --registration-display: block;
     --registration-size: 10px;
     --registration-border: 2px solid #999;
+    --registration-content-overflow: hidden;
 }
     
 :host {
@@ -9,7 +10,6 @@
     font-family: var( --nrcl-font-family );
     height: 100%;
     display: block;
-    // overflow: hidden;
 
     .content {
         position: absolute;
@@ -21,7 +21,19 @@
         display: var( --registration-display );
         background-color: white;
         // height: 100%;
-        overflow: hidden;
+        overflow: var( --registration-content-overflow );
+    }
+
+    // On docs pages stories render inline with an automatic height, so an absolutely
+    // positioned .content would collapse to nothing. Size to the content there instead.
+    // (.docs-story is the container storybook's docs blocks render each story into.)
+    @at-root :host-context(.docs-story) {
+        height: auto;
+        margin-top: 18px; // room for the display mode label
+
+        .content {
+            position: relative;
+        }
     }
 
     .marks {

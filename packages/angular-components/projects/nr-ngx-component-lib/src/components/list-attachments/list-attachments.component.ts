@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } f
 import { Observable } from "rxjs";
 import { RowListBase } from "../../directives/row-list.base";
 import { DATE_FORMATS } from "../../utils/date.util";
-import { InitialState } from "../../public-api";
+import { InitialState } from "../../directives/pagination.base";
 
 export type AttachmentsTableRow = {
     attachmentTypeDescription: string

@@ -1,0 +1,69 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as CellContentStories from './cell-content.component.stories';
+
+<Meta of={CellContentStories} />
+
+# Cell Content
+
+`<nrcl-cell-content>` shows text on one line, cut off with an ellipsis (…) when it doesn't fit, and can
+show the full text in a tooltip. Use it in table cells, such as in a
+[desktop row list](?path=/docs/content-row-list-row-list-desktop--docs), so long values don't make rows
+taller. Interactive examples are under [Examples](#examples).
+
+`CellContentComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<mat-cell *matCellDef="let fire">
+    <nrcl-cell-content tooltip>{{ fire.name }}</nrcl-cell-content>
+</mat-cell>
+```
+
+The component fills the width of its container. Give it the text either as content, as above, or with the
+`content` input:
+
+```html
+<nrcl-cell-content tooltip [content]="fire.name"></nrcl-cell-content>
+```
+
+When `content` is set, anything inside the element is ignored.
+
+## Tooltip
+
+| `tooltip` | Tooltip shows |
+|-----------|---------------|
+| left off, or `[tooltip]="false"` | No tooltip. |
+| `tooltip`, with no value, or `[tooltip]="true"` | The cell's text. |
+| any other text, such as `tooltip="Fire name"` | That text. |
+
+Use `[tooltip]="false"` rather than `tooltip="false"`: the second is the text "false", which shows as the
+tooltip.
+
+Some limits:
+
+- **The tooltip always shows**, whether or not the text is cut off.
+- **The tooltip text is read once**, just after the component is created. If the cell's text changes
+  afterwards, the tooltip keeps the old text. In tables this is rarely a problem, because rows are
+  usually recreated when the data changes.
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `content` | `string` | | Text to show. Replaces the element's content. |
+| `tooltip` | `string` or `boolean` | | See [Tooltip](#tooltip). |
+
+## Examples
+
+Use the width slider to cut the text off, and the `tooltip` control to try each setting.
+
+### Content input
+
+<Canvas of={CellContentStories.ContentProperty} />
+<Controls of={CellContentStories.ContentProperty} />
+
+### Content inside the element
+
+<Canvas of={CellContentStories.ContentProjection} />
+<Controls of={CellContentStories.ContentProjection} />

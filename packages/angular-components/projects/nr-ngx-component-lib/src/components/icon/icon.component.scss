@@ -93,5 +93,17 @@
         .svg {
             display: none;
         }
+
+        &.filled {
+            .mat-icon {
+                font-variation-settings: 'FILL' 1
+            }
+        }
+
+        &.unfilled {
+            .mat-icon {
+                font-variation-settings: 'FILL' 0
+            }
+        }
     }
 }

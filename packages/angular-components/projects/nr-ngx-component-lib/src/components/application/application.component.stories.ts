@@ -4,50 +4,20 @@ import {
     moduleMetadata,
     StoryObj
 } from "@storybook/angular";
+import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
 import {
-    DisplayModeWrapperComponent,
     displayModeWrapperStory
 } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
-import {
-    DesktopViewDirective,
-    DeviceViewComponent,
-    MobileViewDirective
-} from '../device-view/device-view.component';
-import { IconComponent } from '../icon/icon.component';
-import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { loremIpsum } from "projects/nr-ngx-component-lib/story-util";
-import { ButtonComponent } from "../button/button.component";
-import { ApplicationMenuComponent } from "../application-menu/application-menu.component";
-import { MatMenuModule } from "@angular/material/menu";
 import { ApplicationComponent } from "./application.component";
-import { ApplicationHeaderComponent } from "../application-header/application-header.component";
 
 const meta: Meta<ApplicationComponent> = {
-    title: "Application",
+    title: 'Navigation and Structure/Application',
     component: ApplicationComponent,
 
     decorators: [
         moduleMetadata({
             imports: [
-                MatButtonModule,
-                MatIconModule,
-                MatRippleModule,
-                MatTooltipModule,
-                MatMenuModule
             ],
-            declarations: [
-                ButtonComponent,
-                ApplicationMenuComponent,
-                ApplicationHeaderComponent,
-                IconComponent,
-                DisplayModeWrapperComponent,
-                DeviceViewComponent,
-                DesktopViewDirective,
-                MobileViewDirective
-            ]
         }),
 
         componentWrapperDecorator(
@@ -66,15 +36,6 @@ const meta: Meta<ApplicationComponent> = {
         )
     ],
 
-    tags: ["autodocs"],
-
-    parameters: {
-        docs: {
-            description: {
-                component: ``
-            }
-        }
-    },
 };
 
 export default meta;
@@ -89,6 +50,13 @@ export const Primary: Story = {
         ...displayModeWrapperStory.args,
     },
     render: args => ({
+        // nrcl-application fills the viewport; on the docs page that's the whole docs frame,
+        // so give the inline example a fixed height instead.
+        styles: [ `
+            :host-context( .docs-story ) nrcl-application {
+                height: 480px;
+            }
+        ` ],
         props: {
             ...args,
             menuItems: [

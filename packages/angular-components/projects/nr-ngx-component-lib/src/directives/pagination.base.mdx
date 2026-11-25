@@ -1,0 +1,86 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Directives/PaginationBase" />
+
+# PaginationBase
+
+`PaginationBase<F>` keeps the state of a list that's shown a page at a time: the page number, page size,
+sort, and a filter of type `F`. It reloads the list when any of them change, and remembers them in
+[PageStateService](?path=/docs/services-pagestateservice--docs) so the user gets the same page back when
+they return. It extends [NrclBase](?path=/docs/directives-nrclbase--docs).
+
+To build a list, extend [RowListBase](?path=/docs/directives-rowlistbase--docs), which adds loading the
+rows. Extend `PaginationBase` directly only when the loading doesn't fit `RowListBase`: you then implement
+`refresh()` yourself.
+
+## State
+
+| Member | Type | Description |
+|--------|------|-------------|
+| `pageNumber` | `number` | Current page, from 1. |
+| `pageSize` | `number` | Rows per page. |
+| `sortActive` | `string` | Sort column. |
+| `sortDirection` | `'asc' \| 'desc' \| ''` | Sort order. |
+| `filter` | `F` | Current filter. |
+| `totalRowCount` | `number` | Total rows, set by the subclass after loading. |
+| `instance` | `string` | Name the state is remembered under. |
+
+All are read-only. Change them with the methods below.
+
+## Changing the state
+
+Bind these to the list's controls. Each one updates the state, reloads the list with `refresh()`, then saves
+the state:
+
+| Method | Call it with | Also |
+|--------|--------------|------|
+| `onPageNumberChange( page )` | `<nrcl-row-list-pagination>`'s `pageNumberChange`. | |
+| `onPageSizeChange( size )` | `<nrcl-row-list-pagination>`'s `pageSizeChange`. | Goes to page 1. |
+| `onSortChange( sort )` | `matSortChange`, or `<nrcl-row-list-sorting>`'s `sortChange`. | Goes to page 1. |
+| `onFilterChange( filter )` | A new filter object, when any filter changes. | Goes to page 1. |
+
+Nothing happens if the new value is the same as the current one, except for `onFilterChange()`, which
+always reloads.
+
+The filter is copied with `JSON.parse( JSON.stringify( filter ) )`, so use plain values in it: strings,
+numbers, booleans, arrays, and objects. Dates become strings, and functions are dropped.
+
+## Starting state
+
+The subclass implements `getInitialPageState()`, which returns an `InitialState<F>`:
+
+```typescript
+getInitialPageState(): InitialState<FireFilter> {
+    return {
+        instance: 'fire-list',
+        filter: { search: '', status: [] },
+        pageConfig: { pageSize: 20, pageNumber: 1, sortActive: 'name', sortDirection: 'asc' },
+    };
+}
+```
+
+In `ngAfterViewInit()`, the class calls `getInitialPageState()`. If `PageStateService` has state saved
+under the same `instance`, that state is used instead, so the user is back where they left off. Then the
+list loads. If your component has its own `ngAfterViewInit()`, call `super.ngAfterViewInit()` from it.
+
+Leave `instance` out, or set it to `''`, to start from `getInitialPageState()` every time.
+
+`filter` is `undefined` until `ngAfterViewInit()`, so use `filter?.search` rather than `filter.search` in
+templates.
+
+## Helpers
+
+| Method | Returns |
+|--------|---------|
+| `paginateState( id )` | The options for ngx-pagination's `paginate` pipe: `rows \| paginate: paginateState( 'fires' )`. |
+| `getPagingInfoRequest( query? )` | `{ query, pageNumber, pageRowCount, sortColumn, sortDirection }`, the usual paging fields for a request. |
+| `getCurrentPageState()` | The state as a `PaginationState<F>`: `{ pageConfig, filter }`. |
+
+## For subclasses
+
+| Member | Description |
+|--------|-------------|
+| `getInitialPageState()` | Abstract. Returns the starting state. |
+| `refresh()` | Abstract. Reloads the list. `RowListBase` implements it. |
+| `setCurrentPageState( state )` | Replaces the state, without reloading. |
+| `persistState( state )`, `retrieveState()` | Save and read the state in `PageStateService`. |

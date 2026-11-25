@@ -1,9 +1,9 @@
 import { AfterContentInit, booleanAttribute, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from "@angular/core";
 import { MatColumnDef, MatTable } from "@angular/material/table";
 import { Observable, of } from "rxjs";
+import { InitialState } from "../../directives/pagination.base";
 import { RowListBase } from "../../directives/row-list.base";
 import { CodeDescription } from "../../utils/code-table.util";
-import { InitialState } from "../../directives/pagination.base";
 
 @Component({
     selector: "nrcl-list-select",

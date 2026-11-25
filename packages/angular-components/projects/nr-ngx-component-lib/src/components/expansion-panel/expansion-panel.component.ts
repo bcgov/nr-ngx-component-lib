@@ -8,9 +8,9 @@ import { NrclBase } from "../../directives/nrcl.base";
     styleUrl: "./expansion-panel.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.is-loading]':   'isLoading',
-        '[class.expanded]':     'matExpansionPanel?.expanded',
-        '[class.disabled]':     'disabled',
+        '[class.is-loading]': 'isLoading',
+        '[class.expanded]': 'matExpansionPanel?.expanded',
+        '[class.disabled]': 'disabled',
     }
 })
 export class ExpansionPanelComponent extends NrclBase {
@@ -20,5 +20,5 @@ export class ExpansionPanelComponent extends NrclBase {
 
     @Output() expandedChange = new EventEmitter<boolean>()
 
-    @ViewChild( 'panel' ) matExpansionPanel: MatExpansionPanel
+    @ViewChild( 'panel' ) matExpansionPanel?: MatExpansionPanel
 }

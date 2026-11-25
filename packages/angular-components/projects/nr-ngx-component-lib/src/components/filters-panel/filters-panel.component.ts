@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    contentChild,
     EventEmitter,
     Input,
     Output
@@ -22,9 +21,11 @@ import { FilterSearchComponent } from "../filter-search/filter-search.component"
 } )
 export class FiltersPanelComponent extends NrclBase {
     @Input() showClear = true
+    @Input() clearLabel = 'Clear'
     @Input() showFilters = true
     @Input() hasAdvancedFilters = false
     @Input() showAdvancedFilters = false
+    @Input() moreFiltersLabels = ['See More','See Less']
 
     @Output() clearFilters = new EventEmitter()
     @Output() showFiltersChange = new EventEmitter<boolean>()

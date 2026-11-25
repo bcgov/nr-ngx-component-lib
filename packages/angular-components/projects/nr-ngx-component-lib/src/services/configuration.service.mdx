@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Services/ConfigurationService" />
+
+# ConfigurationService
+
+`ConfigurationService` holds two settings that change how the library's components look:
+
+| Setting | Values | Default | Changes |
+|---------|--------|---------|---------|
+| `displayMode` | `'desktop'`, `'mobile'` | `'desktop'` | Layouts, spacing, and which [device view](?path=/docs/utility-device-view--docs) template shows. |
+| `interfaceStyle` | `'2025'`, `'2026'` | `'2025'` | The look of buttons, dialogs, and some other components. |
+
+It's provided in the root injector, so there's one for the whole app.
+
+## Setting the display mode
+
+The library doesn't work out the display mode from the screen size: your app sets it. For example, with the
+CDK's `BreakpointObserver`, in your root component:
+
+```typescript
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ConfigurationService } from '@bcgov/nr-ngx-component-lib';
+
+constructor() {
+    const configurationService = inject( ConfigurationService );
+
+    inject( BreakpointObserver )
+        .observe( '(max-width: 768px)' )
+        .pipe( takeUntilDestroyed() )
+        .subscribe( result => {
+            configurationService.update( { displayMode: result.matches ? 'mobile' : 'desktop' } );
+        } );
+}
+```
+
+`update()` changes only the settings you pass, so set the interface style the same way:
+
+```typescript
+configurationService.update( { interfaceStyle: '2026' } );
+```
+
+## Body classes
+
+The service keeps classes on `<body>` that match the settings, which the library's styles use:
+
+| Setting | Class |
+|---------|-------|
+| `displayMode: 'desktop'` | `nrcl-device-desktop` |
+| `displayMode: 'mobile'` | `nrcl-device-mobile` |
+| `interfaceStyle: '2025'` | `nrcl-style-2025` |
+| `interfaceStyle: '2026'` | `nrcl-style-2026` |
+
+Use them in your own styles too, for example `.nrcl-device-mobile .summary { display: none }`.
+
+The classes are added when the service is first created. Inject it in your root component, as above, so
+they're there from the start.
+
+## Reading the settings
+
+| Member | Description |
+|--------|-------------|
+| `configuration` | The current settings, `{ displayMode, interfaceStyle }`. |
+| `configurationObservable` | An `Observable` of the settings. Emits the current settings straight away, then each change. |
+| `update( settings )` | Changes the settings passed, and keeps the others. |
+
+In a component, extending [ConfigurationSubscriberBase](?path=/docs/directives-configurationsubscriberbase--docs)
+is simpler than subscribing yourself.
+
+## Types
+
+```typescript
+type DisplayMode = 'desktop' | 'mobile';
+type InterfaceStyle = '2025' | '2026';
+type Configuration = { displayMode: DisplayMode, interfaceStyle: InterfaceStyle };
+```

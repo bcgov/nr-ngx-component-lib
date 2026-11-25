@@ -1,15 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayMode } from '../../services/configuration.service';
 import { SnackbarUtilService } from '../../services/snackbar-util.service';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
-import { SnackbarComponent, SnackbarType } from './snackbar.component';
+import { SnackbarType } from './snackbar.component';
 
 @Component( {
     selector: 'storybook-dummy-component',
@@ -18,7 +11,7 @@ import { SnackbarComponent, SnackbarType } from './snackbar.component';
             label="Show SnackBar"
             (click)="onOpenSnackBar()"
         ></nrcl-button>
-    `, 
+    ` 
 } )
 class DummyComponent {
     @Input() message = 'Test Label'
@@ -52,66 +45,17 @@ class DummyComponent {
 type DummyComponentEx = DummyComponent & { displayMode: DisplayMode }
 
 const meta: Meta<DummyComponentEx> = {
-    title: 'Snack Bar',
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A custom Angular Material snackbar component that displays toast notifications with different types and icons.
-
-## Usage
-
-The snackbar is triggered through the \`SnackbarUtilService\`, which provides convenience methods for different notification types:
-
-\`\`\`typescript
-constructor(private snackbarUtilService: SnackbarUtilService) {}
-
-// Show success notification
-this.snackbarUtilService.successful('Operation completed', null);
-
-// Show error notification
-this.snackbarUtilService.error('Something went wrong', null);
-
-// Show info notification
-this.snackbarUtilService.information('Here is some information', null);
-
-// Show update notification
-this.snackbarUtilService.updated('Data has been updated', null);
-\`\`\`
-
-## Types
-
-The component supports four notification types, each with its own icon and styling:
-- **success**: Green checkmark icon for successful operations
-- **error**: Red error icon for failures
-- **info**: Blue information icon for general messages
-- **update**: Purple update icon for data changes
-
-## Interactive Demo
-
-Use the controls below to test different snackbar types and messages. Click the "Show SnackBar" button to display the notification.                             
-                `
-            }
-        }
-    },
+    title: 'Notification and Feedback/Snack Bar',
     component: DummyComponent,
     decorators: [
         // Apply metadata to all stories
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatIconModule,
-                MatSnackBarModule,
-                MatButtonModule,
-                MatTooltipModule,
-                MatIconModule,
-                MatRippleModule
             ],
             // declare components that are used in the template
             declarations: [
-                SnackbarComponent,
-                ButtonComponent,
-                IconComponent
+                DummyComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -131,7 +75,6 @@ Use the controls below to test different snackbar types and messages. Click the 
             }
         ),        
     ],
-    tags: ['autodocs'],
     argTypes: {
         displayMode: {
             control: 'inline-radio',

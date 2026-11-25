@@ -9,11 +9,12 @@ import {
 } from "@angular/core";
 import { Configuration, ConfigurationService } from "../services/configuration.service";
 import { NrclBase } from "./nrcl.base";
+import { Subscription } from "rxjs";
 
 @Directive()
 export class ConfigurationSubscriberBase extends NrclBase implements OnInit, OnDestroy {    
-    configurationSubscription
-    configuration: Configuration
+    configurationSubscription?: Subscription
+    configuration?: Configuration
 
     configurationService = inject( ConfigurationService )
     changeDetectorRef = inject( ChangeDetectorRef )
@@ -34,6 +35,9 @@ export class ConfigurationSubscriberBase extends NrclBase implements OnInit, OnD
 
     onConfigurationChange() {}
 
-    get desktopVisible() { return this.configuration.displayMode == 'desktop' }
-    get mobileVisible() { return this.configuration.displayMode == 'mobile' }
+    get desktopVisible() { return this.configuration!.displayMode == 'desktop' }
+    get mobileVisible() { return this.configuration!.displayMode == 'mobile' }
+
+    get isStyle2025() { return this.configuration!.interfaceStyle == '2025' }
+    get isStyle2026() { return this.configuration!.interfaceStyle == '2026' }
 }

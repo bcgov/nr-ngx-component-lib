@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Services/SnackbarUtilService" />
+
+# SnackbarUtilService
+
+`SnackbarUtilService` shows [snack bar](?path=/docs/notification-and-feedback-snack-bar--docs) messages at
+the bottom of the screen, using Angular Material's `MatSnackBar`. It's provided in the root injector.
+
+```typescript
+import { SnackbarUtilService } from '@bcgov/nr-ngx-component-lib';
+
+snackbarUtilService = inject( SnackbarUtilService );
+
+this.snackbarUtilService.successfullySaved( 'Fire' );
+this.snackbarUtilService.error( 'The fire could not be saved. Try again.' );
+```
+
+Only one snack bar shows at a time. Showing another replaces it.
+
+## Methods
+
+Every method takes the message, or the name of the thing for the shortcuts, and optionally the time to show
+it in milliseconds. `0` or `null` keeps it until the user clicks Close.
+
+| Method | Type | Shows | Closes by default |
+|--------|------|-------|-------------------|
+| `successful( message, duration? )` | Success | `message` | After 5 seconds |
+| `successfullySaved( item, duration? )` | Success | "`item` saved successfully." | After 5 seconds |
+| `successfullyCreated( item, duration? )` | Success | "`item` created successfully." | After 5 seconds |
+| `successfullyAdded( item, duration? )` | Success | "`item` added successfully." | After 5 seconds |
+| `successfullyRemoved( item, duration? )` | Success | "`item` removed successfully." | After 5 seconds |
+| `successfullyDeleted( item, duration? )` | Success | "`item` deleted successfully." | After 5 seconds |
+| `error( message, duration? )` | Error | `message` | When the user clicks Close |
+| `information( message, duration? )` | Information | `message` | When the user clicks Close |
+| `updated( message, duration? )` | Update | `message` | When the user clicks Close |
+
+The [Snack Bar](?path=/docs/notification-and-feedback-snack-bar--docs) page shows each type.
+
+The methods don't return anything. To close a snack bar from code, inject `MatSnackBar` and call its
+`dismiss()`.

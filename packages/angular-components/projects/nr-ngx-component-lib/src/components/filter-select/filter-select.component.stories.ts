@@ -1,76 +1,26 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { FilterSelectComponent } from './filter-select.component';
 import { fruitOptions, fruitSubOptions } from 'projects/nr-ngx-component-lib/story-util';
-import { IconComponent } from '../icon/icon.component';
 import { useArgs } from 'storybook/preview-api';
-import { ButtonComponent } from '../button/button.component';
+import { FilterSelectComponent } from './filter-select.component';
 
 const meta: Meta<FilterSelectComponent> = {
-    title: 'Filter Select',
+    title: 'Inputs and Controls/Filters/Filter Select',
     component: FilterSelectComponent,
     decorators: [
         // Apply metadata to all stories
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                FormsModule,
-                MatButtonModule,
-                MatCheckboxModule,
-                MatFormFieldModule,
-                MatIconModule,
-                MatInputModule,
-                MatListModule,
-                MatTooltipModule,
-                ReactiveFormsModule,
             ],
             // declare components that are used in the template
             declarations: [
-                IconComponent,
-                ButtonComponent
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
             ],
         } ),
     ],
-    tags: ['autodocs'],
     excludeStories: [ 'fruitOptions' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A powerful multi-select component with filtering capabilities.
-
-## Features
-- **Multi-select**: Choose multiple options from a list
-- **Search**: Filter options by typing
-- **Selection limits**: Optionally restrict maximum selections
-- **Tooltips**: Show full descriptions on hover
-- **Summary view**: Display selected items in a compact format
-
-## Usage Example
-
-\`\`\`typescript
-<nrcl-filter-select
-  label="Fruit"
-  [value]="selectedFruits"
-  [options]="fruitOptions"
-  [selectMax]="5"
-  (valueChange)="onFruitChange($event)"
-></nrcl-filter-select>
-\`\`\`
-                `
-            }
-        }
-    },
     argTypes: {
         selectMax: {
             control: {
@@ -112,13 +62,6 @@ A powerful multi-select component with filtering capabilities.
 export default meta;
 
 export const Primary: StoryObj<FilterSelectComponent & { width: number }> = {
-    parameters: {
-        docs: {
-            description: {
-                story: 'The default configuration with all features enabled. Try selecting multiple fruits!'
-            }
-        }
-    },
     argTypes: {
         width: {
             control: {

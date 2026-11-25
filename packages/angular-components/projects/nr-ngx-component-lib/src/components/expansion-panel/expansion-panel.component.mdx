@@ -1,0 +1,181 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ExpansionPanelStories from './expansion-panel.component.stories';
+
+<Meta of={ExpansionPanelStories} />
+
+# Expansion Panel
+
+`<nrcl-expansion-panel>` is a collapsible panel, built on the Angular Material expansion panel. It has a
+header with a title and actions, a body, optional dividing sections, and an optional footer with Save and
+Cancel buttons. Interactive examples are under [Examples](#examples).
+
+Four components make up a panel, all declared and exported by `NrNgxComponentLibModule`:
+
+| Component | Selector | Role |
+|-----------|----------|------|
+| `ExpansionPanelComponent` | `<nrcl-expansion-panel>` | The panel. Everything else goes inside it. |
+| `ExpansionPanelHeaderComponent` | `<nrcl-expansion-panel-header>` | Title on the left, actions on the right. Always visible. |
+| `ExpansionPanelSectionComponent` | `<nrcl-expansion-panel-section>` | A part of the body, with a full-width divider above it. |
+| `ExpansionPanelFooterComponent` | `<nrcl-expansion-panel-footer>` | Bar along the bottom with Save, Cancel, a warning, and your own buttons. |
+
+## Usage
+
+```html
+<nrcl-expansion-panel [(expanded)]="assignmentsOpen" [isLoading]="loading">
+    <nrcl-expansion-panel-header>
+        <h2>Assignments</h2>
+        <h3>3 active</h3>
+
+        <nrcl-button primary label="Add Assignment" (click)="add( $event )"></nrcl-button>
+    </nrcl-expansion-panel-header>
+
+    <div>Panel content</div>
+
+    <nrcl-expansion-panel-footer
+        [saveEnabled]="form.dirty && form.valid"
+        [cancelEnabled]="form.dirty"
+        [showWarning]="form.dirty"
+        (saveClick)="save()"
+        (cancelClick)="cancel()"
+    ></nrcl-expansion-panel-footer>
+</nrcl-expansion-panel>
+```
+
+```typescript
+add( event: Event ) {
+    event.stopPropagation(); // stop the click from also toggling the panel
+    // ...
+}
+```
+
+## Panel
+
+The header row toggles the panel. The expand arrow is on the left, before the title.
+
+- **`expanded`** sets whether the panel is open, and `expandedChange` emits whenever it opens or closes, so
+  `[(expanded)]` works for two-way binding.
+- **`disabled`** stops the panel from being opened or closed by the user.
+- **`isLoading`** shows a spinner at the right of the header and hides the header's actions until loading
+  ends. The body isn't affected.
+
+The body has `--nrcl-gutter-space` padding on the left and right and none on the top or bottom. Add a
+[`<nrcl-gap vertical>`](?path=/docs/utility-gap--docs) where you need vertical space.
+
+### Panel inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `expanded` | `boolean` | `false` | Whether the panel is open. |
+| `disabled` | `boolean` | `false` | Stops the user opening or closing the panel. |
+| `isLoading` | `boolean` | `false` | Shows a spinner in the header and hides the header actions. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `expandedChange` | `boolean` | `true` when the panel opens, `false` when it closes. |
+
+## Header
+
+`<nrcl-expansion-panel-header>` splits its content in two:
+
+| Content | Where it goes |
+|---------|---------------|
+| `<h2>` | Title, on the left. |
+| `<h3>` | Subtitle, below the title. |
+| Elements with `left-side` | Left, below the title. |
+| Anything else | Right, aligned to the right and centred vertically. |
+
+**Clicks in the header toggle the panel**, including clicks on buttons you put there. Call
+`event.stopPropagation()` in the button's click handler so it doesn't also open or close the panel.
+
+The header has no inputs or outputs.
+
+## Sections
+
+`<nrcl-expansion-panel-section>` divides the body into parts. Each section starts with a divider line that
+runs the full width of the panel, through the body's side padding. An `<h3>` inside a section is the section
+title. It's laid out with `justify-content: space-between`, so a button inside the `<h3>` sits at the
+right end:
+
+```html
+<nrcl-expansion-panel-section>
+    <h3>
+        Locations
+        <nrcl-button label="Add Location"></nrcl-button>
+    </h3>
+
+    <div>Section content</div>
+</nrcl-expansion-panel-section>
+```
+
+Sections have no inputs or outputs.
+
+## Footer
+
+`<nrcl-expansion-panel-footer>` is a grey bar below the body. Its content is aligned to the right, in this
+order:
+
+1. A warning icon and `warningMessage`, when `showWarning` is set.
+2. A **Cancel** button, when `cancelEnabled` is set.
+3. A primary **Save** button, when `saveEnabled` is set.
+4. Any projected content.
+
+`saveEnabled` and `cancelEnabled` each have three states:
+
+| Value | Button |
+|-------|--------|
+| left off (`undefined`) | Not shown. |
+| `false` | Shown and disabled. |
+| `true` | Shown and enabled. |
+
+On mobile, Save and Cancel are [compact buttons](?path=/docs/inputs-and-controls-button--docs), with an
+icon above a small label.
+
+For other actions, leave `saveEnabled` and `cancelEnabled` off and project your own buttons:
+
+```html
+<nrcl-expansion-panel-footer>
+    <nrcl-button label="Delete" (click)="delete()"></nrcl-button>
+    <nrcl-button primary label="Update" (click)="update()"></nrcl-button>
+</nrcl-expansion-panel-footer>
+```
+
+### Footer inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `saveEnabled` | `boolean` | | Shows the Save button. See the table above. |
+| `cancelEnabled` | `boolean` | | Shows the Cancel button. See the table above. |
+| `showWarning` | `boolean` | `false` | Shows the warning. |
+| `warningMessage` | `string` | `'Unsaved Changes'` | Warning text. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `saveClick` | `PointerEvent` | Save was clicked. |
+| `cancelClick` | `PointerEvent` | Cancel was clicked. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-gutter-space` | Header and body side padding, and footer padding. Follows the display mode. |
+| `--nrcl-divider-color` | Line under the header. |
+| `--nrcl-font-size-h2`, `--nrcl-font-size-h3` | Header title and subtitle, and section titles. |
+
+The header's minimum height is 50px. The footer's colours are fixed.
+
+## Examples
+
+### Panel
+
+A panel with a header action and a footer. Use the controls to open, disable, or load the panel, and to change
+the footer buttons and warning. Turn on `customFooter` to project your own footer buttons.
+
+<Canvas of={ExpansionPanelStories.Primary} />
+<Controls of={ExpansionPanelStories.Primary} />
+
+### Sections
+
+A panel body with two sections. The second section has a button in its title.
+
+<Canvas of={ExpansionPanelStories.Sections} />
+<Controls of={ExpansionPanelStories.Sections} />

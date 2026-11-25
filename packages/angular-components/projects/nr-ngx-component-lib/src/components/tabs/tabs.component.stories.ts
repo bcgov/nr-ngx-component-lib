@@ -1,17 +1,15 @@
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTooltipModule, TooltipComponent } from '@angular/material/tooltip';
 import { componentWrapperDecorator, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DisplayModeWrapperComponent, displayModeWrapperStory } from 'projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
-import { TabComponent, TabContentDirective, TabLabelDirective } from './tab/tab.component';
-import { OnInit, OnDestroy, Input, Component } from '@angular/core';
 
 @Component( {
     selector: 'sentinel',
     template: `
         <div>Sentinel {{ name }}</div>
         <ng-content></ng-content>
-    `, 
+    `
 } )
 class SentinalComponent implements OnInit, OnDestroy {
     @Input() name
@@ -26,22 +24,18 @@ class SentinalComponent implements OnInit, OnDestroy {
 }
 
 const meta: Meta<DisplayModeWrapperComponent & TabGroupComponent> = {
-    title: 'Tabs',
+    title: 'Navigation and Structure/Tabs',
     // component: TabGroupComponent,
     decorators: [
         // Apply metadata to all stories
         moduleMetadata( {
             // import necessary ngModules or standalone components
             imports: [
-                MatTabsModule
+                MatTabsModule,
             ],
             // declare components that are used in the template
             declarations: [
-                TabComponent,
-                TabGroupComponent,
-                TabLabelDirective,
-                TabContentDirective,
-                SentinalComponent
+                SentinalComponent,
             ],
             // List of providers that should be available to the root component and all its children.
             providers: [
@@ -61,7 +55,6 @@ const meta: Meta<DisplayModeWrapperComponent & TabGroupComponent> = {
             }
         ),
     ],
-    tags: ['autodocs'],
     argTypes: {
         ...displayModeWrapperStory.argTypes,
         selectedTabChange: { action: 'selectedTabChange' },
@@ -120,6 +113,7 @@ export const Classic: StoryObj<DisplayModeWrapperComponent> = {
                     [style.width.px]="width"
                     [selectedTab]="selectedTab"
                     (selectedTabChange)="selectedTabChange($event)"
+                    (activateTab)="activateTab($event)"
                 >
                     ${ tabs }
                 </nrcl-tab-group>
