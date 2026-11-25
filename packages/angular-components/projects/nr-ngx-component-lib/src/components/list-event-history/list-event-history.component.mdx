@@ -1,0 +1,121 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ListEventHistoryStories from './list-event-history.component.stories';
+
+<Meta of={ListEventHistoryStories} />
+
+# List Event History
+
+`<nrcl-list-event-history>` lists the changes made to a record: when, who, what kind of change, which part
+of the record, and a comment. It's a complete [row list](?path=/docs/content-row-list--docs): a table on
+desktop and cards on mobile, with sorting and paging. You supply the data through a provider object.
+Interactive examples are under [Examples](#examples).
+
+`ListEventHistoryComponent` is declared and exported by `NrNgxComponentLibModule`. It uses
+ngx-pagination, so install the `ngx-pagination` package.
+
+It works like [List Attachments](?path=/docs/content-list-attachments--docs), without the download and
+delete buttons.
+
+## Usage
+
+```html
+<nrcl-list-event-history #history
+    [rowListProvider]="historyProvider"
+></nrcl-list-event-history>
+```
+
+```typescript
+import { EventHistoryRowListProvider, EventHistoryTableRow, ListEventHistoryComponent } from '@bcgov/nr-ngx-component-lib';
+
+@ViewChild( 'history' ) history: ListEventHistoryComponent;
+
+historyProvider: EventHistoryRowListProvider<EventHistoryTableRow> = {
+    getInitialPageState: () => ( { instance: 'fire-history' } ),
+
+    // must return an Observable of an object with a totalRowCount field
+    fetchEventHistory: ( params ) => this.api.getEventHistory( this.fireId, params ),
+
+    displayRowListPage: ( res ) => res.collection.map( e => ( {
+        eventHistoryGuid: e.eventHistoryGuid,
+        eventTimestamp: moment( e.eventTimestamp ).format( 'YYYY-MM-DD HH:mm' ),
+        createdByUserId: e.createdByUserId,
+        eventHistoryTypeDescription: this.eventTypes.describe( e.eventHistoryTypeCode ),
+        sourceObjectNameDescription: this.sections.describe( e.sourceObjectNameCode ),
+        comment: e.comment,
+    } ) ),
+};
+```
+
+Use arrow functions in the provider, so `this` is your component. To load the list again, for example after
+the record is saved, call `refreshRowList()` on the component.
+
+## The provider
+
+`rowListProvider` connects the list to your data. Every method is required.
+
+| Method | Called | Returns |
+|--------|--------|---------|
+| `getInitialPageState()` | Once, when the list is created. | Starting state, see below. `{}` is fine. |
+| `fetchEventHistory( params )` | Each time the list loads a page. | An `Observable` of the server's response. The response must have a `totalRowCount` field. |
+| `displayRowListPage( res )` | With each response. | The rows to show, as `EventHistoryTableRow[]`. |
+
+`fetchEventHistory` gets the page to load:
+
+| Field | Description |
+|-------|-------------|
+| `pageNumber` | Page to load, from 1. |
+| `pageRowCount` | Rows per page. |
+| `sortColumn` | `dateTime`, `changedBy`, `type`, or `section`. The comment can't be sorted on. |
+| `sortDirection` | `asc` or `desc`. |
+| `isSupplier` | The component's `isSupplier` input, passed through for your request. |
+
+If the request fails, the list logs a warning to the console and shows as empty.
+
+`getInitialPageState()` works as in [List Attachments](?path=/docs/content-list-attachments--docs#remembering-the-page):
+set `instance` to keep the page and sort while the app runs. The default `pageConfig` is 20 rows per page,
+sorted by `dateTime`, newest first.
+
+### Rows
+
+`EventHistoryTableRow` is what each row shows. The list shows the values as they are, so format them in
+`displayRowListPage`.
+
+| Field | Shown as |
+|-------|----------|
+| `eventHistoryGuid` | Not shown. Identifies the row. |
+| `eventTimestamp` | Date and Time. The title of each card on mobile. |
+| `createdByUserId` | User ID |
+| `eventHistoryTypeDescription` | Type |
+| `sourceObjectNameDescription` | Section |
+| `comment` | Comment |
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `rowListProvider` | `EventHistoryRowListProvider` | | Loads the data. See [The provider](#the-provider). |
+| `isSupplier` | `boolean` | `false` | Passed to `fetchEventHistory`. |
+| `noRowsMessage` | `string` | `'No comments have been added.'` | Shown when there's no history. |
+| `canDelete`, `showPagination` | `boolean` | | Not used. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `isLoadingChange` | `boolean` | `true` when the list starts loading, `false` when it's done. The list shows no loading indicator itself. |
+
+| Method | Description |
+|--------|-------------|
+| `refreshRowList()` | Loads the current page again. |
+
+## Examples
+
+Switch the display mode to see the mobile cards.
+
+### Event history
+
+<Canvas of={ListEventHistoryStories.Primary} />
+<Controls of={ListEventHistoryStories.Primary} />
+
+### No history
+
+<Canvas of={ListEventHistoryStories.NoRows} />
+<Controls of={ListEventHistoryStories.NoRows} />

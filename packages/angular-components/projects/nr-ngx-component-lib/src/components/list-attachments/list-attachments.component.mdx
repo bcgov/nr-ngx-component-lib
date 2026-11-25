@@ -1,0 +1,160 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ListAttachmentsStories from './list-attachments.component.stories';
+
+<Meta of={ListAttachmentsStories} />
+
+# List Attachments
+
+`<nrcl-list-attachments>` lists the files attached to a record, with buttons to download and delete them.
+It's a complete [row list](?path=/docs/content-row-list--docs): a table on desktop and cards on mobile,
+with sorting and paging. You supply the data through a provider object. Interactive examples are under
+[Examples](#examples).
+
+`ListAttachmentsComponent` is declared and exported by `NrNgxComponentLibModule`. It uses
+ngx-pagination, so install the `ngx-pagination` package.
+
+## Usage
+
+```html
+<nrcl-list-attachments #attachments
+    [rowListProvider]="attachmentsProvider"
+    [canDownload]="true"
+    [canDelete]="canEdit"
+    [showOrgUnit]="false"
+></nrcl-list-attachments>
+```
+
+```typescript
+import { AttachmentRowListProvider, AttachmentsTableRow, ListAttachmentsComponent } from '@bcgov/nr-ngx-component-lib';
+
+@ViewChild( 'attachments' ) attachments: ListAttachmentsComponent;
+
+attachmentsProvider: AttachmentRowListProvider<AttachmentsTableRow> = {
+    getInitialPageState: () => ( { instance: 'fire-attachments' } ),
+
+    // must return an Observable of an object with a totalRowCount field
+    fetchAttachments: ( params ) => this.api.getAttachments( this.fireId, params ),
+
+    displayRowListPage: ( res ) => res.collection.map( a => ( {
+        attachmentId: a.attachmentGuid,
+        fileId: a.fileIdentifier,
+        fileName: a.fileName,
+        fileExtension: a.fileName.split( '.' ).pop(),
+        attachmentTypeDescription: this.attachmentTypes.describe( a.attachmentTypeCode ),
+        attachmentDescription: a.attachmentDescription,
+        uploadedBy: a.uploadedBy,
+        uploadedTimestamp: moment( a.uploadedTimestamp ).format( 'YYYY-MM-DD HH:mm' ),
+        orgUnit: a.orgUnit,
+        sourceObjectUniqueId: a.sourceObjectUniqueId,
+    } ) ),
+
+    downloadItem: ( item ) => this.api.download( item.fileId ),
+
+    deleteItem: ( item ) => this.confirmDelete( item )
+        .then( ok => ok && this.api.deleteAttachment( item.attachmentId ) )
+        .then( () => this.attachments.refreshRowList() ),
+};
+```
+
+Use arrow functions in the provider, so `this` is your component.
+
+**Always bind `canDownload`, `canDelete`, and `showOrgUnit`**, even to their default values. The component
+works out its columns when one of those inputs changes. With none of them bound, the desktop table has no
+columns. Without `showOrgUnit`, the mobile **Sort By** picker has no options.
+
+## The provider
+
+`rowListProvider` connects the list to your data. Every method is required.
+
+| Method | Called | Returns |
+|--------|--------|---------|
+| `getInitialPageState()` | Once, when the list is created. | Starting state, see [Remembering the page](#remembering-the-page). `{}` is fine. |
+| `fetchAttachments( params )` | Each time the list loads a page. | An `Observable` of the server's response. The response must have a `totalRowCount` field. |
+| `displayRowListPage( res )` | With each response. | The rows to show, as `AttachmentsTableRow[]`. |
+| `downloadItem( item )` | The user clicked a file name, or a download button. | Anything. |
+| `deleteItem( item )` | The user clicked a delete button. | Anything. |
+
+`fetchAttachments` gets the page to load:
+
+| Field | Description |
+|-------|-------------|
+| `pageNumber` | Page to load, from 1. |
+| `pageRowCount` | Rows per page. |
+| `sortColumn` | `attachmentTypeCode`, `orgUnit`, `fileName`, `fileExtension`, `uploadedBy`, `uploadedTimestamp`, or `description`. |
+| `sortDirection` | `asc` or `desc`. |
+
+If the request fails, the list logs a warning to the console and shows as empty.
+
+### Rows
+
+`AttachmentsTableRow` is what each row shows. The list shows the values as they are, so format them, dates
+especially, in `displayRowListPage`.
+
+| Field | Shown as |
+|-------|----------|
+| `attachmentId` | Not shown. Identifies the row. |
+| `fileId`, `sourceObjectUniqueId` | Not shown. For your download and delete code. |
+| `attachmentTypeDescription` | Attachment Type |
+| `orgUnit` | Org Unit, with `showOrgUnit` |
+| `fileName` | File Name, as a link that downloads the file |
+| `fileExtension` | File Type |
+| `uploadedBy` | Uploaded By |
+| `uploadedTimestamp` | Uploaded Date |
+| `attachmentDescription` | Description |
+
+## Download and delete
+
+The download and delete buttons call the provider's `downloadItem` and `deleteItem`. **The list doesn't
+remove a deleted row itself**: after deleting, call `refreshRowList()` on the component to load the page
+again. Do the same after uploading a file.
+
+`canDownload` and `canDelete` hide the buttons. The file name stays a download link even when
+`canDownload` is off.
+
+## Remembering the page
+
+The page, page size, and sort are kept in `PageStateService` while the app runs. Set `instance` in
+`getInitialPageState()` to a name for the list, and the user gets the same page back when they leave the
+screen and return. It's kept in memory, so it's lost when the browser page reloads.
+
+`getInitialPageState()` can also set the starting page and sort in `pageConfig`. The defaults are:
+
+```typescript
+getInitialPageState: () => ( {
+    instance: 'fire-attachments',
+    pageConfig: { pageSize: 10, pageNumber: 1, sortActive: 'uploadedTimestamp', sortDirection: 'desc' },
+} )
+```
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `rowListProvider` | `AttachmentRowListProvider` | | Loads the data. See [The provider](#the-provider). |
+| `canDownload` | `boolean` | `true` | Shows download buttons. |
+| `canDelete` | `boolean` | `true` | Shows delete buttons. |
+| `showOrgUnit` | `boolean` | `false` | Shows the Org Unit column. |
+| `noRowsMessage` | `string` | `'No attachments have been added.'` | Shown when there are no attachments. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `isLoadingChange` | `boolean` | `true` when the list starts loading, `false` when it's done. The list shows no loading indicator itself. |
+
+| Method | Description |
+|--------|-------------|
+| `refreshRowList()` | Loads the current page again. |
+
+## Examples
+
+The examples log downloads and deletes to the browser console. Switch the display mode to see the mobile
+cards.
+
+### Attachments
+
+<Canvas of={ListAttachmentsStories.Primary} />
+<Controls of={ListAttachmentsStories.Primary} />
+
+### No attachments
+
+<Canvas of={ListAttachmentsStories.NoRows} />
+<Controls of={ListAttachmentsStories.NoRows} />
