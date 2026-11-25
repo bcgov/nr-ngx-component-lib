@@ -46,47 +46,6 @@ type DummyComponentEx = DummyComponent & { displayMode: DisplayMode }
 
 const meta: Meta<DummyComponentEx> = {
     title: 'Notification and Feedback/Snack Bar',
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A custom Angular Material snackbar component that displays toast notifications with different types and icons.
-
-## Usage
-
-The snackbar is triggered through the \`SnackbarUtilService\`, which provides convenience methods for different notification types:
-
-\`\`\`typescript
-constructor(private snackbarUtilService: SnackbarUtilService) {}
-
-// Show success notification
-this.snackbarUtilService.successful('Operation completed', null);
-
-// Show error notification
-this.snackbarUtilService.error('Something went wrong', null);
-
-// Show info notification
-this.snackbarUtilService.information('Here is some information', null);
-
-// Show update notification
-this.snackbarUtilService.updated('Data has been updated', null);
-\`\`\`
-
-## Types
-
-The component supports four notification types, each with its own icon and styling:
-- **success**: Green checkmark icon for successful operations
-- **error**: Red error icon for failures
-- **info**: Blue information icon for general messages
-- **update**: Purple update icon for data changes
-
-## Interactive Demo
-
-Use the controls below to test different snackbar types and messages. Click the "Show SnackBar" button to display the notification.                             
-                `
-            }
-        }
-    },
     component: DummyComponent,
     decorators: [
         // Apply metadata to all stories
@@ -116,7 +75,6 @@ Use the controls below to test different snackbar types and messages. Click the 
             }
         ),        
     ],
-    tags: ['autodocs'],
     argTypes: {
         displayMode: {
             control: 'inline-radio',

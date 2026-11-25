@@ -1,0 +1,42 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as LoadingStatusStories from './loading-status.component.stories';
+
+<Meta of={LoadingStatusStories} />
+
+# Loading Status
+
+`<nrcl-loading-status>` swaps its content for a spinner while something loads, for example a button that
+can't be used until its data has arrived. The space the content takes stays the same, so nothing around it
+moves. An interactive example is under [Example](#example).
+
+`LoadingStatusComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<nrcl-loading-status [loading]="resourcesLoading">
+    <nrcl-button primary label="Add Resource" (click)="addResource()"></nrcl-button>
+</nrcl-loading-status>
+```
+
+While `loading` is set:
+
+- The content is hidden but keeps its space, and can't be clicked or reached with the keyboard.
+- A 30px spinner shows at the top right of that space.
+
+The component is inline, so it can sit in a row of buttons or a line of text.
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `loading` | `boolean` | `false` | Hides the content and shows the spinner. |
+
+`<nrcl-loading-status loading>` is the same as `[loading]="true"`.
+
+## Example
+
+Turn on `loading` to replace the button with the spinner.
+
+<Canvas of={LoadingStatusStories.Primary} />
+<Controls of={LoadingStatusStories.Primary} />
