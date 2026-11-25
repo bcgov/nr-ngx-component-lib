@@ -22,36 +22,42 @@ The library's major version matches the Angular major version it supports.
 | Library | Angular | Components |
 |---------|---------|------------|
 | `18.x`  | 18      | Declared in `NrNgxComponentLibModule` (`standalone: false`) |
+| `21.x`  | 21      | Standalone |
+
+This documentation is for `21.x`.
 
 ## Installation
 
 ```bash
-npm install @bcgov/nr-ngx-component-lib@18
+npm install @bcgov/nr-ngx-component-lib@21
 ```
 
 The library also needs Angular Material and the Moment date adapter, which the date components use:
 
 ```bash
-npm install @angular/material@18 @angular/material-moment-adapter@18 moment
+npm install @angular/material@21 @angular/material-moment-adapter@21 moment
 ```
 
 ## Setup
 
-### 1. Import the module
+### 1. Import the components
 
-`NrNgxComponentLibModule` declares and exports every component and directive, and provides the library's
-services. It includes `BrowserAnimationsModule`, so import it in your root module.
+Every component and directive is standalone. Import the ones you use from `@bcgov/nr-ngx-component-lib` and
+add them to your component's `imports`. The services are provided in root, so they need no setup.
 
 ```typescript
-import { NrNgxComponentLibModule } from '@bcgov/nr-ngx-component-lib';
+import { Component } from '@angular/core';
+import { ButtonComponent, PageHeaderComponent } from '@bcgov/nr-ngx-component-lib';
 
-@NgModule({
+@Component({
+    selector: 'app-resources',
     imports: [
-        BrowserModule,
-        NrNgxComponentLibModule,
+        ButtonComponent,
+        PageHeaderComponent,
     ],
+    templateUrl: './resources.component.html',
 })
-export class AppModule {}
+export class ResourcesComponent {}
 ```
 
 ### 2. Add the styles
