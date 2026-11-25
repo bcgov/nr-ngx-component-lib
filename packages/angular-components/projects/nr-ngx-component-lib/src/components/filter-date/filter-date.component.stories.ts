@@ -86,6 +86,7 @@ export const Primary: StoryObj<FilterDateComponent> = {
     args: {
         label: 'Start Date',
         value: '',
+        displayFormat: 'MMMM D, YYYY',
         hint: '',
         wide: null,
         clear: true,
