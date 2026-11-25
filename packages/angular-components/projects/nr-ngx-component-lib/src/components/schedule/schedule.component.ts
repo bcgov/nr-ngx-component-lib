@@ -126,7 +126,11 @@ export class ScheduleComponent extends RowListBase<{},ScheduleRow> implements On
     protected _templates: TemplateRef<any>[][] = []
 
     ngOnChanges( changes: SimpleChanges ): void {
-        // this.refreshRowList()
+        // the first load happens in ngAfterViewInit; after that, reload when the days shown change
+        const dates = [ changes.startDate, changes.dayCount, changes.weekStart ].filter( c => c )
+        if ( dates.length && dates.some( c => !c.firstChange ) ) {
+            this.refreshRowList()
+        }
     }
 
     ngAfterViewInit(): void {
