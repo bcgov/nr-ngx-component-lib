@@ -20,7 +20,6 @@ const meta: Meta<LoadingStatusComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
 }
 
 export default meta;
