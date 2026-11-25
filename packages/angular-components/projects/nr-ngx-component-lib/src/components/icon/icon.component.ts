@@ -1,4 +1,4 @@
-import { AfterContentInit, booleanAttribute, Component, inject, Input } from '@angular/core';
+import { AfterContentChecked, booleanAttribute, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { SafeHtml } from '@angular/platform-browser';
 import { NrclBase } from '../../directives/nrcl.base';
@@ -21,7 +21,7 @@ import { IconService } from '../../services/icon.service';
         MatIconModule
     ]
 } )
-export class IconComponent extends NrclBase implements AfterContentInit {   
+export class IconComponent extends NrclBase implements AfterContentChecked {   
     iconService = inject( IconService )
 
     @Input( { transform: booleanAttribute } ) small = false
@@ -31,9 +31,26 @@ export class IconComponent extends NrclBase implements AfterContentInit {
     svg?: SafeHtml
     icon?: string
 
-    ngAfterContentInit(): void {
-        let text: string = this.elementRef?.nativeElement?.textContent?.trim();
+    @ViewChild( 'content', { static: true } ) contentRef?: ElementRef<HTMLElement>
 
+    // the projected nodes that hold the icon name. Kept, because the svg replaces them in the DOM,
+    // but Angular still updates them when the name is bound, eg <nrcl-icon>{{ name }}</nrcl-icon>
+    private contentNodes?: Node[]
+    private text?: string
+
+    ngAfterContentChecked(): void {
+        if ( !this.contentNodes ) {
+            this.contentNodes = Array.from( this.contentRef?.nativeElement?.childNodes ?? [] )
+        }
+
+        let text = this.contentNodes.map( n => n.textContent ).join( '' ).trim()
+        if ( text === this.text ) return
+
+        this.text = text
+        this.applyText( text )
+    }
+
+    applyText( text: string ) {
         if ( !text.includes( ';' ) ) {
             this.showIcon( text )
             return
@@ -42,7 +59,7 @@ export class IconComponent extends NrclBase implements AfterContentInit {
         try {
             let nameConfig = text.split( ';' )
 
-            let cfg = JSON.parse( nameConfig[ 1 ] )           
+            let cfg = JSON.parse( nameConfig[ 1 ] )
             if ( 'fill' in cfg ) this.fill = cfg.fill
             if ( 'large' in cfg ) this.large = cfg.large
             if ( 'small' in cfg ) this.small = cfg.small
