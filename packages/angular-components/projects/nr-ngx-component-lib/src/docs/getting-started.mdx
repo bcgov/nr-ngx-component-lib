@@ -32,11 +32,9 @@ This documentation is for `21.x`.
 npm install @bcgov/nr-ngx-component-lib@21
 ```
 
-The library also needs Angular Material and the Moment date adapter, which the date components use:
-
-```bash
-npm install @angular/material@21 @angular/material-moment-adapter@21 moment
-```
+The library's peer dependencies are Angular Material and CDK, the Moment date adapter and Moment, which
+the date components use, and ngx-pagination, which the row lists use. npm 7 and later installs any you don't
+already have, and warns if a version doesn't match.
 
 ## Setup
 
