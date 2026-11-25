@@ -37,15 +37,6 @@ const meta: Meta<ListAttachmentsComponent> = {
             }
         ),
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    },
 }
 
 export default meta;
@@ -59,14 +50,6 @@ export const Primary: StoryObj<ListAttachmentsComponent & DisplayModeWrapperComp
         canDelete: true,
         canDownload: true,
         showOrgUnit: false,
-    },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
     },
     render: ( args ) => {
         args.rowListProvider = {
@@ -112,14 +95,6 @@ export const NoRows: StoryObj<ListAttachmentsComponent & DisplayModeWrapperCompo
     args: {
         ...displayModeWrapperStory.args,
         canDelete: true,
-    },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
     },
     render: ( args ) => {
         args.rowListProvider = {

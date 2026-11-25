@@ -1,0 +1,89 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as RowListPaginationStories from './row-list-pagination.component.stories';
+
+<Meta of={RowListPaginationStories} />
+
+# Row List Pagination
+
+`<nrcl-row-list-pagination>` goes below a [row list](?path=/docs/content-row-list--docs). It shows which
+rows are on screen ("Showing Rows 21 to 40 (of 95)"), links to the other pages, and a page size picker. An
+interactive example is under [Example](#example).
+
+`RowListPaginationComponent` is declared and exported by `NrNgxComponentLibModule`. It uses
+[ngx-pagination](https://www.npmjs.com/package/ngx-pagination): install the `ngx-pagination` package and
+import `NgxPaginationModule` in your own module, for the `paginate` pipe.
+
+## Usage
+
+```html
+<nrcl-row-list-desktop>
+    <mat-table [dataSource]="rows | paginate: { id: 'fires', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: rowCount }">
+        ...
+    </mat-table>
+</nrcl-row-list-desktop>
+
+<nrcl-gap vertical></nrcl-gap>
+
+<nrcl-row-list-pagination
+    paginationId="fires"
+    [pageSize]="pageSize"
+    [pageNumber]="pageNumber"
+    [rowCount]="rowCount"
+    (pageSizeChange)="pageSize = $event; pageNumber = 1; load()"
+    (pageNumberChange)="pageNumber = $event; load()"
+></nrcl-row-list-pagination>
+```
+
+## Linking to the list
+
+The page links come from ngx-pagination, which links them to the list through an id:
+
+- **`paginationId` must match the `id` in the list's `paginate` pipe.** Use a different id for each list on
+  the page.
+- **The page links follow the pipe's `currentPage`**, not this component's `pageNumber`. Bind both to the
+  same value.
+- **`rowCount` is the total number of rows**, across all pages. Pass it as the pipe's `totalItems` too.
+  When there are more rows in total than in `rows`, ngx-pagination treats `rows` as the current page only,
+  which is what you want when the server sends one page at a time. When `rows` holds every row, the pipe
+  shows one page of them.
+
+The component doesn't change the page itself. When the user picks a page or a page size, it emits
+`pageNumberChange` or `pageSizeChange`, and you update the values and load the rows. Go back to page 1 when
+the page size changes.
+
+## Layout
+
+With no rows, the component shows `noRowsMessage` instead, and nothing else.
+
+The layout adapts to the component's own width, and changes when the window is resized:
+
+| Width | Layout |
+|-------|--------|
+| over 600px | One row: the row count, the page links, and the page size. Up to 5 page links. |
+| 551 to 600px | One row, with up to 3 page links. |
+| 550px or less | The row count and page size side by side, and the page links below them. Up to 4 page links. |
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `paginationId` | `string` | `'1'` | Must match the `paginate` pipe's `id`. |
+| `pageNumber` | `number` | | Current page, from 1. |
+| `pageSize` | `number` | `20` | Rows per page. |
+| `rowCount` | `number` | | Total rows, across all pages. |
+| `pageSizeOptions` | `{ code: number, description: string }[]` | 5, 10, 20, 50, and 100 rows | Choices in the page size picker. |
+| `showPageSize` | `boolean` | `true` | Shows the page size picker. |
+| `noRowsMessage` | `string` | `'No records to display.'` | Shown when `rowCount` is 0. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `pageNumberChange` | `number` | The user picked a page. |
+| `pageSizeChange` | `number` | The user picked a page size. |
+
+## Example
+
+The example has no list, so the page links don't change page. Use `rowCount` and `pageSize` to see the
+row count change, and set `rowCount` to 0 for the no-rows message.
+
+<Canvas of={RowListPaginationStories.Primary} />
+<Controls of={RowListPaginationStories.Primary} />

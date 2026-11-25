@@ -1,0 +1,135 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ListSelectStories from './list-select.component.stories';
+
+<Meta of={ListSelectStories} />
+
+# List Select
+
+`<nrcl-list-select>` picks items from a list shown as a table, with a search box above it. Clicking a row
+adds it to the selection, and clicking again removes it. Use it for picking from more options than suit a
+[filter select](?path=/docs/inputs-and-controls-filters-filter-select--docs), for example in a dialog. An
+interactive example is under [Example](#example).
+
+`ListSelectComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<nrcl-list-select
+    descriptionLabel="Resource"
+    [options]="resources"
+    [value]="selectedResources"
+    (valueChange)="selectedResources = $event"
+></nrcl-list-select>
+```
+
+`options` is a list of `CodeDescription` objects, `{ code, description }`, and `value` holds the codes of
+the selected options. `valueChange` emits the new codes after every click.
+
+From top to bottom, the component shows:
+
+1. "2 Selected", the number of items selected. Not shown with `single`.
+2. A [filters panel](?path=/docs/inputs-and-controls-filters-filters-panel--docs) with a search box and a
+   **Clear** button.
+3. The table, with the description and an add / remove icon in each row. Selected rows are highlighted.
+4. `noRowsMessage`, when no options match the search.
+
+Every matching option is shown; there's no paging. Rows can't be sorted, so sort `options` the way you
+want them shown.
+
+## Picking one item
+
+With `single`, clicking a row selects just that row, and clicking it again clears the selection. `value`
+is still an array, with one code or none.
+
+## Searching
+
+The search box hides options whose description doesn't contain the words typed, in the order typed. Case is
+ignored. For example, `cari fire` matches "Cariboo Fire Centre".
+
+The search text is used as a regular expression. Characters with a special meaning there, such as `(`,
+`[`, or `*`, can cause an error, and the list then stops filtering until the text is changed.
+
+**Clear** empties the search box and emits `filterClear`.
+
+## More filters
+
+To filter on something other than the description, add your own filter components with the `filter`
+attribute. They go in the filters panel, next to the search box. Then:
+
+- Set `filterProvider` to a function that returns `true` for each option to show.
+- When your filters change, call `refreshRowList()` on the component to apply them.
+- Handle `filterClear` to reset your filters when **Clear** is clicked. The list filters again after it.
+
+```html
+<nrcl-list-select #list
+    [options]="resources"
+    [filterProvider]="matchesFireCentre"
+    (filterClear)="fireCentre = []"
+    ...
+>
+    <nrcl-filter-select filter
+        label="Fire Centre"
+        [options]="fireCentres"
+        [value]="fireCentre"
+        (valueChange)="fireCentre = $event; list.refreshRowList()"
+    ></nrcl-filter-select>
+</nrcl-list-select>
+```
+
+```typescript
+matchesFireCentre = ( option: CodeDescription ) =>
+    this.fireCentre.length == 0 || this.fireCentre.includes( this.fireCentreOf( option.code ) );
+```
+
+The list also filters again when `options` changes.
+
+## More columns
+
+To show more than the description, add `matColumnDef` columns inside the component, and use
+`displayColumnsProvider` to put their names in the list of columns. The built-in columns are `description`
+and `addRemove`:
+
+```html
+<nrcl-list-select [options]="resources" [displayColumnsProvider]="addTypeColumn">
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+        <mat-cell *matCellDef="let option">{{ option.type }}</mat-cell>
+    </ng-container>
+</nrcl-list-select>
+```
+
+```typescript
+addTypeColumn = ( columns: string[] ) => [ 'description', 'type', 'addRemove' ];
+```
+
+The column cells get each option, so options can carry extra fields. `displayColumnsProvider` is only
+called once, when the component is created.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `options` | `CodeDescription[]` | | Items to pick from. |
+| `value` | `string[]` | | Codes of the selected items. |
+| `single` | `boolean` | `false` | Only one item can be selected. Hides the count. |
+| `descriptionLabel` | `string` | `'Description'` | Heading of the description column. |
+| `noRowsMessage` | `string` | `'No items have been added.'` | Shown when no options match. |
+| `filterProvider` | `( option ) => boolean` | shows all | Extra filter, see [More filters](#more-filters). |
+| `displayColumnsProvider` | `( columns: string[] ) => string[]` | no change | Sets the columns, see [More columns](#more-columns). |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `valueChange` | `string[]` | The selection changed. |
+| `filterClear` | `void` | **Clear** was clicked. |
+
+| Method | Description |
+|--------|-------------|
+| `refreshRowList()` | Filters the options again. |
+
+## Example
+
+Apple and Grape start selected. Turn on `single` to pick one item.
+
+<Canvas of={ListSelectStories.Primary} />
+<Controls of={ListSelectStories.Primary} />

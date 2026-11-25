@@ -35,15 +35,6 @@ const meta: Meta<ListSelectComponent<any>> = {
             }
         ),
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    },
 }
 
 export default meta;
@@ -56,14 +47,6 @@ export const Primary: StoryObj<ListSelectComponent<any> & DisplayModeWrapperComp
         ...displayModeWrapperStory.args,
         descriptionLabel: 'Fruit',
         single: false
-    },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
     },
     render: ( args ) => {
         args.options = fruitOptions()

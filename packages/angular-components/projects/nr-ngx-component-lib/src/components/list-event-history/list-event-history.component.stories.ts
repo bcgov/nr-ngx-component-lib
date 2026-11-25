@@ -39,15 +39,6 @@ const meta: Meta<ListEventHistoryComponent> = {
             }
         ),        
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    },
 }
 
 export default meta;
@@ -59,14 +50,6 @@ export const Primary: StoryObj<ListEventHistoryComponent & DisplayModeWrapperCom
     args: {
         ...displayModeWrapperStory.args,
     },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
-    },    
     render: ( args ) => {
         args.rowListProvider = {
             fetchEventHistory: ( x ) => { return of(eventHistoryCollection()) },
@@ -102,14 +85,6 @@ export const NoRows: StoryObj<ListEventHistoryComponent & DisplayModeWrapperComp
     args: {
         ...displayModeWrapperStory.args,
     },
-    parameters: {
-        docs: {
-            description: {
-                story: `
-                `
-            }
-        }
-    },    
     render: ( args ) => {
         args.rowListProvider = {
             fetchEventHistory: () => { return of(eventHistoryCollection()) },

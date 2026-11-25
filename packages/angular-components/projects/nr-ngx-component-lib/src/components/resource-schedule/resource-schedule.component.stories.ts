@@ -42,15 +42,6 @@ const meta: Meta<ResourceScheduleComponent> = {
             }
         ),        
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    },
 }
 
 export default meta;

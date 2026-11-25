@@ -1,0 +1,194 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as ResourceScheduleStories from './resource-schedule.component.stories';
+
+<Meta of={ResourceScheduleStories} />
+
+# Resource Schedule
+
+`<nrcl-resource-schedule>` shows a grid of resources against days: one row per resource, such as a crew or
+a piece of equipment, and one column per day. Each cell shows the resource's state that day, such as
+available, assigned, or out of service, in a colour for the kind of day. Clicking a cell can open a menu.
+Interactive examples are under [Examples](#examples).
+
+`ResourceScheduleComponent` and the `nrclResourceScheduleRowHeading` directive are declared and exported by
+`NrNgxComponentLibModule`. Your module also needs `MatMenuModule` for the cell menu, and the
+`ngx-pagination` package for paging.
+
+## Usage
+
+```html
+<nrcl-resource-schedule #schedule
+    [provider]="scheduleProvider"
+    [startDate]="startDate"
+    [dayCount]="14"
+    [weekStart]="1"
+    [highlightDate]="selectedDate"
+    [menu]="cellMenu"
+>
+    <h3>Crews</h3>
+
+    <ng-template nrclResourceScheduleRowHeading let-row>
+        <b>{{ row.heading.name }}</b> {{ row.heading.type }}
+    </ng-template>
+</nrcl-resource-schedule>
+
+<mat-menu #cellMenu="matMenu">
+    <ng-template matMenuContent let-cell>
+        <button mat-menu-item (click)="manageAvailability( cell.metadata, cell.item )">Manage Availability</button>
+    </ng-template>
+</mat-menu>
+```
+
+The layout is:
+
+- **The top left corner** holds the content you put inside the component, such as a heading.
+- **The column headings** show the weeks, then each day's name and date. Weekends, today, `highlightDate`,
+  and the first day of each month are marked.
+- **Each row** starts with a heading from your `nrclResourceScheduleRowHeading` template, followed by a cell
+  for each day.
+- **Paging controls** go below the grid.
+
+## The provider
+
+`provider` loads the rows. It's a `ScheduleProvider`:
+
+| Method | Required | Called | Returns |
+|--------|----------|--------|---------|
+| `getInitialPageState()` | yes | Once, when the schedule is created. | Starting state, with `pageConfig` setting the page size. |
+| `fetchSchedule()` | yes | Each time the schedule loads. | An `Observable` of the server's response. |
+| `parseSchedule( res )` | yes | With each response. | The rows, as `ResourceScheduleRow[]`. |
+| `parseTotalRowCount( res )` | no | With each response. | The total number of rows. Without it, the response must have a `totalRowCount` field. |
+| `startloadSchedule( inner )` | no | Around each load. | Must call `inner()` and return its promise. Use it to do something before and after loading. |
+| `completedLoadSchedule( inner )` | no | After each load. | Must call `inner()`. |
+
+```typescript
+scheduleProvider: ScheduleProvider = {
+    getInitialPageState: () => ( {
+        filter: {},
+        pageConfig: { pageSize: 20, pageNumber: 1, sortActive: '', sortDirection: 'asc' },
+    } ),
+
+    fetchSchedule: () => this.api.getCrews( this.startDate, 14 ),
+
+    parseSchedule: ( res ) => res.crews.map( crew => ( {
+        id: crew.id,
+        heading: { name: crew.name, type: crew.type },
+        metadata: crew,
+        items: Promise.resolve( crew.days.map( ( day, i ) => ( {
+            id: String( i ),
+            name: day.assignment ? 'assigned-duty-day' : 'available-duty-day',
+            assignmentName: day.assignment?.name,
+            functionName: day.assignment?.function,
+            allocationType: day.allocation,
+            shiftType: day.shift,
+        } ) ) ),
+    } ) ),
+};
+```
+
+`fetchSchedule()` gets no arguments. If the server sends one page at a time, read the page from the
+component (`schedule.scheduleComponent.getPagingInfoRequest()`). If `parseSchedule` returns every row and
+the total matches, the schedule pages through them itself.
+
+### Rows
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `heading` | any | Passed to the row heading template. |
+| `metadata` | any | Passed to the row heading template and the cell menu. |
+| `items` | `Promise<ResourceScheduleRowItem[]>` | One item per day, from `startDate`. Missing days are empty. Each row shows a placeholder until its promise resolves, so rows can load their days separately. |
+| `id` | `string` | Identifies the row. Defaults to its position. |
+| `rowClass` | `string` | Class added to the row. |
+
+### Cells
+
+Each item's `name` sets what the cell shows and its colour:
+
+| `name` | Shows | Colour |
+|--------|-------|--------|
+| `available-regular-day` | "Available", `allocationType`, `shiftType` | Green |
+| `available-duty-day` | the same | Blue |
+| `available-standby-day` | the same | Yellow |
+| `available-off-day` | the same | Grey |
+| `available-rostered` | the same | Purple |
+| `available-hired` | nothing | Pale green |
+| `assigned-regular-day` | `assignmentName`, `functionName`, `shiftType` | Green |
+| `assigned-duty-day` | the same | Blue |
+| `assigned-standby-day` | the same | Yellow |
+| `assigned-off-day` | the same | Grey |
+| `assigned-rostered` | the same | Purple |
+| `out-of-service` | "OOS", `allocationType`, `shiftType` | Red |
+| `empty` | nothing | White |
+
+Items also take:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Identifies the cell within its row. |
+| `travel` | `boolean` | Draws a line along the bottom of the cell. |
+| `icons` | `() => string[]` | Small [icons](?path=/docs/utility-icon--docs) in the corner of the cell. |
+| `tooltip` | `() => string \| TemplateRef` | Tooltip for the cell. A template gets `{ heading, metadata, item }`. |
+
+## Cell menu
+
+Pass a `<mat-menu>` as `menu`, and clicking a cell opens it. Its `matMenuContent` template gets
+`{ heading, metadata, item }` for the clicked cell. Set `[hover]="false"` to turn off the highlight and
+ripple when the pointer is over a cell.
+
+## Changing dates
+
+**The schedule doesn't reload when `startDate`, `dayCount`, or `weekStart` change.** After changing them,
+call `refreshRowList()` on the inner schedule:
+
+```typescript
+@ViewChild( 'schedule' ) schedule: ResourceScheduleComponent;
+
+nextWeek() {
+    this.startDate = moment( this.startDate ).add( 7, 'day' ).format( 'YYYY-MM-DD' );
+    setTimeout( () => this.schedule.scheduleComponent.refreshRowList() );
+}
+```
+
+The `setTimeout` lets the new `startDate` reach the schedule first.
+
+## Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `provider` | `ScheduleProvider` | | Loads the rows. See [The provider](#the-provider). |
+| `startDate` | `string` | today | First day, `YYYY-MM-DD`. |
+| `dayCount` | `number` | | Number of days. Required: with none, no days show. |
+| `weekStart` | `number` | `0` | Day the week headings start on: `0` for Sunday to `6` for Saturday. |
+| `highlightDate` | `string` | | Day to highlight, `YYYY-MM-DD`. |
+| `menu` | `MatMenuPanel` | | Menu opened by clicking a cell. |
+| `hover` | `boolean` | `true` | Highlights the cell under the pointer. |
+| `heading` | `boolean` | `true` | Shows the row headings and the top left corner. |
+| `pagination` | `boolean` | `true` | Shows the paging controls, and "Loading..." until the first load is done. |
+
+Only one schedule per page can have paging controls: their pagination id is fixed.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-schedule-heading-width` | Row heading width. Default 300px. |
+| `--nrcl-schedule-item-width` | Day column width. Default 80px. |
+| `--nrcl-schedule-row-schedule-height` | Row height. Default 70px. |
+| `--nrcl-schedule-row-days-weekend-background-color`, `-today-`, `-highlight-` | Day heading highlights. |
+| `--nrcl-resource-schedule-item-<kind>-background-color` | Cell colours, where `<kind>` is `regular-day`, `off-day`, `duty-day`, `standby-day`, `out-of-service`, `rostered`, `hired`, or `empty`. |
+| `--nrcl-resource-schedule-item-foreground-color` | Cell text. Default black. |
+
+## Examples
+
+### Schedule
+
+30 rows of sample data, with a cell menu and tooltips. Use the controls to change the dates, turn the menu,
+hover, and headings off, and `leaveEmpty` to leave some days empty.
+
+<Canvas of={ResourceScheduleStories.Primary} />
+<Controls of={ResourceScheduleStories.Primary} />
+
+### No rows
+
+<Canvas of={ResourceScheduleStories.NoRows} />
+<Controls of={ResourceScheduleStories.NoRows} />
