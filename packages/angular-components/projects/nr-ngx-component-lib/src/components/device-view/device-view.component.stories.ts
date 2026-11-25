@@ -53,15 +53,6 @@ const meta: Meta<DeviceViewComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    }  
 }
 
 export default meta;
