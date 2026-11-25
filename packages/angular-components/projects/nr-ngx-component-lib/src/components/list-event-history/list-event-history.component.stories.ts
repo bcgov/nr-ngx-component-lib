@@ -87,7 +87,8 @@ export const NoRows: StoryObj<ListEventHistoryComponent & DisplayModeWrapperComp
     },
     render: ( args ) => {
         args.rowListProvider = {
-            fetchEventHistory: () => { return of(eventHistoryCollection()) },
+            // an empty response, so the row count and paging agree with the rows shown
+            fetchEventHistory: () => { return of( { pageNumber: 1, pageRowCount: 20, totalRowCount: 0, totalPageCount: 0, collection: [] } ) },
             displayRowListPage: ( res: EventHistoryCollection ) => {
                 return []
             },
