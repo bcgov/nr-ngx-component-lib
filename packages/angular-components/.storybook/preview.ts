@@ -5,6 +5,7 @@ import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { DisplayModeWrapperComponent } from "projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component";
 import { RegistrationWrapperComponent } from "projects/nr-ngx-component-lib/story-util/registration-wrapper.component";
 import { RerenderDirective } from "projects/nr-ngx-component-lib/story-util/rerender.directive";
+import { NRCL_STORY_DECLARATIONS, NRCL_STORY_IMPORTS } from "projects/nr-ngx-component-lib/story-util/nrcl-story-metadata";
 
 const preview: Preview = {
     parameters: {
@@ -41,8 +42,10 @@ const preview: Preview = {
         } ),
         moduleMetadata( {
             imports: [
+                ...NRCL_STORY_IMPORTS,
             ],
             declarations: [
+                ...NRCL_STORY_DECLARATIONS,
                 RerenderDirective,
                 DisplayModeWrapperComponent,
                 RegistrationWrapperComponent,
