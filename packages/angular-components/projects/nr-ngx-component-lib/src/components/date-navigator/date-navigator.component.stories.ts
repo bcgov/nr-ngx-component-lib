@@ -6,7 +6,7 @@ import { DATE_FORMATS } from '../../utils/date.util';
 import { DateNavigatorComponent } from './date-navigator.component';
 
 const meta: Meta<DateNavigatorComponent> = {
-    title: 'Data Display/Date Navigator',
+    title: 'Inputs and Controls/Date Navigator',
     component: DateNavigatorComponent,
     decorators: [
         // Apply metadata to all stories
@@ -36,7 +36,6 @@ const meta: Meta<DateNavigatorComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
 }
 
 export default meta;

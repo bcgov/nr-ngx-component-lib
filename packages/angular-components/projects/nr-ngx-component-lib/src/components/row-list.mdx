@@ -1,0 +1,98 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+{/* Index page for the Row List folder: its title is the folder's path, so clicking the folder opens it. */}
+<Meta title="Content/Row List" />
+
+# Row List
+
+The row list components show a list of records: as a table on desktop, and as a list of cards on mobile,
+with paging and sorting controls to match.
+
+| Component | Selector | Role | Docs |
+|-----------|----------|------|------|
+| `RowListDesktopComponent` | `<nrcl-row-list-desktop>` | Styles a `<mat-table>` placed inside it: striped rows, hover and selected colours, and horizontal scrolling. | [Row List (Desktop)](?path=/docs/content-row-list-row-list-desktop--docs) |
+| `RowListMobileComponent` | `<nrcl-row-list-mobile>` | Styles a list of `<mat-card>`s placed inside it, one card per record. | [Row List (Mobile)](?path=/docs/content-row-list-row-list-mobile--docs) |
+| `RowListPaginationComponent` | `<nrcl-row-list-pagination>` | Row count, page links, and a page size picker. | [Row List Pagination](?path=/docs/content-row-list-row-list-pagination--docs) |
+| `RowListSortingComponent` | `<nrcl-row-list-sorting>` | Sort column and direction pickers, for the mobile list, which has no column headers to click. | [Row List Sorting](?path=/docs/content-row-list-row-list-sorting--docs) |
+
+All four are declared and exported by `NrNgxComponentLibModule`.
+
+## Setup
+
+The library doesn't re-export the modules the lists are built with. Import the ones you use in your own
+module:
+
+| Module | For |
+|--------|-----|
+| `MatTableModule`, `MatSortModule` from `@angular/material` | The desktop table and its sortable headers. |
+| `MatCardModule` from `@angular/material` | The mobile cards. |
+| `NgxPaginationModule` from `ngx-pagination` | The `paginate` pipe. Install the `ngx-pagination` package. |
+
+## Usage
+
+The list components only style what you put inside them. You write the table or cards, and switch between
+them with [`<nrcl-device-view>`](?path=/docs/utility-device-view--docs):
+
+```html
+<nrcl-device-view>
+    <ng-template desktop-view>
+        <nrcl-row-list-desktop>
+            <mat-table matSort
+                [dataSource]="rows | paginate: { id: 'records', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: rowCount }"
+                (matSortChange)="onSortChange( $event )"
+            >
+                <!-- column definitions, header row, and rows -->
+            </mat-table>
+        </nrcl-row-list-desktop>
+    </ng-template>
+
+    <ng-template mobile-view>
+        <nrcl-row-list-sorting
+            [sortColumn]="sortColumn"
+            [sortColumnOptions]="sortColumnOptions"
+            [sortDirection]="sortDirection"
+            (sortChange)="onSortChange( $event )"
+        ></nrcl-row-list-sorting>
+
+        <nrcl-row-list-mobile>
+            @for ( row of rows | paginate: { id: 'records', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: rowCount }; track row.id ) {
+                <mat-card>
+                    <!-- one record -->
+                </mat-card>
+            }
+        </nrcl-row-list-mobile>
+    </ng-template>
+</nrcl-device-view>
+
+<nrcl-row-list-pagination
+    paginationId="records"
+    [pageSize]="pageSize"
+    [pageNumber]="pageNumber"
+    [rowCount]="rowCount"
+    (pageSizeChange)="pageSize = $event; load()"
+    (pageNumberChange)="pageNumber = $event; load()"
+></nrcl-row-list-pagination>
+```
+
+## How they fit together
+
+- **Paging uses ngx-pagination.** The `paginate` pipe's `id` must match the pagination component's
+  `paginationId`, which links the page links to the list. Pass `totalItems` when the server sends one page
+  at a time.
+- **Both views sort with the same handler.** `<nrcl-row-list-sorting>` emits the same `Sort` object
+  (`{ active, direction }`) as `MatSort`'s `matSortChange`.
+- **Selected rows.** Add the `selected` class to a `<mat-row>` to highlight it.
+- **Card layout.** The mobile list styles a card title with a `<section title>` (for `<h2>` and `<h3>`)
+  and a `<section actions>` (for compact buttons), a `<mat-card-content>` of `<section>`s, each a
+  `<mat-label>` and a value, and a `<mat-card-footer>`. See
+  [Row List (Mobile)](?path=/docs/content-row-list-row-list-mobile--docs) for the full markup.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-row-list-background-color`, `--nrcl-row-list-alternate-background-color` | Desktop row stripes. |
+| `--nrcl-row-list-hover-background-color` | Desktop row under the pointer, when `showRowHover` is on. |
+| `--nrcl-row-list-selected-background-color`, `--nrcl-row-list-hover-selected-background-color` | Desktop selected rows. |
+| `--nrcl-row-list-mobile-border-color` | Card border. |
+| `--nrcl-row-list-mobile-{header,footer}-{background,border}-color` | Card title and footer. |

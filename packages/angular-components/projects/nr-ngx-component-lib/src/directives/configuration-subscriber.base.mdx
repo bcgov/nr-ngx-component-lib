@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Directives/ConfigurationSubscriberBase" />
+
+# ConfigurationSubscriberBase
+
+`ConfigurationSubscriberBase` is a base class for components that look different by display mode or
+interface style. It keeps the current settings from
+[ConfigurationService](?path=/docs/services-configurationservice--docs) in the component, and redraws the
+component when they change.
+
+The library's button, dialog, page header, application menu, and device view extend it. It extends
+[NrclBase](?path=/docs/directives-nrclbase--docs).
+
+## Usage
+
+```typescript
+import { ConfigurationSubscriberBase } from '@bcgov/nr-ngx-component-lib';
+
+@Component( {
+    selector: 'app-fire-summary',
+    template: `
+        @if ( desktopVisible ) {
+            <app-fire-summary-table [columns]="columns"></app-fire-summary-table>
+        }
+        @else {
+            <app-fire-summary-cards></app-fire-summary-cards>
+        }
+    `,
+} )
+export class FireSummaryComponent extends ConfigurationSubscriberBase {
+    columns: string[];
+
+    onConfigurationChange() {
+        this.columns = this.isStyle2026 ? [ 'name', 'status' ] : [ 'name', 'status', 'size' ];
+    }
+}
+```
+
+The class subscribes to the settings in `ngOnInit()`, and unsubscribes in `ngOnDestroy()`. If your component
+has its own `ngOnInit()` or `ngOnDestroy()`, call `super.ngOnInit()` or `super.ngOnDestroy()` from it.
+
+For switching between two templates, [`<nrcl-device-view>`](?path=/docs/utility-device-view--docs) is
+simpler. Use this class when the component's code needs the settings too.
+
+## Members
+
+| Member | Description |
+|--------|-------------|
+| `configuration` | The current settings: `{ displayMode, interfaceStyle }`. |
+| `desktopVisible` | `true` in desktop mode. |
+| `mobileVisible` | `true` in mobile mode. |
+| `isStyle2025` | `true` with the 2025 interface style. |
+| `isStyle2026` | `true` with the 2026 interface style. |
+| `onConfigurationChange()` | Override it to react to the settings. Called once in `ngOnInit()`, then each time they change. The component is redrawn after it. |
+| `configurationService` | The [ConfigurationService](?path=/docs/services-configurationservice--docs). |

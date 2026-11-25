@@ -23,7 +23,7 @@ class SentinelComponent implements OnInit, OnDestroy {
 }
 
 const meta: Meta<DeviceViewComponent> = {
-    title: 'Foundations/Device View',
+    title: 'Utility/Device View',
     component: DeviceViewComponent,
     decorators: [
         // Apply metadata to all stories
@@ -53,15 +53,6 @@ const meta: Meta<DeviceViewComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    }  
 }
 
 export default meta;

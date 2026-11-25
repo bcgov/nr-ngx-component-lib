@@ -3,7 +3,7 @@ import { DisplayMode } from '../../services/configuration.service';
 import { TagListComponent } from './tag-list.component';
 
 const meta: Meta<TagListComponent> = {
-    title: 'Data Display/Tag List',
+    title: 'Inputs and Controls/Tag List',
     component: TagListComponent,
     decorators: [
         // Apply metadata to all stories
@@ -32,15 +32,6 @@ const meta: Meta<TagListComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    }  
 }
 
 export default meta;

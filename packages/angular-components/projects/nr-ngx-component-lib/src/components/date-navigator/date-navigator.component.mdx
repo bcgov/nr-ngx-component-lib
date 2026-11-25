@@ -1,0 +1,68 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as DateNavigatorStories from './date-navigator.component.stories';
+
+<Meta of={DateNavigatorStories} />
+
+# Date Navigator
+
+`<nrcl-date-navigator>` steps through dates, for a page that shows one day at a time, such as a schedule.
+It has a **Today** button, buttons to go back or forward by a day or a week, and the date itself, which
+opens a calendar when clicked. An interactive example is under [Example](#example).
+
+`DateNavigatorComponent` is declared and exported by `NrNgxComponentLibModule`. It provides its own Moment
+date adapter, so it needs the `moment` and `@angular/material-moment-adapter` packages from
+[Installation](?path=/docs/introduction-getting-started--docs#installation).
+
+## Usage
+
+```html
+<nrcl-date-navigator
+    [value]="date"
+    (valueChange)="date = $event; load()"
+></nrcl-date-navigator>
+```
+
+From left to right:
+
+| Control | Does |
+|---------|------|
+| **Today** | Goes to today. |
+| **«** | Goes back `largeChange` days, default 7. |
+| **‹** | Goes back `smallChange` days, default 1. |
+| The date | Opens a calendar to pick any date. |
+| **›** | Goes forward `smallChange` days. |
+| **»** | Goes forward `largeChange` days. |
+
+Set `smallChange` or `largeChange` to `0` to remove that pair of buttons.
+
+## Value
+
+`value` is a string in `YYYY-MM-DD` form, for example `'2026-11-25'`. The date is shown as
+`November 25, 2026`. It starts at today's date if you don't bind `value`.
+
+Every change, from a button or the calendar, emits `valueChange` with the new date. The navigator also
+updates itself, so binding `[value]` is optional, but bind it if anything else can change the date.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `value` | `string` | Today | The date, `YYYY-MM-DD`. |
+| `smallChange` | `number` | `1` | Days the **‹** and **›** buttons move. `0` removes them. |
+| `largeChange` | `number` | `7` | Days the **«** and **»** buttons move. `0` removes them. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `valueChange` | `string` | The date changed, `YYYY-MM-DD`. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-date-navigator-input-width` | Width of the date. Default 150px. |
+| `--nrcl-date-navigator-height` | Height. Default `--nrcl-filter-height`, 40px, so it lines up with filters. |
+
+## Example
+
+<Canvas of={DateNavigatorStories.Primary} />
+<Controls of={DateNavigatorStories.Primary} />

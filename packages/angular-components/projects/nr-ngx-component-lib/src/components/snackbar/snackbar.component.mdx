@@ -1,0 +1,90 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as SnackbarStories from './snackbar.component.stories';
+
+<Meta of={SnackbarStories} />
+
+# Snack Bar
+
+A snack bar is a short message at the bottom of the screen, such as "Fire saved successfully." It has an
+icon for its type, the message, and a **Close** button. Show one with [`SnackbarUtilService`](?path=/docs/services-snackbarutilservice--docs), which wraps
+Angular Material's `MatSnackBar`. Interactive examples are under [Examples](#examples).
+
+`SnackbarComponent` is declared by `NrNgxComponentLibModule`, and `SnackbarUtilService` is exported by the
+library.
+
+## Usage
+
+```typescript
+import { SnackbarUtilService } from '@bcgov/nr-ngx-component-lib';
+
+snackbarUtilService = inject( SnackbarUtilService );
+
+save() {
+    this.api.saveFire( this.fire )
+        .then( () => this.snackbarUtilService.successfullySaved( 'Fire' ) )
+        .catch( () => this.snackbarUtilService.error( 'The fire could not be saved. Try again.' ) );
+}
+```
+
+Only one snack bar shows at a time. Showing another replaces the one on screen.
+
+## Types
+
+| Type | Methods | Icon | Colour | Closes |
+|------|---------|------|--------|--------|
+| Success | `successful( message )`, and the shortcuts below | Check mark | Green | After 5 seconds |
+| Error | `error( message )` | Cross | Red | When the user clicks Close |
+| Information | `information( message )` | Info | Dark grey | When the user clicks Close |
+| Update | `updated( message )` | Exclamation mark | Dark grey, with an orange Close button | When the user clicks Close |
+
+Every method takes the time to show the snack bar, in milliseconds, as a second argument. Pass `0` or `null`
+to keep it until the user clicks Close.
+
+Errors stay until closed so the user doesn't miss them. Keep error messages short, and say what the user
+can do next.
+
+### Success shortcuts
+
+Each takes the name of the thing, and builds the message:
+
+| Method | Message for `'Fire'` |
+|--------|----------------------|
+| `successfullySaved( 'Fire' )` | Fire saved successfully. |
+| `successfullyCreated( 'Fire' )` | Fire created successfully. |
+| `successfullyAdded( 'Fire' )` | Fire added successfully. |
+| `successfullyRemoved( 'Fire' )` | Fire removed successfully. |
+| `successfullyDeleted( 'Fire' )` | Fire deleted successfully. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-snackbar-success-background-color` | Success background. |
+| `--nrcl-snackbar-error-background-color` | Error background. |
+| `--nrcl-snackbar-info-background-color` | Information background. |
+| `--nrcl-snackbar-update-background-color` | Update background. |
+| `--nrcl-snackbar-update-button-color` | Update Close button. |
+
+## Examples
+
+Click **Show SnackBar**. The examples keep the snack bar until you click Close.
+
+### Success
+
+<Canvas of={SnackbarStories.Success} />
+<Controls of={SnackbarStories.Success} />
+
+### Error
+
+<Canvas of={SnackbarStories.Error} />
+<Controls of={SnackbarStories.Error} />
+
+### Information
+
+<Canvas of={SnackbarStories.Info} />
+<Controls of={SnackbarStories.Info} />
+
+### Update
+
+<Canvas of={SnackbarStories.Update} />
+<Controls of={SnackbarStories.Update} />

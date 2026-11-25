@@ -9,7 +9,7 @@ import { ScheduleProvider } from '../schedule/schedule.component';
 import { ResourceScheduleComponent, ResourceScheduleRowItem } from './resource-schedule.component';
 
 const meta: Meta<ResourceScheduleComponent> = {
-    title: 'Scheduling/Resource Schedule',
+    title: 'Content/Resource Schedule',
     component: ResourceScheduleComponent,
     decorators: [
         // Apply metadata to all stories
@@ -41,15 +41,6 @@ const meta: Meta<ResourceScheduleComponent> = {
             }
         ),        
     ],
-    tags: [ 'autodocs' ],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    },
 }
 
 export default meta;

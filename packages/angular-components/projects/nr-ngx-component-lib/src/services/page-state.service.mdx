@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Services/PageStateService" />
+
+# PageStateService
+
+`PageStateService` stores strings by name while the app runs. The library's lists use it to remember their
+page, page size, sort, and filters, so a user who leaves a list and comes back finds it as they left it.
+It's provided in the root injector.
+
+The state is kept in memory only. It's lost when the browser page reloads, and it isn't shared between
+browser tabs.
+
+## Lists
+
+Lists built on [PaginationBase](?path=/docs/directives-paginationbase--docs) save their state here
+automatically, under the `instance` name from their `getInitialPageState()`. That includes
+[List Attachments](?path=/docs/content-list-attachments--docs#remembering-the-page) and
+[List Event History](?path=/docs/content-list-event-history--docs). Give each list on a different screen a
+different `instance`.
+
+To make a list start fresh, for example after the user changes which record they're looking at, delete its
+state before the list is created:
+
+```typescript
+inject( PageStateService ).deletePageState( 'fire-attachments' );
+```
+
+## Your own state
+
+You can store your own state too. Values are strings, so convert objects to and from JSON:
+
+```typescript
+import { PageStateService } from '@bcgov/nr-ngx-component-lib';
+
+pageStateService = inject( PageStateService );
+
+ngOnInit() {
+    const saved = this.pageStateService.getPageState( 'fire-map' );
+    if ( saved ) this.view = JSON.parse( saved );
+}
+
+ngOnDestroy() {
+    this.pageStateService.setPageState( 'fire-map', JSON.stringify( this.view ) );
+}
+```
+
+Choose names that won't clash with the lists' `instance` names.
+
+## Methods
+
+| Method | Description |
+|--------|-------------|
+| `setPageState( id, state )` | Stores the string `state` under `id`, replacing any already there. |
+| `getPageState( id )` | The string stored under `id`, or `undefined`. |
+| `deletePageState( id )` | Removes what's stored under `id`. |

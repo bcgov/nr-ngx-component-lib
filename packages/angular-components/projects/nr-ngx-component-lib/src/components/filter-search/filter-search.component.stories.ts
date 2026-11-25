@@ -2,7 +2,7 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { FilterSearchComponent } from './filter-search.component';
 
 const meta: Meta<FilterSearchComponent> = {
-    title: 'Filtering/Filter Search',
+    title: 'Inputs and Controls/Filters/Filter Search',
     component: FilterSearchComponent,
     decorators: [
         // Apply metadata to all stories
@@ -31,53 +31,6 @@ const meta: Meta<FilterSearchComponent> = {
             }
         ),
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A search input component built on Angular Material that provides filtering functionality with a clear button.
-
-## Features
-
-- **Search Icon**: Visual indicator that the field is for searching
-- **Clear Button**: Quickly clear the search input with an 'X' button that appears when text is entered
-- **Optional Label**: Customizable label text for the input field
-- **Optional Hint**: Helper text displayed below the input
-- **Value Binding**: Two-way data binding support via \`value\` input and \`valueChange\` output
-
-## Usage
-
-\`\`\`typescript
-import { FilterSearchComponent } from '@nr-ngx-component-lib/filter-search';
-
-@Component({
-  template: \`
-    <nrcl-filter-search 
-      [label]="'Search items'"
-      [value]="searchTerm"
-      (valueChange)="onSearchChange($event)"
-      [hint]="'Enter at least 3 characters'">
-    </nrcl-filter-search>
-  \`
-})
-export class MyComponent {
-  searchTerm = '';
-  
-  onSearchChange(value: string) {
-    console.log('Search term:', value);
-    // Perform filtering logic
-  }
-}
-\`\`\`
-
-## Interactive Demo
-
-Use the controls below to test the component. Adjust the width to see how it responds to different container sizes.                                
-                `
-            }
-        }
-    }  
 }
 
 export default meta;

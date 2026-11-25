@@ -1,0 +1,69 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as RowListSortingStories from './row-list-sorting.component.stories';
+
+<Meta of={RowListSortingStories} />
+
+# Row List Sorting
+
+`<nrcl-row-list-sorting>` lets the user sort a
+[mobile row list](?path=/docs/content-row-list-row-list-mobile--docs), which has no column headers to
+click. It has a **Sort By** picker for the column and a **Sort Order** choice of A → Z or Z → A. An
+interactive example is under [Example](#example).
+
+`RowListSortingComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<nrcl-row-list-sorting
+    [sortColumn]="sortColumn"
+    [sortColumnOptions]="sortColumns"
+    [sortDirection]="sortDirection"
+    (sortChange)="onSortChange( $event )"
+></nrcl-row-list-sorting>
+```
+
+```typescript
+import { Sort } from '@angular/material/sort';
+import { CodeDescription } from '@bcgov/nr-ngx-component-lib';
+
+sortColumns: CodeDescription[] = [
+    { code: 'name', description: 'Fire Name' },
+    { code: 'discoveryDate', description: 'Discovery Date' },
+];
+
+onSortChange( sort: Sort ) {
+    this.sortColumn = sort.active;
+    this.sortDirection = sort.direction;
+    this.load();
+}
+```
+
+`sortChange` emits the same `Sort` object (`{ active, direction }`) as Material's `matSortChange`. Use the
+same handler and the same codes as the desktop table's column names, so the two views share their sorting.
+
+## Behaviour
+
+- **Sort By** is a [filter select](?path=/docs/inputs-and-controls-filters-filter-select--docs) that picks
+  one option. Clearing it emits `sortChange` with `active` set to `''`.
+- **Sort Order** is disabled until a column is picked.
+- Changing either emits `sortChange` with both values.
+
+The two take half the width each.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `sortColumnOptions` | `CodeDescription[]` | `[]` | Columns that can be sorted on. |
+| `sortColumn` | `string` | | Code of the current sort column. |
+| `sortDirection` | `'asc'` or `'desc'` | `'asc'` | Current sort order. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `sortChange` | `Sort` | The column or the order changed. |
+
+## Example
+
+<Canvas of={RowListSortingStories.Primary} />
+<Controls of={RowListSortingStories.Primary} />

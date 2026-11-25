@@ -1,0 +1,75 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Services/DialogService" />
+
+# DialogService
+
+`DialogService` opens dialogs, using Angular Material's `MatDialog` with the library's default settings.
+It's provided in the root injector.
+
+The [Dialog](?path=/docs/notification-and-feedback-dialog--docs) and
+[Dialog Confirm](?path=/docs/notification-and-feedback-dialog-confirm--docs) pages have full examples.
+
+## Methods
+
+Each method returns the `MatDialogRef`. Use its `afterClosed()` to get the result.
+
+### `openDialog( component, data, config? )`
+
+Opens a dialog component that extends [DialogBase](?path=/docs/directives-dialogbase--docs). `data` is
+available in the dialog as `this.config`.
+
+```typescript
+this.dialogService.openDialog( RenameDialogComponent, { name: fire.name } )
+    .afterClosed()
+    .subscribe( result => { if ( result != 'cancel' ) this.rename( fire, result ); } );
+```
+
+### `openDialogTemplate( template, data, config? )`
+
+Opens a dialog from an `<ng-template>`, usually containing an
+[`<nrcl-dialog>`](?path=/docs/notification-and-feedback-dialog--docs). `data` is passed to the template as
+its context. Close it with the returned `MatDialogRef`.
+
+```html
+<ng-template #notes let-data>
+    <nrcl-dialog title="Notes" [saveEnabled]="null" cancelLabel="Close" (cancelClick)="notesRef.close()">
+        {{ data.notes }}
+    </nrcl-dialog>
+</ng-template>
+```
+
+```typescript
+@ViewChild( 'notes' ) notes: TemplateRef<any>;
+
+showNotes( fire: Fire ) {
+    this.notesRef = this.dialogService.openDialogTemplate( this.notes, { notes: fire.notes } );
+}
+```
+
+### `openConfirmDialog( config, matConfig? )`
+
+Opens a [confirm dialog](?path=/docs/notification-and-feedback-dialog-confirm--docs), which asks the user
+to confirm or cancel. `afterClosed()` emits `null` when the user confirms, and `'cancel'` when they cancel.
+
+```typescript
+this.dialogService.openConfirmDialog( { title: 'Delete Fire', saveLabel: 'Delete', template: this.deleteMessage, context: fire } )
+    .afterClosed()
+    .subscribe( result => { if ( result === null ) this.delete( fire ); } );
+```
+
+## Default settings
+
+Every method opens the dialog with these `MatDialogConfig` settings. The last argument changes any of them:
+
+| Setting | Value | Effect |
+|---------|-------|--------|
+| `disableClose` | `true` | Escape and clicking outside the dialog don't close it. |
+| `autoFocus` | `false` | Nothing in the dialog gets focus when it opens. |
+| `maxWidth` | `800` | At most 800px wide. |
+| `closeOnNavigation` | `false` | Stays open when the route changes. |
+| `panelClass` | `'nrcl-dialog'` | Needed for the dialog's styles. Keep it if you change `panelClass`. |
+
+```typescript
+this.dialogService.openDialog( RenameDialogComponent, data, { disableClose: false, width: '600px' } );
+```

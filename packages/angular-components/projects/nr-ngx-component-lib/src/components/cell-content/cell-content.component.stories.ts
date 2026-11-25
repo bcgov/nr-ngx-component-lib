@@ -2,7 +2,7 @@ import { argsToTemplate, componentWrapperDecorator, moduleMetadata, type Meta, t
 import { CellContentComponent } from './cell-content.component';
 
 const meta: Meta<CellContentComponent & { width: number }> = {
-    title: 'Lists & Tables/Cell Content',
+    title: 'Inputs and Controls/Cell Content',
     component: CellContentComponent,
     decorators: [
         // Apply metadata to all stories
@@ -27,54 +27,8 @@ const meta: Meta<CellContentComponent & { width: number }> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
     parameters: {
         docs: {
-            description: {
-                component: `
-A component for displaying cell content with automatic text truncation and optional tooltip support. 
-Ideal for use in tables or grids where content needs to fit within constrained widths.
-
-## Features
-
-- **Text Truncation**: Automatically truncates content that exceeds the container width with ellipsis
-- **Tooltip Support**: Shows full content in a tooltip when text is truncated
-- **Flexible Content Input**: Accepts content via property binding or content projection
-- **Responsive**: Adjusts to container width constraints
-
-## Usage
-
-### With Content Property
-\`\`\`typescript
-<nrcl-cell-content 
-    [content]="'Long text that will be truncated'"
-    tooltip
-</nrcl-cell-content>
-\`\`\`
-
-### With Content Projection
-\`\`\`typescript
-<nrcl-cell-content 
-    tooltip="Custom tooltip text"
-    [style.width.px]="150"
->
-    This is the cell content
-</nrcl-cell-content>
-\`\`\`
-
-## Tooltip Options
-
-The \`tooltip\` input accepts multiple value types:
-- \`true\` (or present) - Shows the cell content as tooltip 
-- \`false\` (or missing) - Disables tooltip
-- \`string\` - Shows custom tooltip text
-
-## Interactive Demo
-
-Adjust the width slider to see how the component handles text truncation at different sizes. 
-Toggle tooltip options to test different tooltip behaviors.
-                `
-            },
             source: {
                 excludeDecorators: true
             }
@@ -108,16 +62,6 @@ Toggle tooltip options to test different tooltip behaviors.
 export default meta;
 
 export const ContentProperty: StoryObj<CellContentComponent & { width: number }> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-Demonstrates using the \`[content]\` property binding to pass cell content. 
-This approach is useful when binding to component data or when the content is dynamic.
-                `
-            }
-        }
-    },    
     argTypes: {
         content: { type: 'string' },
     },
@@ -137,16 +81,6 @@ This approach is useful when binding to component data or when the content is dy
 }
 
 export const ContentProjection: StoryObj<CellContentComponent & { width: number, inserted: string }> = {
-    parameters: {
-        docs: {
-            description: {
-                story: `
-Demonstrates using content projection (ng-content) to insert content into the component. 
-This approach is useful for static content or when you need to include HTML elements within the cell.
-                `
-            }
-        }
-    },    
     argTypes: {
         inserted: { type: 'string' },
     },
