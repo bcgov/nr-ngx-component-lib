@@ -32,15 +32,6 @@ const meta: Meta<TagListComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-                `
-            }
-        }
-    }  
 }
 
 export default meta;

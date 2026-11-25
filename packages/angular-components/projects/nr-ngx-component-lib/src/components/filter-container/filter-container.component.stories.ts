@@ -37,41 +37,6 @@ const meta: Meta<FilterContainerComponent> = {
             }
         ),
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A flexible container component for grouping filter controls with a consistent visual style.
-
-## Features
-- **Flexible sizing**: Control width and height via CSS custom properties
-- **Label support**: Display a label above the filter group
-- **Hint text**: Optional helper text below the container
-- **Content projection**: Works with any filter controls (checkboxes, radio buttons, custom components)
-
-## Usage
-
-\`\`\`html
-<nrcl-filter-container 
-  label="Filter Label"
-  hint="Optional hint text"
-  style="--nrcl-filter-container-width: 300px;"
->
-  <!-- Your filter controls here -->
-  <mat-checkbox>Option 1</mat-checkbox>
-  <mat-checkbox>Option 2</mat-checkbox>
-</nrcl-filter-container>
-\`\`\`
-
-## CSS Custom Properties
-
-- \`--nrcl-filter-container-width\`: Width of the container (default: auto)
-- \`--nrcl-filter-container-height\`: Height of the container (default: auto)                
-                `
-            }
-        }
-    },  
 }
 
 export default meta;

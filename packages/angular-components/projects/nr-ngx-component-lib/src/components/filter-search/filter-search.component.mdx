@@ -1,0 +1,80 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FilterSearchStories from './filter-search.component.stories';
+
+<Meta of={FilterSearchStories} />
+
+# Filter Search
+
+`<nrcl-filter-search>` is a free-text search box for filtering a list. An **×** button clears it. It's one
+of the [filter components](?path=/docs/inputs-and-controls-filters--docs), and usually goes first in a
+[`<nrcl-filters-panel>`](?path=/docs/inputs-and-controls-filters-filters-panel--docs). Interactive
+examples are under [Examples](#examples).
+
+`FilterSearchComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<nrcl-filter-search
+    label="Search Fires"
+    [value]="search"
+    (valueChange)="onSearch( $event )"
+></nrcl-filter-search>
+```
+
+`valueChange` emits on every keystroke, and emits `undefined` when the **×** is clicked. Debounce it before
+searching, so you don't send a request for each letter:
+
+```typescript
+search$ = new Subject<string>();
+
+ngOnInit() {
+    this.search$.pipe( debounceTime( 300 ), distinctUntilChanged() )
+        .subscribe( text => this.load( text ) );
+}
+
+onSearch( text: string ) {
+    this.search$.next( text );
+}
+```
+
+To move the cursor into the box, for example when a page opens, get the component with `@ViewChild` and
+call its `focus()` method.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | `'Search'` | Label. It sits inside the box until the box has focus or text. |
+| `placeholder` | `string` | `'Search...'` | Shown in the box while it has focus and no text. |
+| `hint` | `string` | | Text below the box. |
+| `value` | `string` | | The search text. |
+| `wide` | `string` | | Width in filter units, `'1'` to `'6'`. Default 2. See [Filters](?path=/docs/inputs-and-controls-filters--docs#widths). |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `valueChange` | `string` | The text changed. `undefined` when cleared with **×**. |
+
+In a `<nrcl-filters-panel>`, the search box is up to 4 units wide on desktop and the full width on mobile,
+whatever its `wide` setting.
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-filter-search-width` | Width. Overrides `wide`. |
+| `--nrcl-filter-search-height` | Height. Default `--nrcl-filter-height`, 40px. |
+
+## Examples
+
+### Search
+
+<Canvas of={FilterSearchStories.Primary} />
+<Controls of={FilterSearchStories.Primary} />
+
+### Custom width
+
+Set `--nrcl-filter-search-width` for a width that isn't a whole number of filter units.
+
+<Canvas of={FilterSearchStories.CustomSize} />
+<Controls of={FilterSearchStories.CustomSize} />

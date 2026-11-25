@@ -36,7 +36,6 @@ const meta: Meta<DateNavigatorComponent> = {
             ],
         } ),
     ],
-    tags: ['autodocs'],
 }
 
 export default meta;

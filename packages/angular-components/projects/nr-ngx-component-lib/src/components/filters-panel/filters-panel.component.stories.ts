@@ -48,49 +48,6 @@ const meta: Meta<FiltersPanelComponent> = {
             }
         ),        
     ],
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            description: {
-                component: `
-A container component that provides a consistent layout and behavior for filter controls in your application.
-
-## Features
-- **Flexible content projection**: Accepts any filter components as children
-- **Clear filters functionality**: Optional "Clear All" button to reset all filters at once
-- **Consistent layout**: Automatically arranges filter controls in a vertical stack
-- **Action handling**: Emits events when filters are cleared
-
-## Usage
-
-\`\`\`html
-<nrcl-filters-panel 
-  [showClear]="true"
-  (clearFilters)="onClearFilters()"
->
-  <nrcl-filter-search></nrcl-filter-search>
-  <nrcl-filter-select label="Category" [options]="categories"></nrcl-filter-select>
-  <nrcl-filter-date label="Start Date"></nrcl-filter-date>
-</nrcl-filters-panel>
-\`\`\`
-
-## Best Practices
-
-1. **Group related filters**: Place filters that work together within the same panel
-2. **Use clear labels**: Ensure each filter has a descriptive label
-3. **Enable clear button**: Set \`[showClear]="true"\` when multiple filters are present
-4. **Handle clear events**: Implement \`(clearFilters)\` to reset your data model
-
-## Layout
-
-The panel automatically:
-- Stacks filter components vertically
-- Provides consistent spacing between filters
-- Positions the "Clear All" button at the bottom (when enabled)                
-                `
-            }
-        }
-    }      
 }
 
 export default meta;

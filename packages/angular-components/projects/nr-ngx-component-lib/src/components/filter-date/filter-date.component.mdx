@@ -1,0 +1,84 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FilterDateStories from './filter-date.component.stories';
+
+<Meta of={FilterDateStories} />
+
+# Filter Date
+
+`<nrcl-filter-date>` picks a single date from a calendar, for filtering a list. It's one of the
+[filter components](?path=/docs/inputs-and-controls-filters--docs), built on the Angular Material
+datepicker. Interactive examples are under [Examples](#examples).
+
+`FilterDateComponent` is declared and exported by `NrNgxComponentLibModule`. It provides its own Moment
+date adapter, so it needs the `moment` and `@angular/material-moment-adapter` packages from
+[Installation](?path=/docs/introduction-getting-started--docs#installation).
+
+## Usage
+
+```html
+<nrcl-filter-date
+    label="From"
+    [value]="fromDate"
+    (valueChange)="fromDate = $event; load()"
+    max="2026-12-31"
+></nrcl-filter-date>
+```
+
+The user can't type a date. Clicking the box, or the calendar button, opens the calendar.
+
+## Value
+
+`value` is a string in `YYYY-MM-DD` form, for example `'2026-11-25'`. The box shows it as
+`November 25, 2026`.
+
+**If you don't bind `value`, it starts at today's date.** Bind `[value]="null"`, or a variable that starts
+empty, to start with no date.
+
+Once there's a date, the calendar button changes to an **×** that clears it, and `valueChange` emits
+`undefined`. Set `[clear]="false"` to keep the calendar button, so the user can change the date but not
+remove it.
+
+## Earliest and latest dates
+
+`min` and `max`, both `YYYY-MM-DD` strings, limit the dates the calendar lets the user pick. If `value`
+is set outside them, the box shows `minErrorMessage` or `maxErrorMessage` once the user has touched it.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | `'[label]'` | Label. Always set this. |
+| `placeholder` | `string` | `'Select...'` | Shown in the box while it has focus and no date. |
+| `hint` | `string` | | Text below the box. |
+| `value` | `string` | Today | Selected date, `YYYY-MM-DD`. |
+| `clear` | `boolean` | `true` | Shows an **×** to clear the date. |
+| `min` | `string` | | Earliest date that can be picked, `YYYY-MM-DD`. |
+| `max` | `string` | | Latest date that can be picked, `YYYY-MM-DD`. |
+| `minErrorMessage` | `string` | `'Date is too soon'` | Error when `value` is before `min`. |
+| `maxErrorMessage` | `string` | `'Date is too late'` | Error when `value` is after `max`. |
+| `wide` | `string` | | Width in filter units, `'1'` to `'6'`. Default 2. See [Filters](?path=/docs/inputs-and-controls-filters--docs#widths). |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `valueChange` | `string` | A date was picked, as `YYYY-MM-DD`. `undefined` when cleared. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-filter-date-width` | Width. Overrides `wide`. |
+| `--nrcl-filter-date-height` | Height. Default `--nrcl-filter-height`, 40px. |
+
+## Examples
+
+### Date
+
+<Canvas of={FilterDateStories.Primary} />
+<Controls of={FilterDateStories.Primary} />
+
+### Custom width
+
+Set `--nrcl-filter-date-width` for a width that isn't a whole number of filter units.
+
+<Canvas of={FilterDateStories.CustomWidth} />
+<Controls of={FilterDateStories.CustomWidth} />

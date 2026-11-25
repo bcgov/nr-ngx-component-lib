@@ -1,0 +1,115 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as TagListStories from './tag-list.component.stories';
+
+<Meta of={TagListStories} />
+
+# Tag List
+
+`<nrcl-tag-list>` shows a list of items as tags (Angular Material chips) that wrap onto as many lines as
+needed. Each tag can have an icon, a tooltip, and a button to remove it. Use it for a short list the user
+builds up, such as the people assigned to a task. Interactive examples are under [Examples](#examples).
+
+`TagListComponent` is declared and exported by `NrNgxComponentLibModule`.
+
+## Usage
+
+```html
+<nrcl-tag-list
+    [items]="assignees"
+    (itemRemoved)="removeAssignee( $event )"
+>
+    <nrcl-button label="Add" icon="add" (click)="addAssignee()"></nrcl-button>
+</nrcl-tag-list>
+```
+
+```typescript
+import { TagItem } from '@bcgov/nr-ngx-component-lib';
+
+assignees: TagItem[] = [
+    { id: 'u1', description: 'Jane Smith', tooltip: 'Incident Commander', icon: 'person' },
+];
+
+removeAssignee( item: TagItem ) {
+    this.assignees = this.assignees.filter( a => a.id !== item.id );
+}
+```
+
+## Items
+
+Each item is a `TagItem`:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Identifies the item. Must be unique within the list. |
+| `description` | `string` | Tag text. |
+| `tooltip` | `string` | Tooltip shown when the pointer is over the tag. Empty for none. |
+| `icon` | `string` | [Icon](?path=/docs/utility-icon--docs) shown at the start of the tag. Empty for none. |
+
+The component only redraws when `items` is a new array. Replace the array to add or remove items, as in
+`removeAssignee()` above, rather than changing it with `push()` or `splice()`.
+
+With no items, it shows `noItemsMessage` instead.
+
+## Removing items
+
+Each tag has a remove button. Clicking it, or pressing Delete or Backspace while the tag has focus, emits
+`itemRemoved` with the item. **The tag list doesn't remove the item itself.** Remove it from `items` in
+your handler, which lets you ask for confirmation first.
+
+Set `[removable]="false"` to hide the remove buttons.
+
+## Add button
+
+A `<nrcl-button>` inside the tag list is shown before the first tag, or after `noItemsMessage` when there
+are no items. Use it to add items. Other content inside the tag list isn't shown.
+
+## Custom tags
+
+To show more than the description, pass a template with `tagTemplate`. It gets the item as its context, so
+items can have extra fields:
+
+```html
+<nrcl-tag-list [items]="assignees" [tagTemplate]="assigneeTag"></nrcl-tag-list>
+
+<ng-template #assigneeTag let-item>
+    {{ item.description }} <small>{{ item.role }}</small>
+</ng-template>
+```
+
+The icon and remove button are still added around the template.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `items` | `TagItem[]` | | Items to show. |
+| `removable` | `boolean` | `true` | Shows a remove button on each tag. |
+| `noItemsMessage` | `string` | `'No items have been added.'` | Shown when there are no items. |
+| `tagTemplate` | `TemplateRef` | | Template for each tag's content. |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `itemRemoved` | `TagItem` | The user asked to remove this item. |
+
+## Examples
+
+The examples log removed items to the browser console, and don't remove them.
+
+### Tags
+
+Use `itemCount` to change the number of tags.
+
+<Canvas of={TagListStories.Primary} />
+<Controls of={TagListStories.Primary} />
+
+### No items
+
+<Canvas of={TagListStories.Empty} />
+<Controls of={TagListStories.Empty} exclude={[ 'itemCount' ]} />
+
+### Custom tags
+
+A `tagTemplate` that shows an extra field from each item. The tags are made taller to fit it.
+
+<Canvas of={TagListStories.Template} />
+<Controls of={TagListStories.Template} />
