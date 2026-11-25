@@ -1,7 +1,7 @@
 :host {
     &.direction-horizontal {
         display: inline-flex;       
-        width: var( --nrcl-gutter-space );
+        width: calc( var( --nrcl-gap-multiple, 1 ) * var( --nrcl-gutter-space ) );
         align-items: stretch;
         flex-grow: 0;
         flex-shrink: 0;
@@ -19,8 +19,6 @@
         }
 
         &.divider-position-before, &.divider-position-middle, &.divider-position-after {
-            width: calc( var( --nrcl-gap-multiple ) * var( --nrcl-gutter-space ) );
-        
             .divider {
                 width: 1px;
                 height: 100%;
@@ -31,7 +29,7 @@
 
     &.direction-vertical {
         display: flex;
-        height: var( --nrcl-gutter-space );
+        height: calc( var( --nrcl-gap-multiple, 1 ) * var( --nrcl-gutter-space ) );
         flex-grow: 0;
         flex-shrink: 0;
 
@@ -48,8 +46,6 @@
         }
 
         &.divider-position-before, &.divider-position-middle, &.divider-position-after {
-            height: calc( var( --nrcl-gap-multiple ) * var( --nrcl-gutter-space ) );
-
             .divider {
                 height: 1px;
                 width: 100%;
