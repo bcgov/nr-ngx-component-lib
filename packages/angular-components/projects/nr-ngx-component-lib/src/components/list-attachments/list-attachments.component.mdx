@@ -58,10 +58,6 @@ attachmentsProvider: AttachmentRowListProvider<AttachmentsTableRow> = {
 
 Use arrow functions in the provider, so `this` is your component.
 
-**Always bind `canDownload`, `canDelete`, and `showOrgUnit`**, even to their default values. The component
-works out its columns when one of those inputs changes. With none of them bound, the desktop table has no
-columns. Without `showOrgUnit`, the mobile **Sort By** picker has no options.
-
 ## The provider
 
 `rowListProvider` connects the list to your data. Every method is required.
