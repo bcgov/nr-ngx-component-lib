@@ -113,7 +113,7 @@ again. Do the same after uploading a file.
 
 ## Remembering the page
 
-The page, page size, and sort are kept in `PageStateService` while the app runs. Set `instance` in
+The page, page size, and sort are kept in [`PageStateService`](?path=/docs/services-pagestateservice--docs) while the app runs. Set `instance` in
 `getInitialPageState()` to a name for the list, and the user gets the same page back when they leave the
 screen and return. It's kept in memory, so it's lost when the browser page reloads.
 
@@ -143,6 +143,8 @@ getInitialPageState: () => ( {
 | Method | Description |
 |--------|-------------|
 | `refreshRowList()` | Loads the current page again. |
+
+The list is built on [`RowListBase`](?path=/docs/directives-rowlistbase--docs), which provides `refreshRowList()` and `isLoadingChange`.
 
 ## Examples
 

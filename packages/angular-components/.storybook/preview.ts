@@ -20,6 +20,8 @@ const preview: Preview = {
                     'Content', [ 'Row List', [ 'Row List (Desktop)', 'Row List (Mobile)', 'Row List Pagination', 'Row List Sorting' ] ],
                     'Notification and Feedback', [ 'Dialog', 'Dialog Confirm' ],
                     'Utility',
+                    'Directives', [ 'NrclBase', 'ConfigurationSubscriberBase', 'DialogBase', 'PaginationBase', 'RowListBase' ],
+                    'Services', [ 'ConfigurationService', 'DialogService', 'SnackbarUtilService', 'IconService', 'PageStateService' ],
                 ],
             },
         },

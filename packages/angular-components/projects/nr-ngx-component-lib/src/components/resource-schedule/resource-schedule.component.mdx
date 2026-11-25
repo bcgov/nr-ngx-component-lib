@@ -87,7 +87,7 @@ scheduleProvider: ScheduleProvider = {
 ```
 
 `fetchSchedule()` gets no arguments. If the server sends one page at a time, read the page from the
-component (`schedule.scheduleComponent.getPagingInfoRequest()`). If `parseSchedule` returns every row and
+component (`schedule.scheduleComponent.getPagingInfoRequest()`, from [`PaginationBase`](?path=/docs/directives-paginationbase--docs#helpers)). If `parseSchedule` returns every row and
 the total matches, the schedule pages through them itself.
 
 ### Rows
@@ -138,7 +138,7 @@ ripple when the pointer is over a cell.
 ## Changing dates
 
 **The schedule doesn't reload when `startDate`, `dayCount`, or `weekStart` change.** After changing them,
-call `refreshRowList()` on the inner schedule:
+call `refreshRowList()` on the inner schedule, which is built on [`RowListBase`](?path=/docs/directives-rowlistbase--docs):
 
 ```typescript
 @ViewChild( 'schedule' ) schedule: ResourceScheduleComponent;
