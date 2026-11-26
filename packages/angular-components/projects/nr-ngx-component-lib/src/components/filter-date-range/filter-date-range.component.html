@@ -1,0 +1,53 @@
+<mat-form-field
+    floatLabel="auto"
+    appearance="outline"
+    subscriptSizing="dynamic"
+>
+    <mat-label>{{ label }}</mat-label>
+
+    <mat-date-range-input
+        [rangePicker]="picker"
+        [min]="min"
+        [max]="max"
+        (click)="onInputClick()"
+    >
+        <input matStartDate readonly
+            [ngModel]="start"
+            (ngModelChange)="onStartChange( $event )"
+            [placeholder]="startPlaceholder"
+            #startModel="ngModel"
+        >
+        <input matEndDate readonly
+            [ngModel]="end"
+            (ngModelChange)="onEndChange( $event )"
+            [placeholder]="endPlaceholder"
+            #endModel="ngModel"
+        >
+    </mat-date-range-input>
+
+    @if ( startModel.hasError( 'matDatepickerMin' ) && ( startModel.dirty || startModel.touched ) ) {
+        <mat-error>{{ minErrorMessage }}</mat-error>
+    }
+    @else if ( endModel.hasError( 'matDatepickerMax' ) && ( endModel.dirty || endModel.touched ) ) {
+        <mat-error>{{ maxErrorMessage }}</mat-error>
+    }
+
+    @if ( hint ) {
+        <mat-hint>{{ hint }}</mat-hint>
+    }
+
+    <mat-date-range-picker #picker (closed)="onPickerClosed()"></mat-date-range-picker>
+</mat-form-field>
+
+@if ( isOpen || !hasValue || !clear ) {
+    <nrcl-button tertiary
+        icon="date_range"
+        (click)="picker.open()"
+    ></nrcl-button>
+}
+@else {
+    <nrcl-button tertiary
+        icon="close"
+        (click)="onCancelClick()"
+    ></nrcl-button>
+}

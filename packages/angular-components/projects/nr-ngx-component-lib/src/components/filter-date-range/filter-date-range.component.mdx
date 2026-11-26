@@ -1,0 +1,104 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as FilterDateRangeStories from './filter-date-range.component.stories';
+
+<Meta of={FilterDateRangeStories} />
+
+# Filter Date Range
+
+`<nrcl-filter-date-range>` picks a start and end date from one calendar, for filtering a list to a
+period. It's one of the [filter components](?path=/docs/inputs-and-controls-filters--docs), built on the
+Angular Material date range picker. Interactive examples are under [Examples](#examples).
+
+`FilterDateRangeComponent` is standalone: add it to your component's `imports`. Like
+[Filter Date](?path=/docs/inputs-and-controls-filters-filter-date--docs), it provides its own Moment date
+adapter, so it needs the `moment` and `@angular/material-moment-adapter` packages from
+[Installation](?path=/docs/introduction-getting-started--docs#installation).
+
+## Usage
+
+```html
+<nrcl-filter-date-range
+    label="Reported Between"
+    [value]="reported"
+    (valueChange)="reported = $event; load()"
+    max="2026-12-31"
+></nrcl-filter-date-range>
+```
+
+```ts
+reported: string[] = []     // or [ '2026-11-01', '2026-11-25' ]
+```
+
+The user can't type dates. Clicking the box, or the calendar button, opens the calendar. The first click
+picks the start date, the second picks the end date.
+
+## Value
+
+`value` is a `string[]`, `[ start, end ]`, with both dates in `YYYY-MM-DD` form, so it fits alongside the
+other filters' `string[]` values. An empty array `[]` means no range. An array without both dates is treated
+as `[]`.
+The box shows them as `Nov 1, 2026 – Nov 25, 2026`. To show them another way, set `displayFormat` to a
+[Moment format](https://momentjs.com/docs/#/displaying/format/). It only changes what the box shows.
+
+**Unlike `<nrcl-filter-date>`, it starts empty** (`[]`) if you don't bind `value`.
+
+**`valueChange` only emits a complete range**, once the user has picked the end date, so your list loads
+once rather than twice. If the user picks a start date and then closes the calendar, the box goes back to
+the last complete range and nothing is emitted.
+
+Once there's a range, the calendar button changes to an **×** that clears it, and `valueChange` emits
+`[]`, as `<nrcl-filter-select>` does. Set `[clear]="false"` to keep the calendar button, so the user can change the range but not
+remove it.
+
+## Earliest and latest dates
+
+`min` and `max`, both `YYYY-MM-DD` strings, limit the dates the calendar lets the user pick. If `value`
+starts before `min` or ends after `max`, the box shows `minErrorMessage` or `maxErrorMessage` once the user
+has touched it.
+
+## Inputs and outputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `label` | `string` | `'[label]'` | Label. Always set this. |
+| `startPlaceholder` | `string` | `'Start'` | Shown for the start date while the box has focus and no range. |
+| `endPlaceholder` | `string` | `'End'` | Shown for the end date while the box has focus and no range. |
+| `hint` | `string` | | Text below the box. |
+| `value` | `string[]` | `[]` | Selected range, `[ start, end ]`, both `YYYY-MM-DD`. |
+| `displayFormat` | `string` | `'MMM D, YYYY'` | Moment format for the dates shown in the box. |
+| `clear` | `boolean` | `true` | Shows an **×** to clear the range. |
+| `min` | `string` | | Earliest date that can be picked, `YYYY-MM-DD`. |
+| `max` | `string` | | Latest date that can be picked, `YYYY-MM-DD`. |
+| `minErrorMessage` | `string` | `'Start date is too soon'` | Error when the start is before `min`. |
+| `maxErrorMessage` | `string` | `'End date is too late'` | Error when the end is after `max`. |
+| `wide` | `string` | | Width in filter units, `'1'` to `'6'`. Default 3. See [Filters](?path=/docs/inputs-and-controls-filters--docs#widths). |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `valueChange` | `string[]` | A complete range was picked, as `[ start, end ]`. `[]` when cleared. |
+
+## Styling
+
+| Property | Used for |
+|----------|----------|
+| `--nrcl-filter-date-range-width` | Width. Overrides `wide`. |
+| `--nrcl-filter-date-range-height` | Height. Default `--nrcl-filter-height`, 40px. |
+
+## Examples
+
+### Date range
+
+<Canvas of={FilterDateRangeStories.Primary} />
+<Controls of={FilterDateRangeStories.Primary} />
+
+### With a value, min and max
+
+<Canvas of={FilterDateRangeStories.WithValue} />
+<Controls of={FilterDateRangeStories.WithValue} />
+
+### Custom width
+
+Set `--nrcl-filter-date-range-width` for a width that isn't a whole number of filter units.
+
+<Canvas of={FilterDateRangeStories.CustomWidth} />
+<Controls of={FilterDateRangeStories.CustomWidth} />

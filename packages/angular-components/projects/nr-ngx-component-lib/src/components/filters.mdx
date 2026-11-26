@@ -15,9 +15,10 @@ show more of them.
 | `FilterSearchComponent` | `<nrcl-filter-search>` | Free-text search box. | [Filter Search](?path=/docs/inputs-and-controls-filters-filter-search--docs) |
 | `FilterSelectComponent` | `<nrcl-filter-select>` | Pick one or more options from a list that can be searched. | [Filter Select](?path=/docs/inputs-and-controls-filters-filter-select--docs) |
 | `FilterDateComponent` | `<nrcl-filter-date>` | Pick a date. | [Filter Date](?path=/docs/inputs-and-controls-filters-filter-date--docs) |
+| `FilterDateRangeComponent` | `<nrcl-filter-date-range>` | Pick a start and end date. | [Filter Date Range](?path=/docs/inputs-and-controls-filters-filter-date-range--docs) |
 | `FilterContainerComponent` | `<nrcl-filter-container>` | A labelled box, styled like the other filters, for any other control, such as radio buttons or checkboxes. | [Filter Container](?path=/docs/inputs-and-controls-filters-filter-container--docs) |
 
-All five are standalone: add them to your component's `imports`.
+All six are standalone: add them to your component's `imports`.
 
 ## Usage
 
@@ -70,6 +71,7 @@ All five are standalone: add them to your component's `imports`.
 | `<nrcl-filter-search>` | `string` | `valueChange` emits on every keystroke, so debounce it before searching. |
 | `<nrcl-filter-select>` | `string[]` | Always an array, even with `selectMax="1"`. `wrapFilterValue()` and `unwrapFilterValue()`, exported by the library, convert between a single value and the array. |
 | `<nrcl-filter-date>` | `string`, as `YYYY-MM-DD` | **Starts at today's date** if you don't bind `value`. Emits `undefined` when cleared. |
+| `<nrcl-filter-date-range>` | `string[]`, as `[ start, end ]`, both `YYYY-MM-DD` | Starts empty, `[]`. Only emits a complete range, or `[]` when cleared. |
 
 `<nrcl-filter-select>` takes its options as `CodeDescription[]` (`{ code, description }`). The `value`
 holds the codes.

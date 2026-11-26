@@ -13,6 +13,7 @@ export * from './components/expansion-panel/footer/expansion-panel-footer.compon
 export * from './components/expansion-panel/section/expansion-panel-section.component'
 export * from './components/filter-container/filter-container.component'
 export * from './components/filter-date/filter-date.component'
+export * from './components/filter-date-range/filter-date-range.component'
 export * from './components/filter-search/filter-search.component'
 export * from './components/filter-select/filter-select.component'
 export * from './components/filters-panel/filters-panel.component'

@@ -5,7 +5,7 @@ import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { DisplayModeWrapperComponent } from "projects/nr-ngx-component-lib/story-util/display-mode-wrapper.component";
 import { RegistrationWrapperComponent } from "projects/nr-ngx-component-lib/story-util/registration-wrapper.component";
 import { RerenderDirective } from "projects/nr-ngx-component-lib/story-util/rerender.directive";
-import { NRCL_STORY_DECLARATIONS, NRCL_STORY_IMPORTS } from "projects/nr-ngx-component-lib/story-util/nrcl-story-metadata";
+import { NRCL_STORY_COMPONENTS, NRCL_STORY_IMPORTS } from "projects/nr-ngx-component-lib/story-util/nrcl-story-metadata";
 
 const preview: Preview = {
     parameters: {
@@ -17,7 +17,7 @@ const preview: Preview = {
                 order: [
                     'Introduction', [ 'Getting Started', 'Components' ],
                     'Navigation and Structure', [ 'Application', [ 'Application Header', 'Application Menu' ], 'Page Container', 'Page Header' ],
-                    'Inputs and Controls', [ 'Button', 'Form Layout', 'Form Field', 'Filters', [ 'Filters Panel', 'Filter Container', 'Filter Search', 'Filter Select', 'Filter Date' ], 'Date Navigator' ],
+                    'Inputs and Controls', [ 'Button', 'Form Layout', 'Form Field', 'Filters', [ 'Filters Panel', 'Filter Container', 'Filter Search', 'Filter Select', 'Filter Date', 'Filter Date Range' ], 'Date Navigator' ],
                     'Content', [ 'Row List', [ 'Row List (Desktop)', 'Row List (Mobile)', 'Row List Pagination', 'Row List Sorting' ] ],
                     'Notification and Feedback', [ 'Dialog', 'Dialog Confirm' ],
                     'Utility',
@@ -43,9 +43,9 @@ const preview: Preview = {
         moduleMetadata( {
             imports: [
                 ...NRCL_STORY_IMPORTS,
+                ...NRCL_STORY_COMPONENTS,
             ],
             declarations: [
-                ...NRCL_STORY_DECLARATIONS,
                 RerenderDirective,
                 DisplayModeWrapperComponent,
                 RegistrationWrapperComponent,

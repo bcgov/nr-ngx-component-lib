@@ -36,6 +36,7 @@ import { ExpansionPanelHeaderComponent } from '../src/components/expansion-panel
 import { ExpansionPanelSectionComponent } from '../src/components/expansion-panel/section/expansion-panel-section.component';
 import { FilterContainerComponent } from '../src/components/filter-container/filter-container.component';
 import { FilterDateComponent } from '../src/components/filter-date/filter-date.component';
+import { FilterDateRangeComponent } from '../src/components/filter-date-range/filter-date-range.component';
 import { FilterSearchComponent } from '../src/components/filter-search/filter-search.component';
 import { FilterSelectComponent } from '../src/components/filter-select/filter-select.component';
 import { FiltersPanelComponent } from '../src/components/filters-panel/filters-panel.component';
@@ -64,9 +65,9 @@ import { TagListComponent } from '../src/components/tag-list/tag-list.component'
 import { TooltipComponent, TooltipDirective } from '../src/directives/tooltip/tooltip.directive';
 import { ApplicationComponent } from '../src/components/application/application.component';
 
-// Mirrors NrNgxComponentLibModule (minus BrowserAnimationsModule, which storybook
-// provides via provideAnimations() in .storybook/preview.ts). The library components
-// are not standalone on this branch, so stories declare them rather than import them.
+// Modules and library components every story can use (minus BrowserAnimationsModule, which
+// storybook provides via provideAnimations() in .storybook/preview.ts). The library components
+// are standalone, so stories import them; only the story-util wrappers are declared.
 
 export const NRCL_STORY_IMPORTS = [
     CommonModule,
@@ -96,7 +97,7 @@ export const NRCL_STORY_IMPORTS = [
     MatSnackBarModule,
 ]
 
-export const NRCL_STORY_DECLARATIONS = [
+export const NRCL_STORY_COMPONENTS = [
     ApplicationComponent,
     ApplicationHeaderComponent,
     ApplicationMenuComponent,
@@ -108,6 +109,7 @@ export const NRCL_STORY_DECLARATIONS = [
     ExpansionPanelSectionComponent,
     FilterContainerComponent,
     FilterDateComponent,
+    FilterDateRangeComponent,
     FilterSearchComponent,
     FilterSelectComponent,
     FiltersPanelComponent,
